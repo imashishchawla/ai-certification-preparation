@@ -1,0 +1,20 @@
+# Hugo
+public/
+resources/
+hugo_stats.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Ruby
+vendor/bundle/
+Gemfile.lock
+
+# Node
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+*.swp
