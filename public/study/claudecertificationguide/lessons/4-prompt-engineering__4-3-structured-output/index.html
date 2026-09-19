@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4 Prompt Engineering__4 3 Structured Output | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/4-prompt-engineering__4-3-structured-output/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 4 Prompt Engineering__4 3 Structured Output
+</div>
+
+<article>
+  <header>
+    <h1>4 Prompt Engineering__4 3 Structured Output</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="43--structured-output-with-tool-use--claude-certification-guide">4.3 — Structured Output with Tool Use | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/4-prompt-engineering/4-3-structured-output">https://claudecertificationguide.com/learn/4-prompt-engineering/4-3-structured-output</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+4.1
+System Prompts with Explicit Criteria
+4.2
+Few-Shot Prompting
+4.3
+Structured Output with Tool Use
+4.4
+Validation, Retry, and Feedback Loops
+4.5
+Batch Processing Strategies
+4.6
+Multi-Instance and Multi-Pass Review
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+PROMPT ENGINEERING &amp; STRUCTURED OUTPUT
+/
+4.3
+DOMAIN 4
+TASK 4.3
+Mark Complete
+Structured Output with Tool Use
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>When you need guaranteed schema-compliant structured output from Claude, there is a clear reliability hierarchy:</p>
+<p>tool_use with JSON schemas — eliminates JSON syntax errors entirely
+Prompt-based JSON — model can produce malformed JSON</p>
+<p>Commit this hierarchy to memory. The exam builds on it. With tool use, the tool&rsquo;s JSON schema constrains the shape of what Claude returns, eliminating syntax issues like missing brackets, trailing commas, or unquoted keys. The separate tool_choice parameter is what forces the model to call the tool at all. Prompt-based extraction (asking the model to output JSON in a text response) gives you no structural guarantees and will periodically produce unparseable output in production.</p>
+<p>CURRENT STATE</p>
+<p>Exam guide v1.0 frames the hierarchy as the two tiers above, and that is the expected exam answer. As of 14 August 2026 the API adds two controls the guide predates. strict: true on a tool definition is one; the guide&rsquo;s appendix names it as &ldquo;strict mode for syntax error elimination&rdquo;. output_config.format is the other, and it constrains the response itself rather than a tool call. The current docs also list a fourth tool_choice mode, {&ldquo;type&rdquo;: &ldquo;none&rdquo;}, which blocks tool calls and is the default when you pass no tools; the guide names three, so answer three. On the exam, answer with the tool_use-over-prompt-based hierarchy.</p>
+<p>tool_choice: The Three Modes</p>
+<p>The tool_choice parameter controls whether and how the model calls tools. Understanding the three modes is critical for the exam:</p>
+<p>&ldquo;auto&rdquo; (default): The model decides whether to call a tool or return text. It may choose to respond with a text message instead of calling the extraction tool. Use this when the model legitimately needs the option to respond conversationally.</p>
+<p>&ldquo;any&rdquo;: The model MUST call a tool but chooses which one. Use this when you have multiple extraction schemas (e.g., extract_invoice, extract_receipt, extract_contract) and the document type is unknown. The model selects the appropriate tool and returns structured output. Guaranteed structured output, flexible tool selection.</p>
+<p>{&ldquo;type&rdquo;: &ldquo;tool&rdquo;, &ldquo;name&rdquo;: &ldquo;extract_metadata&rdquo;}: The model MUST call the specific named tool. Use this to force a mandatory first step — for example, ensuring metadata extraction runs before enrichment steps. No flexibility, maximum control.</p>
+<p>extract_metadata here is a tool you defined yourself; the name is arbitrary. tool_choice also applies per request, not per conversation. Once the forced call returns, send the next request with auto (or leave the parameter out), otherwise the model is obliged to call the same tool again and you loop.</p>
+<p>TYPESCRIPT
+Copy
+// Force guaranteed structured output with unknown document type
+const response = await client.messages.create({
+model: &ldquo;claude-sonnet-5&rdquo;,
+max_tokens: 4096,
+tool_choice: { type: &ldquo;any&rdquo; },
+tools: [extractInvoiceTool, extractReceiptTool, extractContractTool],
+messages: [{ role: &ldquo;user&rdquo;, content: documentText }]
+});</p>
+<p>// Force a specific extraction step
+const response = await client.messages.create({
+model: &ldquo;claude-sonnet-5&rdquo;,
+max_tokens: 4096,
+tool_choice: { type: &ldquo;tool&rdquo;, name: &ldquo;extract_metadata&rdquo; },
+tools: [extractMetadataTool],
+messages: [{ role: &ldquo;user&rdquo;, content: documentText }]
+});</p>
+<p>What tool_use Does NOT Prevent</p>
+<p>This is where the exam gets sneaky. tool_use with JSON schemas eliminates syntax errors but does NOT prevent semantic errors:</p>
+<p>Sum discrepancies: Line items that do not sum to the stated total
+Field placement errors: Values placed in the wrong fields (e.g., a date in an amount field when both are strings)
+Fabrication: The model invents values for required fields when the source document lacks the information</p>
+<p>The schema guarantees structure. It doesn&rsquo;t guarantee correctness. Semantic validation needs additional logic (covered in Task Statement 4.4).</p>
+<p>Schema Design for Production</p>
+<p>Effective schema design prevents entire classes of errors at the structural level:</p>
+<p>Optional/nullable fields — When source documents may not contain certain information, make those fields optional or nullable. This is the primary defence against fabrication. If a field is required, the model is pressured to produce a value even when the source has none. If the field is nullable, the model can honestly return null.</p>
+<p>JSON
+Copy
+{
+&ldquo;type&rdquo;: &ldquo;object&rdquo;,
+&ldquo;properties&rdquo;: {
+&ldquo;invoice_number&rdquo;: { &ldquo;type&rdquo;: &ldquo;string&rdquo; },
+&ldquo;vendor_name&rdquo;: { &ldquo;type&rdquo;: &ldquo;string&rdquo; },
+&ldquo;payment_terms&rdquo;: { &ldquo;type&rdquo;: [&ldquo;string&rdquo;, &ldquo;null&rdquo;] },
+&ldquo;purchase_order&rdquo;: { &ldquo;type&rdquo;: [&ldquo;string&rdquo;, &ldquo;null&rdquo;] }
+},
+&ldquo;required&rdquo;: [&ldquo;invoice_number&rdquo;, &ldquo;vendor_name&rdquo;]
+}</p>
+<p>&ldquo;unclear&rdquo; enum value — For ambiguous cases where the source is genuinely unclear, add an explicit &ldquo;unclear&rdquo; option to enum fields. This prevents the model from forcing a classification when the evidence is ambiguous.</p>
+<p>&ldquo;other&rdquo; + detail string — For extensible categorisation, include an &ldquo;other&rdquo; enum value paired with a freeform detail string field. This captures edge cases that your predefined categories do not cover.</p>
+<p>JSON
+Copy
+{
+&ldquo;category&rdquo;: {
+&ldquo;type&rdquo;: &ldquo;string&rdquo;,
+&ldquo;enum&rdquo;: [&ldquo;invoice&rdquo;, &ldquo;receipt&rdquo;, &ldquo;contract&rdquo;, &ldquo;unclear&rdquo;, &ldquo;other&rdquo;]
+},
+&ldquo;category_detail&rdquo;: {
+&ldquo;type&rdquo;: [&ldquo;string&rdquo;, &ldquo;null&rdquo;],
+&ldquo;description&rdquo;: &ldquo;Freeform detail when category is &lsquo;other&rsquo;&rdquo;
+}
+}</p>
+<p>Format normalisation rules — Include format normalisation instructions in the prompt alongside the schema. The schema enforces structure. The prompt enforces formatting consistency (e.g., &ldquo;All dates in ISO 8601 format,&rdquo; &ldquo;All currency amounts as decimal numbers without currency symbols&rdquo;).</p>
+<p>KEY CONCEPT</p>
+<p>tool_use with JSON schemas eliminates syntax errors but not semantic errors. Make fields optional/nullable when source documents may lack information — this prevents the model from fabricating values. Use tool_choice &ldquo;any&rdquo; for guaranteed structured output when the document type is unknown.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Believing tool_use with JSON schemas prevents all extraction errors</p>
+<p>tool_use eliminates JSON syntax errors only. Semantic errors — values that do not sum correctly, data placed in wrong fields, fabricated values for missing information — still occur and require separate validation.</p>
+<p>EXAM TRAP</p>
+<p>Confusing tool_choice &lsquo;auto&rsquo; with &lsquo;any&rsquo;</p>
+<p>&lsquo;auto&rsquo; allows the model to return text instead of calling a tool — no guarantee of structured output. &lsquo;any&rsquo; guarantees a tool call but lets the model choose which tool. For guaranteed structured output with unknown document types, use &lsquo;any&rsquo;.</p>
+<p>EXAM TRAP</p>
+<p>Making all schema fields required to ensure data completeness</p>
+<p>Required fields pressure the model to fabricate values when information is absent from the source. Optional/nullable fields allow honest null responses, which is always preferable to plausible-looking fabricated data.</p>
+<p>Practice Scenario</p>
+<p>Your extraction system uses tool_use with a strict JSON schema where all fields are required. Testers report the model invents plausible-looking dates and monetary amounts when processing documents that lack this information. What is the best fix?</p>
+<p>OPTION A
+Make fields optional or nullable when source documents may not contain the information
+OPTION B
+Switch from tool_use to prompt-based JSON extraction, which gives more flexibility in the output
+OPTION C
+Add an instruction to the prompt telling the model that it must not hallucinate any values at all
+OPTION D
+Add a post-extraction validation step that checks all values against the source document
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Build a Structured Extraction Tool with JSON Schema
+Difficulty
+45 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Design JSON schemas with optional/nullable fields to prevent fabrication of missing data
+Understand the three tool_choice modes (auto, any, forced) and when to use each
+Recognise that tool_use eliminates syntax errors but not semantic errors
+Apply schema design patterns: unclear enum values, other + detail string, format normalisation
+Define an extraction tool with a JSON schema: 3 required fields, 3 optional/nullable fields, an enum with unclear and other options, and a detail string field for the other category</p>
+<p>WHY: Schema design directly prevents fabrication. Required fields pressure the model to invent values when information is absent. Optional/nullable fields allow honest null responses. This is the root cause fix for hallucinated extraction data.</p>
+<p>YOU SHOULD SEE: A valid JSON schema with required array containing only the 3 always-present fields, nullable type definitions for optional fields, and an enum array including unclear and other alongside the standard categories.</p>
+<p>Stuck? Get a nudge
+Test with tool_choice auto and observe cases where the model returns text instead of calling the tool</p>
+<p>WHY: The exam tests the distinction between auto, any, and forced tool_choice. Auto allows the model to respond conversationally instead of calling a tool, which means no guaranteed structured output. You need to see this failure mode firsthand.</p>
+<p>YOU SHOULD SEE: At least one response where the model returns a text message describing the document contents instead of calling the extraction tool. This demonstrates why auto is unsuitable when you need guaranteed structured output.</p>
+<p>Stuck? Get a nudge
+Switch to tool_choice any and verify the model always returns structured output via a tool call</p>
+<p>WHY: tool_choice any guarantees a tool call while letting the model choose which tool. This is the correct setting for guaranteed structured output when the document type is unknown, a key exam distinction from auto.</p>
+<p>YOU SHOULD SEE: Every response has stop_reason of tool_use and contains a valid tool call with structured output conforming to your schema. No text-only responses.</p>
+<p>Stuck? Get a nudge
+Force a specific tool with tool_choice {type: tool, name: extract_metadata} and verify the mandatory extraction step runs</p>
+<p>WHY: Forced tool selection ensures a mandatory first step executes regardless of the model decision. The exam tests this for scenarios like metadata extraction that must run before enrichment steps.</p>
+<p>YOU SHOULD SEE: The response always calls the exact tool you specified, even when the document content might suggest a different tool would be more appropriate. The model has no flexibility in tool selection.</p>
+<p>Stuck? Get a nudge
+Process 5 documents — 3 with complete data and 2 with missing fields — and verify nullable fields return null rather than fabricated values</p>
+<p>WHY: This validates the most important schema design principle: optional/nullable fields prevent fabrication. The exam specifically tests the scenario where required fields pressure the model to invent plausible-looking data for absent information.</p>
+<p>YOU SHOULD SEE: For the 3 complete documents, all fields populated with correct values. For the 2 documents missing information, the nullable fields return null instead of fabricated values. No invented dates, amounts, or identifiers.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Certified Architect Foundations Exam Guide — Task Statement 4.3 — Anthropic
+Tool Use (Function Calling) — Anthropic
+Building with Claude API (Skilljar) — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Few-Shot Prompting
+NEXT LESSON
+Validation, Retry, and Feedback Loops</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

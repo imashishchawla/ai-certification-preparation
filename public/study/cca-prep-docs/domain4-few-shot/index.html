@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain4 Few Shot | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/cca-prep-docs/domain4-few-shot/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Domain4 Few Shot
+</div>
+
+<article>
+  <header>
+    <h1>Domain4 Few Shot</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">cca-prep</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <hr>
+<h2 id="sidebar_label-few-shot-techniques">id: few-shot
+title: Few-shot prompting
+sidebar_label: Few-shot techniques</h2>
+<h1 id="few-shot-prompting">Few-shot prompting</h1>
+<h2 id="what-few-shot-can-and-cannot-do">What few-shot can and cannot do</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Few-shot IS effective for</th>
+					<th>Few-shot IS NOT effective for</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Demonstrating output format</td>
+					<td>Guaranteeing compliance with rules</td>
+			</tr>
+			<tr>
+					<td>Showing reasoning patterns</td>
+					<td>Enforcing tool ordering</td>
+			</tr>
+			<tr>
+					<td>Handling specific ambiguity types</td>
+					<td>Policy enforcement</td>
+			</tr>
+			<tr>
+					<td>Calibrating tone and style</td>
+					<td>Preventing prohibited behavior</td>
+			</tr>
+			<tr>
+					<td>Edge case classification</td>
+					<td>Deterministic workflow control</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>The exam rule:</strong> If the requirement uses &ldquo;always&rdquo;, &ldquo;never&rdquo;, or &ldquo;every time&rdquo; — use programmatic enforcement, not few-shot.</p>
+<h2 id="format-demonstration">Format demonstration</h2>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>system <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;&#34;&#34;Extract product information from listings.
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Examples:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Input: &#34;Apple MacBook Pro 14-inch, M3 Pro, 18GB RAM, 512GB SSD, Space Black&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Output: {&#34;brand&#34;: &#34;Apple&#34;, &#34;model&#34;: &#34;MacBook Pro 14-inch&#34;, &#34;specs&#34;: {&#34;chip&#34;: &#34;M3 Pro&#34;, &#34;ram_gb&#34;: 18, &#34;storage_gb&#34;: 512}, &#34;color&#34;: &#34;Space Black&#34;, &#34;category&#34;: &#34;laptops&#34;}
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Input: &#34;Sony WH-1000XM5 Wireless Noise Canceling Headphones - Midnight Black&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Output: {&#34;brand&#34;: &#34;Sony&#34;, &#34;model&#34;: &#34;WH-1000XM5&#34;, &#34;specs&#34;: {&#34;type&#34;: &#34;wireless&#34;, &#34;feature&#34;: &#34;noise_canceling&#34;}, &#34;color&#34;: &#34;Midnight Black&#34;, &#34;category&#34;: &#34;headphones&#34;}
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Input: &#34;Logitech MX Master 3S Performance Wireless Mouse, Pale Gray&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Output: {&#34;brand&#34;: &#34;Logitech&#34;, &#34;model&#34;: &#34;MX Master 3S&#34;, &#34;specs&#34;: {&#34;connectivity&#34;: &#34;wireless&#34;, &#34;tier&#34;: &#34;performance&#34;}, &#34;color&#34;: &#34;Pale Gray&#34;, &#34;category&#34;: &#34;mice&#34;}
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Now extract from:&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ambiguity-handling">Ambiguity handling</h2>
+<p>Teach Claude how to handle the specific ambiguity types in your data:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>system <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;&#34;&#34;Classify support tickets. When the category is ambiguous, use these rules:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Example — billing question that mentions a technical issue:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Input: &#34;I was charged twice for my subscription and now my account is locked&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Reasoning: Primary issue is billing (duplicate charge). Account lock is a consequence.
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Output: {&#34;category&#34;: &#34;billing&#34;, &#34;subcategory&#34;: &#34;duplicate_charge&#34;, &#34;secondary&#34;: &#34;account_access&#34;}
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Example — technical issue that mentions a billing term:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Input: &#34;The premium features I&#39;m paying for aren&#39;t working on my mobile app&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Reasoning: Primary issue is technical (features broken). Subscription context is background.
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Output: {&#34;category&#34;: &#34;technical&#34;, &#34;subcategory&#34;: &#34;feature_not_working&#34;, &#34;platform&#34;: &#34;mobile&#34;}
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Now classify:&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cicd-review-quality-calibration">CI/CD review quality calibration</h2>
+<p>For CI code review, include both good and bad review comment examples:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>system <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#34;&#34;&#34;Review this code change for security issues.
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Good review comment (specific, actionable):
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Code: `db.query(&#34;SELECT * FROM users WHERE name = &#39;&#34; + username + &#34;&#39;&#34;)`
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Comment: &#34;SQL injection vulnerability on line 47. User input is concatenated directly into the query string. Replace with parameterized query: `db.query(&#39;SELECT * FROM users WHERE name = ?&#39;, [username])`&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Bad review comment (vague, not actionable — do not write comments like this):
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Code: `db.query(&#34;SELECT * FROM users WHERE name = &#39;&#34; + username + &#34;&#39;&#34;)`
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Comment: &#34;This might have security issues. Consider sanitizing inputs.&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Known safe patterns for this codebase (do NOT flag these):
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">- `eval()` in /sandbox/ — reviewed by security team, approved 2026-01-15
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">- Dynamic require() in /scripts/build.js — build tooling only
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Review the following diff:&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="official-documentation">Official documentation</h2>
+<ul>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview">Prompt engineering overview</a></li>
+</ul>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>README Upstream | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/dnacenta-claude-certified-architect/readme-upstream/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> README Upstream
+</div>
+
+<article>
+  <header>
+    <h1>README Upstream</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">dnacenta</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="claude-certified-architect--foundations-study-guide">Claude Certified Architect — Foundations Study Guide</h1>
+<p>Unofficial study guide for the <strong>Claude Certified Architect — Foundations</strong> (CCAR-F) certification exam by Anthropic.</p>
+<p>This guide covers all 5 exam domains with detailed explanations, code examples, anti-patterns, decision frameworks, and practice questions.</p>
+<p>It is actively maintained and updated regularly to track changes to Anthropic&rsquo;s models, APIs, and Claude Code. <strong>Last refresh: September 2026</strong> — see <a href="CHANGELOG.md">CHANGELOG.md</a> for what changed and when.</p>
+<h2 id="the-claude-certification-family">The Claude Certification Family</h2>
+<p>Anthropic now runs <strong>four</strong> certifications. This repo&rsquo;s deep-dive guide covers CCAR-F; overview guides for the other three (sourced from the official v1.0 exam guides) live in <a href="certs/"><code>certs/</code></a>:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Code</th>
+					<th>Credential</th>
+					<th>Audience</th>
+					<th>Fee</th>
+					<th>Guide</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>CCAO-F</td>
+					<td>Associate — Foundations</td>
+					<td>Business / productivity users (non-developer)</td>
+					<td>$99</td>
+					<td><a href="certs/ccao-f-associate.md">Overview</a></td>
+			</tr>
+			<tr>
+					<td><strong>CCAR-F</strong></td>
+					<td><strong>Architect — Foundations</strong></td>
+					<td><strong>Solution architects</strong></td>
+					<td><strong>$125</strong></td>
+					<td><strong><a href="claude-certified-architect.md">Full study guide</a> — this repo&rsquo;s main guide</strong></td>
+			</tr>
+			<tr>
+					<td>CCAR-P</td>
+					<td>Architect — Professional</td>
+					<td>Senior architects owning the full solution lifecycle</td>
+					<td>$175</td>
+					<td><a href="certs/ccar-p-architect-professional.md">Overview</a></td>
+			</tr>
+			<tr>
+					<td>CCDV-F</td>
+					<td>Developer — Foundations</td>
+					<td>Engineers shipping Claude apps, agents, and workflows</td>
+					<td>$125</td>
+					<td><a href="certs/ccdv-f-developer.md">Overview</a></td>
+			</tr>
+	</tbody>
+</table>
+<p>All four are 120-minute proctored exams delivered via Pearson VUE, passing score 720/1,000, credentials valid 12 months (Exam Guides v1.0, effective July 2026). Renewal is free if done on time: review what changed and pass a non-proctored assessment; a lapsed credential means sitting the full exam again. Registration needs a partner-domain email — personal addresses are rejected.</p>
+<h2 id="read-it-online">Read it online</h2>
+<ul>
+<li><strong>Website:</strong> <a href="https://dnacenta.github.io/claude-certified-architect/">https://dnacenta.github.io/claude-certified-architect/</a></li>
+<li><strong>PDF (English):</strong> <a href="https://dnacenta.github.io/claude-certified-architect/guide_en.pdf">https://dnacenta.github.io/claude-certified-architect/guide_en.pdf</a></li>
+</ul>
+<p>The landing page and PDF are built and deployed automatically from this repo&rsquo;s markdown on every push to <code>main</code> (see <a href=".github/workflows/pages.yml"><code>.github/workflows/pages.yml</code></a>). The PDF is generated from the source <code>.md</code> files, so it never drifts from the guide.</p>
+<h2 id="exam-overview">Exam Overview</h2>
+<ul>
+<li><strong>Format</strong>: 60 multiple-choice, scenario-based questions in 120 minutes (proctored, closed-book)</li>
+<li><strong>Passing score</strong>: 720/1000</li>
+<li><strong>Scenarios</strong>: 4 of 6 randomly selected per exam</li>
+<li><strong>Delivery</strong>: Pearson VUE (OnVUE online or test center), registered via the Anthropic Partner Academy</li>
+<li><strong>Price / validity</strong>: $125 per attempt; certification valid 12 months, free on-time renewal via a non-proctored assessment (Exam Guide v1.0, effective July 2026)</li>
+<li><strong>Target audience</strong>: Solution architects with 6+ months experience building with Claude APIs, Agent SDK, Claude Code, and MCP; access is gated to the Claude Partner Network</li>
+</ul>
+<h2 id="domains">Domains</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Domain</th>
+					<th>Weight</th>
+					<th>Guide</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Agentic Architecture &amp; Orchestration</td>
+					<td>27%</td>
+					<td><a href="domains/d1-agentic-architecture.md">Domain 1</a></td>
+			</tr>
+			<tr>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>18%</td>
+					<td><a href="domains/d2-tool-design-mcp.md">Domain 2</a></td>
+			</tr>
+			<tr>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>20%</td>
+					<td><a href="domains/d3-claude-code-config.md">Domain 3</a></td>
+			</tr>
+			<tr>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>20%</td>
+					<td><a href="domains/d4-prompt-engineering.md">Domain 4</a></td>
+			</tr>
+			<tr>
+					<td>Context Management &amp; Reliability</td>
+					<td>15%</td>
+					<td><a href="domains/d5-context-reliability.md">Domain 5</a></td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="main-reference">Main Reference</h2>
+<p>See <a href="claude-certified-architect.md">claude-certified-architect.md</a> for the full overview including exam scenarios, anti-patterns, decision frameworks, a 4-week study plan, and official resources.</p>
+<h2 id="model-lineup-used-in-this-guide">Model Lineup Used in This Guide</h2>
+<p>Code samples use <strong><code>claude-opus-5</code></strong> — Anthropic&rsquo;s current default for complex agentic coding and enterprise work.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Model</th>
+					<th>ID</th>
+					<th>Context</th>
+					<th>Max output</th>
+					<th>Price (in / out per MTok)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Claude Fable 5.1</td>
+					<td><code>claude-fable-5-1</code></td>
+					<td>1M</td>
+					<td>128k</td>
+					<td>$10 / $50 (cache reads $0.25)</td>
+			</tr>
+			<tr>
+					<td><strong>Claude Opus 5</strong></td>
+					<td><code>claude-opus-5</code></td>
+					<td>1M</td>
+					<td>128k</td>
+					<td>$5 / $25</td>
+			</tr>
+			<tr>
+					<td>Claude Sonnet 5</td>
+					<td><code>claude-sonnet-5</code></td>
+					<td>1M</td>
+					<td>128k</td>
+					<td>$2 / $10</td>
+			</tr>
+			<tr>
+					<td>Claude Haiku 4.5</td>
+					<td><code>claude-haiku-4-5</code></td>
+					<td>200k</td>
+					<td>64k</td>
+					<td>$1 / $5</td>
+			</tr>
+	</tbody>
+</table>
+<p>Fable 5, Opus 4.8, 4.7, 4.6, 4.5, Sonnet 4.6, and Sonnet 4.5 are legacy but still available (Opus 4.1 retired 2026-08-05). Fable 5.1 (released 2026-09-01) rejects forced <code>tool_choice</code> and binds thinking blocks to the model and history that produced them — see the <a href="claude-certified-architect.md#current-model-lineup-september-2026">main guide</a>.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542750%2FClaude+Certified+Architect+%E2%80%93+Foundations+Exam+Guide.pdf">Official CCAR-F Exam Guide (PDF, v1.0)</a> — the <a href="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F8lsy243ftffjjy1cx9lm3o2bw%2Fpublic%2F1773274827%2FClaude+Certified+Architect+%E2%80%93+Foundations+Certification+Exam+Guide.pdf">March 2026 launch guide</a> is superseded</li>
+<li><a href="https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification">Anthropic Partner Academy — CCAR-F registration</a> · <a href="https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses">Prep courses</a> · <a href="https://anthropic-partners.skilljar.com/page/faq-certifications">Certification FAQ</a></li>
+<li><a href="https://www.pearsonvue.com/us/en/anthropic.html">Pearson VUE — Anthropic certification program</a></li>
+<li><a href="https://anthropic.skilljar.com/claude-with-the-anthropic-api">Anthropic Skilljar — Building with Claude API</a></li>
+<li><a href="https://github.com/SGridworks/claude-certified-architect-training">12-Week Training Program (GitHub)</a></li>
+<li><a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents (Anthropic Research)</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview">Claude API docs</a> · <a href="https://platform.claude.com/docs/en/models/overview">Models overview</a> · <a href="https://code.claude.com/docs/en/overview">Claude Code docs</a> · <a href="https://code.claude.com/docs/en/agent-sdk/overview">Claude Agent SDK</a> · <a href="https://modelcontextprotocol.io/introduction">MCP</a></li>
+</ul>
+<p>The <a href="claude-certified-architect.md#resources">main guide&rsquo;s Resources section</a> has the full, categorised link list.</p>
+<blockquote>
+<p><strong>Docs note:</strong> Anthropic split its documentation in July 2026. API docs live at <code>platform.claude.com/docs/en/*</code>, Claude Code docs at <code>code.claude.com/docs/en/*</code>; the old <code>docs.anthropic.com/en/docs/*</code> URLs still redirect. The SDK was renamed from &ldquo;Claude Code SDK&rdquo; to the <strong>Claude Agent SDK</strong>.</p>
+</blockquote>
+<h2 id="credits">Credits</h2>
+<p>This guide was inspired by and based on the exam breakdown by <a href="https://x.com/hooeem/status/2033198345045336559">@hooeem on X</a>. Full credit to them for compiling the domain coverage, scenarios, and key concepts from the official exam guide.</p>
+<h2 id="related-work">Related work</h2>
+<p>I&rsquo;m also building open-source tools around persistent agents, structured memory, and Claude Code usage visibility — same problem space as the agentic / MCP / context domains in this guide, different angle:</p>
+<ul>
+<li><strong><a href="https://github.com/dnacenta/recall-echo">recall-echo</a></strong> — persistent, confidence-weighted memory for coding agents (MCP-friendly). Early but usable.</li>
+<li><strong><a href="https://github.com/dnacenta/pulse-null">pulse-null</a></strong> — single-binary scaffold for longer-running AI entities. Research prototype — expect bugs.</li>
+<li><strong><a href="https://github.com/pulse-null/pulse-limits">pulse-limits</a></strong> — Claude, Codex and Grok plan limits as a retro patient monitor: macOS menu bar, Waybar, terminal. One Rust binary. <code>brew install pulse-null/tap/pulse-limits &amp;&amp; pulse-limits install</code>. No account, no server — it reuses the logins your CLIs already keep.</li>
+<li><strong><a href="https://pulse-null.com">pulse-null.com</a></strong> — overview of the work.</li>
+</ul>
+<p>Not affiliated with Anthropic or the Claude Certified Architect program. Solo project; stars and issues help.</p>
+<p>Feel free to reach out: <a href="mailto:dnacenta@pulse-null.com">dnacenta@pulse-null.com</a></p>
+<h2 id="license">License</h2>
+<p>This is an unofficial community study guide. Claude Certified Architect is a certification program by <a href="https://www.anthropic.com">Anthropic</a>.</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

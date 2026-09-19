@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Reference__domain 2 | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/reference/quick-reference__domain-2/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Quick Reference__domain 2
+</div>
+
+<article>
+  <header>
+    <h1>Quick Reference__domain 2</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="quick-reference-domain-2--tool-design--mcp-integration--claude-certification-guide">Quick Reference: Domain 2 — Tool Design &amp; MCP Integration | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/quick-reference/domain-2">https://claudecertificationguide.com/learn/quick-reference/domain-2</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+Quick Reference
+/
+Domain 2
+DOMAIN 2
+18%
+Quick Reference: Domain 2 — Tool Design &amp; MCP Integration
+Print this page
+Tool Description Design</p>
+<p>Tool descriptions are the primary mechanism Claude uses to select which tool to call. They matter more than tool names.</p>
+<p>What to include in a tool description:</p>
+<p>What the tool does (one sentence)
+Expected input formats and constraints
+What it returns (shape of the response)
+Boundary conditions (what it does NOT do)
+Example queries that would trigger this tool</p>
+<p>Count the tools before you pick the remedy. Misselection has two different causes and they take opposite fixes:</p>
+<p>The tools are&hellip;	The fix
+Few enough to reason about, but two read alike	Sharpen the descriptions (TS 2.1)
+Different jobs (query, transform, export)	Split by role into focused agents (TS 2.3)
+Variations on one job, sharing a shape	Consolidate into one parameterised tool (TS 2.3)</p>
+<p>Descriptions are the first fix only when the toolkit is already a workable size. Past roughly 4–5 tools per agent, selection degrades on decision complexity alone, and rewriting 22 descriptions leaves that untouched. Few-shot examples are not a sanctioned step for misselection — the bank keys them wrong.</p>
+<p>Schema Design Rules
+Keep each agent&rsquo;s tool set small and role-focused. The guide contrasts 4–5 tools with 18 to show how selection reliability degrades as the set grows.
+Use descriptive parameter names — customer_email not email, order_date_range not range.
+Mark parameters as required only when truly mandatory. Optional parameters with defaults reduce friction.
+Use enum types for constrained choices — they guide the model better than freeform strings.
+Diagnose before you fix. A small toolkit with two lookalike tools is a description problem. An oversized toolkit is a distribution problem, and no amount of description quality rescues it.
+tool_choice Modes
+Mode	Behaviour	Use When
+auto	Model decides whether to call a tool	Default for most agentic loops
+any	Model must call at least one tool (chooses which)	Guaranteed structured output when the input could match one of several schemas
+tool (forced)	Model must call a specific named tool	Guaranteed schema compliance for one known structure</p>
+<p>Key exam point: Use tool_choice: { type: &ldquo;tool&rdquo;, name: &ldquo;extract_data&rdquo; } when you need one specific structure every time. When the document type is unknown and any of several extraction schemas could apply, tool_choice: &ldquo;any&rdquo; still guarantees structured output while letting the model pick the right tool.</p>
+<p>auto is the correct default for agentic loops — the model needs freedom to decide when to call tools and when to respond with text.</p>
+<p>MCP Architecture</p>
+<p>Three-layer model: Host ⊃ Client ↔ Server (the host application contains the client; the client connects to servers)</p>
+<p>Layer	Role	Example
+Host	The application that manages client lifecycle	Claude Desktop, an IDE extension
+Client	The connector inside the host, which connects to one server and routes its tool calls	The client instance the desktop app creates per server
+Server	Exposes tools, resources, prompts	A database connector, file system server</p>
+<p>Protocol: JSON-RPC 2.0 over stdio or streamable HTTP.</p>
+<p>Configuration files:</p>
+<p>.mcp.json in project root — project-level MCP servers (shared with team)
+~/.claude.json — personal/global MCP servers (not committed)</p>
+<p>Key rule: Use community MCP servers first. Only build custom servers when no community server meets your requirements.</p>
+<p>Tool Error Handling</p>
+<p>Structured error metadata (the exam-tested pattern). This is an application-level convention carried inside the result content, not part of the MCP envelope — the protocol&rsquo;s CallToolResult defines only content, structuredContent and isError:</p>
+<p>Copy
+{
+&ldquo;errorCategory&rdquo;: &ldquo;transient&rdquo; | &ldquo;validation&rdquo; | &ldquo;business&rdquo; | &ldquo;permission&rdquo;,
+&ldquo;isRetryable&rdquo;: true | false,
+&ldquo;description&rdquo;: &ldquo;Rate limit hit; retry after 5 seconds&rdquo;
+}</p>
+<p>The four categories: transient (timeouts, service unavailability — isRetryable: true, resend as-is), validation (invalid input — false, correct the input and send a new call), business (policy violations — false, take an alternative path), permission (missing access — false, escalate to a principal with access). Only transient is retryable: the flag asks whether resending this call can work, and everything else needs something to change first. &ldquo;Not found&rdquo; is deliberately absent: a query that finds nothing is a valid empty result, not an error.</p>
+<p>Critical distinction:</p>
+<p>Access failure (auth error, network timeout) → Retry or escalate. Something went wrong.
+Valid empty result (search returned 0 results) → Accept. The absence of data IS the answer.</p>
+<p>Never treat a valid empty result as an error. Never silently swallow an access failure.</p>
+<p>Tool Selection in Claude Code
+Tool	Purpose	Use When
+Grep	Search file contents by pattern	Looking for code patterns, string occurrences
+Glob	Find files by name/path pattern	Looking for files by extension or naming convention
+Read	Read a specific file	You know the exact file path
+Write	Write a complete file	Creating a file, or replacing one wholesale
+Edit	Modify file contents	Making targeted changes to existing files
+Bash	Run shell commands	Build, test, git operations, anything not covered above</p>
+<p>Selection principle: Use the most specific tool. Grep for content search, Glob for file discovery, Read for known files. Avoid Bash for tasks that specialised tools handle better.</p>
+<p>When Edit fails on a non-unique match: the exam guide names Read + Write as the tested fallback — load the full file, then write the complete modified version.</p>
+<p>Current state (checked 14 August 2026): the live tools reference describes Claude first supplying a longer anchor string with enough surrounding context to pin down one occurrence, or setting replace_all: true. Answer Read + Write on the exam; recognise the widening and replace_all behaviour in current Claude Code.</p>
+<p>Decision Rules for the Exam
+If the question says&hellip;	The answer is likely&hellip;
+&ldquo;Claude keeps picking the wrong tool&rdquo; (small toolkit)	Improve tool descriptions
+&ldquo;Claude keeps picking the wrong tool&rdquo; (20+ tools)	Split by role or consolidate — not descriptions
+&ldquo;guaranteed structured output&rdquo;	Forced tool_choice for one known schema; tool_choice: any across multiple schemas
+&ldquo;model should decide which tool&rdquo;	tool_choice: auto
+&ldquo;must call a tool but can choose which&rdquo;	tool_choice: any
+&ldquo;search returned no results&rdquo;	Valid empty result — accept it
+&ldquo;API returned 401/timeout&rdquo;	Access failure — retry or escalate
+&ldquo;too many tools, selection errors&rdquo;	Split into role-scoped agents, or consolidate variants of one job
+&ldquo;need a custom MCP server&rdquo;	Check community servers first
+&ldquo;project-wide MCP config&rdquo;	.mcp.json in project root
+&ldquo;personal MCP config&rdquo;	~/.claude.json
+Common Exam Traps
+Trap	Correct Answer
+&ldquo;Improve all 22 tool descriptions to fix misselection&rdquo;	Wrong — past ~4–5 tools the problem is decision complexity, not wording
+&ldquo;Add few-shot examples to fix misselection&rdquo;	Wrong — not a sanctioned remedy; fix the descriptions or the distribution
+&ldquo;tool_choice: any guarantees a specific tool&rdquo;	Wrong — any forces a tool call, not a specific one
+&ldquo;MCP servers connect directly to each other&rdquo;	Wrong — all communication goes through the client/host
+&ldquo;Empty search results mean the tool failed&rdquo;	Wrong — absence of data is a valid result
+&ldquo;Return generic error string from tools&rdquo;	Wrong — return structured metadata (category, retryable, suggestion)
+&ldquo;Build a custom MCP server for common integrations&rdquo;	Wrong — check community servers first
+&ldquo;Tool name is the primary selection signal&rdquo;	Wrong — tool description is the primary signal
+Previous
+Domain 1: Agentic Architecture &amp; Orchestration
+Next
+Domain 3: Claude Code Configuration &amp; Workflows</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

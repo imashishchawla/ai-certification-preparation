@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Guide on CCA-F Exam Prep</title>
+		<link>http://localhost:1313/tags/guide/</link>
+		<description>Recent content in Guide on CCA-F Exam Prep</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="http://localhost:1313/tags/guide/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Amey-Thakur — Domain Task Statements</title>
+				<link>http://localhost:1313/study/amey-thakur-architect-foundations-readme/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/study/amey-thakur-architect-foundations-readme/</guid>
+				<description>&lt;h1 id=&#34;claude-certified-architect--foundations&#34;&gt;Claude Certified Architect – Foundations&lt;/h1&gt;&#xA;&lt;p&gt;The Claude Certified Architect – Foundations certification validates that practitioners can make informed decisions about tradeoffs when implementing real-world solutions with Claude. It tests foundational knowledge across Claude Code, the Claude Agent SDK, the Claude API, and Model Context Protocol, the core technologies used to build production-grade applications with Claude.&lt;/p&gt;&#xA;&lt;p&gt;This exam differs from the other three: every question is framed by one of six published production scenarios, and the exam guide is by far the most detailed of the four, with full task statements, preparation exercises, and an appendix of in-scope technologies. The &lt;a href=&#34;exam-guide.pdf&#34;&gt;exam guide&lt;/a&gt; (version 1.0, effective July 2026) is the authoritative reference, and the maintainer&amp;rsquo;s study notes for this exam are in &lt;a href=&#34;notes.md&#34;&gt;notes.md&lt;/a&gt;, with original practice questions in &lt;a href=&#34;practice-questions.md&#34;&gt;practice-questions.md&lt;/a&gt; and a timed &lt;a href=&#34;mock-exam-1.md&#34;&gt;mock exam&lt;/a&gt;. The &lt;a href=&#34;cheat-sheet.md&#34;&gt;cheat sheet&lt;/a&gt; condenses this whole page to one printable page for the day before.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Amey-Thakur — Maintainer Notes</title>
+				<link>http://localhost:1313/study/amey-thakur-notes/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/study/amey-thakur-notes/</guid>
+				<description>&lt;h1 id=&#34;study-notes-architect--foundations&#34;&gt;Study notes: Architect – Foundations&lt;/h1&gt;&#xA;&lt;p&gt;My working notes from preparing for this exam. This is the exam where preparation pays off most directly, because the six scenarios are published in advance and the guide&amp;rsquo;s appendix names the testable technologies. Nothing here comes from the live exam, which is covered by a non-disclosure agreement; everything traces to the &lt;a href=&#34;exam-guide.pdf&#34;&gt;exam guide&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;work-the-scenarios-not-just-the-domains&#34;&gt;Work the scenarios, not just the domains&lt;/h2&gt;&#xA;&lt;p&gt;Four of the six published scenarios appear per sitting. For each one I wrote down what it must ask about, then studied that intersection. The short version:&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Amey-Thakur — One-Page Cheat Sheet</title>
+				<link>http://localhost:1313/study/amey-thakur-cheat-sheet/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/study/amey-thakur-cheat-sheet/</guid>
+				<description>&lt;h1 id=&#34;cheat-sheet-architect--foundations&#34;&gt;Cheat sheet: Architect – Foundations&lt;/h1&gt;&#xA;&lt;p&gt;Everything worth holding in your head the hour before the exam, on one page. Facts come from the &lt;a href=&#34;exam-guide.pdf&#34;&gt;official exam guide&lt;/a&gt;; the rules of thumb are the maintainer&amp;rsquo;s, distilled from the official rationales.&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;../.github/assets/cheat-sheet-architect-foundations.png&#34; title=&#34;View this cheat sheet at full size&#34;&gt;&lt;img src=&#34;../.github/assets/cheat-sheet-architect-foundations.png&#34; alt=&#34;Claude Certified Architect – Foundations cheat sheet: exam facts, domain weights, and the rules that decide questions&#34;&gt;&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;Save or share the card above; the full sheet follows.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Cheat Sheet</title>
+				<link>http://localhost:1313/study/cca-prep-cheatsheet/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/study/cca-prep-cheatsheet/</guid>
+				<description>&lt;h1 id=&#34;cca-prep-cheat-sheet-29-quick-reference-entries&#34;&gt;CCA-Prep Cheat Sheet (29 quick-reference entries)&lt;/h1&gt;&#xA;&lt;p&gt;Source: github.com/vinipx/cca-prep · src/data/cheatsheet.ts&lt;/p&gt;&#xA;&lt;h2 id=&#34;1-agentic-loops-d1-agentic-architecture--orchestration--stop_reason-control-flow&#34;&gt;1. [Agentic loops] D1 Agentic Architecture &amp;amp; Orchestration — stop_reason control flow&lt;/h2&gt;&#xA;&lt;p&gt;Continue loop when stop_reason === &amp;ldquo;tool_use&amp;rdquo;. Execute tools, append results to conversation history, call Claude again. Terminate when stop_reason === &amp;ldquo;end_turn&amp;rdquo;. Never use text content checks as a stop signal.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;while (true) {&#xA;  const response = await claude.messages.create({...});&#xA;  if (response.stop_reason === &amp;#39;end_turn&amp;#39;) break;&#xA;  // stop_reason === &amp;#39;tool_use&amp;#39; — execute tools&#xA;  const toolResults = await executeTools(response.content);&#xA;  messages.push({ role: &amp;#39;assistant&amp;#39;, content: response.content });&#xA;  messages.push({ role: &amp;#39;user&amp;#39;, content: toolResults });&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;2-multi-agent-d1-agentic-architecture--orchestration--hub-and-spoke-coordinator-pattern&#34;&gt;2. [Multi-agent] D1 Agentic Architecture &amp;amp; Orchestration — Hub-and-spoke coordinator pattern&lt;/h2&gt;&#xA;&lt;p&gt;Coordinator manages ALL inter-subagent communication, error handling, and information routing. Subagents receive isolated context — must be passed explicitly in each prompt. Coordinator decomposes tasks, delegates, aggregates results, and routes errors. Subagents never communicate directly with each other.&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Exam Scenarios</title>
+				<link>http://localhost:1313/study/cca-prep-exam-scenarios/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/study/cca-prep-exam-scenarios/</guid>
+				<description>&lt;hr&gt;&#xA;&lt;h2 id=&#34;sidebar_label--exam-scenarios&#34;&gt;id: exam-scenarios&#xA;title: The 6 exam scenarios&#xA;sidebar_label: 📋 Exam scenarios&lt;/h2&gt;&#xA;&lt;h1 id=&#34;the-6-exam-scenarios&#34;&gt;The 6 exam scenarios&lt;/h1&gt;&#xA;&lt;p&gt;The CCA exam randomly selects 4 of these 6 scenarios. Every question is anchored to one of the selected scenarios — you&amp;rsquo;re the architect of a specific production system, not answering in the abstract.&lt;/p&gt;&#xA;&lt;p&gt;:::tip Preparation strategy&#xA;You cannot know which 4 scenarios will appear. Study all 6, but pay extra attention to &lt;strong&gt;Scenarios 1, 3, and 4&lt;/strong&gt; — they cover Domains 1 and 2, which together account for 45% of the exam.&#xA;:::&lt;/p&gt;</description>
+			</item>
+			<item>
+				<title>Paullarionov — Full Theory Guide</title>
+				<link>http://localhost:1313/study/paullarionov-guide_en/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/study/paullarionov-guide_en/</guid>
+				<description>&lt;h1 id=&#34;claude-certified-architect--foundations-certification&#34;&gt;Claude Certified Architect — Foundations Certification&lt;/h1&gt;&#xA;&lt;h2 id=&#34;study-guide-based-on-the-official-exam-guide&#34;&gt;Study Guide (Based on the Official Exam Guide)&lt;/h2&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;The &lt;strong&gt;Claude Certified Architect — Foundations&lt;/strong&gt; certification confirms that a specialist can make sound trade-off decisions when implementing real-world Claude-based solutions. The exam assesses foundational knowledge of Claude Code, the Claude Agent SDK, the Claude API, and the Model Context Protocol (MCP)—the core technologies for building production applications with Claude.&lt;/p&gt;&#xA;&lt;p&gt;The exam questions are based on realistic industry scenarios: building agentic systems for customer support, designing multi-agent research pipelines, integrating Claude Code into CI/CD, creating developer productivity tools, and extracting structured data from unstructured documents.&lt;/p&gt;</description>
+			</item>
+	</channel>
+</rss>

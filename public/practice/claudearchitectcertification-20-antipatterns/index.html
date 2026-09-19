@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>20 Canonical Anti-patterns | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/practice/claudearchitectcertification-20-antipatterns/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/practice/">Practice Questions</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 20 Canonical Anti-patterns
+</div>
+
+<article>
+  <header>
+    <h1>20 Canonical Anti-patterns</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">practice</span>
+      
+        <span class="tag">questions</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="20-anti-patterns-for-the-cca-f-exam">20 Anti-Patterns for the CCA-F Exam</h1>
+<p>Source: claudearchitectcertification.com/exam-guide/anti-patterns
+(Pages from the downloadable 12-page exam guide at /downloads/cca-f-exam-guide.pdf)</p>
+<p>Exam distractors are almost always anti-patterns dressed up to look correct. Spot the anti-pattern and you eliminate two or three wrong answers. Eight are critical, ten common, two edge cases.</p>
+<h2 id="d1--agentic-architecture-27--5-anti-patterns">D1 · Agentic Architecture (27%) — 5 anti-patterns</h2>
+<p><strong>AP-LOOP-01 — Critical — Parsing natural language for loop termination</strong></p>
+<ul>
+<li>Wrong call: Pattern-matching on &ldquo;I&rsquo;m done&rdquo; / &ldquo;task complete&rdquo; to exit a loop. The model&rsquo;s narration is descriptive, not authoritative.</li>
+<li>Right call: Check <code>stop_reason</code> — <code>tool_use</code> means run tool and continue; <code>end_turn</code> means finished. Read the field, don&rsquo;t infer from prose.</li>
+</ul>
+<p><strong>AP-LOOP-02 — Critical — Arbitrary iteration caps as the primary stopping rule</strong></p>
+<ul>
+<li>Wrong call: <code>max_iterations=10</code> as the main exit. Legit long tasks get cut; broken loops still burn budget to the cap.</li>
+<li>Right call: Let <code>stop_reason</code> drive the loop; the cap is a safety net. If you hit it regularly, the prompt/tool surface is the problem.</li>
+</ul>
+<p><strong>AP-MULTI-01 — Common — Subagents inherit the full parent conversation</strong></p>
+<ul>
+<li>Wrong call: Forwarding all parent context to every subagent — burns tokens, contaminates reasoning, breaks isolation.</li>
+<li>Right call: Pass only the task brief plus narrow inputs. Isolation is the reason to use a subagent.</li>
+</ul>
+<p><strong>AP-MULTI-02 — Common — Sentiment-based escalation routing</strong></p>
+<ul>
+<li>Wrong call: Escalating when the user &ldquo;sounds frustrated&rdquo;. Sentiment ≠ complexity.</li>
+<li>Right call: Escalate on complexity, policy gaps, low retrieval coverage, explicit request for human, tool failure on retry.</li>
+</ul>
+<p><strong>AP-MULTI-03 — Common — Self-reported confidence as escalation signal</strong></p>
+<ul>
+<li>Wrong call: Asking &ldquo;how confident are you?&rdquo; and routing on it — uncalibrated and reflexively high.</li>
+<li>Right call: Programmatic checks — missing required fields, coverage below threshold, ≥2 tool retries, policy hooks fired.</li>
+</ul>
+<h2 id="d2--tool-design--integration-18--4-anti-patterns">D2 · Tool Design + Integration (18%) — 4 anti-patterns</h2>
+<p><strong>AP-TOOL-01 — Critical — 18+ tools registered on a single agent</strong></p>
+<ul>
+<li>Wrong call: Long tool lists degrade selection; model confuses similarly-named tools.</li>
+<li>Right call: 4–5 tools per agent; orthogonal capabilities go to subagents with their own 4–5 tools.</li>
+</ul>
+<p><strong>AP-TOOL-02 — Critical — Generic error messages (&ldquo;Operation failed&rdquo;)</strong></p>
+<ul>
+<li>Wrong call: <code>{error: 'failed'}</code> gives no signal to retry/switch/escalate. The model guesses.</li>
+<li>Right call: Structured errors — <code>isError</code>, category, <code>isRetryable</code>, <code>retryAfterMs</code>, context.</li>
+</ul>
+<p><strong>AP-TOOL-03 — Common — Silently returning empty results as success</strong></p>
+<ul>
+<li>Wrong call: Search returns <code>[]</code> for both &ldquo;no matches&rdquo; and &ldquo;auth expired&rdquo;.</li>
+<li>Right call: Distinguish &ldquo;access failed&rdquo; from &ldquo;genuinely empty&rdquo;. Failures surface as categorised errors.</li>
+</ul>
+<p><strong>AP-MCP-01 — Edge — Mixing project and user MCP configurations</strong></p>
+<ul>
+<li>Wrong call: Same servers in <code>.mcp.json</code> and <code>~/.claude.json</code>.</li>
+<li>Right call: Project MCP in <code>.mcp.json</code>; user scope for personal tooling. User scope never fires in CI.</li>
+</ul>
+<h2 id="d3--claude-code-configuration--workflows-20--4-anti-patterns">D3 · Claude Code Configuration &amp; Workflows (20%) — 4 anti-patterns</h2>
+<p><strong>AP-CC-01 — Critical — Prompt-based enforcement for business rules</strong></p>
+<ul>
+<li>Wrong call: &ldquo;Never refund over $500&rdquo; in system prompt — probabilistic.</li>
+<li>Right call: <code>PreToolUse</code> hooks for deterministic enforcement. Deterministic, auditable.</li>
+</ul>
+<p><strong>AP-CC-02 — Common — Ignoring the CLAUDE.md hierarchy</strong></p>
+<ul>
+<li>Wrong call: Project rules hardcoded in user scope or ad-hoc prompts.</li>
+<li>Right call: CLAUDE.md at repo root; <code>.claude/rules/</code> for topics. User → project → directory, with <code>@import</code>.</li>
+</ul>
+<p><strong>AP-CC-03 — Common — Slash commands with allowed-tools: &lsquo;*&rsquo;</strong></p>
+<ul>
+<li>Wrong call: All tools by default; prompt injection in a PR description triggers <code>Bash(rm -rf .)</code>.</li>
+<li>Right call: Explicit <code>allowed-tools</code> per command; add Bash sparingly.</li>
+</ul>
+<p><strong>AP-CC-04 — Common — Same-session self-review of generated code</strong></p>
+<ul>
+<li>Wrong call: The session that wrote code rationalises its own choices.</li>
+<li>Right call: Generator and reviewer in isolated sessions.</li>
+</ul>
+<h2 id="d4--prompt-engineering-20--4-anti-patterns">D4 · Prompt Engineering (20%) — 4 anti-patterns</h2>
+<p><strong>AP-PROMPT-01 — Critical — Vague instructions (&ldquo;be careful&rdquo;)</strong></p>
+<ul>
+<li>Wrong call: Soft instructions leave compliance to intuition.</li>
+<li>Right call: Explicit criteria with concrete decision rules — &ldquo;amount &gt; $500 or currency ≠ USD → REQUIRES_REVIEW with {amount, currency, reason}&rdquo;.</li>
+</ul>
+<p><strong>AP-PROMPT-02 — Common — Few-shot examples omitted on ambiguous tasks</strong></p>
+<ul>
+<li>Wrong call: Instruction text alone for classification/extraction.</li>
+<li>Right call: 2–4 few-shot examples (typical, edge, negative).</li>
+</ul>
+<p><strong>AP-PROMPT-03 — Critical — JSON output with no schema validation or retry</strong></p>
+<ul>
+<li>Wrong call: &ldquo;Return JSON&rdquo; and parse the first response.</li>
+<li>Right call: <code>tool_use</code> with schema + validation-retry loop. 2–3 retries catch &gt;99%.</li>
+</ul>
+<p><strong>AP-PROMPT-04 — Edge — <code>tool_choice = 'auto'</code> when only one tool is correct</strong></p>
+<ul>
+<li>Wrong call: Model occasionally narrates in text instead of calling the tool.</li>
+<li>Right call: <code>tool_choice = 'any'</code> or force the specific tool.</li>
+</ul>
+<h2 id="d5--context--reliability-15--3-anti-patterns">D5 · Context + Reliability (15%) — 3 anti-patterns</h2>
+<p><strong>AP-CTX-01 — Critical — Progressive summarisation losing case facts</strong></p>
+<ul>
+<li>Wrong call: Order numbers, plan tier, prior decisions summarised into prose and lost.</li>
+<li>Right call: Pinned case-facts block at the top of context; summarise only narration.</li>
+</ul>
+<p><strong>AP-CTX-02 — Common — Aggregate accuracy masking per-document failures</strong></p>
+<ul>
+<li>Wrong call: &ldquo;94% extraction accuracy&rdquo; hides failure on the 10% of invoices that are 100% of dollar value.</li>
+<li>Right call: Stratified metrics per type, field, confidence band.</li>
+</ul>
+<p><strong>AP-CTX-03 — Common — Context degradation in long-running sessions</strong></p>
+<ul>
+<li>Wrong call: Hours without checkpointing; early details fade, contradictions compound.</li>
+<li>Right call: Periodic compaction, scratchpad files, recovery manifests.</li>
+</ul>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

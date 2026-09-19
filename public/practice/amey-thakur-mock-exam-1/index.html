@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amey-Thakur — Mock Exam 1 | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/practice/amey-thakur-mock-exam-1/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/practice/">Practice Questions</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Amey-Thakur — Mock Exam 1
+</div>
+
+<article>
+  <header>
+    <h1>Amey-Thakur — Mock Exam 1</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">practice</span>
+      
+        <span class="tag">questions</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="mock-exam-1-architect--foundations">Mock exam 1: Architect – Foundations</h1>
+<p>A timed practice exam in the official style: scenario-framed, domains hidden, answers at the end. Unlike the <a href="practice-questions.md">practice questions</a>, this measures readiness rather than teaching. Original questions written against the public <a href="README.md#skills-measured">blueprint</a> and the <a href="README.md#the-six-exam-scenarios">six published scenarios</a>; not items from the live exam, which is covered by a non-disclosure agreement.</p>
+<p><strong>How to take it.</strong> 15 questions, 30 minutes, closed book: no notes, no documentation, no Claude. The real exam presents 4 scenarios drawn from the published 6; this mock samples across all of them. Score yourself with the <a href="#answer-key">key</a> and the <a href="#interpreting-your-score">readiness table</a> afterwards.</p>
+<hr>
+<h2 id="scenario-a-customer-support-resolution-agent">Scenario A: customer support resolution agent</h2>
+<p>An Agent SDK agent handles returns, billing disputes, and account issues through MCP tools: get_customer, lookup_order, process_refund, escalate_to_human.</p>
+<p><strong>1.</strong> The agent occasionally answers billing questions using an order it looked up three turns earlier for a different customer. What is the architectural fix?</p>
+<ul>
+<li>A. Increase the context window</li>
+<li>B. Scope each conversation&rsquo;s context to one customer and clear or isolate prior lookups when the subject changes</li>
+<li>C. Remove the lookup_order tool</li>
+<li>D. Instruct the model to be careful about customer identity</li>
+</ul>
+<p><strong>2.</strong> process_refund fails intermittently because the billing backend times out. What should the tool return so the agent can behave sensibly?</p>
+<ul>
+<li>A. An empty string</li>
+<li>B. A message asking the user to try later</li>
+<li>C. A structured error with a category and a retryable flag, so the agent can retry or escalate deliberately</li>
+<li>D. The exception stack trace</li>
+</ul>
+<p><strong>3.</strong> Which condition should route a ticket to escalate_to_human rather than continue autonomous resolution?</p>
+<ul>
+<li>A. The customer writes in a language the agent supports</li>
+<li>B. The order is more than thirty days old</li>
+<li>C. The conversation exceeds five turns</li>
+<li>D. The request falls outside documented policy, or the agent cannot make progress after a bounded number of attempts</li>
+</ul>
+<p><strong>4.</strong> The agent sometimes calls get_customer when it should call lookup_order. What is the most effective change?</p>
+<ul>
+<li>A. Rewrite both tool descriptions so each states precisely when it applies and how it differs from the other</li>
+<li>B. Reorder the tools in the configuration</li>
+<li>C. Merge them into one tool with a mode flag</li>
+<li>D. Increase the model&rsquo;s temperature</li>
+</ul>
+<h2 id="scenario-b-claude-code-for-a-development-team">Scenario B: Claude Code for a development team</h2>
+<p>A team uses Claude Code across a monorepo for generation, refactoring, and review.</p>
+<p><strong>5.</strong> Backend conventions should apply only when backend files are touched. Where do they belong?</p>
+<ul>
+<li>A. In the root CLAUDE.md so they are always available</li>
+<li>B. In a path-scoped rule under .claude/rules/ with frontmatter matching backend paths</li>
+<li>C. In each engineer&rsquo;s user-level configuration</li>
+<li>D. In the repository wiki</li>
+</ul>
+<p><strong>6.</strong> When is plan mode the appropriate choice over direct execution?</p>
+<ul>
+<li>A. For every change, since planning is always safer</li>
+<li>B. Only when the model is unfamiliar with the language</li>
+<li>C. When the change is large or risky enough that a human should review the approach before edits are made</li>
+<li>D. When the context window is nearly full</li>
+</ul>
+<p><strong>7.</strong> A repeated multi-step review procedure should be available to the whole team as a single invocation. What is the right mechanism?</p>
+<ul>
+<li>A. A shared document describing the steps</li>
+<li>B. A longer CLAUDE.md</li>
+<li>C. A saved chat transcript</li>
+<li>D. A custom slash command or skill committed to the repository</li>
+</ul>
+<h2 id="scenario-c-multi-agent-research-system">Scenario C: multi-agent research system</h2>
+<p>A coordinator delegates to search, analysis, synthesis, and report subagents that produce cited reports.</p>
+<p><strong>8.</strong> Subagents return full source documents to the coordinator, which then exceeds its context limit. What is the correct design change?</p>
+<ul>
+<li>A. Have subagents return structured findings with citations while raw sources stay at the edge or in a scratchpad</li>
+<li>B. Give the coordinator a larger model</li>
+<li>C. Reduce the number of subagents to one</li>
+<li>D. Truncate each document to its first page</li>
+</ul>
+<p><strong>9.</strong> Final reports attribute claims to the wrong sources even though each subagent is individually accurate. What is the likely cause?</p>
+<ul>
+<li>A. The synthesis model is too small</li>
+<li>B. The handoff format does not carry claim and source together, so provenance is lost between stages</li>
+<li>C. The search subagent returns too many results</li>
+<li>D. Reports are generated before analysis completes</li>
+</ul>
+<p><strong>10.</strong> A subagent fails permanently on one source. What should the coordinator receive?</p>
+<ul>
+<li>A. Nothing, so the report proceeds</li>
+<li>B. A silent retry loop until it succeeds</li>
+<li>C. A propagated error with enough context to decide between retry, exclusion with a noted gap, or abort</li>
+<li>D. A generic failure flag with no detail</li>
+</ul>
+<h2 id="scenario-d-claude-code-in-cicd">Scenario D: Claude Code in CI/CD</h2>
+<p>Claude Code runs automated review on pull requests and posts feedback.</p>
+<p><strong>11.</strong> The reviewer must emit results a pipeline can parse. Which invocation is correct?</p>
+<ul>
+<li>A. Interactive session with output redirected to a log</li>
+<li>B. Plan mode with an approval step</li>
+<li>C. A cron job that emails the transcript</li>
+<li>D. Non-interactive print mode with JSON output and a schema</li>
+</ul>
+<p><strong>12.</strong> Reviews flag many low-value style nits and engineers now ignore them. Which change addresses this?</p>
+<ul>
+<li>A. Define explicit review criteria and a severity bar in the prompt, with examples of in-scope and out-of-scope findings</li>
+<li>B. Post findings to a separate channel</li>
+<li>C. Run the review only on large pull requests</li>
+<li>D. Cap output at five findings</li>
+</ul>
+<h2 id="scenario-e-structured-data-extraction">Scenario E: structured data extraction</h2>
+<p>Documents are parsed into validated records for downstream systems.</p>
+<p><strong>13.</strong> Some invoices legitimately lack a delivery date. How should the schema express this?</p>
+<ul>
+<li>A. Make the field required and let extraction fail</li>
+<li>B. Make the field nullable so absence is recorded explicitly, with conditional validation where the document type requires it</li>
+<li>C. Omit the field from the schema</li>
+<li>D. Default it to today&rsquo;s date</li>
+</ul>
+<p><strong>14.</strong> Which loop gives the most reliable extraction output?</p>
+<ul>
+<li>A. Generate, then manually review every record</li>
+<li>B. Generate three times and take the majority</li>
+<li>C. Enforce a JSON schema through tool use, validate, and on failure retry with the validation error provided to the model</li>
+<li>D. Generate with temperature zero and accept the result</li>
+</ul>
+<p><strong>15.</strong> Your team reports 97% accuracy measured only on records that passed validation. Why is that number misleading?</p>
+<ul>
+<li>A. Accuracy should be measured per field, not per record</li>
+<li>B. 97% is too low to report</li>
+<li>C. Validation and accuracy are unrelated</li>
+<li>D. It excludes the failures, so it measures where the system already succeeded rather than the true rate across all documents</li>
+</ul>
+<hr>
+<h2 id="answer-key">Answer key</h2>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: center">#</th>
+					<th>Answer</th>
+					<th>Domain</th>
+					<th>Why</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center">1</td>
+					<td>B</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Cross-customer contamination is a context-scoping defect, not a window-size problem</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">2</td>
+					<td>C</td>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>Structured errors with categories and retryable flags are what let an agent recover deliberately</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">3</td>
+					<td>D</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Policy gaps and lack of progress are the documented escalation triggers; turn counts and order age are not</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">4</td>
+					<td>A</td>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>Tool selection runs on descriptions, so differentiation is the fix for confusion between similar tools</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">5</td>
+					<td>B</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>Path-scoped rules load conditionally, which is exactly the stated requirement</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">6</td>
+					<td>C</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>Plan mode is a human review gate for approach, warranted by risk rather than universally</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">7</td>
+					<td>D</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>Repeatable team procedures belong in committed commands or skills, not prose</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">8</td>
+					<td>A</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Delegation exists to keep bulk at the edge and move distilled results</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">9</td>
+					<td>B</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Provenance survives handoffs only when the format carries claim and source together</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">10</td>
+					<td>C</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Errors must propagate with enough context for the coordinator to choose a recovery path</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">11</td>
+					<td>D</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>CI requires non-interactive invocation with structured, schema-validated output</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">12</td>
+					<td>A</td>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>Precision comes from explicit criteria and examples that draw the signal boundary</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">13</td>
+					<td>B</td>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>Nullable fields record legitimate absence; required fields force fabrication or failure</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">14</td>
+					<td>C</td>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>Schema enforcement plus a validation-retry loop is the reliability pattern the guide describes</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">15</td>
+					<td>D</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Measuring only validated records is a biased sample; calibration needs coverage of all documents</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="interpreting-your-score">Interpreting your score</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Raw score</th>
+					<th>Reading</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>13 to 15</td>
+					<td>Comfortable. Review misses, reread the six scenarios, and book the exam</td>
+			</tr>
+			<tr>
+					<td>10 to 12</td>
+					<td>Close. Work the weak domains, then do the guide&rsquo;s own preparation exercises</td>
+			</tr>
+			<tr>
+					<td>7 to 9</td>
+					<td>More study needed. Build an Agent SDK agent and configure Claude Code on a real project before testing</td>
+			</tr>
+			<tr>
+					<td>6 or fewer</td>
+					<td>Start from the exam guide, including its appendix of named technologies</td>
+			</tr>
+	</tbody>
+</table>
+<p>This scale is a study aid, not a predictor. The real exam reports a scaled score from 100 to 1,000 with 720 to pass.</p>
+<p>Tally misses by domain; two or more in one domain marks your next study target, as the real score report&rsquo;s percent-correct breakdown would.</p>
+<hr>
+<p>Written by the maintainer for self-assessment. <a href="README.md">Study guide</a> · <a href="notes.md">Study notes</a> · <a href="mock-exam-2.md">Mock 2</a> · <a href="mock-exam-3.md">Mock 3</a> · <a href="practice-questions.md">Practice questions</a> · <a href="../README.md">Repository index</a></p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

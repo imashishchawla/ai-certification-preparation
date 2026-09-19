@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>17 Anti-patterns with Exam Tips | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/practice/cca-prep-antipatterns/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/practice/">Practice Questions</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 17 Anti-patterns with Exam Tips
+</div>
+
+<article>
+  <header>
+    <h1>17 Anti-patterns with Exam Tips</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">practice</span>
+      
+        <span class="tag">questions</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="cca-prep-anti-patterns-17-canonical-wrong-answer-patterns">CCA-Prep Anti-patterns (17 canonical wrong-answer patterns)</h1>
+<p>Source: github.com/vinipx/cca-prep · src/data/antipatterns.ts</p>
+<p>The exam&rsquo;s distractors are almost always one of these. If you can name the anti-pattern, you can eliminate options fast.</p>
+<h2 id="1-d1-agentic-architecture--orchestration-using-few-shot-examples-to-enforce-tool-ordering">1. D1 Agentic Architecture &amp; Orchestration: Using few-shot examples to enforce tool ordering</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Few-shot examples are demonstrations — they influence Claude&rsquo;s behavior probabilistically, not deterministically. Showing Claude examples of &ldquo;always call verify_identity before process_payment&rdquo; reduces but cannot eliminate ordering violations. For financial or compliance workflows, &ldquo;most of the time&rdquo; is not acceptable.</p>
+<p><strong>Correct approach:</strong> Use programmatic prerequisites: hooks that block downstream tool calls until required upstream tools have completed. The gate fires deterministically every time — not based on what Claude has &ldquo;seen&rdquo; in examples.</p>
+<blockquote>
+<p>Exam tip: If the exam asks about enforcing ORDERING or SEQUENCING of tool calls for compliance, the answer is never few-shot examples — it is always programmatic hooks or prerequisite gates.</p>
+</blockquote>
+<h2 id="2-d5-context-management--reliability-self-reported-confidence-scores-for-escalation-routing">2. D5 Context Management &amp; Reliability: Self-reported confidence scores for escalation routing</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> LLMs are poorly calibrated on confidence. Research consistently shows models express high confidence on questions they answer incorrectly. For an escalation system, this means the cases that MOST need human review (hard, ambiguous, high-stakes) are the ones the model will most confidently handle itself — and get wrong.</p>
+<p><strong>Correct approach:</strong> Use programmatic escalation triggers: missing required data fields, policy threshold violations (amount &gt; $500), specific issue category flags, tool error counts exceeding a threshold. These are objective and deterministic.</p>
+<blockquote>
+<p>Exam tip: Any answer option involving &ldquo;Claude&rsquo;s confidence score&rdquo; or &ldquo;self-reported certainty&rdquo; as an escalation signal is wrong.</p>
+</blockquote>
+<h2 id="3-d4-prompt-engineering--structured-output-routing-all-workflows-to-the-batch-api-for-cost-savings">3. D4 Prompt Engineering &amp; Structured Output: Routing all workflows to the Batch API for cost savings</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> The Message Batches API has a 24-hour processing window with no SLA. &ldquo;~50% cost savings&rdquo; sounds compelling, but applying it to real-time or blocking workflows means users wait minutes or hours for responses, or hard deadlines are missed. Cost savings are worthless if the product is unusable.</p>
+<p><strong>Correct approach:</strong> Batches API for: overnight processing, bulk classification, non-interactive jobs with deadlines hours away. Synchronous API for: live user queries, any workflow where a human is waiting for the result right now.</p>
+<blockquote>
+<p>Exam tip: The exam will present &ldquo;route to Batch API&rdquo; as a cost optimization option. It is wrong whenever the workflow is real-time, blocking, or has a hard latency requirement.</p>
+</blockquote>
+<h2 id="4-d5-context-management--reliability-using-a-larger-context-window-to-fix-attention-dilution">4. D5 Context Management &amp; Reliability: Using a larger context window to fix attention dilution</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Context window size and attention quality are different properties. Putting a 200-page document into a 200K token window does not guarantee reliable attention across all 200 pages — the model still has the &ldquo;lost in the middle&rdquo; property, just at a larger scale. The diluted zone moves but does not disappear.</p>
+<p><strong>Correct approach:</strong> Per-section passes where each section is the primary focus of the entire context, followed by a separate synthesis/integration pass over section summaries. Focused attention on smaller chunks always outperforms diluted attention on large chunks.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Use a model with a larger context window&rdquo; is a distractor for attention dilution questions. The correct answer always involves splitting into focused passes.</p>
+</blockquote>
+<h2 id="5-d1-agentic-architecture--orchestration-returning-empty-results-when-a-subagent-fails">5. D1 Agentic Architecture &amp; Orchestration: Returning empty results when a subagent fails</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Silently returning empty results on failure is catastrophic for coordinator recovery. The coordinator cannot tell the difference between &ldquo;found nothing&rdquo; and &ldquo;failed to look.&rdquo; It will proceed with an incomplete picture, producing incorrect or incomplete synthesis, and will not know to retry or escalate.</p>
+<p><strong>Correct approach:</strong> Return structured error context: what was retrieved before failure (partial results), what error occurred (category, message), whether retry is appropriate (isRetryable), and what was attempted. The coordinator uses this to make an informed decision.</p>
+<blockquote>
+<p>Exam tip: Empty results on failure is wrong. Structured error propagation with partial results is correct.</p>
+</blockquote>
+<h2 id="6-d2-tool-design--mcp-integration-giving-all-agents-access-to-all-available-tools">6. D2 Tool Design &amp; MCP Integration: Giving all agents access to all available tools</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Tool selection reliability degrades with the number of available tools. An agent with 18 tools will make worse decisions than one with 4-5 role-appropriate tools. Agents with tools outside their role tend to misuse them — a synthesis agent with email access may send emails in unexpected contexts.</p>
+<p><strong>Correct approach:</strong> Scope tools to each agent&rsquo;s role. Give each agent only the tools it needs: read-only tools for exploration agents, role-specific tools for specialist agents. Fewer, more relevant tools = better selection reliability.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Give the agent access to all tools&rdquo; is always wrong. &ldquo;Scope tools to 4-5 per agent role&rdquo; is always right.</p>
+</blockquote>
+<h2 id="7-d1-agentic-architecture--orchestration-parsing-natural-language-to-determine-loop-termination">7. D1 Agentic Architecture &amp; Orchestration: Parsing natural language to determine loop termination</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Claude&rsquo;s phrasing is non-deterministic. Checking response text for phrases like &ldquo;I&rsquo;m done&rdquo;, &ldquo;Task complete&rdquo;, or &ldquo;Finished&rdquo; is fragile: Claude may use these phrases mid-task while still planning further steps, or may not use them even when finished. This creates both premature termination and infinite loops.</p>
+<p><strong>Correct approach:</strong> Always use stop_reason as the loop termination signal. stop_reason === &ldquo;end_turn&rdquo; means the loop is done. stop_reason === &ldquo;tool_use&rdquo; means continue. This is the structured, reliable API contract.</p>
+<blockquote>
+<p>Exam tip: Any answer involving &ldquo;check if the response text says X to stop&rdquo; is wrong. stop_reason is always the correct termination mechanism.</p>
+</blockquote>
+<h2 id="8-d5-context-management--reliability-using-sentiment-analysis-for-escalation-routing">8. D5 Context Management &amp; Reliability: Using sentiment analysis for escalation routing</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Customer frustration (sentiment) does not correlate with case complexity. A customer can be highly frustrated about a simple issue the agent can resolve in one turn, and completely calm about a complex policy exception requiring human judgment. Sentiment-based escalation causes the agent to escalate resolvable cases (frustrated customers with simple issues) while autonomously mishandling complex cases (calm customers with policy gaps).</p>
+<p><strong>Correct approach:</strong> Use explicit, objective escalation criteria: (1) customer explicitly requests a human, (2) policy is silent or ambiguous on the case, (3) agent cannot make meaningful progress. These triggers are deterministic and directly tied to whether human judgment is actually needed.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Detect customer frustration&rdquo; and &ldquo;sentiment threshold&rdquo; escalation options are always wrong. Explicit customer request, policy gap, and inability to progress are the correct triggers.</p>
+</blockquote>
+<h2 id="9-d3-claude-code-configuration--workflows-resuming-a-session-without-informing-claude-about-changed-files">9. D3 Claude Code Configuration &amp; Workflows: Resuming a session without informing Claude about changed files</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> When you resume a session after code modifications, the prior tool results in context still reference the old file contents. Claude may reason from outdated facts — referencing classes that were renamed, functions that were removed, or patterns that were refactored. The session appears to continue correctly but produces recommendations based on a codebase that no longer exists.</p>
+<p><strong>Correct approach:</strong> When resuming after file changes: explicitly inform the agent about which specific files changed and what changed in them. For major refactors (many files changed), starting a new session with an injected summary of prior findings is more reliable than resuming with stale tool results.</p>
+<blockquote>
+<p>Exam tip: When the exam describes session resumption after code changes, &ldquo;resume and assume Claude detects changes&rdquo; is wrong. The correct answer involves explicitly informing Claude about what changed.</p>
+</blockquote>
+<h2 id="10-d2-tool-design--mcp-integration-giving-synthesis-agents-access-to-all-available-web-search-tools">10. D2 Tool Design &amp; MCP Integration: Giving synthesis agents access to all available web search tools</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Synthesis agents are designed to combine and reason over findings already gathered by search agents. Giving them full web search access blurs specialization — the synthesis agent may start conducting its own research, duplicating work, using inconsistent search strategies, and routing around the coordinator. Tool selection also degrades: agents with more tools than they need make worse tool decisions.</p>
+<p><strong>Correct approach:</strong> Give synthesis agents a scoped, limited tool for common verification needs (e.g., a verify_fact tool for simple date/name lookups). Route complex verification needs back through the coordinator to the web search agent. This applies least-privilege while handling the 85% common case efficiently.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Give the synthesis agent access to all web search tools&rdquo; is wrong. &ldquo;Give it a scoped verify_fact tool&rdquo; for the common case, with complex verifications through the coordinator, is correct.</p>
+</blockquote>
+<h2 id="11-d4-prompt-engineering--structured-output-trusting-aggregate-accuracy-metrics-to-reduce-human-review">11. D4 Prompt Engineering &amp; Structured Output: Trusting aggregate accuracy metrics to reduce human review</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> A 97% overall accuracy rate can coexist with 40% error on a specific document type if that type is a small fraction of total volume. The high accuracy of the majority papers over the minority failures in aggregate metrics. Reducing human review based on aggregate metrics can silently introduce systematic failures in specific segments — only discovered later when production errors surface.</p>
+<p><strong>Correct approach:</strong> Before reducing human review, measure accuracy by document type, field, and other meaningful segments. Stratified random sampling of high-confidence extractions catches novel error patterns and segment-level failures. Only automate when performance is consistently high across all relevant segments — not just in aggregate.</p>
+<blockquote>
+<p>Exam tip: &ldquo;97% overall accuracy justifies removing human review&rdquo; is wrong. &ldquo;Verify accuracy by document type and field segment first&rdquo; is always the correct answer for questions about reducing human review.</p>
+</blockquote>
+<h2 id="12-d1-agentic-architecture--orchestration-terminating-the-entire-workflow-when-a-single-subagent-fails">12. D1 Agentic Architecture &amp; Orchestration: Terminating the entire workflow when a single subagent fails</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> A single subagent failure does not necessarily invalidate the entire research or processing task. Propagating a subagent timeout to a top-level handler that terminates everything means partial work is discarded and the coordinator has no opportunity to recover — it cannot retry with a different query, proceed with partial results, or route around the failed source.</p>
+<p><strong>Correct approach:</strong> Subagents should implement local recovery for transient failures. Errors that cannot be resolved locally should be propagated to the coordinator as structured error context (failure type, partial results, alternatives) — not as workflow-terminating exceptions. The coordinator then decides whether to retry, proceed with partial results, or escalate.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Terminate the entire workflow on a subagent failure&rdquo; is always wrong. &ldquo;Return structured error context to the coordinator for intelligent recovery&rdquo; is always right.</p>
+</blockquote>
+<h2 id="13-d5-context-management--reliability-silently-omitting-topic-areas-with-no-source-coverage-in-synthesis">13. D5 Context Management &amp; Reliability: Silently omitting topic areas with no source coverage in synthesis</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> When a synthesis agent has no sources for a topic, silently omitting it from the output makes the gap invisible. Readers and downstream consumers assume the output is complete. Decisions made on this output may be systematically wrong because entire topic areas are missing — with no indication that they are absent rather than simply unimportant.</p>
+<p><strong>Correct approach:</strong> Annotate each section of synthesis output with its coverage status. When no sources are available for a topic, include a coverage gap annotation: &ldquo;Music industry: no sources retrieved for this topic area — findings are incomplete.&rdquo; This makes the gap explicit and lets readers know where to seek additional information rather than assuming silence means &ldquo;nothing notable.&rdquo;</p>
+<blockquote>
+<p>Exam tip: Any option that describes a synthesis agent &ldquo;focusing on well-covered topics&rdquo; or &ldquo;omitting areas with insufficient data&rdquo; is wrong. Coverage gaps must be explicitly surfaced, not silently dropped.</p>
+</blockquote>
+<h2 id="14-d2-tool-design--mcp-integration-using-generic-tools-when-constrained-alternatives-enforce-their-own-validation">14. D2 Tool Design &amp; MCP Integration: Using generic tools when constrained alternatives enforce their own validation</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> A generic <code>fetch_url</code> tool lets an agent fetch any URL — including internal services, sensitive endpoints, or domains outside the intended scope. Prompt instructions like &ldquo;only fetch approved domains&rdquo; are probabilistic and can be overridden by adversarial inputs in fetched content (prompt injection). The tool itself has no enforcement mechanism.</p>
+<p><strong>Correct approach:</strong> Replace generic tools with constrained alternatives that bake the restrictions into the tool itself. A <code>load_document</code> tool that validates document URLs against an allow-list enforces its scope deterministically — the restriction fires on every call regardless of what is in the conversation history or any injected content.</p>
+<blockquote>
+<p>Exam tip: When the exam asks about securing tool access or preventing agents from accessing out-of-scope resources, prompt-level instructions are the wrong answer. Constrained tool alternatives with built-in validation are the correct answer.</p>
+</blockquote>
+<h2 id="15-d4-prompt-engineering--structured-output-making-all-extraction-schema-fields-required-to-ensure-complete-output">15. D4 Prompt Engineering &amp; Structured Output: Making all extraction schema fields required to ensure complete output</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Required fields force the model to fabricate a value when the source document does not contain the information. A required <code>invoice_date</code> field on a purchase order that has no date will be hallucinated — commonly as today&rsquo;s date, a date from another field, or a plausible-looking made-up value. The output appears complete but contains fabricated data that corrupts downstream processing.</p>
+<p><strong>Correct approach:</strong> Make fields nullable/optional when the source document may not contain the information. Return an explicit null for absent fields. Required fields should only be used when the source document is guaranteed to contain that information every time.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Make all fields required to guarantee structured output&rdquo; is wrong. &ldquo;Make fields optional/nullable when source documents may not contain the data&rdquo; is always the correct answer for preventing hallucination in extraction schemas.</p>
+</blockquote>
+<h2 id="16-d4-prompt-engineering--structured-output-submitting-large-batch-jobs-without-testing-the-prompt-on-a-sample-first">16. D4 Prompt Engineering &amp; Structured Output: Submitting large batch jobs without testing the prompt on a sample first</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> Submitting 50,000 documents to the Batches API with an untested prompt means discovering prompt failures only after the 24-hour processing window completes. If extraction quality is poor — wrong fields, hallucinated values, schema violations — the entire batch must be resubmitted with a corrected prompt, doubling both cost and time. Errors that affect 10% of documents would have been found with a 100-document sample in minutes.</p>
+<p><strong>Correct approach:</strong> Before any large batch submission, test the prompt synchronously on a representative sample of 50-100 documents. Validate extraction quality on that sample — check field accuracy, null rates, and schema compliance — then refine the prompt before submitting the full batch.</p>
+<blockquote>
+<p>Exam tip: &ldquo;Submit the full batch to minimize API calls&rdquo; is wrong when prompt quality is unvalidated. &ldquo;Test on a synchronous sample first, then batch&rdquo; is the correct answer for any question about batch workflow efficiency.</p>
+</blockquote>
+<h2 id="17-d5-context-management--reliability-using-heuristic-selection-when-a-lookup-returns-multiple-matching-records">17. D5 Context Management &amp; Reliability: Using heuristic selection when a lookup returns multiple matching records</h2>
+<p><strong>Why it&rsquo;s wrong:</strong> When a customer lookup returns multiple matches, selecting the &ldquo;most recently active&rdquo; account or the first result is a heuristic that will eventually pick the wrong account. Applying a refund, canceling an order, or updating contact information on the wrong customer account is a serious operational error — potentially affecting a customer who had no interaction with the current agent session.</p>
+<p><strong>Correct approach:</strong> When a lookup returns multiple matches, ask the customer for an additional identifier that uniquely identifies their account: email address, order number, last 4 digits of card on file, or account creation date. Only proceed with the action once the correct account is unambiguously identified.</p>
+<blockquote>
+<p>Exam tip: Any option that selects a record from multiple matches based on recency, order, or activity heuristics is wrong. &ldquo;Request additional identifying information from the customer&rdquo; is always the correct answer when a lookup returns multiple results.</p>
+</blockquote>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

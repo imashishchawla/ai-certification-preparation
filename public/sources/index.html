@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sources &amp; Provenance | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/sources/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a> <span>/</span> Sources &amp; Provenance
+</div>
+
+<h1>Sources &amp; Provenance</h1>
+<h1 id="sources--claude-certified-architect-foundations-exam-pack">Sources — Claude Certified Architect (Foundations) Exam Pack</h1>
+<blockquote>
+<p><strong>Compiled:</strong> 2026-09-19 · <strong>Exam:</strong> Claude Certified Architect — Foundations (<code>CCAR-F</code> / <code>CCA-F</code>)
+<strong>Method:</strong> HTTPS sources only. Every URL below was fetched and its HTTP status recorded on the date above.
+<strong>Local root:</strong> <code>ccaf-exam/</code> — see <a href="README.md"><code>README.md</code></a> for the full inventory.</p>
+</blockquote>
+<p>Legend: ✅ downloaded · 📚 rendered to markdown · 🔒 account/paywall/login-gated · 🚫 blocked (451/403) · 🗄️ recovered from Wayback Machine</p>
+<hr>
+<h2 id="1-official-anthropic-sources">1. Official Anthropic sources</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Source</th>
+					<th>Status</th>
+					<th>What we saved</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>https://everpath-course-content.s3-accelerate.amazonaws.com/.../Claude+Certified+Architect+–+Foundations+Certification+Exam+Guide.pdf</code></td>
+					<td>✅ 200 (583 KB)</td>
+					<td><code>pdfs/official-exam-guide-nehasharma.pdf</code> + <code>pdfs/official-exam-guide-39page-webb.archive.pdf</code> — the <strong>official 40-page v1.0 exam guide</strong> (originally 403; recovered via Wayback, now direct-200)</td>
+			</tr>
+			<tr>
+					<td><code>https://everpath-course-content.s3-accelerate.amazonaws.com/.../Claude+Certified+Architect+–+Professional+Exam+Guide.pdf</code></td>
+					<td>✅ 200 (358 KB)</td>
+					<td><code>pdfs/official-exam-guide-ccar-professional.pdf</code> — the sibling <strong>CCAR-P v1.0 guide</strong> (11 pp, bonus)</td>
+			</tr>
+			<tr>
+					<td><code>https://anthropic-partners.skilljar.com/page/partner-certifications</code></td>
+					<td>✅ 200 (1.3 MB)</td>
+					<td>exam programme + registration facts (content login-gated)</td>
+			</tr>
+			<tr>
+					<td><code>https://anthropic-partners.skilljar.com/page/faq-certifications</code></td>
+					<td>✅ 200 (1.4 MB)</td>
+					<td>certification FAQ</td>
+			</tr>
+			<tr>
+					<td><code>https://claude.com/blog/four-role-based-claude-certifications</code></td>
+					<td>✅ 200</td>
+					<td>Anthropic&rsquo;s official announcement of all four certs (July 2026)</td>
+			</tr>
+			<tr>
+					<td><code>https://www.anthropic.com/engineering/building-effective-agents</code></td>
+					<td>✅ 200 / 📚</td>
+					<td><code>study-guides/official-docs/anthropic-com-engineering-building-effective-agents.md</code></td>
+			</tr>
+			<tr>
+					<td><code>https://www.anthropic.com/engineering/claude-code-best-practices</code></td>
+					<td>✅ 200 / 📚</td>
+					<td><code>study-guides/official-docs/anthropic-com-engineering-claude-code-best-practices.md</code></td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="official-documentation-scraped-to-markdown--study-guidesofficial-docs">Official documentation (scraped to markdown → <code>study-guides/official-docs/</code>)</h3>
+<p>All fetched 200; <code>.md</code> endpoints used where available (Mintlify), else rendered.</p>
+<ul>
+<li><code>code.claude.com/docs/en/</code> — <code>memory</code>, <code>skills</code>, <code>hooks</code>, <code>cli-reference</code>, <code>mcp</code>, <code>tools</code>, <code>github-actions</code>, <code>settings</code>, <code>permissions</code>, <code>agent-sdk/sessions</code></li>
+<li><code>platform.claude.com/docs/en/</code> (via <code>docs.anthropic.com/en/*.md</code>) — <code>agent-sdk/overview</code>, <code>agent-sdk/hooks</code>, <code>agents-and-tools/tool-use/overview</code>, <code>build-with-claude/tool-use</code>, <code>build-with-claude/prompt-engineering/claude-prompting-best-practices</code>, <code>build-with-claude/batch-processing</code>, <code>api/messages</code></li>
+<li><code>modelcontextprotocol.io/</code> — <code>docs/concepts/tools</code>, <code>docs/concepts/resources</code>, <code>specification</code></li>
+<li>Documentation indexes: <code>code.claude.com/docs/llms.txt</code>, <code>docs.anthropic.com/llms.txt</code>, <code>modelcontextprotocol.io/llms.txt</code> (saved as <code>INDEX-*.txt</code>)</li>
+</ul>
+<hr>
+<h2 id="2-community-study--practice-sites">2. Community study &amp; practice sites</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Source</th>
+					<th>Status</th>
+					<th>What we saved</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>claudecertificationguide.com</strong> — free, fully-open CCAR-F track by &ldquo;Walter&rdquo;</td>
+					<td>✅ 200</td>
+					<td>📚 <code>study-guides/claudecertificationguide/</code> (30 lessons, 5 quick-refs, 5 glossaries, 10 scenarios, mock/drill/diagnostic pages) + <strong><code>practice-questions/claudecertificationguide-257-question-bank.md</code></strong> (257 Qs, per-option explanations, answer key, rationale, difficulty, task-statement mapping)</td>
+			</tr>
+			<tr>
+					<td><strong>github.com/dnacenta/claude-certified-architect</strong> (+ GitHub Pages)</td>
+					<td>✅ 200</td>
+					<td><code>study-guides/dnacenta-claude-certified-architect/</code> (main guide + 5 domain deep-dives + 3 other-cert guides) + <code>pdfs/dnacenta-guide_en.pdf</code> (83 pp)</td>
+			</tr>
+			<tr>
+					<td><strong>claudecertifiedarchitects.com</strong></td>
+					<td>✅ 200</td>
+					<td><strong><code>practice-questions/claudecertifiedarchitects-400-question-bank.md</code></strong> — full 400-Q bank extracted from the public client bundle <code>app.js</code> (site normally gates it behind an account)</td>
+			</tr>
+			<tr>
+					<td><strong>claudecertprep.com</strong></td>
+					<td>✅ 200</td>
+					<td><code>practice-questions/cca-prep-*</code> (170-Q bank, 17 anti-patterns, 45 flashcards, cheat sheet) — already in pack</td>
+			</tr>
+			<tr>
+					<td><strong>spectrumailab.com/blog/claude-certification-exams-2026</strong></td>
+					<td>✅ 200</td>
+					<td><code>study-guides/articles/spectrumailab-all-4-exams-explained-2026.md</code> (official facts, verified July 2026)</td>
+			</tr>
+			<tr>
+					<td><strong>claudearchitectguide.com/certifications</strong></td>
+					<td>✅ 200</td>
+					<td><code>study-guides/articles/claudearchitectguide-certifications-and-cost.md</code></td>
+			</tr>
+			<tr>
+					<td><strong>claudearchitectcertification.com/exam-guide</strong></td>
+					<td>✅ 200</td>
+					<td><code>pdfs/cca-f-exam-guide-claudearchitectcert.pdf</code>, <code>pdfs/claude-certifications-companion.pdf</code>, <code>practice-questions/claudearchitectcertification-20-antipatterns.md</code></td>
+			</tr>
+			<tr>
+					<td><strong>claude.ajithkumarr.com/claude-certification-guide</strong></td>
+					<td>✅ 200</td>
+					<td>independent four-cert guide (free; practice section free) — <em>not mirrored</em></td>
+			</tr>
+			<tr>
+					<td><strong>claudepractice.com</strong></td>
+					<td>✅ 200</td>
+					<td>four-cert marketing/blueprint site; questions behind &ldquo;Start free&rdquo; account — <em>not mirrored</em></td>
+			</tr>
+			<tr>
+					<td><strong>ccafoundations.com</strong></td>
+					<td>✅ 200 (paid £49)</td>
+					<td>InfoSecAI 9-part manual + 250-Q test engine — <strong>paywalled</strong>, not mirrored</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="3-account--paywall--legally-blocked-documented-not-downloaded">3. Account / paywall / legally blocked (documented, not downloaded)</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Source</th>
+					<th>Status</th>
+					<th>Note</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>claudecertified.io</strong></td>
+					<td>🔒 login</td>
+					<td>Claims <strong>1,374 practice questions</strong> + full mock + domain study guides; questions load only after sign-in (runtime API). Page shells saved only.</td>
+			</tr>
+			<tr>
+					<td><strong>claude.termidy.com</strong> (ClaudePrep)</td>
+					<td>🔒 login</td>
+					<td>Moodle LMS; <strong>1,068 questions</strong> across 4 certs (360 for CCAR-F) behind course login. Home saved: <code>study-guides/articles/termidy-claudeprep-home.md</code></td>
+			</tr>
+			<tr>
+					<td><strong>claudecertifications.com/</strong></td>
+					<td>🚫 451</td>
+					<td>Cloudflare &ldquo;Unavailable For Legal Reasons&rdquo; (error 451). Free 12-week plan + 25 Qs inaccessible from this network.</td>
+			</tr>
+			<tr>
+					<td><strong>claudetestprep.com</strong></td>
+					<td>🔒 gated</td>
+					<td>609-question bank (signup)</td>
+			</tr>
+			<tr>
+					<td><strong>ccafoundations.com</strong></td>
+					<td>💰 £49</td>
+					<td>Paid manual/test engine</td>
+			</tr>
+			<tr>
+					<td><strong>anthropic-partners.skilljar.com</strong> (Anthropic Academy courses)</td>
+					<td>🔒 login</td>
+					<td>Free courses, account required; certificates ≠ proctored cert</td>
+			</tr>
+			<tr>
+					<td><strong>git-scm.com/docs/git-worktree</strong></td>
+					<td>✅ 200</td>
+					<td>Cited by question banks; generic reference, not mirrored</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="4-recovered--special">4. Recovered / special</h2>
+<ul>
+<li><strong>Wayback Machine</strong> — <code>https://web.archive.org/web/20260314145708if_/&lt;official Foundations PDF&gt;</code> → recovered the official guide when the live URL returned <strong>403</strong>. Snapshot digest <code>BKBDI7C3QIOR3SVBW6HZVUBEWNUYWIGQ</code>.</li>
+<li><strong>Public JS bundle mining</strong> — the claudecertifiedarchitects 400-question bank was not an API call; it ships inside <code>app.js</code> and was parsed with a JS-literal scanner. See <code>practice-questions/claudecertifiedarchitects-400-question-bank.md</code>.</li>
+<li><strong>Next.js RSC payload mining</strong> — the claudecertificationguide 257-question bank + 10 scenarios ride along in the server-rendered payload of <code>/mock-exam/start</code>; extracted from <code>self.__next_f.push(...)</code> flight data.</li>
+</ul>
+<h2 id="5-aggregate-question-count-in-this-pack">5. Aggregate question count in this pack</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Bank</th>
+					<th>Questions</th>
+					<th>Answer key</th>
+					<th>Per-option explanations</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>claudecertificationguide.com</td>
+					<td>257</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>claudecertifiedarchitects.com</td>
+					<td>400</td>
+					<td>✅</td>
+					<td>✅ (single explanation)</td>
+			</tr>
+			<tr>
+					<td>amey-thakur (community)</td>
+					<td>320</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>cca-prep (claudecertprep.com)</td>
+					<td>170</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td>paullarionov guide</td>
+					<td>88</td>
+					<td>✅</td>
+					<td>—</td>
+			</tr>
+			<tr>
+					<td>amey-thakur mocks (3)</td>
+					<td>~60</td>
+					<td>✅</td>
+					<td>✅</td>
+			</tr>
+			<tr>
+					<td><strong>Total</strong></td>
+					<td><strong>~1,295+</strong></td>
+					<td></td>
+					<td></td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p>Fees/facts cross-checked against the official v1.0 guides (July 2026): 60 items · 120 min · pass 720/1000 · 5 domains (27/18/20/20/15) · 4 scenarios from a bank of 6 · $125 · valid 12 months · Pearson VUE proctored.</p>
+</blockquote>
+
+
+<div class="stat-grid">
+  <div class="stat"><div class="num">14</div><div class="label">Practice Pages</div></div>
+  <div class="stat"><div class="num">84</div><div class="label">Study Pages</div></div>
+  <div class="stat"><div class="num">3</div><div class="label">Articles</div></div>
+  <div class="stat"><div class="num">9</div><div class="label">PDFs</div></div>
+</div>
+
+<section>
+  <h2>Quick Links</h2>
+  <div class="card-grid">
+    
+    <a href="/practice/" class="card">
+      <h3>Practice Questions</h3>
+      <p></p>
+    </a>
+    
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

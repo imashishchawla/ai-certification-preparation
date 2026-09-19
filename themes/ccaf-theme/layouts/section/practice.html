@@ -1,0 +1,18 @@
+{{ define "main" }}
+<div class="breadcrumbs">
+  <a href="{{ .Site.BaseURL }}">Home</a> <span>/</span> {{ .Title }}
+</div>
+
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+
+<div class="card-grid">
+  {{ range .Pages }}
+  <a href="{{ .RelPermalink }}" class="card">
+    <h3>{{ .Title }}</h3>
+    {{ with .Params.meta }}<div class="meta">{{ . }}</div>{{ end }}
+    {{ with .Params.count }}<div class="count">{{ . }}</div>{{ end }}
+  </a>
+  {{ end }}
+</div>
+{{ end }}

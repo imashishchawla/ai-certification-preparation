@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Downloads on CCA-F Exam Prep</title>
+		<link>http://localhost:1313/tags/downloads/</link>
+		<description>Recent content in Downloads on CCA-F Exam Prep</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+		
+			<atom:link href="http://localhost:1313/tags/downloads/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>PDFs</title>
+				<link>http://localhost:1313/pdfs/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/pdfs/</guid>
+				<description>&lt;h1 id=&#34;pdfs&#34;&gt;PDFs&lt;/h1&gt;&#xA;&lt;p&gt;Direct downloads:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/official-exam-guide-nehasharma.pdf&#34;&gt;Official Foundations Exam Guide (nehasharma mirror)&lt;/a&gt; — Anthropic&amp;rsquo;s official 40-page v1.0 exam guide&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/official-exam-guide-39page-webb.archive.pdf&#34;&gt;Official Foundations Exam Guide (Wayback)&lt;/a&gt; — Recovered from Wayback Machine (identical)&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/official-exam-guide-ccar-professional.pdf&#34;&gt;Official Professional Exam Guide (CCAR-P)&lt;/a&gt; — 11-page sibling guide&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/exam-guide-amey-thakur.pdf&#34;&gt;Exam Guide v1.0 (Amey-Thakur)&lt;/a&gt; — 39pp printout: $125 fee, validity, task statements&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/dnacenta-guide_en.pdf&#34;&gt;dnacenta Community Study Guide&lt;/a&gt; — 83 pages&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/cca-f-exam-guide-claudearchitectcert.pdf&#34;&gt;12-Page CCA-F Guide&lt;/a&gt; — Concept checklist, two-week plan, test-day checklist&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/guide_en-github.pdf&#34;&gt;Paullarionov Community Guide PDF&lt;/a&gt; — Full guide also available as markdown&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;pdfs/claude-certifications-companion.pdf&#34;&gt;All Four Certs Companion&lt;/a&gt; — 2.1 MB printable companion&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
+	</channel>
+</rss>

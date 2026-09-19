@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D2 Tool Design Mcp | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/dnacenta-claude-certified-architect/domains/d2-tool-design-mcp/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> D2 Tool Design Mcp
+</div>
+
+<article>
+  <header>
+    <h1>D2 Tool Design Mcp</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">dnacenta</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="domain-2-tool-design--mcp-integration-18">Domain 2: Tool Design &amp; MCP Integration (18%)</h1>
+<p>Covers how to design tool interfaces that LLMs can reliably use, how to handle errors from tools, how to distribute tools across agents, and how MCP servers are configured and operate.</p>
+<hr>
+<h2 id="21-tool-interface-design">2.1 Tool Interface Design</h2>
+<h3 id="tool-descriptions-are-everything">Tool Descriptions Are Everything</h3>
+<p>Tool descriptions are the <strong>primary mechanism</strong> Claude uses to decide which tool to call. The description is not just documentation — it&rsquo;s the selection criteria.</p>
+<p><strong>Bad description (leads to unreliable selection):</strong></p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;search&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Search for things&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Good description:</strong></p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;search_knowledge_base&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Search the internal knowledge base for support articles, FAQs, and troubleshooting guides. Use this when the customer asks a question that may have an existing documented answer. Input should be a natural language query describing the customer&#39;s issue. Returns matching articles ranked by relevance with titles, snippets, and article IDs.&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="what-to-include-in-tool-descriptions">What to Include in Tool Descriptions</h3>
+<ol>
+<li><strong>Purpose</strong> — What the tool does and when to use it</li>
+<li><strong>Input format</strong> — What the input should look like, with examples</li>
+<li><strong>Output format</strong> — What the tool returns</li>
+<li><strong>Edge cases</strong> — What happens with invalid inputs or no results</li>
+<li><strong>Differentiation</strong> — When to use THIS tool vs similar tools</li>
+</ol>
+<h3 id="the-full-tool-definition-schema">The Full Tool Definition Schema</h3>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;get_weather&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Get the current weather in a given location. Returns temperature, conditions, humidity, and wind speed. Use this when the user asks about current weather conditions. For forecasts, use get_forecast instead.&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;input_schema&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;object&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;properties&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;location&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;string&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;The city and state/country, e.g. &#39;San Francisco, CA&#39; or &#39;London, UK&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;unit&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;string&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;enum&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;celsius&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;fahrenheit&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Temperature unit. Defaults to celsius if not specified.&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;required&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;location&#34;</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="strict-mode">Strict Mode</h3>
+<p>Strict mode guarantees Claude&rsquo;s tool inputs conform exactly to the schema:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;extract_invoice&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;strict&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;input_schema&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;object&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;properties&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;vendor_name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;string&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;invoice_number&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;string&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;total_amount&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;number&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;currency&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;string&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;enum&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;USD&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;EUR&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;GBP&#34;</span><span style="color:#1f2328">]</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;required&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;vendor_name&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;invoice_number&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;total_amount&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;currency&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;additionalProperties&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">false</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Requirements for strict mode:</strong></p>
+<ul>
+<li><code>additionalProperties: false</code> must be set</li>
+<li>All properties must be in <code>required</code></li>
+<li>Only a subset of JSON Schema is supported (see Domain 4)</li>
+</ul>
+<h3 id="anti-pattern-ambiguous-tool-overlap">Anti-Pattern: Ambiguous Tool Overlap</h3>
+<p>Having two tools with near-identical descriptions causes misrouting:</p>
+<pre tabindex="0"><code>Tool 1: &#34;analyze_content&#34; — &#34;Analyze content for insights&#34;
+Tool 2: &#34;analyze_document&#34; — &#34;Analyze a document for insights&#34;
+</code></pre><p>Claude can&rsquo;t reliably distinguish between these. Fix: rename to clearly differentiate purpose, or merge into one tool.</p>
+<hr>
+<h2 id="22-structured-error-responses">2.2 Structured Error Responses</h2>
+<h3 id="mcp-error-structure">MCP Error Structure</h3>
+<p>When tools fail, the error response should be structured, not a generic string:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;isError&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;errorCategory&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;transient&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;isRetryable&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Database connection timed out after 30 seconds. The query was for customer #12345&#39;s order history.&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;partial_results&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">null</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;attempted_action&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;SELECT * FROM orders WHERE customer_id = 12345&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="error-categories">Error Categories</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Category</th>
+					<th>Retryable?</th>
+					<th>Examples</th>
+					<th>Agent Action</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Transient</strong></td>
+					<td>Yes</td>
+					<td>Timeouts, service unavailability, rate limits</td>
+					<td>Retry with backoff</td>
+			</tr>
+			<tr>
+					<td><strong>Validation</strong></td>
+					<td>No (without input changes)</td>
+					<td>Invalid email format, missing required field</td>
+					<td>Fix input, retry</td>
+			</tr>
+			<tr>
+					<td><strong>Business</strong></td>
+					<td>No</td>
+					<td>Refund exceeds policy limit, account frozen</td>
+					<td>Escalate or inform user</td>
+			</tr>
+			<tr>
+					<td><strong>Permission</strong></td>
+					<td>No</td>
+					<td>Insufficient access, expired token</td>
+					<td>Escalate</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="what-the-agent-should-do-with-errors">What the Agent Should Do with Errors</h3>
+<ol>
+<li><strong>Transient errors:</strong> Subagents should implement local recovery (retry with backoff). Only propagate if recovery fails.</li>
+<li><strong>Validation errors:</strong> Claude should examine the error, fix the input, and retry.</li>
+<li><strong>Business errors:</strong> Claude should explain the policy to the user or escalate.</li>
+<li><strong>Permission errors:</strong> Claude should escalate to a human.</li>
+</ol>
+<h3 id="anti-patterns-wrong-answers">Anti-Patterns (Wrong Answers)</h3>
+<ol>
+<li><strong>Generic error messages:</strong> <code>&quot;Operation failed&quot;</code> — hides the cause and prevents intelligent recovery</li>
+<li><strong>Silent suppression:</strong> Returning <code>{ &quot;results&quot;: [] }</code> when the search engine is down. This makes it look like there are no results when actually the search didn&rsquo;t work. The agent will confidently tell the user &ldquo;I found nothing&rdquo; when the truth is &ldquo;I couldn&rsquo;t search.&rdquo;</li>
+<li><strong>Generic status messages:</strong> <code>&quot;search unavailable&quot;</code> without context about what was attempted</li>
+<li><strong>Terminating on single failure:</strong> Killing an entire multi-step workflow because one step failed, instead of using partial results or trying alternatives</li>
+</ol>
+<h3 id="distinguishing-empty-from-failed">Distinguishing Empty from Failed</h3>
+<p>This is a specific exam concept:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Situation</th>
+					<th>What Happened</th>
+					<th>Correct Response</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Search returns <code>[]</code> with status 200</td>
+					<td>Valid query, no matches</td>
+					<td>&ldquo;No results found for that query&rdquo;</td>
+			</tr>
+			<tr>
+					<td>Search returns timeout error</td>
+					<td>Query didn&rsquo;t execute</td>
+					<td>&ldquo;I wasn&rsquo;t able to search right now, let me try again&rdquo;</td>
+			</tr>
+	</tbody>
+</table>
+<p>These must be handled differently. The first is information. The second is an error.</p>
+<hr>
+<h2 id="23-tool-distribution-and-tool_choice">2.3 Tool Distribution and tool_choice</h2>
+<h3 id="the-4-5-tool-maximum">The 4-5 Tool Maximum</h3>
+<p>Each agent should have <strong>4-5 tools maximum</strong>. Giving an agent 18 tools degrades selection reliability — Claude may pick the wrong tool, call unnecessary tools, or struggle to reason about which to use.</p>
+<p><strong>Solution for complex systems:</strong> Distribute tools across specialized subagents.</p>
+<pre tabindex="0"><code>Instead of:
+  One agent with 18 tools
+
+Do:
+  Coordinator with: Agent, AskUser
+  Search subagent with: search_web, search_docs, search_db
+  Analysis subagent with: analyze_text, extract_entities, summarize
+  Action subagent with: send_email, create_ticket, update_record
+</code></pre><p>This is the exam&rsquo;s answer, and the underlying principle (one agent, one focused job) is still correct. The current numbers from Anthropic&rsquo;s docs are worth knowing alongside it.</p>
+<h3 id="beyond-the-exam-guide-tool-search">Beyond the Exam Guide: Tool Search</h3>
+<p>Anthropic&rsquo;s current published guidance is that <strong>tool-selection accuracy degrades once an agent exceeds roughly 30–50 available tools</strong>, and that a typical multi-server MCP setup (GitHub, Slack, Sentry, Grafana, Splunk) burns ~55k tokens of context in tool definitions before any work happens. The fix is no longer &ldquo;split into subagents&rdquo; alone — it&rsquo;s the <strong>tool search tool</strong>, which is GA on the Claude API.</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#0a3069">&#34;tools&#34;</span><span style="color:#f6f8fa;background-color:#82071e">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;tool_search_tool_regex_20251119&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;tool_search_tool_regex&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;get_weather&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;description&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;...&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;input_schema&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#f6f8fa;background-color:#82071e">...</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;defer_loading&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">true</span> <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>How it works:</p>
+<ol>
+<li>You still send <strong>every</strong> tool definition on every request. <code>defer_loading</code> controls what enters the <em>context window</em>, not what you transmit.</li>
+<li>Non-deferred tools load into context immediately; deferred ones don&rsquo;t.</li>
+<li>When Claude needs something else, it calls the search tool. The API returns <code>tool_reference</code> blocks and expands them into full definitions inline — the system-prompt prefix is untouched, so <strong>prompt caching survives</strong>.</li>
+<li>Two variants: <code>tool_search_tool_regex_20251119</code> (Claude writes Python <code>re.search()</code> patterns, max 200 chars) and <code>tool_search_tool_bm25_20251119</code> (natural-language queries, max 500 chars). Both search names, descriptions, argument names, and argument descriptions.</li>
+</ol>
+<table>
+	<thead>
+			<tr>
+					<th>Rule</th>
+					<th>Detail</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Never defer everything</td>
+					<td>At least one tool must have <code>defer_loading: false</code>, normally the search tool itself. Otherwise: <strong>400, &ldquo;All tools cannot be deferred&rdquo;</strong></td>
+			</tr>
+			<tr>
+					<td>Keep a hot set</td>
+					<td>Leave your <strong>3–5 most-used tools</strong> non-deferred so Claude can call them without a search round-trip</td>
+			</tr>
+			<tr>
+					<td>Limits</td>
+					<td>Up to 10,000 deferred tools per request; searches return 5 matches by default (Claude may set <code>limit</code>, 1–10,000)</td>
+			</tr>
+			<tr>
+					<td>Cache</td>
+					<td>A tool with <code>defer_loading: true</code> can&rsquo;t also carry <code>cache_control</code> — 400. Put the breakpoint on a non-deferred tool</td>
+			</tr>
+			<tr>
+					<td>Composability</td>
+					<td>Works with <code>strict: true</code>; the grammar builds from the full toolset</td>
+			</tr>
+			<tr>
+					<td>MCP</td>
+					<td>Don&rsquo;t set <code>defer_loading</code> per tool — set it on the <code>mcp_toolset</code> entry&rsquo;s <code>default_config</code></td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>When to use it:</strong> 10+ tools, tool definitions over 10k tokens, accuracy dropping as the toolset grows, or aggregating multiple MCP servers. <strong>When not to:</strong> fewer than 10 tools, every tool used every request, or definitions totalling under ~100 tokens.</p>
+<p>Reconciling the two: the exam&rsquo;s &ldquo;4-5 tools&rdquo; is about how many tools are <em>in front of the model at decision time</em>. Tool search doesn&rsquo;t raise that number — it keeps it at 3–5 while letting the catalog behind it grow to thousands.</p>
+<h3 id="tool_choice-parameter">tool_choice Parameter</h3>
+<p>Controls how Claude interacts with tools:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Value</th>
+					<th>Behavior</th>
+					<th>Use Case</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>&quot;auto&quot;</code> (default)</td>
+					<td>Claude may call a tool OR respond with text</td>
+					<td>General conversation with optional tool use</td>
+			</tr>
+			<tr>
+					<td><code>&quot;any&quot;</code></td>
+					<td>Claude MUST call a tool, but can choose which</td>
+					<td>Guarantee structured output</td>
+			</tr>
+			<tr>
+					<td><code>{&quot;type&quot;: &quot;tool&quot;, &quot;name&quot;: &quot;specific_tool&quot;}</code></td>
+					<td>Claude MUST call this exact tool</td>
+					<td>Force a specific operation first</td>
+			</tr>
+			<tr>
+					<td><code>&quot;none&quot;</code></td>
+					<td>Claude cannot call any tool; text only</td>
+					<td>Force a text answer while keeping tool definitions in context</td>
+			</tr>
+	</tbody>
+</table>
+<p>Any <code>tool_choice</code> value can also carry <code>&quot;disable_parallel_tool_use&quot;: true</code> to cap Claude at a single tool call per response (by default it may emit several <code>tool_use</code> blocks at once).</p>
+<blockquote>
+<p><strong>Fable 5.1 / Mythos 5.1 (since 2026-09-01): forced tool use is gone.</strong> <code>{&quot;type&quot;: &quot;any&quot;}</code> and <code>{&quot;type&quot;: &quot;tool&quot;, &quot;name&quot;: ...}</code> return <code>400 invalid_request_error</code> (<code>tool_choice: type &quot;tool&quot; and &quot;any&quot; are not supported for this model</code>) — on <code>count_tokens</code> and in the Batches API too. <code>auto</code> and <code>none</code> still work, and <code>disable_parallel_tool_use</code> still works with <code>auto</code>. The replacements, in order of preference:</p>
+<ol>
+<li><code>tool_choice: {&quot;type&quot;: &quot;auto&quot;}</code> plus an explicit instruction naming the tool (in the <code>user</code> turn, or in a mid-conversation <code>role: &quot;system&quot;</code> message when the app requires the call), with <code>strict: true</code> on the tool so the arguments still match your schema.</li>
+<li>Structured outputs (<code>output_config.format</code>, Domain 4 §4.3) when the forced call only existed to get JSON back.</li>
+</ol>
+<p>Opus 5, Sonnet 5, and the 4.x family keep all four <code>tool_choice</code> values, so the exam&rsquo;s &ldquo;<code>any</code> guarantees a tool call&rdquo; answer is still correct — just not model-agnostic anymore. Check <code>client.models.retrieve(id).capabilities</code> before assuming.</p>
+</blockquote>
+<h3 id="when-to-use-each">When to Use Each</h3>
+<p><strong><code>&quot;auto&quot;</code></strong> — Most conversations. Claude decides whether a tool is needed.</p>
+<p><strong><code>&quot;any&quot;</code></strong> — When you need guaranteed structured output. Example: You have multiple extraction schemas (invoice, receipt, contract) and you want Claude to pick the right one and always return structured data.</p>
+<p><strong>Forced specification</strong> — When a specific tool must run first. Example: Always call <code>extract_metadata</code> before any enrichment step.</p>
+<p><strong><code>&quot;none&quot;</code></strong> — When a turn must produce prose (e.g., a final summarization pass) without stripping the tool definitions from the request.</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># Force Claude to call a specific tool (Opus 5 / Sonnet 5 / 4.x — 400 on Fable 5.1)</span>
+</span></span><span style="display:flex;"><span>response <span style="color:#0550ae">=</span> client<span style="color:#0550ae">.</span>messages<span style="color:#0550ae">.</span>create<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    model<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;claude-opus-5&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    messages<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0550ae">...</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0550ae">...</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    tool_choice<span style="color:#0550ae">=</span><span style="color:#1f2328">{</span><span style="color:#0a3069">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;tool&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;extract_metadata&#34;</span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="24-mcp-server-configuration">2.4 MCP Server Configuration</h2>
+<h3 id="what-is-mcp">What is MCP?</h3>
+<p>The Model Context Protocol is an open standard for connecting AI models to external data sources and tools. It provides a standardized way for Claude to interact with databases, APIs, file systems, and other services.</p>
+<h3 id="architecture">Architecture</h3>
+<pre tabindex="0"><code>┌─────────────────────────────────────┐
+│              Host                   │
+│         (Claude Code)               │
+│                                     │
+│  ┌──────────┐  ┌──────────┐       │
+│  │ Client 1 │  │ Client 2 │  ...  │
+│  └─────┬────┘  └─────┬────┘       │
+└────────┼──────────────┼────────────┘
+         │              │
+         ↓              ↓
+   ┌──────────┐   ┌──────────┐
+   │ Server 1 │   │ Server 2 │
+   │ (GitHub)  │   │ (Postgres)│
+   └──────────┘   └──────────┘
+</code></pre><ul>
+<li><strong>Host</strong>: The AI application (Claude Code, an IDE) that coordinates MCP clients</li>
+<li><strong>Client</strong>: A component within the host that maintains a 1:1 connection to an MCP server</li>
+<li><strong>Server</strong>: A program that provides context (tools, resources, prompts) to the client</li>
+</ul>
+<h3 id="transport-types">Transport Types</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Transport</th>
+					<th><code>type</code> in config</th>
+					<th>How It Works</th>
+					<th>When to Use</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>stdio</strong></td>
+					<td><code>&quot;stdio&quot;</code> (implied when the entry has <code>command</code>)</td>
+					<td>Standard input/output</td>
+					<td>Local process communication. No network overhead. Most common for local tools.</td>
+			</tr>
+			<tr>
+					<td><strong>Streamable HTTP</strong></td>
+					<td><code>&quot;http&quot;</code> (alias: <code>&quot;streamable-http&quot;</code>)</td>
+					<td>HTTP POST for client→server, optional SSE for streaming</td>
+					<td>Remote servers, cloud-hosted tools. The only remote transport that supports OAuth</td>
+			</tr>
+			<tr>
+					<td><strong>SSE</strong> (legacy)</td>
+					<td><code>&quot;sse&quot;</code></td>
+					<td>Server-Sent Events endpoint</td>
+					<td>Services that still expose only an SSE endpoint</td>
+			</tr>
+			<tr>
+					<td><strong>WebSocket</strong></td>
+					<td><code>&quot;ws&quot;</code></td>
+					<td>Persistent bidirectional connection</td>
+					<td>Remote servers that push events unprompted. Header-only auth, no OAuth</td>
+			</tr>
+	</tbody>
+</table>
+<blockquote>
+<p><strong>Config gotcha:</strong> an entry with a <code>url</code> but no <code>type</code> is a configuration error — Claude Code reads a typeless entry as a stdio server, skips it, and reports <code>has a &quot;url&quot; but no &quot;type&quot;</code>. Always set <code>type</code> on remote servers.</p>
+</blockquote>
+<h3 id="mcp-protocol-details">MCP Protocol Details</h3>
+<ul>
+<li>Uses <strong>JSON-RPC 2.0</strong> message format</li>
+<li>Lifecycle:
+<ol>
+<li><code>initialize</code> — Capability negotiation (what the server supports)</li>
+<li><code>notifications/initialized</code> — Server confirms ready</li>
+<li><code>tools/list</code> — Client discovers available tools</li>
+<li><code>tools/call</code> — Client invokes a tool</li>
+</ol>
+</li>
+</ul>
+<h3 id="server-primitives">Server Primitives</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Primitive</th>
+					<th>What It Is</th>
+					<th>Example</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Tools</strong></td>
+					<td>Executable functions</td>
+					<td><code>search_database</code>, <code>create_issue</code></td>
+			</tr>
+			<tr>
+					<td><strong>Resources</strong></td>
+					<td>Data sources (read-only content catalogs)</td>
+					<td>File listings, database schemas</td>
+			</tr>
+			<tr>
+					<td><strong>Prompts</strong></td>
+					<td>Interaction templates</td>
+					<td>Pre-built prompt workflows</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="client-primitives">Client Primitives</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Primitive</th>
+					<th>What It Is</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Sampling</strong></td>
+					<td>Server requests an LLM completion from the client</td>
+			</tr>
+			<tr>
+					<td><strong>Elicitation</strong></td>
+					<td>Server requests user input from the client</td>
+			</tr>
+			<tr>
+					<td><strong>Roots</strong></td>
+					<td>Server asks the client which URIs or filesystem boundaries it may operate within</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="installation-scopes">Installation Scopes</h3>
+<p>Three scopes, and the file a server lands in depends on the scope — not on which file you happened to edit.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Scope</th>
+					<th>Loads in</th>
+					<th>Shared with the team?</th>
+					<th>Stored in</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Local</strong> (default)</td>
+					<td>Current project only</td>
+					<td>No</td>
+					<td><code>~/.claude.json</code>, keyed by project path</td>
+			</tr>
+			<tr>
+					<td><strong>Project</strong></td>
+					<td>Current project only</td>
+					<td>Yes, via version control</td>
+					<td><code>.mcp.json</code> in the project root</td>
+			</tr>
+			<tr>
+					<td><strong>User</strong></td>
+					<td>All your projects</td>
+					<td>No</td>
+					<td><code>~/.claude.json</code></td>
+			</tr>
+			<tr>
+					<td><strong>Managed</strong> (admin)</td>
+					<td>Every session in the org</td>
+					<td>Yes, pushed by IT</td>
+					<td><code>managedMcpServers</code> in managed settings (v2.1.259+) — org-provided servers users can&rsquo;t remove</td>
+			</tr>
+	</tbody>
+</table>
+<p>Note the naming trap: MCP <em>local scope</em> lives in <code>~/.claude.json</code> (home directory), while general <em>local settings</em> live in <code>.claude/settings.local.json</code> (project directory). They are unrelated files.</p>
+<p>Adding servers from the CLI:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># Remote HTTP server, shared with the team</span>
+</span></span><span style="display:flex;"><span>claude mcp add --transport http --scope project shared-api https://example.com/mcp
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Remote server with a static auth header</span>
+</span></span><span style="display:flex;"><span>claude mcp add --transport http secure-api https://api.example.com/mcp <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  --header <span style="color:#0a3069">&#34;Authorization: Bearer </span><span style="color:#953800">$TOKEN</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Local stdio server — everything after -- is passed to the server untouched</span>
+</span></span><span style="display:flex;"><span>claude mcp add airtable --env <span style="color:#953800">AIRTABLE_API_KEY</span><span style="color:#0550ae">=</span>YOUR_KEY -- npx -y @example/mcp-server
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Paste a config block written for another MCP client</span>
+</span></span><span style="display:flex;"><span>claude mcp add-json example <span style="color:#0a3069">&#39;{&#34;type&#34;:&#34;http&#34;,&#34;url&#34;:&#34;https://mcp.example.com/mcp&#34;}&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="project-level-configuration-mcpjson">Project-Level Configuration (<code>.mcp.json</code>)</h3>
+<p>This file lives in the project root and is version-controlled:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;mcpServers&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;shared-api&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;http&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;url&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;https://example.com/mcp&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;headers&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;Authorization&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Bearer ${API_TOKEN}&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;timeout&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0550ae">600000</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;postgres&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;command&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;npx&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;args&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;@modelcontextprotocol/server-postgres&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;env&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;DATABASE_URL&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;${DATABASE_URL}&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Key details:</strong></p>
+<ul>
+<li><code>${DATABASE_URL}</code> — Environment variable expansion. The actual secret is NOT in the config file. Use <code>${VAR:-default}</code> when the variable may be unset.</li>
+<li><code>command</code> + <code>args</code> — How to start the MCP server process (stdio transport)</li>
+<li><code>timeout</code> — per-server tool execution timeout in milliseconds; overrides <code>MCP_TOOL_TIMEOUT</code> for that server</li>
+<li>Claude Code <strong>prompts for approval</strong> before using project-scoped servers from <code>.mcp.json</code> in interactive sessions. <code>claude -p</code>, Agent SDK sessions, and cloud sessions can&rsquo;t show that prompt and load them without asking — use <code>disabledMcpjsonServers</code> or <code>--setting-sources</code> to keep a server out of headless runs</li>
+<li>Some server names are reserved (<code>workspace</code>, <code>claude-in-chrome</code>, <code>computer-use</code>, <code>Claude Preview</code>, <code>Claude Browser</code>) and will be skipped with a warning</li>
+</ul>
+<h3 id="authentication-for-remote-servers">Authentication for Remote Servers</h3>
+<p>HTTP and SSE servers support <strong>OAuth</strong> — run <code>/mcp</code> in-session (or <code>claude mcp add</code> then authenticate) and Claude Code handles the browser flow and token refresh. For services without OAuth, pass a static token via <code>headers</code>, or generate one at connect time with <code>headersHelper</code> (a command whose stdout becomes the header value) when the credential is short-lived. WebSocket servers are header-only.</p>
+<h3 id="tool-search-is-on-by-default-in-claude-code">Tool Search Is On by Default in Claude Code</h3>
+<p>MCP tool definitions are <strong>deferred</strong> by default: only tool names and server instructions load at session start, and Claude searches for the rest on demand. That is why Claude Code imposes no per-server tool cap — the practical limit is your context budget.</p>
+<table>
+	<thead>
+			<tr>
+					<th><code>ENABLE_TOOL_SEARCH</code></th>
+					<th>Behavior</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>(unset)</td>
+					<td>All MCP tools deferred, loaded on demand</td>
+			</tr>
+			<tr>
+					<td><code>true</code></td>
+					<td>Force deferral (sends the beta header even through proxies)</td>
+			</tr>
+			<tr>
+					<td><code>auto</code> / <code>auto:N</code></td>
+					<td>Load upfront while deferred definitions total under 10% (or N%) of the context window; defer once past it</td>
+			</tr>
+			<tr>
+					<td><code>false</code></td>
+					<td>Load every MCP tool upfront</td>
+			</tr>
+	</tbody>
+</table>
+<p>Set <code>&quot;alwaysLoad&quot;: true</code> on a server entry to exempt it from deferral when Claude needs its tools on every turn. Server authors should write good <strong>server instructions</strong> — with tool search on, those instructions are how Claude decides whether to search your server at all. Claude Code truncates tool descriptions and server instructions at 2 KB each.</p>
+<h3 id="output-limits">Output Limits</h3>
+<p>Claude Code warns when MCP tool output exceeds <strong>10,000 tokens</strong> and truncates at <strong>25,000 tokens</strong> by default. Raise the ceiling with <code>MAX_MCP_OUTPUT_TOKENS</code>; the warning threshold is fixed. This is the mechanical reason tool-output trimming (Domain 5) matters — a chatty server can silently lose the tail of its own response.</p>
+<h3 id="mcp-resources">MCP Resources</h3>
+<p>Resources expose content catalogs to reduce exploratory tool calls. Instead of Claude blindly searching, it can browse available resources:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;resources&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;uri&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;file:///project/docs/api-reference.md&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;API Reference&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#0550ae">&#34;mimeType&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;text/markdown&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="25-built-in-tools">2.5 Built-in Tools</h2>
+<p>Claude Code&rsquo;s built-in tools and when to use each:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Tool</th>
+					<th>Purpose</th>
+					<th>When to Use</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Grep</strong></td>
+					<td>Search file contents for patterns</td>
+					<td>Finding function definitions, error messages, imports, string patterns</td>
+			</tr>
+			<tr>
+					<td><strong>Glob</strong></td>
+					<td>Find files by name/extension</td>
+					<td>Locating files: <code>**/*.test.ts</code>, <code>src/**/config.*</code></td>
+			</tr>
+			<tr>
+					<td><strong>Read</strong></td>
+					<td>Load full file contents</td>
+					<td>Reading a specific file after finding it with Grep/Glob</td>
+			</tr>
+			<tr>
+					<td><strong>Write</strong></td>
+					<td>Create new files</td>
+					<td>Creating new files that don&rsquo;t exist</td>
+			</tr>
+			<tr>
+					<td><strong>Edit</strong></td>
+					<td>Targeted modifications</td>
+					<td>Changing specific sections of existing files (uses unique text matching)</td>
+			</tr>
+			<tr>
+					<td><strong>Bash</strong></td>
+					<td>Run terminal commands</td>
+					<td>git, npm, running scripts, system commands</td>
+			</tr>
+			<tr>
+					<td><strong>WebSearch / WebFetch</strong></td>
+					<td>Search the web; fetch and read a URL</td>
+					<td>Looking up current docs, checking an API&rsquo;s behavior</td>
+			</tr>
+			<tr>
+					<td><strong>Agent</strong></td>
+					<td>Spawn a subagent</td>
+					<td>Delegating bounded or noisy work (see Domain 1 §1.3)</td>
+			</tr>
+			<tr>
+					<td><strong>Skill</strong></td>
+					<td>Invoke a skill by name</td>
+					<td>Running a packaged workflow</td>
+			</tr>
+			<tr>
+					<td><strong>NotebookEdit</strong></td>
+					<td>Edit Jupyter notebook cells</td>
+					<td><code>.ipynb</code> files</td>
+			</tr>
+			<tr>
+					<td><strong>AskUserQuestion</strong></td>
+					<td>Ask the user a blocking question</td>
+					<td>Decisions only the user can make</td>
+			</tr>
+			<tr>
+					<td><strong>ToolSearch</strong></td>
+					<td>Load a deferred tool&rsquo;s schema on demand</td>
+					<td>The client-side counterpart of the API&rsquo;s tool search — MCP and rarely used built-in tools ship as names only until Claude searches for them</td>
+			</tr>
+			<tr>
+					<td><strong>SendMessage / ListAgents</strong></td>
+					<td>Message a running or completed subagent, teammate, or another session</td>
+					<td>Resuming a subagent with its context intact (Domain 3 §3.4); cross-session messaging</td>
+			</tr>
+			<tr>
+					<td><strong>Workflow</strong></td>
+					<td>Run a dynamic-workflow script that orchestrates many subagents</td>
+					<td>Only when the user opts in (&ldquo;use a workflow&rdquo;, <code>ultracode</code>) — see Domain 1 §1.3</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="codebase-exploration-pattern">Codebase Exploration Pattern</h3>
+<p>The correct pattern for exploring an unfamiliar codebase:</p>
+<pre tabindex="0"><code>1. Grep for entry points (main functions, route definitions, exports)
+2. Read the entry point files
+3. Follow imports — Grep for referenced modules
+4. Read those files
+5. Build understanding iteratively
+</code></pre><p><strong>Anti-pattern:</strong> Reading all files upfront. This wastes context and doesn&rsquo;t build understanding.</p>
+<h3 id="when-edit-fails">When Edit Fails</h3>
+<p>The Edit tool works by matching unique text strings. If the text isn&rsquo;t unique in the file, the edit fails.</p>
+<p><strong>Fallback:</strong> Use Read to get the full file, then Write to replace the entire file with the modified version.</p>
+<hr>
+<h2 id="26-anthropic-defined-and-server-side-tools">2.6 Anthropic-Defined and Server-Side Tools</h2>
+<p>Not every tool is one you write. Some are <strong>Anthropic-defined</strong> (schema-less: you declare a <code>type</code> and a <code>name</code>, and Claude knows the interface), and some are <strong>server-side</strong> (they execute on Anthropic&rsquo;s infrastructure — results come back as content blocks in the same response, with no client-side execution loop).</p>
+<table>
+	<thead>
+			<tr>
+					<th>Tool</th>
+					<th><code>type</code></th>
+					<th>Client- or server-side</th>
+					<th>Result block</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Web search</td>
+					<td><code>web_search_20260209</code></td>
+					<td>Server</td>
+					<td><code>web_search_tool_result</code></td>
+			</tr>
+			<tr>
+					<td>Web fetch</td>
+					<td><code>web_fetch_20260209</code></td>
+					<td>Server</td>
+					<td><code>web_fetch_tool_result</code></td>
+			</tr>
+			<tr>
+					<td>Code execution</td>
+					<td><code>code_execution_20260521</code></td>
+					<td>Server</td>
+					<td><code>bash_code_execution_tool_result</code> (<code>.content.stdout</code>)</td>
+			</tr>
+			<tr>
+					<td>Tool search (regex / BM25)</td>
+					<td><code>tool_search_tool_regex_20251119</code> / <code>..._bm25_20251119</code></td>
+					<td>Server</td>
+					<td><code>tool_search_tool_result</code></td>
+			</tr>
+			<tr>
+					<td>Memory</td>
+					<td><code>memory_20250818</code></td>
+					<td>Client (you implement the file ops)</td>
+					<td>standard <code>tool_result</code></td>
+			</tr>
+			<tr>
+					<td>Bash</td>
+					<td><code>bash_20250124</code></td>
+					<td>Client</td>
+					<td>standard <code>tool_result</code></td>
+			</tr>
+			<tr>
+					<td>Text editor</td>
+					<td><code>text_editor_20250728</code></td>
+					<td>Client</td>
+					<td>standard <code>tool_result</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>Details worth carrying into an exam or a design review:</p>
+<ul>
+<li><strong>Version the type string.</strong> <code>web_search_20260209</code> / <code>web_fetch_20260209</code> add dynamic filtering and need Opus 4.6+ / Sonnet 4.6+; older models use the basic <code>web_search_20250305</code> / <code>web_fetch_20250910</code>. Don&rsquo;t also declare <code>code_execution</code> alongside the <code>_20260209</code> variants — they run code under the hood, and a second execution environment confuses the model.</li>
+<li><strong>Web fetch only fetches URLs already present in the conversation.</strong> It is not a crawler.</li>
+<li><strong>Server-tool errors do not raise.</strong> They return HTTP 200 with an error object inside the result block (e.g. <code>{&quot;error_code&quot;: &quot;max_uses_exceeded&quot;}</code>). For web search, a success <code>content</code> is a <em>list</em> and an error <code>content</code> is an <em>object</em> — branch on that before indexing. This is the same &ldquo;empty vs failed&rdquo; distinction from §2.2, at the API layer.</li>
+<li><strong><code>pause_turn</code></strong> is how a server-side tool loop tells you it hit its internal cap. Send the response back to continue (Domain 1 §1.1).</li>
+<li><strong>Bash and text editor are schema-less.</strong> Declaring a custom tool of your own named <code>&quot;bash&quot;</code> with an <code>input_schema</code> creates a <em>different</em> tool.</li>
+<li><strong>Advisor tool:</strong> its <code>model</code> must be at least as capable as the request&rsquo;s top-level <code>model</code> (e.g. executor <code>claude-sonnet-5</code> → advisor <code>claude-opus-5</code>). An invalid pair returns 400.</li>
+</ul>
+<h3 id="parallel-tool-use">Parallel Tool Use</h3>
+<p>By default Claude may emit several <code>tool_use</code> blocks in one assistant message. Execute them concurrently and return <strong>all</strong> <code>tool_result</code> blocks in a <strong>single</strong> user message. Splitting them across multiple messages silently teaches Claude to stop making parallel calls. For a tool that failed, return its <code>tool_result</code> with <code>is_error: true</code> — never drop it.</p>
+<h3 id="programmatic-tool-calling">Programmatic Tool Calling</h3>
+<p>Claude can call <em>your</em> custom tool from inside the code execution sandbox instead of round-tripping through the conversation — useful when a tool returns large results that would otherwise flood the context. Declare <code>{&quot;type&quot;: &quot;code_execution_20260120&quot;, &quot;name&quot;: &quot;code_execution&quot;}</code> and set <code>&quot;allowed_callers&quot;: [&quot;code_execution_20260120&quot;]</code> on the custom tool. When responding to a pending programmatic call, the user message must contain <strong>only</strong> <code>tool_result</code> blocks — no text. Not compatible with <code>strict: true</code>, <code>disable_parallel_tool_use</code>, forced <code>tool_choice</code>, or MCP tools.</p>
+<h3 id="mcp-from-the-api-side-the-mcp-connector">MCP from the API Side: the MCP Connector</h3>
+<p>Domain 2&rsquo;s MCP material is written from Claude Code&rsquo;s perspective (a host that manages its own clients). The Messages API can also connect to remote MCP servers directly. It needs <strong>both halves</strong> — passing <code>mcp_servers</code> alone is a validation error:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>client<span style="color:#0550ae">.</span>beta<span style="color:#0550ae">.</span>messages<span style="color:#0550ae">.</span>create<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    model<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;claude-opus-5&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    betas<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;mcp-client-2025-11-20&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    mcp_servers<span style="color:#0550ae">=</span><span style="color:#1f2328">[{</span><span style="color:#0a3069">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;url&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;url&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;https://mcp.example.com/mcp&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;example&#34;</span><span style="color:#1f2328">}],</span>
+</span></span><span style="display:flex;"><span>    tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[{</span><span style="color:#0a3069">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;mcp_toolset&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;mcp_server_name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;example&#34;</span><span style="color:#1f2328">}],</span>
+</span></span><span style="display:flex;"><span>    messages<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0550ae">...</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Set <code>defer_loading</code> once on the <code>mcp_toolset</code> entry&rsquo;s <code>default_config</code> (or per tool in <code>configs</code>) rather than on individual tool definitions.</p>
+<h3 id="changing-tools-mid-conversation-without-breaking-the-cache">Changing Tools Mid-Conversation Without Breaking the Cache</h3>
+<p>The <code>tools</code> array sits <em>earlier</em> in the cached prefix than <code>system</code>, so editing it between turns invalidates the cache for the whole conversation (Domain 4 §4.8). On the models that support mid-conversation system messages (Fable 5 / 5.1, Mythos 5 / 5.1, Opus 4.8, Opus 5 — not Sonnet 5), declare the full tool set up front and then <em>offer or withdraw</em> tools with <code>tool_addition</code> / <code>tool_removal</code> blocks inside a <code>role: &quot;system&quot;</code> message (beta header <code>mid-conversation-tool-changes-2026-07-01</code>). A tool declared with <code>defer_loading: true</code> stays withheld until a <code>tool_addition</code> surfaces it. On Fable 5.1 this is also the only history-safe way to change tools, because rebuilding <code>tools</code> counts as editing earlier turns and invalidates later thinking blocks.</p>
+<hr>
+<h2 id="domain-2-practice-questions">Domain 2 Practice Questions</h2>
+<p><strong>Q1:</strong> An agent has 18 tools configured and is frequently selecting the wrong tool. What is the most effective solution?</p>
+<ul>
+<li>A) Improve all 18 tool descriptions to be more detailed</li>
+<li>B) Distribute the tools across specialized subagents with 4-5 tools each</li>
+<li>C) Set tool_choice to &ldquo;any&rdquo; to force tool usage</li>
+<li>D) Add examples to the system prompt showing correct tool selection</li>
+</ul>
+<p><strong>Answer: B</strong> — The 4-5 tool maximum per agent is the key architectural principle. Even with better descriptions, 18 tools degrades selection reliability.</p>
+<p><strong>Q2:</strong> A search tool returns an empty array. What should the agent communicate to the user?</p>
+<ul>
+<li>A) &ldquo;The search service is currently unavailable&rdquo;</li>
+<li>B) &ldquo;No results were found matching your query&rdquo;</li>
+<li>C) Check the response status to distinguish between &ldquo;no results&rdquo; and &ldquo;search failed&rdquo;</li>
+<li>D) Retry the search with different parameters</li>
+</ul>
+<p><strong>Answer: C</strong> — The agent must distinguish between a valid empty result (status 200, no matches) and a failed search (error/timeout). These require fundamentally different responses.</p>
+<p><strong>Q3:</strong> Where should MCP server credentials be stored in a project using <code>.mcp.json</code>?</p>
+<ul>
+<li>A) Directly in the <code>.mcp.json</code> file</li>
+<li>B) In environment variables referenced via <code>${VAR_NAME}</code> syntax</li>
+<li>C) In a separate <code>.mcp-secrets.json</code> file</li>
+<li>D) In the project&rsquo;s <code>package.json</code></li>
+</ul>
+<p><strong>Answer: B</strong> — <code>.mcp.json</code> supports environment variable expansion. Credentials should never be committed to version control.</p>
+<p><strong>Q4:</strong> A platform team aggregates six MCP servers, exposing about 200 tools. Tool definitions consume ~55k tokens before any work starts, and tool selection has become unreliable. What is the current recommended fix?</p>
+<ul>
+<li>A) Raise <code>max_tokens</code> so there is room for the definitions</li>
+<li>B) Enable the tool search tool and mark all but 3-5 frequently used tools <code>defer_loading: true</code></li>
+<li>C) Set <code>tool_choice: &quot;any&quot;</code> so Claude is forced to commit to a tool</li>
+<li>D) Set <code>defer_loading: true</code> on every tool including the search tool</li>
+</ul>
+<p><strong>Answer: B</strong> — Tool search keeps only a small hot set plus the search tool in context and loads the rest on demand via <code>tool_reference</code> blocks, cutting definition tokens by ~85% while preserving prompt caching. D is a 400 error: at least one tool must stay non-deferred. Splitting across subagents (§2.3) is still valid, but tool search is what makes a 200-tool catalog workable inside one agent.</p>
+<p><strong>Q5:</strong> An extraction service forces its schema with <code>tool_choice: {&quot;type&quot;: &quot;tool&quot;, &quot;name&quot;: &quot;extract_invoice&quot;}</code> and is being moved from Claude Opus 5 to Claude Fable 5.1. What happens, and what is the right fix?</p>
+<ul>
+<li>A) Nothing changes — forced tool use works on every current model</li>
+<li>B) The request returns 400; switch to <code>tool_choice: &quot;any&quot;</code> instead</li>
+<li>C) The request returns 400; use <code>tool_choice: &quot;auto&quot;</code> with an explicit instruction and <code>strict: true</code>, or structured outputs via <code>output_config.format</code></li>
+<li>D) The call silently falls back to text output</li>
+</ul>
+<p><strong>Answer: C</strong> — Fable 5.1 and Mythos 5.1 reject both forced forms (<code>any</code> and <code>tool</code>) with a 400. <code>auto</code> plus an instruction keeps the tool call, <code>strict: true</code> keeps the arguments schema-valid, and structured outputs replace the pattern entirely when the tool only existed to return JSON. Opus 5 and Sonnet 5 still accept forced tool use, so this is a per-model check, not a global rule.</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

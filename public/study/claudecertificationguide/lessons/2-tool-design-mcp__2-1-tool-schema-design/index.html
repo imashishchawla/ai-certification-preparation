@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2 Tool Design Mcp__2 1 Tool Schema Design | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/2-tool-design-mcp__2-1-tool-schema-design/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 2 Tool Design Mcp__2 1 Tool Schema Design
+</div>
+
+<article>
+  <header>
+    <h1>2 Tool Design Mcp__2 1 Tool Schema Design</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="21--tool-interface-design--claude-certification-guide">2.1 — Tool Interface Design | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/2-tool-design-mcp/2-1-tool-schema-design">https://claudecertificationguide.com/learn/2-tool-design-mcp/2-1-tool-schema-design</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+2.1
+Tool Interface Design
+2.2
+Structured Error Responses
+2.3
+Tool Distribution &amp; Tool Choice
+2.4
+MCP Server Integration
+2.5
+Built-in Tools
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+TOOL DESIGN &amp; MCP INTEGRATION
+/
+2.1
+DOMAIN 2
+TASK 2.1
+Mark Complete
+Tool Interface Design
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>Tool descriptions are the PRIMARY mechanism LLMs use for tool selection. Not supplementary metadata. Not an afterthought. When a model receives a set of tools, it reads the descriptions to decide which one to call — and if those descriptions are minimal, something like &ldquo;Retrieves customer information&rdquo;, it has no way to tell apart tools that serve overlapping purposes.</p>
+<p>What Makes a Good Tool Description</p>
+<p>A production-grade tool description includes five elements:</p>
+<p>What the tool does — its primary purpose, stated unambiguously
+What inputs it expects — data types, formats, constraints, and required versus optional fields
+Example queries it handles well — concrete use cases that anchor the model&rsquo;s understanding
+Edge cases and limitations — what the tool does NOT do, and what happens when inputs fall outside expected ranges
+Explicit boundaries — when to use THIS tool versus similar tools in the same toolkit</p>
+<p>Here is the difference between a minimal and a production-grade description:</p>
+<p>Minimal (causes misrouting):</p>
+<p>TEXT
+Copy
+get_customer: &ldquo;Retrieves customer information&rdquo;
+lookup_order: &ldquo;Retrieves order details&rdquo;</p>
+<p>Production-grade (reliable selection):</p>
+<p>TEXT
+Copy
+get_customer: &ldquo;Looks up a customer account by email address,
+phone number, or customer ID. Returns customer profile
+(name, contact details, account status, loyalty tier).
+Use this when you need to verify who the customer is.
+Do NOT use for order-specific queries — use lookup_order
+for those.&rdquo;</p>
+<p>lookup_order: &ldquo;Retrieves order details by order number
+(format: #NNNNN) or tracking ID. Returns order status,
+items, shipping details, and refund eligibility.
+Use this when a customer asks about a specific order.
+Do NOT use for customer identity verification —
+use get_customer for that.&rdquo;</p>
+<p>The second version gives the model explicit disambiguation. It knows which identifiers each tool accepts, what each returns, and crucially, when NOT to use each tool.</p>
+<p>The Misrouting Problem</p>
+<p>Two tools with overlapping or near-identical descriptions cause selection confusion. The exam guide&rsquo;s sample Question 2 presents exactly this scenario: get_customer and lookup_order with minimal descriptions, causing the agent to route &ldquo;check my order #12345&rdquo; to the wrong tool.</p>
+<p>The exam tests whether you can spot the correct fix. Four plausible options, three of them wrong:</p>
+<p>Expand descriptions — correct. Low effort, high leverage, directly addresses the root cause.
+Few-shot examples — wrong. Adds token overhead without fixing why the model is confused. You&rsquo;re treating symptoms, not the disease.
+Routing classifier — wrong. Over-engineered as a first step. Bypasses the LLM&rsquo;s natural language understanding and adds infrastructure complexity.
+Tool consolidation — wrong as a first step. It&rsquo;s a valid architectural choice long-term, but it costs far more effort than expanding descriptions.</p>
+<p>The exam consistently favours low-effort, high-leverage fixes. Better descriptions before routing classifiers. Scoped access before full access. Community servers before custom builds.</p>
+<p>Tool Splitting</p>
+<p>Generic tools with broad responsibilities create ambiguity. The fix: split them into purpose-specific tools with defined input/output contracts.</p>
+<p>Before splitting:</p>
+<p>TEXT
+Copy
+analyze_document: &ldquo;Analyses a document and returns results&rdquo;</p>
+<p>After splitting:</p>
+<p>TEXT
+Copy
+extract_data_points: &ldquo;Extracts structured data fields
+(dates, amounts, names) from a document&rdquo;</p>
+<p>summarize_content: &ldquo;Produces a concise summary of a
+document&rsquo;s key arguments and conclusions&rdquo;</p>
+<p>verify_claim_against_source: &ldquo;Checks whether a specific
+claim is supported by the source document, returning
+supporting/contradicting evidence&rdquo;</p>
+<p>Each resulting tool does one narrow, clearly described job. The model can pick the right one based on what the user actually needs.</p>
+<p>Tool Renaming for Clarity</p>
+<p>When two tools have confusingly similar names, renaming fixes the overlap at the interface level. Rename analyze_content to extract_web_results, give it a web-specific description, and the tool&rsquo;s purpose becomes unambiguous — without touching its implementation.</p>
+<p>System Prompt Interactions</p>
+<p>Keyword-sensitive instructions in system prompts can create unintended tool associations that override well-written descriptions. If your system prompt says &ldquo;always check customer details before proceeding&rdquo;, the model may route any customer-related query to get_customer no matter what the descriptions say.</p>
+<p>So after updating tool descriptions, reread your system prompt for conflicts. It&rsquo;s a subtle failure mode, and the exam tests it.</p>
+<p>KEY CONCEPT</p>
+<p>Tool descriptions are the primary mechanism LLMs use for tool selection. When misrouting is caused by weak descriptions, improving them is the first fix — not few-shot examples, routing classifiers, or tool consolidation.</p>
+<p>Read the condition on that, because the exam tests both halves. Descriptions are the fix when the agent has a workable number of tools and simply cannot tell two of them apart. They are not the fix when the toolkit itself is the problem: past roughly 4-5 tools per agent, selection degrades on decision complexity alone, and rewriting 22 descriptions leaves that untouched. Diagnose which one you are looking at before reaching for a remedy. Task Statement 2.3 covers the overload threshold and what to do instead.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Choosing few-shot examples to fix tool misrouting caused by minimal descriptions</p>
+<p>Few-shot examples add token overhead without addressing the root cause. The model is confused because descriptions do not differentiate the tools — fix the descriptions first.</p>
+<p>EXAM TRAP</p>
+<p>Implementing a routing classifier as the first step to fix tool selection</p>
+<p>A routing classifier is over-engineered as a first response. It bypasses the LLM&rsquo;s natural language understanding and adds infrastructure the exam does not consider proportionate.</p>
+<p>EXAM TRAP</p>
+<p>Consolidating similar tools into one as the first step</p>
+<p>Tool consolidation is a valid long-term architectural choice, but it requires more effort than expanding descriptions. The exam favours low-effort, high-leverage first steps.</p>
+<p>EXAM TRAP</p>
+<p>Ignoring system prompt wording after updating tool descriptions</p>
+<p>Keyword-sensitive instructions in system prompts can silently override well-written tool descriptions, creating unintended tool associations.</p>
+<p>Practice Scenario</p>
+<p>Production logs show an agent frequently calls get_customer when users ask about orders (e.g. &lsquo;check my order #12345&rsquo;), instead of calling lookup_order. Both tools have minimal descriptions (&lsquo;Retrieves customer information&rsquo; / &lsquo;Retrieves order details&rsquo;) and accept similar identifier formats. What is the most effective first step to improve tool selection reliability?</p>
+<p>OPTION A
+Add 5-8 few-shot examples to the system prompt demonstrating correct tool selection patterns for order-related queries.
+OPTION B
+Expand each tool description to include input formats, example queries, edge cases, and boundaries explaining when to use it versus similar tools.
+OPTION C
+Consolidate both tools into a single lookup_entity tool that accepts any identifier and internally determines which backend to query.
+OPTION D
+Implement a routing layer that parses user input before each turn and pre-selects the appropriate tool based on detected keywords.
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Design Tool Descriptions That Eliminate Misrouting
+Difficulty
+30 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Understand that tool descriptions are the primary mechanism LLMs use for tool selection
+Write production-grade descriptions with purpose, inputs, examples, edge cases, and boundaries
+Diagnose misrouting caused by ambiguous or overlapping descriptions
+Identify system prompt conflicts that override well-written tool descriptions
+Create two MCP tools with intentionally ambiguous descriptions (e.g. get_customer: Retrieves customer information and lookup_order: Retrieves order details)</p>
+<p>WHY: Reproducing a misrouting scenario first-hand builds intuition for why minimal descriptions fail. The exam tests your ability to identify ambiguous descriptions as the root cause of tool selection errors.</p>
+<p>YOU SHOULD SEE: Two tool definitions registered with your MCP server, each having a single-sentence description that does not mention input formats, example queries, or boundaries.</p>
+<p>Stuck? Get a nudge
+Test with 10 queries covering different user intents and log which tool the model selects for each</p>
+<p>WHY: Quantifying selection accuracy before and after description changes gives you concrete evidence of the impact. The exam expects you to know that description quality directly affects selection reliability.</p>
+<p>YOU SHOULD SEE: A log showing at least 2-3 misrouted queries where the model selected get_customer for order-related queries or vice versa, demonstrating the ambiguity problem.</p>
+<p>Stuck? Get a nudge
+Rewrite both descriptions to include: purpose, expected inputs with formats, example queries, edge cases, and explicit boundaries against the other tool</p>
+<p>WHY: This is the core exam skill — the lowest-effort, highest-leverage fix for misrouting. Production-grade descriptions include all five elements: purpose, inputs, examples, edge cases, and boundaries.</p>
+<p>YOU SHOULD SEE: Each tool description is 3-5 sentences long, explicitly states accepted identifier formats, gives example queries, and includes a boundary statement like &ldquo;Do NOT use for order-specific queries — use lookup_order for those.&rdquo;</p>
+<p>Stuck? Get a nudge
+Re-run the same 10 queries and compare selection accuracy before and after</p>
+<p>WHY: Measuring improvement validates that description quality is the root cause. The exam expects you to understand that better descriptions produce measurably better selection without any architectural changes.</p>
+<p>YOU SHOULD SEE: Selection accuracy improves to 9/10 or 10/10 correct, with previously misrouted queries now hitting the correct tool. A clear before/after comparison showing the improvement.</p>
+<p>Stuck? Get a nudge
+Review your system prompt for keyword-sensitive instructions that could override the improved descriptions</p>
+<p>WHY: System prompt conflicts are a subtle failure mode the exam tests. Keywords like &ldquo;always check customer details&rdquo; can create unintended tool associations that override even well-written descriptions.</p>
+<p>YOU SHOULD SEE: A list of any keyword-sensitive phrases in your system prompt that could trigger incorrect tool associations, along with rewritten versions that avoid the conflict.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Certified Architect Foundations Exam Guide — Domain 2, Task Statement 2.1 — Anthropic
+Tool use — Anthropic API Documentation — Anthropic
+Model Context Protocol Specification — Tools — Model Context Protocol
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Session State and Resumption
+NEXT LESSON
+Structured Error Responses</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

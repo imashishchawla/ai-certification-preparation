@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amey-Thakur — Mock Exam 2 | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/practice/amey-thakur-mock-exam-2/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/practice/">Practice Questions</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Amey-Thakur — Mock Exam 2
+</div>
+
+<article>
+  <header>
+    <h1>Amey-Thakur — Mock Exam 2</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">practice</span>
+      
+        <span class="tag">questions</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="mock-exam-2-architect--foundations">Mock exam 2: Architect – Foundations</h1>
+<p>A second timed practice exam in the official style, with fifteen questions that appear nowhere else in this repository. Take it after <a href="mock-exam-1.md">mock exam 1</a> and the <a href="practice-questions.md">practice questions</a>, when you want a fresh measure rather than a review. Original questions written against the public <a href="README.md#skills-measured">blueprint</a>; not items from the live exam, which is covered by a non-disclosure agreement.</p>
+<p><strong>How to take it.</strong> 15 questions, 30 minutes, closed book: no notes, no documentation, no Claude. The real exam frames its items inside published scenarios; this mock samples the same judgment across all of them. Score yourself with the <a href="#answer-key">key</a> and the <a href="#interpreting-your-score">readiness table</a> afterwards.</p>
+<blockquote>
+<p>[!TIP]
+Stuck on a question afterwards? The <a href="../guide/prompts.md">prompts for studying with Claude</a> include one for working through a question you got wrong, and one for drilling a whole domain.</p>
+</blockquote>
+<hr>
+<h2 id="questions">Questions</h2>
+<p><strong>1.</strong> A pipeline has four steps whose order never varies and whose outputs are each checkable. What should it be?</p>
+<ul>
+<li>A. An agent that plans each run</li>
+<li>B. Four agents, one per step</li>
+<li>C. A deterministic workflow with model calls at defined points</li>
+<li>D. A single prompt covering all four steps</li>
+</ul>
+<p><strong>2.</strong> What is the principal cost of introducing a subagent?</p>
+<ul>
+<li>A. It loses the context the parent held unless the handoff carries it explicitly</li>
+<li>B. It requires a larger model</li>
+<li>C. It cannot use tools</li>
+<li>D. It doubles token cost in every case</li>
+</ul>
+<p><strong>3.</strong> An autonomous step would modify production data. What does the architecture require?</p>
+<ul>
+<li>A. A more capable model</li>
+<li>B. A longer system prompt describing caution</li>
+<li>C. A retry policy</li>
+<li>D. A checkpoint where a person authorises the action, or a reversible mechanism</li>
+</ul>
+<p><strong>4.</strong> What most helps diagnose an agentic failure after the fact?</p>
+<ul>
+<li>A. The final output alone</li>
+<li>B. A trace of each step&rsquo;s inputs, tool calls, and outputs</li>
+<li>C. The total token count</li>
+<li>D. The model version</li>
+</ul>
+<p><strong>5.</strong> Where should repository-wide conventions for Claude Code live?</p>
+<ul>
+<li>A. In each developer&rsquo;s local configuration</li>
+<li>B. In a CLAUDE.md committed to the repository</li>
+<li>C. In the team&rsquo;s chat channel</li>
+<li>D. In the CI configuration only</li>
+</ul>
+<p><strong>6.</strong> Which task is best suited to headless Claude Code in CI?</p>
+<ul>
+<li>A. Exploratory debugging of an unfamiliar failure</li>
+<li>B. Designing a new module&rsquo;s architecture</li>
+<li>C. Pair programming with a developer</li>
+<li>D. A repeatable, well-specified check that runs on every pull request</li>
+</ul>
+<p><strong>7.</strong> What is a hook for?</p>
+<ul>
+<li>A. Running a deterministic action at a defined point, independently of the model</li>
+<li>B. Storing reusable instructions</li>
+<li>C. Holding project context</li>
+<li>D. Selecting the model</li>
+</ul>
+<p><strong>8.</strong> A pipeline needs output that always conforms to a fixed shape. What is the correct mechanism?</p>
+<ul>
+<li>A. Requesting the shape in the prompt and parsing the result</li>
+<li>B. Post-processing prose with regular expressions</li>
+<li>C. Declaring the shape as a schema the model must satisfy, and validating on receipt</li>
+<li>D. Lowering the temperature</li>
+</ul>
+<p><strong>9.</strong> How should a schema handle a value the source may not contain?</p>
+<ul>
+<li>A. Omit the field silently</li>
+<li>B. Supply a plausible default</li>
+<li>C. Return an empty string in all cases</li>
+<li>D. Define an explicit representation for absence</li>
+</ul>
+<p><strong>10.</strong> Extraction succeeds on typical inputs and fails on unusual ones. What is the most effective response?</p>
+<ul>
+<li>A. Raise the temperature</li>
+<li>B. Use a larger model</li>
+<li>C. Add examples covering the unusual formats and state what to return when a field is missing</li>
+<li>D. Ask the model to be careful with unusual inputs</li>
+</ul>
+<p><strong>11.</strong> What is the clearest sign that a tool surface needs redesign rather than better prompting?</p>
+<ul>
+<li>A. It exposes more than five tools</li>
+<li>B. The model repeatedly selects a tool that cannot satisfy the request</li>
+<li>C. The tools are implemented in different services</li>
+<li>D. The tools return large payloads</li>
+</ul>
+<p><strong>12.</strong> How should a tool that deletes records be constrained?</p>
+<ul>
+<li>A. By enforcing authorisation and scope outside the model</li>
+<li>B. By a description warning the model to use it carefully</li>
+<li>C. By requiring more parameters</li>
+<li>D. By declaring it last among the tools</li>
+</ul>
+<p><strong>13.</strong> An MCP integration exposes an entire database through one general query tool. What is the architectural concern?</p>
+<ul>
+<li>A. The model&rsquo;s authority is unbounded, and least privilege cannot be applied</li>
+<li>B. It will be slow</li>
+<li>C. It uses too many tokens</li>
+<li>D. It cannot return structured output</li>
+</ul>
+<p><strong>14.</strong> Quality degrades steadily through a long agentic run. What is the most likely cause?</p>
+<ul>
+<li>A. The model version changed mid-run</li>
+<li>B. Accumulated context has diluted the material that matters</li>
+<li>C. The temperature is too low</li>
+<li>D. The tools have become slower</li>
+</ul>
+<p><strong>15.</strong> What must happen for state to survive a compaction boundary?</p>
+<ul>
+<li>A. Nothing, the model retains what matters</li>
+<li>B. The context window must be enlarged</li>
+<li>C. The decisions and constraints that must persist are written into an explicit carried-forward summary</li>
+<li>D. The run must restart</li>
+</ul>
+<hr>
+<h2 id="answer-key">Answer key</h2>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: center">#</th>
+					<th>Answer</th>
+					<th>Domain</th>
+					<th>Why</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center">1</td>
+					<td>C</td>
+					<td>Agentic Architecture &amp; Orchestration</td>
+					<td>A known fixed order is encoded rather than rediscovered, which is cheaper and testable per step. Runtime planning (A, B) adds nondeterminism, and one prompt (D) removes the checkpoints</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">2</td>
+					<td>A</td>
+					<td>Agentic Architecture &amp; Orchestration</td>
+					<td>Delegation buys isolation and pays in context, which is why handoffs must be explicit. A subagent does not require a larger model (B), can use tools (C), and cost varies with the work (D)</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">3</td>
+					<td>D</td>
+					<td>Agentic Architecture &amp; Orchestration</td>
+					<td>Irreversible external effects need an authorisation boundary or reversibility, enforced outside the model. Capability (A), instruction (B), and retries (C) do not bound the consequence</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">4</td>
+					<td>B</td>
+					<td>Agentic Architecture &amp; Orchestration</td>
+					<td>A per-step trace reconstructs a nondeterministic run, which is what diagnosis needs. The final output (A), token totals (C), and version (D) do not show where it diverged</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">5</td>
+					<td>B</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>Committed project memory is shared, versioned, and reviewed with the code. Local configuration (A) does not propagate, chat (C) is not read as context, and CI (D) covers automation rather than interactive work</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">6</td>
+					<td>D</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>Headless execution suits bounded, repeatable work that runs unattended. Exploration (A), design (B), and pairing (C) all depend on a person in the loop</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">7</td>
+					<td>A</td>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>Hooks execute as code at fixed points, which is how a guarantee is enforced. Instructions (B) and context (C) belong in project memory, and model choice (D) is configuration</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">8</td>
+					<td>C</td>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>A declared schema makes the shape a contract rather than a request, and validation closes the loop. Prompt requests (A), text parsing (B), and temperature (D) leave the shape to chance</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">9</td>
+					<td>D</td>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>Absence must be representable so a genuine gap is distinguishable from a failure. Silent omission (A) is ambiguous, a plausible default (B) fabricates, and an empty string (C) conflates absence with an empty value</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">10</td>
+					<td>C</td>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>The unusual cases fail because they were never specified, and examples plus a missing-value rule specify them. Temperature (A) adds variance, model size (B) is not aimed at the gap, and exhortation (D) is not specification</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">11</td>
+					<td>B</td>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>Repeated wrong selection indicates the tools are not distinguishable from their descriptions, which is a design fault. Tool count (A) and implementation topology (C) are not faults, and payload size (D) is a separate problem</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">12</td>
+					<td>A</td>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>Destructive capability is bounded by the surrounding system, since a description is a request rather than a control. Extra parameters (C) and ordering (D) do not limit authority</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">13</td>
+					<td>A</td>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>A single unrestricted tool removes the ability to scope what the model may reach. Speed (B) and tokens (C) are secondary, and structured output (D) is achievable either way</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">14</td>
+					<td>B</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Progressive degradation over a long run is the signature of context accumulation. Versions do not change mid-run (A), low temperature (C) reduces variety rather than quality, and tool latency (D) does not affect correctness</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">15</td>
+					<td>C</td>
+					<td>Context Management &amp; Reliability</td>
+					<td>Compaction is lossy, so persistence must be deliberate. Relying on recall (A) is unreliable, a larger window (B) only moves the boundary, and restarting (D) discards the work</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="interpreting-your-score">Interpreting your score</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Score</th>
+					<th>Reading</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>13 to 15</td>
+					<td>Comfortable. Review anything you missed and book the exam</td>
+			</tr>
+			<tr>
+					<td>10 to 12</td>
+					<td>Close. Work the domains where you lost points, then revisit the <a href="notes.md">study notes</a></td>
+			</tr>
+			<tr>
+					<td>7 to 9</td>
+					<td>More study needed. Return to the <a href="README.md">study guide</a> and the prep courses before testing</td>
+			</tr>
+			<tr>
+					<td>6 or fewer</td>
+					<td>Start from the blueprint and the official exam guide; you are not yet reading questions the way the exam intends</td>
+			</tr>
+	</tbody>
+</table>
+<p>This scale is a study aid, not a predictor. The real exam reports a scaled score from 100 to 1,000 with 720 to pass, and it draws from a much larger item pool.</p>
+<p>Tally your misses by domain using the key above; two or more misses in one domain marks it as your next study target, exactly as the real score report&rsquo;s percent-correct breakdown would.</p>
+<hr>
+<p>Written by the maintainer for self-assessment. <a href="README.md">Study guide</a> · <a href="notes.md">Study notes</a> · <a href="mock-exam-1.md">Mock 1</a> · <a href="mock-exam-3.md">Mock 3</a> · <a href="practice-questions.md">Practice questions</a> · <a href="../README.md">Repository index</a></p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

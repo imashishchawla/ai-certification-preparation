@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  {{ $style := resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+  <link rel="canonical" href="{{ .Permalink }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+      <p class="tagline">{{ .Site.Params.description }}</p>
+      <nav>
+        <a href="{{ "practice/" | relLangURL }}">Practice Questions</a>
+        <a href="{{ "study/" | relLangURL }}">Study Guides</a>
+        <a href="{{ "articles/" | relLangURL }}">Articles</a>
+        <a href="{{ "pdfs/" | relLangURL }}">PDFs</a>
+        <a href="{{ "sources/" | relLangURL }}">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; {{ now.Year }} {{ .Site.Title }} · Compiled from public sources · <a href="{{ .Site.Params.repo_url }}">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

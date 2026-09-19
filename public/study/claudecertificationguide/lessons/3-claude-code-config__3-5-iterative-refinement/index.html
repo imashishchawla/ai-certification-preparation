@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3 Claude Code Config__3 5 Iterative Refinement | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/3-claude-code-config__3-5-iterative-refinement/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 3 Claude Code Config__3 5 Iterative Refinement
+</div>
+
+<article>
+  <header>
+    <h1>3 Claude Code Config__3 5 Iterative Refinement</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="35--iterative-refinement-techniques--claude-certification-guide">3.5 — Iterative Refinement Techniques | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/3-claude-code-config/3-5-iterative-refinement">https://claudecertificationguide.com/learn/3-claude-code-config/3-5-iterative-refinement</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+3.1
+CLAUDE.md Hierarchy, Scoping, and Modular Organisation
+3.2
+Custom Slash Commands and Skills
+3.3
+Path-Specific Rules for Conditional Convention Loading
+3.4
+Plan Mode vs Direct Execution
+3.5
+Iterative Refinement Techniques
+3.6
+CI/CD Integration
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+CLAUDE CODE CONFIGURATION &amp; WORKFLOWS
+/
+3.5
+DOMAIN 3
+TASK 3.5
+Mark Complete
+Iterative Refinement Techniques
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>Working with Claude Code is iterative. The first output is rarely the final one. The exam checks that you know the specific techniques for steering Claude Code toward the right result — and which one to reach for first in each situation.</p>
+<p>The Technique Hierarchy</p>
+<p>Not all refinement techniques are equal. There&rsquo;s a clear pecking order:</p>
+<ol>
+<li>Concrete input/output examples (most effective for inconsistent interpretation)</li>
+</ol>
+<p>When you describe a code transformation in prose and Claude Code interprets it differently each time, the fix is not more prose. The fix is concrete examples.</p>
+<p>Provide 2-3 examples showing the exact input and the exact expected output:</p>
+<p>TEXT
+Copy
+Input:
+getUserData(userId: string): Promise<UserData></p>
+<p>Expected output:
+getUserData(userId: string): Promise&lt;Result&lt;UserData, ApiError&raquo;</p>
+<p>TEXT
+Copy
+Input:
+fetchOrders(customerId: string): Promise&lt;Order[]&gt;</p>
+<p>Expected output:
+fetchOrders(customerId: string): Promise&lt;Result&lt;Order[], ApiError&raquo;</p>
+<p>The model generalises from these examples more reliably than from any prose description. Two or three concrete examples set the pattern, and the model applies it to new cases. This is the first technique to reach for when interpretation is inconsistent.</p>
+<ol start="2">
+<li>Test-driven iteration (most effective for complex transformations)</li>
+</ol>
+<p>Write the tests first. Define the expected behaviour through test cases covering:</p>
+<p>Happy path (the standard expected transformation)
+Edge cases (null values, empty inputs, boundary conditions)
+Performance requirements (if applicable)</p>
+<p>Then share the test failures with Claude Code. The failures give concrete, unambiguous feedback about what needs fixing. There&rsquo;s no room for interpretation when the test output says &ldquo;Expected X, got Y.&rdquo;</p>
+<p>TEXT
+Copy
+FAIL: testMigrationHandlesNullValues
+Expected: null preserved in output JSON
+Actual: null replaced with empty string &quot;&quot;</p>
+<p>This failure message tells Claude Code exactly what to fix. No prose explanation needed.</p>
+<ol start="3">
+<li>Interview pattern (most effective for unfamiliar domains)</li>
+</ol>
+<p>When you&rsquo;re working in a domain where you lack expertise, have Claude ask questions before implementing. This surfaces considerations you&rsquo;d otherwise miss.</p>
+<p>Instead of prescribing a solution:</p>
+<p>&ldquo;Build me a caching layer for the API&rdquo;</p>
+<p>Use the interview pattern:</p>
+<p>&ldquo;I need a caching layer for the API. Before implementing, ask me questions about the requirements, edge cases, and constraints I should consider.&rdquo;</p>
+<p>Claude might ask about cache invalidation strategies, TTL policies, consistency requirements, and failure modes — considerations that an expert would know to address but that you might overlook.</p>
+<p>KEY CONCEPT</p>
+<p>The interview pattern is for unfamiliar domains where the developer might miss important considerations. Concrete examples are for when the developer knows the exact transformation but the model interprets it inconsistently. Do not confuse the two — they solve different problems.</p>
+<p>Batch vs Sequential Feedback</p>
+<p>How you deliver feedback matters. The rule:</p>
+<p>Single message (batch) when fixes interact with each other:</p>
+<p>If changing the error handling pattern also affects the logging format and the response structure, provide all three pieces of feedback in one message. The model needs to see all the interacting constraints at once to produce a coherent fix.</p>
+<p>TEXT
+Copy
+Three changes needed (they interact with each other):</p>
+<ol>
+<li>Error responses must include an error code field</li>
+<li>Logging must include the error code in structured format</li>
+<li>The client SDK type definitions must reflect the new error code field</li>
+</ol>
+<p>Sequential iteration when issues are independent:</p>
+<p>If the naming convention issue and the indentation issue don&rsquo;t affect each other, fix them one at a time. Batching independent issues can confuse the model about which feedback applies to which part of the code.</p>
+<p>TEXT
+Copy
+First iteration: &ldquo;Fix the function naming — use camelCase throughout&rdquo;
+[Wait for result]
+Second iteration: &ldquo;Now update the indentation to use 2 spaces&rdquo;</p>
+<p>Example-Based Communication in Practice</p>
+<p>When prose descriptions produce inconsistent results, the switch to examples follows a clear pattern:</p>
+<p>Observe inconsistency: You describe a transformation, Claude Code does it differently each time.
+Switch to examples: Provide 2-3 concrete before/after pairs showing the exact transformation.
+Verify generalisation: Test on a new case to confirm the model generalises the pattern correctly.
+Add edge case examples if needed: If the model handles the standard case but misses edge cases, add examples specifically showing edge case handling.</p>
+<p>It&rsquo;s not about piling on more examples. Two or three well-chosen ones that cover the standard case and a key edge case are enough. The model generalises the pattern; you don&rsquo;t need to hand it every possible case.</p>
+<p>When Each Technique Applies
+Situation	Technique
+Prose description interpreted differently each time	Concrete input/output examples
+Complex transformation with many edge cases	Test-driven iteration
+Working in an unfamiliar domain	Interview pattern
+Multiple issues that affect each other	Batch feedback (one message)
+Multiple independent issues	Sequential feedback
+Exam Traps
+EXAM TRAP</p>
+<p>Choosing to refine prose descriptions when the model interprets them inconsistently</p>
+<p>More precise prose still relies on interpretation. Concrete input/output examples eliminate interpretation ambiguity. The answer to inconsistent interpretation is always examples first, not better prose.</p>
+<p>EXAM TRAP</p>
+<p>Not recognising when to batch vs sequence feedback</p>
+<p>If issues interact (fixing A affects B), provide all in one message so the model sees all constraints. If issues are independent, fix sequentially. The exam tests this distinction directly.</p>
+<p>EXAM TRAP</p>
+<p>Confusing the interview pattern with the examples technique</p>
+<p>The interview pattern is for unfamiliar domains where you might miss considerations. Examples are for when you know the exact transformation but the model misinterprets it. Different problems, different solutions.</p>
+<p>Practice Scenario</p>
+<p>A developer describes a code transformation in prose. Claude Code interprets it differently each time, producing inconsistent results. What technique should the developer try first?</p>
+<p>OPTION A
+Provide 2-3 concrete input/output examples showing the exact before and after transformation
+OPTION B
+Write a comprehensive test suite and iterate by sharing test failures
+OPTION C
+Use the interview pattern to have Claude ask clarifying questions before implementing
+OPTION D
+Rewrite the prose description with more precise language and technical terminology
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Practice Iterative Refinement Techniques
+Difficulty
+30 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Apply the technique hierarchy: concrete examples over prose for inconsistent interpretation
+Use test-driven iteration to provide unambiguous feedback via test failures
+Deploy the interview pattern for unfamiliar domains to surface hidden requirements
+Distinguish when to batch feedback vs iterate sequentially based on issue interdependence
+Recognise that 2-3 well-chosen examples are sufficient for pattern generalisation
+Describe a code transformation in prose and run it three times, noting how interpretation varies across runs</p>
+<p>WHY: This demonstrates the core problem that concrete examples solve. Prose descriptions rely on interpretation, and interpretation varies across runs. Observing this inconsistency firsthand makes the case for switching to examples.</p>
+<p>YOU SHOULD SEE: Three different outputs from the same prose description. The variations may be subtle (different naming choices, different edge case handling) or significant (different structural approaches). This proves that prose alone produces inconsistent results.</p>
+<p>Stuck? Get a nudge
+Provide 2-3 concrete input/output examples of the same transformation and run it three times — compare the consistency</p>
+<p>WHY: Concrete examples are the documented first-line technique for inconsistent interpretation. The model generalises from examples more reliably than from prose. This step proves the effectiveness difference experimentally.</p>
+<p>YOU SHOULD SEE: Three outputs that are consistent with each other and match the pattern established by the examples. The variation observed in the prose-only step is eliminated or drastically reduced.</p>
+<p>Stuck? Get a nudge
+Write a test suite for a function with happy path, edge cases, and error cases, then iterate by sharing test failures with Claude Code</p>
+<p>WHY: Test-driven iteration is the most effective technique for complex transformations. Test failures provide unambiguous feedback — &ldquo;Expected X, got Y&rdquo; leaves no room for interpretation. This technique complements examples for more complex scenarios.</p>
+<p>YOU SHOULD SEE: After sharing test failures, Claude Code makes targeted fixes that address the specific failing assertions. Each iteration reduces the number of failing tests. The feedback loop is faster and more precise than prose-based corrections.</p>
+<p>Stuck? Get a nudge
+Use the interview pattern for a task outside your expertise — ask Claude to pose questions before implementing and note what considerations surface</p>
+<p>WHY: The interview pattern is for unfamiliar domains where you might miss important requirements. It surfaces considerations an expert would know to address. The exam tests whether you can distinguish this from the examples technique — they solve different problems.</p>
+<p>YOU SHOULD SEE: Claude asks 5-10 targeted questions about requirements, edge cases, and constraints you had not considered. The questions reveal considerations like cache invalidation strategies, consistency requirements, failure modes, or security implications that would have been missed.</p>
+<p>Stuck? Get a nudge
+Practice batching: give Claude three interdependent issues in one message and observe whether the fix is coherent across all three</p>
+<p>WHY: When issues interact, batching them in one message lets the model see all constraints simultaneously. Sequential fixing of interdependent issues causes the model to fix one issue in a way that conflicts with the others. The exam tests this distinction.</p>
+<p>YOU SHOULD SEE: A single coherent fix that addresses all three interdependent issues consistently. The error response shape, the logging format, and the type definitions all align with each other. Compare this to fixing them sequentially, where each fix might conflict with the next.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Code Iterative Development Documentation — Anthropic
+Claude Certified Architect Foundations Exam Guide — Task Statement 3.5 — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Plan Mode vs Direct Execution
+NEXT LESSON
+CI/CD Integration</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

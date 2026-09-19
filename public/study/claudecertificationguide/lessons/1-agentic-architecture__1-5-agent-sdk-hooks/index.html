@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 Agentic Architecture__1 5 Agent Sdk Hooks | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/1-agentic-architecture__1-5-agent-sdk-hooks/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 1 Agentic Architecture__1 5 Agent Sdk Hooks
+</div>
+
+<article>
+  <header>
+    <h1>1 Agentic Architecture__1 5 Agent Sdk Hooks</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="15--agent-sdk-hooks--claude-certification-guide">1.5 — Agent SDK Hooks | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/1-agentic-architecture/1-5-agent-sdk-hooks">https://claudecertificationguide.com/learn/1-agentic-architecture/1-5-agent-sdk-hooks</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+1.1
+Agentic Loops
+1.2
+Multi-Agent Orchestration
+1.3
+Subagent Invocation and Context Passing
+1.4
+Workflow Enforcement and Handoff
+1.5
+Agent SDK Hooks
+1.6
+Task Decomposition Strategies
+1.7
+Session State and Resumption
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+AGENTIC ARCHITECTURE &amp; ORCHESTRATION
+/
+1.5
+DOMAIN 1
+TASK 1.5
+Mark Complete
+Agent SDK Hooks
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>Agent SDK hooks inject deterministic behaviour into an otherwise probabilistic system. They sit right at the boundary between the model&rsquo;s decisions and the real world, intercepting tool calls and results to enforce business rules and normalise data. Remember the enforcement spectrum from 1.4? Hooks are how you implement its programmatic side in practice.</p>
+<p>Two Types of Hooks</p>
+<p>The Agent SDK provides hooks at two points in the tool execution lifecycle:</p>
+<p>PostToolUse hooks run after a tool executes but before the model processes the result. They intercept tool results and transform them before the model sees them. The model receives clean, normalised data regardless of which tool produced it.</p>
+<p>PreToolUse hooks (sometimes described as tool-call interception) run before a tool executes. They intercept the outgoing tool call and can block it, modify it, or redirect it to an alternative workflow. The tool never runs if the hook decides to block it.</p>
+<p>What each hook returns. In the Agent SDK a PreToolUse hook answers with a permissionDecision of allow, deny, ask or defer, plus an optional updatedInput that rewrites the tool&rsquo;s arguments before it runs. A PostToolUse hook can set updatedToolOutput to replace what the model sees, for built-in and MCP tools alike. The older updatedMCPToolOutput covered MCP tools only and is deprecated. One thing neither field changes: by the time PostToolUse fires the tool has already run, so blocking there stops the loop but does not undo the side effect. (Agent SDK hooks guide, checked September 2026.)</p>
+<p>KEY CONCEPT</p>
+<p>PostToolUse hooks transform data after execution. PreToolUse hooks enforce policy before execution. Know which direction each hook operates in — the exam tests this distinction.</p>
+<p>PostToolUse Hooks: Data Normalisation</p>
+<p>Different MCP tools return data in different formats. A customer database might return Unix timestamps (1710489600). An order management system might return ISO 8601 dates (&ldquo;2024-03-15T12:00:00Z&rdquo;). A status API might return numeric codes (200, 404, 500) while another returns strings (&ldquo;active&rdquo;, &ldquo;cancelled&rdquo;, &ldquo;pending&rdquo;).</p>
+<p>Without normalisation, the model has to interpret these mixed formats on every single iteration. That breeds inconsistency. It might parse a Unix timestamp correctly one time and misread it the next.</p>
+<p>A PostToolUse hook solves this by normalising all formats before the model processes them:</p>
+<p>Unix timestamps → ISO 8601 dates
+Numeric status codes → human-readable strings
+Currency values → consistent decimal format with currency code
+Date strings in various regional formats → a single standard format</p>
+<p>The model receives clean, consistent data every time, regardless of which tool or backend system produced it.</p>
+<p>PreToolUse Hooks: Policy Enforcement</p>
+<p>PreToolUse hooks are the implementation mechanism for the prerequisite gates described in 1.4. They intercept outgoing tool calls before execution and apply business rules:</p>
+<p>Use case: Refund threshold enforcement. A hook intercepts all calls to process_refund. If the refund amount exceeds $500, the hook blocks the call and redirects to a human escalation workflow. The refund tool never executes — the hook prevents it before it can run.</p>
+<p>Use case: Compliance prerequisite gates. A hook intercepts calls to transfer_funds. If the required anti-money laundering (AML) check has not been completed for this session, the hook blocks the call and returns an error message directing the agent to complete the AML check first.</p>
+<p>Use case: Manager approval workflow. A hook intercepts calls to approve_discount for discounts above 20%. The hook pauses execution and routes the request to a manager approval queue. Only after manager approval does the tool execute.</p>
+<p>EXAM TRAP</p>
+<p>The exam will present PostToolUse hooks as a solution for blocking policy-violating actions. This is wrong. PostToolUse runs after execution — by the time it fires, the non-compliant action has already occurred. Use PreToolUse hooks (pre-execution) to block actions before they happen.</p>
+<p>The Decision Framework</p>
+<p>This framework is the core mental model for the exam:</p>
+<p>Requirement	Mechanism	Guarantee
+Must be followed 100% of the time	Hooks	Deterministic
+Preferred but occasional deviation is acceptable	Prompts	Probabilistic</p>
+<p>If the business would lose money from a single failure → use a hook. If the business would face legal risk from a single failure → use a hook. If it is a formatting preference or style guideline → prompt-based guidance is fine.</p>
+<p>The exam consistently presents prompt-based solutions as distractors for scenarios requiring deterministic enforcement. The decision is not about whether prompts are &ldquo;good enough&rdquo; — it&rsquo;s about whether the consequence of a single failure justifies deterministic guarantees.</p>
+<p>Hooks vs Prompts: Side-by-Side Comparison</p>
+<p>Scenario: International transfers must pass AML checks.</p>
+<p>Prompt approach: &ldquo;Always complete AML verification before processing international transfers.&rdquo; Works 95% of the time. The 5% failure rate means some transfers skip AML checks — a regulatory violation.
+Hook approach: A PreToolUse hook blocks transfer_funds until aml_check returns a pass. Works 100% of the time. No transfer can execute without AML verification.</p>
+<p>Scenario: Responses should be formatted in markdown.</p>
+<p>Prompt approach: &ldquo;Format all responses using markdown with headers and bullet points.&rdquo; Works most of the time. Occasional plain-text responses are not a business risk.
+Hook approach: Unnecessary overhead. Formatting preferences do not require deterministic enforcement.</p>
+<p>Scenario: Refunds above $500 require human approval.</p>
+<p>Prompt approach: &ldquo;For refunds above $500, escalate to a human agent.&rdquo; Works most of the time. A single failure means a large refund processed without approval.
+Hook approach: Intercept process_refund, check the amount, block if above $500 and route to human escalation. Works 100% of the time.
+Beyond PreToolUse and PostToolUse</p>
+<p>BEYOND THE GUIDE</p>
+<p>The guide scopes Task Statement 1.5 to PreToolUse and PostToolUse. Claude Code fires hooks at other points in a session as well, and the practice bank has tested one of them, PreCompact, since July. Verified against the hooks reference on 16 September 2026.</p>
+<p>The same hook mechanism covers session events, not only tool calls. The one worth knowing is PreCompact, which runs immediately before Claude Code compacts the conversation, whether the user typed /compact (matcher manual) or the context reached the auto-compact window (matcher auto). The hook receives the transcript path, the trigger, and any custom instructions the user passed to /compact, so it can archive the full transcript to a log before the summary discards detail. Exit code 2, or &ldquo;decision&rdquo;: &ldquo;block&rdquo; in its JSON output, blocks the compaction. A PostCompact event fires afterwards carrying the generated summary. The pattern is the one you already know from tool hooks: a Pre event can inspect and block, a Post event can only observe what&rsquo;s already happened.</p>
+<p>Practical Example: Data Format Chaos</p>
+<p>A customer support agent uses three MCP tools:</p>
+<p>get_customer returns dates as Unix timestamps and status as numeric codes.
+lookup_order returns dates as ISO 8601 strings and status as English strings.
+check_shipping returns dates as &ldquo;DD/MM/YYYY&rdquo; and status as single-character codes (&ldquo;S&rdquo; for shipped, &ldquo;P&rdquo; for pending).</p>
+<p>Without a PostToolUse hook, the model must interpret three different date formats and three different status representations on every iteration. Sometimes it correctly converts a Unix timestamp; sometimes it confuses the day/month order in &ldquo;DD/MM/YYYY&rdquo;; sometimes it misinterprets &ldquo;P&rdquo; as &ldquo;processed&rdquo; instead of &ldquo;pending.&rdquo;</p>
+<p>With a PostToolUse hook, all tool results are normalised before the model sees them:</p>
+<p>All dates → ISO 8601 (&ldquo;2024-03-15T12:00:00Z&rdquo;)
+All status codes → human-readable strings (&ldquo;shipped&rdquo;, &ldquo;pending&rdquo;, &ldquo;delivered&rdquo;)</p>
+<p>The model always receives consistent data, eliminating interpretation errors entirely.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Using PostToolUse hooks to block policy-violating actions</p>
+<p>PostToolUse hooks run after tool execution. By the time the hook fires, the non-compliant action has already been processed. Use PreToolUse hooks (pre-execution) to block actions before they happen.</p>
+<p>EXAM TRAP</p>
+<p>Enhanced prompt instructions as the solution for 100% compliance requirements</p>
+<p>Prompts provide probabilistic compliance. If the business requires 100% enforcement (financial operations, regulatory compliance, security checks), only hooks provide deterministic guarantees.</p>
+<p>EXAM TRAP</p>
+<p>Suggesting model-side data transformation instead of PostToolUse hooks for normalisation</p>
+<p>Relying on the model to normalise heterogeneous data formats introduces inconsistency. PostToolUse hooks ensure clean, consistent data reaches the model every time, regardless of which tool produced it.</p>
+<p>EXAM TRAP</p>
+<p>Confusing the direction of hooks — PostToolUse runs after execution, PreToolUse runs before</p>
+<p>PostToolUse transforms results after a tool runs. PreToolUse blocks or modifies calls before a tool runs. Using the wrong hook direction means either missing the opportunity to prevent an action or unnecessarily blocking completed work.</p>
+<p>Practice Scenario</p>
+<p>An agent occasionally processes international transfers without required compliance checks. The compliance team requires 100% enforcement of anti-money laundering (AML) checks before any international transfer is executed. The current system uses prompt instructions that work approximately 95% of the time. What is the correct approach?</p>
+<p>OPTION A
+Implement a PreToolUse hook that blocks the transfer_funds tool from executing until aml_check returns a verified pass result
+OPTION B
+Add detailed AML check instructions to the system prompt with examples of correct behaviour and explicit warnings about penalties for non-compliance
+OPTION C
+Add a PostToolUse hook that flags any completed transfer which skipped its AML check and queues it for manual review by the compliance team
+OPTION D
+Train the agent with few-shot examples demonstrating the correct AML verification workflow before every transfer
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Implement Agent SDK Hooks for Normalisation and Policy Enforcement
+Difficulty
+60 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>The distinction between PostToolUse hooks (after execution, data normalisation) and PreToolUse hooks (before execution, policy enforcement)
+Why hooks provide deterministic guarantees that prompts cannot match
+How to normalise heterogeneous data formats from multiple MCP tools into a consistent schema
+How to implement threshold-based and prerequisite-based policy enforcement using pre-execution hooks
+The decision framework: hooks for 100% requirements, prompts for preferences
+Create an agent with three MCP tools that return data in different formats: Tool A returns Unix timestamps and numeric status codes, Tool B returns ISO 8601 dates and string statuses, Tool C returns DD/MM/YYYY dates and single-character status codes</p>
+<p>WHY: This recreates the data format chaos example from the exam. Without normalisation, the model must interpret three different date formats and three different status representations, leading to inconsistent parsing across iterations.</p>
+<p>YOU SHOULD SEE: Three tool implementations that each return data with distinct date and status formats. Tool A uses epoch seconds and numeric codes, Tool B uses ISO strings and English statuses, Tool C uses DD/MM/YYYY and single characters.</p>
+<p>Stuck? Get a nudge
+Implement a PostToolUse hook that intercepts all tool results and normalises dates to ISO 8601 format and status codes to human-readable English strings</p>
+<p>WHY: PostToolUse hooks run after execution but before the model processes the result. This is the correct hook direction for data normalisation — the exam tests whether you know that PostToolUse transforms data after execution, not before.</p>
+<p>YOU SHOULD SEE: A HookCallback registered under PostToolUse that reads tool_response and rewrites it: Unix timestamps and DD/MM/YYYY dates to ISO 8601, numeric and single-character status codes to English strings. The rewritten object comes back as updatedToolOutput inside hookSpecificOutput.</p>
+<p>Stuck? Get a nudge
+Verify the model receives consistent data by testing with queries that require results from all three tools</p>
+<p>WHY: Consistent data eliminates interpretation errors. Without normalisation, the model might confuse day/month order in DD/MM/YYYY or misinterpret status code P as processed instead of pending. Verification proves the hook works across all tool outputs.</p>
+<p>YOU SHOULD SEE: Three tool results that all use ISO 8601 dates and English status strings, whichever tool produced them. The model response should reference dates and statuses consistently.</p>
+<p>Stuck? Get a nudge
+Add a PreToolUse hook that blocks process_refund when the amount exceeds $500 and redirects to a human escalation workflow</p>
+<p>WHY: A PreToolUse hook runs before execution — the refund never processes. The exam specifically warns against using PostToolUse for blocking, because by that point the action has already occurred. Pre-execution interception is the only correct hook direction for policy enforcement.</p>
+<p>YOU SHOULD SEE: A PreToolUse callback that inspects the refund amount and denies anything above $500, returning permissionDecision deny with a permissionDecisionReason. The refund tool never executes for denied calls.</p>
+<p>Stuck? Get a nudge
+Add a second PreToolUse hook that blocks transfer_funds until aml_check has returned a pass result in the current session</p>
+<p>WHY: This is the AML compliance scenario from the exam. Prompt instructions achieve 95% compliance, but regulatory requirements demand 100%. The hook provides deterministic enforcement that no prompt can match — a single missed AML check can result in legal penalties.</p>
+<p>YOU SHOULD SEE: Two callbacks: a PreToolUse hook on transfer_funds that denies until session state records a passing AML check, and a PostToolUse hook on aml_check that sets that state.</p>
+<p>Stuck? Get a nudge
+Test both hooks by attempting to trigger the blocked operations and verify they are prevented before execution</p>
+<p>WHY: Testing confirms that the hooks provide deterministic enforcement. The key verification is that blocked tools never execute — the hook prevents the call, not just logs a warning after the fact.</p>
+<p>YOU SHOULD SEE: Both denied operations leave their tool handlers untouched, and the model receives the permissionDecisionReason. Once the prerequisites are met, the same operations run.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Agent SDK Overview — Anthropic
+Claude Agent SDK Hooks Documentation — Anthropic
+Claude Code Hooks Reference — PreCompact — Anthropic
+Building with Claude API (Skilljar) — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Workflow Enforcement and Handoff
+NEXT LESSON
+Task Decomposition Strategies</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

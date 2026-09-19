@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelcontextprotocol Io Specification | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/ccaf-exam/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="https://your-org.github.io/ccaf-exam/study/official-docs/modelcontextprotocol-io-specification/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="https://your-org.github.io/ccaf-exam/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/ccaf-exam/practice/">Practice Questions</a>
+        <a href="/ccaf-exam/study/">Study Guides</a>
+        <a href="/ccaf-exam/articles/">Articles</a>
+        <a href="/ccaf-exam/pdfs/">PDFs</a>
+        <a href="/ccaf-exam/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="https://your-org.github.io/ccaf-exam/">Home</a>
+  
+    <span>/</span> <a href="https://your-org.github.io/ccaf-exam/study/">Studies</a>
+  
+    <span>/</span> <a href="https://your-org.github.io/ccaf-exam/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Modelcontextprotocol Io Specification
+</div>
+
+<article>
+  <header>
+    <h1>Modelcontextprotocol Io Specification</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">official-docs</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <!-- source: https://modelcontextprotocol.io/specification (fetched https://modelcontextprotocol.io/specification.md) -->
+<blockquote>
+<h2 id="documentation-index">Documentation Index</h2>
+<p>Fetch the complete documentation index at: <a href="https://modelcontextprotocol.io/llms.txt">https://modelcontextprotocol.io/llms.txt</a>
+Use this file to discover all available pages before exploring further.</p>
+</blockquote>
+<h1 id="specification">Specification</h1>
+<div id="enable-section-numbers" />
+<p><a href="https://modelcontextprotocol.io">Model Context Protocol</a> (MCP) is an open protocol that
+enables seamless integration between LLM applications and external data sources and
+tools. Whether you&rsquo;re building an AI-powered IDE, enhancing a chat interface, or creating
+custom AI workflows, MCP provides a standardized way to connect LLMs with the context
+they need.</p>
+<p>This specification defines the authoritative protocol requirements, based on the
+TypeScript schema in
+<a href="https://github.com/modelcontextprotocol/specification/blob/main/schema/2026-07-28/schema.ts">schema.ts</a>.</p>
+<p>For implementation guides and examples, visit
+<a href="https://modelcontextprotocol.io">modelcontextprotocol.io</a>.</p>
+<p>The key words &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD
+NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;NOT RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, and &ldquo;OPTIONAL&rdquo; in this document are to be
+interpreted as described in <a href="https://datatracker.ietf.org/doc/html/bcp14">BCP 14</a>
+[<a href="https://datatracker.ietf.org/doc/html/rfc2119">RFC2119</a>]
+[<a href="https://datatracker.ietf.org/doc/html/rfc8174">RFC8174</a>] when, and only when, they
+appear in all capitals, as shown here.</p>
+<h2 id="overview">Overview</h2>
+<p>MCP provides a standardized way for applications to:</p>
+<ul>
+<li>Share contextual information with language models</li>
+<li>Expose tools and capabilities to AI systems</li>
+<li>Build composable integrations and workflows</li>
+</ul>
+<p>The protocol uses <a href="https://www.jsonrpc.org/">JSON-RPC</a> 2.0 messages to establish
+communication between:</p>
+<ul>
+<li><strong>Hosts</strong>: LLM applications that initiate connections</li>
+<li><strong>Clients</strong>: Connectors within the host application</li>
+<li><strong>Servers</strong>: Services that provide context and capabilities</li>
+</ul>
+<p>MCP takes some inspiration from the
+<a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a>, which
+standardizes how to add support for programming languages across a whole ecosystem of
+development tools. In a similar way, MCP standardizes how to integrate additional context
+and tools into the ecosystem of AI applications.</p>
+<h2 id="key-details">Key Details</h2>
+<h3 id="base-protocol">Base Protocol</h3>
+<ul>
+<li><a href="https://www.jsonrpc.org/">JSON-RPC</a> message format</li>
+<li>Stateless, self-contained requests</li>
+<li>Per-request capability negotiation</li>
+</ul>
+<h3 id="features">Features</h3>
+<p>Servers offer any of the following features to clients:</p>
+<ul>
+<li><strong>Resources</strong>: Context and data, for the user or the AI model to use</li>
+<li><strong>Prompts</strong>: Templated messages and workflows for users</li>
+<li><strong>Tools</strong>: Functions for the AI model to execute</li>
+</ul>
+<p>Clients may offer the following features to servers:</p>
+<ul>
+<li><strong>Elicitation</strong>: Server-initiated requests for additional information from users</li>
+</ul>
+<h3 id="additional-utilities">Additional Utilities</h3>
+<ul>
+<li>Configuration</li>
+<li>Progress tracking</li>
+<li>Cancellation</li>
+<li>Error reporting</li>
+</ul>
+<h3 id="extensions">Extensions</h3>
+<p>Beyond the core protocol, MCP defines optional <a href="/extensions/overview">extensions</a>
+that add modular, specialized, or experimental functionality. Extensions
+are always opt-in and require explicit support from both client and server, negotiated
+during initialization. Notable extensions include:</p>
+<ul>
+<li><strong><a href="/extensions/tasks/overview">Tasks</a></strong>: Asynchronous execution of long-running
+operations, with polling, mid-flight input, and durable handles</li>
+<li><strong><a href="/community/working-groups/skills-over-mcp">Skills over MCP</a></strong>: Rich, structured
+instructions for agent workflows, discovered and consumed through MCP</li>
+<li><strong><a href="/extensions/apps/overview">MCP Apps</a></strong>: Interactive UI elements (charts, forms,
+video players) rendered inline within conversations</li>
+</ul>
+<h2 id="security-and-trust--safety">Security and Trust &amp; Safety</h2>
+<p>The Model Context Protocol enables powerful capabilities through arbitrary data access
+and code execution paths. With this power comes important security and trust
+considerations that all implementors must carefully address.</p>
+<h3 id="key-principles">Key Principles</h3>
+<ol>
+<li>
+<p><strong>User Consent and Control</strong></p>
+<ul>
+<li>Users must explicitly consent to and understand all data access and operations</li>
+<li>Users must retain control over what data is shared and what actions are taken</li>
+<li>Implementors should provide clear UIs for reviewing and authorizing activities</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Privacy</strong></p>
+<ul>
+<li>Hosts must obtain explicit user consent before exposing user data to servers</li>
+<li>Hosts must not transmit resource data elsewhere without user consent</li>
+<li>User data should be protected with appropriate access controls</li>
+</ul>
+</li>
+<li>
+<p><strong>Tool Safety</strong></p>
+<ul>
+<li>Tools represent arbitrary code execution and must be treated with appropriate
+caution.
+<ul>
+<li>In particular, descriptions of tool behavior such as annotations should be
+considered untrusted, unless obtained from a trusted server.</li>
+</ul>
+</li>
+<li>Hosts must obtain explicit user consent before invoking any tool</li>
+<li>Users should understand what each tool does before authorizing its use</li>
+</ul>
+</li>
+</ol>
+<h3 id="implementation-guidelines">Implementation Guidelines</h3>
+<p>While MCP itself cannot enforce these security principles at the protocol level,
+implementors <strong>SHOULD</strong>:</p>
+<ol>
+<li>Build robust consent and authorization flows into their applications</li>
+<li>Provide clear documentation of security implications</li>
+<li>Implement appropriate access controls and data protections</li>
+<li>Follow security best practices in their integrations</li>
+<li>Consider privacy implications in their feature designs</li>
+</ol>
+<h2 id="learn-more">Learn More</h2>
+<p>Explore the detailed specification for each protocol component:</p>
+<CardGroup cols={5}>
+  <Card title="Architecture" icon="sitemap" href="/specification/2026-07-28/architecture" />
+  <Card title="Base Protocol" icon="code" href="/specification/2026-07-28/basic" />
+  <Card title="Server Features" icon="server" href="/specification/2026-07-28/server" />
+  <Card title="Client Features" icon="user" href="/specification/2026-07-28/client" />
+  <Card title="Contributing" icon="pencil" href="/community/contributing" />
+</CardGroup>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

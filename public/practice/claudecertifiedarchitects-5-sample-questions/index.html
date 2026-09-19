@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>claudecertifiedarchitects — 5 Sample Questions | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/practice/claudecertifiedarchitects-5-sample-questions/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/practice/">Practice Questions</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> claudecertifiedarchitects — 5 Sample Questions
+</div>
+
+<article>
+  <header>
+    <h1>claudecertifiedarchitects — 5 Sample Questions</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">practice</span>
+      
+        <span class="tag">questions</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="cca-foundations-study-plan-with-5-worked-sample-questions">CCA Foundations Study Plan with 5 Worked Sample Questions</h1>
+<p>Source: claudecertifiedarchitects.com/blog/cca-foundations-exam-guide-2026
+Independent prep platform - not affiliated with Anthropic.</p>
+<h2 id="exam-facts-from-this-source">Exam facts (from this source)</h2>
+<ul>
+<li>60 questions, MCQ + multiple-response (each states how many to select)</li>
+<li>120 minutes (2 min/question)</li>
+<li>720/1000 scaled, domain-weighted</li>
+<li>Valid 12 months; fee $125 USD</li>
+</ul>
+<h2 id="domains-and-weights">Domains and weights</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Domain</th>
+					<th>Weight</th>
+					<th>Est. questions</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1. Agentic Architecture</td>
+					<td>27%</td>
+					<td>~16</td>
+			</tr>
+			<tr>
+					<td>2. Claude Code Configuration</td>
+					<td>20%</td>
+					<td>~12</td>
+			</tr>
+			<tr>
+					<td>3. Prompt Engineering</td>
+					<td>20%</td>
+					<td>~12</td>
+			</tr>
+			<tr>
+					<td>4. Tool Design &amp; MCP</td>
+					<td>18%</td>
+					<td>~11</td>
+			</tr>
+			<tr>
+					<td>5. Context Management</td>
+					<td>15%</td>
+					<td>~9</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="5-sample-questions">5 sample questions</h2>
+<h3 id="q1--agentic-architecture">Q1 — Agentic Architecture</h3>
+<p>An orchestrator spawns four subagents in parallel to process sections of a large document. One hits a permission error and halts. Correct response from the orchestrator?</p>
+<ul>
+<li>A. Reassign the section to a successful subagent</li>
+<li>B. Have the failed subagent write its error into shared context</li>
+<li>C. <strong>Surface the partial failure to the user, return successful results, request clarification before retrying</strong> ✔</li>
+<li>D. Grant the subagent broader permissions and re-run</li>
+</ul>
+<p><strong>Why C:</strong> A permission error isn&rsquo;t transient; retrying unchanged fails again. Widening permissions self-grants capability. Reassigning retries a failing error. Letting the failed subagent write to shared context bypasses the coordinator, which owns error handling in hub-and-spoke.</p>
+<h3 id="q2--claude-code-configuration">Q2 — Claude Code Configuration</h3>
+<p>Allow npm test and npm run build without confirmation, but require approval for all other Bash. Applies to every dev who clones the repo. Where to configure?</p>
+<ul>
+<li>A. Global <code>~/.claude/settings.json</code> allowedTools</li>
+<li>B. <strong>Project <code>.claude/settings.json</code> allowedTools, committed</strong> ✔</li>
+<li>C. <code>CLAUDE.md</code> natural-language instruction</li>
+<li>D. Project <code>.claude/settings.local.json</code> allowedTools</li>
+</ul>
+<p><strong>Why B:</strong> Project-level committed settings = tool permissions for all contributors. Global applies to every project on the machine. CLAUDE.md is behavioural guidance, not enforced. settings.local.json is personal, must not be committed.</p>
+<h3 id="q3--prompt-engineering">Q3 — Prompt Engineering</h3>
+<p>A support system prompt has a clear persona, detailed instructions, rich context, but no worked examples. Responses vary noticeably in tone and length across sessions. Most likely root cause?</p>
+<ul>
+<li>A. Persona too broad — narrow it</li>
+<li>B. <strong>Without concrete examples, no calibration anchor for tone/length/format</strong> ✔</li>
+<li>C. Instructions too long — model ignores guidance</li>
+<li>D. Context conflicts with persona — shorten it</li>
+</ul>
+<p><strong>Why B:</strong> Few-shot examples are the behavioural anchor. Without them Claude interpolates from pre-training, producing variance.</p>
+<h3 id="q4--tool-design--mcp">Q4 — Tool Design &amp; MCP</h3>
+<p>Two tools <code>get_order_status</code> and <code>get_order_shipping_info</code> query the same table and are almost always needed together. Claude sometimes calls only one. Most effective fix?</p>
+<ul>
+<li>A. Rename tools more distinctively</li>
+<li>B. <strong>Consolidate into one <code>get_order_details</code> tool returning both</strong> ✔</li>
+<li>C. System-prompt note to always call both</li>
+<li>D. Shorten descriptions to reduce tokens</li>
+</ul>
+<p><strong>Why B:</strong> Match tool granularity to how data is used. No coordination problem remains. A is marginal, C is probabilistic not structural, D makes selection harder.</p>
+<h3 id="q5--context-management">Q5 — Context Management</h3>
+<p>Long-running agent task near context limit with ~15% remaining; needs 3 more tool calls. Best strategy to preserve continuity?</p>
+<ul>
+<li>A. Clear entire history and restart fresh</li>
+<li>B. <strong>Summarise completed steps into a compact state block and continue</strong> ✔</li>
+<li>C. Increase <code>max_tokens</code></li>
+<li>D. Return context-limit error, restart from scratch</li>
+</ul>
+<p><strong>Why B:</strong> Conversation compaction preserves state. Clearing history discards all state; max_tokens controls output length, not input context; erroring is premature.</p>
+<h2 id="suggested-timelines">Suggested timelines</h2>
+<p><strong>7-day sprint:</strong> Days 1-2 read official exam guide → days 3-5 40-50 questions/day in weight order → day 6 full timed 60-Q simulation → day 7 review two weakest domains only, rest the night before.</p>
+<p><strong>14-day plan:</strong> Week 1 cover domains in weight order, 20-30 Q/domain. Week 2 two full timed simulations spaced 3 days apart; final 24h review personal notes only.</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glossary__domain 4 | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/glossary/glossary__domain-4/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Glossary__domain 4
+</div>
+
+<article>
+  <header>
+    <h1>Glossary__domain 4</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="glossary-domain-4--prompt-engineering--structured-output--claude-certification-guide">Glossary: Domain 4 — Prompt Engineering &amp; Structured Output | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/glossary/domain-4">https://claudecertificationguide.com/learn/glossary/domain-4</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+Glossary
+/
+Domain 4
+DOMAIN 4
+20%
+Glossary: Prompt Engineering &amp; Structured Output</p>
+<p>Quick-lookup definitions for the 20% exam domain. Each entry includes a concise definition and exam context. Follow the lesson links to dive deeper.</p>
+<p>System Prompt</p>
+<p>The initial instruction message sent to Claude with the system parameter in an API call. It sets the overall behaviour, persona, constraints, and output format for the conversation. System prompts are not part of the message history — they sit above it and persist across all turns.</p>
+<p>Exam context: Know the difference between system prompts and user messages. The exam tests system prompt best practices: clear role definition, explicit constraints, output format specification, and avoiding conflicting instructions.</p>
+<p>See also: 4.1 System Prompts</p>
+<p>Structured Output</p>
+<p>A technique for getting Claude to return responses in a specific, machine-parseable format such as JSON, XML, or YAML. This is achieved through explicit format instructions in the prompt, JSON Schema definitions, or tool-use schemas.</p>
+<p>Exam context: The exam tests two approaches to structured output: prompt-based instructions and tool-use schemas. Know the trade-offs, and know that tool-use schemas eliminate syntax errors without preventing semantic ones.</p>
+<p>Current state (checked 14 August 2026): the API-level control for constrained output is now output_config.format (structured outputs), which the guide does not cover.</p>
+<p>See also: 4.3 Structured Output</p>
+<p>Prompt Chaining</p>
+<p>An orchestration technique where the output of one Claude call becomes the input to the next. Each step in the chain has a focused, specific task. Chaining decomposes a complex problem into manageable steps and allows for validation or transformation between steps.</p>
+<p>Exam context: Know when to use prompt chaining versus a single prompt. The exam tests the principle that each link in the chain should do one thing well. Understand how to pass context between chain steps and where to insert validation gates.</p>
+<p>Scope note: the exam guide places prompt chaining under Task Statement 1.6, not Domain 4.</p>
+<p>See also: 4.4 Validation-Retry Loops</p>
+<p>Few-Shot Examples</p>
+<p>Input-output pairs included in the prompt to demonstrate the desired behaviour, format, or reasoning pattern. By showing Claude concrete examples of correct responses, you reduce ambiguity and improve consistency. Few-shot examples are placed in the system prompt or user message before the actual request.</p>
+<p>Exam context: Know best practices for few-shot examples: use diverse examples that cover edge cases, place them before the request, and match the exact format you want in the output. The exam may test how many examples are typically needed (2-4 targeted examples; more than 4 wastes tokens).</p>
+<p>See also: 4.2 Few-Shot Prompting</p>
+<p>Prompt Optimisation</p>
+<p>The iterative process of refining prompts to improve output quality, reduce costs, and increase reliability. Techniques include simplifying instructions, removing ambiguity, adding constraints, and testing against a set of evaluation cases.</p>
+<p>Exam context: The exam tests systematic approaches to prompt improvement rather than ad-hoc tweaking. Know the evaluation-driven workflow: define test cases, measure baseline performance, make targeted changes, and measure again.</p>
+<p>See also: 4.5 Batch Processing</p>
+<p>Output Validation</p>
+<p>Programmatic checks applied to Claude&rsquo;s responses to verify they meet expected criteria before being used downstream. Validation can check format (valid JSON, correct schema), content (required fields present, values within ranges), and safety (no prohibited content). Failed validation triggers a retry or fallback.</p>
+<p>Exam context: Know the common validation strategies: schema validation (JSON Schema, Zod, Pydantic), content checks, and review by an independent Claude instance without the generation context (same-session self-review retains reasoning bias and is a keyed exam trap). Understand how validation fits into an agentic loop.</p>
+<p>See also: 4.4 Validation-Retry Loops</p>
+<p>Prefilling</p>
+<p>Starting Claude&rsquo;s response by supplying the opening of the assistant message, historically used to force a response into a given format.</p>
+<p>Current state (checked 14 August 2026): a trailing assistant-turn prefill is rejected with an HTTP 400 on every current Claude model. The word &ldquo;prefill&rdquo; appears nowhere in the exam guide, so it is not a tested technique either. It is listed here only so you recognise the term if you meet it in older material; the documented replacement is output_config.format.</p>
+<p>See also: 4.3 Structured Output</p>
+<p>XML Tags</p>
+<p>Delimiters used within prompts to structure content into clearly labelled sections. Claude is trained to understand XML-style tags like <instructions>, <context>, and <examples>. Using tags makes prompts more readable and helps Claude identify the purpose of each section.</p>
+<p>Exam context: &ldquo;XML&rdquo; appears nowhere in the exam guide, so do not expect a keyed item on tag syntax. The underlying practice is genuine Anthropic guidance and worth knowing: tagged sections reduce misinterpretation of prompt boundaries.</p>
+<p>See also: 4.1 System Prompts</p>
+<p>Chain of Thought</p>
+<p>A prompting technique that instructs Claude to show its reasoning step by step before arriving at a final answer. This improves accuracy on complex tasks by forcing the model to work through the problem methodically. Chain of thought can be elicited by adding instructions like &ldquo;think step by step&rdquo; or by using extended thinking.</p>
+<p>Exam context: Know when chain of thought helps (complex reasoning, multi-step problems) and when it is unnecessary (simple factual retrieval). Understand the relationship between chain of thought prompting and Claude&rsquo;s extended thinking feature.</p>
+<p>See also: 4.1 System Prompts</p>
+<p>Temperature</p>
+<p>A sampling parameter that historically controlled the randomness of Claude&rsquo;s responses. Lower temperatures (e.g., 0.0) produce more deterministic, focused output. Higher temperatures (e.g., 0.8) produce more varied, creative output. The default is 1.0.</p>
+<p>Exam context: &ldquo;Temperature&rdquo; appears nowhere in the exam guide — not in any task statement, not in the appendix — so do not expect it to be keyed. It does appear as a distractor in this domain&rsquo;s bank, and is never the answer.</p>
+<p>Current state (checked 14 August 2026): temperature, top_p and top_k are rejected with an HTTP 400 on current Claude models. Steer behaviour with prompting instead.</p>
+<p>See also: 4.5 Batch Processing</p>
+<p>Previous
+Domain 3: Claude Code Configuration &amp; Workflows
+Next
+Domain 5: Context Management &amp; Reliability</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2 Tool Design Mcp__2 2 Structured Error Responses | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/2-tool-design-mcp__2-2-structured-error-responses/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 2 Tool Design Mcp__2 2 Structured Error Responses
+</div>
+
+<article>
+  <header>
+    <h1>2 Tool Design Mcp__2 2 Structured Error Responses</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="22--structured-error-responses--claude-certification-guide">2.2 — Structured Error Responses | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/2-tool-design-mcp/2-2-structured-error-responses">https://claudecertificationguide.com/learn/2-tool-design-mcp/2-2-structured-error-responses</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+2.1
+Tool Interface Design
+2.2
+Structured Error Responses
+2.3
+Tool Distribution &amp; Tool Choice
+2.4
+MCP Server Integration
+2.5
+Built-in Tools
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+TOOL DESIGN &amp; MCP INTEGRATION
+/
+2.2
+DOMAIN 2
+TASK 2.2
+Mark Complete
+Structured Error Responses
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>When an MCP tool fails, the error response it returns determines whether the agent can recover intelligently or fail blindly. Generic messages like &ldquo;Operation failed&rdquo; are useless to an LLM. No signal about what went wrong, whether to retry, or what to try instead.</p>
+<p>The MCP protocol provides the isError flag specifically for communicating tool failures back to the agent. Set it and the model knows the execution failed, so it can reason about recovery instead of treating the error text as a normal successful result.</p>
+<p>Two Error Layers</p>
+<p>The MCP specification reports tool failures through two separate channels, and knowing which one a failure belongs to is the first step in designing the recovery.</p>
+<p>Protocol errors are standard JSON-RPC error responses. The server sends one when the request itself is malformed: the tool name does not exist, the arguments fail the input schema, or the server hits an internal fault. There&rsquo;s no result object at all, only an error with a code and a message. The host application handles these. The model never sees a tool result, because no tool ran.</p>
+<p>JSON
+Copy
+{
+&ldquo;jsonrpc&rdquo;: &ldquo;2.0&rdquo;,
+&ldquo;id&rdquo;: 3,
+&ldquo;error&rdquo;: { &ldquo;code&rdquo;: -32602, &ldquo;message&rdquo;: &ldquo;Unknown tool: invalid_tool_name&rdquo; }
+}</p>
+<p>Tool execution errors are results. The tool was found, the arguments were valid, the tool ran, and something went wrong inside it: an upstream API failed, the input data was wrong, a business rule rejected the request. The server returns a normal result with isError: true and the detail in content, and the model reads it and decides what to do next.</p>
+<p>JSON
+Copy
+{
+&ldquo;jsonrpc&rdquo;: &ldquo;2.0&rdquo;,
+&ldquo;id&rdquo;: 4,
+&ldquo;result&rdquo;: {
+&ldquo;content&rdquo;: [{ &ldquo;type&rdquo;: &ldquo;text&rdquo;, &ldquo;text&rdquo;: &ldquo;Failed to fetch weather data: API rate limit exceeded&rdquo; }],
+&ldquo;isError&rdquo;: true
+}
+}</p>
+<p>Everything else in this lesson lives in the second layer. The four categories below, isRetryable and the recovery guidance all describe execution errors, because that is the layer the agent reasons about. A protocol error means the call was built wrong, and the fix belongs in the tool schema or the client, not in the agent&rsquo;s recovery loop.</p>
+<p>The Four Error Categories</p>
+<p>Every tool failure falls into one of four categories. Each demands a different recovery strategy, and the agent needs structured metadata to distinguish them.</p>
+<p>One shape note before the examples. errorCategory, isRetryable and description are an application-level convention, not part of the MCP envelope: the protocol&rsquo;s CallToolResult defines only content, structuredContent and isError. The examples below carry the metadata in structuredContent, which is where structured data belongs. The exam guide names these four categories and the isRetryable boolean, so know them by name; just do not expect to find them in the MCP specification.</p>
+<ol>
+<li>Transient Errors Timeouts, service unavailability, rate limits. The underlying system is temporarily unreachable but the request itself is valid. Recovery: retry after a brief delay.</li>
+</ol>
+<p>JSON
+Copy
+{
+&ldquo;isError&rdquo;: true,
+&ldquo;content&rdquo;: [{
+&ldquo;type&rdquo;: &ldquo;text&rdquo;,
+&ldquo;text&rdquo;: &ldquo;Service temporarily unavailable&rdquo;
+}],
+&ldquo;structuredContent&rdquo;: {
+&ldquo;errorCategory&rdquo;: &ldquo;transient&rdquo;,
+&ldquo;isRetryable&rdquo;: true,
+&ldquo;description&rdquo;: &ldquo;The order database is experiencing high load. The request is valid and should succeed on retry.&rdquo;
+}
+}</p>
+<ol start="2">
+<li>Validation Errors Invalid input format, missing required fields, out-of-range values. The request itself is malformed. Recovery: fix the input, then send a corrected call.</li>
+</ol>
+<p>JSON
+Copy
+{
+&ldquo;isError&rdquo;: true,
+&ldquo;content&rdquo;: [{
+&ldquo;type&rdquo;: &ldquo;text&rdquo;,
+&ldquo;text&rdquo;: &ldquo;Invalid order ID format&rdquo;
+}],
+&ldquo;structuredContent&rdquo;: {
+&ldquo;errorCategory&rdquo;: &ldquo;validation&rdquo;,
+&ldquo;isRetryable&rdquo;: false,
+&ldquo;description&rdquo;: &ldquo;Order ID must be in format #NNNNN (e.g. #12345). Received: &lsquo;order-abc&rsquo;. Reformat the ID and call again.&rdquo;
+}
+}</p>
+<p>isRetryable: false here is not &ldquo;give up&rdquo;. It means resending this call is pointless: order-abc fails the same format check every time. The agent still recovers, just by correcting the input first — and the description tells it exactly how. The boolean says whether to resend; errorCategory says what to do instead.</p>
+<ol start="3">
+<li>Business Errors Policy violations, limit exceedances, business rule conflicts. The request is technically valid but violates a business constraint. Recovery: do NOT retry — the same request will always fail. The agent needs an alternative workflow.</li>
+</ol>
+<p>JSON
+Copy
+{
+&ldquo;isError&rdquo;: true,
+&ldquo;content&rdquo;: [{
+&ldquo;type&rdquo;: &ldquo;text&rdquo;,
+&ldquo;text&rdquo;: &ldquo;Refund exceeds policy limit&rdquo;
+}],
+&ldquo;structuredContent&rdquo;: {
+&ldquo;errorCategory&rdquo;: &ldquo;business&rdquo;,
+&ldquo;isRetryable&rdquo;: false,
+&ldquo;description&rdquo;: &ldquo;Refund amount of £750 exceeds the £500 automatic refund limit. This requires manager approval. Please escalate to a human agent with the refund details.&rdquo;
+}
+}</p>
+<p>Note the isRetryable: false flag. Business errors never resolve through retrying — the same policy violation applies every time. The agent has to take a fundamentally different path, usually escalation or an alternative workflow, and a customer-friendly explanation in the description lets it communicate that properly.</p>
+<ol start="4">
+<li>Permission Errors Access denied, insufficient credentials, authorisation failures. The tool cannot execute because the caller lacks the required permissions. Recovery: escalate or use different credentials.</li>
+</ol>
+<p>JSON
+Copy
+{
+&ldquo;isError&rdquo;: true,
+&ldquo;content&rdquo;: [{
+&ldquo;type&rdquo;: &ldquo;text&rdquo;,
+&ldquo;text&rdquo;: &ldquo;Access denied&rdquo;
+}],
+&ldquo;structuredContent&rdquo;: {
+&ldquo;errorCategory&rdquo;: &ldquo;permission&rdquo;,
+&ldquo;isRetryable&rdquo;: false,
+&ldquo;description&rdquo;: &ldquo;The current service account does not have permission to access financial records. Escalate to a senior agent with financial system access.&rdquo;
+}
+}</p>
+<p>What isRetryable Really Signals</p>
+<p>isRetryable answers one narrow question: will resending this exact request work? Only transient errors get true — the call was valid, the system was briefly not. Everything else is false, because something has to change first: the input (validation), the request itself (business), or the caller (permission).</p>
+<p>Read isRetryable to decide whether to resend as-is, then read errorCategory to decide what to do when you can&rsquo;t:</p>
+<p>Category	isRetryable	Recovery
+transient	true	Resend the same call after a delay
+validation	false	Correct the input, send a new call
+business	false	Take an alternative path or escalate
+permission	false	Retry as a principal with the right access</p>
+<p>The distinction that matters most is between the three false rows. Validation is recoverable by the agent alone. Business and permission are not — a policy limit applies no matter how the request is worded, and a permission error needs a different account, not a better call. false means &ldquo;not this call again&rdquo;, not &ldquo;stop&rdquo;.</p>
+<p>CURRENT STATE: WHERE THIS TABLE COMES FROM</p>
+<p>The exam guide (v1.0) states retriable: false for business rule violations and never assigns a value to validation. The false above is the convention the wider ecosystem uses — gRPC treats INVALID_ARGUMENT as non-retryable, and AWS-style retry metadata does the same — applied to a gap the guide leaves open. Expect the exam to test which category a failure belongs to and what recovery it needs, which the guide does specify. If a question turns on the boolean for validation, reason from &ldquo;will resending this exact call work&rdquo; and you will land on false. (Verified against the exam guide, August 2026.)</p>
+<p>Access Failure vs Valid Empty Result</p>
+<p>Of everything in this domain, this is the distinction to nail. The exam tests it directly.</p>
+<p>Access failure: The tool couldn&rsquo;t reach the data source. A timeout occurred, authentication failed, or the service was down. The data might exist, but the tool couldn&rsquo;t check. The agent needs to decide whether to retry.</p>
+<p>Valid empty result: The tool successfully queried the data source and found no matches. The query executed correctly — there simply is no data matching the criteria. The agent should NOT retry. The answer is &ldquo;no results found.&rdquo;</p>
+<p>Confusing the two breaks recovery logic entirely. Here&rsquo;s how that plays out:</p>
+<p>A tool returns an empty array after a customer lookup. The agent retries 3 times, then escalates to a human. Analysis reveals the customer&rsquo;s account simply does not exist.</p>
+<p>The tool succeeded. It queried the database, found no matching customer, and correctly returned an empty result. But because the response doesn&rsquo;t distinguish between &ldquo;I couldn&rsquo;t reach the database&rdquo; and &ldquo;I reached the database and found nothing&rdquo;, the agent treats both the same way — as a failure worth retrying.</p>
+<p>The fix: structure your tool responses so a successful query with no results looks nothing like a failed query.</p>
+<p>JSON
+Copy
+// Valid empty result — NOT an error
+{
+&ldquo;isError&rdquo;: false,
+&ldquo;content&rdquo;: [{
+&ldquo;type&rdquo;: &ldquo;text&rdquo;,
+&ldquo;text&rdquo;: &ldquo;No customer found matching email &lsquo;john@example.com&rsquo;. The query executed successfully but returned no matches.&rdquo;
+}],
+&ldquo;structuredContent&rdquo;: {
+&ldquo;resultCount&rdquo;: 0
+}
+}</p>
+<p>// Access failure — IS an error
+{
+&ldquo;isError&rdquo;: true,
+&ldquo;content&rdquo;: [{
+&ldquo;type&rdquo;: &ldquo;text&rdquo;,
+&ldquo;text&rdquo;: &ldquo;Could not reach customer database&rdquo;
+}],
+&ldquo;structuredContent&rdquo;: {
+&ldquo;errorCategory&rdquo;: &ldquo;transient&rdquo;,
+&ldquo;isRetryable&rdquo;: true,
+&ldquo;description&rdquo;: &ldquo;Connection to the customer database timed out after 5 seconds. The query did not execute.&rdquo;
+}
+}</p>
+<p>Error Propagation in Multi-Agent Systems</p>
+<p>In multi-agent architectures, error handling follows a principle of local recovery with selective propagation:</p>
+<p>Subagents implement local recovery for transient failures. If a web search times out, the search subagent retries before bothering the coordinator.
+Only propagate errors that cannot be resolved locally. If all retries fail, the subagent reports the failure upward.
+Include partial results and what was attempted. The coordinator needs context: &ldquo;I searched 3 of 5 sources successfully. Sources 4 and 5 timed out. Here are partial results from the 3 successful sources.&rdquo;</p>
+<p>This prevents two anti-patterns: silently suppressing errors (returning empty results as success) and terminating entire workflows on a single failure. Both leave the coordinator making decisions blind.</p>
+<p>KEY CONCEPT</p>
+<p>The distinction between access failures (tool could not reach the data source) and valid empty results (tool successfully queried and found nothing) is critical. Confusing the two causes wasted retries and incorrect escalations. The exam tests this directly.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Retrying when a tool returns an empty result from a successful query</p>
+<p>An empty result from a successful query means &rsquo;no data matches your criteria.&rsquo; Retrying will produce the same empty result. The agent should accept the result and respond accordingly.</p>
+<p>EXAM TRAP</p>
+<p>Using generic error messages like &lsquo;Operation failed&rsquo; without structured metadata</p>
+<p>Without errorCategory, isRetryable, and a description, the agent cannot distinguish transient failures from business rule violations. It cannot make appropriate recovery decisions.</p>
+<p>EXAM TRAP</p>
+<p>Treating business errors as retryable</p>
+<p>Business errors (e.g. refund exceeds policy limit) will never resolve through retry. The same policy violation applies every time. The agent must take an alternative path such as escalation.</p>
+<p>EXAM TRAP</p>
+<p>Marking a validation error isRetryable: true because the agent can recover from it</p>
+<p>isRetryable answers whether resending this exact call can work. A malformed order ID fails the same check every time, so validation is isRetryable: false. The agent still recovers — by correcting the input and issuing a new call — but errorCategory carries that instruction, not the boolean.</p>
+<p>EXAM TRAP</p>
+<p>Reading isRetryable: false as &lsquo;abandon the task&rsquo;</p>
+<p>Three categories are non-retryable and only two of them are dead ends. Validation is false because the input must change first, and the agent fixes it unaided. Business and permission are the ones that need an alternative path or a different principal.</p>
+<p>EXAM TRAP</p>
+<p>Silently suppressing subagent errors by returning empty results as success</p>
+<p>This hides failure information from the coordinator, preventing intelligent recovery. The coordinator cannot distinguish &lsquo;found nothing&rsquo; from &lsquo;could not search&rsquo; and may produce incomplete or inaccurate output.</p>
+<p>Practice Scenario</p>
+<p>A tool returns an empty array after a customer lookup. The agent retries 3 times, then escalates to a human agent. Analysis shows the customer&rsquo;s account simply does not exist. What is the root cause of this wasted effort?</p>
+<p>OPTION A
+The retry limit is too low. Raising it to 5 attempts would give the lookup enough chances to return the account before escalation triggers.
+OPTION B
+The system prompt should instruct the agent never to retry a customer lookup, so that every failed search escalates to a human immediately.
+OPTION C
+The escalation threshold is too aggressive. The agent should exhaust more retries before involving a human in the loop.
+OPTION D
+The tool does not distinguish between access failures and valid empty results, so the agent treats no matches as a retriable failure.
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Build Structured Error Responses for All Four Categories
+Difficulty
+45 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Implement structured error responses with errorCategory, isRetryable, and description metadata
+Distinguish between access failures (isError: true) and valid empty results (isError: false)
+Categorise tool failures into transient, validation, business, and permission types
+Build agent recovery logic that takes different actions based on error metadata
+Create an MCP tool that queries a mock customer database with simulated failure modes</p>
+<p>WHY: Simulating failure modes in a controlled environment lets you observe how agents behave when errors lack structure. The exam tests your understanding of how poor error responses cause wasted retries and incorrect escalations.</p>
+<p>YOU SHOULD SEE: An MCP server running with a customer_lookup tool that accepts a customer identifier and a failure_mode parameter to trigger specific error conditions on demand.</p>
+<p>Stuck? Get a nudge
+Implement four error response types: transient (simulated timeout), validation (invalid input format), business (refund exceeds policy limit), and permission (access denied)</p>
+<p>WHY: Each error category demands a different recovery strategy. The exam tests whether you can identify which category an error belongs to and what recovery action is appropriate. Transient errors are retryable; business errors never are.</p>
+<p>YOU SHOULD SEE: Four distinct error responses, each with isError: true, a specific errorCategory value, the correct isRetryable boolean, and a descriptive message explaining what went wrong and what to do next.</p>
+<p>Stuck? Get a nudge
+Include structured metadata in each error: errorCategory, isRetryable boolean, and a human-readable description</p>
+<p>WHY: Structured metadata is what enables intelligent recovery. Without these fields, the agent cannot distinguish a transient timeout from a permanent policy violation. The exam specifically tests whether you know that isRetryable: false means the agent must take an alternative path, not retry.</p>
+<p>YOU SHOULD SEE: Each error response parses to a JSON object containing exactly three fields: errorCategory (one of transient, validation, business, permission), isRetryable (boolean), and description (a sentence explaining the error and suggesting recovery).</p>
+<p>Stuck? Get a nudge
+Implement a valid empty result response (isError: false, resultCount: 0) clearly distinguished from an access failure</p>
+<p>WHY: This is one of the most critical distinctions in Domain 2. Confusing access failures with valid empty results causes wasted retries and incorrect escalations. The exam tests this directly — an agent retrying a successful empty query is the canonical anti-pattern.</p>
+<p>YOU SHOULD SEE: Two structurally different responses: a valid empty result with isError: false and resultCount: 0 (indicating the query ran successfully but found nothing), and an access failure with isError: true, errorCategory: transient, and isRetryable: true.</p>
+<p>Stuck? Get a nudge
+Write an agent loop that reads the error metadata and takes appropriate action: retry for transient, fix input for validation, escalate for business, and request credentials for permission</p>
+<p>WHY: The agent loop demonstrates the practical outcome of structured error metadata. Each error category maps to a specific recovery action, and the loop must branch correctly. This is exactly the kind of decision logic the exam expects you to design.</p>
+<p>YOU SHOULD SEE: An agent loop that parses the error metadata, branches on errorCategory, retries transient errors up to 3 times with backoff, reformats input for validation errors, escalates business errors to a human, and requests elevated credentials for permission errors.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Certified Architect Foundations Exam Guide — Domain 2, Task Statement 2.2 — Anthropic
+MCP Specification — Tool Results — Model Context Protocol
+MCP Specification — Tools, Error Handling — Model Context Protocol
+Building Effective Agents — Anthropic — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Tool Interface Design
+NEXT LESSON
+Tool Distribution &amp; Tool Choice</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain1 Multi Agent | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/cca-prep-docs/domain1-multi-agent/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Domain1 Multi Agent
+</div>
+
+<article>
+  <header>
+    <h1>Domain1 Multi Agent</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">cca-prep</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <hr>
+<h2 id="sidebar_label-multi-agent-systems">id: multi-agent
+title: Multi-agent orchestration
+sidebar_label: Multi-agent systems</h2>
+<h1 id="multi-agent-orchestration">Multi-agent orchestration</h1>
+<h2 id="hub-and-spoke-architecture">Hub-and-spoke architecture</h2>
+<p>All production multi-agent systems in the CCA exam use the <strong>hub-and-spoke</strong> pattern. The coordinator is the hub; subagents are the spokes.</p>
+<pre tabindex="0"><code>                   ┌─────────────┐
+                   │ Coordinator │  ← Hub
+                   └──────┬──────┘
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+    [Web search]    [Doc analysis]    [Synthesis]
+     subagent         subagent         subagent
+</code></pre><p><strong>Invariants:</strong></p>
+<ul>
+<li>Subagents communicate <strong>only</strong> through the coordinator — never directly</li>
+<li>Subagents have <strong>fully isolated context</strong> — they receive only what the coordinator passes</li>
+<li>The coordinator handles all error routing, result aggregation, and quality evaluation</li>
+</ul>
+<h2 id="spawning-subagents-the-task-tool">Spawning subagents: the Task tool</h2>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># Coordinator must have &#34;Task&#34; in allowedTools</span>
+</span></span><span style="display:flex;"><span>options <span style="color:#0550ae">=</span> ClaudeAgentOptions<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    allowed_tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;Task&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;search_web&#34;</span><span style="color:#1f2328">],</span>  <span style="color:#57606a"># &#34;Task&#34; is mandatory for spawning</span>
+</span></span><span style="display:flex;"><span>    system_prompt<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;You are a research coordinator...&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="parallel-spawning--one-coordinator-turn">Parallel spawning — one coordinator turn</h3>
+<pre tabindex="0"><code># Emit BOTH Task calls in a single coordinator response
+# → parallel execution (not sequential)
+
+Tool call 1: Task(&#34;web_search_agent&#34;, query=&#34;...&#34;)
+Tool call 2: Task(&#34;doc_analysis_agent&#34;, docs=[...])
+</code></pre><pre tabindex="0"><code># Separate turns → sequential (slow)
+Turn 1: Task(&#34;web_search_agent&#34;, ...)    # waits for completion
+Turn 2: Task(&#34;doc_analysis_agent&#34;, ...)  # only starts after turn 1 finishes
+</code></pre><h2 id="context-passing">Context passing</h2>
+<p>Subagents are isolated. They cannot see the coordinator&rsquo;s history. The coordinator must explicitly build their context:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># ❌ Wrong — subagent gets no context</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">await</span> coordinator<span style="color:#0550ae">.</span>task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;synthesis_agent&#34;</span><span style="color:#1f2328">,</span> prompt<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Synthesize the findings&#34;</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ✅ Correct — explicitly pass everything the subagent needs</span>
+</span></span><span style="display:flex;"><span>synthesis_prompt <span style="color:#0550ae">=</span> <span style="color:#0a3069">f</span><span style="color:#0a3069">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Synthesize the following research findings into a coherent report.
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Web search findings:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">{</span>json<span style="color:#0550ae">.</span>dumps<span style="color:#1f2328">(</span>web_results<span style="color:#1f2328">,</span> indent<span style="color:#0550ae">=</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span><span style="color:#0a3069">}</span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Document analysis findings:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">{</span>json<span style="color:#0550ae">.</span>dumps<span style="color:#1f2328">(</span>doc_analysis<span style="color:#1f2328">,</span> indent<span style="color:#0550ae">=</span><span style="color:#0550ae">2</span><span style="color:#1f2328">)</span><span style="color:#0a3069">}</span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">Requirements:
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">- Each claim must cite its source_id
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">- Cover all findings from both sources
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">- Identify any contradictions between sources
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">await</span> coordinator<span style="color:#0550ae">.</span>task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;synthesis_agent&#34;</span><span style="color:#1f2328">,</span> prompt<span style="color:#0550ae">=</span>synthesis_prompt<span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="dynamic-vs-fixed-routing">Dynamic vs. fixed routing</h2>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># ❌ Fixed routing — always invokes all subagents regardless of query</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">research</span><span style="color:#1f2328">(</span>query<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    web <span style="color:#0550ae">=</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;web_agent&#34;</span><span style="color:#1f2328">,</span> query<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    doc <span style="color:#0550ae">=</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;doc_agent&#34;</span><span style="color:#1f2328">,</span> query<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    synthesis <span style="color:#0550ae">=</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;synthesis_agent&#34;</span><span style="color:#1f2328">,</span> web<span style="color:#1f2328">,</span> doc<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;report_agent&#34;</span><span style="color:#1f2328">,</span> synthesis<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># ✅ Dynamic routing — coordinator decides which subagents to invoke</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">research</span><span style="color:#1f2328">(</span>query<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#57606a"># Coordinator analyzes the query first</span>
+</span></span><span style="display:flex;"><span>    plan <span style="color:#0550ae">=</span> coordinator<span style="color:#0550ae">.</span>plan<span style="color:#1f2328">(</span>query<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    results <span style="color:#0550ae">=</span> <span style="color:#1f2328">{}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> plan<span style="color:#0550ae">.</span>needs_web_search<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>        results<span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;web&#34;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;web_agent&#34;</span><span style="color:#1f2328">,</span> query<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> plan<span style="color:#0550ae">.</span>needs_document_analysis<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>        results<span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;docs&#34;</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;doc_agent&#34;</span><span style="color:#1f2328">,</span> query<span style="color:#1f2328">,</span> plan<span style="color:#0550ae">.</span>relevant_docs<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> task<span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;synthesis_agent&#34;</span><span style="color:#1f2328">,</span> results<span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="iterative-refinement-loop">Iterative refinement loop</h2>
+<pre tabindex="0"><code>Coordinator → delegates to subagents
+     ↑                ↓
+     └── evaluates ← synthesis output
+         (is quality bar met?)
+         YES → produce final report
+         NO  → targeted re-delegation with gap-filling queries
+</code></pre><p>The coordinator should specify <strong>quality criteria</strong> in the synthesis prompt, evaluate the output, and re-delegate with targeted queries until the criteria are met. This is more reliable than hoping the first pass is sufficient.</p>
+<h2 id="error-handling-across-agents">Error handling across agents</h2>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># Subagent: attempt local recovery first, then propagate</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">async</span> <span style="color:#cf222e">def</span> <span style="color:#6639ba">web_search_subagent</span><span style="color:#1f2328">(</span>query<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> attempt <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span><span style="color:#0550ae">3</span><span style="color:#1f2328">):</span>  <span style="color:#57606a"># local retry for transient errors</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">try</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">return</span> <span style="color:#cf222e">await</span> search<span style="color:#1f2328">(</span>query<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">except</span> TimeoutError<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> attempt <span style="color:#0550ae">==</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#57606a"># Propagate structured error to coordinator</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">return</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#0a3069">&#34;status&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;partial_failure&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#0a3069">&#34;results_before_failure&#34;</span><span style="color:#1f2328">:</span> accumulated_results<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#0a3069">&#34;error&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Search timed out after 3 attempts&#34;</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#0a3069">&#34;is_retryable&#34;</span><span style="color:#1f2328">:</span> <span style="color:#cf222e">True</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#0a3069">&#34;attempted&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">f</span><span style="color:#0a3069">&#34;Searched for: </span><span style="color:#0a3069">{</span>query<span style="color:#0a3069">}</span><span style="color:#0a3069">&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">await</span> asyncio<span style="color:#0550ae">.</span>sleep<span style="color:#1f2328">(</span><span style="color:#0550ae">2</span> <span style="color:#0550ae">**</span> attempt<span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="official-documentation">Official documentation</h2>
+<ul>
+<li><a href="https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk">Building agents with the Claude Agent SDK</a></li>
+<li><a href="https://platform.claude.com/docs/en/agent-sdk/quickstart">Agent SDK quickstart</a></li>
+</ul>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3 Claude Code Config__3 3 Path Specific Rules | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/3-claude-code-config__3-3-path-specific-rules/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 3 Claude Code Config__3 3 Path Specific Rules
+</div>
+
+<article>
+  <header>
+    <h1>3 Claude Code Config__3 3 Path Specific Rules</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="33--path-specific-rules-for-conditional-convention-loading--claude-certification-guide">3.3 — Path-Specific Rules for Conditional Convention Loading | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/3-claude-code-config/3-3-path-specific-rules">https://claudecertificationguide.com/learn/3-claude-code-config/3-3-path-specific-rules</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+3.1
+CLAUDE.md Hierarchy, Scoping, and Modular Organisation
+3.2
+Custom Slash Commands and Skills
+3.3
+Path-Specific Rules for Conditional Convention Loading
+3.4
+Plan Mode vs Direct Execution
+3.5
+Iterative Refinement Techniques
+3.6
+CI/CD Integration
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+CLAUDE CODE CONFIGURATION &amp; WORKFLOWS
+/
+3.3
+DOMAIN 3
+TASK 3.3
+Mark Complete
+Path-Specific Rules for Conditional Convention Loading
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>Path-specific rules apply conventions conditionally, based on which files you&rsquo;re editing. They solve something neither root CLAUDE.md nor directory-level CLAUDE.md handles well: conventions that must apply to one file type scattered across many directories.</p>
+<p>How Path-Specific Rules Work</p>
+<p>Rule files live in the .claude/rules/ directory. Each file carries YAML frontmatter with a paths field specifying glob patterns. The rules inside load only when you&rsquo;re editing files that match those patterns.</p>
+<h2 id="copy">YAML
+Copy</h2>
+<h2 id="paths-terraform">paths: [&ldquo;terraform/**/*&rdquo;]</h2>
+<h1 id="terraform-conventions">Terraform Conventions</h1>
+<ul>
+<li>Use snake_case for all resource names</li>
+<li>Tag every resource with environment and team labels</li>
+<li>Never hardcode AMI IDs — use data sources</li>
+<li>All modules must have a variables.tf, outputs.tf, and README.md</li>
+</ul>
+<p>Edit a file matching terraform/**/* and these rules load automatically. Edit a React component or an API handler and they don&rsquo;t. The rules stay invisible until they&rsquo;re relevant.</p>
+<p>Glob Patterns Match Across the Entire Codebase</p>
+<p>This is where they earn their keep. A glob like **/*.test.tsx catches every test file in the codebase, wherever it sits. Take a typical project structure:</p>
+<p>Copy
+src/
+components/
+Button.tsx
+Button.test.tsx
+api/
+auth.ts
+auth.test.ts
+utils/
+format.ts
+format.test.ts
+pages/
+dashboard/
+Dashboard.tsx
+Dashboard.test.tsx</p>
+<p>Test files sit next to their source files across four directories. A path-specific rule with paths: [&quot;<strong>/*.test.tsx&quot;, &ldquo;</strong>/*.test.ts&rdquo;] applies the same test conventions to every one of them, automatically.</p>
+<p>Why Not Directory-Level CLAUDE.md?</p>
+<p>A directory-level CLAUDE.md applies to files in that one directory. To cover test files spread across 50+ directories, you&rsquo;d have to drop a CLAUDE.md into every single directory that holds tests. That means:</p>
+<p>50+ copies of the same conventions
+Every new directory with tests needs a new copy
+Any convention change requires updating all 50+ files
+Inevitable drift as some copies fall behind</p>
+<p>Path-specific rules with glob patterns eliminate this entirely. One file, one pattern, universal coverage.</p>
+<p>Why Not Root CLAUDE.md?</p>
+<p>Root CLAUDE.md loads for every session, regardless of which files you edit. Put your Terraform conventions in the root CLAUDE.md and they burn tokens even while you&rsquo;re editing React components. Put your test conventions there and they load while you&rsquo;re writing API handlers.</p>
+<p>KEY CONCEPT</p>
+<p>Path-scoped rules are more token-efficient than root CLAUDE.md because they load ONLY when editing matching files. This reduces irrelevant context and keeps the model focused on conventions that actually apply to the current work. In large projects with many convention categories, this efficiency gain is substantial.</p>
+<p>Practical Rule File Examples</p>
+<p>Test conventions across the entire codebase:</p>
+<h2 id="copy-1">YAML
+Copy</h2>
+<h2 id="paths-testtsxspects-spectsx">paths: [&quot;<strong>/*.test.ts&quot;, &ldquo;</strong>/<em>.test.tsx&rdquo;, &ldquo;**/</em>.spec.ts&rdquo;, &ldquo;**/*.spec.tsx&rdquo;]</h2>
+<h1 id="test-conventions">Test Conventions</h1>
+<ul>
+<li>Use describe/it blocks with descriptive names that read as sentences</li>
+<li>Each test file must have at least one happy path and one error case</li>
+<li>Use factory functions for test data, not inline object literals</li>
+<li>Mock external services at the module boundary, not individual functions</li>
+<li>Assert behaviour, not implementation details</li>
+</ul>
+<p>API conventions for any route handler:</p>
+<h2 id="copy-2">YAML
+Copy</h2>
+<h2 id="paths-srcapiroutescontrollerts">paths: [&ldquo;src/api/<strong>/*&rdquo;, &ldquo;</strong>/routes/<strong>/*&rdquo;, &ldquo;</strong>/*.controller.ts&rdquo;]</h2>
+<h1 id="api-conventions">API Conventions</h1>
+<ul>
+<li>All endpoints return { data, error, metadata } response shape</li>
+<li>Use Zod schemas for request validation at the handler boundary</li>
+<li>Log request ID on every error response</li>
+<li>Rate limiting configuration must be explicit, not inherited from defaults</li>
+</ul>
+<p>Infrastructure-as-code conventions:</p>
+<h2 id="copy-3">YAML
+Copy</h2>
+<h2 id="paths-terraformtf">paths: [&ldquo;terraform/<strong>/*&rdquo;, &ldquo;</strong>/<em>.tf&rdquo;, &ldquo;infrastructure/**/</em>&rdquo;]</h2>
+<h1 id="infrastructure-conventions">Infrastructure Conventions</h1>
+<ul>
+<li>State files must reference remote backends, never local</li>
+<li>Use workspaces for environment separation</li>
+<li>Every module must be versioned with a CHANGELOG</li>
+</ul>
+<p>When to Use Each Approach
+Scenario	Best approach
+Universal team standards that apply to all code	Root CLAUDE.md
+Conventions for one specific package directory	Directory-level CLAUDE.md
+Conventions for a file type spread across many directories	Path-specific rules with glob patterns
+Task-specific workflows invoked on demand	Skills in .claude/skills/</p>
+<p>The exam frequently presents the scenario of test files co-located with source files across many directories. The answer is always path-specific rules with glob patterns.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Choosing directory-level CLAUDE.md over path-specific rules for cross-directory conventions</p>
+<p>When conventions must apply to files spread across 50+ directories (like co-located test files), path-specific rules with glob patterns are correct. Directory-level CLAUDE.md would require placing a file in every directory — a massive maintenance burden.</p>
+<p>EXAM TRAP</p>
+<p>Placing file-type-specific conventions in root CLAUDE.md</p>
+<p>Root CLAUDE.md loads for every session regardless of which files you edit. Terraform conventions consume tokens when editing React components. Path-specific rules load only when editing matching files, preserving token budget.</p>
+<p>EXAM TRAP</p>
+<p>Confusing skills with path-specific rules for automatic convention application</p>
+<p>Both skills and .claude/rules/ can auto-activate via a paths frontmatter, but they serve different purposes. Rules stay in context as background guidance — loaded when Claude reads a matching file — so they shape every edit. Skills load on-demand as task-style workflows, triggered either by the model&rsquo;s intent match or by explicit invocation. When the question asks about automatic, always-on convention loading for a file type, path-specific rules are the right answer.</p>
+<p>Practice Scenario</p>
+<p>A codebase has test files co-located with source files throughout 50+ directories (e.g., Button.test.tsx next to Button.tsx). The team wants all tests to follow the same conventions regardless of location. What is the most maintainable approach?</p>
+<p>OPTION A
+Add all the test conventions to the root CLAUDE.md file so they are loaded into context for every session
+OPTION B
+Create a rule file in .claude/rules/ with YAML frontmatter paths: [&quot;<strong>/*.test.tsx&quot;, &ldquo;</strong>/*.test.ts&rdquo;] holding the test conventions for the repo
+OPTION C
+Place a CLAUDE.md file in every directory that contains test files, each carrying a copy of the team test conventions
+OPTION D
+Create a skill in .claude/skills/ that includes the test conventions and instruct developers to invoke it before writing or editing any tests
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Configure Path-Specific Rules with Glob Patterns
+Difficulty
+30 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Write YAML frontmatter with glob patterns for conditional rule loading
+Apply path-specific rules to files spread across many directories
+Understand why path-specific rules are more token-efficient than root CLAUDE.md
+Distinguish when to use path-specific rules vs directory-level CLAUDE.md
+Verify conditional loading behaviour using the /context command
+Create .claude/rules/testing.md with YAML frontmatter paths: [&quot;<strong>/*.test.ts&quot;, &ldquo;</strong>/<em>.test.tsx&rdquo;, &ldquo;**/</em>.spec.ts&rdquo;] and test conventions (naming, assertions, mocking patterns)</p>
+<p>WHY: Path-specific rules with glob patterns are the correct solution for conventions that apply to a file type spread across many directories. The exam favourite scenario is test files co-located with source files across 50+ directories.</p>
+<p>YOU SHOULD SEE: A file at .claude/rules/testing.md with YAML frontmatter containing a paths array with glob patterns. The body contains at least three test conventions covering naming, assertions, and mocking.</p>
+<p>Stuck? Get a nudge
+Create .claude/rules/api-conventions.md with paths: [&ldquo;src/api/<strong>/*&rdquo;, &ldquo;</strong>/routes/**/*&rdquo;] and API conventions (response shape, validation, error handling)</p>
+<p>WHY: Separating API conventions into their own path-scoped rule means they only load when editing API files. This avoids consuming tokens with irrelevant context when working on frontend or infrastructure code.</p>
+<p>YOU SHOULD SEE: A file at .claude/rules/api-conventions.md with YAML frontmatter paths targeting API directories. The body contains at least three API conventions.</p>
+<p>Stuck? Get a nudge
+Create .claude/rules/terraform.md with paths: [&ldquo;terraform/<strong>/*&rdquo;, &ldquo;</strong>/*.tf&rdquo;] and infrastructure conventions</p>
+<p>WHY: Infrastructure conventions are completely irrelevant when editing application code. Path-scoped rules ensure Terraform rules never consume tokens during React or API development sessions.</p>
+<p>YOU SHOULD SEE: A file at .claude/rules/terraform.md with YAML frontmatter paths matching Terraform files. The body contains infrastructure-specific conventions.</p>
+<p>Stuck? Get a nudge
+Edit a test file and use /context to verify that testing rules are loaded but API and Terraform rules are not</p>
+<p>WHY: This proves the conditional loading mechanism works. The exam tests whether you understand that path-specific rules load only for matching files, and /context is the diagnostic tool to verify this.</p>
+<p>YOU SHOULD SEE: When editing a .test.ts file, /context output lists .claude/rules/testing.md as loaded. The .claude/rules/api-conventions.md and .claude/rules/terraform.md files do NOT appear in the /context output.</p>
+<p>Stuck? Get a nudge
+Edit an API handler and verify that API rules load while testing and Terraform rules do not</p>
+<p>WHY: This is the complementary verification. Switching contexts should swap which rules are loaded, confirming that the glob patterns correctly scope each rule file.</p>
+<p>YOU SHOULD SEE: When editing a file in src/api/, /context output lists .claude/rules/api-conventions.md as loaded. The testing and Terraform rule files do NOT appear.</p>
+<p>Stuck? Get a nudge
+Compare the token footprint when all conventions are in root CLAUDE.md versus split into path-specific rules</p>
+<p>WHY: Token efficiency is a key exam concept. Root CLAUDE.md loads all conventions for every session regardless of relevance. Path-specific rules load only matching conventions, reducing irrelevant context and preserving token budget for actual work.</p>
+<p>YOU SHOULD SEE: With all conventions in root CLAUDE.md, /context shows the full set of conventions loaded even when editing a simple utility file. With path-specific rules, /context shows only the relevant subset. The token count for loaded configuration is measurably smaller when using path-specific rules for targeted editing sessions.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Code Memory and Rules Documentation — Anthropic
+Claude Certified Architect Foundations Exam Guide — Task Statement 3.3 — Anthropic
+Claude Certified Architect Foundations Exam Guide — Sample Question 6 — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Custom Slash Commands and Skills
+NEXT LESSON
+Plan Mode vs Direct Execution</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3 Claude Code Config | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/dnacenta-claude-certified-architect/domains/d3-claude-code-config/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> D3 Claude Code Config
+</div>
+
+<article>
+  <header>
+    <h1>D3 Claude Code Config</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">dnacenta</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="domain-3-claude-code-configuration--workflows-20">Domain 3: Claude Code Configuration &amp; Workflows (20%)</h1>
+<p>Covers CLAUDE.md hierarchy and loading, custom commands and skills, path-specific rules, plan mode vs direct execution, iterative refinement, and CI/CD integration.</p>
+<hr>
+<h2 id="30-surfaces-where-claude-code-runs">3.0 Surfaces: Where Claude Code Runs</h2>
+<p>Claude Code is no longer just a CLI. Every surface connects to the <strong>same engine</strong>, so CLAUDE.md files, settings, skills, and MCP servers work identically across all of them — which is the architecturally relevant point: configuration is portable, and so is a session.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Surface</th>
+					<th>What it is</th>
+					<th>Install / entry point</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Terminal</strong></td>
+					<td>Full-featured CLI</td>
+					<td><code>curl -fsSL https://claude.ai/install.sh | bash</code>, then <code>claude</code></td>
+			</tr>
+			<tr>
+					<td><strong>VS Code / Cursor</strong></td>
+					<td>Extension with inline diffs, @-mentions, plan review</td>
+					<td>Extensions marketplace</td>
+			</tr>
+			<tr>
+					<td><strong>JetBrains</strong></td>
+					<td>Plugin for IntelliJ, PyCharm, WebStorm (requires the CLI)</td>
+					<td>JetBrains Marketplace</td>
+			</tr>
+			<tr>
+					<td><strong>Desktop app</strong></td>
+					<td>Standalone app: visual diffs, parallel sessions, scheduled tasks, cloud sessions</td>
+					<td>macOS / Windows download</td>
+			</tr>
+			<tr>
+					<td><strong>Web</strong></td>
+					<td>Browser sessions with no local setup; long-running tasks on repos you don&rsquo;t have locally</td>
+					<td><a href="https://claude.ai/code">claude.ai/code</a></td>
+			</tr>
+			<tr>
+					<td><strong>Mobile</strong></td>
+					<td>iOS / Android app for the same cloud sessions</td>
+					<td>Claude app</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="session-portability">Session Portability</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Goal</th>
+					<th>Mechanism</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Start locally, finish in the cloud</td>
+					<td><code>claude --cloud &quot;&lt;task&gt;&quot;</code> (<code>--remote</code> is a deprecated alias)</td>
+			</tr>
+			<tr>
+					<td>Pull a web/cloud session into the terminal</td>
+					<td><code>claude --teleport</code></td>
+			</tr>
+			<tr>
+					<td>Run a task as a local background session</td>
+					<td><code>claude --bg &quot;&lt;task&gt;&quot;</code>, then <code>claude agents</code> / <code>claude attach &lt;id&gt;</code> / <code>logs</code> / <code>stop</code> / <code>respawn</code> / <code>rm</code></td>
+			</tr>
+			<tr>
+					<td>Copy the current session into a background session</td>
+					<td><code>/fork [prompt]</code> (a forked <em>subagent</em> that reports back is <code>/subtask</code>; <code>/branch</code> switches you into a copy)</td>
+			</tr>
+			<tr>
+					<td>Hand the current terminal session to the desktop app</td>
+					<td><code>/desktop</code></td>
+			</tr>
+			<tr>
+					<td>Drive a running local session from a phone or another browser</td>
+					<td>Remote Control</td>
+			</tr>
+			<tr>
+					<td>Push external events (Telegram, Discord, iMessage, webhooks) into a session</td>
+					<td>Channels</td>
+			</tr>
+			<tr>
+					<td>Route work from team chat</td>
+					<td><code>@Claude</code> in Slack</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="scheduling">Scheduling</h3>
+<p>Three distinct mechanisms — the exam-relevant distinction is <em>where they run</em>:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Mechanism</th>
+					<th>Runs</th>
+					<th>Use for</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Routines</strong> (<code>/schedule</code>, web, or desktop)</td>
+					<td>In the cloud — keeps running with your machine off; can also trigger on API calls or GitHub events</td>
+					<td>Morning PR reviews, overnight CI failure analysis, weekly dependency audits</td>
+			</tr>
+			<tr>
+					<td><strong>Desktop scheduled tasks</strong></td>
+					<td>On your machine, with local file and tool access</td>
+					<td>Anything that needs the local filesystem or private network</td>
+			</tr>
+			<tr>
+					<td><strong><code>/loop</code></strong></td>
+					<td>Inside the current CLI session</td>
+					<td>Quick polling within one sitting — omit the interval and Claude self-paces between iterations</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="31-claudemd-hierarchy">3.1 CLAUDE.md Hierarchy</h2>
+<h3 id="what-is-claudemd">What is CLAUDE.md?</h3>
+<p>CLAUDE.md files are instruction files that tell Claude Code how to behave in a specific context. They&rsquo;re like <code>.editorconfig</code> or <code>.eslintrc</code> but for an AI agent — defining coding standards, project conventions, tool restrictions, and workflow rules.</p>
+<h3 id="loading-order-broader--more-specific">Loading Order (Broader → More Specific)</h3>
+<p>Claude Code loads CLAUDE.md files in a hierarchy. More specific files override broader ones:</p>
+<pre tabindex="0"><code>1. Managed Policy (org-wide, admin-controlled)
+   └── /etc/claude-code/CLAUDE.md                           (Linux, WSL)
+   └── /Library/Application Support/ClaudeCode/CLAUDE.md    (macOS)
+   └── C:\Program Files\ClaudeCode\CLAUDE.md                (Windows)
+
+2. User-Level (personal, NOT version-controlled)
+   └── ~/.claude/CLAUDE.md
+
+3. Project-Level (shared via version control)
+   └── ./CLAUDE.md  or  ./.claude/CLAUDE.md
+
+4. Local project (personal, gitignored)
+   └── ./CLAUDE.local.md
+
+5. Directory-Level (loaded on demand)
+   └── ./src/api/CLAUDE.md (loaded when Claude reads files in src/api/)
+   └── ./tests/CLAUDE.md (loaded when Claude reads files in tests/)
+</code></pre><p><strong>Key distinction:</strong> Project-level CLAUDE.md is committed to git and shared with the team. User-level is personal and local. <code>CLAUDE.local.md</code> is personal per project (gitignore it). Directory-level loads dynamically when Claude works in that directory.</p>
+<h3 id="agentsmd-interop">AGENTS.md Interop</h3>
+<p>During normal sessions Claude Code reads <code>CLAUDE.md</code>, <strong>not</strong> <code>AGENTS.md</code> — though <code>/init</code> does read an existing <code>AGENTS.md</code> when scaffolding. If your repo already uses <code>AGENTS.md</code> for other coding agents, keep one source of truth by importing it:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># CLAUDE.md
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">@AGENTS</span>.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Claude-specific overrides
+</span></span><span style="display:flex;"><span>Use plan mode for changes under <span style="color:#0a3069">`src/billing/`</span>.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="import-syntax">@import Syntax</h3>
+<p>CLAUDE.md files can import other files for modular configuration:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># Project Configuration
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">@docs/coding</span>-standards.md
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">@docs/api</span>-conventions.md
+</span></span><span style="display:flex;"><span>@~/.claude/my-personal-preferences.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>See <span style="color:#6639ba">@README</span>.md for project overview.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Resolution rules:</strong></p>
+<ul>
+<li>Relative paths resolve relative to the file containing the import</li>
+<li><code>@~/</code> resolves to the user&rsquo;s home directory</li>
+<li>Maximum import depth: 5 hops (to prevent circular imports)</li>
+<li>Imported files can themselves contain @imports (up to depth limit)</li>
+</ul>
+<h3 id="clauderules-directory">.claude/rules/ Directory</h3>
+<p>For topic-specific rules organized as separate files:</p>
+<pre tabindex="0"><code>.claude/
+  rules/
+    testing.md       — Testing conventions
+    api-design.md    — API endpoint patterns
+    security.md      — Security requirements
+    typescript.md    — TypeScript-specific rules
+</code></pre><p><strong>Without frontmatter:</strong> Rules load unconditionally at session start.
+<strong>With frontmatter:</strong> Rules load conditionally based on file paths.</p>
+<h3 id="auto-memory">Auto Memory</h3>
+<p>Claude Code maintains automatic memory at:</p>
+<pre tabindex="0"><code>~/.claude/projects/&lt;project&gt;/memory/MEMORY.md
+</code></pre><ul>
+<li><strong>First 200 lines OR 25 KB</strong> (whichever comes first) loaded at session start</li>
+<li>Machine-local (not version controlled)</li>
+<li>All worktrees in the same git repo share one memory directory</li>
+<li>Claude writes notes here automatically about project patterns, decisions, preferences</li>
+<li>Requires Claude Code v2.1.59 or later</li>
+<li><code>autoMemoryEnabled: false</code> disables it; <code>autoMemoryDirectory</code> relocates it</li>
+<li>Topic files (e.g., <code>debugging.md</code>, <code>api-conventions.md</code>) alongside <code>MEMORY.md</code> are loaded on demand — the 200-line cap applies only to <code>MEMORY.md</code> itself</li>
+<li>Current layout: <code>MEMORY.md</code> is an <strong>index</strong> (one line per memory) and each memory is its own file with YAML frontmatter — <code>name</code>, <code>description</code>, and a <code>type</code> of <code>user</code> / <code>feedback</code> / <code>project</code> / <code>reference</code>; Claude Code stamps a <code>modified</code> timestamp on every write (v2.1.214+)</li>
+<li>Subagents can maintain their own auto memory</li>
+</ul>
+<h3 id="monorepo-and-multi-directory-controls">Monorepo and Multi-Directory Controls</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Setting / flag</th>
+					<th>Purpose</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>claudeMdExcludes</code> (in settings)</td>
+					<td>Glob-list of CLAUDE.md files to skip — useful when another team&rsquo;s nested CLAUDE.md would otherwise load</td>
+			</tr>
+			<tr>
+					<td><code>--add-dir &lt;path&gt;</code></td>
+					<td>Grant Claude access to additional working directories</td>
+			</tr>
+			<tr>
+					<td><code>CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1</code></td>
+					<td>Also load CLAUDE.md / rules from <code>--add-dir</code> paths</td>
+			</tr>
+			<tr>
+					<td><code>CLAUDE_CODE_NEW_INIT=1</code></td>
+					<td>Interactive multi-phase <code>/init</code> that scaffolds CLAUDE.md, skills, and hooks</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="32-skills-and-legacy-slash-commands">3.2 Skills (and Legacy Slash Commands)</h2>
+<blockquote>
+<p><strong>Major change (2026):</strong> Custom slash commands have been <strong>merged into skills</strong>. A file at <code>.claude/commands/deploy.md</code> and a skill at <code>.claude/skills/deploy/SKILL.md</code> both create <code>/deploy</code> and behave the same way. The old <code>/project:name</code> and <code>/user:name</code> namespacing is gone — commands are just <code>/name</code>, and higher-priority locations win when names collide.</p>
+</blockquote>
+<h3 id="skill-locations-priority-enterprise--personal--project--plugin">Skill Locations (Priority: Enterprise &gt; Personal &gt; Project &gt; Plugin)</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Location</th>
+					<th>Path</th>
+					<th>Applies to</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Enterprise</td>
+					<td>Managed settings path</td>
+					<td>All users in the org</td>
+			</tr>
+			<tr>
+					<td>Personal</td>
+					<td><code>~/.claude/skills/&lt;name&gt;/SKILL.md</code></td>
+					<td>All your projects</td>
+			</tr>
+			<tr>
+					<td>Project</td>
+					<td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td>
+					<td>This project only</td>
+			</tr>
+			<tr>
+					<td>Plugin</td>
+					<td><code>&lt;plugin&gt;/skills/&lt;name&gt;/SKILL.md</code></td>
+					<td>Where the plugin is enabled (namespaced <code>plugin-name:skill-name</code>)</td>
+			</tr>
+	</tbody>
+</table>
+<p>Legacy <code>.claude/commands/*.md</code> still works and supports the same frontmatter — but skills add a directory for supporting files, dynamic context injection, and subagent execution. When a skill and a command share a name, the skill wins. Claude Code skills follow the open <a href="https://agentskills.io">Agent Skills</a> standard.</p>
+<h3 id="example-skillmd">Example SKILL.md</h3>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>deploy<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">description</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Deploy the application to a specified environment<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">context</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>fork<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">agent</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Explore<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">allowed-tools</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Bash(git *) Bash(npm run deploy *)<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">argument-hint</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span>environment]<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">disable-model-invocation</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#cf222e">true</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Deploy Skill</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>Deploy the application to $ARGUMENTS.<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">1</span>. Run the test suite<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">2</span>. Build the application<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">3</span>. Push to the deployment target<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">4</span>. Verify the deployment succeeded<span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="frontmatter-reference-current">Frontmatter Reference (Current)</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Field</th>
+					<th>Purpose</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>name</code></td>
+					<td><code>/slash-command</code> name (defaults to directory name; lowercase, digits, hyphens, max 64 chars)</td>
+			</tr>
+			<tr>
+					<td><code>description</code></td>
+					<td>When to use the skill — Claude uses this to decide whether to auto-load. Capped at 1,536 chars combined with <code>when_to_use</code></td>
+			</tr>
+			<tr>
+					<td><code>when_to_use</code></td>
+					<td>Additional trigger phrases / example requests, appended to <code>description</code></td>
+			</tr>
+			<tr>
+					<td><code>argument-hint</code></td>
+					<td>Hint shown in autocomplete, e.g. <code>[issue-number]</code></td>
+			</tr>
+			<tr>
+					<td><code>arguments</code></td>
+					<td>Named positional arguments for <code>$name</code> substitution</td>
+			</tr>
+			<tr>
+					<td><code>disable-model-invocation</code></td>
+					<td><code>true</code> → only the user can invoke via <code>/name</code>; Claude can&rsquo;t auto-trigger</td>
+			</tr>
+			<tr>
+					<td><code>user-invocable</code></td>
+					<td><code>false</code> → hidden from <code>/</code> menu; Claude can still invoke (background knowledge)</td>
+			</tr>
+			<tr>
+					<td><code>allowed-tools</code></td>
+					<td>Tools pre-approved while this skill is active</td>
+			</tr>
+			<tr>
+					<td><code>model</code></td>
+					<td>Model override for this skill&rsquo;s turn</td>
+			</tr>
+			<tr>
+					<td><code>effort</code></td>
+					<td><code>low</code> / <code>medium</code> / <code>high</code> / <code>xhigh</code> / <code>max</code> — effort-level override</td>
+			</tr>
+			<tr>
+					<td><code>context</code></td>
+					<td><code>fork</code> runs the skill in an isolated subagent</td>
+			</tr>
+			<tr>
+					<td><code>agent</code></td>
+					<td>Which subagent type executes when <code>context: fork</code> (e.g. <code>Explore</code>, <code>Plan</code>, <code>general-purpose</code>)</td>
+			</tr>
+			<tr>
+					<td><code>hooks</code></td>
+					<td>Hooks scoped to this skill&rsquo;s lifecycle</td>
+			</tr>
+			<tr>
+					<td><code>paths</code></td>
+					<td>Glob patterns — auto-load only when working with matching files</td>
+			</tr>
+			<tr>
+					<td><code>shell</code></td>
+					<td><code>bash</code> (default) or <code>powershell</code> for inline command injection</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="substitution-variables">Substitution Variables</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Variable</th>
+					<th>Resolves To</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>$ARGUMENTS</code></td>
+					<td>Full argument string passed by the user</td>
+			</tr>
+			<tr>
+					<td><code>$ARGUMENTS[N]</code> / <code>$N</code></td>
+					<td>0-indexed positional argument (<code>$0</code>, <code>$1</code>, …)</td>
+			</tr>
+			<tr>
+					<td><code>$name</code></td>
+					<td>Named argument declared in <code>arguments:</code> frontmatter</td>
+			</tr>
+			<tr>
+					<td><code>${CLAUDE_SESSION_ID}</code></td>
+					<td>Current session identifier</td>
+			</tr>
+			<tr>
+					<td><code>${CLAUDE_SKILL_DIR}</code></td>
+					<td>Directory containing the SKILL.md file</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="dynamic-context-injection">Dynamic Context Injection</h3>
+<p>Skills can preprocess shell output and file contents before Claude sees them:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>pr-summary<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">description</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Summarize changes in a pull request<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">context</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>fork<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">agent</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Explore<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">allowed-tools</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Bash(gh *)<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">## PR context</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">Diff</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>!`gh pr diff`<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">Comments</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>!`gh pr view --comments`<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">Changed files</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>!`gh pr diff --name-only`<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">## Your task</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>Summarize this pull request...<span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>!`cmd`</code> runs the command <em>before</em> the skill body is sent. Multi-line blocks use <code>```!</code>. File inclusion with <code>@path</code> also works. Disable globally with <code>&quot;disableSkillShellExecution&quot;: true</code>.</p>
+<h3 id="context-isolation-context-fork">Context Isolation (<code>context: fork</code>)</h3>
+<ul>
+<li>Spawns the skill as a subagent with its own context</li>
+<li>The <code>agent:</code> field picks the execution environment (built-in <code>Explore</code>, <code>Plan</code>, <code>general-purpose</code>, or a custom <code>.claude/agents/*</code> subagent)</li>
+<li>CLAUDE.md still loads; main conversation history does not</li>
+<li>Useful for noisy operations (deep research, deployments) that would pollute the main context</li>
+</ul>
+<h3 id="skill-lifecycle-and-compaction">Skill Lifecycle and Compaction</h3>
+<p>When invoked, a skill&rsquo;s rendered body enters the conversation as a single message and stays there. Claude Code does <strong>not</strong> re-read the file on later turns — write standing instructions, not one-time steps. Auto-compaction re-attaches the most recently invoked skills (first 5 000 tokens of each, 25 000-token combined budget), dropping older ones if you used many.</p>
+<h3 id="bundled-skills">Bundled Skills</h3>
+<p>Claude Code ships with a set of bundled skills that varies by release. Recent versions include:</p>
+<ul>
+<li><code>/claude-api</code> — Build and migrate Claude API / Anthropic SDK apps; subcommands <code>migrate</code>, <code>prompt-audit</code>, <code>upgrade</code> (Python SDK 0.x → 1.x), <code>cost-optimize</code></li>
+<li><code>/code-review</code> — Multi-agent review of pending changes or a PR (<code>ultra</code> runs it in the cloud; <code>/ultrareview</code> is the legacy alias)</li>
+<li><code>/diff</code> — Review the working-tree changes, including Claude&rsquo;s edits, before shipping</li>
+<li><code>/security-review</code> — Security review of the pending changes on the branch</li>
+<li><code>/simplify</code> — Reuse / simplification / efficiency cleanups on changed code</li>
+<li><code>/dataviz</code> — Charts and dashboards with consistent design</li>
+<li><code>/design</code> — Multi-artboard visual design canvas</li>
+<li><code>/init</code> — Scaffold a CLAUDE.md for the codebase</li>
+<li><code>/run</code> — Launch the project&rsquo;s app to confirm a change works</li>
+<li><code>/loop</code> — Run a prompt or slash command on a recurring interval</li>
+<li><code>/schedule</code> — Create and manage cloud routines</li>
+<li><code>/deep-research</code> — A bundled dynamic <em>workflow</em>: fan out web searches, cross-check sources, synthesize a cited report</li>
+<li><code>/workflows</code> / <code>/workflow-authoring</code> — Watch running workflows; load the script-writing reference (when dynamic workflows are enabled)</li>
+<li><code>/advisor</code> — Consult a second model (<code>fable</code>, <code>opus</code>, <code>sonnet</code>) at key moments of a task</li>
+<li><code>/fast</code> — Toggle fast mode (Opus 5 / Opus 4.8 only; premium pricing, same model, faster output)</li>
+<li><code>/update-config</code> — Configure settings.json, hooks, and permissions</li>
+<li><code>/fewer-permission-prompts</code> — Build a permission allowlist from your usage</li>
+<li><code>/skill-doctor</code> — Show what each skill costs in context and how often it is used (v2.1.252+); every listed skill costs tokens on every turn</li>
+<li><code>/doctor</code> — Diagnose Claude Code setup problems; <code>/feedback</code> sends a report with session context</li>
+</ul>
+<p>Check <code>/help</code> in your installed version (or the commands page in the docs) for the current list — the set changes release to release.</p>
+<h3 id="plugins">Plugins</h3>
+<p>A <strong>plugin</strong> is a distributable bundle of skills, subagents, hooks, and MCP servers, installed from a marketplace and enabled per project. Plugin-provided items are namespaced (<code>plugin-name:skill-name</code> for skills, <code>plugin:&lt;plugin&gt;:&lt;server&gt;</code> for MCP servers) so they can&rsquo;t collide with your own. Plugins sit at the lowest priority in the skill resolution order (Enterprise &gt; Personal &gt; Project &gt; Plugin).</p>
+<p>Plugins are also the unit that <code>claude plugin eval</code> tests: you write an eval suite against the plugin&rsquo;s skills and run it in a sandbox or in CI, and it emits a JSON report. That is the packaging answer to &ldquo;how does a team ship and regression-test its Claude Code conventions?&rdquo;</p>
+<hr>
+<h2 id="33-path-specific-rules">3.3 Path-Specific Rules</h2>
+<h3 id="conditional-rule-loading">Conditional Rule Loading</h3>
+<p>Rules in <code>.claude/rules/</code> can specify which files they apply to using glob patterns in YAML frontmatter:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">paths</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0a3069">&#34;src/api/**/*.ts&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0a3069">&#34;src/api/**/*.test.ts&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># API Development Rules</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">All API endpoints must</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Use Zod for request validation<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Return standardized error responses<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Include rate limiting middleware<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Have corresponding integration tests<span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">paths</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0a3069">&#34;**/*.test.tsx&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0a3069">&#34;**/*.test.ts&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span>- <span style="color:#0a3069">&#34;**/*.spec.ts&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"># Testing Conventions</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Use React Testing Library, not Enzyme<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Test behavior, not implementation<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Mock external APIs, not internal modules<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- Each test file must have a describe block matching the component/function name<span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="when-path-specific-rules-beat-directory-claudemd">When Path-Specific Rules Beat Directory CLAUDE.md</h3>
+<p><strong>Scenario:</strong> Testing conventions that apply to test files scattered throughout the entire codebase.</p>
+<p><strong>Directory CLAUDE.md approach:</strong></p>
+<pre tabindex="0"><code>src/
+  components/
+    CLAUDE.md  ← Would need testing rules here
+    Button.test.tsx
+  api/
+    CLAUDE.md  ← And here
+    users.test.ts
+  utils/
+    CLAUDE.md  ← And here
+    format.test.ts
+</code></pre><p><strong>Path-specific rules approach:</strong></p>
+<pre tabindex="0"><code>.claude/
+  rules/
+    testing.md  ← One file with paths: [&#34;**/*.test.*&#34;]
+</code></pre><p>The rules approach is superior because:</p>
+<ul>
+<li>Single source of truth for testing conventions</li>
+<li>Applies everywhere test files exist, even new directories</li>
+<li>No need to duplicate CLAUDE.md files across directories</li>
+</ul>
+<hr>
+<h2 id="34-plan-mode-vs-direct-execution">3.4 Plan Mode vs Direct Execution</h2>
+<h3 id="permission-modes-current">Permission Modes (Current)</h3>
+<p>Plan mode is now one entry in a broader permission-mode system. Start in a specific mode with <code>--permission-mode &lt;mode&gt;</code>, or cycle modes with <strong>Shift+Tab</strong> in an interactive session.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Mode</th>
+					<th>Behavior</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>default</code></td>
+					<td>Standard permission prompts</td>
+			</tr>
+			<tr>
+					<td><code>acceptEdits</code></td>
+					<td>Auto-accept file edits; still prompt for other tools</td>
+			</tr>
+			<tr>
+					<td><code>plan</code></td>
+					<td>Exploration-only: Claude designs an approach and presents it before touching files</td>
+			</tr>
+			<tr>
+					<td><code>auto</code></td>
+					<td>Classifier decides per-tool whether to prompt — see <code>claude auto-mode defaults</code></td>
+			</tr>
+			<tr>
+					<td><code>dontAsk</code></td>
+					<td>Never prompt for the pre-approved list</td>
+			</tr>
+			<tr>
+					<td><code>bypassPermissions</code></td>
+					<td>Skip all prompts (dangerous; use only for short, contained tasks)</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="when-to-use-plan-mode">When to Use Plan Mode</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Indicator</th>
+					<th>Example</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Multi-file changes</td>
+					<td>Refactoring auth across 15 files</td>
+			</tr>
+			<tr>
+					<td>Architectural decisions</td>
+					<td>Choosing between REST and GraphQL</td>
+			</tr>
+			<tr>
+					<td>Multiple valid approaches</td>
+					<td>Several ways to implement caching</td>
+			</tr>
+			<tr>
+					<td>Large scope</td>
+					<td>Library migration affecting 45+ files</td>
+			</tr>
+			<tr>
+					<td>Unclear requirements</td>
+					<td>&ldquo;Make the app faster&rdquo; — needs investigation first</td>
+			</tr>
+	</tbody>
+</table>
+<p>In plan mode, Claude:</p>
+<ol>
+<li>Explores the codebase (Glob, Grep, Read)</li>
+<li>Identifies affected files and patterns</li>
+<li>Designs an approach</li>
+<li>Presents the plan for approval</li>
+<li>Only implements after user approval</li>
+</ol>
+<h3 id="when-to-use-direct-execution">When to Use Direct Execution</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Indicator</th>
+					<th>Example</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Single-file fix</td>
+					<td>Bug fix with clear stack trace</td>
+			</tr>
+			<tr>
+					<td>Obvious scope</td>
+					<td>Adding a null check</td>
+			</tr>
+			<tr>
+					<td>Clear instructions</td>
+					<td>&ldquo;Add a <code>createdAt</code> field to the User model&rdquo;</td>
+			</tr>
+			<tr>
+					<td>Small, contained</td>
+					<td>Fixing a typo, updating a constant</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="built-in-subagents">Built-in Subagents</h3>
+<p>Four subagents ship with Claude Code and are registered by default in interactive sessions:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Agent</th>
+					<th>Purpose</th>
+					<th>Tools</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Explore</strong></td>
+					<td>Fast file discovery and codebase search</td>
+					<td>Read-only; skips CLAUDE.md and git status</td>
+			</tr>
+			<tr>
+					<td><strong>Plan</strong></td>
+					<td>Research for plan mode before proposing changes</td>
+					<td>Read-only; skips CLAUDE.md and git status</td>
+			</tr>
+			<tr>
+					<td><strong>general-purpose</strong></td>
+					<td>Multi-step tasks needing exploration <em>and</em> action</td>
+					<td>All subagent tools</td>
+			</tr>
+			<tr>
+					<td><strong>claude</strong></td>
+					<td>Catch-all fallback</td>
+					<td>All subagent tools</td>
+			</tr>
+	</tbody>
+</table>
+<p>The Explore agent is the canonical context-preservation move:</p>
+<pre tabindex="0"><code>Main conversation context is preserved
+     ↓
+Explore subagent runs (Glob, Grep, Read — lots of output)
+     ↓
+Returns concise summary to main conversation
+     ↓
+Main context stays clean
+</code></pre><p>Without it, a deep codebase exploration would fill the main context window with raw file contents and search results.</p>
+<h3 id="custom-subagents-claudeagents">Custom Subagents (<code>.claude/agents/</code>)</h3>
+<p>Custom subagents are markdown files with YAML frontmatter, resolved in the order: managed settings &gt; <code>--agents</code> CLI JSON &gt; project (<code>.claude/agents/</code>) &gt; user (<code>~/.claude/agents/</code>) &gt; plugin.</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>db-reader<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">description</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Execute read-only database queries       <span style="color:#fff"> </span><span style="color:#57606a"># how Claude decides to delegate</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">tools</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Read, Grep, Bash                               <span style="color:#fff"> </span><span style="color:#57606a"># allowlist</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">disallowedTools</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Write, Edit                          <span style="color:#fff"> </span><span style="color:#57606a"># denylist, applied after `tools`</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">model</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>sonnet                                         <span style="color:#fff"> </span><span style="color:#57606a"># inherit | sonnet | opus | haiku | full ID</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">effort</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>low                                           <span style="color:#fff"> </span><span style="color:#57606a"># low | medium | high | xhigh | max</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">permissionMode</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>plan                                  <span style="color:#fff"> </span><span style="color:#57606a"># default | acceptEdits | auto | dontAsk | bypassPermissions | plan</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">maxTurns</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0550ae">10</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">skills</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span>api-conventions]                             <span style="color:#fff"> </span><span style="color:#57606a"># preloaded skill content</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">mcpServers</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">[</span>github]<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">memory</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>project                                       <span style="color:#fff"> </span><span style="color:#57606a"># user | project | local — persistent across sessions</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">isolation</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>worktree                                   <span style="color:#fff"> </span><span style="color:#57606a"># run in its own git worktree</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">background</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#cf222e">false</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">experimental</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">cacheTtl</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>1h                                        <span style="color:#fff"> </span><span style="color:#57606a"># prompt-cache lifetime for this subagent (v2.1.248+)</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#0550ae">hooks</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">PreToolUse</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">    </span>- <span style="color:#0550ae">matcher</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#0a3069">&#34;Bash&#34;</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">      </span><span style="color:#0550ae">hooks</span><span style="color:#1f2328">:</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">        </span>- <span style="color:#0550ae">type</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>command<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">          </span><span style="color:#0550ae">command</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>./scripts/validate-readonly-query.sh<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#24292e">---</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>Execute SELECT queries only. Never issue writes.<span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Three ways to invoke:</strong> name it in natural language (&ldquo;use the db-reader to…&rdquo;), <code>@</code>-mention it to guarantee that specific agent runs, or start a whole session as it with <code>claude --agent db-reader</code>.</p>
+<p><strong>What a fresh subagent loads:</strong> its own system prompt, the delegation prompt, the CLAUDE.md hierarchy, a git status snapshot, preloaded skills, and environment details. <strong>What stays out:</strong> your conversation history, the main session&rsquo;s auto memory, and other subagents&rsquo; results — which is exactly the &ldquo;context does not inherit&rdquo; rule from Domain 1 §1.3.</p>
+<p><strong>Constraints worth remembering:</strong> permission modes flow <em>down</em> — if the parent runs <code>bypassPermissions</code>, <code>acceptEdits</code>, or <code>auto</code>, the subagent inherits it and cannot override. Subagents nest 3 deep by default and 20 can run concurrently. Completed subagents can be resumed by ID or name via <code>SendMessage</code>, retaining their prior context; one-shot agents (Explore, Plan) cannot be resumed.</p>
+<p><strong>Prompt-injection note:</strong> Claude Code scans subagent reports for instruction-shaped patterns before the parent reads them, escaping text that imitates harness output. It&rsquo;s a mitigation, not a permission boundary — every tool call still goes through the session&rsquo;s permission checks.</p>
+<h3 id="beyond-subagents-agent-teams-and-dynamic-workflows">Beyond Subagents: Agent Teams and Dynamic Workflows</h3>
+<p>Subagents are one worker per delegation, decided turn by turn. Two larger units exist when that isn&rsquo;t enough, and the exam-style question is <em>who holds the plan</em>:</p>
+<table>
+	<thead>
+			<tr>
+					<th></th>
+					<th>Subagents</th>
+					<th>Agent teams (experimental)</th>
+					<th>Dynamic workflows</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>What it is</td>
+					<td>A worker Claude spawns</td>
+					<td>A lead session supervising peer Claude Code sessions with a shared task list and inter-agent messaging</td>
+					<td>A JavaScript script Claude writes and a runtime executes in the background</td>
+			</tr>
+			<tr>
+					<td>Who decides what runs next</td>
+					<td>Claude, turn by turn</td>
+					<td>The lead agent</td>
+					<td>The script (<code>agent()</code>, <code>parallel()</code>, <code>pipeline()</code>, <code>phase()</code>)</td>
+			</tr>
+			<tr>
+					<td>Scale</td>
+					<td>A few delegated tasks per turn</td>
+					<td>A handful of long-running peers</td>
+					<td>Dozens to hundreds of agents per run; resumable in-session</td>
+			</tr>
+			<tr>
+					<td>Enable</td>
+					<td>Built in</td>
+					<td><code>CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code></td>
+					<td>Paid plans and API access; Pro turns it on in <code>/config</code>; <code>workflowSizeGuideline</code> caps the advisory agent count</td>
+			</tr>
+	</tbody>
+</table>
+<p>A workflow only runs when the user opts in — the <code>ultracode</code> effort level, an explicit &ldquo;use a workflow&rdquo;, or a bundled workflow skill such as <code>/deep-research</code>. <code>/workflows</code> watches, pauses, resumes, or saves a run. Codifying the orchestration is the point: the plan becomes a reviewable, rerunnable script instead of a coordinator&rsquo;s memory (Domain 1 §1.2).</p>
+<h3 id="combining-modes">Combining Modes</h3>
+<p>Plan mode for investigation → Direct execution for implementation:</p>
+<pre tabindex="0"><code>1. Enter plan mode
+2. Explore the codebase
+3. Design the approach
+4. Present plan to user
+5. User approves
+6. Exit plan mode
+7. Implement directly, file by file
+</code></pre><hr>
+<h2 id="35-iterative-refinement-techniques">3.5 Iterative Refinement Techniques</h2>
+<h3 id="1-concrete-examples">1. Concrete Examples</h3>
+<p>When prose instructions produce inconsistent results, provide 2-3 input/output examples:</p>
+<pre tabindex="0"><code>Instead of: &#34;Format dates consistently&#34;
+
+Use: &#34;Format dates as YYYY-MM-DD. Examples:
+  Input: &#39;January 5th, 2024&#39; → Output: &#39;2024-01-05&#39;
+  Input: &#39;12/31/23&#39; → Output: &#39;2023-12-31&#39;
+  Input: &#39;Mar 2024&#39; → Output: &#39;2024-03-01&#39;&#34;
+</code></pre><h3 id="2-tdd-iteration">2. TDD Iteration</h3>
+<p>Write tests first, then iterate by sharing test failures:</p>
+<pre tabindex="0"><code>1. Write the test: expect(validateEmail(&#34;bad&#34;)).toBe(false)
+2. Run tests → FAIL
+3. Share failure with Claude
+4. Claude fixes the implementation
+5. Run tests → PASS or new failures
+6. Repeat until green
+</code></pre><h3 id="3-interview-pattern">3. Interview Pattern</h3>
+<p>Claude asks clarifying questions before implementing:</p>
+<pre tabindex="0"><code>User: &#34;Add authentication to the app&#34;
+Claude: &#34;Before I implement, a few questions:
+  - JWT or session-based?
+  - Do you need refresh tokens?
+  - What&#39;s the session duration?
+  - Should I add role-based access control?&#34;
+</code></pre><h3 id="4-multiple-vs-independent-issues">4. Multiple vs Independent Issues</h3>
+<p><strong>Multiple interacting issues:</strong> Address in a single message because fixes may conflict.</p>
+<pre tabindex="0"><code>&#34;The auth middleware has two issues:
+1. It doesn&#39;t check token expiry
+2. It returns 500 instead of 401 for invalid tokens
+Fix both together.&#34;
+</code></pre><p><strong>Independent issues:</strong> Fix sequentially to keep each change clean and reviewable.</p>
+<hr>
+<h2 id="36-cicd-integration">3.6 CI/CD Integration</h2>
+<h3 id="cli-flags-for-ci">CLI Flags for CI</h3>
+<table>
+	<thead>
+			<tr>
+					<th>Flag</th>
+					<th>Purpose</th>
+					<th>Critical?</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>-p</code> / <code>--print</code></td>
+					<td>Non-interactive mode</td>
+					<td><strong>MUST use in CI</strong> or the process hangs waiting for input</td>
+			</tr>
+			<tr>
+					<td><code>--output-format</code></td>
+					<td><code>text</code>, <code>json</code>, or <code>stream-json</code> for machine-parseable output</td>
+					<td>Needed for downstream processing</td>
+			</tr>
+			<tr>
+					<td><code>--input-format stream-json</code></td>
+					<td>Stream input events back into the agent</td>
+					<td>For pipeline composition</td>
+			</tr>
+			<tr>
+					<td><code>--json-schema '{...}'</code></td>
+					<td>Validate final output against a JSON Schema (print mode only)</td>
+					<td>Enforces CI output shape</td>
+			</tr>
+			<tr>
+					<td><code>--max-turns N</code></td>
+					<td>Hard cap on agentic turns; exits with error if hit</td>
+					<td>Guardrail</td>
+			</tr>
+			<tr>
+					<td><code>--max-budget-usd X</code></td>
+					<td>Stop once API spend hits $X (print mode only)</td>
+					<td>Cost guardrail</td>
+			</tr>
+			<tr>
+					<td><code>--bare</code></td>
+					<td>Skip auto-discovery (hooks, skills, plugins, MCP, auto memory, CLAUDE.md) — fast scripted starts</td>
+					<td>Low-overhead scripted calls</td>
+			</tr>
+			<tr>
+					<td><code>--no-session-persistence</code></td>
+					<td>Don&rsquo;t save the session to disk</td>
+					<td>Ephemeral CI runs</td>
+			</tr>
+			<tr>
+					<td><code>--fallback-model sonnet</code></td>
+					<td>Auto-fall back when the primary model is overloaded</td>
+					<td>Reliability</td>
+			</tr>
+			<tr>
+					<td><code>--include-hook-events</code></td>
+					<td>Emit all hook lifecycle events into the stream</td>
+					<td>Observability</td>
+			</tr>
+			<tr>
+					<td><code>--include-partial-messages</code></td>
+					<td>Emit partial streaming events</td>
+					<td>Debugging</td>
+			</tr>
+			<tr>
+					<td><code>--permission-mode &lt;mode&gt;</code></td>
+					<td>Start in <code>default</code> / <code>acceptEdits</code> / <code>plan</code> / <code>auto</code> / <code>dontAsk</code> / <code>bypassPermissions</code></td>
+					<td>See §3.4</td>
+			</tr>
+			<tr>
+					<td><code>--permission-prompt-tool &lt;mcp&gt;</code></td>
+					<td>Delegate permission prompts to an MCP tool in headless mode</td>
+					<td>Non-interactive approvals</td>
+			</tr>
+			<tr>
+					<td><code>--permission-prompts none</code></td>
+					<td>Deny anything that would prompt when nobody can answer (v2.1.259+); the active mode still decides everything else</td>
+					<td>Unattended runners</td>
+			</tr>
+			<tr>
+					<td><code>--restricted</code></td>
+					<td>Remove command/code-running tools and <code>WebFetch</code>, confine file tools to the working directories, load only managed settings, refuse <code>bypassPermissions</code> (v2.1.248+)</td>
+					<td>Eval harnesses on shared machines</td>
+			</tr>
+			<tr>
+					<td><code>--safe-mode</code></td>
+					<td>Start with every customization disabled (CLAUDE.md, skills, hooks, MCP, plugins, workflows, auto memory) — unlike <code>--bare</code>, permissions still apply</td>
+					<td>Troubleshooting a broken config</td>
+			</tr>
+			<tr>
+					<td><code>--session-id</code>, <code>--resume</code>, <code>--continue</code>, <code>--fork-session</code></td>
+					<td>Session lifecycle control</td>
+					<td>Multi-step pipelines</td>
+			</tr>
+			<tr>
+					<td><code>--setting-sources user,project,local</code></td>
+					<td>Restrict which settings layers are loaded</td>
+					<td>Reproducible runs</td>
+			</tr>
+			<tr>
+					<td><code>--effort &lt;level&gt;</code></td>
+					<td><code>low</code> / <code>medium</code> / <code>high</code> / <code>xhigh</code> / <code>max</code> / <code>ultracode</code></td>
+					<td>Tune cost vs quality per run</td>
+			</tr>
+			<tr>
+					<td><code>--agent &lt;name&gt;</code> / <code>--agents '&lt;json&gt;'</code></td>
+					<td>Run the session as a named subagent, or define subagents inline</td>
+					<td>Specialized CI jobs</td>
+			</tr>
+			<tr>
+					<td><code>--append-subagent-system-prompt</code> / <code>-file</code></td>
+					<td>Append text (or a file, v2.1.261+) to every subagent&rsquo;s prompt except forks (non-interactive only)</td>
+					<td>Consistent citation/format rules</td>
+			</tr>
+			<tr>
+					<td><code>--forward-subagent-text</code></td>
+					<td>Emit subagent messages into the stream</td>
+					<td>Observability across delegated work</td>
+			</tr>
+			<tr>
+					<td><code>--system-prompt</code> / <code>--system-prompt-file</code> / <code>--append-system-prompt</code></td>
+					<td>Replace or extend the system prompt</td>
+					<td>Purpose-built CI personas</td>
+			</tr>
+			<tr>
+					<td><code>--exclude-dynamic-system-prompt-sections</code></td>
+					<td>Move per-machine sections out of the system prompt</td>
+					<td>Prompt-cache reuse across runners</td>
+			</tr>
+			<tr>
+					<td><code>--strict-mcp-config</code></td>
+					<td>Use only the servers from <code>--mcp-config</code></td>
+					<td>Hermetic MCP surface</td>
+			</tr>
+			<tr>
+					<td><code>--init</code> / <code>--init-only</code></td>
+					<td>Run Setup / SessionStart hooks (and exit)</td>
+					<td>Warm a CI workspace before the real run</td>
+			</tr>
+			<tr>
+					<td><code>--bg</code> / <code>--background</code> + <code>--exec</code></td>
+					<td>Start as a background agent; run a shell command as a background job</td>
+					<td>Long tasks that shouldn&rsquo;t block</td>
+			</tr>
+			<tr>
+					<td><code>--environment ccpool_*</code> / <code>--ref</code></td>
+					<td>Target a self-hosted environment; check out a named ref</td>
+					<td>Fleet / remote execution</td>
+			</tr>
+			<tr>
+					<td><code>--betas</code></td>
+					<td>Send beta headers with API requests</td>
+					<td>Opt into preview features</td>
+			</tr>
+	</tbody>
+</table>
+<h3 id="example-ci-usage">Example CI Usage</h3>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#57606a"># GitHub Actions example</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Code Review<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">run</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">|</span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    claude -p &#34;Review this PR for bugs and security issues&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      --output-format json \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">      --json-schema &#39;{&#34;type&#34;:&#34;object&#34;,&#34;properties&#34;:{&#34;issues&#34;:{&#34;type&#34;:&#34;array&#34;}}}&#39;</span><span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="managed-ci-integrations">Managed CI Integrations</h3>
+<p>You don&rsquo;t always wire the CLI up by hand:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Integration</th>
+					<th>What it does</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>GitHub Actions</strong></td>
+					<td>Run Claude Code in a workflow — PR review, issue triage, <code>@claude</code> mentions</td>
+			</tr>
+			<tr>
+					<td><strong>GitLab CI/CD</strong></td>
+					<td>Same model on GitLab pipelines</td>
+			</tr>
+			<tr>
+					<td><strong>GitHub Code Review</strong></td>
+					<td>Automatic review on every PR, no workflow file to maintain</td>
+			</tr>
+			<tr>
+					<td><strong>Routines</strong></td>
+					<td>Cloud-scheduled runs that can also fire on GitHub events or API calls</td>
+			</tr>
+	</tbody>
+</table>
+<p>The <code>-p</code> + <code>--output-format json</code> pattern below is still the right primitive when you need full control; these integrations are the managed path.</p>
+<h3 id="cost-cache-and-fleet-controls-settings">Cost, Cache, and Fleet Controls (Settings)</h3>
+<p>A few settings that turn up in &ldquo;how does the platform team keep 200 developers&rsquo; sessions cheap and consistent&rdquo; scenarios:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Setting</th>
+					<th>Purpose</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>promptCacheTtl</code> / <code>subagentPromptCacheTtl</code></td>
+					<td>Choose the 5-minute or 1-hour prompt-cache lifetime for the session and for subagents (per-agent override: <code>experimental.cacheTtl</code> in frontmatter)</td>
+			</tr>
+			<tr>
+					<td><code>modelPicker</code> / <code>modelPricing</code> (managed)</td>
+					<td>Curate the <code>/model</code> list; supply custom per-token rates so <code>/cost</code> is accurate behind a gateway</td>
+			</tr>
+			<tr>
+					<td><code>managedMcpServers</code> (managed)</td>
+					<td>Org-provided MCP servers every session gets</td>
+			</tr>
+			<tr>
+					<td><code>bashOutputMaxChars</code> / <code>taskOutputMaxChars</code></td>
+					<td>Cap inline tool output (up to 128K chars) before it floods the context</td>
+			</tr>
+			<tr>
+					<td><code>permissions.blockReadsOutsideWorkingDirectories</code></td>
+					<td>Keep file reads inside the working directories</td>
+			</tr>
+			<tr>
+					<td><code>workflowSizeGuideline</code></td>
+					<td>Advisory agent-count ceiling for dynamic workflows</td>
+			</tr>
+	</tbody>
+</table>
+<p><code>/cost</code> now reports per-session prompt-cache statistics and cache-miss diagnostics — the Claude Code view of the same prefix-stability problem described in Domain 4 §4.8.</p>
+<h3 id="message-batches-api">Message Batches API</h3>
+<p>For non-blocking, cost-optimized batch operations:</p>
+<table>
+	<thead>
+			<tr>
+					<th>Feature</th>
+					<th>Detail</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Cost savings</td>
+					<td>50% compared to synchronous API</td>
+			</tr>
+			<tr>
+					<td>Processing window</td>
+					<td>Up to 24 hours, no latency SLA</td>
+			</tr>
+			<tr>
+					<td>Correlation</td>
+					<td><code>custom_id</code> per request for matching responses — results arrive in <strong>any order</strong>, so key by <code>custom_id</code>, never by position</td>
+			</tr>
+			<tr>
+					<td>Multi-turn</td>
+					<td>NOT supported within a single batch request</td>
+			</tr>
+			<tr>
+					<td>Extended output</td>
+					<td>Up to 300k output tokens on Opus 5 / 4.8 / 4.7 / 4.6 and Sonnet 5 / 4.6 with beta header <code>output-300k-2026-03-24</code> (vs 128k synchronous)</td>
+			</tr>
+	</tbody>
+</table>
+<p><strong>Good for:</strong></p>
+<ul>
+<li>Overnight code analysis reports</li>
+<li>Weekly audit summaries</li>
+<li>Nightly test generation</li>
+<li>Batch document processing</li>
+</ul>
+<p><strong>NOT good for:</strong></p>
+<ul>
+<li>Pre-merge checks (blocking, needs immediate response)</li>
+<li>Real-time user interactions</li>
+<li>Anything requiring tool calling loops within a single request</li>
+</ul>
+<h3 id="handling-batch-failures">Handling Batch Failures</h3>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># Process batch results</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">for</span> result <span style="color:#0550ae">in</span> batch_results<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> result<span style="color:#0550ae">.</span>status <span style="color:#0550ae">==</span> <span style="color:#0a3069">&#34;failed&#34;</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>        failed_ids<span style="color:#0550ae">.</span>append<span style="color:#1f2328">(</span>result<span style="color:#0550ae">.</span>custom_id<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Resubmit only failures</span>
+</span></span><span style="display:flex;"><span>resubmit_batch <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>r <span style="color:#cf222e">for</span> r <span style="color:#0550ae">in</span> original_requests <span style="color:#cf222e">if</span> r<span style="color:#0550ae">.</span>custom_id <span style="color:#0550ae">in</span> failed_ids<span style="color:#1f2328">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="session-context-isolation-for-reviews">Session Context Isolation for Reviews</h3>
+<p><strong>Problem:</strong> The same Claude session that wrote code is less effective at reviewing it because it retains the reasoning context (it already &ldquo;knows&rdquo; why it made each decision, making it less likely to question them).</p>
+<p><strong>Solution:</strong> Use independent review instances that don&rsquo;t have the generation context.</p>
+<pre tabindex="0"><code>Generation session: Claude writes the code
+                          ↓
+               (new session, no shared context)
+                          ↓
+Review session: Claude reviews the code fresh
+</code></pre><hr>
+<h2 id="domain-3-practice-questions">Domain 3 Practice Questions</h2>
+<p><strong>Q1:</strong> A team wants testing conventions to apply to all <code>*.test.ts</code> files throughout their codebase, which has tests scattered across many directories. What is the most maintainable approach?</p>
+<ul>
+<li>A) Add a CLAUDE.md in every directory that contains test files</li>
+<li>B) Create a single rule file in <code>.claude/rules/</code> with <code>paths: [&quot;**/*.test.ts&quot;]</code> frontmatter</li>
+<li>C) Add testing rules to the project-level CLAUDE.md</li>
+<li>D) Create a <code>tests/</code> directory and put all tests there with a CLAUDE.md</li>
+</ul>
+<p><strong>Answer: B</strong> — Path-specific rules in <code>.claude/rules/</code> are superior to directory-level CLAUDE.md when conventions span multiple directories. A single rule file with glob patterns covers all matching files without duplication.</p>
+<p><strong>Q2:</strong> When should Claude Code use plan mode instead of direct execution?</p>
+<ul>
+<li>A) When fixing a single bug with a clear stack trace</li>
+<li>B) When migrating a library that affects 45+ files across the project</li>
+<li>C) When adding a null check to a function</li>
+<li>D) When updating a configuration constant</li>
+</ul>
+<p><strong>Answer: B</strong> — Plan mode is for multi-file changes with architectural implications and multiple valid approaches. A library migration affecting 45+ files clearly fits. The other options are small, obvious-scope changes suited for direct execution.</p>
+<p><strong>Q3:</strong> A CI pipeline needs to run Claude Code for automated code review. Which flag is essential?</p>
+<ul>
+<li>A) <code>--verbose</code></li>
+<li>B) <code>-p</code> / <code>--print</code></li>
+<li>C) <code>--force</code></li>
+<li>D) <code>--no-cache</code></li>
+</ul>
+<p><strong>Answer: B</strong> — The <code>-p</code>/<code>--print</code> flag enables non-interactive mode, which is mandatory in CI. Without it, Claude Code hangs waiting for user input. Pair it with <code>--output-format json</code> (or <code>stream-json</code>), <code>--max-turns</code> / <code>--max-budget-usd</code> for production-grade guardrails, and <code>--permission-prompts none</code> when no host can answer a permission prompt.</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

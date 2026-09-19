@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 Agentic Architecture__1 1 Agentic Loops | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/1-agentic-architecture__1-1-agentic-loops/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 1 Agentic Architecture__1 1 Agentic Loops
+</div>
+
+<article>
+  <header>
+    <h1>1 Agentic Architecture__1 1 Agentic Loops</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="11--agentic-loops--claude-certification-guide">1.1 — Agentic Loops | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/1-agentic-architecture/1-1-agentic-loops">https://claudecertificationguide.com/learn/1-agentic-architecture/1-1-agentic-loops</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+1.1
+Agentic Loops
+1.2
+Multi-Agent Orchestration
+1.3
+Subagent Invocation and Context Passing
+1.4
+Workflow Enforcement and Handoff
+1.5
+Agent SDK Hooks
+1.6
+Task Decomposition Strategies
+1.7
+Session State and Resumption
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+AGENTIC ARCHITECTURE &amp; ORCHESTRATION
+/
+1.1
+DOMAIN 1
+TASK 1.1
+Mark Complete
+Agentic Loops
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>An agentic loop is the core execution cycle behind every Claude-based agent. It&rsquo;s deterministic control flow, defined in code. Not a prompt trick, not a retry loop, not a chatbot turn. Get this lifecycle right and most of Domain 1 falls into place; get it wrong and your agent stops halfway through a task in production.</p>
+<p>The Agentic Loop Lifecycle</p>
+<p>The loop follows four steps, repeated until completion:</p>
+<p>Send a request to Claude via the Messages API. This includes the conversation history (system prompt, prior messages, and any tool results from the previous iteration).</p>
+<p>Inspect the stop_reason field in the response. This field is the authoritative signal for what happens next. It has two values relevant to agentic loops:</p>
+<p>&ldquo;tool_use&rdquo; — Claude wants to call one or more tools. The loop continues.
+&ldquo;end_turn&rdquo; — Claude has finished its work. The loop terminates.</p>
+<p>If stop_reason is &ldquo;tool_use&rdquo;: execute the requested tool(s), append the tool results to the conversation history as a new message, and send the updated conversation back to Claude.</p>
+<p>If stop_reason is &ldquo;end_turn&rdquo;: the agent has finished. Present the final response to the user.</p>
+<p>Step 3 is where loops break. Tool results must be appended to conversation history. Miss that, and Claude can&rsquo;t reason about the new information on the next iteration — the model never sees what the tool returned, so it has nothing new to act on.</p>
+<p>KEY CONCEPT</p>
+<p>The stop_reason field is the only reliable signal for loop control. It is deterministic and unambiguous. Never use natural language parsing, text content checks, or arbitrary iteration caps as your primary stopping mechanism.</p>
+<p>CURRENT STATE: BEYOND THE TWO EXAM VALUES</p>
+<p>The exam guide (v1.0) keys tool_use and end_turn, the two values a basic loop branches on. The live Messages API returns others that a production loop must handle: pause_turn (continue a long-running server-tool turn), max_tokens, stop_sequence, refusal (current models such as Fable 5 can decline on an otherwise-normal 200 response), and model_context_window_exceeded (the response filled the model&rsquo;s context window; handle it like max_tokens truncation). Treat any value other than end_turn as &ldquo;not finished, check why&rdquo; rather than assuming tool_use. (Verified against the Messages API docs, July 2026.)</p>
+<p>Model-Driven Decision-Making</p>
+<p>In an agentic loop, Claude decides which tool to call from the current context. That&rsquo;s model-driven decision-making — the model reads the task, weighs the available tools, and picks one. Compare that to pre-configured decision trees or fixed tool sequences, where the developer hard-codes which tool runs when.</p>
+<p>The exam favours model-driven approaches because they flex. Claude adapts to situations the developer never mapped out, handles edge cases, and chains tools in orders nobody planned. There&rsquo;s one exception worth memorising: when business logic demands deterministic compliance — financial operations, security checks, regulatory requirements — programmatic enforcement overrides that flexibility. Task Statement 1.4 covers this in detail.</p>
+<p>The Three Anti-Patterns</p>
+<p>Three anti-patterns show up again and again for loop termination. Learn to spot all three.</p>
+<p>Anti-Pattern 1: Parsing natural language signals. Checking if Claude said &ldquo;I&rsquo;m done&rdquo; or &ldquo;task complete&rdquo; to determine whether the loop should end. This is wrong because natural language is inherently ambiguous. Claude might say &ldquo;I&rsquo;ve finished analysing the first file&rdquo; while intending to continue with more files. The stop_reason field exists precisely to eliminate this ambiguity.</p>
+<p>Anti-Pattern 2: Arbitrary iteration caps as the primary stopping mechanism. Setting &ldquo;stop after 10 loops&rdquo; as the main way to terminate the agent. This is wrong because it either cuts off useful work (if the task genuinely needs 12 iterations) or runs unnecessary iterations (if the task finishes in 3). The model signals completion via stop_reason — use that signal. Iteration caps are acceptable as a safety net (a maximum bound to prevent runaway agents), but never as the primary control mechanism.</p>
+<p>Anti-Pattern 3: Checking for assistant text content as a completion indicator. Using response.content[0].type == &ldquo;text&rdquo; to decide the loop is finished. This is wrong because Claude can return text alongside tool_use blocks. A response might contain explanatory text (&ldquo;I&rsquo;ll now search for the customer&rsquo;s order history&rdquo;) immediately followed by a tool call. Checking for text presence does not tell you whether the agent is finished.</p>
+<p>COMMON EXAM DISTRACTOR</p>
+<p>The exam frequently presents iteration caps as a plausible fix for premature termination. Reject these answers. Caps address runaway loops, not premature exits. The fix for premature termination is always to check stop_reason correctly.</p>
+<p>Practical Example: The Premature Termination Bug</p>
+<p>A developer builds a customer support agent. It works for simple queries but sometimes stops mid-task on complex requests. The code checks if response.content[0].type == &ldquo;text&rdquo; to determine completion.</p>
+<p>The bug: Claude returns a text explanation (&ldquo;Let me look up your order&rdquo;) alongside a tool_use block requesting the lookup_order tool. The code sees text in position [0], concludes the agent is finished, and returns the incomplete response to the user.</p>
+<p>The fix: replace the content-type check with a stop_reason check. Continue the loop when stop_reason == &ldquo;tool_use&rdquo;, terminate when stop_reason == &ldquo;end_turn&rdquo;. This works regardless of what content types appear in the response.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Using response.content[0].type == &rsquo;text&rsquo; to determine loop completion</p>
+<p>Claude can return text alongside tool_use blocks in the same response. Text presence does not indicate completion. The stop_reason field is the authoritative signal.</p>
+<p>EXAM TRAP</p>
+<p>Setting arbitrary iteration caps (e.g., &lsquo;stop after 10 loops&rsquo;) as the primary stopping mechanism</p>
+<p>Iteration caps either cut off useful work or run unnecessary iterations. They are acceptable as a safety net, not as the primary loop control. Use stop_reason instead.</p>
+<p>EXAM TRAP</p>
+<p>Parsing natural language phrases like &lsquo;I&rsquo;m done&rsquo; or &rsquo;task complete&rsquo; to decide loop termination</p>
+<p>Natural language is ambiguous and unreliable. The stop_reason field provides a deterministic, unambiguous signal for loop control.</p>
+<p>EXAM TRAP</p>
+<p>Forcing tool_choice to &lsquo;any&rsquo; to prevent the agent from returning text</p>
+<p>This forces tool use even when the agent is genuinely finished, creating an infinite loop. The correct approach is to let the model signal completion naturally via stop_reason.</p>
+<p>Practice Scenario</p>
+<p>A developer&rsquo;s agent sometimes terminates prematurely when Claude returns text alongside a tool call. Their loop checks response.content[0].type == &rsquo;text&rsquo; to determine if the agent is finished. Users report incomplete responses on complex queries. What should the developer change?</p>
+<p>OPTION A
+Add an iteration cap of 15 loops to ensure the agent runs long enough for complex queries
+OPTION B
+Check the stop_reason field instead of content type — continue when stop_reason is tool_use, terminate when end_turn
+OPTION C
+Set tool_choice to any so Claude always calls a tool instead of returning text
+OPTION D
+Parse the assistant text for completion phrases like I have finished before terminating the loop
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Build a Multi-Tool Agent Loop
+Difficulty
+45 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>How the agentic loop lifecycle works with the Messages API
+Why stop_reason is the authoritative signal for loop control
+How to handle tool_use and end_turn stop_reason values correctly
+How to append tool results to conversation history for multi-turn execution
+When safety iteration caps are appropriate versus inappropriate as stopping mechanisms
+Set up a Claude API client with two tools: a calculator tool (accepts expression, returns result) and a web search stub (accepts query, returns mock results)</p>
+<p>WHY: Multi-tool setups expose model-driven decision-making — Claude must select the right tool based on context, which is core to agentic architecture.</p>
+<p>YOU SHOULD SEE: Two tool definitions registered with proper JSON Schema input_schema, each with name, description, and parameters.</p>
+<p>Stuck? Get a nudge
+Implement the agentic loop that sends requests to Claude and inspects stop_reason after each response</p>
+<p>WHY: The agentic loop is the core execution pattern — the exam tests whether you use stop_reason (deterministic) versus content-type checks or natural language parsing (unreliable).</p>
+<p>YOU SHOULD SEE: A while loop that calls client.messages.create() and checks response.stop_reason after each iteration.</p>
+<p>Stuck? Get a nudge
+Handle the tool_use stop_reason by executing the requested tool, creating a tool result message, and appending it to conversation history</p>
+<p>WHY: This is the critical handoff in the loop — the exam specifically tests whether you correctly extract tool calls, execute them, and return results in the right message format.</p>
+<p>YOU SHOULD SEE: When Claude requests a tool, your code extracts the tool_use block, runs the corresponding function, and appends both the assistant response and a user message with tool_result to the conversation.</p>
+<p>Stuck? Get a nudge
+Handle the end_turn stop_reason by extracting and returning the final response</p>
+<p>WHY: end_turn is Claude signal that it has completed the task — extracting the final text response correctly closes the loop and returns the result to the user.</p>
+<p>YOU SHOULD SEE: When stop_reason is end_turn, your loop exits and returns the text content from the final response.</p>
+<p>Stuck? Get a nudge
+Test with a prompt that requires multiple sequential tool calls (e.g., search for a value then calculate something with it) and verify the loop continues correctly through all iterations</p>
+<p>WHY: Sequential tool calls test the full loop lifecycle — the agent must complete one tool call, receive the result, reason about it, and decide to call another tool before finally returning.</p>
+<p>YOU SHOULD SEE: At least two tool call iterations before end_turn. The agent searches first, uses the search result in a calculation, then returns the combined answer.</p>
+<p>Stuck? Get a nudge
+Add a safety iteration cap of 20 as a maximum bound (not the primary stopping mechanism) and log a warning if it triggers</p>
+<p>WHY: The exam distinguishes safety caps (acceptable as a fallback) from using caps as the primary stopping mechanism (an anti-pattern). Your cap should never trigger in normal operation.</p>
+<p>YOU SHOULD SEE: A MAX_ITERATIONS constant, a counter that increments each loop, and a warning log if the cap is hit. Normal queries should terminate via stop_reason well before reaching 20.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Agent SDK Overview — Anthropic
+Messages API Reference — Anthropic
+Building with Claude API (Skilljar) — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+NEXT LESSON
+Multi-Agent Orchestration</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide Main Document | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/dnacenta-claude-certified-architect/guide-main-document/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Guide Main Document
+</div>
+
+<article>
+  <header>
+    <h1>Guide Main Document</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">dnacenta</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="claude-certified-architect--foundations">Claude Certified Architect — Foundations</h1>
+<p>Anthropic&rsquo;s technical certification for solution architects building production applications with Claude (exam code <strong>CCAR-F</strong>). 60 multiple-choice, scenario-based questions in 120 minutes, proctored and closed-book. Passing score: 720/1000. Candidates answer questions from 4 of 6 randomly selected scenarios. No penalty for guessing.</p>
+<p>Part of a four-credential family: <a href="certs/ccao-f-associate.md">Claude Certified Associate — Foundations (CCAO-F)</a>, <strong>Architect — Foundations (CCAR-F)</strong> — this guide, <a href="certs/ccar-p-architect-professional.md">Architect — Professional (CCAR-P)</a>, and <a href="certs/ccdv-f-developer.md">Developer — Foundations (CCDV-F)</a>. Delivered via Pearson VUE (OnVUE online or test center), registered through the Anthropic Partner Academy. Per Exam Guide v1.0 (effective July 2026): $125 per attempt, certification valid 12 months, up to 4 attempts per rolling 12 months (14/30/90-day waits after attempts 1–3). Renewal is free when done on time — review what changed since you certified and pass a non-proctored assessment; let it lapse and the full exam fee applies again. Access remains gated to the Claude Partner Network (registration needs a partner-domain email); the earlier &ldquo;$99, first 5,000 partner employees free&rdquo; beta terms are superseded.</p>
+<p>Target: Solution architect with 6+ months experience with Claude APIs, Agent SDK, Claude Code, and MCP.</p>
+<hr>
+<h2 id="current-model-lineup-september-2026">Current Model Lineup (September 2026)</h2>
+<p>The exam is model-agnostic, but scenario questions and code samples assume a current lineup. This guide&rsquo;s samples use <strong><code>claude-opus-5</code></strong>.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Model</th>
+					<th>ID</th>
+					<th>Context</th>
+					<th>Max output</th>
+					<th>Price (in / out per MTok)</th>
+					<th>Notes</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Claude Fable 5.1</td>
+					<td><code>claude-fable-5-1</code></td>
+					<td>1M</td>
+					<td>128k</td>
+					<td>$10 / $50 (cache reads $0.25)</td>
+					<td>Most capable widely released model (2026-09-01); thinking always on; <strong>no forced <code>tool_choice</code></strong>; thinking blocks bound to model + history</td>
+			</tr>
+			<tr>
+					<td><strong>Claude Opus 5</strong></td>
+					<td><code>claude-opus-5</code></td>
+					<td>1M</td>
+					<td>128k</td>
+					<td>$5 / $25</td>
+					<td><strong>Default for complex agentic coding and enterprise work</strong></td>
+			</tr>
+			<tr>
+					<td>Claude Sonnet 5</td>
+					<td><code>claude-sonnet-5</code></td>
+					<td>1M</td>
+					<td>128k</td>
+					<td>$2 / $10</td>
+					<td>Best speed/intelligence balance; no mid-conversation system messages, no task budgets</td>
+			</tr>
+			<tr>
+					<td>Claude Haiku 4.5</td>
+					<td><code>claude-haiku-4-5</code></td>
+					<td>200k</td>
+					<td>64k</td>
+					<td>$1 / $5</td>
+					<td>Fastest; only current model still using <code>budget_tokens</code> thinking; no <code>effort</code></td>
+			</tr>
+	</tbody>
+</table>
+<p>Claude Mythos 5.1 (<code>claude-mythos-5-1</code>) shares Fable 5.1&rsquo;s specs and is invitation-only under Project Glasswing, for defensive cybersecurity work; unlike Mythos 5 it runs safety classifiers, so <code>refusal</code> handling applies there too. <strong>Legacy but still available:</strong> Fable 5, Opus 4.8, Opus 4.7, Opus 4.6, Opus 4.5, Sonnet 4.6, Sonnet 4.5. Opus 4.1 retired on 2026-08-05. Anthropic now publishes retirement floors: Fable 5.1 not before 2027-09-01, Opus 5 not before 2027-07-24, Sonnet 5 not before 2027-06-30, Haiku 4.5 not before 2026-10-15.</p>
+<p>Model IDs from the 4.6 generation onward are <strong>dateless but still pinned snapshots</strong>, not evergreen pointers. Query <code>client.models.list()</code> / <code>.retrieve(id)</code> for live <code>max_input_tokens</code>, <code>max_tokens</code>, and <code>capabilities</code> rather than hardcoding a table like this one.</p>
+<p><strong>What Fable 5.1 changes for architects</strong> (the same API surface as Fable 5, plus three breaking changes — details in Domain 2 §2.3, Domain 4 §4.7, Domain 5 §5.7):</p>
+<ol>
+<li><code>tool_choice: &quot;any&quot;</code> and <code>{&quot;type&quot;: &quot;tool&quot;, ...}</code> return <strong>400</strong>. Use <code>auto</code> plus an explicit instruction, <code>strict: true</code>, or structured outputs.</li>
+<li>Thinking blocks are readable only by the model that produced them or a newer one — a fallback or router switch to an older model silently drops them (unbilled) and that model re-plans.</li>
+<li>Editing, reordering, or removing earlier turns invalidates every later thinking block. Harnesses must be <strong>append-only</strong>: freeze <code>system</code> and <code>tools</code>, move mid-session changes into <code>role: &quot;system&quot;</code> messages, and trim context server-side (compaction / context editing) rather than on the client.</li>
+</ol>
+<p>Fable 5.1 also requires 30-day data retention (no zero-data-retention orgs unless authorized) and is excluded from Priority Tier, as are Opus 5 and Sonnet 5.</p>
+<blockquote>
+<p><strong>Docs (since 2026-07):</strong> Anthropic split its documentation. API docs live at <code>platform.claude.com/docs/en/*</code>, Claude Code docs at <code>code.claude.com/docs/en/*</code>; the old <code>docs.anthropic.com</code> URLs still redirect. The SDK was renamed from &ldquo;Claude Code SDK&rdquo; to the <strong>Claude Agent SDK</strong> (<code>pip install claude-agent-sdk</code>, <code>npm install @anthropic-ai/claude-agent-sdk</code>).</p>
+<p><strong>Program (Exam Guide v1.0, effective July 2026):</strong> four credentials (CCAO-F, CCAR-F, CCAR-P, CCDV-F), proctored via Pearson VUE, registered through the Anthropic Partner Academy. $125 for CCAR-F, 12-month validity — superseding the launch-period &ldquo;$99 / first 5,000 partner employees free&rdquo; terms.</p>
+<p>Refresh history: <a href="CHANGELOG.md">CHANGELOG.md</a>.</p>
+</blockquote>
+<hr>
+<h2 id="exam-domains">Exam Domains</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Domain</th>
+					<th>Weight</th>
+					<th>Deep Dive</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Agentic Architecture &amp; Orchestration</td>
+					<td>27%</td>
+					<td><a href="domains/d1-agentic-architecture.md">domains/d1-agentic-architecture.md</a></td>
+			</tr>
+			<tr>
+					<td>Tool Design &amp; MCP Integration</td>
+					<td>18%</td>
+					<td><a href="domains/d2-tool-design-mcp.md">domains/d2-tool-design-mcp.md</a></td>
+			</tr>
+			<tr>
+					<td>Claude Code Configuration &amp; Workflows</td>
+					<td>20%</td>
+					<td><a href="domains/d3-claude-code-config.md">domains/d3-claude-code-config.md</a></td>
+			</tr>
+			<tr>
+					<td>Prompt Engineering &amp; Structured Output</td>
+					<td>20%</td>
+					<td><a href="domains/d4-prompt-engineering.md">domains/d4-prompt-engineering.md</a></td>
+			</tr>
+			<tr>
+					<td>Context Management &amp; Reliability</td>
+					<td>15%</td>
+					<td><a href="domains/d5-context-reliability.md">domains/d5-context-reliability.md</a></td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="the-6-exam-scenarios">The 6 Exam Scenarios</h2>
+<ol>
+<li><strong>Customer Support Resolution Agent</strong> — Agent SDK, MCP tools, escalation logic</li>
+<li><strong>Code Generation with Claude Code</strong> — CLAUDE.md, plan mode, slash commands</li>
+<li><strong>Multi-Agent Research System</strong> — Coordinator-subagent patterns, error handling</li>
+<li><strong>Developer Productivity with Claude</strong> — Built-in tools, MCP servers, codebase exploration</li>
+<li><strong>Claude Code for CI/CD</strong> — Structured output, batch API, multi-pass review</li>
+<li><strong>Structured Data Extraction</strong> — JSON schemas, tool_use, validation-retry</li>
+</ol>
+<hr>
+<h2 id="the-10-critical-anti-patterns">The 10 Critical Anti-Patterns</h2>
+<p>These show up as wrong answers on the exam:</p>
+<ol>
+<li>Parsing natural language for loop termination instead of checking <code>stop_reason</code></li>
+<li>Arbitrary iteration caps as primary stopping mechanism</li>
+<li>Prompt-based enforcement for critical business rules (should use hooks)</li>
+<li>Self-reported confidence scores for escalation decisions</li>
+<li>Sentiment-based escalation (sentiment ≠ complexity)</li>
+<li>Generic error messages hiding diagnostic context</li>
+<li>Silently suppressing errors (returning empty results as success)</li>
+<li>Too many tools per agent (18 vs 4-5 recommended) — see Domain 2 §2.3 for how tool search changes this in the current API</li>
+<li>Same-session self-review (retains reasoning context bias)</li>
+<li>Aggregate accuracy metrics masking per-document-type failures</li>
+</ol>
+<hr>
+<h2 id="key-decision-frameworks">Key Decision Frameworks</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Decision</th>
+					<th>Option A</th>
+					<th>Option B</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Enforcement</td>
+					<td><strong>Programmatic hooks</strong> — financial/safety</td>
+					<td><strong>Prompt-based</strong> — best-effort</td>
+			</tr>
+			<tr>
+					<td>Execution mode</td>
+					<td><strong>Plan mode</strong> — multi-file, architectural</td>
+					<td><strong>Direct</strong> — single-file, obvious</td>
+			</tr>
+			<tr>
+					<td>tool_choice</td>
+					<td><strong>&ldquo;any&rdquo;</strong> — guarantee tool call</td>
+					<td><strong>Forced</strong> — specific tool first. <em>Both return 400 on Fable 5.1 / Mythos 5.1</em> — there, <code>auto</code> + instruction + <code>strict: true</code>, or <code>output_config.format</code></td>
+			</tr>
+			<tr>
+					<td>API type</td>
+					<td><strong>Synchronous</strong> — blocking workflows</td>
+					<td><strong>Batch</strong> — latency-tolerant</td>
+			</tr>
+			<tr>
+					<td>Error handling</td>
+					<td><strong>Structured context</strong> — category, retry, partial</td>
+					<td>Never generic or silent</td>
+			</tr>
+			<tr>
+					<td>Escalation</td>
+					<td><strong>Immediate</strong> — explicit customer request</td>
+					<td><strong>Resolve first</strong> — within capability</td>
+			</tr>
+			<tr>
+					<td>Code review</td>
+					<td><strong>Multi-pass</strong> — large PRs</td>
+					<td><strong>Single-pass</strong> — small, focused</td>
+			</tr>
+			<tr>
+					<td>Context passing</td>
+					<td><strong>Always explicit</strong> in subagent prompts</td>
+					<td>Never rely on auto-inheritance</td>
+			</tr>
+			<tr>
+					<td>Thinking</td>
+					<td><strong>Adaptive</strong> (<code>{&quot;type&quot;: &quot;adaptive&quot;}</code>) on every current model</td>
+					<td><code>budget_tokens</code> is removed — 400 on Fable 5.x / Opus 5 / Sonnet 5 / 4.7 / 4.8</td>
+			</tr>
+			<tr>
+					<td>Effort</td>
+					<td><strong><code>high</code></strong> (default) then sweep — <code>xhigh</code> for the hardest coding/agentic work on Opus 5 / Fable 5.1, and the recommended start on Opus 4.8 / 4.7</td>
+					<td><strong><code>low</code> / <code>medium</code></strong> — subagents, mechanical and routine tasks</td>
+			</tr>
+			<tr>
+					<td>Tool exposure</td>
+					<td><strong>Load upfront</strong> — under ~10 tools</td>
+					<td><strong>Tool search + <code>defer_loading</code></strong> — 10+ tools or multi-server MCP</td>
+			</tr>
+			<tr>
+					<td>Context reduction</td>
+					<td><strong>Clear</strong> (context editing) — verbose tool results</td>
+					<td><strong>Compact</strong> — long conversations that need their narrative</td>
+			</tr>
+			<tr>
+					<td>State that must persist</td>
+					<td><strong>Memory tool / files</strong></td>
+					<td>Never rely on the conversation surviving compaction</td>
+			</tr>
+			<tr>
+					<td>Agent harness</td>
+					<td><strong>Tool Runner / Agent SDK</strong> — you host</td>
+					<td><strong>Managed Agents</strong> — Anthropic hosts loop + sandbox</td>
+			</tr>
+			<tr>
+					<td>Conversation history</td>
+					<td><strong>Append-only</strong> — freeze <code>system</code>/<code>tools</code>, changes via <code>role: &quot;system&quot;</code> messages</td>
+					<td>Never edit or snip earlier turns on Fable 5.1 — it invalidates thinking blocks</td>
+			</tr>
+			<tr>
+					<td>Many-agent orchestration (Claude Code)</td>
+					<td><strong>Subagents / forks</strong> — a few delegated tasks per turn</td>
+					<td><strong>Dynamic workflows</strong> — a script the runtime executes for dozens to hundreds of agents</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="4-week-study-plan">4-Week Study Plan</h2>
+<p>Assumes daily study, 1.5–2 hours per day.</p>
+<table>
+	<thead>
+			<tr>
+					<th>Week</th>
+					<th>Focus</th>
+					<th>Topics</th>
+					<th>Daily Goal</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>Core Architecture</td>
+					<td>Agentic loops, <code>stop_reason</code>, multi-agent orchestration, hooks, session management, tool design, MCP config</td>
+					<td>1 domain section + practice questions</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>Applied Skills</td>
+					<td>CLAUDE.md hierarchy, plan mode, CI/CD, Batches API, explicit criteria, few-shot, validation-retry, structured output</td>
+					<td>1 domain section + build a small project using each concept</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>Reliability + Hands-On</td>
+					<td>Context management, escalation, error propagation, provenance, hands-on exercises across all domains</td>
+					<td>Review weak areas + build an end-to-end scenario</td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>Exam Prep</td>
+					<td>Practice exams, anti-pattern drills, scenario walkthroughs, timed question sets</td>
+					<td>1 full practice exam per day + targeted review</td>
+			</tr>
+	</tbody>
+</table>
+<hr>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F6nizmqk8tpzpfjvt6qmmav7rh%2Fpublic%2F1783542750%2FClaude+Certified+Architect+%E2%80%93+Foundations+Exam+Guide.pdf">Official CCAR-F Exam Guide (PDF, v1.0)</a> — the <a href="https://everpath-course-content.s3-accelerate.amazonaws.com/instructor%2F8lsy243ftffjjy1cx9lm3o2bw%2Fpublic%2F1773274827%2FClaude+Certified+Architect+%E2%80%93+Foundations+Certification+Exam+Guide.pdf">March 2026 launch guide</a> is superseded</li>
+<li><a href="https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification">Anthropic Partner Academy — CCAR-F registration</a> · <a href="https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses">Prep courses</a> · <a href="https://anthropic-partners.skilljar.com/page/faq-certifications">Certification FAQ</a> (renewal, retakes, eligibility)</li>
+<li><a href="https://www.pearsonvue.com/us/en/anthropic.html">Pearson VUE — Anthropic certification program</a></li>
+<li><a href="https://anthropic.skilljar.com/claude-with-the-anthropic-api">Anthropic Skilljar — Building with Claude API</a></li>
+<li><a href="https://github.com/SGridworks/claude-certified-architect-training">12-Week Training Program (GitHub)</a></li>
+<li><a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents (Anthropic Research)</a></li>
+<li><a href="https://www.anthropic.com/news/claude-partner-network">Claude Partner Network</a></li>
+</ul>
+<p><strong>API (platform.claude.com)</strong></p>
+<ul>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview">Tool use overview</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool">Tool search tool</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling">Programmatic tool calling</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool">Memory tool</a></li>
+<li><a href="https://platform.claude.com/docs/en/agents-and-tools/mcp-connector">MCP connector</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/thinking">Thinking</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/preserved-thinking">Preserved thinking</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/effort">Effort</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/task-budgets">Task budgets</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages">Mid-conversation system messages</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/context-editing">Context editing</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/compaction">Compaction</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Prompt caching</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/cache-diagnostics">Cache diagnostics</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/structured-outputs">Structured outputs</a></li>
+<li><a href="https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons">Stop reasons and fallback</a> · <a href="https://platform.claude.com/docs/en/build-with-claude/refusals-and-fallback">Refusals and fallback</a></li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/overview">Managed Agents overview</a> · <a href="https://platform.claude.com/docs/en/cli-sdks-libraries/cli/quickstart"><code>ant</code> CLI</a> · <a href="https://platform.claude.com/docs/en/manage-claude/admin-api">Admin API</a></li>
+<li><a href="https://platform.claude.com/docs/en/models/overview">Models overview</a> · <a href="https://platform.claude.com/docs/en/models/fable-5-1/migration-guide">Claude Fable 5.1 migration guide</a> · <a href="https://platform.claude.com/docs/en/about-claude/model-deprecations">Model deprecations</a> · <a href="https://platform.claude.com/docs/en/about-claude/pricing">Pricing</a></li>
+</ul>
+<p><strong>Claude Code (code.claude.com)</strong></p>
+<ul>
+<li><a href="https://code.claude.com/docs/en/overview">Overview</a> · <a href="https://code.claude.com/docs/en/cli-reference">CLI reference</a></li>
+<li><a href="https://code.claude.com/docs/en/sub-agents">Subagents</a> · <a href="https://code.claude.com/docs/en/workflows">Dynamic workflows</a> · <a href="https://code.claude.com/docs/en/agent-teams">Agent teams</a> · <a href="https://code.claude.com/docs/en/skills">Skills</a> · <a href="https://code.claude.com/docs/en/plugins">Plugins</a> · <a href="https://code.claude.com/docs/en/hooks">Hooks</a></li>
+<li><a href="https://code.claude.com/docs/en/mcp">MCP</a> · <a href="https://code.claude.com/docs/en/memory">Memory and CLAUDE.md</a> · <a href="https://code.claude.com/docs/en/routines">Routines</a> · <a href="https://code.claude.com/docs/en/commands">Commands</a> · <a href="https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md">Changelog</a></li>
+<li><a href="https://code.claude.com/docs/en/agent-sdk/overview">Claude Agent SDK overview</a></li>
+</ul>
+<p><strong>Background reading</strong></p>
+<ul>
+<li><a href="https://modelcontextprotocol.io/introduction">MCP Introduction</a></li>
+<li><a href="https://www.anthropic.com/engineering/advanced-tool-use">Advanced tool use (Anthropic Engineering)</a></li>
+<li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective context engineering for AI agents</a></li>
+</ul>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

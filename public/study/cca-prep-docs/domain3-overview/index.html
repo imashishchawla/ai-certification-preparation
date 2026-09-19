@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Domain3 Overview | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/cca-prep-docs/domain3-overview/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Domain3 Overview
+</div>
+
+<article>
+  <header>
+    <h1>Domain3 Overview</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">cca-prep</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <hr>
+<h2 id="sidebar_label-overview-20">id: overview
+title: Domain 3 — Claude Code Configuration &amp; Workflows
+sidebar_label: Overview (20%)</h2>
+<h1 id="domain-3--claude-code-configuration--workflows">Domain 3 — Claude Code Configuration &amp; Workflows</h1>
+<p><strong>Exam weight: 20%</strong></p>
+<p>This domain tests your ability to configure Claude Code for team workflows using CLAUDE.md files, Agent Skills, custom slash commands, hooks, and CI/CD integration.</p>
+<h2 id="what-this-domain-tests">What this domain tests</h2>
+<table>
+	<thead>
+			<tr>
+					<th>Task Statement</th>
+					<th>Description</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>3.1</td>
+					<td>Configure persistent project context with CLAUDE.md</td>
+			</tr>
+			<tr>
+					<td>3.2</td>
+					<td>Design and use plan mode for high-impact operations</td>
+			</tr>
+			<tr>
+					<td>3.3</td>
+					<td>Create custom slash commands for repeatable workflows</td>
+			</tr>
+			<tr>
+					<td>3.4</td>
+					<td>Integrate Claude Code into CI/CD pipelines</td>
+			</tr>
+			<tr>
+					<td>3.5</td>
+					<td>Apply hooks for deterministic post-action behavior</td>
+			</tr>
+			<tr>
+					<td>3.6</td>
+					<td>Configure tool access with allowedTools and permissionMode</td>
+			</tr>
+	</tbody>
+</table>
+<h2 id="claudemd--the-persistent-project-context">CLAUDE.md — the persistent project context</h2>
+<p>CLAUDE.md is a markdown file that Claude Code reads automatically at the start of every session. It functions as a &ldquo;tech lead in a file&rdquo; — encoding institutional knowledge that applies to every interaction.</p>
+<h3 id="hierarchy-most-specific-wins">Hierarchy (most specific wins)</h3>
+<pre tabindex="0"><code>subdirectory CLAUDE.md  ← highest priority
+       ↑
+project root CLAUDE.md
+       ↑
+~/.claude/CLAUDE.md     ← lowest priority (global user defaults)
+</code></pre><p><strong>Example: monorepo structure</strong></p>
+<pre tabindex="0"><code>/project/
+  CLAUDE.md              ← shared rules: git conventions, PR format, CI commands
+  /frontend/
+    CLAUDE.md            ← React patterns, component conventions, design system tokens
+  /backend/
+    CLAUDE.md            ← Python type hints, FastAPI patterns, test structure
+</code></pre><h3 id="what-belongs-in-claudemd">What belongs in CLAUDE.md</h3>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># Project: Payments Platform
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Build commands
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> <span style="color:#0a3069">`npm run dev`</span> — start dev server
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> <span style="color:#0a3069">`npm test`</span> — run full test suite
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> <span style="color:#0a3069">`npm run lint &amp;&amp; npm run typecheck`</span> — required before PR
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Architecture
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> Services communicate via gRPC, not REST
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> All new services must implement health check at /health
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> Database: Postgres 15 via Prisma ORM
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## Coding standards
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> TypeScript strict mode required everywhere
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> No <span style="color:#0a3069">`any`</span> types — use <span style="color:#0a3069">`unknown`</span> and type guards
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">-</span> All async functions must handle errors explicitly
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>## PR checklist
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">- [ ]</span> Tests added for new behavior
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">- [ ]</span> No console.log left in code
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">- [ ]</span> API changes documented in /docs/api
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="plan-mode">Plan mode</h2>
+<p>Plan mode shows Claude&rsquo;s full intended action sequence before any file is modified. It is the human review checkpoint for high-stakes changes.</p>
+<p><strong>When plan mode is required:</strong></p>
+<table>
+	<thead>
+			<tr>
+					<th>Scenario</th>
+					<th>Why</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Large-scale refactor (10+ files)</td>
+					<td>Verify scope before execution</td>
+			</tr>
+			<tr>
+					<td>Database schema migration</td>
+					<td>Irreversible in production</td>
+			</tr>
+			<tr>
+					<td>CI/CD deployment</td>
+					<td>Broad system impact</td>
+			</tr>
+			<tr>
+					<td>Authentication changes</td>
+					<td>High-risk, hard to reverse</td>
+			</tr>
+	</tbody>
+</table>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># Invoke plan mode</span>
+</span></span><span style="display:flex;"><span>/plan
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Or with a specific task description</span>
+</span></span><span style="display:flex;"><span>/plan refactor authentication to use JWT across all services
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Claude shows the plan → you review → approve, modify, or cancel.</p>
+<h2 id="custom-slash-commands">Custom slash commands</h2>
+<p>Custom slash commands package repeatable multi-step workflows:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/review-pr     → lint + <span style="color:#6639ba">test</span> coverage + security scan + summarize findings
+</span></span><span style="display:flex;"><span>/add-tests     → explore structure + identify gaps + generate tests + run them
+</span></span><span style="display:flex;"><span>/deploy-staging → build + <span style="color:#6639ba">test</span> + deploy + smoke <span style="color:#6639ba">test</span> + notify team
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Commands are defined in <code>.claude/commands/</code> and can be shared across the team via version control.</p>
+<h2 id="hooks">Hooks</h2>
+<p>Hooks run shell commands at specific points in the Claude Code agent loop:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-json" data-lang="json"><span style="display:flex;"><span><span style="color:#57606a">// .claude/settings.json
+</span></span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0550ae">&#34;hooks&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0550ae">&#34;PostToolUse&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;matcher&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">{</span> <span style="color:#0550ae">&#34;tool_name&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;Write&#34;</span> <span style="color:#1f2328">},</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&#34;hooks&#34;</span><span style="color:#1f2328">:</span> <span style="color:#1f2328">[{</span> <span style="color:#0550ae">&#34;type&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;command&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">&#34;command&#34;</span><span style="color:#1f2328">:</span> <span style="color:#0a3069">&#34;npm run lint -- ${file}&#34;</span> <span style="color:#1f2328">}]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This hook runs the linter automatically after every file write — deterministic quality enforcement without prompting.</p>
+<h2 id="tool-access-configuration">Tool access configuration</h2>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># Read-only exploration agent</span>
+</span></span><span style="display:flex;"><span>options <span style="color:#0550ae">=</span> ClaudeAgentOptions<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    allowed_tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;Read&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Glob&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Grep&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    permission_mode<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;default&#34;</span>  <span style="color:#57606a"># prompts before any write</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Development agent with auto-approved edits</span>
+</span></span><span style="display:flex;"><span>options <span style="color:#0550ae">=</span> ClaudeAgentOptions<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    allowed_tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;Read&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Glob&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Grep&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Write&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Bash&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    permission_mode<span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;acceptEdits&#34;</span>  <span style="color:#57606a"># auto-approves file operations</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Explicitly block sensitive tools</span>
+</span></span><span style="display:flex;"><span>options <span style="color:#0550ae">=</span> ClaudeAgentOptions<span style="color:#1f2328">(</span>
+</span></span><span style="display:flex;"><span>    allowed_tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;Read&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Glob&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Grep&#34;</span><span style="color:#1f2328">,</span> <span style="color:#0a3069">&#34;Write&#34;</span><span style="color:#1f2328">],</span>
+</span></span><span style="display:flex;"><span>    disallowed_tools<span style="color:#0550ae">=</span><span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;Bash&#34;</span><span style="color:#1f2328">]</span>  <span style="color:#57606a"># no shell execution</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong><code>permissionMode</code> values:</strong></p>
+<ul>
+<li><code>&quot;default&quot;</code> — prompts user for approval on each write operation</li>
+<li><code>&quot;acceptEdits&quot;</code> — auto-approves all file read/write; appropriate for CI/CD</li>
+</ul>
+<h2 id="cicd-integration">CI/CD integration</h2>
+<p>Claude Code in CI pipelines runs automated review on every PR:</p>
+<div class="highlight"><div style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#57606a"># .github/workflows/claude-review.yml</span><span style="color:#fff">
+</span></span></span><span style="display:flex;"><span>- <span style="color:#0550ae">name</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span>Run Claude Code review<span style="color:#fff">
+</span></span></span><span style="display:flex;"><span><span style="color:#fff">  </span><span style="color:#0550ae">run</span><span style="color:#1f2328">:</span><span style="color:#fff"> </span><span style="color:#1f2328">|</span><span style="color:#0a3069">
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    claude -p &#34;Review this PR for: security issues, missing tests, \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    architecture violations per CLAUDE.md, and documentation gaps. \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    Output structured JSON with findings array.&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    --output-format json &gt; review.json</span><span style="color:#fff">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Key considerations for CI prompts:</strong></p>
+<ul>
+<li>Load CLAUDE.md automatically (happens by default)</li>
+<li>Request structured output for downstream processing</li>
+<li>Include specific review criteria, not &ldquo;review this code&rdquo;</li>
+<li>Calibrate false positive rate with project-specific examples in CLAUDE.md</li>
+</ul>
+<h2 id="official-documentation">Official documentation</h2>
+<ul>
+<li><a href="https://code.claude.com/docs/en/overview">Claude Code overview</a></li>
+<li><a href="https://code.claude.com/docs/en/memory">Store instructions and memory (CLAUDE.md)</a></li>
+<li><a href="https://code.claude.com/docs/en/overview">Claude Code settings</a></li>
+<li><a href="https://platform.claude.com/docs/en/agent-sdk/agent-loop">Agent SDK permissions</a></li>
+</ul>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 Agentic Architecture__1 2 Orchestration Patterns | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/1-agentic-architecture__1-2-orchestration-patterns/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 1 Agentic Architecture__1 2 Orchestration Patterns
+</div>
+
+<article>
+  <header>
+    <h1>1 Agentic Architecture__1 2 Orchestration Patterns</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="12--multi-agent-orchestration--claude-certification-guide">1.2 — Multi-Agent Orchestration | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/1-agentic-architecture/1-2-orchestration-patterns">https://claudecertificationguide.com/learn/1-agentic-architecture/1-2-orchestration-patterns</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+1.1
+Agentic Loops
+1.2
+Multi-Agent Orchestration
+1.3
+Subagent Invocation and Context Passing
+1.4
+Workflow Enforcement and Handoff
+1.5
+Agent SDK Hooks
+1.6
+Task Decomposition Strategies
+1.7
+Session State and Resumption
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+AGENTIC ARCHITECTURE &amp; ORCHESTRATION
+/
+1.2
+DOMAIN 1
+TASK 1.2
+Mark Complete
+Multi-Agent Orchestration
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>Multi-agent orchestration is how you get several Claude agents working together on one complex task. The exam isn&rsquo;t loose about the shape this takes. It tests one pattern: hub-and-spoke, with a coordinator at the centre.</p>
+<p>Hub-and-Spoke Architecture</p>
+<p>The architecture has two roles:</p>
+<p>Coordinator agent: sits at the centre. Receives the initial task, decomposes it, decides which subagents to invoke, passes context to them, aggregates their results, handles errors, and routes information between them.
+Subagents: the spokes. Each one handles a specialised task (web search, document analysis, synthesis, report generation). They receive instructions from the coordinator and return results to it.</p>
+<p>The cardinal rule: ALL communication flows through the coordinator. Subagents never communicate directly with each other. Never. Not for efficiency, not for convenience, not for any reason. Every piece of information that moves between subagents passes through the coordinator.</p>
+<p>CURRENT STATE</p>
+<p>This strict hub-and-spoke model is what the exam tests. In current Claude Code a sub-agent can itself spawn sub-agents (nested parent-child delegation), so the &ldquo;never, for any reason&rdquo; absolute is an exam simplification rather than a hard product limit. On the exam, treat direct subagent-to-subagent communication as the wrong answer.</p>
+<p>This centralisation provides three things the exam cares about:</p>
+<p>Observability — you can log and monitor every message in one place.
+Consistent error handling — the coordinator applies uniform error recovery policies.
+Controlled information flow — the coordinator decides what context each subagent receives.</p>
+<p>KEY CONCEPT</p>
+<p>All inter-subagent communication flows through the coordinator. Subagents never communicate directly with each other. This is the foundational architectural constraint of hub-and-spoke orchestration.</p>
+<p>The Critical Isolation Principle</p>
+<p>This is the single most misunderstood idea in multi-agent systems, and the exam leans on that confusion hard.</p>
+<p>Subagents do NOT automatically inherit the coordinator&rsquo;s conversation history. When the coordinator spawns a subagent, that subagent starts with only what the coordinator explicitly includes in its prompt. It has no access to:</p>
+<p>The coordinator&rsquo;s system prompt (unless explicitly included)
+Previous messages in the coordinator&rsquo;s conversation
+Results from other subagents (unless the coordinator passes them)
+Any &ldquo;shared memory&rdquo; or global state</p>
+<p>Subagents do NOT share memory between invocations. If the coordinator calls the web search subagent twice, the second invocation has no knowledge of the first. Every invocation is independent.</p>
+<p>So the coordinator has to be deliberate about context. Every piece of information a subagent needs goes in its prompt, explicitly. If the synthesis agent needs web search results, the coordinator passes those results — the synthesis agent can&rsquo;t &ldquo;look them up&rdquo; from a shared store. There&rsquo;s no shared store.</p>
+<p>EXAM TRAP</p>
+<p>When a multi-agent system produces incomplete or incorrect output, the exam expects you to trace the failure to its origin. Do not blame the subagent that produced the output — check whether the coordinator gave it the right input.</p>
+<p>Coordinator Responsibilities</p>
+<p>The coordinator has four key responsibilities that the exam tests:</p>
+<ol>
+<li>
+<p>Dynamic subagent selection. The coordinator analyses query requirements and dynamically selects which subagents to invoke. It does NOT always route through the full pipeline. A simple factual question might only need the web search subagent, not the full research-analysis-synthesis chain. Routing every query through every subagent wastes time and resources.</p>
+</li>
+<li>
+<p>Research scope partitioning. When delegating to multiple subagents, the coordinator partitions the research scope to minimise duplication. It assigns distinct subtopics or source types to each agent. For example, one agent searches academic papers while another searches news articles — they do not both search the same sources.</p>
+</li>
+<li>
+<p>Iterative refinement loops. The coordinator evaluates synthesis output for gaps. If the synthesis is incomplete, it re-delegates to search and analysis subagents with targeted queries. It re-invokes synthesis until coverage is sufficient. This is not a single-shot process — it is an iterative cycle.</p>
+</li>
+<li>
+<p>Centralised communication routing. All subagent communication routes through the coordinator for observability, consistent error handling, and controlled information flow.</p>
+</li>
+</ol>
+<p>The Narrow Decomposition Failure</p>
+<p>This is a specific exam pattern you must recognise. The exam guide&rsquo;s sample set includes a question (Question 7) where a coordinator decomposes &ldquo;impact of AI on creative industries&rdquo; into only visual arts subtopics, missing music, writing, and film entirely.</p>
+<p>The root cause is the coordinator&rsquo;s task decomposition, not any downstream agent. The web search agent searched thoroughly for what it was assigned. The synthesis agent synthesised everything it received. But the coordinator only assigned visual arts topics, so music, writing, and film were never researched.</p>
+<p>The exam expects you to trace failures to their origin. When a multi-agent system produces a report that misses entire categories, do not blame the subagents — check the coordinator&rsquo;s decomposition.</p>
+<p>This pattern applies broadly: if the output is incomplete in scope (not depth), the coordinator&rsquo;s decomposition is almost always the root cause.</p>
+<p>Practical Example: Research System Coverage Gap</p>
+<p>A multi-agent research system is tasked with &ldquo;renewable energy technologies.&rdquo; The coordinator decomposes this into &ldquo;solar panel efficiency&rdquo; and &ldquo;wind turbine design.&rdquo; Each subagent produces thorough, well-sourced research on its assigned topic.</p>
+<p>The final report is comprehensive on solar and wind but says nothing about geothermal, tidal, biomass, or nuclear fusion. The coverage gap is not because the search was poor or the synthesis was weak — it is because the coordinator never assigned those subtopics.</p>
+<p>The fix is not better search queries, not a more capable synthesis agent, and not more subagents. The fix is better coordinator decomposition that covers the full breadth of the topic.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Blaming downstream subagents for coverage gaps when the coordinator&rsquo;s task decomposition was too narrow</p>
+<p>Subagents research what they are assigned. If the coordinator only assigns solar and wind as subtopics for renewable energy, no subagent can cover geothermal or tidal. Trace failures to their origin — the coordinator&rsquo;s decomposition.</p>
+<p>EXAM TRAP</p>
+<p>Assuming subagents share memory or inherit the coordinator&rsquo;s conversation history</p>
+<p>Subagents have completely isolated context. They do not automatically inherit anything from the coordinator. Every piece of information must be explicitly passed in the subagent&rsquo;s prompt.</p>
+<p>EXAM TRAP</p>
+<p>Proposing direct inter-subagent communication as an efficiency improvement</p>
+<p>Direct communication breaks observability, consistent error handling, and controlled information flow. All communication must flow through the coordinator, regardless of perceived efficiency gains.</p>
+<p>EXAM TRAP</p>
+<p>Adding more subagents to fix a decomposition problem</p>
+<p>If the coordinator decomposes a topic too narrowly, adding more subagents does not help — they will receive equally narrow assignments. The fix is improving the coordinator&rsquo;s decomposition logic.</p>
+<p>Practice Scenario</p>
+<p>A multi-agent research system produces a report on &lsquo;renewable energy technologies&rsquo; that only covers solar and wind power. Each subagent produced thorough, well-sourced coverage of its assigned topic. The web search subagent returned relevant results for every query it received. The synthesis subagent accurately combined all research it was given. What is the most likely root cause of the coverage gap?</p>
+<p>OPTION A
+The document analysis subagent had no access to sources covering the other renewable energy categories, so none of those sections were ever written
+OPTION B
+The synthesis subagent failed to identify gaps in the research it received and request additional coverage of the missing technology categories from the coordinator
+OPTION C
+The web search subagent used queries that were too narrow, so geothermal, tidal, biomass and fusion sources never appeared anywhere in its results
+OPTION D
+The coordinator decomposed the topic into only solar and wind subtopics, never assigning geothermal, tidal, biomass, or fusion to any subagent
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Build a Hub-and-Spoke Research Coordinator
+Difficulty
+60 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>How hub-and-spoke architecture centralises all communication through a coordinator
+Why subagent isolation means every piece of context must be explicitly passed
+How to implement broad task decomposition that avoids the narrow decomposition failure
+How iterative refinement loops detect and fill coverage gaps
+Why tracing failures to the coordinator decomposition is the correct diagnostic approach
+Create a coordinator agent that accepts a broad research topic as input</p>
+<p>WHY: The coordinator is the central hub in hub-and-spoke architecture. The exam tests whether you understand that the coordinator owns task decomposition, subagent selection, and result aggregation — not the subagents.</p>
+<p>YOU SHOULD SEE: A coordinator function that accepts a topic string and returns a structured research report. It should have a system prompt defining its role as the orchestrating hub.</p>
+<p>Stuck? Get a nudge
+Implement task decomposition logic that breaks the topic into at least 5 distinct subtopics covering the full breadth of the subject</p>
+<p>WHY: Narrow decomposition is a specific exam failure pattern. The coordinator that only assigns solar and wind for renewable energy misses entire categories. The exam expects you to recognise that incomplete output traces back to the coordinator decomposition.</p>
+<p>YOU SHOULD SEE: A decomposition function that produces 5 or more subtopics for any broad topic. For renewable energy, it should cover solar, wind, geothermal, tidal, biomass, and fusion at minimum.</p>
+<p>Stuck? Get a nudge
+Spawn two subagents (web search and document analysis) with explicit context passing — include all relevant information in each subagent prompt</p>
+<p>WHY: Subagent isolation means no shared memory and no inherited context. The exam heavily tests this: if a subagent produces poor results, check whether the coordinator gave it sufficient context, not whether the subagent itself is flawed.</p>
+<p>YOU SHOULD SEE: Two subagent invocations where each receives the full assigned subtopic, the research goal, and any relevant context from prior agents — all explicitly included in the prompt.</p>
+<p>Stuck? Get a nudge
+Aggregate results from both subagents and evaluate coverage completeness</p>
+<p>WHY: The coordinator must evaluate whether the combined results cover the full breadth of the original topic. This is where iterative refinement starts — gaps detected here trigger re-delegation.</p>
+<p>YOU SHOULD SEE: An aggregation function that combines results from both subagents and produces a coverage assessment listing which subtopics are well-covered, partially covered, or missing.</p>
+<p>Stuck? Get a nudge
+Implement an iterative refinement loop: if the coordinator identifies coverage gaps, re-delegate to subagents with targeted queries and re-invoke until coverage is sufficient</p>
+<p>WHY: Iterative refinement is a core coordinator responsibility the exam tests. A single-shot delegation is not enough — the coordinator must evaluate output and re-delegate for gaps. This distinguishes a coordinator from a simple dispatcher.</p>
+<p>YOU SHOULD SEE: A loop that checks coverage, identifies gaps, sends targeted follow-up queries to subagents for the missing subtopics, and re-evaluates until a coverage threshold is met or a maximum iteration count is reached.</p>
+<p>Stuck? Get a nudge
+Test with the topic renewable energy technologies and verify that the final output covers solar, wind, geothermal, tidal, biomass, and fusion</p>
+<p>WHY: This specific test case maps to the exam narrow decomposition failure pattern. If your output only covers solar and wind, the root cause is the coordinator decomposition — the exact diagnostic the exam expects you to make.</p>
+<p>YOU SHOULD SEE: A final research report with substantive sections on all six energy types: solar, wind, geothermal, tidal, biomass, and fusion. The coverage evaluation should show 100% completeness.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Agent SDK Overview — Anthropic
+Building with Claude API, including the Multi-Agent Research System scenario (Skilljar) — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Agentic Loops
+NEXT LESSON
+Subagent Invocation and Context Passing</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

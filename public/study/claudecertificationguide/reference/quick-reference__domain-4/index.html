@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quick Reference__domain 4 | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/reference/quick-reference__domain-4/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Quick Reference__domain 4
+</div>
+
+<article>
+  <header>
+    <h1>Quick Reference__domain 4</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="quick-reference-domain-4--prompt-engineering--structured-output--claude-certification-guide">Quick Reference: Domain 4 — Prompt Engineering &amp; Structured Output | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/quick-reference/domain-4">https://claudecertificationguide.com/learn/quick-reference/domain-4</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+Quick Reference
+/
+Domain 4
+DOMAIN 4
+20%
+Quick Reference: Domain 4 — Prompt Engineering &amp; Structured Output
+Print this page
+System Prompts</p>
+<p>Concrete code examples beat prose descriptions. Instead of writing &ldquo;use clear variable names&rdquo;, show a before/after code snippet.</p>
+<p>Severity calibration: Without examples of what constitutes &ldquo;critical&rdquo; vs. &ldquo;minor&rdquo;, the model treats all issues as equally important. Provide 2–3 calibration examples showing severity levels with specific code samples.</p>
+<p>Structure a system prompt as:</p>
+<p>Role and context (who the model is, what it is doing)
+Rules and constraints (what it must/must not do)
+Output format specification
+Calibration examples (severity, tone, detail level)</p>
+<p>Key rule: System prompts are the most cost-effective way to control behaviour, because one prompt shapes every request rather than being repeated per call.</p>
+<p>Structured Output — tool_use vs Text
+Method	Guarantee	Use When
+Forced tool_choice ({ type: &ldquo;tool&rdquo;, name: &hellip; })	Tool call guaranteed; the tool&rsquo;s JSON schema constrains the shape	You need one specific structure every time
+tool_choice: any	A tool call is guaranteed, model picks which tool	Multiple extraction schemas, document type unknown
+tool_choice: auto	Model may or may not use the tool	Agentic loops where text responses are also valid
+Prompt-based JSON	No schema enforcement	Simple cases, prototyping only</p>
+<p>The exam&rsquo;s preferred pattern: Define a tool whose sole purpose is to structure output (e.g., extract_entities), then force it with tool_choice: { type: &ldquo;tool&rdquo;, name: &ldquo;extract_entities&rdquo; }. This guarantees the response matches your schema.</p>
+<p>Why tool_use over prompt-based JSON:</p>
+<p>Schema is validated by the API, not by post-processing
+Eliminates syntax errors: malformed JSON, missing fields, extra fields
+Works with streaming (structured chunks)</p>
+<p>The caveat the exam tests most: a strict JSON schema eliminates syntax errors but does not prevent semantic ones — line items that do not sum to the total, a value extracted into the wrong field, a plausible-looking date that is not the one in the document. Options claiming tool_use prevents all extraction errors are wrong.</p>
+<p>Schema Design for Structured Output
+Make fields optional or union-typed with null when data may be missing. If a field is required but the data is absent, the model will fabricate a value to satisfy the schema.
+Use enum for constrained choices to prevent freeform values.
+Keep schemas flat where possible — deeply nested schemas increase extraction errors.
+Include description fields on each property — these guide the model on what to extract.</p>
+<p>Fabrication prevention rule: If a field might not have a real value, give it a union type — {&ldquo;type&rdquo;: [&ldquo;string&rdquo;, &ldquo;null&rdquo;]} — and leave it out of the parent object&rsquo;s required array. That gives the model permission to return null instead of inventing data.</p>
+<p>Note the syntax: nullable: true is OpenAPI, not JSON Schema, and required is an array on the parent object rather than a per-property boolean. An input_schema using either form is rejected.</p>
+<p>Few-Shot Examples</p>
+<p>When to use few-shot: When instructions alone produce inconsistent output. Few-shot examples demonstrate the exact format and reasoning you expect.</p>
+<p>Best practices:</p>
+<p>2–4 examples is the sweet spot. More adds context cost; fewer may not cover edge cases.
+Include reasoning in examples, not just input → output. Show why the answer is what it is.
+Cover edge cases — at least one example should demonstrate boundary behaviour.
+Place examples in the system prompt for caching benefits, or in the user message for per-request variation.</p>
+<p>Diminishing returns: Going from 0 to 2 examples has the largest impact. Going from 4 to 8 rarely improves quality and costs more context.</p>
+<p>Prompt Chaining</p>
+<p>Scope note: the guide places prompt chaining under Task Statement 1.6 (fixed sequential pipelines versus dynamic adaptive decomposition), not Domain 4. It is repeated here because validation between steps is a natural companion to TS 4.4 retry loops, but expect it to be keyed as a Domain 1 construct.</p>
+<p>Multi-step pipelines where each step is a focused prompt with a single responsibility.</p>
+<p>Pattern: Step 1 (extract) → Step 2 (validate) → Step 3 (format) → Step 4 (synthesise)</p>
+<p>Advantages:</p>
+<p>Each step has a smaller, focused prompt — higher accuracy per step
+Intermediate results can be validated before proceeding
+Individual steps can be retried without rerunning the entire chain
+Different models can be used for different steps (cost optimisation)</p>
+<p>When to chain vs. single prompt: Chain when the task has distinct phases with different requirements. Use a single prompt when the task is cohesive and the output format is straightforward.</p>
+<p>Retry Pattern — retry-with-error-feedback</p>
+<p>When output fails validation, send back: original prompt + failed output + specific validation error.</p>
+<p>Copy
+Original: &ldquo;Extract all dates from this contract&rdquo;
+Failed output: { dates: [&ldquo;2024-01-15&rdquo;, &ldquo;next Tuesday&rdquo;] }
+Error: &ldquo;dates[1] is relative (&rsquo;next Tuesday&rsquo;), not absolute. All dates must be ISO 8601 format.&rdquo;</p>
+<p>The model sees what it produced, what was wrong, and can correct specifically. Never just say &ldquo;try again&rdquo; — always include the specific error.</p>
+<p>When to retry vs. escalate:</p>
+<p>Retry: Validation error, format mismatch, missing field — the model can fix it
+Escalate: Repeated failures (&gt;2 retries), confidence below threshold, fundamentally wrong interpretation</p>
+<p>Pydantic&rsquo;s role (Python): parsing enforces the schema; custom validators enforce semantic rules a JSON schema cannot express (sums that must match, ordered dates). Its ValidationError yields per-field messages you feed straight into the retry prompt.</p>
+<p>Batch API
+Property	Value
+Cost saving	50% cheaper than synchronous
+Latency	Up to 24 hours (not guaranteed faster)
+Use case	Latency-tolerant bulk workloads
+Not for	Real-time, interactive, or user-facing requests</p>
+<p>Key exam point: Batch API is for throughput and cost, not speed. If the question mentions &ldquo;real-time&rdquo; or &ldquo;user-facing&rdquo;, Batch API is wrong.</p>
+<p>Self-Review Limitation</p>
+<p>A model cannot effectively review its own output in the same session. It retains the reasoning that produced the original output and is biased toward confirming it.</p>
+<p>Fix: Use a separate model instance (new conversation, no shared history) for review. The reviewing instance sees only the output, not the reasoning that produced it.</p>
+<p>For large inputs: Use per-file passes (analyse each file independently) plus a cross-file integration pass (synthesise findings). This is the &ldquo;attention dilution&rdquo; mitigation — processing everything in one pass causes the model to miss details.</p>
+<p>Decision Rules for the Exam
+If the question says&hellip;	The answer is likely&hellip;
+&ldquo;guaranteed schema compliance&rdquo;	Forced tool_choice with specific tool; tool_choice: any when the document type is unknown
+&ldquo;output sometimes has wrong format&rdquo;	Add few-shot examples (2–4)
+&ldquo;model fabricates missing data&rdquo;	Make schema fields optional/nullable
+&ldquo;validation failed, need to fix&rdquo;	retry-with-error-feedback (original + failed + error)
+&ldquo;50% cost reduction&rdquo;, &ldquo;bulk processing&rdquo;	Batch API
+&ldquo;real-time&rdquo;, &ldquo;user-facing&rdquo;	NOT Batch API — use synchronous
+&ldquo;inconsistent output quality&rdquo;	Few-shot examples or prompt chaining
+&ldquo;review its own output&rdquo;	Separate instance (not same session)
+&ldquo;large document, missing details&rdquo;	Per-file passes + cross-file integration
+&ldquo;instructions alone aren&rsquo;t working&rdquo;	Add few-shot examples
+Common Exam Traps
+Trap	Correct Answer
+&ldquo;Use prompt-based JSON for production&rdquo;	Wrong — use forced tool_choice for guaranteed schema
+&ldquo;Just say &rsquo;try again&rsquo; on validation failure&rdquo;	Wrong — include original + failed output + specific error
+&ldquo;Batch API for faster responses&rdquo;	Wrong — Batch API trades latency for cost savings
+&ldquo;Review output in the same conversation&rdquo;	Wrong — same-session review is biased; use separate instance
+&ldquo;Add 10+ few-shot examples for best results&rdquo;	Wrong — 2–4 is the sweet spot; diminishing returns after that
+&ldquo;Required fields prevent fabrication&rdquo;	Wrong — required fields CAUSE fabrication when data is missing
+&ldquo;One big prompt handles everything&rdquo;	Wrong — chain prompts when task has distinct phases
+Previous
+Domain 3: Claude Code Configuration &amp; Workflows
+Next
+Domain 5: Context Management &amp; Reliability</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

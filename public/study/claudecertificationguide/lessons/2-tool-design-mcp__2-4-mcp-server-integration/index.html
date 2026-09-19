@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2 Tool Design Mcp__2 4 Mcp Server Integration | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/2-tool-design-mcp__2-4-mcp-server-integration/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 2 Tool Design Mcp__2 4 Mcp Server Integration
+</div>
+
+<article>
+  <header>
+    <h1>2 Tool Design Mcp__2 4 Mcp Server Integration</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="24--mcp-server-integration--claude-certification-guide">2.4 — MCP Server Integration | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/2-tool-design-mcp/2-4-mcp-server-integration">https://claudecertificationguide.com/learn/2-tool-design-mcp/2-4-mcp-server-integration</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+2.1
+Tool Interface Design
+2.2
+Structured Error Responses
+2.3
+Tool Distribution &amp; Tool Choice
+2.4
+MCP Server Integration
+2.5
+Built-in Tools
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+TOOL DESIGN &amp; MCP INTEGRATION
+/
+2.4
+DOMAIN 2
+TASK 2.4
+Mark Complete
+MCP Server Integration
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>MCP (Model Context Protocol) servers extend Claude&rsquo;s capabilities by connecting it to external systems — databases, APIs, development tools, issue trackers. Configuring them correctly determines whether your team shares a consistent toolset or descends into configuration chaos.</p>
+<p>The Scoping Hierarchy</p>
+<p>MCP server configuration lives at two levels, and mixing them up is where most setup problems start.</p>
+<p>Project-level: .mcp.json Lives in the project repository root. Version-controlled. Shared with every team member who clones or pulls the repository. Use this for servers that the entire team needs — your Jira integration, your GitHub tools, your internal API connectors.</p>
+<p>JSON
+Copy
+{
+&ldquo;mcpServers&rdquo;: {
+&ldquo;github&rdquo;: {
+&ldquo;type&rdquo;: &ldquo;http&rdquo;,
+&ldquo;url&rdquo;: &ldquo;<a href="https://api.githubcopilot.com/mcp/%22">https://api.githubcopilot.com/mcp/&quot;</a>
+},
+&ldquo;atlassian&rdquo;: {
+&ldquo;type&rdquo;: &ldquo;http&rdquo;,
+&ldquo;url&rdquo;: &ldquo;<a href="https://mcp.atlassian.com/v1/mcp/authv2%22">https://mcp.atlassian.com/v1/mcp/authv2&quot;</a>
+},
+&ldquo;filesystem&rdquo;: {
+&ldquo;command&rdquo;: &ldquo;npx&rdquo;,
+&ldquo;args&rdquo;: [&quot;-y&rdquo;, &ldquo;@modelcontextprotocol/server-filesystem&rdquo;, &ldquo;${WORKSPACE_ROOT:-.}&rdquo;]
+}
+}
+}</p>
+<p>Note the two entry shapes. A remote server declares &ldquo;type&rdquo;: &ldquo;http&rdquo; and a url. A local one declares a command and args, and speaks over stdio. An entry with a url but no type is a configuration error — Claude Code reads it as a stdio server, skips it, and tells you to add the type. Both GitHub and Atlassian ship official remote servers now, which is why neither is an npx line.</p>
+<p>User-level: ~/.claude.json Lives in the user&rsquo;s home directory. Personal. NOT version-controlled. NOT shared with teammates. Use this for experimental servers, personal integrations, or servers you&rsquo;re testing before proposing them to the team.</p>
+<p>CURRENT STATE</p>
+<p>Exam guide v1.0 describes MCP configuration at two levels, project and user, and that is the expected exam answer. As of 14 August 2026 the MCP documentation documents three scopes — local (the default), project and user — selected with -s / &ndash;scope, with ~/.claude.json holding both the local and user entries. On the exam, answer with the two-level project-vs-user split.</p>
+<p>Key principle: all tools from all configured servers (both project-level and user-level) are discovered at connection time and available simultaneously. There&rsquo;s no manual activation step — if a server is configured and reachable, its tools appear in the agent&rsquo;s toolkit.</p>
+<p>Environment Variable Expansion</p>
+<p>The .mcp.json file supports ${VARIABLE_NAME} syntax for environment variable expansion. This is how you keep credentials out of version control whilst still sharing server configuration with your team.</p>
+<p>JSON
+Copy
+{
+&ldquo;env&rdquo;: {
+&ldquo;GITHUB_TOKEN&rdquo;: &ldquo;${GITHUB_TOKEN}&rdquo;,
+&ldquo;DATABASE_URL&rdquo;: &ldquo;${DATABASE_URL}&rdquo;
+}
+}</p>
+<p>Each developer sets their own tokens locally (in their shell profile, .env file, or secrets manager). The .mcp.json file references the variable names, not the values. This means:</p>
+<p>The configuration file is safe to commit to version control
+Each developer authenticates with their own credentials
+Token rotation does not require config file changes
+No secrets leak through repository history</p>
+<p>There is a second form worth knowing: ${VAR:-default} expands to VAR when it is set and falls back to default when it is not. Use it for machine-specific paths that have a sensible fallback, as in the ${WORKSPACE_ROOT:-.} argument above. As of 14 August 2026, an unset variable with no default does not stop the rest of the configuration loading. Claude Code warns and carries on, so do not rely on a missing token failing loudly.</p>
+<p>MCP Resources</p>
+<p>MCP resources expose content catalogues to agents without requiring exploratory tool calls. Instead of calling a tool to discover what data exists, the agent gets that information upfront.</p>
+<p>That is the exam guide&rsquo;s framing and the keyed answer. One precision from the MCP specification (September 2026): resources are application-controlled. The server lists them, but the client decides when to attach one to the model&rsquo;s context, so the agent sees a resource only when the host surfaces it. Claude Code does that through @server:resource mentions and a resource-listing tool.</p>
+<p>Examples of what to expose as resources:</p>
+<p>Issue summaries — a list of current Jira issues with titles and statuses
+Documentation hierarchies — a table of contents for your internal docs
+Database schemas — table names, column types, and relationships</p>
+<p>The payoff is fewer wasted calls. Without resources, an agent might call list_tables, then describe_table for every table, burning tool calls just to get its bearings. With a database schema resource, it knows immediately.</p>
+<p>Resources show agents what data is available. Tools let them act on it.</p>
+<p>The Build-vs-Use Decision</p>
+<p>This decision comes up constantly, in the exam and in real work. Your team needs to integrate with an external system: build a custom MCP server, or use an existing community one?</p>
+<p>Use community servers for standard integrations:</p>
+<p>Jira, GitHub, Slack, Linear, Notion — these all have maintained community MCP servers
+They cover standard use cases, are tested by the community, and receive updates
+Using them saves development time and maintenance burden</p>
+<p>Build custom servers only when:</p>
+<p>Your team has specific workflows that community servers cannot handle
+You need custom business logic embedded in the tool layer
+You require integration with proprietary internal systems that have no community server</p>
+<p>The exam consistently favours the pragmatic choice. &ldquo;Evaluate community servers first&rdquo; is always correct when a standard integration is involved. &ldquo;Build custom&rdquo; is only correct when the scenario explicitly describes team-specific requirements that community servers cannot meet.</p>
+<p>Enhancing MCP Tool Descriptions</p>
+<p>Here&rsquo;s a subtle one: when an MCP tool has a sparse description, the agent may prefer built-in tools (like Grep) even when the MCP tool is more capable. The model simply has better context about built-in tools — their descriptions are rich and detailed.</p>
+<p>The fix: enhance your MCP tool descriptions to explain capabilities and outputs in detail. Instead of:</p>
+<p>Copy
+search_codebase: &ldquo;Searches code&rdquo;</p>
+<p>Write:</p>
+<p>Copy
+search_codebase: &ldquo;Performs semantic code search across the
+entire repository using AST-aware indexing. Returns matching
+functions, classes, and methods with full context including
+file path, line numbers, and surrounding code. More accurate
+than text-based grep for finding code by intent rather than
+exact string match. Use this instead of Grep when searching
+for code by what it does rather than what it contains.&rdquo;</p>
+<p>The enhanced description gives the model enough context to prefer the MCP tool when it&rsquo;s genuinely more capable than the built-in alternative.</p>
+<p>KEY CONCEPT</p>
+<p>Project-level .mcp.json is version-controlled and shared with the team. User-level ~/.claude.json is personal and not shared. Use ${ENV_VAR} syntax to keep credentials out of version control.</p>
+<p>Exam Traps
+EXAM TRAP</p>
+<p>Building a custom MCP server for a standard integration like Jira</p>
+<p>Community MCP servers exist for standard integrations and should be evaluated first. Custom builds are only justified for team-specific workflows that community servers cannot handle.</p>
+<p>EXAM TRAP</p>
+<p>Putting team-wide MCP server configuration in ~/.claude.json</p>
+<p>~/.claude.json is user-level and personal — it is not version-controlled or shared. Team-wide servers belong in .mcp.json at the project root.</p>
+<p>EXAM TRAP</p>
+<p>Committing credentials directly in .mcp.json instead of using environment variable expansion</p>
+<p>Credentials in version control are a security risk. Use ${GITHUB_TOKEN} syntax so each developer sets tokens locally and secrets never enter repository history.</p>
+<p>EXAM TRAP</p>
+<p>Leaving MCP tool descriptions sparse, causing the agent to prefer built-in tools</p>
+<p>The model defaults to tools it understands best. Sparse MCP descriptions lose out to detailed built-in tool descriptions. Enhance MCP descriptions to explain capabilities and outputs fully.</p>
+<p>Practice Scenario</p>
+<p>A team needs to integrate with Jira for issue tracking in their Claude Code workflow. A developer proposes building a custom MCP server. What is the correct first step?</p>
+<p>OPTION A
+Evaluate existing community MCP servers for Jira and only build custom if they cannot handle team-specific workflows.
+OPTION B
+Add the Jira integration to ~/.claude.json so that each developer can configure their own connection to Jira independently.
+OPTION C
+Use the Jira REST API directly from Bash commands instead of MCP, which avoids the whole server setup and its configuration.
+OPTION D
+Build a custom MCP server exposing exactly the Jira API endpoints the team needs, so the integration matches their workflow precisely.
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Configure MCP Servers with Scoping and Environment Variables
+Difficulty
+30 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Configure project-level MCP servers in .mcp.json for team-wide sharing
+Use environment variable expansion to keep credentials out of version control
+Distinguish between project-level and user-level MCP configuration scoping
+Expose MCP resources to reduce unnecessary exploratory tool calls
+Write enhanced MCP tool descriptions that compete with built-in tool descriptions
+Create a .mcp.json file in your project root configuring an official MCP server (e.g. the GitHub remote endpoint)</p>
+<p>WHY: Project-level .mcp.json is version-controlled and shared with every team member who clones the repository. The exam tests whether you know that team-wide servers belong here, not in ~/.claude.json. Using community servers for standard integrations is always the correct first choice.</p>
+<p>YOU SHOULD SEE: A .mcp.json file at the project root containing an mcpServers object with at least one server entry. A remote server needs &ldquo;type&rdquo;: &ldquo;http&rdquo; and a url; a local one needs command and args.</p>
+<p>Stuck? Get a nudge
+Use ${GITHUB_TOKEN} environment variable expansion for authentication credentials</p>
+<p>WHY: Committing credentials directly in .mcp.json is a security risk the exam penalises. The ${VARIABLE_NAME} syntax lets the configuration file reference environment variables without containing the actual values, keeping secrets out of repository history.</p>
+<p>YOU SHOULD SEE: The headers section of your server configuration contains ${GITHUB_TOKEN} (not an actual token value). Running git diff confirms no secrets are staged for commit. Each developer sets their own token locally.</p>
+<p>Stuck? Get a nudge
+Add a personal or experimental MCP server to ~/.claude.json for user-level configuration</p>
+<p>WHY: User-level configuration in ~/.claude.json is personal, not version-controlled, and not shared with teammates. The exam tests whether you know the scoping hierarchy: .mcp.json for team servers, ~/.claude.json for personal or experimental servers.</p>
+<p>YOU SHOULD SEE: A ~/.claude.json file with an mcpServers entry for a personal server (e.g. an experimental integration you are testing). This file is NOT in your project repository and NOT in version control.</p>
+<p>Stuck? Get a nudge
+Expose a content catalogue (e.g. a documentation hierarchy or database schema) as an MCP resource</p>
+<p>WHY: MCP resources give agents visibility into available data without requiring exploratory tool calls. Without resources, an agent might call list_tables then describe_table for every table, wasting multiple tool calls. A schema resource makes that information available immediately.</p>
+<p>YOU SHOULD SEE: An MCP resource definition that exposes structured data (e.g. a list of database tables with column types, or a documentation table of contents) accessible at a URI like db://schema/main. The resource should have a name, description, and mimeType.</p>
+<p>Stuck? Get a nudge
+Enhance the tool descriptions for your configured MCP server to explain capabilities and outputs in detail, preventing the agent from preferring built-in tools</p>
+<p>WHY: When an MCP tool has a sparse description, the agent prefers built-in tools like Grep because their descriptions are richer and more detailed. The exam tests whether you know that enhanced MCP descriptions are required to compete with built-in tools for selection priority.</p>
+<p>YOU SHOULD SEE: Tool descriptions that are 3-5 sentences long, explaining what the tool does, what it returns, when to use it, and how it compares to built-in alternatives. For example, a search_codebase tool description that explicitly states it is more accurate than Grep for semantic searches.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Certified Architect Foundations Exam Guide — Domain 2, Task Statement 2.4 — Anthropic
+MCP Server Configuration — Claude Code Documentation — Anthropic
+Model Context Protocol — Resources — Model Context Protocol
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+Tool Distribution &amp; Tool Choice
+NEXT LESSON
+Built-in Tools</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

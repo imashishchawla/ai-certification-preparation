@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Claude Certified Architect Foundations Exam Guide | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/exam-guides/blog-claude-certified-architect-foundations-exam-guide/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Blog Claude Certified Architect Foundations Exam Guide
+</div>
+
+<article>
+  <header>
+    <h1>Blog Claude Certified Architect Foundations Exam Guide</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="claude-certified-architect-foundations-exam-guide-and-blueprint--claude-certification-guide">Claude Certified Architect (Foundations): Exam Guide and Blueprint | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/blog/claude-certified-architect-foundations-exam-guide">https://claudecertificationguide.com/blog/claude-certified-architect-foundations-exam-guide</a></p>
+</blockquote>
+<p>JOURNAL
+/
+CLAUDE CERTIFIED ARCHITECT (FOUNDATIONS): EXAM GUIDE AND BLUEPRINT
+Claude Certified Architect (Foundations): Exam Guide and Blueprint
+Claude Certification Guide
+·
+24 July 2026
+·
+8 min read</p>
+<p>The Claude Certified Architect (Foundations) exam, code CCAR-F, is the certification this site was built around and the one you can prepare for in full, for free, today. It&rsquo;s aimed at solution architects who design and implement production applications with Claude, and it&rsquo;s the only one of Anthropic&rsquo;s four certifications that is scenario-based. That format tells you a lot about what it&rsquo;s really testing: not whether you&rsquo;ve memorised the docs, but whether you can make the right architectural call when a realistic situation puts several plausible options in front of you.</p>
+<p>This is the blueprint. If you want the week-by-week study plan and the specific traps, read the companion study guide after this.</p>
+<p>The format: four scenarios from a bank of six</p>
+<p>Most certification exams throw isolated questions at you. Architect (Foundations) works differently. You&rsquo;re presented with four scenarios drawn from a bank of six, and the questions attach to those scenarios. The six are:</p>
+<p>Customer Support Resolution Agent
+Code Generation with Claude Code
+Multi-Agent Research System
+Developer Productivity with Claude
+Claude Code for Continuous Integration
+Structured Data Extraction</p>
+<p>Because you don&rsquo;t know which four you&rsquo;ll get, there&rsquo;s no shortcut. You have to be comfortable reasoning about all six. Each one is a small production design problem, and the exam wants to see whether you&rsquo;d build it the way an experienced architect would.</p>
+<p>The rest of the mechanics match the wider programme: 60 items, 120 minutes, a scaled score of 720 on a 100 to 1,000 scale to pass, and a credential valid for 12 months. The guide is Version 1.0, effective July 2026.</p>
+<p>Who it&rsquo;s for</p>
+<p>The target candidate is a solution architect who has actually shipped things with Claude, not someone who has only read about it. The guide describes roughly six months of practical experience across the Claude APIs, the Agent SDK, Claude Code, and MCP. In practice that means you&rsquo;ve written multi-agent orchestration with subagent delegation, configured Claude Code with CLAUDE.md and Agent Skills, designed MCP tools and resources, prompted for structured output, and wired Claude into CI/CD with sensible escalation and reliability patterns.</p>
+<p>If that sounds like your job, this is your exam. If you&rsquo;re earlier in the journey, the free curriculum below closes the gap faster than you&rsquo;d expect.</p>
+<p>The five domains</p>
+<p>The weighting is uneven, and it rewards you to know where the marks are.</p>
+<p>Domain	Weight	What it tests
+Agentic Architecture &amp; Orchestration	27%	Agentic loops, orchestration patterns, guardrails, the Agent SDK
+Claude Code Configuration &amp; Workflows	20%	Settings hierarchy, CLAUDE.md, hooks, permissions, CI/CD
+Prompt Engineering &amp; Structured Output	20%	System prompts, few-shot patterns, output validation
+Tool Design &amp; MCP Integration	18%	Tool schemas, MCP servers and clients, tool routing
+Context Management &amp; Reliability	15%	Context windows, caching, long conversations, reliability</p>
+<p>Domain 1 alone is over a quarter of the exam. Agentic architecture and orchestration is where the most questions live and where candidates most often bleed marks, usually by mishandling the agentic loop or reaching for a complex fix when a simple one was on offer. If your study time is limited, weight it here first.</p>
+<p>The one pattern that runs through the whole exam</p>
+<p>Across every domain, the exam favours the simplest fix that works. When a scenario describes a tool being called at the wrong moment, the answer is almost always &ldquo;write a clearer tool description,&rdquo; not &ldquo;add a routing classifier.&rdquo; When output is inconsistent, it&rsquo;s usually &ldquo;give the model explicit, measurable criteria,&rdquo; not &ldquo;bolt on another model to check the first one.&rdquo; Learn to spot the answer that solves the stated problem with the least machinery, and you&rsquo;ll pick correctly far more often than not.</p>
+<p>How to prepare, for free</p>
+<p>This is the cert with the complete free curriculum behind it:</p>
+<p>The full curriculum covers all five domains across 30 lessons, each with an explanation, an exam trap, a practice scenario, and a build exercise.
+The diagnostic is a short test that pinpoints which domains you&rsquo;re weakest in before you sink hours into revision.
+The mock exam runs at the real exam&rsquo;s pace, with weighted scoring out of 1,000 and the same 720 pass mark, so a practice score means something.
+Quick-reference sheets give you one page per domain for last-minute review.</p>
+<p>For the study strategy that pulls all of this together, week by week, read the complete study guide.</p>
+<p>Where this sits in the programme</p>
+<p>Architect (Foundations) is one of four Claude certifications. It&rsquo;s the design-focused Foundations exam. If your work runs deeper into governance, stakeholder management, and owning a production system end to end, the Architect (Professional) tier is built for that. Neither requires the other first.</p>
+<p>Ready to find out where you stand? Take the diagnostic, then work through Domain 1. When you feel solid, sit a full mock exam.</p>
+<p>This is an independent community resource, not affiliated with or endorsed by Anthropic.</p>
+<p>Related articles
+10 MIN READ
+Anthropic&rsquo;s Claude Certifications: All Four Exams Explained (2026)</p>
+<p>Anthropic&rsquo;s Claude Certification Program now spans four exams. Here&rsquo;s what each one tests, who it&rsquo;s for, and how to choose the right track.</p>
+<p>24 JULY 2026
+12 MIN READ
+How to Pass the Claude Certified Architect Exam: Complete Study Guide</p>
+<p>A practical, no-filler guide to the Claude Certified Architect (Foundations) exam. Covers all 5 domains, weighted study strategy, common traps, and the resources that actually matter.</p>
+<p>18 MARCH 2026
+8 MIN READ
+Claude Certified Architect (Professional): Exam Guide and Blueprint</p>
+<p>The Claude Certified Architect (Professional) exam: seven domains, senior audience, governance and lifecycle focus, and how it differs from Foundations.</p>
+<p>24 JULY 2026</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

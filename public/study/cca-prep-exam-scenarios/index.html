@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Scenarios | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/cca-prep-exam-scenarios/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> Exam Scenarios
+</div>
+
+<article>
+  <header>
+    <h1>Exam Scenarios</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">guide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <hr>
+<h2 id="sidebar_label--exam-scenarios">id: exam-scenarios
+title: The 6 exam scenarios
+sidebar_label: 📋 Exam scenarios</h2>
+<h1 id="the-6-exam-scenarios">The 6 exam scenarios</h1>
+<p>The CCA exam randomly selects 4 of these 6 scenarios. Every question is anchored to one of the selected scenarios — you&rsquo;re the architect of a specific production system, not answering in the abstract.</p>
+<p>:::tip Preparation strategy
+You cannot know which 4 scenarios will appear. Study all 6, but pay extra attention to <strong>Scenarios 1, 3, and 4</strong> — they cover Domains 1 and 2, which together account for 45% of the exam.
+:::</p>
+<hr>
+<h2 id="scenario-1--customer-support-resolution-agent">Scenario 1 — Customer Support Resolution Agent</h2>
+<p><strong>Primary domains: D1, D2, D5</strong></p>
+<p>You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues.</p>
+<p><strong>MCP tools available:</strong></p>
+<ul>
+<li><code>get_customer</code> — retrieve customer profile and verification status</li>
+<li><code>lookup_order</code> — fetch order details and history</li>
+<li><code>process_refund</code> — issue a refund to a payment method</li>
+<li><code>escalate_to_human</code> — create a human agent handoff ticket</li>
+</ul>
+<p><strong>Target:</strong> 80%+ first-contact resolution rate</p>
+<p><strong>Key architectural challenges tested:</strong></p>
+<ul>
+<li>Programmatic prerequisites: <code>process_refund</code> must be gated on verified <code>get_customer</code></li>
+<li>Multi-concern decomposition: a customer with 3 issues needs parallel investigation tracks</li>
+<li>Structured handoff: escalation summaries must be self-contained for agents without session access</li>
+<li>Escalation triggers: replace confidence-based routing with rule-based triggers</li>
+</ul>
+<p><strong>Common exam traps in this scenario:</strong></p>
+<ul>
+<li>Using system prompt ordering instructions instead of prerequisite hooks</li>
+<li>Escalating based on Claude&rsquo;s expressed uncertainty</li>
+<li>Returning empty results when a tool times out</li>
+</ul>
+<hr>
+<h2 id="scenario-2--code-generation-with-claude-code">Scenario 2 — Code Generation with Claude Code</h2>
+<p><strong>Primary domains: D3, D5</strong></p>
+<p>You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow.</p>
+<p><strong>Key architectural challenges tested:</strong></p>
+<ul>
+<li>CLAUDE.md hierarchy for a monorepo with multiple technology stacks</li>
+<li>Plan mode before high-impact operations (40+ file refactors, database migrations)</li>
+<li>Session management for multi-day projects (when to resume vs. start fresh)</li>
+<li>CI/CD integration for automated PR review</li>
+</ul>
+<p><strong>Common exam traps in this scenario:</strong></p>
+<ul>
+<li>Skipping plan mode for large refactors</li>
+<li>Using only a root CLAUDE.md instead of subdirectory files for tech-specific rules</li>
+<li>Continuing in a session after a fundamental assumption was invalidated</li>
+</ul>
+<hr>
+<h2 id="scenario-3--multi-agent-research-system">Scenario 3 — Multi-Agent Research System</h2>
+<p><strong>Primary domains: D1, D2, D5</strong></p>
+<p>You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialist subagents: web search, document analysis, synthesis, and report generation.</p>
+<p><strong>Target:</strong> Comprehensive cited research reports</p>
+<p><strong>Key architectural challenges tested:</strong></p>
+<ul>
+<li>Parallel vs. sequential subagent invocation (web search and doc analysis are independent)</li>
+<li>Structured context passing with source provenance metadata</li>
+<li>Iterative refinement: coordinator evaluates synthesis and re-delegates for gaps</li>
+<li>Error handling: what happens when a subagent partially fails</li>
+</ul>
+<p><strong>Common exam traps in this scenario:</strong></p>
+<ul>
+<li>Always routing through all 4 subagents regardless of query type</li>
+<li>Passing findings as plain text blobs (loses attribution)</li>
+<li>Having the synthesis subagent query the web directly instead of via coordinator</li>
+</ul>
+<hr>
+<h2 id="scenario-4--developer-productivity-tools">Scenario 4 — Developer Productivity Tools</h2>
+<p><strong>Primary domains: D1, D2, D3</strong></p>
+<p>You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks.</p>
+<p><strong>Built-in tools available:</strong> Read, Write, Bash, Grep, Glob</p>
+<p><strong>Key architectural challenges tested:</strong></p>
+<ul>
+<li>Task-scoped tool profiles: exploration (Read/Glob/Grep only) vs. development (add Write/Bash) vs. deployment (add deployment tools)</li>
+<li>Dynamic adaptive decomposition for open-ended tasks (&ldquo;add tests to this legacy codebase&rdquo;)</li>
+<li>Tool description overlap across MCP servers</li>
+</ul>
+<p><strong>Common exam traps in this scenario:</strong></p>
+<ul>
+<li>Giving the agent all available tools regardless of current task phase</li>
+<li>Using fixed sequential decomposition for open-ended exploration tasks</li>
+<li>Over-provisioning tools causing misuse</li>
+</ul>
+<hr>
+<h2 id="scenario-5--claude-code-for-cicd">Scenario 5 — Claude Code for CI/CD</h2>
+<p><strong>Primary domains: D3, D4</strong></p>
+<p>You are integrating Claude Code into your Continuous Integration/Continuous Deployment pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests.</p>
+<p><strong>Key architectural challenges tested:</strong></p>
+<ul>
+<li>CLAUDE.md with project-specific security exceptions to reduce false positives</li>
+<li>Prompt engineering for actionable, specific feedback (few-shot with good/bad examples)</li>
+<li><code>permissionMode: &quot;acceptEdits&quot;</code> for automated pipeline operation</li>
+<li>Path restrictions preventing Claude from modifying production code during test generation</li>
+</ul>
+<p><strong>Common exam traps in this scenario:</strong></p>
+<ul>
+<li>Generic system prompts producing generic reviews</li>
+<li>Removing security checks entirely to reduce false positives (should add exceptions, not remove checks)</li>
+<li>Using <code>permissionMode: &quot;default&quot;</code> in CI (blocks automation waiting for user approval)</li>
+</ul>
+<hr>
+<h2 id="scenario-6--structured-data-extraction">Scenario 6 — Structured Data Extraction</h2>
+<p><strong>Primary domains: D4, D5</strong></p>
+<p>You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates output using JSON schemas, and maintains high accuracy.</p>
+<p><strong>Key architectural challenges tested:</strong></p>
+<ul>
+<li>Validation retry loops with specific error feedback</li>
+<li>Handling persistent failures gracefully (requires_human_review pattern)</li>
+<li>Multi-pass extraction for long documents (per-section → integration)</li>
+<li>Message Batches API for bulk processing with appropriate latency expectations</li>
+</ul>
+<p><strong>Common exam traps in this scenario:</strong></p>
+<ul>
+<li>Generic retry feedback (&ldquo;that was wrong, try again&rdquo;)</li>
+<li>Using Batches API for time-sensitive downstream systems</li>
+<li>Processing entire long documents in one call instead of focused section passes</li>
+</ul>
+<hr>
+<h2 id="how-to-study-scenarios">How to study scenarios</h2>
+<p>For each scenario, practice answering: <em>&ldquo;What is the most common architectural mistake in this scenario, and what is the correct fix?&rdquo;</em></p>
+<p>The exam always presents production situations where something is going wrong. Your job is to identify the root cause and select the correct architectural intervention — not a symptomatic fix.</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

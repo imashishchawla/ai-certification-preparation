@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4 Prompt Engineering__4 2 Few Shot Prompting | CCA-F Exam Prep</title>
+  <meta name="description" content="Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack">
+  
+  <link rel="stylesheet" href="/css/main.min.4bb8890e4455de9facb1dd339d066a73aa77ff82b4551489ab7257a168e35bdc.css" integrity="sha256-S7iJDkRV3p&#43;ssd0znQZqc6p3/4K0VRSJq3JXoWjjW9w=">
+  <link rel="canonical" href="http://localhost:1313/study/claudecertificationguide/lessons/4-prompt-engineering__4-2-few-shot-prompting/">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1><a href="http://localhost:1313/">CCA-F Exam Prep</a></h1>
+      <p class="tagline">Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack</p>
+      <nav>
+        <a href="/practice/">Practice Questions</a>
+        <a href="/study/">Study Guides</a>
+        <a href="/articles/">Articles</a>
+        <a href="/pdfs/">PDFs</a>
+        <a href="/sources/">Sources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+<div class="breadcrumbs">
+  <a href="http://localhost:1313/">Home</a>
+  
+    <span>/</span> <a href="http://localhost:1313/study/">Studies</a>
+  
+    <span>/</span> <a href="http://localhost:1313/">CCA-F Exam Prep</a>
+  
+  <span>/</span> 4 Prompt Engineering__4 2 Few Shot Prompting
+</div>
+
+<article>
+  <header>
+    <h1>4 Prompt Engineering__4 2 Few Shot Prompting</h1>
+    
+    
+    <div class="tags">
+      
+        <span class="tag">study</span>
+      
+        <span class="tag">claudecertificationguide</span>
+      
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <h1 id="42--few-shot-prompting--claude-certification-guide">4.2 — Few-Shot Prompting | Claude Certification Guide</h1>
+<blockquote>
+<p>source: <a href="https://claudecertificationguide.com/learn/4-prompt-engineering/4-2-few-shot-prompting">https://claudecertificationguide.com/learn/4-prompt-engineering/4-2-few-shot-prompting</a></p>
+</blockquote>
+<p>STUDY TOOLS</p>
+<p>Progress Dashboard
+Drill Mode</p>
+<p>CURRICULUM</p>
+<p>01
+Agentic Architecture &amp; Orchestration
+02
+Tool Design &amp; MCP Integration
+03
+Claude Code Configuration &amp; Workflows
+04
+Prompt Engineering &amp; Structured Output
+4.1
+System Prompts with Explicit Criteria
+4.2
+Few-Shot Prompting
+4.3
+Structured Output with Tool Use
+4.4
+Validation, Retry, and Feedback Loops
+4.5
+Batch Processing Strategies
+4.6
+Multi-Instance and Multi-Pass Review
+05
+Context Management &amp; Reliability</p>
+<p>PRACTICE</p>
+<p>Build Exercises
+Diagnostic Test</p>
+<p>LOOK UP</p>
+<p>Quick Reference
+Glossary
+LEARN
+/
+PROMPT ENGINEERING &amp; STRUCTURED OUTPUT
+/
+4.2
+DOMAIN 4
+TASK 4.2
+Mark Complete
+Few-Shot Prompting
+Learn this interactively
+|
+Concept Check
+|
+Exam Sim
+|
+Build Coach
+What You Need to Know</p>
+<p>Few-shot examples are the most effective technique for achieving consistent, well-formatted output from Claude. Not more instructions. Not confidence thresholds. Not temperature adjustments. When your output is inconsistent, few-shot examples are the first tool to reach for.</p>
+<p>This is a direct exam principle. The exam presents scenarios where detailed instructions produce inconsistent results and tests whether you choose &ldquo;add more instructions&rdquo; or &ldquo;add few-shot examples.&rdquo; The correct answer is almost always the latter.</p>
+<p>When to Deploy Few-Shot Examples</p>
+<p>Three specific triggers tell you few-shot examples are needed:</p>
+<ol>
+<li>
+<p>Detailed instructions alone produce inconsistent formatting. You have written a thorough prompt specifying the output format, but the model produces different structures across invocations — sometimes a bulleted list, sometimes a table, sometimes prose. More instructions will not fix this. A few examples showing the exact format you want will.</p>
+</li>
+<li>
+<p>The model makes inconsistent judgement calls on ambiguous cases. For a code review tool, the model flags variable shadowing as &ldquo;critical&rdquo; in one file and &ldquo;minor&rdquo; in another. For a tool selection agent, it routes &ldquo;check my order&rdquo; to different tools depending on phrasing. These ambiguous cases need examples demonstrating the correct judgement, with reasoning.</p>
+</li>
+<li>
+<p>Extraction tasks produce empty/null fields for information that exists in the document. The information is present but in an unexpected format — embedded in narrative text rather than a structured table, or split across multiple paragraphs. Few-shot examples showing extraction from varied document structures resolve this.</p>
+</li>
+</ol>
+<p>How to Construct Effective Examples</p>
+<p>The rules are tight:</p>
+<p>Use 2-4 targeted examples. Fewer than 2 doesn&rsquo;t establish a pattern. More than 4 wastes tokens without proportional benefit. Point your examples at the specific ambiguous scenarios causing problems.</p>
+<p>Each example must show reasoning. Don&rsquo;t just show input-output pairs. Show why one action was chosen over plausible alternatives. That teaches the model to generalise its judgement to novel patterns, not just match the specific cases in your examples.</p>
+<p>Copy
+Example: Tool selection for &ldquo;check my order #12345&rdquo;
+Input: &ldquo;check my order #12345&rdquo;
+Selected tool: lookup_order
+Reasoning: The user provides an order number (#12345), indicating
+they want order-specific information. Even though this could be
+interpreted as a general customer query, the specific order
+identifier makes lookup_order the correct choice over get_customer.</p>
+<p>Without the reasoning, the model learns only &ldquo;queries mentioning order numbers go to lookup_order.&rdquo; With the reasoning, the model learns the general principle: specific identifiers route to specific lookup tools.</p>
+<p>Cover the failing scenarios. If your extraction works on tables but fails on narrative text, your examples should show correct extraction from narrative text. If your code review is inconsistent on variable shadowing, your examples should classify variable shadowing scenarios at different severity levels with reasoning.</p>
+<p>The Hallucination Reduction Effect</p>
+<p>Few-shot examples have a useful side effect: they cut hallucination in extraction tasks. When the model sees examples of correct extraction from varied document structures — inline citations vs bibliographies, narrative descriptions vs structured tables, headers vs embedded text — it learns to handle structural variety without inventing data.</p>
+<p>This matters most for documents with inconsistent formatting. A financial report might list expenses in a table on one page and bury them in a paragraph on the next. Without examples, the model often nails the table but returns empty fields for the narrative section, or worse, fabricates values. Show it both structures and extraction quality climbs.</p>
+<p>Few-Shot for Reducing False Positives</p>
+<p>In code review and analysis, few-shot examples pull double duty: they show both what to flag and what to ignore. Examples that separate acceptable code patterns from genuine issues cut false positives while still catching the real problems.</p>
+<p>TEXT
+Copy
+Example: Variable shadowing assessment
+Code: function process(items) {
+const result = items.map(item =&gt; {
+const result = transform(item);  // shadows outer &lsquo;result&rsquo;
+return result;
+});
+return result;
+}
+Severity: minor
+Reasoning: The inner &lsquo;result&rsquo; shadows the outer variable but
+within a limited scope (arrow function). The code is still readable
+and the shadow does not cause a bug. This is a style preference,
+not a defect. Flag as minor only if style consistency is in scope.</p>
+<p>This example teaches the model to distinguish genuine bugs from benign patterns, reducing false positives while preserving the ability to generalise to genuinely problematic shadowing cases.</p>
+<p>KEY CONCEPT</p>
+<p>Few-shot examples are the most effective technique for consistency. Use 2-4 targeted examples that include reasoning for decisions, not just input-output pairs. Deploy them when instructions alone produce inconsistent results, ambiguous judgements, or empty extraction fields for data that exists.</p>
+<p>Few-Shot vs Other Techniques</p>
+<p>The exam tests whether you can distinguish when few-shot examples are the right solution versus when another technique applies:</p>
+<p>Problem	Correct Technique
+Inconsistent output formatting	Few-shot examples
+Malformed JSON output	tool_use with JSON schemas
+Fabricated values for missing fields	Optional/nullable schema fields
+Wrong tool selection	Better tool descriptions (first), then few-shot
+Model misses information in narrative text	Few-shot examples showing narrative extraction
+Extraction sum does not match total	Validation-retry loop
+Exam Traps
+EXAM TRAP</p>
+<p>Choosing &lsquo;add more detailed instructions&rsquo; when output formatting is inconsistent</p>
+<p>If detailed instructions already exist and output is still inconsistent, adding more instructions will not fix the problem. Few-shot examples demonstrating the exact desired format are more effective for consistency.</p>
+<p>EXAM TRAP</p>
+<p>Thinking few-shot examples only teach literal pattern-matching</p>
+<p>When examples include reasoning for why decisions were made, they teach the model to generalise to novel patterns. The model learns the decision principle, not just the specific case.</p>
+<p>EXAM TRAP</p>
+<p>Using confidence thresholds to fix inconsistent judgement calls</p>
+<p>Confidence thresholds are poorly calibrated and do not address the root cause. Few-shot examples showing the correct judgement for ambiguous cases directly teach consistent decision-making.</p>
+<p>Practice Scenario</p>
+<p>Your extraction pipeline correctly identifies research data in structured tables but returns empty fields when the same information appears in narrative paragraphs. Detailed instructions already specify all required fields and their formats. What should you try first?</p>
+<p>OPTION A
+Add a pre-processing step to convert all narrative text into structured tables before extraction
+OPTION B
+Increase the model context window to process more of each document
+OPTION C
+Add few-shot examples showing correct extraction from both structured tables and narrative paragraphs
+OPTION D
+Add a post-processing retry that re-extracts any fields returned as empty
+Check Answer
+Build Exercise
+BUILD EXERCISE
+Build a Few-Shot Enhanced Extraction Prompt
+Difficulty
+45 MINUTES</p>
+<p>WHAT YOU&rsquo;LL LEARN</p>
+<p>Identify the three triggers for deploying few-shot examples: inconsistent formatting, ambiguous judgement calls, and empty fields for existing data
+Construct effective few-shot examples with reasoning, not just input-output pairs
+Use 2-4 targeted examples covering the specific failing scenarios
+Distinguish when few-shot examples are the right technique versus schema changes or validation loops
+Measure the impact of few-shot examples on empty field rates and format consistency
+Create a base extraction prompt with detailed instructions but no examples and test it against 10 documents with varied structures: tables, narrative paragraphs, mixed formats</p>
+<p>WHY: Establishing a baseline without examples demonstrates the consistency problem the exam tests. Detailed instructions alone produce inconsistent output across varied document structures, which is the exact trigger for deploying few-shot examples.</p>
+<p>YOU SHOULD SEE: Inconsistent extraction results across the 10 documents: fields extracted correctly from tables but empty or wrong from narrative paragraphs, different output formats across runs, and inconsistent handling of edge cases.</p>
+<p>Stuck? Get a nudge
+Record which fields are consistently empty or inconsistent across document structures</p>
+<p>WHY: Identifying the specific failure patterns tells you exactly what your few-shot examples need to demonstrate. The exam tests whether you can diagnose the problem before prescribing the solution.</p>
+<p>YOU SHOULD SEE: A table or log showing which fields fail on which document types. Typical pattern: dates extracted correctly from tables but missed in narrative text, amounts inconsistent when written in words rather than digits, line items empty when embedded in paragraphs.</p>
+<p>Stuck? Get a nudge
+Create 3 few-shot examples targeting the failing patterns — each must include reasoning explaining why the extraction was done that way</p>
+<p>WHY: Examples with reasoning teach the model to generalise to novel patterns, not just match specific cases. Without reasoning, the model learns only surface-level pattern matching. The exam specifically tests that reasoning-included examples outperform input-output pairs.</p>
+<p>YOU SHOULD SEE: Three examples, each showing a different document structure (table, narrative, mixed), with the correct extraction AND a reasoning section explaining how the data was located and why the extraction decisions were made.</p>
+<p>Stuck? Get a nudge
+Re-run the same 10 documents with the few-shot enhanced prompt and compare: empty field rate, format consistency, and extraction accuracy</p>
+<p>WHY: Quantifying the improvement demonstrates the effectiveness of few-shot examples as the first-choice technique for consistency problems. The exam expects you to know that few-shot examples outperform additional instructions for this class of problem.</p>
+<p>YOU SHOULD SEE: A measurable reduction in empty fields (especially on narrative documents), improved format consistency across document types, and higher overall extraction accuracy. The improvement should be most dramatic on the document types that previously failed.</p>
+<p>Stuck? Get a nudge
+Document which structural patterns benefit most from few-shot examples and which require different techniques like schema changes</p>
+<p>WHY: The exam tests whether you can match the right technique to the right problem. Few-shot examples fix consistency and structural variety issues, but malformed JSON needs tool_use, fabricated values need nullable schemas, and sum discrepancies need validation loops.</p>
+<p>YOU SHOULD SEE: A decision matrix showing which problem types improved with few-shot examples and which still need other interventions. Narrative extraction and format consistency should improve. Fabrication of missing data should not improve and needs schema changes instead.</p>
+<p>Stuck? Get a nudge
+Sources
+Claude Certified Architect Foundations Exam Guide — Task Statement 4.2 — Anthropic
+Prompt Engineering Overview — Anthropic
+Building with Claude API (Skilljar) — Anthropic
+Drill This Domain
+Quick Reference
+Mark Complete
+PREVIOUS LESSON
+System Prompts with Explicit Criteria
+NEXT LESSON
+Structured Output with Tool Use</p>
+
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 CCA-F Exam Prep · Compiled from public sources · <a href="https://github.com/your-org/ccaf-exam">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>
