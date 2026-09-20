@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const rootDir = '/Users/ashishchawla/Documents/My-DIY-Projects/n8-rev-build/neighter/ccaf-exam';
+const rootDir = process.cwd();
 const outputFilePath = path.join(rootDir, 'data/questions/cca-f/questions.json');
 const staticOutputPath = path.join(rootDir, 'static/data/questions/cca-f/questions.json');
 

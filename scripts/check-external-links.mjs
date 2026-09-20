@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const rootDir = '/Users/ashishchawla/Documents/My-DIY-Projects/n8-rev-build/neighter/ccaf-exam';
+const rootDir = process.cwd();
 const publicDir = path.join(rootDir, 'public');
 
 if (!fs.existsSync(publicDir)) {
