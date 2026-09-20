@@ -680,7 +680,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Customer Support Resolution Agent* Your customer support agent is resolving billing disputes 80% of the time on first contact, but 6% of transactions are processed without the mandatory identity verification step. You have a clear system prompt instruction: \"Always verify customer identity before processing any transaction.\" What is the most appropriate fix?",
+    "prompt": "Your customer support agent is resolving billing disputes 80% of the time on first contact, but 6% of transactions are processed without the mandatory identity verification step. You have a clear system prompt instruction: \"Always verify customer identity before processing any transaction.\" What is the most appropriate fix?",
     "options": [
       {
         "id": "A",
@@ -701,7 +701,8 @@
     ],
     "correct": "C",
     "explanation": "System prompt instructions and few-shot examples address probabilistic behavior — they reduce but cannot eliminate the failure rate. A 6% skip rate on financial identity verification is a compliance failure. Programmatic prerequisite gates (hooks that block payment tools until verification returns a valid ID) provide deterministic, guaranteed enforcement. The fix must be architectural, not prompt-based.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk) · [Agent SDK — hooks](https://github.com/anthropics/claude-agent-sdk-python)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Customer Support Resolution Agent"
   },
   {
     "id": "cca-f-prep-023",
@@ -712,7 +713,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Multi-Agent Research System* Your coordinator agent delegates a broad research topic to four specialist subagents. The synthesis subagent's output has poor source attribution — it cannot identify which findings came from which source. What caused this and what is the fix?",
+    "prompt": "Your coordinator agent delegates a broad research topic to four specialist subagents. The synthesis subagent's output has poor source attribution — it cannot identify which findings came from which source. What caused this and what is the fix?",
     "options": [
       {
         "id": "A",
@@ -733,7 +734,8 @@
     ],
     "correct": "B",
     "explanation": "When a coordinator passes subagent findings as unstructured text blobs, attribution data (source URLs, document titles, page numbers) is lost or conflated. The fix is to pass structured data — e.g., a JSON array where each finding has a `content` field and a `source` field with URL and metadata. The synthesis subagent can then produce properly cited output.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Multi-Agent Research System"
   },
   {
     "id": "cca-f-prep-024",
@@ -744,7 +746,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Developer Productivity Tools* An engineer asks your developer productivity agent to \"add comprehensive tests to this legacy codebase.\" The agent immediately starts writing tests for the first file it finds, without understanding the codebase structure. What task decomposition pattern should the agent use?",
+    "prompt": "An engineer asks your developer productivity agent to \"add comprehensive tests to this legacy codebase.\" The agent immediately starts writing tests for the first file it finds, without understanding the codebase structure. What task decomposition pattern should the agent use?",
     "options": [
       {
         "id": "A",
@@ -765,7 +767,8 @@
     ],
     "correct": "B",
     "explanation": "Open-ended tasks on unknown systems require dynamic adaptive decomposition. The agent cannot know the right approach until it understands the codebase. Phase 1: map the structure and understand the domain. Phase 2: identify high-impact, under-tested areas. Phase 3: create a prioritized plan that adapts as dependencies and test complexity emerge. This contrasts with prompt chaining, which requires knowing the steps upfront.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Developer Productivity Tools"
   },
   {
     "id": "cca-f-prep-025",
@@ -776,7 +779,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Multi-Agent Research System* After a multi-agent research pipeline produces a comprehensive but shallow first draft, the coordinator needs to run iterative refinement. What is the architecturally correct approach?",
+    "prompt": "After a multi-agent research pipeline produces a comprehensive but shallow first draft, the coordinator needs to run iterative refinement. What is the architecturally correct approach?",
     "options": [
       {
         "id": "A",
@@ -797,7 +800,8 @@
     ],
     "correct": "C",
     "explanation": "Iterative refinement is a coordinator responsibility. The coordinator evaluates synthesis output against quality criteria (depth, coverage, citation density), identifies specific gaps (not vague dissatisfaction), formulates targeted follow-up queries, and re-delegates only what is needed. This loop continues until the coordinator's quality evaluation passes. Full pipeline re-runs are wasteful; user-driven gap identification is a design failure.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Multi-Agent Research System"
   },
   {
     "id": "cca-f-prep-026",
@@ -808,7 +812,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Customer Support Resolution Agent* A customer contacts support with three separate issues: a billing error, a failed delivery, and a missing account credit. Your agent is handling them sequentially and missing interactions between them (the billing error and missing credit are related). What is the correct architectural approach?",
+    "prompt": "A customer contacts support with three separate issues: a billing error, a failed delivery, and a missing account credit. Your agent is handling them sequentially and missing interactions between them (the billing error and missing credit are related). What is the correct architectural approach?",
     "options": [
       {
         "id": "A",
@@ -829,7 +833,8 @@
     ],
     "correct": "C",
     "explanation": "Multi-concern requests should be decomposed into parallel investigation tracks that share context (so the billing/credit relationship is visible to both tracks), then synthesized into a unified resolution. Sequential handling misses cross-issue relationships. Separate sessions destroy the shared context needed to detect interactions. This is parallel decomposition with shared context — a core orchestration pattern.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Customer Support Resolution Agent"
   },
   {
     "id": "cca-f-prep-027",
@@ -840,7 +845,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Customer Support Resolution Agent* Your agent has resolved a complex billing dispute but cannot resolve a technical account issue that requires backend engineering access. It must hand off to a human agent. What should the handoff summary include?",
+    "prompt": "Your agent has resolved a complex billing dispute but cannot resolve a technical account issue that requires backend engineering access. It must hand off to a human agent. What should the handoff summary include?",
     "options": [
       {
         "id": "A",
@@ -861,7 +866,8 @@
     ],
     "correct": "B",
     "explanation": "Human agents receiving escalations typically do not have access to the full conversation transcript or AI session context. The structured handoff summary must be self-contained: customer ID (for lookup), root cause (what was determined), actions taken (what the AI already did, including any credits applied), and recommended next action (what the human should do first). This prevents duplicate actions and allows the human to work from a cold start.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Customer Support Resolution Agent"
   },
   {
     "id": "cca-f-prep-028",
@@ -1320,7 +1326,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Customer Support Resolution Agent* Your support agent has four MCP tools: `get_customer`, `lookup_order`, `process_refund`, and `escalate_to_human`. Over time, `get_customer` is being called for order-related queries and `lookup_order` is being called to fetch customer profiles. The tool descriptions are: `get_customer`: \"Gets customer information\" and `lookup_order`: \"Gets order information.\" What is the correct fix?",
+    "prompt": "Your support agent has four MCP tools: `get_customer`, `lookup_order`, `process_refund`, and `escalate_to_human`. Over time, `get_customer` is being called for order-related queries and `lookup_order` is being called to fetch customer profiles. The tool descriptions are: `get_customer`: \"Gets customer information\" and `lookup_order`: \"Gets order information.\" What is the correct fix?",
     "options": [
       {
         "id": "A",
@@ -1341,7 +1347,8 @@
     ],
     "correct": "B",
     "explanation": "One-line generic descriptions like \"Gets customer information\" are the most common cause of tool misrouting. Each description should include: (1) exactly what it fetches, (2) the required input format (e.g., \"Takes a `customer_id` string — use this when you have a customer ID, not an order ID\"), (3) what it returns, and (4) when NOT to use it. Detailed descriptions are the primary routing mechanism Claude has available.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Customer Support Resolution Agent"
   },
   {
     "id": "cca-f-prep-043",
@@ -1352,7 +1359,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Structured Data Extraction* Your extraction system calls an `extract_fields` MCP tool on a 500-document batch. For 12% of documents, the tool returns `{\"isError\": true, \"errorCategory\": \"validation\", \"isRetryable\": false, \"message\": \"Document format not supported: .pages\"}`. How should the system handle these?",
+    "prompt": "Your extraction system calls an `extract_fields` MCP tool on a 500-document batch. For 12% of documents, the tool returns `{\"isError\": true, \"errorCategory\": \"validation\", \"isRetryable\": false, \"message\": \"Document format not supported: .pages\"}`. How should the system handle these?",
     "options": [
       {
         "id": "A",
@@ -1373,7 +1380,8 @@
     ],
     "correct": "C",
     "explanation": "`isRetryable: false` means retrying will not help — the format is unsupported and retrying the same document will always fail. The correct response is to: (1) skip these documents without retry, (2) log each failure with the document name and error details for operator review, (3) continue processing supported formats, (4) include a failure summary in the final report. Halting the entire batch is disproportionate when most documents are processable.\nRefs: [MCP documentation](https://modelcontextprotocol.io/docs)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Structured Data Extraction"
   },
   {
     "id": "cca-f-prep-044",
@@ -1384,7 +1392,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Developer Productivity Tools* Your developer productivity agent uses built-in tools (Read, Write, Bash, Grep, Glob) plus 14 custom MCP tools for linting, type-checking, test running, deployment, database migration, and more. Engineers report the agent is using deployment tools during routine code exploration tasks. What is the architectural fix?",
+    "prompt": "Your developer productivity agent uses built-in tools (Read, Write, Bash, Grep, Glob) plus 14 custom MCP tools for linting, type-checking, test running, deployment, database migration, and more. Engineers report the agent is using deployment tools during routine code exploration tasks. What is the architectural fix?",
     "options": [
       {
         "id": "A",
@@ -1405,7 +1413,8 @@
     ],
     "correct": "C",
     "explanation": "The solution is task-scoped tool profiles — dynamically configure `allowedTools` based on the current task phase. Exploration: read-only tools only. Development: add write and quality tools. Deployment: add deployment tools explicitly. This prevents accidental deployment tool invocations by making them literally unavailable during exploration, rather than relying on prompt instructions that can fail.\nRefs: [Agent SDK — permissions](https://platform.claude.com/docs/en/agent-sdk/agent-loop) · [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Developer Productivity Tools"
   },
   {
     "id": "cca-f-prep-045",
@@ -1832,7 +1841,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: Claude Code for CI/CD* Your automated CI/CD pipeline using Claude Code generates PR feedback reports, but senior engineers complain the feedback is too generic — it ignores the team's specific architectural patterns and flags standard patterns as violations. The pipeline uses `permissionMode: \"acceptEdits\"` and a generic system prompt. What is the most impactful single change?",
+    "prompt": "Your automated CI/CD pipeline using Claude Code generates PR feedback reports, but senior engineers complain the feedback is too generic — it ignores the team's specific architectural patterns and flags standard patterns as violations. The pipeline uses `permissionMode: \"acceptEdits\"` and a generic system prompt. What is the most impactful single change?",
     "options": [
       {
         "id": "A",
@@ -1853,7 +1862,8 @@
     ],
     "correct": "B",
     "explanation": "Generic system prompts produce generic output. A project CLAUDE.md loaded at session start provides persistent, project-specific context: the team's architectural patterns, approved vs. disallowed libraries, known-safe patterns that look suspicious, and specific review criteria. This is precisely what CLAUDE.md is for — context that makes Claude Code behave like a team member rather than a generic reviewer.\nRefs: [Claude Code — store instructions and memory](https://code.claude.com/docs/en/memory)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Claude Code for CI/CD"
   },
   {
     "id": "cca-f-prep-059",
@@ -1864,7 +1874,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: Code Generation with Claude Code* A developer is about to have Claude Code perform a large-scale refactoring of the authentication module — replacing the legacy session-based auth with JWT across 47 files. This is a high-stakes, partially reversible operation. What should the developer do before confirming execution?",
+    "prompt": "A developer is about to have Claude Code perform a large-scale refactoring of the authentication module — replacing the legacy session-based auth with JWT across 47 files. This is a high-stakes, partially reversible operation. What should the developer do before confirming execution?",
     "options": [
       {
         "id": "A",
@@ -1885,7 +1895,8 @@
     ],
     "correct": "C",
     "explanation": "Large-scale, partially reversible refactoring is exactly when plan mode is mandatory. Plan mode shows the full intended sequence of changes before any file is modified. The developer can verify the plan covers all 47 files correctly, catches any scope errors, and decides whether to approve, modify, or cancel. Running immediately with `acceptEdits` on a 47-file auth refactor without reviewing the plan first is a high-risk anti-pattern.\nRefs: [Claude Code overview — plan mode](https://code.claude.com/docs/en/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Code Generation with Claude Code"
   },
   {
     "id": "cca-f-prep-060",
@@ -1896,7 +1907,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: Claude Code for CI/CD* You want your CI pipeline to use Claude Code for automated test generation but need to ensure it never modifies existing production code, only creates new test files. Which combination of settings enforces this?",
+    "prompt": "You want your CI pipeline to use Claude Code for automated test generation but need to ensure it never modifies existing production code, only creates new test files. Which combination of settings enforces this?",
     "options": [
       {
         "id": "A",
@@ -1917,7 +1928,8 @@
     ],
     "correct": "C",
     "explanation": "Multi-layer enforcement: (1) `allowedTools` includes Write (needed to create test files) but omits Edit (prevents modifying existing files), (2) path restrictions in `.claude/settings.json` limit Write operations to the `/tests` directory, blocking any attempt to write to production code paths. System prompt instructions alone are insufficient for a CI security requirement.\nRefs: [Agent SDK — permissions](https://platform.claude.com/docs/en/agent-sdk/agent-loop) · [Claude Code settings](https://code.claude.com/docs/en/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Claude Code for CI/CD"
   },
   {
     "id": "cca-f-prep-061",
@@ -2376,7 +2388,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Structured Data Extraction* Your extraction system processes invoices and must populate 8 mandatory fields. On the first pass, 18% of invoices fail validation — mostly because `currency_code` is returned as \"US Dollars\" instead of the ISO 4217 code \"USD\". After implementing a retry loop, failures drop to 2%. The remaining 2% have ambiguous or missing currency information in the source document. How should you handle the persistent 2%?",
+    "prompt": "Your extraction system processes invoices and must populate 8 mandatory fields. On the first pass, 18% of invoices fail validation — mostly because `currency_code` is returned as \"US Dollars\" instead of the ISO 4217 code \"USD\". After implementing a retry loop, failures drop to 2%. The remaining 2% have ambiguous or missing currency information in the source document. How should you handle the persistent 2%?",
     "options": [
       {
         "id": "A",
@@ -2397,7 +2409,8 @@
     ],
     "correct": "C",
     "explanation": "When repeated retry passes still fail, the underlying issue is ambiguous source data — no amount of retrying will produce a reliable answer. The correct architectural pattern is graceful degradation: set `requires_human_review: true` and `confidence: \"low\"`, route to a manual review queue, and process the remaining 98% automatically. This maximizes automation while maintaining data quality for the edge cases that genuinely need human judgment.\nRefs: [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Structured Data Extraction"
   },
   {
     "id": "cca-f-prep-076",
@@ -2408,7 +2421,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Claude Code for CI/CD* Your CI pipeline generates code review comments using Claude. Developers complain that 40% of security-related comments are false positives about their use of `eval()` in a controlled, sandboxed context. You have documented that `eval()` in the `/sandbox` directory is reviewed and approved. What is the most targeted fix?",
+    "prompt": "Your CI pipeline generates code review comments using Claude. Developers complain that 40% of security-related comments are false positives about their use of `eval()` in a controlled, sandboxed context. You have documented that `eval()` in the `/sandbox` directory is reviewed and approved. What is the most targeted fix?",
     "options": [
       {
         "id": "A",
@@ -2429,7 +2442,8 @@
     ],
     "correct": "C",
     "explanation": "This is a targeted CLAUDE.md context injection. The false positives are caused by Claude lacking project-specific knowledge that `/sandbox/eval()` is approved. Adding this specific exception to CLAUDE.md tells Claude exactly which pattern to exempt and why — without removing eval() coverage elsewhere. Removing all security checks or adding blanket filters are over-corrections that reduce security coverage across the codebase.\nRefs: [Claude Code — store instructions and memory](https://code.claude.com/docs/en/memory)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Claude Code for CI/CD"
   },
   {
     "id": "cca-f-prep-077",
@@ -2440,7 +2454,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Structured Data Extraction* You need to build a contract analysis pipeline that extracts 15 fields from legal documents including parties, dates, payment terms, termination clauses, and governing law. Some documents are 80+ pages. What is the most reliable architecture?",
+    "prompt": "You need to build a contract analysis pipeline that extracts 15 fields from legal documents including parties, dates, payment terms, termination clauses, and governing law. Some documents are 80+ pages. What is the most reliable architecture?",
     "options": [
       {
         "id": "A",
@@ -2461,7 +2475,8 @@
     ],
     "correct": "B",
     "explanation": "Multi-pass extraction on long documents produces significantly better results than single-pass. Each pass focuses on a subset of related fields and the relevant document sections (e.g., pass 1 only reads the header and signature blocks; pass 2 reads the payment section). This prevents attention dilution, reduces the extraction schema complexity per pass, and allows each pass to use the most relevant document context.\nRefs: [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs) · [Prompt engineering overview](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Structured Data Extraction"
   },
   {
     "id": "cca-f-prep-078",
@@ -2472,7 +2487,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Structured Data Extraction* A product classification pipeline achieves 94% accuracy on well-formatted product listings but drops to 71% on short, abbreviated listings (e.g., \"16GB DDR5 3200MHz\" instead of \"Kingston 16GB DDR5 RAM Module 3200MHz CL16\"). How should you address this?",
+    "prompt": "A product classification pipeline achieves 94% accuracy on well-formatted product listings but drops to 71% on short, abbreviated listings (e.g., \"16GB DDR5 3200MHz\" instead of \"Kingston 16GB DDR5 RAM Module 3200MHz CL16\"). How should you address this?",
     "options": [
       {
         "id": "A",
@@ -2493,7 +2508,8 @@
     ],
     "correct": "C",
     "explanation": "Few-shot examples are ideally suited for demonstrating how to handle the specific failure mode: abbreviated input. By showing Claude several examples of abbreviated listings and the reasoning used to classify them (\"DDR5 3200MHz → RAM category, 3200MHz is the speed → subcategory: Memory\"), you teach the pattern without modifying the schema. This is targeted prompt engineering for a specific input distribution.\nRefs: [Prompt engineering overview](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Structured Data Extraction"
   },
   {
     "id": "cca-f-prep-079",
@@ -2856,7 +2872,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Customer Support Resolution Agent* Your support agent handles 10,000 tickets per day. Analysis shows 12% are escalated to human agents. Post-escalation review finds: 60% of escalations were based on Claude's \"I'm not fully confident\" output, and 40% of those did not actually need human handling. Engineering is asked to reduce unnecessary escalations without increasing missed escalations. What is the correct architectural change?",
+    "prompt": "Your support agent handles 10,000 tickets per day. Analysis shows 12% are escalated to human agents. Post-escalation review finds: 60% of escalations were based on Claude's \"I'm not fully confident\" output, and 40% of those did not actually need human handling. Engineering is asked to reduce unnecessary escalations without increasing missed escalations. What is the correct architectural change?",
     "options": [
       {
         "id": "A",
@@ -2877,7 +2893,8 @@
     ],
     "correct": "C",
     "explanation": "The problem is over-reliance on self-reported confidence. The fix is deterministic rule-based escalation: define the exact conditions that require human judgment in your routing logic, derive them from structured extraction fields, not Claude's uncertainty expressions. This reduces false escalations (Claude saying \"not confident\" when it actually can handle it) while maintaining necessary escalations (rules fire when the actual conditions are met).\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Customer Support Resolution Agent"
   },
   {
     "id": "cca-f-prep-091",
@@ -2888,7 +2905,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Multi-Agent Research System* Your research coordinator is producing synthesis reports, but the sources in the final report cannot be traced back to specific documents — the synthesis subagent merged everything into unsourced paragraphs. You are now asked to add citation tracking. What change makes this possible?",
+    "prompt": "Your research coordinator is producing synthesis reports, but the sources in the final report cannot be traced back to specific documents — the synthesis subagent merged everything into unsourced paragraphs. You are now asked to add citation tracking. What change makes this possible?",
     "options": [
       {
         "id": "A",
@@ -2909,7 +2926,8 @@
     ],
     "correct": "B",
     "explanation": "Citation tracking must be architected upstream, not retrofitted downstream. The coordinator must pass structured context (source ID → document title + URL + page) to the synthesis subagent, and the synthesis schema must include a `citations` field (array of source IDs) alongside each claim. The synthesis subagent can only attribute claims to sources if it received source metadata. Post-hoc citation extraction from unstructured prose is fragile and will miss many citations.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Multi-Agent Research System"
   },
   {
     "id": "cca-f-prep-092",
@@ -2920,7 +2938,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Structured Data Extraction* Your legal document extraction system processes 500 contracts per hour. The pipeline has 99.1% availability but experiences occasional cascading failures when a malformed document causes the extraction model to generate a response that crashes the JSON parser, which in turn drops the next 30 documents in the queue. How should the pipeline be redesigned for resilience?",
+    "prompt": "Your legal document extraction system processes 500 contracts per hour. The pipeline has 99.1% availability but experiences occasional cascading failures when a malformed document causes the extraction model to generate a response that crashes the JSON parser, which in turn drops the next 30 documents in the queue. How should the pipeline be redesigned for resilience?",
     "options": [
       {
         "id": "A",
@@ -2941,7 +2959,8 @@
     ],
     "correct": "B",
     "explanation": "Cascading failure prevention requires two patterns: (1) per-document error isolation — each document must fail independently without affecting others (try-catch per item, not per batch), and (2) the circuit breaker pattern — if error rates spike above a threshold, the pipeline temporarily stops accepting new documents and alerts operations rather than continuing to fail. Sequential processing would eliminate one cause of cascades but at a severe throughput cost.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Structured Data Extraction"
   },
   {
     "id": "cca-f-prep-093",
@@ -2952,7 +2971,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Code Generation with Claude Code* A developer is using Claude Code for a multi-day migration project. After working for 3 days, they discover that a fundamental assumption in the migration approach is wrong, requiring a significantly different strategy. The current session has 200+ turns of context. What is the best way to proceed?",
+    "prompt": "A developer is using Claude Code for a multi-day migration project. After working for 3 days, they discover that a fundamental assumption in the migration approach is wrong, requiring a significantly different strategy. The current session has 200+ turns of context. What is the best way to proceed?",
     "options": [
       {
         "id": "A",
@@ -2973,7 +2992,8 @@
     ],
     "correct": "C",
     "explanation": "When a fundamental assumption is invalidated, the prior 200 turns of context based on the wrong assumption become actively misleading. Resuming or continuing in that context means Claude will reason from stale, incorrect premises. A new session with a structured summary that explicitly states the corrected understanding prevents stale reasoning. The summary should capture everything learned that is still valid, plus the corrected approach — a \"clean start with memory\" rather than a full restart.\nRefs: [Claude Code — memory and sessions](https://code.claude.com/docs/en/memory)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Code Generation with Claude Code"
   },
   {
     "id": "cca-f-prep-094",
@@ -3048,7 +3068,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Customer Support Resolution Agent* The support agent calls the `lookup_order` tool and receives: `{\"isError\": false, \"content\": [], \"message\": \"No orders found for customer ID 48291\"}`. It then calls `lookup_order` again three more times with the same customer ID. What is wrong with the agent's behavior and what caused it?",
+    "prompt": "The support agent calls the `lookup_order` tool and receives: `{\"isError\": false, \"content\": [], \"message\": \"No orders found for customer ID 48291\"}`. It then calls `lookup_order` again three more times with the same customer ID. What is wrong with the agent's behavior and what caused it?",
     "options": [
       {
         "id": "A",
@@ -3069,7 +3089,8 @@
     ],
     "correct": "B",
     "explanation": "The tool returned `isError: false` with an empty array — this is correct behavior for \"no records found.\" The agent erroneously interpreted this as a failure and retried. The root cause is missing downstream logic to distinguish empty results (success, no data) from errors (failure, try again). This is the critical `isError: false + empty content` vs `isError: true` distinction the exam tests directly.\nRefs: [MCP documentation](https://modelcontextprotocol.io/docs)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Customer Support Resolution Agent"
   },
   {
     "id": "cca-f-prep-097",
@@ -3080,7 +3101,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Structured Data Extraction* You are extracting data from insurance claims forms. The schema requires a `claim_type` field with enum values: `[\"medical\", \"dental\", \"vision\", \"mental_health\", \"pharmacy\"]`. Validation shows Claude is occasionally returning `\"Mental Health\"` (capitalized, with space) instead of `\"mental_health\"`. Which two changes together guarantee this never happens?",
+    "prompt": "You are extracting data from insurance claims forms. The schema requires a `claim_type` field with enum values: `[\"medical\", \"dental\", \"vision\", \"mental_health\", \"pharmacy\"]`. Validation shows Claude is occasionally returning `\"Mental Health\"` (capitalized, with space) instead of `\"mental_health\"`. Which two changes together guarantee this never happens?",
     "options": [
       {
         "id": "A",
@@ -3101,7 +3122,8 @@
     ],
     "correct": "B",
     "explanation": "Two layers of guarantee: (1) defining the enum in the JSON schema tells Claude exactly which values are valid, (2) `strict: true` guarantees that the response matches the schema — any deviation (capitalization, spacing) is caught at the API level before your code processes it. Post-processing normalization is a workaround that treats the symptom; schema enforcement prevents the problem at the source.\nRefs: [Tool use — structured outputs mode](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) · [Structured outputs](https://platform.claude.com/docs/en/build-with-claude/structured-outputs)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Structured Data Extraction"
   },
   {
     "id": "cca-f-prep-098",
@@ -3112,7 +3134,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Code Generation with Claude Code* You want to use Claude Code to refactor a monolithic authentication service into microservices. This is a week-long project. You plan a session architecture: Day 1 explores the codebase, Day 2-3 designs the new architecture, Day 4-5 implements. How should sessions be managed across this project?",
+    "prompt": "You want to use Claude Code to refactor a monolithic authentication service into microservices. This is a week-long project. You plan a session architecture: Day 1 explores the codebase, Day 2-3 designs the new architecture, Day 4-5 implements. How should sessions be managed across this project?",
     "options": [
       {
         "id": "A",
@@ -3133,7 +3155,8 @@
     ],
     "correct": "C",
     "explanation": "Named session resumption within a phase preserves the context of ongoing work (exploration findings, design decisions). Phase transitions warrant new sessions with structured summaries: the implementation session starts with \"Architecture decisions from design phase: [list]\" rather than carrying all the exploratory dead-ends and discarded design options from days 1-3. This keeps each phase context focused and avoids stale reasoning from earlier phases.\nRefs: [Claude Code — memory and sessions](https://code.claude.com/docs/en/memory)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Code Generation with Claude Code"
   },
   {
     "id": "cca-f-prep-099",
@@ -3144,7 +3167,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Multi-Agent Research System* Your multi-agent research system takes 45 minutes to complete a comprehensive research report because the web search, document analysis, synthesis, and report generation subagents run sequentially. The coordinator waits for each to complete before starting the next. How do you reduce this to ~12 minutes without changing the synthesis step?",
+    "prompt": "Your multi-agent research system takes 45 minutes to complete a comprehensive research report because the web search, document analysis, synthesis, and report generation subagents run sequentially. The coordinator waits for each to complete before starting the next. How do you reduce this to ~12 minutes without changing the synthesis step?",
     "options": [
       {
         "id": "A",
@@ -3165,7 +3188,8 @@
     ],
     "correct": "B",
     "explanation": "Web search and document analysis are independent — they do not need each other's results. Running them in parallel (single coordinator response with two Task calls) reduces their combined time from sum to max. Synthesis correctly waits for both (it needs both results). Report generation correctly follows synthesis. This is the parallel-then-sequential pattern: parallelize independent steps, sequence dependent ones. Running synthesis in parallel with earlier steps would break the dependency chain.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Multi-Agent Research System"
   },
   {
     "id": "cca-f-prep-100",
@@ -3208,7 +3232,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom MCP tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate.* Production data shows that in 12% of cases, your agent skips get_customer entirely and calls lookup_order using only the customer's stated name, occasionally leading to misidentified accounts and incorrect refunds. What change would most effectively address this reliability issue?",
+    "prompt": "Production data shows that in 12% of cases, your agent skips get_customer entirely and calls lookup_order using only the customer's stated name, occasionally leading to misidentified accounts and incorrect refunds. What change would most effectively address this reliability issue?",
     "options": [
       {
         "id": "A",
@@ -3229,7 +3253,8 @@
     ],
     "correct": "A",
     "explanation": "When a specific tool sequence is required for critical business logic (like verifying customer identity before processing refunds), programmatic enforcement provides deterministic guarantees that prompt-based approaches cannot. Options B and C rely on probabilistic LLM compliance, which is insufficient when errors have financial consequences. Option D addresses tool availability rather than tool ordering, which is not the actual problem.\nRefs: [Hooks — tool prerequisites](https://platform.claude.com/docs/en/agent-sdk/hooks)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom MCP tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate."
   },
   {
     "id": "cca-f-prep-102",
@@ -3240,7 +3265,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom MCP tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate.* Production logs show the agent frequently calls get_customer when users ask about orders (e.g., \"check my order #12345\"), instead of calling lookup_order. Both tools have minimal descriptions (\"Retrieves customer information\" / \"Retrieves order details\") and accept similar identifier formats. What's the most effective first step to improve tool selection reliability?",
+    "prompt": "Production logs show the agent frequently calls get_customer when users ask about orders (e.g., \"check my order #12345\"), instead of calling lookup_order. Both tools have minimal descriptions (\"Retrieves customer information\" / \"Retrieves order details\") and accept similar identifier formats. What's the most effective first step to improve tool selection reliability?",
     "options": [
       {
         "id": "A",
@@ -3261,7 +3286,8 @@
     ],
     "correct": "B",
     "explanation": "Tool descriptions are the primary mechanism LLMs use for tool selection. When descriptions are minimal, models lack the context to differentiate between similar tools. Option B directly addresses this root cause with a low-effort, high-leverage fix. Few-shot examples (A) add token overhead without fixing the underlying issue. A routing layer (C) is over-engineered and bypasses the LLM's natural language understanding. Consolidating tools (D) is a valid architectural choice but requires more effort than a \"first step\" warrants when the immediate problem is inadequate descriptions.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom MCP tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate."
   },
   {
     "id": "cca-f-prep-103",
@@ -3272,7 +3298,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom MCP tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate.* Your agent achieves 55% first-contact resolution, well below the 80% target. Logs show it escalates straightforward cases (standard damage replacements with photo evidence) while attempting to autonomously handle complex situations requiring policy exceptions. What's the most effective way to improve escalation calibration?",
+    "prompt": "Your agent achieves 55% first-contact resolution, well below the 80% target. Logs show it escalates straightforward cases (standard damage replacements with photo evidence) while attempting to autonomously handle complex situations requiring policy exceptions. What's the most effective way to improve escalation calibration?",
     "options": [
       {
         "id": "A",
@@ -3293,7 +3319,8 @@
     ],
     "correct": "A",
     "explanation": "Adding explicit escalation criteria with few-shot examples directly addresses the root cause: unclear decision boundaries. This is the proportionate first response before adding infrastructure. Option B fails because LLM self-reported confidence is poorly calibrated — the agent is already incorrectly confident on hard cases. Option C is over-engineered, requiring labeled data and ML infrastructure when prompt optimization hasn't been tried. Option D solves a different problem entirely; sentiment doesn't correlate with case complexity, which is the actual issue.\nRefs: [Human-in-the-loop patterns](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/human-in-the-loop)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom MCP tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate."
   },
   {
     "id": "cca-f-prep-104",
@@ -3304,7 +3331,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution.* You want to create a custom /review slash command that runs your team's standard code review checklist. This command should be available to every developer when they clone or pull the repository. Where should you create this command file?",
+    "prompt": "You want to create a custom /review slash command that runs your team's standard code review checklist. This command should be available to every developer when they clone or pull the repository. Where should you create this command file?",
     "options": [
       {
         "id": "A",
@@ -3325,7 +3352,8 @@
     ],
     "correct": "A",
     "explanation": "Project-scoped custom slash commands should be stored in the .claude/commands/ directory within the repository. These commands are version-controlled and automatically available to all developers when they clone or pull the repo. Option B (~/.claude/commands/) is for personal commands that aren't shared via version control. Option C (CLAUDE.md) is for project instructions and context, not command definitions. Option D describes a configuration mechanism that doesn't exist in Claude Code.\nRefs: [Claude Code slash commands](https://docs.anthropic.com/en/docs/claude-code/slash-commands)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution."
   },
   {
     "id": "cca-f-prep-105",
@@ -3336,7 +3364,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution.* You've been assigned to restructure the team's monolithic application into microservices. This will involve changes across dozens of files and requires decisions about service boundaries and module dependencies. Which approach should you take?",
+    "prompt": "You've been assigned to restructure the team's monolithic application into microservices. This will involve changes across dozens of files and requires decisions about service boundaries and module dependencies. Which approach should you take?",
     "options": [
       {
         "id": "A",
@@ -3357,7 +3385,8 @@
     ],
     "correct": "A",
     "explanation": "Plan mode is designed for complex tasks involving large-scale changes, multiple valid approaches, and architectural decisions — exactly what monolith-to-microservices restructuring requires. It enables safe codebase exploration and design before committing to changes. Option B risks costly rework when dependencies are discovered late. Option C assumes you already know the right structure without exploring the code. Option D ignores that the complexity is already stated in the requirements, not something that might emerge later.\nRefs: [Claude Code plan mode](https://docs.anthropic.com/en/docs/claude-code/plan-mode)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution."
   },
   {
     "id": "cca-f-prep-106",
@@ -3368,7 +3397,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution.* Your codebase has distinct areas with different coding conventions: React components use functional style with hooks, API handlers use async/await with specific error handling, and database models follow a repository pattern. Test files are spread throughout the codebase alongside the code they test (e.g., Button.test.tsx next to Button.tsx), and you want all tests to follow the same conventions regardless of location. What's the most maintainable way to ensure Claude automatically applies the correct conventions when generating code?",
+    "prompt": "Your codebase has distinct areas with different coding conventions: React components use functional style with hooks, API handlers use async/await with specific error handling, and database models follow a repository pattern. Test files are spread throughout the codebase alongside the code they test (e.g., Button.test.tsx next to Button.tsx), and you want all tests to follow the same conventions regardless of location. What's the most maintainable way to ensure Claude automatically applies the correct conventions when generating code?",
     "options": [
       {
         "id": "A",
@@ -3389,7 +3418,8 @@
     ],
     "correct": "A",
     "explanation": ".claude/rules/ with glob patterns (e.g., **/*.test.tsx) allows conventions to be automatically applied based on file paths regardless of directory location — essential for test files spread throughout the codebase. Option B relies on inference rather than explicit matching, making it unreliable. Option C requires manual skill invocation or relies on Claude choosing to load them, contradicting the need for deterministic \"automatic\" application based on file paths. Option D can't easily handle files spread across many directories since CLAUDE.md files are directory-bound.\nRefs: [CLAUDE.md configuration](https://docs.anthropic.com/en/docs/claude-code/memory)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution."
   },
   {
     "id": "cca-f-prep-107",
@@ -3400,7 +3430,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports.* After running the system on the topic \"impact of AI on creative industries,\" you observe that each subagent completes successfully — the web search agent finds relevant articles, the document analysis agent summarizes papers correctly, and the synthesis agent produces coherent output. However, the final reports cover only visual arts, completely missing music, writing, and film production. When you examine the coordinator's logs, you see it decomposed the topic into three subtasks: \"AI in digital art creation,\" \"AI in graphic design,\" and \"AI in photography.\" What is the most likely root cause?",
+    "prompt": "After running the system on the topic \"impact of AI on creative industries,\" you observe that each subagent completes successfully — the web search agent finds relevant articles, the document analysis agent summarizes papers correctly, and the synthesis agent produces coherent output. However, the final reports cover only visual arts, completely missing music, writing, and film production. When you examine the coordinator's logs, you see it decomposed the topic into three subtasks: \"AI in digital art creation,\" \"AI in graphic design,\" and \"AI in photography.\" What is the most likely root cause?",
     "options": [
       {
         "id": "A",
@@ -3421,7 +3451,8 @@
     ],
     "correct": "B",
     "explanation": "The coordinator's logs reveal the root cause directly: it decomposed \"creative industries\" into only visual arts subtasks (digital art, graphic design, photography), completely omitting music, writing, and film. The subagents executed their assigned tasks correctly — the problem is what they were assigned. Options A, C, and D incorrectly blame downstream agents that are working correctly within their assigned scope.\nRefs: [Multi-agent orchestration](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/orchestration)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports."
   },
   {
     "id": "cca-f-prep-108",
@@ -3432,7 +3463,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports.* The web search subagent times out while researching a complex topic. You need to design how this failure information flows back to the coordinator agent. Which error propagation approach best enables intelligent recovery?",
+    "prompt": "The web search subagent times out while researching a complex topic. You need to design how this failure information flows back to the coordinator agent. Which error propagation approach best enables intelligent recovery?",
     "options": [
       {
         "id": "A",
@@ -3453,7 +3484,8 @@
     ],
     "correct": "A",
     "explanation": "Structured error context gives the coordinator the information it needs to make intelligent recovery decisions — whether to retry with a modified query, try an alternative approach, or proceed with partial results. Option B's generic status hides valuable context from the coordinator, preventing informed decisions. Option C suppresses the error by marking failure as success, which prevents any recovery and risks incomplete research outputs. Option D terminates the entire workflow unnecessarily when recovery strategies could succeed.\nRefs: [Error handling in agents](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/orchestration)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports."
   },
   {
     "id": "cca-f-prep-109",
@@ -3464,7 +3496,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports.* During testing, you observe that the synthesis agent frequently needs to verify specific claims while combining findings. Currently, when verification is needed, the synthesis agent returns control to the coordinator, which invokes the web search agent, then re-invokes synthesis with results. This adds 2–3 round trips per task and increases latency by 40%. Your evaluation shows that 85% of these verifications are simple fact-checks (dates, names, statistics) while 15% require deeper investigation. What's the most effective approach to reduce overhead while maintaining system reliability?",
+    "prompt": "During testing, you observe that the synthesis agent frequently needs to verify specific claims while combining findings. Currently, when verification is needed, the synthesis agent returns control to the coordinator, which invokes the web search agent, then re-invokes synthesis with results. This adds 2–3 round trips per task and increases latency by 40%. Your evaluation shows that 85% of these verifications are simple fact-checks (dates, names, statistics) while 15% require deeper investigation. What's the most effective approach to reduce overhead while maintaining system reliability?",
     "options": [
       {
         "id": "A",
@@ -3485,7 +3517,8 @@
     ],
     "correct": "A",
     "explanation": "Option A applies the principle of least privilege by giving the synthesis agent only what it needs for the 85% common case (simple fact verification) while preserving the existing coordination pattern for complex cases. Option B's batching approach creates blocking dependencies since synthesis steps may depend on earlier verified facts. Option C over-provisions the synthesis agent, violating separation of concerns. Option D relies on speculative caching that cannot reliably predict what the synthesis agent will need to verify.\nRefs: [Tool distribution across agents](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/orchestration)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports."
   },
   {
     "id": "cca-f-prep-110",
@@ -3496,7 +3529,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are integrating Claude Code into your CI/CD pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives.* Your pipeline script runs `claude \"Analyze this pull request for security issues\"` but the job hangs indefinitely. Logs indicate Claude Code is waiting for interactive input. What's the correct approach to run Claude Code in an automated pipeline?",
+    "prompt": "Your pipeline script runs `claude \"Analyze this pull request for security issues\"` but the job hangs indefinitely. Logs indicate Claude Code is waiting for interactive input. What's the correct approach to run Claude Code in an automated pipeline?",
     "options": [
       {
         "id": "A",
@@ -3517,7 +3550,8 @@
     ],
     "correct": "A",
     "explanation": "The -p (or --print) flag is the documented way to run Claude Code in non-interactive mode. It processes the prompt, outputs the result to stdout, and exits without waiting for user input — exactly what CI/CD pipelines require. The other options reference non-existent features (CLAUDE_HEADLESS environment variable, --batch flag) or use Unix workarounds that don't properly address Claude Code's command syntax.\nRefs: [Claude Code CLI reference](https://docs.anthropic.com/en/docs/claude-code/cli-reference)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are integrating Claude Code into your CI/CD pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives."
   },
   {
     "id": "cca-f-prep-111",
@@ -3528,7 +3562,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are integrating Claude Code into your CI/CD pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives.* Your team wants to reduce API costs for automated analysis. Currently, real-time Claude calls power two workflows: (1) a blocking pre-merge check that must complete before developers can merge, and (2) a technical debt report generated overnight for review the next morning. Your manager proposes switching both to the Message Batches API for its 50% cost savings. How should you evaluate this proposal?",
+    "prompt": "Your team wants to reduce API costs for automated analysis. Currently, real-time Claude calls power two workflows: (1) a blocking pre-merge check that must complete before developers can merge, and (2) a technical debt report generated overnight for review the next morning. Your manager proposes switching both to the Message Batches API for its 50% cost savings. How should you evaluate this proposal?",
     "options": [
       {
         "id": "A",
@@ -3549,7 +3583,8 @@
     ],
     "correct": "A",
     "explanation": "The Message Batches API offers 50% cost savings but has processing times up to 24 hours with no guaranteed latency SLA. This makes it unsuitable for blocking pre-merge checks where developers wait for results, but ideal for overnight batch jobs like technical debt reports. Option B is wrong because relying on polling isn't acceptable for blocking workflows with developer wait time. Option C reflects a misconception — batch results can be correlated using custom_id fields. Option D adds unnecessary complexity when the simpler solution is matching each API to its appropriate use case.\nRefs: [Message Batches API](https://docs.anthropic.com/en/docs/build-with-claude/batch-processing)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are integrating Claude Code into your CI/CD pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives."
   },
   {
     "id": "cca-f-prep-112",
@@ -3560,7 +3595,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are integrating Claude Code into your CI/CD pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives.* A pull request modifies 14 files across the stock tracking module. Your single-pass review analyzing all files together produces inconsistent results: detailed feedback for some files but superficial comments for others, obvious bugs missed, and contradictory feedback — flagging a pattern as problematic in one file while approving identical code elsewhere in the same PR. How should you restructure the review?",
+    "prompt": "A pull request modifies 14 files across the stock tracking module. Your single-pass review analyzing all files together produces inconsistent results: detailed feedback for some files but superficial comments for others, obvious bugs missed, and contradictory feedback — flagging a pattern as problematic in one file while approving identical code elsewhere in the same PR. How should you restructure the review?",
     "options": [
       {
         "id": "A",
@@ -3581,7 +3616,8 @@
     ],
     "correct": "A",
     "explanation": "Splitting reviews into focused passes directly addresses the root cause: attention dilution when processing many files at once. File-by-file analysis ensures consistent depth, while a separate integration pass catches cross-file issues. Option B shifts burden to developers without improving the system. Option C misunderstands that larger context windows don't solve attention quality issues. Option D would actually suppress detection of real bugs by requiring consensus on issues that may only be caught intermittently.\nRefs: [Multi-pass review architecture](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/orchestration)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are integrating Claude Code into your CI/CD pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives."
   },
   {
     "id": "cca-f-prep-113",
@@ -5064,7 +5100,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team uses Claude Code in a CI/CD pipeline for automated code quality, security, and testing tasks. You need to balance cost optimization against developer experience constraints across workflows with different latency requirements.* Your CI/CD system performs three types of Claude-powered analysis: (1) quick style checks on each PR that block merging until complete, (2) comprehensive security audits of the entire codebase run weekly, and (3) test case generation triggered nightly for recently-modified modules. The Message Batches API offers 50% cost savings but can take up to 24 hours to process. You want to optimize API costs while maintaining acceptable developer experience. Which combination correctly matches each task to its API approach?",
+    "prompt": "Your CI/CD system performs three types of Claude-powered analysis: (1) quick style checks on each PR that block merging until complete, (2) comprehensive security audits of the entire codebase run weekly, and (3) test case generation triggered nightly for recently-modified modules. The Message Batches API offers 50% cost savings but can take up to 24 hours to process. You want to optimize API costs while maintaining acceptable developer experience. Which combination correctly matches each task to its API approach?",
     "options": [
       {
         "id": "A",
@@ -5085,7 +5121,8 @@
     ],
     "correct": "D",
     "explanation": "PR style checks block developers from merging and require immediate responses — they must use synchronous calls. Weekly security audits and nightly test generation are scheduled tasks with flexible timelines: they already run asynchronously and can easily tolerate the up-to-24-hour batch processing window. Using the Batches API for both scheduled workflows captures the 50% cost savings on the two highest-volume workloads without degrading developer experience. Option A incorrectly uses sync for nightly test generation, missing cost savings. Option B would make PR style checks unusable. Option C foregoes all batch savings.\n_Why A is wrong:_ Incorrect: nightly test generation is a scheduled, latency-tolerant task — identical to the security audit in its batch-compatibility. Using sync for it wastes 50% cost savings with no benefit.\n_Why B is wrong:_ Incorrect: PR style checks block merging — developers cannot wait up to 24 hours. Batching them would halt the development workflow entirely.\n_Why C is wrong:_ Incorrect: prompt caching reduces costs for repeated prefixes but does not provide the 50% across-the-board savings of batch processing. Using sync for all three foregoes significant savings on the two scheduled tasks.\nRefs: [Message Batches API](https://docs.anthropic.com/en/docs/build-with-claude/message-batches) · [Claude Code in CI/CD](https://docs.anthropic.com/en/docs/claude-code/github-actions)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team uses Claude Code in a CI/CD pipeline for automated code quality, security, and testing tasks. You need to balance cost optimization against developer experience constraints across workflows with different latency requirements."
   },
   {
     "id": "cca-f-prep-160",
@@ -5096,7 +5133,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team uses the Claude Code CLI with --print mode for automated PR reviews in CI. The review pipeline analyzes code quality, documentation accuracy, and potential bugs across a large codebase with varied commenting conventions.* Your automated review analyzes comments and docstrings. The current prompt instructs Claude to \"check that comments are accurate and up-to-date.\" Findings frequently flag acceptable patterns (TODO markers, straightforward descriptions) while missing comments that describe behavior the code no longer implements. What change addresses the root cause of this inconsistent analysis?",
+    "prompt": "Your automated review analyzes comments and docstrings. The current prompt instructs Claude to \"check that comments are accurate and up-to-date.\" Findings frequently flag acceptable patterns (TODO markers, straightforward descriptions) while missing comments that describe behavior the code no longer implements. What change addresses the root cause of this inconsistent analysis?",
     "options": [
       {
         "id": "A",
@@ -5117,7 +5154,8 @@
     ],
     "correct": "D",
     "explanation": "The root cause is the vague instruction \"check that comments are accurate and up-to-date,\" which provides no concrete definition of what makes a comment problematic. Specifying explicit criteria — flag a comment only when its stated behavior contradicts what the code actually does — removes the ambiguity that generates both false positives (TODO markers, obvious descriptions) and false negatives (stale behavioral claims). This directly targets the mismatch between claim and implementation. Git blame (A) adds noise without a decision rule. Filtering (B) is a workaround, not a fix. Few-shot examples (C) help but are secondary to fixing the missing criterion.\n_Why A is wrong:_ Git blame data indicates which comments are old but does not define whether an old comment is wrong. A comment from 3 years ago may still be accurate; a comment added yesterday may already be stale. Age alone cannot substitute for behavioral accuracy criteria.\n_Why B is wrong:_ Filtering out TODO and descriptive patterns treats the symptom rather than the root cause. This reduces false positives on those specific patterns but does not prevent future false positives on new acceptable patterns, nor does it improve detection of genuinely stale behavioral descriptions.\n_Why C is wrong:_ Few-shot examples can improve recognition of specific misleading patterns but only generalize well to similar examples. Without an explicit criterion (claimed behavior vs. actual code), the model lacks a general principle to apply to novel comment structures it has not seen examples of.\nRefs: [Prompt engineering — explicit criteria](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview) · [Claude Code CI/CD integration](https://docs.anthropic.com/en/docs/claude-code/github-actions)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team uses the Claude Code CLI with --print mode for automated PR reviews in CI. The review pipeline analyzes code quality, documentation accuracy, and potential bugs across a large codebase with varied commenting conventions."
   },
   {
     "id": "cca-f-prep-161",
@@ -5128,7 +5166,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team uses the Claude Code CLI with --print mode for automated PR reviews in CI. The review pipeline uses an iterative tool-calling pattern where Claude requests additional file context mid-analysis before producing final feedback.* The code review component works iteratively: Claude analyzes a changed file, then may request related files (imports, base classes, tests) via tool calling to understand context before providing final feedback. Your application defines a tool that lets Claude request file contents; Claude invokes this tool, receives results, and continues its analysis. You're evaluating batch processing to reduce API costs. What is the primary technical constraint when considering batch processing for this workflow?",
+    "prompt": "The code review component works iteratively: Claude analyzes a changed file, then may request related files (imports, base classes, tests) via tool calling to understand context before providing final feedback. Your application defines a tool that lets Claude request file contents; Claude invokes this tool, receives results, and continues its analysis. You're evaluating batch processing to reduce API costs. What is the primary technical constraint when considering batch processing for this workflow?",
     "options": [
       {
         "id": "A",
@@ -5149,7 +5187,8 @@
     ],
     "correct": "C",
     "explanation": "The Batches API uses a fire-and-forget asynchronous model: you submit a batch and poll for completion; there is no mechanism to intercept a tool call mid-request, execute it server-side, and return the result so Claude can continue. Iterative tool-calling requires multiple round-trips within a single logical interaction — Claude calls a tool, your code executes it and returns the result, Claude resumes. This architecture is fundamentally incompatible with the batch model. The latency concern (B) is real but secondary — even if latency were acceptable, the workflow would still be broken because the tool calls cannot be served. Tool definitions (A) are supported in batch requests. Correlation IDs (D) are handled via the custom_id field.\n_Why A is wrong:_ Incorrect: the Batches API does support tool definitions in request parameters — you can include a `tools` array. The problem is not the request schema but the inability to serve tool calls asynchronously mid-execution.\n_Why B is wrong:_ Incorrect: latency is a valid concern for PR-blocking workflows, but it is not the primary technical constraint. Even for a workflow where latency is acceptable, the tool-calling interaction pattern still cannot function with the async fire-and-forget model.\n_Why C is wrong:_ Incorrect: the Batches API does provide correlation — each request includes a `custom_id` field that maps to the corresponding output. Request correlation is not the constraint.\nRefs: [Message Batches API](https://docs.anthropic.com/en/docs/build-with-claude/message-batches) · [Tool use overview](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team uses the Claude Code CLI with --print mode for automated PR reviews in CI. The review pipeline uses an iterative tool-calling pattern where Claude requests additional file context mid-analysis before producing final feedback."
   },
   {
     "id": "cca-f-prep-162",
@@ -5160,7 +5199,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team uses the Claude Code CLI with --print mode for automated PR reviews in CI. The review pipeline analyzes code quality, documentation accuracy, and potential bugs across a large codebase with varied commenting conventions.* Your automated code review averages 15 findings per pull request, with developers reporting a 40% false positive rate. The bottleneck is investigation time: developers must click into each finding to read Claude's reasoning before deciding whether to address or dismiss it. Your CLAUDE.md already contains comprehensive rules for acceptable patterns, and stakeholders have rejected any approach that filters findings before developer review. What change would best address the investigation time bottleneck?",
+    "prompt": "Your automated code review averages 15 findings per pull request, with developers reporting a 40% false positive rate. The bottleneck is investigation time: developers must click into each finding to read Claude's reasoning before deciding whether to address or dismiss it. Your CLAUDE.md already contains comprehensive rules for acceptable patterns, and stakeholders have rejected any approach that filters findings before developer review. What change would best address the investigation time bottleneck?",
     "options": [
       {
         "id": "A",
@@ -5181,7 +5220,8 @@
     ],
     "correct": "A",
     "explanation": "The bottleneck is clicking into findings to read reasoning. Including reasoning and confidence inline with each finding eliminates that click — developers can triage at a glance without navigating away. This respects the no-filtering constraint because all findings remain visible; it simply makes the information needed for triage immediately accessible. Categorizing (B) adds a useful label but still requires developers to evaluate each finding without the reasoning they need. The post-processor (C) was explicitly rejected by stakeholders as a filtering approach. High-confidence filtering (D) was also explicitly rejected — it hides findings from developers.\n_Why A is wrong:_ While categorizing findings into blocking vs. suggestions can speed some triage decisions, it does not address the root bottleneck: developers still need to click into each finding to understand why it was flagged before deciding. Inline reasoning is what eliminates the click.\n_Why B is wrong:_ Adding a post-processor to suppress historical false positive patterns is a form of pre-filtering — it removes findings before developers see them. Stakeholders explicitly rejected this approach.\n_Why C is wrong:_ High-confidence filtering hides findings from developers — this was explicitly rejected by stakeholders who want all findings visible.\nRefs: [Prompt engineering — structured output](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview) · [Claude Code CI/CD integration](https://docs.anthropic.com/en/docs/claude-code/github-actions)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team uses the Claude Code CLI with --print mode for automated PR reviews in CI. The review pipeline analyzes code quality, documentation accuracy, and potential bugs across a large codebase with varied commenting conventions."
   },
   {
     "id": "cca-f-prep-163",
@@ -5192,7 +5232,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "exam",
-    "prompt": "*Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution.* Your CLAUDE.md has grown to over 400 lines containing coding standards, testing conventions, a detailed PR review checklist, deployment workflow instructions, and database migration procedures. You want Claude to always follow the coding standards and testing conventions, but only apply PR review, deployment, and migration guidance when you're actually performing those tasks. What's the most effective restructuring approach?",
+    "prompt": "Your CLAUDE.md has grown to over 400 lines containing coding standards, testing conventions, a detailed PR review checklist, deployment workflow instructions, and database migration procedures. You want Claude to always follow the coding standards and testing conventions, but only apply PR review, deployment, and migration guidance when you're actually performing those tasks. What's the most effective restructuring approach?",
     "options": [
       {
         "id": "A",
@@ -5213,7 +5253,8 @@
     ],
     "correct": "B",
     "explanation": "CLAUDE.md content is loaded for every conversation, making it the right home for standards that should always apply (coding conventions, testing rules). Skills are invoked on-demand when Claude detects relevant trigger keywords or the developer uses a slash command, making them ideal for task-specific workflows like PR reviews, deployments, and migrations. This matches loading behavior to usage frequency. Glob rules (A) are path-based — they activate for files matching a pattern, not for tasks like \"I'm doing a deployment.\" Moving everything to Skills (C) would cause coding standards to be absent from regular coding sessions. The `@import` syntax (D) does not exist in CLAUDE.md — there is no such feature.\n_Why A is wrong:_ Glob patterns in .claude/rules/ activate based on the file path being edited — they are ideal for \"apply this when editing test files\" but cannot express \"apply this when the developer is performing a deployment.\" Task-based activation requires Skills.\n_Why B is wrong:_ Moving all guidance to Skills means coding standards and testing conventions would only be active when a developer explicitly invokes the relevant skill. During normal coding, Claude would have no standards to follow — the opposite of what is needed.\n_Why C is wrong:_ CLAUDE.md does not support an @import syntax. There is no mechanism to compose CLAUDE.md from separate files via imports.\nRefs: [Claude Code memory — CLAUDE.md](https://docs.anthropic.com/en/docs/claude-code/memory) · [Claude Code slash commands and skills](https://docs.anthropic.com/en/docs/claude-code/slash-commands)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution."
   },
   {
     "id": "cca-f-prep-164",
@@ -5256,7 +5297,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team is building an AI-powered customer support agent that handles order inquiries, billing disputes, and account management. The agent uses a set of tools including get_customer, lookup_order, process_refund, and escalate_to_human to resolve customer issues autonomously.* Production metrics show that when your agent resolves complex cases involving billing disputes or multi-order returns, customer satisfaction scores are 15% lower than for simple cases—even when the resolution is technically correct. Root cause analysis reveals the agent provides accurate resolutions but inconsistently explains the reasoning: sometimes omitting relevant policy details, other times missing timeline information or next steps. The specific context gaps vary by case. You want to improve resolution quality without adding human review overhead. Which approach is most effective?",
+    "prompt": "Production metrics show that when your agent resolves complex cases involving billing disputes or multi-order returns, customer satisfaction scores are 15% lower than for simple cases—even when the resolution is technically correct. Root cause analysis reveals the agent provides accurate resolutions but inconsistently explains the reasoning: sometimes omitting relevant policy details, other times missing timeline information or next steps. The specific context gaps vary by case. You want to improve resolution quality without adding human review overhead. Which approach is most effective?",
     "options": [
       {
         "id": "A",
@@ -5277,7 +5318,8 @@
     ],
     "correct": "A",
     "explanation": "The self-critique step (evaluator-optimizer pattern) directly addresses the root cause: gaps in completeness that vary by case. Before presenting the response, the agent evaluates its own draft against explicit criteria — does it explain the policy, include relevant timelines, address all concerns, and anticipate follow-up questions? This catch-mechanism is case-aware and handles the variability that makes few-shot examples insufficient. The confirmation question (B) shifts the burden to customers to identify their own information gaps. Few-shot examples (C) cover five specific templates but miss novel gap patterns in different case types. A model tier upgrade (D) may improve general quality but does not add a targeted completeness check.\n_Why A is wrong:_ Asking customers \"Does this fully address your concern?\" puts the burden on the customer to identify gaps in the agent's explanation — a poor experience. Many customers will not know what policy details or next steps they are missing until they need them later.\n_Why B is wrong:_ Few-shot examples for five common case types provide templates but cannot cover all complex case variations. The root cause is variable, case-specific gaps; a fixed set of templates cannot catch gaps in novel case configurations.\n_Why C is wrong:_ A model tier upgrade may improve general quality but provides no targeted mechanism to detect or fill completeness gaps in the response. Without a self-critique step, a more capable model will still produce inconsistently complete explanations.\nRefs: [Agentic systems — human in the loop](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/human-in-the-loop) · [Build effective agents](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/build-effective-agents)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team is building an AI-powered customer support agent that handles order inquiries, billing disputes, and account management. The agent uses a set of tools including get_customer, lookup_order, process_refund, and escalate_to_human to resolve customer issues autonomously."
   },
   {
     "id": "cca-f-prep-166",
@@ -5288,7 +5330,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent.* When researching a broad topic, you observe that the web search agent and document analysis agent are both investigating the same subtopics, resulting in significant overlap in their findings. Token usage nearly doubled without proportionally increasing the breadth or depth of research coverage. What's the most effective way to address this?",
+    "prompt": "When researching a broad topic, you observe that the web search agent and document analysis agent are both investigating the same subtopics, resulting in significant overlap in their findings. Token usage nearly doubled without proportionally increasing the breadth or depth of research coverage. What's the most effective way to address this?",
     "options": [
       {
         "id": "A",
@@ -5309,7 +5351,8 @@
     ],
     "correct": "D",
     "explanation": "The root cause is that the coordinator delegated the same research space to both agents without defining boundaries. Having the coordinator explicitly partition the research space before delegation — assigning distinct subtopics (e.g., agent A covers academic/primary sources; agent B covers industry/news) or distinct domains of the topic — addresses the problem at its source, before any wasted work occurs. This preserves the benefits of parallel execution. Shared state (A) adds coordination complexity and coordination failures. Sequential execution (B) eliminates the parallelism benefit. Post-hoc deduplication (C) is a workaround that still wastes all the tokens spent on overlapping work.\n_Why A is wrong:_ Shared state between parallel agents introduces coordination overhead and race conditions (what if both agents choose the same focus area simultaneously?). It also requires agents to monitor and respond to each other's state, adding complexity. Upfront partitioning is simpler and more reliable.\n_Why B is wrong:_ Converting to sequential execution solves the overlap but at the cost of the primary performance benefit — parallel research. The coordinator pattern uses parallel subagents specifically to reduce total time. Sequential execution defeats this architecture.\n_Why C is wrong:_ Post-hoc deduplication removes overlapping findings before synthesis but the tokens were already spent generating them. This treats the symptom (duplicate findings) rather than the cause (unpartitioned task assignment).\nRefs: [Build effective agents — orchestration](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/orchestration) · [Agentic systems overview](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/build-effective-agents)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent."
   },
   {
     "id": "cca-f-prep-167",
@@ -5320,7 +5363,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent.* The web search subagent returns results for only 3 of 5 requested source categories (competitor websites and industry reports succeeded, but news archives and social media feeds timed out). The document analysis subagent successfully processed all provided documents. The synthesis subagent must now produce a findings summary from this mixed-quality input. What's the most effective error propagation strategy?",
+    "prompt": "The web search subagent returns results for only 3 of 5 requested source categories (competitor websites and industry reports succeeded, but news archives and social media feeds timed out). The document analysis subagent successfully processed all provided documents. The synthesis subagent must now produce a findings summary from this mixed-quality input. What's the most effective error propagation strategy?",
     "options": [
       {
         "id": "A",
@@ -5341,7 +5384,8 @@
     ],
     "correct": "B",
     "explanation": "Graceful degradation with transparency is the correct pattern: the synthesis agent produces the most useful output possible from available data, while explicitly annotating which findings are well-supported and which areas have gaps due to unavailable sources. This preserves the value of the completed work (3 of 5 sources succeeded) and propagates uncertainty information so downstream consumers can make informed decisions. Blocking on retry (A) delays the entire output for sources that may time out again. Returning an error (C) discards all completed work. Silent synthesis (D) hides the uncertainty, potentially leading consumers to make decisions on incomplete data without knowing it.\n_Why A is wrong:_ Blocking synthesis until all sources respond discards the value of the 3 successful sources and the completed document analysis while waiting for timed-out sources that may never respond. A partial synthesis with gap annotations is more useful than no synthesis.\n_Why B is wrong:_ Returning an error and discarding all completed work means the successfully retrieved competitor websites, industry reports, and all analyzed documents produce nothing. This is the worst outcome — it wastes all completed work for the sake of two failed sources.\n_Why C is wrong:_ Synthesizing silently without gap annotations produces output that appears comprehensive but is not. Consumers may make decisions based on missing news and social media perspectives without knowing those sources failed, which is worse than knowing the gaps exist.\nRefs: [Build effective agents — error handling](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/build-effective-agents) · [Context management](https://docs.anthropic.com/en/docs/build-with-claude/context-windows)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent."
   },
   {
     "id": "cca-f-prep-168",
@@ -5352,7 +5396,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent.* Production monitoring reveals inconsistent synthesis quality. When aggregated results total ~75K tokens, the synthesis agent reliably cites information from the first 15K tokens (web search headlines and snippets) and the final 10K tokens (document analysis conclusions), but frequently omits critical findings that appear in the middle 50K tokens—even when those findings directly address the research question. How should you restructure the aggregated input?",
+    "prompt": "Production monitoring reveals inconsistent synthesis quality. When aggregated results total ~75K tokens, the synthesis agent reliably cites information from the first 15K tokens (web search headlines and snippets) and the final 10K tokens (document analysis conclusions), but frequently omits critical findings that appear in the middle 50K tokens—even when those findings directly address the research question. How should you restructure the aggregated input?",
     "options": [
       {
         "id": "A",
@@ -5373,7 +5417,8 @@
     ],
     "correct": "A",
     "explanation": "The pattern is classic lost-in-the-middle: reliable attention at the start and end, poor attention in the middle. Placing a key findings summary at the beginning leverages the primacy effect — the most critical information occupies the most reliably attended position. Explicit section headers throughout the 75K input help the model navigate and maintain attention on middle sections. These two changes directly mitigate the attention pattern without discarding any content. Rotation (B) distributes the problem across tasks but does not fix it — findings will still be missed, just from different positions. Streaming (C) creates sequential processing that eliminates the parallelism benefit. Aggressive summarization to 20K (D) risks losing important details that were in the original findings.\n_Why A is wrong:_ Rotation ensures each source receives primacy positioning equally across tasks, but this does not improve synthesis quality for any individual task — critical findings from one source will still be in the middle when the other source leads. The problem recurs for every task.\n_Why B is wrong:_ Streaming web results first to completion before introducing document analysis results converts parallel aggregation into sequential processing. This eliminates the performance benefit of running subagents in parallel and does not address the attention distribution problem for whichever source comes second.\n_Why C is wrong:_ Summarizing all outputs to 20K tokens reduces the lost-in-the-middle risk by shrinking the context, but aggressive compression risks losing important secondary findings. A key findings summary at the start plus section headers achieves the attention improvement without discarding content.\nRefs: [Context windows and attention](https://docs.anthropic.com/en/docs/build-with-claude/context-windows) · [Build effective agents](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/build-effective-agents)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent."
   },
   {
     "id": "cca-f-prep-169",
@@ -5384,7 +5429,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent.* During testing, combined outputs from the web search agent (85K tokens including page content) and the document analysis agent (70K tokens including reasoning chains) total 155K tokens, but the synthesis agent performs optimally with inputs under 50K tokens. What's the most effective solution?",
+    "prompt": "During testing, combined outputs from the web search agent (85K tokens including page content) and the document analysis agent (70K tokens including reasoning chains) total 155K tokens, but the synthesis agent performs optimally with inputs under 50K tokens. What's the most effective solution?",
     "options": [
       {
         "id": "A",
@@ -5405,7 +5450,8 @@
     ],
     "correct": "C",
     "explanation": "Modifying upstream agents to return structured data addresses the root cause: the agents are returning far more token-volume than the synthesis step needs. Full page content and reasoning chains are intermediate artifacts of the search and analysis process — they are not the output the synthesis agent needs. Requiring agents to output key facts, citations, and relevance scores reduces token volume at the source while preserving the essential information. This is better than downstream approaches: vector retrieval (A) adds latency and requires the synthesis agent to know what to retrieve; intermediate summarization (B) adds another agent hop and may lose structured facts; sequential batches (D) require maintaining state across calls and do not reduce total token usage.\n_Why A is wrong:_ A vector database with retrieval tools gives the synthesis agent a way to query for specific information but requires it to generate queries, increasing complexity and latency. It also does not reduce the total data generated by upstream agents — the 155K tokens are still produced and stored. Structured output upstream is simpler and more direct.\n_Why B is wrong:_ An intermediate summarization agent adds a third layer of processing and another agent hop. It also risks losing structured data (key facts, specific figures, citation metadata) that is easier to preserve by having the upstream agents return structured output directly.\n_Why C is wrong:_ Sequential batch processing of 155K tokens across multiple calls adds complexity through state management and does not reduce the total context the synthesis agent must process — it just fragments it. Upstream structured output is more efficient.\nRefs: [Build effective agents — orchestration](https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems/orchestration) · [Context windows](https://docs.anthropic.com/en/docs/build-with-claude/context-windows)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team built a multi-agent research system using Claude as a coordinator with specialized subagents: a web search agent, a document analysis agent, and a synthesis agent. The coordinator decomposes research topics, delegates to subagents, and passes combined findings to the synthesis agent."
   },
   {
     "id": "cca-f-prep-170",
@@ -5416,7 +5462,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "exam",
-    "prompt": "*Scenario: Your team is building an AI-powered customer support agent that handles order inquiries, billing disputes, and account management. The agent uses a set of tools including get_customer, lookup_order, process_refund, and escalate_to_human to resolve customer issues autonomously.* Production logs show the agent sometimes selects get_customer when lookup_order would be more appropriate, particularly for ambiguous requests like \"I need help with my recent purchase.\" You decide to add few-shot examples to your system prompt to improve tool selection. Which approach will most effectively address this issue?",
+    "prompt": "Production logs show the agent sometimes selects get_customer when lookup_order would be more appropriate, particularly for ambiguous requests like \"I need help with my recent purchase.\" You decide to add few-shot examples to your system prompt to improve tool selection. Which approach will most effectively address this issue?",
     "options": [
       {
         "id": "A",
@@ -5437,7 +5483,8 @@
     ],
     "correct": "D",
     "explanation": "The error occurs on ambiguous requests — not on clear cases where the agent already performs correctly. Few-shot examples are most effective when they target the specific scenarios where errors occur, paired with explicit reasoning about the comparative decision. For \"I need help with my recent purchase,\" the reasoning might be: \"This mentions a purchase, not account details — use lookup_order, not get_customer. If the customer had said 'my account' or 'my profile,' get_customer would be appropriate.\" This comparative reasoning directly teaches the decision process for edge cases. Grouping by tool (A) makes examples easier to scan but does not demonstrate comparative reasoning. Many clear-case examples (B) reinforce behavior that already works correctly without addressing the ambiguous cases. Tool description updates (C) are a valid complementary fix but are not few-shot examples.\n_Why A is wrong:_ Grouping examples by tool (all get_customer first, then all lookup_order) organizes the prompt for human readability but does not teach comparative reasoning. The model sees each tool's use cases in isolation rather than side-by-side for ambiguous inputs.\n_Why B is wrong:_ Adding 10–15 clear-case examples reinforces correct behavior on cases the agent already handles correctly. Since the errors occur specifically on ambiguous requests, these examples do not address the problem. More examples of already-known patterns do not generalize to edge cases.\n_Why C is wrong:_ Updating tool descriptions with \"use when / do not use when\" guidelines is a valid and complementary approach, but it is not few-shot prompting. The question asks specifically about which few-shot approach is most effective.\nRefs: [Tool use best practices](https://docs.anthropic.com/en/docs/build-with-claude/tool-use/best-practices) · [Prompt engineering — few-shot](https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/use-examples)",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Scenario: Your team is building an AI-powered customer support agent that handles order inquiries, billing disputes, and account management. The agent uses a set of tools including get_customer, lookup_order, process_refund, and escalate_to_human to resolve customer issues autonomously."
   },
   {
     "id": "cca-f-amey-001",
@@ -5448,7 +5495,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Support resolution agent: Agentic Architecture & Orchestration.** Your support agent resolves most tickets but sometimes loops indefinitely, re-calling lookup_order on the same order. What is the correct structural fix?",
+    "prompt": ".** Your support agent resolves most tickets but sometimes loops indefinitely, re-calling lookup_order on the same order. What is the correct structural fix?",
     "options": [
       {
         "id": "A",
@@ -5469,7 +5516,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Support resolution agent — Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-002",
@@ -5480,7 +5528,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Support resolution agent: Tool Design & MCP Integration.** process_refund currently accepts any amount. Support policy caps agent-initiated refunds at $200; larger refunds need a human. Where does that rule belong?",
+    "prompt": ".** process_refund currently accepts any amount. Support policy caps agent-initiated refunds at $200; larger refunds need a human. Where does that rule belong?",
     "options": [
       {
         "id": "A",
@@ -5501,7 +5549,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Support resolution agent — Tool Design & MCP Integration"
   },
   {
     "id": "cca-f-amey-003",
@@ -5608,7 +5657,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
-    "prompt": "Claude Code in CI: Claude Code Configuration & Workflows.** Your CI job runs Claude Code to review pull requests, and the pipeline must parse the results mechanically. Which invocation is correct?",
+    "prompt": ".** Your CI job runs Claude Code to review pull requests, and the pipeline must parse the results mechanically. Which invocation is correct?",
     "options": [
       {
         "id": "A",
@@ -5629,7 +5678,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code in CI — Claude Code Configuration & Workflows"
   },
   {
     "id": "cca-f-amey-007",
@@ -5640,7 +5690,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
-    "prompt": "Claude Code in CI: Prompt Engineering & Structured Output.** The automated reviewer flags dozens of trivial style nits per pull request, and engineers have started ignoring it. Which change addresses the false-positive problem the way the blueprint suggests?",
+    "prompt": ".** The automated reviewer flags dozens of trivial style nits per pull request, and engineers have started ignoring it. Which change addresses the false-positive problem the way the blueprint suggests?",
     "options": [
       {
         "id": "A",
@@ -5661,7 +5711,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code in CI — Prompt Engineering & Structured Output"
   },
   {
     "id": "cca-f-amey-008",
@@ -5736,7 +5787,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Developer productivity agent: Tool Design & MCP Integration.** Your codebase-exploration agent has get_file_contents, read_source, and fetch_file tools that all read files, and it frequently picks poorly among them. What is the correct fix?",
+    "prompt": ".** Your codebase-exploration agent has get_file_contents, read_source, and fetch_file tools that all read files, and it frequently picks poorly among them. What is the correct fix?",
     "options": [
       {
         "id": "A",
@@ -5757,7 +5808,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Developer productivity agent — Tool Design & MCP Integration"
   },
   {
     "id": "cca-f-amey-011",
@@ -5768,7 +5820,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** A support workflow resolves tickets by looking up an account, checking entitlement, and drafting a reply, always in that order. Which architecture is correct?",
+    "prompt": ".** A support workflow resolves tickets by looking up an account, checking entitlement, and drafting a reply, always in that order. Which architecture is correct?",
     "options": [
       {
         "id": "A",
@@ -5789,7 +5841,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-012",
@@ -5800,7 +5853,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** What is the strongest justification for splitting work across subagents?",
+    "prompt": ".** What is the strongest justification for splitting work across subagents?",
     "options": [
       {
         "id": "A",
@@ -5821,7 +5874,8 @@
     ],
     "correct": "B",
     "explanation": "Option B is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-013",
@@ -5832,7 +5886,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** An agent loops between two tools without converging. What is the most appropriate first control?",
+    "prompt": ".** An agent loops between two tools without converging. What is the most appropriate first control?",
     "options": [
       {
         "id": "A",
@@ -5853,7 +5907,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-014",
@@ -5864,7 +5919,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** Which property most increases the operational risk of an agentic design?",
+    "prompt": ".** Which property most increases the operational risk of an agentic design?",
     "options": [
       {
         "id": "A",
@@ -5885,7 +5940,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-015",
@@ -5896,7 +5952,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** How should an agentic system handle a step whose result it cannot verify?",
+    "prompt": ".** How should an agentic system handle a step whose result it cannot verify?",
     "options": [
       {
         "id": "A",
@@ -5917,7 +5973,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-016",
@@ -5928,7 +5985,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** A team proposes an agent for a task where every input is well formed and every rule is known. What should the architect recommend?",
+    "prompt": ".** A team proposes an agent for a task where every input is well formed and every rule is known. What should the architect recommend?",
     "options": [
       {
         "id": "A",
@@ -5949,7 +6006,8 @@
     ],
     "correct": "B",
     "explanation": "Option B is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-017",
@@ -5960,7 +6018,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Agentic Architecture & Orchestration.** What most improves the debuggability of an agentic system in production?",
+    "prompt": ".** What most improves the debuggability of an agentic system in production?",
     "options": [
       {
         "id": "A",
@@ -5981,7 +6039,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Agentic Architecture & Orchestration"
   },
   {
     "id": "cca-f-amey-018",
@@ -5992,7 +6051,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
-    "prompt": "Claude Code Configuration & Workflows.** Where should conventions that apply to everyone working in a repository be recorded?",
+    "prompt": ".** Where should conventions that apply to everyone working in a repository be recorded?",
     "options": [
       {
         "id": "A",
@@ -6013,7 +6072,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code Configuration & Workflows"
   },
   {
     "id": "cca-f-amey-019",
@@ -6024,7 +6084,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
-    "prompt": "Claude Code Configuration & Workflows.** What distinguishes work suited to headless mode?",
+    "prompt": ".** What distinguishes work suited to headless mode?",
     "options": [
       {
         "id": "A",
@@ -6045,7 +6105,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code Configuration & Workflows"
   },
   {
     "id": "cca-f-amey-020",
@@ -6056,7 +6117,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Claude Code Configuration & Workflows.** A skill and a subagent could both address a need. What decides between them?",
+    "prompt": ".** A skill and a subagent could both address a need. What decides between them?",
     "options": [
       {
         "id": "A",
@@ -6077,7 +6138,8 @@
     ],
     "correct": "B",
     "explanation": "Option B is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code Configuration & Workflows"
   },
   {
     "id": "cca-f-amey-021",
@@ -6088,7 +6150,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
-    "prompt": "Claude Code Configuration & Workflows.** What is the correct use of a hook in a Claude Code workflow?",
+    "prompt": ".** What is the correct use of a hook in a Claude Code workflow?",
     "options": [
       {
         "id": "A",
@@ -6109,7 +6171,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code Configuration & Workflows"
   },
   {
     "id": "cca-f-amey-022",
@@ -6120,7 +6183,7 @@
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
-    "prompt": "Claude Code Configuration & Workflows.** Claude Code performs well for one engineer and inconsistently across the team. What is the most likely cause?",
+    "prompt": ".** Claude Code performs well for one engineer and inconsistently across the team. What is the most likely cause?",
     "options": [
       {
         "id": "A",
@@ -6141,7 +6204,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Claude Code Configuration & Workflows"
   },
   {
     "id": "cca-f-amey-023",
@@ -6152,7 +6216,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Prompt Engineering & Structured Output.** A pipeline requires output that always validates against a schema. What is the correct approach?",
+    "prompt": ".** A pipeline requires output that always validates against a schema. What is the correct approach?",
     "options": [
       {
         "id": "A",
@@ -6173,7 +6237,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Prompt Engineering & Structured Output"
   },
   {
     "id": "cca-f-amey-024",
@@ -6184,7 +6249,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
-    "prompt": "Prompt Engineering & Structured Output.** Extraction is accurate for common cases and fails on rare formats. What is the most effective response?",
+    "prompt": ".** Extraction is accurate for common cases and fails on rare formats. What is the most effective response?",
     "options": [
       {
         "id": "A",
@@ -6205,7 +6270,8 @@
     ],
     "correct": "B",
     "explanation": "Option B is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Prompt Engineering & Structured Output"
   },
   {
     "id": "cca-f-amey-025",
@@ -6216,7 +6282,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Prompt Engineering & Structured Output.** What should a schema define for a field the source document may not contain?",
+    "prompt": ".** What should a schema define for a field the source document may not contain?",
     "options": [
       {
         "id": "A",
@@ -6237,7 +6303,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Prompt Engineering & Structured Output"
   },
   {
     "id": "cca-f-amey-026",
@@ -6248,7 +6315,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
-    "prompt": "Prompt Engineering & Structured Output.** Which practice most improves consistency across a long-running structured extraction job?",
+    "prompt": ".** Which practice most improves consistency across a long-running structured extraction job?",
     "options": [
       {
         "id": "A",
@@ -6269,7 +6336,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Prompt Engineering & Structured Output"
   },
   {
     "id": "cca-f-amey-027",
@@ -6280,7 +6348,7 @@
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
-    "prompt": "Prompt Engineering & Structured Output.** A prompt mixes the instruction, the data, and the output format in continuous prose. What is the first improvement?",
+    "prompt": ".** A prompt mixes the instruction, the data, and the output format in continuous prose. What is the first improvement?",
     "options": [
       {
         "id": "A",
@@ -6301,7 +6369,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Prompt Engineering & Structured Output"
   },
   {
     "id": "cca-f-amey-028",
@@ -6312,7 +6381,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Tool Design & MCP Integration.** What is the strongest indicator that a tool surface needs redesign?",
+    "prompt": ".** What is the strongest indicator that a tool surface needs redesign?",
     "options": [
       {
         "id": "A",
@@ -6333,7 +6402,8 @@
     ],
     "correct": "B",
     "explanation": "Option B is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Tool Design & MCP Integration"
   },
   {
     "id": "cca-f-amey-029",
@@ -6344,7 +6414,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Tool Design & MCP Integration.** How should a tool that performs an irreversible action be designed?",
+    "prompt": ".** How should a tool that performs an irreversible action be designed?",
     "options": [
       {
         "id": "A",
@@ -6365,7 +6435,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Tool Design & MCP Integration"
   },
   {
     "id": "cca-f-amey-030",
@@ -6376,7 +6447,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Tool Design & MCP Integration.** A tool returns a large payload that consumes most of the context window. What is the right change?",
+    "prompt": ".** A tool returns a large payload that consumes most of the context window. What is the right change?",
     "options": [
       {
         "id": "A",
@@ -6397,7 +6468,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Tool Design & MCP Integration"
   },
   {
     "id": "cca-f-amey-031",
@@ -6408,7 +6480,7 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Tool Design & MCP Integration.** What belongs in a tool's description?",
+    "prompt": ".** What belongs in a tool's description?",
     "options": [
       {
         "id": "A",
@@ -6429,7 +6501,8 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Tool Design & MCP Integration"
   },
   {
     "id": "cca-f-amey-032",
@@ -6440,7 +6513,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Context Management & Reliability.** A long agentic run degrades in quality as it proceeds. What is the most likely cause?",
+    "prompt": ".** A long agentic run degrades in quality as it proceeds. What is the most likely cause?",
     "options": [
       {
         "id": "A",
@@ -6461,7 +6534,8 @@
     ],
     "correct": "B",
     "explanation": "Option B is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Context Management & Reliability"
   },
   {
     "id": "cca-f-amey-033",
@@ -6472,7 +6546,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "intermediate",
-    "prompt": "Context Management & Reliability.** What is the right way to carry state across a compaction boundary?",
+    "prompt": ".** What is the right way to carry state across a compaction boundary?",
     "options": [
       {
         "id": "A",
@@ -6493,7 +6567,8 @@
     ],
     "correct": "C",
     "explanation": "Option C is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Context Management & Reliability"
   },
   {
     "id": "cca-f-amey-034",
@@ -6504,7 +6579,7 @@
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "intermediate",
-    "prompt": "Context Management & Reliability.** Which measure most improves reliability for a workflow that must not silently produce wrong output?",
+    "prompt": ".** Which measure most improves reliability for a workflow that must not silently produce wrong output?",
     "options": [
       {
         "id": "A",
@@ -6525,7 +6600,8 @@
     ],
     "correct": "D",
     "explanation": "Option D is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Context Management & Reliability"
   },
   {
     "id": "cca-f-amey-035",
@@ -6536,7 +6612,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Context Management & Reliability.** What should be measured to know whether a production agentic system is healthy?",
+    "prompt": ".** What should be measured to know whether a production agentic system is healthy?",
     "options": [
       {
         "id": "A",
@@ -6557,6 +6633,7 @@
     ],
     "correct": "A",
     "explanation": "Option A is correct per scenario guidelines.",
-    "mockEligible": true
+    "mockEligible": true,
+    "title": "Context Management & Reliability"
   }
 ]

@@ -6,6 +6,8 @@
 
   var allQuestions = [];
   var activeDomain = 'All';
+  var activeDifficulty = 'All';
+  var activeSort = 'oldest'; // 'oldest' (Old to New) | 'newest' (New to Old)
   var currentPage = 1;
   var pageSize = 50;
 
@@ -38,12 +40,43 @@
   function renderFilters() {
     if (!filterContainer) return;
     var domains = ['All', 'D1', 'D2', 'D3', 'D4', 'D5'];
-    var html = '';
+    var difficulties = ['All', 'basic', 'intermediate', 'advanced'];
+
+    var html = '<div style="display: flex; flex-direction: column; gap: 0.75rem; background: var(--card); border: 2px solid var(--border); padding: 1rem; border-radius: 2px; margin-bottom: 1.5rem; box-shadow: 3px 3px 0 var(--border);">';
+    
+    // Row 1: Domains
+    html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
+    html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Domain:</span>';
     domains.forEach(function(d) {
       var label = d === 'All' ? 'All Domains (' + allQuestions.length + ')' : d;
       var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: #fff;"' : '';
-      html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" ' + activeStyle + ' style="margin-right: 0.5rem; margin-bottom: 0.5rem;">' + label + '</button>';
+      html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" ' + activeStyle + '>' + label + '</button>';
     });
+    html += '</div>';
+
+    // Row 2: Difficulty & Sorting
+    html += '<div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px dashed var(--border); padding-top: 0.75rem;">';
+    
+    // Difficulty
+    html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
+    html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Difficulty:</span>';
+    difficulties.forEach(function(diff) {
+      var label = diff === 'All' ? '[All]' : '[' + diff + ']';
+      var activeStyle = diff === activeDifficulty ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+      html += '<button class="reveal-btn diff-btn" data-diff="' + diff + '" ' + activeStyle + '>' + label + '</button>';
+    });
+    html += '</div>';
+
+    // Sorting
+    html += '<div style="display: flex; align-items: center; gap: 0.5rem;">';
+    html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; color: var(--muted);">Sort:</span>';
+    var oldestActive = activeSort === 'oldest' ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+    var newestActive = activeSort === 'newest' ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+    html += '<button class="reveal-btn sort-btn" data-sort="oldest" ' + oldestActive + '>Old to New</button>';
+    html += '<button class="reveal-btn sort-btn" data-sort="newest" ' + newestActive + '>New to Old</button>';
+    html += '</div>';
+
+    html += '</div></div>';
     filterContainer.innerHTML = html;
 
     filterContainer.querySelectorAll('.domain-btn').forEach(function(btn) {
@@ -54,13 +87,46 @@
         renderQuestions();
       });
     });
+
+    filterContainer.querySelectorAll('.diff-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        activeDifficulty = this.getAttribute('data-diff');
+        currentPage = 1;
+        renderFilters();
+        renderQuestions();
+      });
+    });
+
+    filterContainer.querySelectorAll('.sort-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        activeSort = this.getAttribute('data-sort');
+        currentPage = 1;
+        renderFilters();
+        renderQuestions();
+      });
+    });
   }
 
   function getFilteredQuestions() {
-    if (activeDomain === 'All') return allQuestions;
-    return allQuestions.filter(function(q) {
-      return q.domain && q.domain.startsWith(activeDomain);
-    });
+    var filtered = allQuestions.slice();
+
+    if (activeDomain !== 'All') {
+      filtered = filtered.filter(function(q) {
+        return q.domain && q.domain.startsWith(activeDomain);
+      });
+    }
+
+    if (activeDifficulty !== 'All') {
+      filtered = filtered.filter(function(q) {
+        return (q.difficulty || 'intermediate').toLowerCase() === activeDifficulty.toLowerCase();
+      });
+    }
+
+    if (activeSort === 'newest') {
+      filtered.reverse();
+    }
+
+    return filtered;
   }
 
   function renderQuestions() {
@@ -68,7 +134,7 @@
     var totalQuestions = filtered.length;
 
     if (totalQuestions === 0) {
-      container.innerHTML = '<p>No questions found for this filter.</p>';
+      container.innerHTML = '<div class="card" style="padding: 2rem; text-align: center;"><p class="muted">No questions found matching your filter criteria.</p></div>';
       if (paginationContainer) paginationContainer.innerHTML = '';
       return;
     }
@@ -89,6 +155,11 @@
       html += '    <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
       html += '    <span>[' + (q.difficulty || 'intermediate') + ']</span>';
       html += '  </div>';
+      
+      if (q.title) {
+        html += '  <div style="font-weight: bold; font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 0.5rem;">' + escapeHtml(q.title) + '</div>';
+      }
+
       html += '  <div class="question-prompt">' + globalIndex + '. ' + escapeHtml(q.prompt) + '</div>';
       html += '  <div class="options-list">';
       
