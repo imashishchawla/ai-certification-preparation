@@ -3,15 +3,15 @@
 
 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; gap: 1rem;">
   <h1 style="margin: 0; font-size: 1.75rem;">Available Certifications : <span style="color: var(--accent);">AI Certification Exams</span></h1>
-  <span class="tag" style="background: var(--accent); color: #fff; font-size: 0.85rem;">4 TRACKS AVAILABLE</span>
+  <span class="tag" style="background: var(--accent); color: #fff; font-size: 0.85rem;">3 TRACKS AVAILABLE</span>
 </div>
 
 <p class="muted" style="margin-bottom: 2rem;">Self-contained offline preparation library for professional AI certification exams. Practice normalized scenario questions, study official guides, and take timed mock tests.</p>
 
-<div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+<div class="card-grid card-grid-3">
   {{ range site.Data.exams.exams }}
     {{ if eq .status "active" }}
-    <div class="question-card" style="border-left: 6px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="question-card" style="border-left: 6px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0;">
       <div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
           <span class="tag" style="background: var(--accent); color: #fff;">STATUS: ACTIVE</span>
@@ -28,7 +28,7 @@
       </div>
     </div>
     {{ else }}
-    <div class="question-card" style="opacity: 0.85; border-left: 6px solid var(--muted); display: flex; flex-direction: column; justify-content: space-between;">
+    <div class="question-card" style="opacity: 0.85; border-left: 6px solid var(--muted); display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 0;">
       <div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
           <span class="tag" style="background: var(--muted); color: #fff;">STATUS: PLANNED</span>

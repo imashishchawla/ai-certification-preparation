@@ -21,7 +21,7 @@
 
   --font-heading: "IBM Plex Mono", "Courier New", Courier, monospace;
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Georgia, serif;
-  --max-width: 960px;
+  --max-width: 1240px;
 }
 
 [data-theme="dark"] {
@@ -237,10 +237,16 @@ th {
 /* Card Grid */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.25rem;
   margin: 1.5rem 0;
 }
+@media (min-width: 992px) {
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .card {
   background: var(--card);
   border: 2px solid var(--border);

@@ -34,20 +34,6 @@ path = "/exams/ccar-p/"
 description = "Advanced professional certification for enterprise multi-agent deployment, safety, and governance."
 
 [[exams]]
-id = "ccao-f"
-code = "CCAO-F"
-name = "Claude Certified Associate — Foundations"
-provider = "Anthropic"
-status = "planned"
-questions = 45
-duration_minutes = 90
-practice_pass_percent = 70
-pass_score = 700
-price_usd = 100
-path = "/exams/ccao-f/"
-description = "Entry-level associate certification for core Claude capabilities, prompt design, and AI assistance."
-
-[[exams]]
 id = "ccdv-f"
 code = "CCDV-F"
 name = "Claude Certified Developer — Foundations"
