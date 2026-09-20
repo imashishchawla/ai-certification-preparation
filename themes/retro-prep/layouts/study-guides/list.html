@@ -1,0 +1,115 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<h1>CCAF Study Guides & Domain Lessons</h1>
+<p class="muted">Access theoretical deep dives, domain lessons, master cheat sheets, and architectural guides for the CCAF exam.</p>
+
+<section style="margin-top: 2rem;">
+  <h2>1. Master Study Guides & Cheat Sheets</h2>
+  <div class="card-grid">
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">MASTER GUIDE</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/cca-prep-cheatsheet/" | relLangURL }}">CCAF Comprehensive Master Cheat Sheet</a></h3>
+      <p>Complete cross-domain architectural breakdown covering loops, tool schemas, CLAUDE.md rules, prompt patterns, and context window budgets.</p>
+      <a href="{{ "exams/cca-f/study-guides/cca-prep-cheatsheet/" | relLangURL }}" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read Master Cheat Sheet →</a>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">STUDY GUIDE</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/amey-thakur-architect-foundations-README/" | relLangURL }}">Amey Thakur CCAF Foundations Guide</a></h3>
+      <p>In-depth preparation guide covering exam breakdown, key concepts, study roadmap, and domain tips.</p>
+      <a href="{{ "exams/cca-f/study-guides/amey-thakur-architect-foundations-README/" | relLangURL }}" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read Guide →</a>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">CHEAT SHEET</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/amey-thakur-cheat-sheet/" | relLangURL }}">Amey Thakur Quick Exam Reference Cheat Sheet</a></h3>
+      <p>High-yield quick reference notes, CLI syntax shortcuts, and task statement solving patterns.</p>
+      <a href="{{ "exams/cca-f/study-guides/amey-thakur-cheat-sheet/" | relLangURL }}" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read Cheat Sheet →</a>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">FULL MANUAL</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/paullarionov-guide_en/" | relLangURL }}">Paul Larionov Comprehensive Claude Guide (EN)</a></h3>
+      <p>Extensive technical manual detailing Claude architecture, tool integration patterns, and enterprise design.</p>
+      <a href="{{ "exams/cca-f/study-guides/paullarionov-guide_en/" | relLangURL }}" class="btn" style="margin-top: 0.5rem; display: inline-block;">Read Manual →</a>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top: 3rem;">
+  <h2>2. Official Domain Study Notes (D1–D5)</h2>
+  <div class="card-grid">
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">DOMAIN 1</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain1-overview/" | relLangURL }}">D1: Agentic Architecture & Orchestration</a></h3>
+      <p>Single-agent vs multi-agent loops, supervisor delegation patterns, SDK hooks, task decomposition, and session state resumption.</p>
+      <div style="margin-top: 0.5rem; font-size: 0.85rem;">
+        Sub-topics: 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain1-agentic-loops/" | relLangURL }}">Agentic Loops</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain1-hooks/" | relLangURL }}">SDK Hooks</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain1-multi-agent/" | relLangURL }}">Multi-Agent Orchestration</a>
+      </div>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">DOMAIN 2</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain2-overview/" | relLangURL }}">D2: Tool Design & MCP Integration</a></h3>
+      <p>JSON Schema tool definitions, tool scoping, built-in tools vs custom tools, structured error handling, and MCP stdio/SSE transports.</p>
+      <div style="margin-top: 0.5rem; font-size: 0.85rem;">
+        Sub-topics: 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain2-tool-scoping/" | relLangURL }}">Tool Scoping</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain2-mcp-errors/" | relLangURL }}">MCP Errors</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain2-tool-descriptions/" | relLangURL }}">Tool Descriptions</a>
+      </div>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">DOMAIN 3</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain3-overview/" | relLangURL }}">D3: Claude Code Configuration & Workflows</a></h3>
+      <p>CLAUDE.md hierarchy, path-specific rules, custom slash commands, plan mode execution, iterative refinement, and CI/CD automation.</p>
+      <div style="margin-top: 0.5rem; font-size: 0.85rem;">
+        Sub-topics: 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain3-claude-md/" | relLangURL }}">CLAUDE.md Hierarchy</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain3-plan-mode/" | relLangURL }}">Plan Mode</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain3-cicd/" | relLangURL }}">CI/CD Integration</a>
+      </div>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">DOMAIN 4</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain4-overview/" | relLangURL }}">D4: Prompt Engineering & Output</a></h3>
+      <p>System prompts, XML tag formatting, few-shot prompting, JSON Schema structured output, validation retry loops, and Anthropic Batch API.</p>
+      <div style="margin-top: 0.5rem; font-size: 0.85rem;">
+        Sub-topics: 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain4-few-shot/" | relLangURL }}">Few-Shot Examples</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain4-structured-output/" | relLangURL }}">Structured Output</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain4-batch-api/" | relLangURL }}">Batch API</a>
+      </div>
+    </div>
+
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <span class="tag">DOMAIN 5</span>
+      <h3><a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain5-overview/" | relLangURL }}">D5: Context Management & Reliability</a></h3>
+      <p>Context window budget, compaction strategies, truncation, ambiguity resolution, error propagation, and human review calibration.</p>
+      <div style="margin-top: 0.5rem; font-size: 0.85rem;">
+        Sub-topics: 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain5-context-strategies/" | relLangURL }}">Context Window Strategies</a> · 
+        <a href="{{ "exams/cca-f/study-guides/cca-prep-docs/domain5-escalation/" | relLangURL }}">Ambiguity Escalation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ if .Pages }}
+<section style="margin-top: 3rem;">
+  <h2>3. All Available Sub-Documents & Guides</h2>
+  <ul style="line-height: 1.8;">
+    {{ range .Pages }}
+      <li><a href="{{ .RelPermalink }}"><strong>{{ .Title }}</strong></a> — {{ .Description }}</li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
+
+{{ end }}

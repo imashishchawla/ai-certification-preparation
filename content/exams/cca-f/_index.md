@@ -4,19 +4,13 @@ description: "Exam guide, study materials, practice questions, and mock tests fo
 layout: "single"
 ---
 
-Welcome to the **Claude Certified Architect — Foundations (CCAF / CCAR-F)** prep library.
-
-> **Disclaimer:** This is an unofficial, independent preparation handbook. It is not affiliated with or endorsed by Anthropic.
-
----
-
 ## Exam Specifications
 
 | Specification | Value |
 |---|---|
 | **Questions** | 60 items |
 | **Duration** | 120 minutes |
-| **Passing Score** | 720 / 1000 scaled |
+| **Passing Score** | 720 / 1000 scaled (72%) |
 | **Exam Fee** | $125 USD |
 | **Provider** | Pearson VUE (proctored) |
 
@@ -24,11 +18,38 @@ Welcome to the **Claude Certified Architect — Foundations (CCAF / CCAR-F)** pr
 
 ## Official Exam Domains & Weights
 
-- **D1 Agentic Architecture & Orchestration** — 27% (~16 Qs)
-- **D2 Tool Design & MCP Integration** — 18% (~11 Qs)
-- **D3 Claude Code Configuration & Workflows** — 20% (~12 Qs)
-- **D4 Prompt Engineering & Structured Output** — 20% (~12 Qs)
-- **D5 Context Management & Reliability** — 15% (~9 Qs)
+<div class="domains-row" style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0;">
+  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
+    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">27%</div>
+    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D1 Architecture</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">16 Questions</div>
+  </div>
+  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
+    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">18%</div>
+    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D2 Tool Design</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">11 Questions</div>
+  </div>
+  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
+    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">20%</div>
+    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D3 Claude Code</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">12 Questions</div>
+  </div>
+  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
+    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">20%</div>
+    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D4 Prompts & JSON</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">12 Questions</div>
+  </div>
+  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
+    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">15%</div>
+    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D5 Context & Rel</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">9 Questions</div>
+  </div>
+  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--accent); background: rgba(0,0,0,0.03); text-align: center;">
+    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--fg);">100%</div>
+    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">Total Exam</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">60 Questions</div>
+  </div>
+</div>
 
 ---
 
@@ -83,3 +104,5 @@ Welcome to the **Claude Certified Architect — Foundations (CCAF / CCAR-F)** pr
     <p>Simulate the live certification exam with a randomized 60-question test balanced by official domain weights and a 120-minute timer.</p>
   </a>
 </div>
+
+<p class="muted" style="margin-top: 3rem; padding-top: 1rem; border-top: 1px dashed var(--border); font-size: 0.85rem;">Disclaimer: This is an unofficial, independent preparation handbook. It is not affiliated with or endorsed by Anthropic.</p>

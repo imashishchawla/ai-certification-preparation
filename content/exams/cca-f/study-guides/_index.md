@@ -1,5 +1,6 @@
 ---
-title: "Study Guides"
-description: "Theory deep-dives and lesson modules for CCAF."
+title: "Study Guides & Lessons"
+description: "Comprehensive CCAF study guides, domain lessons, and reference guides."
+type: "study-guides"
 layout: "list"
 ---

@@ -8,6 +8,5 @@
   <p class="muted">Loading Mock Exam Engine...</p>
 </div>
 
-{{ $script := resources.Get "js/mock-test.js" | fingerprint }}
-<script src="{{ $script.RelPermalink }}"></script>
+<script src="{{ "js/mock-test.js" | relLangURL }}"></script>
 {{ end }}
