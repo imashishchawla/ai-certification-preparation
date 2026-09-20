@@ -1,6 +1,6 @@
 <header class="top-bar">
   <div class="top-bar-inner">
-    <a href="{{ .Site.BaseURL }}" class="site-logo">
+    <a href="{{ "" | relLangURL }}" class="site-logo">
       <span>AI CERT</span> PREP
     </a>
     
@@ -8,9 +8,26 @@
       <details class="dropdown">
         <summary>Exams ▾</summary>
         <div class="dropdown-menu">
+          <a href="{{ "exams/" | relLangURL }}" style="font-weight: bold; border-bottom: 1px dashed var(--border);">All Certifications</a>
           {{ range site.Data.exams.exams }}
             <a href="{{ .path | relLangURL }}">{{ .name }} ({{ .code }})</a>
           {{ end }}
+        </div>
+      </details>
+
+      <details class="dropdown">
+        <summary>CCAF Prep ▾</summary>
+        <div class="dropdown-menu">
+          <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase;">2. Practice Library</div>
+          <a href="{{ "exams/cca-f/sample-questions/" | relLangURL }}">Sample Questions (200+)</a>
+          <a href="{{ "exams/cca-f/mock-test/" | relLangURL }}">Timed Mock Test (60Q/120M)</a>
+          
+          <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase; border-top: 1px dashed var(--border); margin-top: 0.25rem; padding-top: 0.5rem;">1. Study Material</div>
+          <a href="{{ "exams/cca-f/study-guides/" | relLangURL }}">Study Guides</a>
+          <a href="{{ "exams/cca-f/exam-notes/" | relLangURL }}">Exam Notes</a>
+          <a href="{{ "exams/cca-f/articles/" | relLangURL }}">Technical Articles</a>
+          <a href="{{ "exams/cca-f/study-materials/" | relLangURL }}">Official Documents & PDFs</a>
+          <a href="{{ "exams/cca-f/resources/" | relLangURL }}">Resources & Anti-Patterns</a>
         </div>
       </details>
 
