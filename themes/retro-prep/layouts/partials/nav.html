@@ -40,10 +40,38 @@
   </div>
 </header>
 <script>
+  // Theme toggle
   document.getElementById('themeToggle').addEventListener('click', function() {
     var current = document.documentElement.getAttribute('data-theme');
     var target = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', target);
     localStorage.setItem('theme', target);
   });
+
+  // Dropdown accordions: close others when one opens & close on outside click
+  (function() {
+    var dropdowns = document.querySelectorAll('details.dropdown');
+    dropdowns.forEach(function(det) {
+      det.addEventListener('toggle', function() {
+        if (this.open) {
+          dropdowns.forEach(function(other) {
+            if (other !== det) other.removeAttribute('open');
+          });
+        }
+      });
+      det.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          det.removeAttribute('open');
+        });
+      });
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('details.dropdown')) {
+        dropdowns.forEach(function(det) {
+          det.removeAttribute('open');
+        });
+      }
+    });
+  })();
 </script>
