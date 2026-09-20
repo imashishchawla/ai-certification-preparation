@@ -36,10 +36,17 @@ export function runValidation(rootDir, examId = 'cca-f') {
       errors++;
     }
 
-    if (/✔|✅|Correct:|Answer:/i.test(q.prompt)) {
+    if (/✔|✅|\[CORRECT\]|^\s*\(?(?:Correct|Answer|Explanation)\s*[:\)]/i.test(q.prompt)) {
       console.error(`${label} Prompt contains answer key markers.`);
       errors++;
     }
+
+    q.options.forEach(opt => {
+      if (/✔|✅|\[CORRECT\]|^\s*\(?(?:Correct|Answer)\s*[:\)]/i.test(opt.text)) {
+        console.error(`${label} Option ${opt.id} contains answer key marker.`);
+        errors++;
+      }
+    });
   });
 
   if (errors > 0) {

@@ -9,7 +9,10 @@
     "build": "hugo --minify && node scripts/check-external-links.mjs",
     "validate": "node scripts/validate-questions.mjs",
     "normalize": "node scripts/normalize-questions.mjs",
+    "dedup": "node .agent/cert-prep-curator/cli.mjs dedup-db cca-f",
+    "sync": "node .agent/cert-prep-curator/cli.mjs sync cca-f",
     "preflight": "node .agent/cert-prep-curator/cli.mjs preflight",
+    "curate": "node .agent/cert-prep-curator/cli.mjs curate cca-f",
     "curator": "node .agent/cert-prep-curator/cli.mjs"
   },
   "keywords": [

@@ -6,5 +6,8 @@ compatibility_date = "2026-09-01"
 AGENT_NAME = "cert-prep-curator"
 AGENT_VERSION = "1.0.0"
 EXAM_CODE = "CCAF"
-TOTAL_QUESTIONS = 205
+TOTAL_QUESTIONS = 1003
 GITHUB_REPO = "imashishchawla/ai-certification-preparation"
+
+[triggers]
+crons = ["0 3 * * 1"]

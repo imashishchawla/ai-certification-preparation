@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "exam": "cca-f",
+  "sources": [
+    {
+      "id": "anthropic-official-exam-guide",
+      "name": "Anthropic Official Exam Guide v1.0",
+      "category": "official-guides-docs",
+      "trustTier": "tier-1-official",
+      "baseUrl": "https://everpath-course-content.s3-accelerate.amazonaws.com",
+      "endpoints": [
+        "https://everpath-course-content.s3-accelerate.amazonaws.com/Claude+Certified+Architect+–+Foundations+Certification+Exam+Guide.pdf"
+      ],
+      "destination": "content/exams/cca-f/study-materials/",
+      "format": "pdf",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "anthropic-partner-academy",
+      "name": "Anthropic Partner Academy (Skilljar)",
+      "category": "official-guides-docs",
+      "trustTier": "tier-1-official",
+      "baseUrl": "https://anthropic-partners.skilljar.com",
+      "endpoints": [
+        "https://anthropic-partners.skilljar.com/page/partner-certifications",
+        "https://anthropic-partners.skilljar.com/page/faq-certifications"
+      ],
+      "destination": "content/exams/cca-f/study-materials/",
+      "format": "html",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "claude-code-docs",
+      "name": "Claude Code CLI Documentation",
+      "category": "official-guides-docs",
+      "trustTier": "tier-1-official",
+      "baseUrl": "https://code.claude.com",
+      "endpoints": [
+        "https://code.claude.com/docs/en/memory.md",
+        "https://code.claude.com/docs/en/skills.md",
+        "https://code.claude.com/docs/en/hooks.md",
+        "https://code.claude.com/docs/en/cli-reference.md",
+        "https://code.claude.com/docs/en/mcp.md",
+        "https://code.claude.com/docs/en/tools.md",
+        "https://code.claude.com/docs/en/github-actions.md",
+        "https://code.claude.com/docs/en/settings.md",
+        "https://code.claude.com/docs/en/permissions.md",
+        "https://code.claude.com/docs/en/agent-sdk/sessions.md"
+      ],
+      "destination": "content/exams/cca-f/study-materials/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D3"]
+    },
+    {
+      "id": "anthropic-platform-docs",
+      "name": "Anthropic Platform & Agent SDK",
+      "category": "official-guides-docs",
+      "trustTier": "tier-1-official",
+      "baseUrl": "https://docs.anthropic.com",
+      "endpoints": [
+        "https://docs.anthropic.com/en/agent-sdk/overview.md",
+        "https://docs.anthropic.com/en/agent-sdk/hooks.md",
+        "https://docs.anthropic.com/en/agents-and-tools/tool-use/overview.md",
+        "https://docs.anthropic.com/en/build-with-claude/tool-use.md",
+        "https://docs.anthropic.com/en/build-with-claude/prompt-engineering/claude-prompting-best-practices.md",
+        "https://docs.anthropic.com/en/build-with-claude/batch-processing.md",
+        "https://docs.anthropic.com/en/api/messages.md"
+      ],
+      "destination": "content/exams/cca-f/study-materials/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D4", "D5"]
+    },
+    {
+      "id": "mcp-specification",
+      "name": "Model Context Protocol (MCP) Official Spec",
+      "category": "official-guides-docs",
+      "trustTier": "tier-1-official",
+      "baseUrl": "https://modelcontextprotocol.io",
+      "endpoints": [
+        "https://modelcontextprotocol.io/docs/concepts/tools.md",
+        "https://modelcontextprotocol.io/docs/concepts/resources.md",
+        "https://modelcontextprotocol.io/specification.md"
+      ],
+      "destination": "content/exams/cca-f/study-materials/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D2"]
+    },
+    {
+      "id": "walter-claudecertificationguide",
+      "name": "Walter (claudecertificationguide.com)",
+      "category": "mock-exams-questions",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://claudecertificationguide.com",
+      "endpoints": [
+        "https://claudecertificationguide.com/mock-exam/start",
+        "https://claudecertificationguide.com/practice-questions",
+        "https://claudecertificationguide.com/study-guide"
+      ],
+      "destination": "data/questions/cca-f/questions.json",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "certyiq",
+      "name": "CertyIQ (certyiq.com)",
+      "category": "mock-exams-questions",
+      "trustTier": "tier-2-curated",
+      "baseUrl": "https://certyiq.com",
+      "endpoints": [
+        "https://certyiq.com/papers/anthropic/claude-certified-architect-foundations-cca-f",
+        "https://certyiq.com/papers/anthropic/claude-certified-associate-foundations-ccao-f",
+        "https://certyiq.com/papers/anthropic/claude-certified-developer-foundations-ccdv-f"
+      ],
+      "destination": "data/questions/cca-f/questions.json",
+      "format": "json",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "szymon-paluch",
+      "name": "Szymon Paluch (szymonpaluch.com)",
+      "category": "mock-exams-questions",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://szymonpaluch.com",
+      "endpoints": [
+        "https://szymonpaluch.com/claude-certified-architect-practice-exam",
+        "https://szymonpaluch.com/claude-certification-guide"
+      ],
+      "destination": "data/questions/cca-f/questions.json",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "claudecertifiedarchitects",
+      "name": "claudecertifiedarchitects.com Bank",
+      "category": "mock-exams-questions",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://claudecertifiedarchitects.com",
+      "endpoints": [
+        "https://claudecertifiedarchitects.com/app.js"
+      ],
+      "destination": "data/questions/cca-f/questions.json",
+      "format": "json",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "amey-thakur-bank",
+      "name": "Amey Thakur Question Bank & Mocks",
+      "category": "mock-exams-questions",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://raw.githubusercontent.com",
+      "endpoints": [
+        "https://raw.githubusercontent.com/amey-thakur/claude-architect/main/questions.json",
+        "https://raw.githubusercontent.com/amey-thakur/claude-architect/main/mock-exams.md"
+      ],
+      "destination": "data/questions/cca-f/questions.json",
+      "format": "json",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "cca-prep-claudecertprep",
+      "name": "cca-prep (claudecertprep.com)",
+      "category": "mock-exams-questions",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://claudecertprep.com",
+      "endpoints": [
+        "https://claudecertprep.com/questions.json",
+        "https://claudecertprep.com/antipatterns.json",
+        "https://claudecertprep.com/cheatsheet.json"
+      ],
+      "destination": "data/questions/cca-f/questions.json",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "paul-larionov-guide",
+      "name": "Paul Larionov Architect Guide",
+      "category": "study-guides-deep-dives",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://raw.githubusercontent.com",
+      "endpoints": [
+        "https://raw.githubusercontent.com/paullarionov/claude-architect-guide/main/guide_en.md",
+        "https://raw.githubusercontent.com/paullarionov/claude-architect-guide/main/questions.md"
+      ],
+      "destination": "content/exams/cca-f/study-guides/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "dnacenta-community-guide",
+      "name": "dnacenta Community Guide",
+      "category": "study-guides-deep-dives",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://raw.githubusercontent.com",
+      "endpoints": [
+        "https://raw.githubusercontent.com/dnacenta/claude-certified-architect/main/README.md"
+      ],
+      "destination": "content/exams/cca-f/study-guides/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "anthropic-engineering-research",
+      "name": "Anthropic Engineering Research Articles",
+      "category": "study-guides-deep-dives",
+      "trustTier": "tier-1-official",
+      "baseUrl": "https://www.anthropic.com/engineering",
+      "endpoints": [
+        "https://www.anthropic.com/engineering/building-effective-agents.md",
+        "https://www.anthropic.com/engineering/claude-code-best-practices.md"
+      ],
+      "destination": "content/exams/cca-f/study-guides/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D3"]
+    },
+    {
+      "id": "spectrum-ai-labs",
+      "name": "Spectrum AI Labs Certification Breakdown",
+      "category": "articles-analysis",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://spectrumailab.com",
+      "endpoints": [
+        "https://spectrumailab.com/blog/claude-certification-exams-2026.md"
+      ],
+      "destination": "content/exams/cca-f/articles/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D1", "D2", "D3", "D4", "D5"]
+    },
+    {
+      "id": "claude-architect-guide-tokenomics",
+      "name": "Claude Architect Guide (Tokenomics & Caching)",
+      "category": "articles-analysis",
+      "trustTier": "tier-2-verified",
+      "baseUrl": "https://claudearchitectguide.com",
+      "endpoints": [
+        "https://claudearchitectguide.com/certifications/cost-analysis.md"
+      ],
+      "destination": "content/exams/cca-f/articles/",
+      "format": "markdown",
+      "active": true,
+      "domains": ["D4", "D5"]
+    }
+  ]
+}

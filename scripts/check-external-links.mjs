@@ -9,7 +9,7 @@ if (!fs.existsSync(publicDir)) {
   process.exit(0);
 }
 
-const siteDomains = ['ashishchawla.github.io', 'your-org.github.io', 'localhost', '127.0.0.1'];
+const siteDomains = ['ashishchawla.github.io', 'your-org.github.io', 'localhost', '127.0.0.1', 'revendum.com', 'www.revendum.com'];
 
 function scanDir(dir) {
   let leaks = 0;

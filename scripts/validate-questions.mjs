@@ -37,13 +37,13 @@ questions.forEach((q, index) => {
   }
 
   // Check for leaks
-  if (/✔|✅|Correct:|Answer:|Explanation:/i.test(q.prompt)) {
+  if (/✔|✅|\[CORRECT\]|^\s*\(?(?:Correct|Answer|Explanation)\s*[:\)]/i.test(q.prompt)) {
     console.error(`${prefix} Prompt contains answer key markers.`);
     errors++;
   }
 
   q.options.forEach(opt => {
-    if (/✔|✅|Correct:/i.test(opt.text)) {
+    if (/✔|✅|\[CORRECT\]|^\s*\(?(?:Correct|Answer)\s*[:\)]/i.test(opt.text)) {
       console.error(`${prefix} Option ${opt.id} contains answer key marker.`);
       errors++;
     }

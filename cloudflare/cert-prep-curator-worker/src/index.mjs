@@ -94,5 +94,26 @@ export default {
     }
 
     return new Response(JSON.stringify({ error: 'Endpoint not found', path }), { status: 404, headers: corsHeaders });
+  },
+
+  async scheduled(event, env, ctx) {
+    console.log('[Cloudflare Worker] Weekly scheduled cron fired.');
+    if (env.GITHUB_TOKEN && env.GITHUB_REPO) {
+      try {
+        await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${env.GITHUB_TOKEN}`,
+            'User-Agent': 'Cloudflare-Worker-Cert-Prep-Curator',
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ event_type: 'weekly-curator-sync' })
+        });
+        console.log('[Cloudflare Worker] Triggered GitHub curation workflow successfully.');
+      } catch (err) {
+        console.error('[Cloudflare Worker] Failed to dispatch GitHub workflow:', err);
+      }
+    }
   }
 };
