@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<h1>AI Certification Exam Directory</h1>
+<p class="muted">Browse all active and planned AI certification preparation tracks. Select an exam below to access sample questions, timed mock tests, and study guides.</p>
+
+<div class="card-grid" style="grid-template-columns: 1fr;">
+  {{ range site.Data.exams.exams }}
+    {{ if eq .status "active" }}
+    <div class="question-card" style="border-left: 6px solid var(--accent);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <span class="tag" style="background: var(--accent); color: #fff;">STATUS: ACTIVE</span>
+        <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">Provider: {{ .provider }} · {{ .code }}</span>
+      </div>
+      <h2 style="margin-top: 0.25rem; margin-bottom: 0.5rem;"><a href="{{ .path | relLangURL }}">{{ .name }}</a></h2>
+      <p style="margin-bottom: 1rem;">{{ .description }}</p>
+
+      <table style="margin: 1rem 0;">
+        <thead>
+          <tr><th>Questions</th><th>Duration</th><th>Passing Mark</th><th>Fee</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ .questions }} items</td>
+            <td>{{ .duration_minutes }} minutes</td>
+            <td>{{ .practice_pass_percent }}% ({{ .pass_score }}/1000)</td>
+            <td>${{ .price_usd }} USD</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem;">
+        <a href="{{ .path | relLangURL }}" class="reveal-btn" style="text-decoration: none;">Explore {{ .code }} Prep →</a>
+        <a href="{{ (printf "%ssample-questions/" .path) | relLangURL }}" class="reveal-btn" style="background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">Sample Questions (200+)</a>
+        <a href="{{ (printf "%smock-test/" .path) | relLangURL }}" class="reveal-btn" style="background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">Timed Mock Test (60Q/120M)</a>
+      </div>
+    </div>
+    {{ else }}
+    <div class="question-card" style="opacity: 0.75; border-left: 6px solid var(--muted);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <span class="tag" style="background: var(--muted); color: #fff;">STATUS: PLANNED</span>
+        <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">Provider: {{ .provider }} · {{ .code }}</span>
+      </div>
+      <h2 style="margin-top: 0.25rem; margin-bottom: 0.5rem;">{{ .name }}</h2>
+      <p style="margin-bottom: 0.5rem;">{{ .description }}</p>
+      <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">[ Content in development ]</span>
+    </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}

@@ -1,0 +1,10 @@
+name = "retro-prep"
+license = "MIT"
+licenselink = ""
+description = "Retro study handbook theme for AI certification preparation"
+homepage = ""
+tags = ["certification", "study", "retro"]
+min_version = "0.100.0"
+
+[author]
+  name = "AI Cert Prep"

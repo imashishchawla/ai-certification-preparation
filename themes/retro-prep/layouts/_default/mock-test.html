@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<h1>CCAF Timed Mock Exam (60Q / 120M)</h1>
+<p class="muted">Simulate the official CCAF exam experience with 60 randomized questions balanced by official domain weights.</p>
+
+<div id="mockTestApp">
+  <p class="muted">Loading Mock Exam Engine...</p>
+</div>
+
+{{ $script := resources.Get "js/mock-test.js" | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+{{ end }}

@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<h1>Sample Questions (Interactive Practice)</h1>
+<p class="muted">Practice 200+ normalized scenario questions across all 5 official CCAF exam domains. Select an option, click <strong>Reveal answer</strong> to verify, and read the detailed explanation.</p>
+
+<div id="domainFilters" style="margin-bottom: 1.5rem;"></div>
+
+<div id="questionsContainer">
+  <p class="muted">Loading practice questions...</p>
+</div>
+
+<div id="paginationContainer" style="margin-top: 2rem; margin-bottom: 2rem;"></div>
+
+{{ $script := resources.Get "js/question-reveal.js" | fingerprint }}
+<script src="{{ $script.RelPermalink }}"></script>
+{{ end }}

@@ -1,0 +1,16 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<article class="single-article">
+  <header>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.domain }}
+      <span class="tag">{{ . }}</span>
+    {{ end }}
+  </header>
+
+  <div class="content">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}

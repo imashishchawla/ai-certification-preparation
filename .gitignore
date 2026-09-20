@@ -2,6 +2,13 @@
 public/
 resources/
 hugo_stats.json
+hugo.log
+.hugo_build.lock
+
+# Data & Agent & Archive
+.data/
+.agent/reports/
+.archive/
 
 # OS
 .DS_Store

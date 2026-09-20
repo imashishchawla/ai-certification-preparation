@@ -1,8 +1,10 @@
-baseURL = 'https://ashishchawla.github.io/ccaf-exam/'
-title = 'CCA-F Exam Prep'
-theme = 'ccaf-theme'
+baseURL = '/'
+title = 'AI Certification Exam Prep'
+theme = 'retro-prep'
 defaultContentLanguage = 'en'
-enableGitInfo = true
+enableGitInfo = false
+relativeURLs = false
+canonifyURLs = false
 
 [markup]
   [markup.goldmark]
@@ -10,16 +12,12 @@ enableGitInfo = true
       unsafe = true
   [markup.highlight]
     style = 'github'
-    lineNos = true
-    lineNumbersInTable = true
+    lineNos = false
 
 [params]
-  description = 'Claude Certified Architect — Foundations (CCA-F / CCAR-F) offline exam preparation pack'
-  repo_url = 'https://github.com/your-org/ccaf-exam'
+  description = 'Self-contained retro preparation site for AI certification exams'
   show_toc = true
 
 [taxonomies]
   tag = 'tags'
   category = 'categories'
-
-    path = 'github.com/your-org/ccaf-exam'

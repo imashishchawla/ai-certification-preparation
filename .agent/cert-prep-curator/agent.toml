@@ -1,0 +1,15 @@
+[agent]
+name = "cert-prep-curator"
+title = "Cert Prep Curator Agent"
+version = "1.0.0"
+description = "Automated curation agent for AI certification source checking, material extraction, question normalization, and change detection."
+
+[commands]
+preflight = "preflight.mjs"
+sync = "sync-sources.mjs"
+detect-changes = "detect-changes.mjs"
+extract = "extract-materials.mjs"
+build-questions = "build-questions.mjs"
+validate = "validate-output.mjs"
+stage = "stage-output.mjs"
+publish = "publish-output.mjs"

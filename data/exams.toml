@@ -1,0 +1,34 @@
+[[exams]]
+id = "cca-f"
+code = "CCAF"
+name = "Claude Certified Architect — Foundations"
+provider = "Anthropic"
+status = "active"
+questions = 60
+duration_minutes = 120
+practice_pass_percent = 72
+pass_score = 720
+price_usd = 125
+path = "/exams/cca-f/"
+description = "Foundations-level certification covering agentic architecture, tool design, Claude Code, prompt engineering, and context management."
+
+[exams.domain_weights]
+"D1 Agentic Architecture & Orchestration" = 27
+"D2 Tool Design & MCP Integration" = 18
+"D3 Claude Code Configuration & Workflows" = 20
+"D4 Prompt Engineering & Structured Output" = 20
+"D5 Context Management & Reliability" = 15
+
+[[exams]]
+id = "ccar-p"
+code = "CCAR-P"
+name = "Claude Certified Architect — Professional"
+provider = "Anthropic"
+status = "planned"
+questions = 60
+duration_minutes = 120
+practice_pass_percent = 72
+pass_score = 720
+price_usd = 250
+path = "/exams/ccar-p/"
+description = "Advanced professional certification for enterprise multi-agent deployment and security."

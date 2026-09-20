@@ -9,7 +9,7 @@ Prepared for the **Claude Certified Architect - Foundations** exam (60 questions
 · D4 Prompt Engineering & Structured Output 20%  
 · D5 Context Management & Reliability 15%
 
-> Full provenance for every URL checked is in **[`sources.md`](sources.md)**.
+> Full provenance for every URL checked is in the non-published planning file **[`plan/sources.md`](plan/sources.md)**.
 
 ---
 
@@ -88,7 +88,7 @@ Prepared for the **Claude Certified Architect - Foundations** exam (60 questions
 
 ---
 
-## Sources at a glance (see `sources.md` for the full table)
+## Sources at a glance (see `plan/sources.md` for the full table)
 
 - **Official:** Anthropic exam guides (Foundations + Professional), Anthropic blog, engineering docs, Anthropic Academy/Skilljar, 23 official docs pages.
 - **Community/free:** claudecertificationguide.com, github.com/dnacenta, claudecertifiedarchitects.com, claudecertprep.com, spectrumailab.com, claudearchitectguide.com, claudearchitectcertification.com, claude.ajithkumarr.com, claudepractice.com.

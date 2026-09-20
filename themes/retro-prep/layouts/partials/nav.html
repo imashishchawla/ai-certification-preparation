@@ -1,0 +1,32 @@
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <a href="{{ .Site.BaseURL }}" class="site-logo">
+      <span>AI CERT</span> PREP
+    </a>
+    
+    <nav class="nav-links">
+      <details class="dropdown">
+        <summary>Exams ▾</summary>
+        <div class="dropdown-menu">
+          {{ range site.Data.exams.exams }}
+            <a href="{{ .path | relLangURL }}">{{ .name }} ({{ .code }})</a>
+          {{ end }}
+        </div>
+      </details>
+
+      <a href="{{ "exams/cca-f/sample-questions/" | relLangURL }}">Sample Questions</a>
+      <a href="{{ "exams/cca-f/mock-test/" | relLangURL }}">Mock Test</a>
+      <a href="{{ "exams/cca-f/study-guides/" | relLangURL }}">Study Guides</a>
+
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle light and dark theme">☀/☾</button>
+    </nav>
+  </div>
+</header>
+<script>
+  document.getElementById('themeToggle').addEventListener('click', function() {
+    var current = document.documentElement.getAttribute('data-theme');
+    var target = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', target);
+    localStorage.setItem('theme', target);
+  });
+</script>
