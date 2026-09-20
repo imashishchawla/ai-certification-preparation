@@ -31,4 +31,32 @@ practice_pass_percent = 72
 pass_score = 720
 price_usd = 250
 path = "/exams/ccar-p/"
-description = "Advanced professional certification for enterprise multi-agent deployment and security."
+description = "Advanced professional certification for enterprise multi-agent deployment, safety, and governance."
+
+[[exams]]
+id = "ccao-f"
+code = "CCAO-F"
+name = "Claude Certified Associate — Foundations"
+provider = "Anthropic"
+status = "planned"
+questions = 45
+duration_minutes = 90
+practice_pass_percent = 70
+pass_score = 700
+price_usd = 100
+path = "/exams/ccao-f/"
+description = "Entry-level associate certification for core Claude capabilities, prompt design, and AI assistance."
+
+[[exams]]
+id = "ccdv-f"
+code = "CCDV-F"
+name = "Claude Certified Developer — Foundations"
+provider = "Anthropic"
+status = "planned"
+questions = 50
+duration_minutes = 90
+practice_pass_percent = 70
+pass_score = 700
+price_usd = 150
+path = "/exams/ccdv-f/"
+description = "Developer certification covering Anthropic API integration, SDK usage, and tool calling."
