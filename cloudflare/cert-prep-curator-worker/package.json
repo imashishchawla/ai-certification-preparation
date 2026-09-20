@@ -1,0 +1,14 @@
+{
+  "name": "cert-prep-curator-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker adapter for AI Certification Prep Curation Agent",
+  "main": "src/index.mjs",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

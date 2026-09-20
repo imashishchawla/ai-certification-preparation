@@ -1,0 +1,24 @@
+{
+  "name": "ai-certification-preparation",
+  "version": "1.0.0",
+  "description": "Retro-styled, self-contained AI certification preparation library for CCAF and future tracks.",
+  "main": "scripts/serve.mjs",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "dev": "node scripts/serve.mjs",
+    "build": "hugo --minify && node scripts/check-external-links.mjs",
+    "validate": "node scripts/validate-questions.mjs",
+    "normalize": "node scripts/normalize-questions.mjs",
+    "preflight": "node .agent/cert-prep-curator/cli.mjs preflight",
+    "curator": "node .agent/cert-prep-curator/cli.mjs"
+  },
+  "keywords": [
+    "hugo",
+    "ccaf",
+    "ai-certification",
+    "claude-certified-architect",
+    "mock-exam"
+  ],
+  "author": "imashishchawla",
+  "license": "MIT"
+}

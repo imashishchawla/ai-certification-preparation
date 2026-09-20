@@ -1,0 +1,10 @@
+name = "cert-prep-curator-worker"
+main = "src/index.mjs"
+compatibility_date = "2026-09-01"
+
+[vars]
+AGENT_NAME = "cert-prep-curator"
+AGENT_VERSION = "1.0.0"
+EXAM_CODE = "CCAF"
+TOTAL_QUESTIONS = 205
+GITHUB_REPO = "imashishchawla/ai-certification-preparation"
