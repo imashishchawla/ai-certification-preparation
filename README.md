@@ -1,100 +1,113 @@
-# Claude Certified Architect - Foundations (CCA-F / CCAR-F) Exam Prep
+# 🕹️ AI Certification Exam Prep — Cyberspace Training Simulator
 
-Prepared for the **Claude Certified Architect - Foundations** exam (60 questions, 120 min, 720/1000 passing, 5 domains).
+[![Cyberspace Status](https://img.shields.io/badge/TERMINAL-ONLINE-00FF66?style=for-the-badge&logo=gnubash&logoColor=000)](https://imashishchawla.github.io/ai-certification-preparation/)
+[![Access Tier](https://img.shields.io/badge/ACCESS-100%25%20FREE-FFB000?style=for-the-badge)](https://imashishchawla.github.io/ai-certification-preparation/)
+[![Sync Pulse](https://img.shields.io/badge/SYNC%20PULSE-MON%2000%3A00%20UTC-00E5FF?style=for-the-badge&logo=githubactions&logoColor=fff)](https://github.com/imashishchawla/ai-certification-preparation/actions)
+[![Question Bank](https://img.shields.io/badge/QUESTION%20DATABASE-1%2C130%20VERIFIED-FF0055?style=for-the-badge)](https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/sample-questions/)
 
-**Domain weights:**  
-· D1 Agentic Architecture & Orchestration 27%  
-· D2 Tool Design & MCP 18%  
-· D3 Claude Code Config & Workflows 20%  
-· D4 Prompt Engineering & Structured Output 20%  
-· D5 Context Management & Reliability 15%
-
-> Full provenance for every URL checked is in the non-published planning file **[`plan/sources.md`](plan/sources.md)**.
+> **Jack in, boot your cyberdeck, and study like it's 1999.**  
+> A self-contained, retro-styled AI certification preparation library and interactive exam simulator — 100% free, privacy-first, zero tokens needed, and fully offline-capable.
 
 ---
 
-## Quick start (1 week)
+### 🌐 Live Cyberspace Terminal
 
-1. Read the official exam guide: `pdfs/official-exam-guide-nehasharma.pdf` + `pdfs/exam-guide-amey-thakur.pdf`
-2. Read the full theory study guide: `study-guides/paullarionov-guide_en.md` (3400 lines)
-3. Do 40-50 questions/day from `practice-questions/cca-prep-170-question-bank.md` (worked answers included)
-4. Work through the two big banks: `claudecertificationguide-257-question-bank.md` and `claudecertifiedarchitects-400-question-bank.md`
-5. Review the anti-patterns: `practice-questions/claudearchitectcertification-20-antipatterns.md`
-6. Time yourself on `practice-questions/amey-thakur-mock-exam-*.md` (3 timed mocks)
-7. Drill with `practice-questions/cca-prep-flashcards.md` + Anki deck
+**Boot the live website right in your browser:**  
+### 🚀 **[https://imashishchawla.github.io/ai-certification-preparation/](https://imashishchawla.github.io/ai-certification-preparation/)**
 
----
-
-## PDFs (`pdfs/`)
-
-| File | What it is |
-| --- | --- |
-| `official-exam-guide-nehasharma.pdf` | Anthropic's **official 40-page v1.0 EXAM GUIDE** (format, domains, task statements, sample Qs) |
-| `official-exam-guide-39page-webb.archive.pdf` | Same official guide recovered from the Wayback Machine (identical, kept as a backup) |
-| `official-exam-guide-ccar-professional.pdf` | **Official CCAR-P v1.0 guide** (11 pp) — bonus |
-| `exam-guide-amey-thakur.pdf` | Official v1.0 exam-guide printout (39 pp): $125 fee, validity, task statements |
-| `dnacenta-guide_en.pdf` | dnacenta community study guide (83 pp) |
-| `cca-f-exam-guide-claudearchitectcert.pdf` | 12-page CCA-F guide: concept checklist, two-week plan, test-day checklist |
-| `guide_en-github.pdf` | Paullarionov community study guide PDF (full guide also in md) |
-| `claude-certifications-companion.pdf` | Printable companion covering all four Claude certs (2.1 MB) |
-
-## Practice questions & mocks (`practice-questions/`)
-
-| File | Content |
-| --- | --- |
-| `claudecertificationguide-257-question-bank.md` | **257 questions** (all 5 domains) with answer key, rationale, per-option explanations, difficulty + task-statement mapping |
-| `claudecertifiedarchitects-400-question-bank.md` | **400 questions** (all 5 domains) with answer key + explanation, extracted from the site's public JS bundle |
-| `cca-prep-170-question-bank.md` | 170 scenario questions (all 5 domains, 4 difficulty tiers), every answer explained with why-the-others-are-wrong + doc links |
-| `amey-thakur-arch-foundations-80q.md` | 80 architect questions with rationale (from the 320-Q JSON bank) |
-| `paullarionov-guide-questions.md` | 88 situation-based questions grouped by exam scenario |
-| `amey-thakur-practice-questions.md` | 35 original practice questions in the six published scenarios |
-| `amey-thakur-mock-exam-1.md` / `-2.md` / `-3.md` | 3 timed mock exams (15 Q / 30 min each, answer keys) |
-| `claudecertifiedarchitects-5-sample-questions.md` | 5 worked sample questions + 7-day / 14-day study plans |
-| `claudearchitectcertification-20-antipatterns.md` | 20 canonical wrong-answer patterns (critical/common/edge) |
-| `cca-prep-antipatterns.md` | 17 anti-patterns with exam tips |
-| `cca-prep-flashcards.md` | 45 flip cards |
-| `flashcards.md` | 110 flashcards (Amey-Thakur, all 4 certs) |
-| `paullarionov-anki-practical-test.apkg` | Anki deck - import directly into Anki |
-| `amey-thakur-question-bank.json` | Raw 320-question JSON bank |
-| `cca-prep-*.ts` | Original TypeScript data files (questions, anti-patterns, flashcards) |
-
-## Study guides (`study-guides/`)
-
-| File / folder | Content |
-| --- | --- |
-| `paullarionov-guide_en.md` | **Full 3400-line theory guide**: API, tools/tool_use, Agent SDK loops, hub-and-spoke, hooks, MCP, Claude Code, sessions + exercises |
-| `claudecertificationguide/` | **Complete free CCAR-F course**: 30 lessons, 5 quick-refs, 5 glossaries, 10 scenarios, mock/drill/diagnostic pages |
-| `dnacenta-claude-certified-architect/` | Community guide + 5 domain deep-dives + guides for the other 3 certs |
-| `official-docs/` | **23 official Anthropic docs** scraped to markdown (Claude Code, Agent SDK, tool use, MCP, prompting) + 3 `INDEX-*.txt` doc indexes |
-| `articles/` | Independent 2026 explainers: Spectrum AI Labs (all 4 exams), Claude Architect Guide (costs), Termidy (ClaudePrep) |
-| `cca-prep-docs/` | 20 per-topic deep-dives across all 5 domains |
-| `cca-prep-exam-scenarios.md` | The six published exam scenarios |
-| `cca-prep-cheatsheet.md` | 29-entry printable cheat sheet with code examples |
-| `amey-thakur-*.md` | Domain task statements, one-page cheat sheet, maintainer's notes |
+- 💾 **100% Free Forever:** No paywalls, no paid courses, no sign-ups, no tracking cookies.
+- ⚡ **Weekly Sync Pulse:** Automatically synchronizes, deduplicates, and validates new scenario questions **every Monday night at 00:00 UTC**.
+- 🛸 **Offline Ready:** Zero server calls during mock exams or practice questions; everything runs client-side in pure static HTML/JS.
 
 ---
 
-## Question-bank totals
+## 📺 Visual Terminal Deck (Screenshots)
 
-| Bank | Questions |
-| --- | --- |
-| claudecertificationguide.com | 257 |
-| claudecertifiedarchitects.com | 400 |
-| Amey-Thakur (JSON) | 320 |
-| cca-prep (claudecertprep.com) | 170 |
-| Paullarionov | 88 |
-| Amey-Thakur mocks (3) | ~60 |
-| **Total** | **~1,295** |
+### 1. The Holo-Deck Command Center
+Explore all certification tracks, track status, exam durations, and domain breakdowns from a single retro dashboard.
+
+![Command Center & Certification Matrix](static/screenshots/home-hub.png)
 
 ---
 
-## Sources at a glance (see `plan/sources.md` for the full table)
+### 2. Interactive Scenario Practice (1,130 Questions)
+Filter by domain (D1 to D5), toggle difficulty tiers (`basic`, `intermediate`, `advanced`), test your reflexes, and click **Reveal answer** for comprehensive architectural rationale and official reference links.
 
-- **Official:** Anthropic exam guides (Foundations + Professional), Anthropic blog, engineering docs, Anthropic Academy/Skilljar, 23 official docs pages.
-- **Community/free:** claudecertificationguide.com, github.com/dnacenta, claudecertifiedarchitects.com, claudecertprep.com, spectrumailab.com, claudearchitectguide.com, claudearchitectcertification.com, claude.ajithkumarr.com, claudepractice.com.
-- **Account/paywall-gated (not mirrored):** claudecertified.io (1,374 Qs), claude.termidy.com (Moodle, 1,068 Qs), claudetestprep.com (609 Qs), ccafoundations.com (£49).
-- **Blocked:** claudecertifications.com returns HTTP 451 (legal).
+![Interactive Practice Simulator](static/screenshots/sample-questions.png)
 
-## Need more practice while offline?
+---
 
-Ask me to quiz you — I can generate fresh scenario questions per domain from the material above, or build a randomized timed mock exam from the 1,295-question pool (answers hidden until you submit).
+### 3. Timed Arcade Mock Exam (Survival Mode)
+Simulate the official proctored experience: 60 randomized questions, 120-minute countdown timer, domain-weighted distribution, and a 72% pass/fail grading protocol.
+
+![Timed Mock Exam Simulator](static/screenshots/mock-test.png)
+
+---
+
+### 4. The Netrunner Archives (Study Guides & Lessons)
+Complete 30-lesson structured curriculum, deep architectural breakdowns, 21 Golden Rules, distractor patterns, and master cheat sheets.
+
+![Study Guides & Domain Lessons](static/screenshots/study-guides.png)
+
+---
+
+## 💾 Exam Matrix: Published vs. In Pipeline
+
+### 🟢 Active & Operational Now
+
+#### **Claude Certified Architect — Foundations (CCA-F / CCAR-F)**
+- **1,130 Interactive Practice Questions:** Full coverage across all 5 official exam domains:
+  - **D1 Agentic Architecture & Orchestration (27%)**
+  - **D2 Tool Design & MCP (18%)**
+  - **D3 Claude Code Config & Workflows (20%)**
+  - **D4 Prompt Engineering & Structured Output (20%)**
+  - **D5 Context Management & Reliability (15%)**
+- **Timed Mock Simulator:** 60 questions, 120 minutes, domain-weighted, score reports.
+- **30-Lesson Structured Curriculum:** Step-by-step deep dives covering loops, subagents, MCP servers, hooks, context budgeting, and prompt caching.
+- **Master Cheat Sheets & Exam Notes:** 21 Golden Rules, distractor patterns, and the Calm Method scenario heuristics.
+- **Official Documentation & PDF Compendiums:** Curated official exam guides and offline reference manuals.
+
+---
+
+### 🟡 In The Pipeline (Upcoming Missions)
+
+- **Claude Certified Architect — Professional (CCAR-P):** Advanced multi-agent choreography, enterprise governance, high-scale evaluations, and security hardening.
+- **Claude Certified Developer — Foundations (CCDV-F):** Direct SDK integrations, client tool schemas, API error handling, and streaming implementations.
+- **Cross-Cloud AI Certifications:** Planned expansion into foundational AI engineering badges across major cloud platforms.
+
+---
+
+## 📊 Complete Database Breakdown by Source
+
+Every single question in our bank is normalized, categorized by domain and difficulty, deduplicated, and verified against official specifications.
+
+| Source ID | Source / Topic Description | Count | Percentage |
+|---|---|---:|---:|
+| `cca-prep-170` | Foundations Core Prep Set (170) | 170 | 15.0% |
+| `foundations-prep-35` | Foundations Focused Architecture Question Set (35) | 35 | 3.1% |
+| `architectural-eval-6` | Architectural Evaluation Scenarios (6) | 6 | 0.5% |
+| `cca-prep-170-qu` | Foundations Extended Question Supplement (51) | 51 | 4.5% |
+| `cca-400` | Comprehensive Architecture & Agentic Practice Question Bank (357) | 357 | 31.6% |
+| `associate-prep-50` | Associate Architecture Preparation Suite (50) | 50 | 4.4% |
+| `situational-scenarios-88` | Situational Scenario & Architecture Practice Bank (88) | 88 | 7.8% |
+| `claude-architect-guide-257` | Claude Certified Architect Guide & Domain Drills (246) | 246 | 21.8% |
+| `practice-exam-60` | Timed Mock Practice Exam (60) | 60 | 5.3% |
+| `certyiq` | CertYIQ Practice Question Bank (45) | 45 | 4.0% |
+| `calm-method-patterns` | Calm Method Heuristics & Exam Patterns Practice (22) | 22 | 1.9% |
+| **TOTAL** | **Active Verified Question Bank** | **1,130** | **100.0%** |
+
+---
+
+## 🤝 Join the Cyberpunk Crew (Community & Collaborators)
+
+Did we miss an architectural scenario, a key exam pattern, or a newly released feature? Found a typo or a glitch in the matrix? 
+
+- 🐛 **Found an Issue / Missing Topic?** Please [open an Issue](https://github.com/imashishchawla/ai-certification-preparation/issues) or drop suggestions in [Discussions](https://github.com/imashishchawla/ai-certification-preparation/discussions).
+- 🕹️ **Want to Add More Exams?** We are expanding to CCAR-P, CCDV-F, and more! If you would like to contribute scenario questions, review explanations, or design curriculum tracks, **we would love to have you as a collaborator**.
+- 🌟 **Share the Signal:** If this helped you ace your exam, star the repository and share it with fellow netrunners!
+
+---
+
+<div align="center">
+  <sub>Built with ♥ for the global developer and AI architect community. 100% Free · Open Knowledge · Cyberpunk Spirit</sub>
+</div>
