@@ -1,6 +1,6 @@
 # Hugo
-public/
-resources/
+/public/
+/resources/
 hugo_stats.json
 hugo.log
 .hugo_build.lock
