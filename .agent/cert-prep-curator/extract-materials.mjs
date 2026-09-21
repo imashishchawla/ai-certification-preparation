@@ -448,6 +448,21 @@ export function extractAndMergeAllMaterials(rootDir, examId = 'cca-f') {
   console.log(`Explanations Enriched:     ${enrichedCount}`);
   console.log(`Final Database Total:      ${pool.length}`);
 
+  const sourceBreakdown = {};
+  pool.forEach(q => {
+    const s = q.sourceId || 'unknown';
+    sourceBreakdown[s] = (sourceBreakdown[s] || 0) + 1;
+  });
+
+  console.log(`\n### Complete Database Breakdown by Source`);
+  console.log(`| Source ID | Count | Percentage |`);
+  console.log(`| :--- | :---: | :---: |`);
+  for (const [src, cnt] of Object.entries(sourceBreakdown).sort((a, b) => b[1] - a[1])) {
+    const pct = ((cnt / pool.length) * 100).toFixed(1);
+    console.log(`| **\`${src}\`** | ${cnt} | ${pct}% |`);
+  }
+  console.log(`| **TOTAL** | **${pool.length}** | **100.0%** |\n`);
+
   // Save to database
   const formatted = JSON.stringify(pool, null, 2);
   fs.writeFileSync(dbPath, formatted);
