@@ -8,7 +8,7 @@ tags: ["study", "community-guide"]
 
 Overview guide for the **Claude Certified Associate — Foundations** exam — the entry-level, non-developer credential in the Claude certification family. Facts below are taken from the official Exam Guide v1.0 (effective July 2026).
 
-> Looking for the Architect exam? The full deep-dive study guide in this repo covers [CCAR-F](../claude-certified-architect.md). This page is an overview of a sibling certification.
+> Looking for the Architect exam? The full deep-dive study guide in this repo covers [CCAR-F](../../guide-main-document/). This page is an overview of a sibling certification.
 
 ---
 
@@ -72,7 +72,7 @@ Note the emphasis: output evaluation (21%), workflow design (16%), and governanc
 - Build a real workflow: configure a Project with instructions and knowledge sources, then evaluate outputs for accuracy and bias
 - Practice responsible-use judgment: data sensitivity, appropriate use cases, when to escalate or seek human review
 
-Much of this repo's [Domain 4 (explicit criteria, few-shot)](../domains/d4-prompt-engineering.md) and [Domain 5 (context management, escalation, provenance)](../domains/d5-context-reliability.md) material transfers directly — at a less technical depth.
+Much of this repo's [Domain 4 (explicit criteria, few-shot)](../../domains/d4-prompt-engineering/) and [Domain 5 (context management, escalation, provenance)](../../domains/d5-context-reliability/) material transfers directly — at a less technical depth.
 
 ---
 

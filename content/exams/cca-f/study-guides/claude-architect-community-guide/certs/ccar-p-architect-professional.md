@@ -8,7 +8,7 @@ tags: ["study", "community-guide"]
 
 Overview guide for the **Claude Certified Architect — Professional** exam — the advanced tier above the Architect Foundations exam this repo covers in depth. Facts below are taken from the official Exam Guide v1.0 (effective July 2026).
 
-> Preparing for Foundations first? Start with the full [CCAR-F study guide](../claude-certified-architect.md) — Anthropic's Professional blueprint assumes you operate comfortably at that level.
+> Preparing for Foundations first? Start with the full [CCAR-F study guide](../../guide-main-document/) — Anthropic's Professional blueprint assumes you operate comfortably at that level.
 
 ---
 
@@ -70,7 +70,7 @@ The published samples test least-privilege tool configuration (remove unneeded r
 
 ## Relationship to CCAR-F and This Repo
 
-- All five CCAR-F domains reappear inside CCAR-P domains 1–5 — the [existing deep-dives](../claude-certified-architect.md) remain the right base layer.
+- All five CCAR-F domains reappear inside CCAR-P domains 1–5 — the [existing deep-dives](../../guide-main-document/) remain the right base layer.
 - Study the deltas on top: **RAG architecture** (chunking/indexing/retrieval strategy), **evaluation frameworks and A/B testing**, **regulated-industry compliance**, and **stakeholder communication / lifecycle management** — none of which the Foundations guide covers today.
 - Anthropic recommends sitting CCAR-F first unless you already have deep, current production experience.
 
@@ -98,4 +98,4 @@ The published samples test least-privilege tool configuration (remove unneeded r
 
 - [Official CCAR-P Exam Guide (PDF, v1.0)](https://everpath-course-content.s3-accelerate.amazonaws.com/instructor/6nizmqk8tpzpfjvt6qmmav7rh/public/1783542810/Claude+Certified+Architect+%E2%80%93+Professional+Exam+Guide.pdf)
 - [Pearson VUE — Anthropic certification program](https://www.pearsonvue.com/us/en/anthropic.html)
-- [CCAR-F study guide in this repo](../claude-certified-architect.md) — the base layer
+- [CCAR-F study guide in this repo](../../guide-main-document/) — the base layer

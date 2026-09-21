@@ -2147,7 +2147,7 @@ When Edit fails due to a non-unique text match:
 
 > 60 questions across 4 scenarios. Format and difficulty match the real exam.
 > 
-> Alternatively, you can practice these questions in an exam-like HTML file: [Practical Test (EN)](practical_test_en.html)
+> Alternatively, you can practice these questions in an exam-like HTML file: [Practical Test (EN)](/ai-certification-preparation/exams/cca-f/sample-questions/)
 
 ## Scenario: Multi-agent Research System
 

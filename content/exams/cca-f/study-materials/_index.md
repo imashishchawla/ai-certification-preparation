@@ -18,7 +18,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Anthropic Official CCAF v1.0 Exam Guide</h3>
     <p>Anthropic's official 40-page v1.0 Foundations certification exam guide covering exam format, 5 domain task statements, weighted scoring, and official sample questions.</p>
-    <a href="/assets/cca-f/pdfs/official-exam-guide-foundations-v1.pdf" target="_blank" class="reveal-btn" style="display: inline-block; text-decoration: none;">View / Download Official Guide (Mirror) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/official-exam-guide-foundations-v1.pdf" target="_blank" class="reveal-btn" style="display: inline-block; text-decoration: none;">View / Download Official Guide (Mirror) →</a>
   </div>
 
   <div class="question-card">
@@ -28,7 +28,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Official Exam Guide (Foundations Reference)</h3>
     <p>Official 40-page v1.0 exam guide reference snapshot recovered from verified archives.</p>
-    <a href="/assets/cca-f/pdfs/official-exam-guide-foundations-reference.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Reference Archive) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/official-exam-guide-foundations-reference.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Reference Archive) →</a>
   </div>
 
   <div class="question-card">
@@ -38,7 +38,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Official CCAR-P Professional Exam Guide</h3>
     <p>Official 11-page v1.0 exam guide for the sibling Claude Certified Architect — Professional certification.</p>
-    <a href="/assets/cca-f/pdfs/official-exam-guide-ccar-professional.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (CCAR-P) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/official-exam-guide-ccar-professional.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (CCAR-P) →</a>
   </div>
 
   <div class="question-card">
@@ -48,7 +48,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Community Architecture Foundations Study Guide</h3>
     <p>Comprehensive 83-page community study guide covering all 5 exam domains with code snippets and architecture diagrams.</p>
-    <a href="/assets/cca-f/pdfs/claude-architect-comprehensive-guide.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download Comprehensive Guide (PDF) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/claude-architect-comprehensive-guide.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download Comprehensive Guide (PDF) →</a>
   </div>
 
   <div class="question-card">
@@ -58,7 +58,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">CCA-F 12-Page Concept Checklist & 2-Week Plan</h3>
     <p>Condensed 12-page preparation guide featuring a 2-week study schedule, test-day checklist, and core concept tables.</p>
-    <a href="/assets/cca-f/pdfs/cca-f-exam-guide-claudearchitectcert.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Checklist) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/cca-f-exam-guide-claudearchitectcert.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Checklist) →</a>
   </div>
 
   <div class="question-card">
@@ -68,7 +68,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Architecture Scenario & Theory Study Guide PDF</h3>
     <p>PDF export of the comprehensive theory study guide covering API, tool use, Agent SDK, hooks, and MCP.</p>
-    <a href="/assets/cca-f/pdfs/guide_en-github.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download Theory Study Guide (PDF) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/guide_en-github.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download Theory Study Guide (PDF) →</a>
   </div>
 
   <div class="question-card">
@@ -78,7 +78,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Claude Certifications Printable Companion</h3>
     <p>Printable companion covering all four Claude certifications (Foundations, Professional, Developer, Associate).</p>
-    <a href="/assets/cca-f/pdfs/claude-certifications-companion.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Companion) →</a>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/claude-certifications-companion.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Companion) →</a>
   </div>
 </div>
 

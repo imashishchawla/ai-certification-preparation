@@ -5,7 +5,7 @@ tags: ["study", "guide"]
 ---
 # Study notes: Architect – Foundations
 
-My working notes from preparing for this exam. This is the exam where preparation pays off most directly, because the six scenarios are published in advance and the guide's appendix names the testable technologies. Nothing here comes from the live exam, which is covered by a non-disclosure agreement; everything traces to the [exam guide](exam-guide.pdf).
+My working notes from preparing for this exam. This is the exam where preparation pays off most directly, because the six scenarios are published in advance and the guide's appendix names the testable technologies. Nothing here comes from the live exam, which is covered by a non-disclosure agreement; everything traces to the [exam guide](/ai-certification-preparation/exams/cca-f/study-materials/).
 
 ## Work the scenarios, not just the domains
 
@@ -84,4 +84,4 @@ loop that spins.
 
 ---
 
-These notes are the maintainer's own summary and carry no official standing. [Study guide](README.md) · [Repository index](../README.md)
+These notes are the maintainer's own summary and carry no official standing. [Study Guides](/ai-certification-preparation/exams/cca-f/study-guides/) · [Exam Center](/ai-certification-preparation/)

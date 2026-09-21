@@ -27,7 +27,7 @@ layout: "single"
 
 While the CCAR-P material is being finalized, prepare for the **Foundations (CCAF)** exam first:
 
-* 👉 <a href="/exams/cca-f/"><strong>CCAF Exam Overview & Study Center</strong></a>
-* 📝 <a href="/exams/cca-f/sample-questions/"><strong>CCAF 200+ Practice Question Library</strong></a>
-* ⏱️ <a href="/exams/cca-f/mock-test/"><strong>CCAF 60Q/120M Timed Mock Test Engine</strong></a>
-* 📚 <a href="/exams/cca-f/study-materials/"><strong>CCAF Official Documents & PDFs</strong></a>
+* 👉 <a href="/ai-certification-preparation/exams/cca-f/"><strong>CCAF Exam Overview & Study Center</strong></a>
+* 📝 <a href="/ai-certification-preparation/exams/cca-f/sample-questions/"><strong>CCAF 200+ Practice Question Library</strong></a>
+* ⏱️ <a href="/ai-certification-preparation/exams/cca-f/mock-test/"><strong>CCAF 60Q/120M Timed Mock Test Engine</strong></a>
+* 📚 <a href="/ai-certification-preparation/exams/cca-f/study-materials/"><strong>CCAF Official Documents & PDFs</strong></a>

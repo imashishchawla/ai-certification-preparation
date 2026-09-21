@@ -7,7 +7,7 @@ tags: ["study", "guide"]
 
 The Claude Certified Architect – Foundations certification validates that practitioners can make informed decisions about tradeoffs when implementing real-world solutions with Claude. It tests foundational knowledge across Claude Code, the Claude Agent SDK, the Claude API, and Model Context Protocol, the core technologies used to build production-grade applications with Claude.
 
-This exam differs from the other three: every question is framed by one of six published production scenarios, and the exam guide is by far the most detailed of the four, with full task statements, preparation exercises, and an appendix of in-scope technologies. The [exam guide](exam-guide.pdf) (version 1.0, effective July 2026) is the authoritative reference, and the maintainer's study notes for this exam are in [notes.md](notes.md), with original practice questions in [practice-questions.md](practice-questions.md) and a timed [mock exam](mock-exam-1.md). The [cheat sheet](cheat-sheet.md) condenses this whole page to one printable page for the day before.
+This exam differs from the other three: every question is framed by one of six published production scenarios, and the exam guide is by far the most detailed of the four, with full task statements, preparation exercises, and an appendix of in-scope technologies. The [exam guide](/ai-certification-preparation/exams/cca-f/study-materials/) (version 1.0, effective July 2026) is the authoritative reference, and the maintainer's study notes for this exam are in [Exam Notes](/ai-certification-preparation/exams/cca-f/exam-notes/), with original practice questions in [Sample Questions](/ai-certification-preparation/exams/cca-f/sample-questions/) and a timed [Mock Test](/ai-certification-preparation/exams/cca-f/mock-test/). The [Cheat Sheet](/ai-certification-preparation/exams/cca-f/study-guides/cca-prep-cheatsheet/) condenses this whole page to one printable page for the day before.
 
 ## Exam facts
 
@@ -19,7 +19,7 @@ This exam differs from the other three: every question is framed by one of six p
 | Time limit | 120 minutes, with about 135 minutes of total seat time |
 | Delivery | Pearson VUE, online proctored or at a test center |
 | Passing score | 720 on a scaled range of 100 to 1,000 |
-| Fee | 125 USD, before any [partner-tier discount](../guide/faq.md#pricing-and-discounts). Increased from 99 USD on June 30, 2026 |
+| Fee | 125 USD, before any partner-tier discount. Increased from 99 USD on June 30, 2026 |
 | Validity | 12 months from the date you earn it |
 | Prerequisites | None. No course is required |
 | Language | English |
@@ -74,7 +74,7 @@ Task statements per domain, condensed from section 6 of the guide:
 
 ## The six exam scenarios
 
-[![The six published Architect Foundations exam scenarios and what each one tests](../.github/assets/card-architect-scenarios.png)](../.github/assets/card-architect-scenarios.png "View the six scenarios at full size")
+
 
 > [!TIP]
 > This is the largest preparation advantage available on any of the four exams: the scenarios are published in advance, and four of these six frame every question you will see. Rehearse each one until its likely questions are predictable.
@@ -106,11 +106,11 @@ The guide's appendix lists what may appear on the exam. Highlights worth studyin
 
 | Document | Local copy | Source |
 | --- | --- | --- |
-| Exam guide | [PDF](exam-guide.pdf) | [Partner Academy certifications page](https://anthropic-partners.skilljar.com/page/partner-certifications) |
-| Exam policy | [PDF](../guide/anthropic-certification-exam-policy.pdf) | Same page |
-| Terms and conditions | [PDF](../guide/certification-terms-and-conditions.pdf) | Same page |
+| Exam guide | [Official Guide PDF](/ai-certification-preparation/exams/cca-f/study-materials/) | [Partner Academy certifications page](https://anthropic-partners.skilljar.com/page/partner-certifications) |
+| Exam policy | [Official Policy](/ai-certification-preparation/exams/cca-f/study-materials/) | Same page |
+| Terms and conditions | [Terms & Conditions](/ai-certification-preparation/exams/cca-f/study-materials/) | Same page |
 
-Registration: [Claude Certified Architect – Foundations Certification](https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification). Prep courses: [Architect – Foundations prep courses](https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses). The registration process itself is described in [Registration and scheduling](../guide/registration.md).
+Registration: [Claude Certified Architect – Foundations Certification](https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification). Prep courses: [Architect – Foundations prep courses](https://anthropic-partners.skilljar.com/page/claude-certified-architect-foundations-prep-courses). The registration process itself is described in [Registration Information](https://anthropic-partners.skilljar.com/).
 
 ## Preparing
 
@@ -126,14 +126,14 @@ Points worth noting before you schedule:
 
 - Agentic Architecture & Orchestration is the heaviest domain at 27%. Combined with Tool Design & MCP Integration, nearly half the exam is agent and tool design.
 - If you attempted this exam before June 30, 2026 and did not pass, the earlier failed attempt was cleared in the Pearson migration and you can register without a waiting period.
-- Anthropic describes this certification as proving an architect can build with Claude, while [Architect – Professional](../architect-professional/README.md) proves they can design and govern solutions at enterprise scale. There is no prerequisite in either direction and Foundations does not upgrade automatically.
+- Anthropic describes this certification as proving an architect can build with Claude, while [Architect – Professional](/ai-certification-preparation/exams/ccar-p/) proves they can design and govern solutions at enterprise scale. There is no prerequisite in either direction and Foundations does not upgrade automatically.
 
 ## Related certifications
 
-- [Claude Certified Developer – Foundations](../developer-foundations/README.md), which tests overlapping technologies from an implementation perspective
-- [Claude Certified Architect – Professional](../architect-professional/README.md), the next step for enterprise-scale design and governance
-- [Claude Certified Associate – Foundations](../associate-foundations/README.md), for non-developers who apply Claude to business workflows
+- [Developer – Foundations](/ai-certification-preparation/exams/ccdv-f/), which tests overlapping technologies from an implementation perspective
+- [Claude Certified Architect – Professional](/ai-certification-preparation/exams/ccar-p/), the next step for enterprise-scale design and governance
+- [Associate – Foundations](/ai-certification-preparation/), for non-developers who apply Claude to business workflows
 
 ---
 
-Facts last verified against the official sources on 2026-09-18. [Repository index](../README.md)
+Facts last verified against the official sources on 2026-09-18. [Exam Center](/ai-certification-preparation/)

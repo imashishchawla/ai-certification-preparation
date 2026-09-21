@@ -5,9 +5,9 @@ tags: ["study", "guide"]
 ---
 # Cheat sheet: Architect – Foundations
 
-Everything worth holding in your head the hour before the exam, on one page. Facts come from the [official exam guide](exam-guide.pdf); the rules of thumb are the maintainer's, distilled from the official rationales.
+Everything worth holding in your head the hour before the exam, on one page. Facts come from the [official exam guide](/ai-certification-preparation/exams/cca-f/study-materials/); the rules of thumb are the maintainer's, distilled from the official rationales.
 
-[![Claude Certified Architect – Foundations cheat sheet: exam facts, domain weights, and the rules that decide questions](../.github/assets/cheat-sheet-architect-foundations.png)](../.github/assets/cheat-sheet-architect-foundations.png "View this cheat sheet at full size")
+
 
 Save or share the card above; the full sheet follows.
 
@@ -102,4 +102,4 @@ Move on within the block and come back. Scenario questions are mutually reinforc
 
 ---
 
-Facts last verified against the official sources on 2026-09-18. [Study guide](README.md) · [Notes](notes.md) · [Practice questions](practice-questions.md) · [Mock exam](mock-exam-1.md) · [Repository index](../README.md)
+Facts last verified against the official sources on 2026-09-18. [Study Guides](/ai-certification-preparation/exams/cca-f/study-guides/) · [Exam Notes](/ai-certification-preparation/exams/cca-f/exam-notes/) · [Sample Questions](/ai-certification-preparation/exams/cca-f/sample-questions/) · [Mock Test](/ai-certification-preparation/exams/cca-f/mock-test/) · [Exam Center](/ai-certification-preparation/)

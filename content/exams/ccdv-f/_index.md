@@ -27,6 +27,6 @@ layout: "single"
 
 Start with the **Claude Certified Architect — Foundations (CCAF)** exam prep library:
 
-* 👉 <a href="/exams/cca-f/"><strong>CCAF Exam Overview & Study Center</strong></a>
-* 📝 <a href="/exams/cca-f/sample-questions/"><strong>CCAF 200+ Practice Questions</strong></a>
-* ⏱️ <a href="/exams/cca-f/mock-test/"><strong>CCAF Timed Mock Test Engine</strong></a>
+* 👉 <a href="/ai-certification-preparation/exams/cca-f/"><strong>CCAF Exam Overview & Study Center</strong></a>
+* 📝 <a href="/ai-certification-preparation/exams/cca-f/sample-questions/"><strong>CCAF 200+ Practice Questions</strong></a>
+* ⏱️ <a href="/ai-certification-preparation/exams/cca-f/mock-test/"><strong>CCAF Timed Mock Test Engine</strong></a>

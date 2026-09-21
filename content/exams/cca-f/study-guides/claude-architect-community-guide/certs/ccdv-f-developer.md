@@ -8,7 +8,7 @@ tags: ["study", "community-guide"]
 
 Overview guide for the **Claude Certified Developer — Foundations** exam — the hands-on implementation credential in the Claude certification family. Facts below are taken from the official Exam Guide v1.0 (effective July 2026).
 
-> Looking for the Architect exam? The full deep-dive study guide in this repo covers [CCAR-F](../claude-certified-architect.md). This page is an overview of a sibling certification — with heavy content overlap, mapped below.
+> Looking for the Architect exam? The full deep-dive study guide in this repo covers [CCAR-F](../../guide-main-document/). This page is an overview of a sibling certification — with heavy content overlap, mapped below.
 
 ---
 
@@ -72,10 +72,10 @@ A large share of CCDV-F content is already covered in the Architect guide, at ar
 
 | CCDV-F domain | Covered in |
 |---|---|
-| Agents and Workflows | [d1 — Agentic Architecture](../domains/d1-agentic-architecture.md) |
-| Tools and MCPs | [d2 — Tool Design & MCP](../domains/d2-tool-design-mcp.md) |
-| Claude Code | [d3 — Claude Code Configuration](../domains/d3-claude-code-config.md) |
-| Prompt and Context Engineering | [d4 — Prompt Engineering](../domains/d4-prompt-engineering.md) + [d5 — Context Management](../domains/d5-context-reliability.md) |
+| Agents and Workflows | [d1 — Agentic Architecture](../../domains/d1-agentic-architecture/) |
+| Tools and MCPs | [d2 — Tool Design & MCP](../../domains/d2-tool-design-mcp/) |
+| Claude Code | [d3 — Claude Code Configuration](../../domains/d3-claude-code-config/) |
+| Prompt and Context Engineering | [d4 — Prompt Engineering](../../domains/d4-prompt-engineering/) + [d5 — Context Management](../../domains/d5-context-reliability/) |
 | Applications and Integration / Model Selection | Partially in d1/d4; the API-mechanics and cost-optimization depth is CCDV-F-specific |
 
 The developer exam goes deeper on API mechanics, SDK usage, evals, security, and cost optimization than the Architect Foundations blueprint does.

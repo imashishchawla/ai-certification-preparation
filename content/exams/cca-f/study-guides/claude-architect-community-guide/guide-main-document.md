@@ -8,7 +8,7 @@ tags: ["study", "community-guide"]
 
 Anthropic's technical certification for solution architects building production applications with Claude (exam code **CCAR-F**). 60 multiple-choice, scenario-based questions in 120 minutes, proctored and closed-book. Passing score: 720/1000. Candidates answer questions from 4 of 6 randomly selected scenarios. No penalty for guessing.
 
-Part of a four-credential family: [Claude Certified Associate — Foundations (CCAO-F)](certs/ccao-f-associate.md), **Architect — Foundations (CCAR-F)** — this guide, [Architect — Professional (CCAR-P)](certs/ccar-p-architect-professional.md), and [Developer — Foundations (CCDV-F)](certs/ccdv-f-developer.md). Delivered via Pearson VUE (OnVUE online or test center), registered through the Anthropic Partner Academy. Per Exam Guide v1.0 (effective July 2026): $125 per attempt, certification valid 12 months, up to 4 attempts per rolling 12 months (14/30/90-day waits after attempts 1–3). Renewal is free when done on time — review what changed since you certified and pass a non-proctored assessment; let it lapse and the full exam fee applies again. Access remains gated to the Claude Partner Network (registration needs a partner-domain email); the earlier "$99, first 5,000 partner employees free" beta terms are superseded.
+Part of a four-credential family: [Claude Certified Associate — Foundations (CCAO-F)](../certs/ccao-f-associate/), **Architect — Foundations (CCAR-F)** — this guide, [Architect — Professional (CCAR-P)](../certs/ccar-p-architect-professional/), and [Developer — Foundations (CCDV-F)](../certs/ccdv-f-developer/). Delivered via Pearson VUE (OnVUE online or test center), registered through the Anthropic Partner Academy. Per Exam Guide v1.0 (effective July 2026): $125 per attempt, certification valid 12 months, up to 4 attempts per rolling 12 months (14/30/90-day waits after attempts 1–3). Renewal is free when done on time — review what changed since you certified and pass a non-proctored assessment; let it lapse and the full exam fee applies again. Access remains gated to the Claude Partner Network (registration needs a partner-domain email); the earlier "$99, first 5,000 partner employees free" beta terms are superseded.
 
 Target: Solution architect with 6+ months experience with Claude APIs, Agent SDK, Claude Code, and MCP.
 
@@ -41,7 +41,7 @@ Fable 5.1 also requires 30-day data retention (no zero-data-retention orgs unles
 >
 > **Program (Exam Guide v1.0, effective July 2026):** four credentials (CCAO-F, CCAR-F, CCAR-P, CCDV-F), proctored via Pearson VUE, registered through the Anthropic Partner Academy. $125 for CCAR-F, 12-month validity — superseding the launch-period "$99 / first 5,000 partner employees free" terms.
 >
-> Refresh history: [CHANGELOG.md](CHANGELOG.md).
+> Refresh history: [CHANGELOG.md](../changelog/).
 
 ---
 
@@ -49,11 +49,11 @@ Fable 5.1 also requires 30-day data retention (no zero-data-retention orgs unles
 
 | Domain | Weight | Deep Dive |
 |--------|--------|-----------|
-| Agentic Architecture & Orchestration | 27% | [domains/d1-agentic-architecture.md](domains/d1-agentic-architecture.md) |
-| Tool Design & MCP Integration | 18% | [domains/d2-tool-design-mcp.md](domains/d2-tool-design-mcp.md) |
-| Claude Code Configuration & Workflows | 20% | [domains/d3-claude-code-config.md](domains/d3-claude-code-config.md) |
-| Prompt Engineering & Structured Output | 20% | [domains/d4-prompt-engineering.md](domains/d4-prompt-engineering.md) |
-| Context Management & Reliability | 15% | [domains/d5-context-reliability.md](domains/d5-context-reliability.md) |
+| Agentic Architecture & Orchestration | 27% | [domains/d1-agentic-architecture.md](../domains/d1-agentic-architecture/) |
+| Tool Design & MCP Integration | 18% | [domains/d2-tool-design-mcp.md](../domains/d2-tool-design-mcp/) |
+| Claude Code Configuration & Workflows | 20% | [domains/d3-claude-code-config.md](../domains/d3-claude-code-config/) |
+| Prompt Engineering & Structured Output | 20% | [domains/d4-prompt-engineering.md](../domains/d4-prompt-engineering/) |
+| Context Management & Reliability | 15% | [domains/d5-context-reliability.md](../domains/d5-context-reliability/) |
 
 ---
 

@@ -62,7 +62,7 @@ The exam blueprint itself (domains, weights, scenarios) comes from the official 
 
 ## 2026-07 — Pearson VUE program update, four credentials
 
-- Certification family expanded to four credentials (CCAO-F, CCAR-F, CCAR-P, CCDV-F); added overview guides in [`certs/`](certs/).
+- Certification family expanded to four credentials (CCAO-F, CCAR-F, CCAR-P, CCDV-F); added overview guides in [`certs/`](../certs/ccao-f-associate/).
 - Exam delivery moved to Pearson VUE (OnVUE online or test center), registered through the Anthropic Partner Academy. Exam Guide v1.0 (effective July 2026) set a $125 fee for CCAR-F and 12-month validity, superseding the launch-period "$99 / first 5,000 partner employees free" terms.
 - Documentation split: API docs to `platform.claude.com`, Claude Code docs to `code.claude.com`.
 - Schema, `tool_choice`, and hooks corrections throughout.
