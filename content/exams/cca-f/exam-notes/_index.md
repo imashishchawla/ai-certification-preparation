@@ -53,3 +53,5 @@ Welcome to the **Exam Notes & Domain Cheat Sheets** section. These notes summari
 
 * 📄 <a href="/exams/cca-f/study-guides/cca-prep-cheatsheet/"><strong>Comprehensive CCAF Master Cheat Sheet</strong></a> — Complete cross-domain breakdown with code samples.
 * 📄 <a href="/exams/cca-f/study-guides/claude-architecture-quick-cheat-sheet/"><strong>Architecture & Foundations Quick Reference Cheat Sheet</strong></a> — Key concepts and high-yield notes.
+* 📄 <a href="/exams/cca-f/study-guides/exam-patterns-and-the-calm-method/"><strong>Exam Patterns, Cheat Sheet, and The Calm Method</strong></a> — 21 Golden Rules, 9 Distractor Patterns, domain cheat sheets, and scenario playbooks.
+

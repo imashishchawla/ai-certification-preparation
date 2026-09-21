@@ -35531,5 +35531,709 @@
     "correct": "C",
     "explanation": "A. Treat the first-run failure as a permanent fault, replace the MCP server, and do not verify whether subsequent runs succeed. \n\n Incorrect \n\nThe fact that the MCP server succeeds on subsequent runs strongly suggests that the initial failure may be related to first-run permissions or authorization . Replacing the server without investigating would be unnecessary and could fail to address the actual cause.\n\n B. Reinstall the operating system to clear all permission state without first confirming whether the one-time permission grant caused the failure. \n\n Incorrect \n\nReinstalling the operating system is an extreme and unnecessary troubleshooting step . The permission dialogs provide a much more relevant clue that should be investigated first.\n\n C. Recognize the first-run permission grant as the cause, document the expected behavior in onboarding guidance, and confirm that subsequent runs succeed. \n\n Correct \n\nThe appearance of system permission dialogs during the first launch is a strong indication that the initial failure was related to one-time operating-system authorization . The appropriate response is to document this expected first-run behavior and verify that the MCP server works normally afterward.\n\n D. Disable operating-system permission dialogs entirely, accept the resulting security implications, and proceed without confirming whether the failure recurs. \n\n Incorrect \n\nDisabling operating-system permission controls unnecessarily weakens security protections . The better approach is to understand the permission requirement, document it, and verify successful subsequent operation.\n\n Final Answer: C. Recognize the first-run permission grant as the cause, document the expected behavior in onboarding guidance, and confirm that subsequent runs succeed.",
     "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-001",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "intermediate",
+    "prompt": "An agent sometimes calls `process_refund` before `verify_customer`. The prompt already says to verify first. What is the best fix?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rewrite the prompt with the rule in capitals and repeat it."
+      },
+      {
+        "id": "B",
+        "text": "Make `process_refund` reject any call unless verification succeeded earlier in this session."
+      },
+      {
+        "id": "C",
+        "text": "Add three examples of correct ordering to the prompt."
+      },
+      {
+        "id": "D",
+        "text": "Increase the model's temperature so it explores more sequences."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Ordering rules and business policies must be enforced in code or tool validation hooks. Relying solely on prompt instructions (A, C) only makes correct execution probabilistic, and adjusting temperature (D) is irrelevant to sequence validation.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-002",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "intermediate",
+    "prompt": "A tool returns the single word \"Error\" on every failure. The agent retries the same failing call repeatedly. What should you change first?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Return structured errors with a category and a retryable flag, and add a loop cap that escalates to a human."
+      },
+      {
+        "id": "B",
+        "text": "Switch to a larger model."
+      },
+      {
+        "id": "C",
+        "text": "Remove the tool and let the model answer from memory."
+      },
+      {
+        "id": "D",
+        "text": "Add a second tool that does the same job."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Structured errors give the model actionable context (transient vs permanent) to decide whether to retry. Pairing this with a loop cap and human escalation prevents infinite failing retry cycles.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-003",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "intermediate",
+    "prompt": "A coordinator gives each subagent the entire conversation so far. Costs are high and subagents wander off task. What is the best change?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pass each subagent only a focused task prompt containing the goal, constraints, and the findings it needs."
+      },
+      {
+        "id": "B",
+        "text": "Give subagents an even longer history."
+      },
+      {
+        "id": "C",
+        "text": "Remove the coordinator and let subagents talk freely."
+      },
+      {
+        "id": "D",
+        "text": "Reduce max_tokens."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Subagents require isolated, explicit context rather than full conversation history. Passing focused prompts with explicit constraints reduces token spend and prevents off-task drift.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-004",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "intermediate",
+    "prompt": "Step 2 of a pipeline needs the output of step 1. A teammate suggests running both in parallel to save time. What is right?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Run them sequentially because step 2 depends on step 1's result."
+      },
+      {
+        "id": "B",
+        "text": "Run in parallel; the model will guess step 1's output."
+      },
+      {
+        "id": "C",
+        "text": "Merge them into one prompt with no tools."
+      },
+      {
+        "id": "D",
+        "text": "Run step 2 twice for safety."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Workflows with strict data dependencies must be executed sequentially. Parallelization is reserved strictly for independent tasks.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-005",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "intermediate",
+    "prompt": "When a customer support case moves to a human agent, what should the handoff contain?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A structured summary: customer ID, the issue, actions already taken, and what is still needed."
+      },
+      {
+        "id": "B",
+        "text": "The raw transcript only, so nothing is lost."
+      },
+      {
+        "id": "C",
+        "text": "Only the customer's last message."
+      },
+      {
+        "id": "D",
+        "text": "A sentiment score."
+      }
+    ],
+    "correct": "A",
+    "explanation": "A structured handoff summary (customer ID, issue, actions taken, next steps) minimizes human agent ramp-up time and prevents frustrating the customer with repeated questions.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-006",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "intermediate",
+    "prompt": "Your team wants shared conventions, and each developer also has personal editor preferences. Where do they go in Claude Code?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Team conventions in the project's CLAUDE.md in the repo; personal preferences in `~/.claude/CLAUDE.md`."
+      },
+      {
+        "id": "B",
+        "text": "Everything in each developer's personal file."
+      },
+      {
+        "id": "C",
+        "text": "Everything in the project file, including personal preferences."
+      },
+      {
+        "id": "D",
+        "text": "In the CI logs."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Project-specific standards belong in `./CLAUDE.md` committed to version control, while developer preferences belong in the user-level config `~/.claude/CLAUDE.md`.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-007",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "intermediate",
+    "prompt": "Claude Code generates a change in one session and reviews it in the same session. Reviews rarely find problems. What is the best improvement?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Review in a separate, independent session with explicit review criteria."
+      },
+      {
+        "id": "B",
+        "text": "Ask the same session to \"try harder\"."
+      },
+      {
+        "id": "C",
+        "text": "Skip review to save time."
+      },
+      {
+        "id": "D",
+        "text": "Lower the temperature to zero."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Self-review in the same session suffers from context bias and hallucination reinforcement. Spawning an independent review session with explicit criteria delivers objective evaluation.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-008",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "intermediate",
+    "prompt": "You must fix a clear bug with a stack trace pointing to one function using Claude Code. Which approach fits best?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Direct execution: the change is small and clear."
+      },
+      {
+        "id": "B",
+        "text": "Plan mode with a written multi-phase design."
+      },
+      {
+        "id": "C",
+        "text": "Batches API."
+      },
+      {
+        "id": "D",
+        "text": "Split it across three subagents."
+      }
+    ],
+    "correct": "A",
+    "explanation": "When scope is well-defined and isolated to a single function, direct execution is the fastest and cleanest approach. Plan mode is meant for architectural or multi-file alterations.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-009",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "intermediate",
+    "prompt": "A team repo needs an MCP server that requires an API token. How should it be configured?",
+    "options": [
+      {
+        "id": "A",
+        "text": "In the project's `.mcp.json`, with the token supplied through an environment variable."
+      },
+      {
+        "id": "B",
+        "text": "Token written directly into `.mcp.json` and committed."
+      },
+      {
+        "id": "C",
+        "text": "Token pasted into CLAUDE.md."
+      },
+      {
+        "id": "D",
+        "text": "Token shared in team chat each morning."
+      }
+    ],
+    "correct": "A",
+    "explanation": "MCP server definitions in `.mcp.json` should reference secrets via environment variables, ensuring sensitive keys are never committed to version control.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-010",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "intermediate",
+    "prompt": "Your automated CI reviewer flags many trivial style issues and developers are ignoring it. What is best?",
+    "options": [
+      {
+        "id": "A",
+        "text": "State which categories to report (bugs, security) and which to skip (style), with examples."
+      },
+      {
+        "id": "B",
+        "text": "Add \"be conservative\" to the prompt."
+      },
+      {
+        "id": "C",
+        "text": "Only report findings the model rates above 90% confidence."
+      },
+      {
+        "id": "D",
+        "text": "Increase the review length limit."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Explicit category scoping (specifying bug/security checks while explicitly excluding style) accompanied by few-shot examples eliminates false positives and developer alert fatigue.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-011",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "intermediate",
+    "prompt": "Some contracts contain no termination date, and the model keeps inventing one during structured extraction. What should you change?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Make `termination_date` nullable/optional so \"not stated\" is a valid output."
+      },
+      {
+        "id": "B",
+        "text": "Make it required with a default of today's date."
+      },
+      {
+        "id": "C",
+        "text": "Add \"never guess\" in capitals."
+      },
+      {
+        "id": "D",
+        "text": "Retry until a date appears."
+      }
+    ],
+    "correct": "A",
+    "explanation": "When extraction fields are required, models hallucinate values when data is absent. Making fields nullable/optional allows valid representation of missing source data.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-012",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "intermediate",
+    "prompt": "Validation fails because the invoice number is missing from the source document. Three retries fail the same way. Why?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Retries fix format errors; they can't create information that isn't in the source."
+      },
+      {
+        "id": "B",
+        "text": "The retry limit is too low."
+      },
+      {
+        "id": "C",
+        "text": "The model needs a higher temperature."
+      },
+      {
+        "id": "D",
+        "text": "The schema should use more nesting."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Retry loops resolve schema formatting or syntactic issues. They cannot extract or hallucinate facts that are physically absent from the source document.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-013",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "intermediate",
+    "prompt": "Which workload is the best fit for the Message Batches API?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A weekly technical-debt report on the whole codebase, needed by Monday."
+      },
+      {
+        "id": "B",
+        "text": "A pre-merge check developers are waiting on."
+      },
+      {
+        "id": "C",
+        "text": "A live chat reply to a customer."
+      },
+      {
+        "id": "D",
+        "text": "An agent loop that needs each tool result immediately."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The Message Batches API offers a 50% discount and high throughput for asynchronous, non-blocking jobs with a 24-hour SLA. Interactive or blocking workflows must use synchronous endpoints.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-014",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "intermediate",
+    "prompt": "A 14-file pull request gets deep feedback on some files and shallow feedback on others, plus contradictory comments. What is the best redesign?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Review each file in its own pass, then run a separate pass for cross-file issues."
+      },
+      {
+        "id": "B",
+        "text": "Put all 14 files in one prompt and ask for more detail."
+      },
+      {
+        "id": "C",
+        "text": "Review only the first five files."
+      },
+      {
+        "id": "D",
+        "text": "Increase max_tokens only."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Evaluating files individually in isolated review passes ensures equal depth, followed by an integration pass to evaluate cross-file architectural coherence.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-015",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "intermediate",
+    "prompt": "`analyze_content` and `analyze_document` have near-identical descriptions and the agent confuses them. What is the best fix?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rewrite both descriptions to state purpose, inputs, and when to use each; merge them if they truly overlap."
+      },
+      {
+        "id": "B",
+        "text": "Add a third similar tool."
+      },
+      {
+        "id": "C",
+        "text": "Force `tool_choice` to `any`."
+      },
+      {
+        "id": "D",
+        "text": "Tell the model to guess."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Tool descriptions are the primary interface guiding model tool selection. Clarifying boundaries and distinguishing use cases or consolidating duplicate functions solves tool confusion.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-016",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "intermediate",
+    "prompt": "Every request must return data through a specific extraction schema, with no chatty text. How do you set `tool_choice`?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Force that specific tool using `tool_choice: {\"type\": \"tool\", \"name\": \"...\"}`."
+      },
+      {
+        "id": "B",
+        "text": "`auto`, and hope the model chooses it."
+      },
+      {
+        "id": "C",
+        "text": "Omit tools and ask for JSON in plain text."
+      },
+      {
+        "id": "D",
+        "text": "`any` with twenty unrelated tools."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Setting `tool_choice` to a specific named tool forces Claude to respond with that tool call adhering strictly to the JSON schema, suppressing conversational output.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-017",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "intermediate",
+    "prompt": "You want the agent to see a read-only catalog of available report templates without exploring by tool calls. What fits best?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Expose the catalog as an MCP resource."
+      },
+      {
+        "id": "B",
+        "text": "Write one tool per template."
+      },
+      {
+        "id": "C",
+        "text": "Paste the catalog into every prompt by hand."
+      },
+      {
+        "id": "D",
+        "text": "Ask the model to remember it."
+      }
+    ],
+    "correct": "A",
+    "explanation": "In Model Context Protocol (MCP), Resources are specifically designed to expose readable data, catalogs, and documentation without executing tool actions.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-018",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "intermediate",
+    "prompt": "After a long chat is summarised, the agent forgets the order number and refund amount. What is best?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keep a structured \"case facts\" block with those values in every turn."
+      },
+      {
+        "id": "B",
+        "text": "Summarise more aggressively."
+      },
+      {
+        "id": "C",
+        "text": "Ask the customer to repeat themselves each turn."
+      },
+      {
+        "id": "D",
+        "text": "Reduce the number of tools."
+      }
+    ],
+    "correct": "A",
+    "explanation": "A persistent \"case facts\" block retains immutable critical attributes (order IDs, customer identifiers, numerical balances) across summarization cycles.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-019",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "intermediate",
+    "prompt": "A lookup tool returns 40 fields, but the task needs 5. Context fills quickly. What do you do?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Trim the result to the needed fields before adding it to context."
+      },
+      {
+        "id": "B",
+        "text": "Add all 40 fields to every turn."
+      },
+      {
+        "id": "C",
+        "text": "Increase the context window setting and change nothing else."
+      },
+      {
+        "id": "D",
+        "text": "Ask the model to ignore the extra fields."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Filtering out irrelevant payload attributes before injecting tool results into context conserves token budget and keeps attention focused on relevant facts.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-020",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "intermediate",
+    "prompt": "Which situation is the strongest reason for an agent to escalate to a human?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The customer explicitly asks for a human agent."
+      },
+      {
+        "id": "B",
+        "text": "The customer's message sounds annoyed."
+      },
+      {
+        "id": "C",
+        "text": "The model self-reports 60% confidence."
+      },
+      {
+        "id": "D",
+        "text": "The conversation has lasted more than five minutes."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Explicit user escalation requests provide clear, deterministic criteria. Subjective heuristics like emotional tone or model self-reported confidence scores are noisy and unreliable.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-021",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "intermediate",
+    "prompt": "A search subagent's source says revenue was $4.1B; a filing analysed by another subagent says $3.9B. What should the report do?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Show both figures, name each source, and note the discrepancy."
+      },
+      {
+        "id": "B",
+        "text": "Use the larger number."
+      },
+      {
+        "id": "C",
+        "text": "Average them."
+      },
+      {
+        "id": "D",
+        "text": "Omit revenue."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Rigorous reporting maintains data provenance and highlights discrepancies between conflicting sources rather than silently averaging or guessing.",
+    "mockEligible": true
+  },
+  {
+    "id": "cca-f-calm-022",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "calm-method-patterns",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "intermediate",
+    "prompt": "A subagent's search times out. What should it return?",
+    "options": [
+      {
+        "id": "A",
+        "text": "What it attempted, any partial results, and suggested alternatives, flagged as a failure."
+      },
+      {
+        "id": "B",
+        "text": "An empty list marked successful."
+      },
+      {
+        "id": "C",
+        "text": "A confident answer from memory."
+      },
+      {
+        "id": "D",
+        "text": "Nothing."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Subagents must report failures explicitly along with attempted steps and partial results so coordinators have the context needed to re-route or escalate.",
+    "mockEligible": true
   }
 ]
