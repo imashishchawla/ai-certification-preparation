@@ -1,5 +1,5 @@
 ---
-title: "Paullarionov — Full Theory Guide"
+title: "Claude Architect Scenario & Theory Guide"
 meta: "3400 lines · API, Agent SDK, MCP, Claude Code, hooks, sessions"
 tags: ["study", "guide"]
 ---
@@ -78,7 +78,7 @@ The system extracts information from unstructured documents, validates output wi
 You design multi-turn conversational systems covering context window management, instruction persistence across turns, memory strategies, tool design for safe execution, and handling ambiguous or conflicting user inputs.
 
 ### Scenario 8: Agentic AI Tools *(content missing — help us fill it in!)*
-This scenario has been reported by exam candidates but is not yet covered in this guide. If you have encountered questions from this scenario on the real exam, please share them in [GitHub Issues](https://github.com/paullarionov/claude-certified-architect/issues) so we can add full coverage. Your contribution will help everyone preparing for the exam.
+This scenario has been reported by exam candidates but is not yet covered in this guide. If you have encountered questions from this scenario on the real exam, please share them in repository issues so we can add full coverage. Your contribution will help everyone preparing for the exam.
 
 ---
 

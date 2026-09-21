@@ -1,7 +1,7 @@
 ---
 title: "D3 Claude Code Config"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Domain 3: Claude Code Configuration & Workflows (20%)

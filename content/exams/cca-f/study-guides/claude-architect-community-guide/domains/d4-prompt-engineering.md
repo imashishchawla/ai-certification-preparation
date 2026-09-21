@@ -1,7 +1,7 @@
 ---
 title: "D4 Prompt Engineering"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Domain 4: Prompt Engineering & Structured Output (20%)

@@ -6,7 +6,7 @@ tags: ["study", "claudecertificationguide"]
 
 # Claude Certification Guide (claudecertificationguide.com) — Full CCAR-F Prep Track
 
-> **Homepage:** https://claudecertificationguide.com — a free, fully open CCAR-F practice site built by "Walter".
+> **Homepage:** https://claudecertificationguide.com — a free, fully open CCAR-F practice site built by community contributors.
 > **Captured:** 2026-09-19 · **License:** content is the site's own; saved locally for personal study.
 > **What's here:** the entire free curriculum (30 lessons), per-domain quick references & glossaries,
 > the complete 257-question bank (which powers the free mock exams, exercises and drill mode),

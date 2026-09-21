@@ -1,7 +1,7 @@
 ---
 title: "D2 Tool Design Mcp"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Domain 2: Tool Design & MCP Integration (18%)

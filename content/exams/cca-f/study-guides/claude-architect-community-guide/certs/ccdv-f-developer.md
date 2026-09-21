@@ -1,7 +1,7 @@
 ---
 title: "Ccdv F Developer"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Claude Certified Developer — Foundations (CCDV-F)

@@ -1,7 +1,7 @@
 ---
 title: "D1 Agentic Architecture"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Domain 1: Agentic Architecture & Orchestration (27%)

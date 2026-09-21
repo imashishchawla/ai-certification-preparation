@@ -223,8 +223,7 @@ Mode follows the prompt input. With no prompt, the action runs in interactive mo
 
 CLI flags go through claude_args. There's no separate action input for the system prompt, the tool allowlist or the turn cap. You pass the flags from the reference table above as one string: --append-system-prompt, --allowedTools, --max-turns, --model, --mcp-config. So "add review criteria without replacing the default behaviour" is --append-system-prompt inside claude_args, exactly as it would be on the command line. The pre-v1 inputs map onto this: custom_instructions became --append-system-prompt, direct_prompt became prompt, and mode went away because the action now infers it.
 
-YAML
-Copy
+```yaml
 name: Claude Code
 on:
   issue_comment:
@@ -252,6 +251,7 @@ jobs:
             --append-system-prompt "Review against the checklist in CLAUDE.md. Report only critical findings."
             --allowedTools "Read,Grep,Glob,Bash(git diff *)"
             --max-turns 10
+```
 
 
 How files reach Claude: actions/checkout puts the repository on the runner, so without that step there is nothing on disk to read. Claude reads the pull request itself through the GitHub tools the action provides, and the permissions block bounds what it can write back. id-token: write is required for the action's default GitHub App authentication and actions: read lets it see CI results on the pull request. The credential is a repository secret, anthropic_api_key for an API key or claude_code_oauth_token for a subscription token, and never a literal in the file.

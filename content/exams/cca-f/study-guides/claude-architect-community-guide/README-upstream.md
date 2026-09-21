@@ -1,7 +1,7 @@
 ---
 title: "README Upstream"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Claude Certified Architect — Foundations Study Guide
@@ -27,8 +27,8 @@ All four are 120-minute proctored exams delivered via Pearson VUE, passing score
 
 ## Read it online
 
-- **Website:** https://dnacenta.github.io/claude-certified-architect/
-- **PDF (English):** https://dnacenta.github.io/claude-certified-architect/guide_en.pdf
+- **Website:** https://community-architect.github.io/claude-certified-architect/
+- **PDF (English):** https://community-architect.github.io/claude-certified-architect/guide_en.pdf
 
 The landing page and PDF are built and deployed automatically from this repo's markdown on every push to `main` (see [`.github/workflows/pages.yml`](.github/workflows/pages.yml)). The PDF is generated from the source `.md` files, so it never drifts from the guide.
 
@@ -90,14 +90,14 @@ This guide was inspired by and based on the exam breakdown by [@hooeem on X](htt
 
 I'm also building open-source tools around persistent agents, structured memory, and Claude Code usage visibility — same problem space as the agentic / MCP / context domains in this guide, different angle:
 
-- **[recall-echo](https://github.com/dnacenta/recall-echo)** — persistent, confidence-weighted memory for coding agents (MCP-friendly). Early but usable.
-- **[pulse-null](https://github.com/dnacenta/pulse-null)** — single-binary scaffold for longer-running AI entities. Research prototype — expect bugs.
+- **[recall-echo](https://github.com/community-architect/recall-echo)** — persistent, confidence-weighted memory for coding agents (MCP-friendly). Early but usable.
+- **[pulse-null](https://github.com/community-architect/pulse-null)** — single-binary scaffold for longer-running AI entities. Research prototype — expect bugs.
 - **[pulse-limits](https://github.com/pulse-null/pulse-limits)** — Claude, Codex and Grok plan limits as a retro patient monitor: macOS menu bar, Waybar, terminal. One Rust binary. `brew install pulse-null/tap/pulse-limits && pulse-limits install`. No account, no server — it reuses the logins your CLIs already keep.
 - **[pulse-null.com](https://pulse-null.com)** — overview of the work.
 
 Not affiliated with Anthropic or the Claude Certified Architect program. Solo project; stars and issues help.
 
-Feel free to reach out: [dnacenta@pulse-null.com](mailto:dnacenta@pulse-null.com)
+Feel free to reach out: [community-architect@pulse-null.com](mailto:community-architect@pulse-null.com)
 
 ## License
 

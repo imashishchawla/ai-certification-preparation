@@ -1,7 +1,7 @@
 ---
 title: "D5 Context Reliability"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Domain 5: Context Management & Reliability (15%)

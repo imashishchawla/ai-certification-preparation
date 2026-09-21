@@ -1,7 +1,7 @@
 ---
 title: "Guide Main Document"
-meta: "dnacenta community guide"
-tags: ["study", "dnacenta"]
+meta: "community architect guide"
+tags: ["study", "community-guide"]
 ---
 
 # Claude Certified Architect — Foundations
