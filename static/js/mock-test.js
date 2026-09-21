@@ -2,7 +2,9 @@
   var container = document.getElementById('mockTestApp');
   if (!container) return;
 
-  var pathPrefix = window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '';
+  var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation')
+    ? '/ai-certification-preparation'
+    : (window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '');
   var fetchUrl = pathPrefix + '/data/questions/cca-f/questions.json';
 
   var STORAGE_KEY = 'ccaf_mock_attempt_v1';

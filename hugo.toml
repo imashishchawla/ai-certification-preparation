@@ -1,4 +1,4 @@
-baseURL = '/'
+baseURL = 'https://imashishchawla.github.io/ai-certification-preparation/'
 title = 'AI Certification Exam Prep'
 theme = 'retro-prep'
 defaultContentLanguage = 'en'

@@ -11,7 +11,9 @@
   var currentPage = 1;
   var pageSize = 50;
 
-  var pathPrefix = window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '';
+  var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation')
+    ? '/ai-certification-preparation'
+    : (window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '');
   var fetchUrl = pathPrefix + '/data/questions/cca-f/questions.json';
 
   function loadData(url) {

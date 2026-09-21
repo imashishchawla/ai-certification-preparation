@@ -9,7 +9,7 @@ duration_minutes = 120
 practice_pass_percent = 72
 pass_score = 720
 price_usd = 125
-path = "/exams/cca-f/"
+path = "exams/cca-f/"
 description = "Foundations-level certification covering agentic architecture, tool design, Claude Code, prompt engineering, and context management."
 
 [exams.domain_weights]
@@ -30,7 +30,7 @@ duration_minutes = 120
 practice_pass_percent = 72
 pass_score = 720
 price_usd = 250
-path = "/exams/ccar-p/"
+path = "exams/ccar-p/"
 description = "Advanced professional certification for enterprise multi-agent deployment, safety, and governance."
 
 [[exams]]
@@ -43,6 +43,6 @@ questions = 50
 duration_minutes = 90
 practice_pass_percent = 70
 pass_score = 700
-price_usd = 150
-path = "/exams/ccdv-f/"
+price_usd = 125
+path = "exams/ccdv-f/"
 description = "Developer certification covering Anthropic API integration, SDK usage, and tool calling."
