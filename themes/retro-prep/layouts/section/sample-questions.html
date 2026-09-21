@@ -1,8 +1,9 @@
 {{ define "main" }}
 {{ partial "breadcrumbs.html" . }}
 
+{{ $exam := index (where site.Data.exams.exams "id" "cca-f") 0 }}
 <h1>Sample Questions (Interactive Practice)</h1>
-<p class="muted">Practice 205 normalized scenario questions across all 5 official CCAF exam domains. Select an option, click <strong>Reveal answer</strong> to verify, and read the detailed explanation.</p>
+<p class="muted">Practice <strong id="totalQuestionsCount">{{ $exam.questions }}</strong> normalized scenario questions across all 5 official CCAF exam domains — select an option and click <strong>Reveal answer</strong> to verify explanations.</p>
 
 <div id="domainFilters" style="margin-bottom: 1.5rem;"></div>
 

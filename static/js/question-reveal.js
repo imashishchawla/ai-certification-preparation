@@ -30,6 +30,10 @@
     })
     .then(function(data) {
       allQuestions = data;
+      var countEl = document.getElementById('totalQuestionsCount');
+      if (countEl) {
+        countEl.textContent = data.length.toLocaleString();
+      }
       renderFilters();
       renderQuestions();
     })

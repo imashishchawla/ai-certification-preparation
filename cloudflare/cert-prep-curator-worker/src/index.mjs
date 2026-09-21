@@ -25,7 +25,7 @@ export default {
         version: env.AGENT_VERSION || '1.0.0',
         status: 'healthy',
         activeExam: env.EXAM_CODE || 'CCAF',
-        totalQuestions: parseInt(env.TOTAL_QUESTIONS || '205', 10),
+        totalQuestions: parseInt(env.TOTAL_QUESTIONS || '1130', 10),
         repository: env.GITHUB_REPO || 'imashishchawla/ai-certification-preparation',
         pagesUrl: `https://${(env.GITHUB_REPO || 'imashishchawla').split('/')[0]}.github.io/ai-certification-preparation/`,
         timestamp: new Date().toISOString()
@@ -42,7 +42,7 @@ export default {
           name: 'Claude Certified Architect — Foundations',
           provider: 'Anthropic',
           status: 'active',
-          questionsCount: 205,
+          questionsCount: parseInt(env.TOTAL_QUESTIONS || '1130', 10),
           mockTestFormat: '60Q / 120M'
         },
         {
@@ -60,9 +60,10 @@ export default {
 
     // Detailed Status & Preflight Check API
     if (path === '/api/v1/status') {
+      const totalQ = parseInt(env.TOTAL_QUESTIONS || '1130', 10);
       const auditReport = {
         preflight: 'PASSED',
-        questionValidation: 'PASSED (205 valid questions)',
+        questionValidation: `PASSED (${totalQ} valid questions)`,
         linkIntegrity: 'PASSED (0 external leaks)',
         domains: {
           D1: { name: 'Agentic Architecture & Orchestration', weight: '27%', targetMockCount: 16 },
