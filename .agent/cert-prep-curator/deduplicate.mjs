@@ -7,7 +7,7 @@ import crypto from 'crypto';
  */
 export function normalizeText(text) {
   if (!text) return '';
-  return text
+  return String(text)
     .toLowerCase()
     .replace(/[`*_~#>[\]()]/g, ' ')
     .replace(/[^a-z0-9\s]/g, ' ')

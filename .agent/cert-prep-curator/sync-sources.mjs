@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import https from 'https';
 import http from 'http';
 import { URL } from 'url';
+import { syncCertyIQ } from './sync-certyiq.mjs';
 
 /**
  * Validates whether an endpoint URL is trusted according to sources.json.
@@ -85,7 +86,21 @@ export async function syncSources(rootDir, examId = 'cca-f', options = { dryRun:
   for (const source of sources) {
     if (!source.active) continue;
 
-    for (const endpoint of (source.endpoints || [])) {
+    if (source.id === 'certyiq') {
+      if (!options.dryRun) {
+        try {
+          await syncCertyIQ(rootDir, examId);
+          synced++;
+        } catch (err) {
+          console.warn(`[Source Sync] CertyIQ API sync warning: ${err.message}`);
+          errors++;
+        }
+      } else {
+        console.log(`[DRY RUN] Would sync CertyIQ via API`);
+        skipped++;
+      }
+      continue;
+    }
       if (!isUrlTrusted(endpoint, sources)) {
         console.warn(`[Source Sync] UNTRUSTED SOURCE BLOCKED: ${endpoint}`);
         errors++;
