@@ -5487,11 +5487,11 @@
     "title": "Scenario: Your team is building an AI-powered customer support agent that handles order inquiries, billing disputes, and account management. The agent uses a set of tools including get_customer, lookup_order, process_refund, and escalate_to_human to resolve customer issues autonomously."
   },
   {
-    "id": "cca-f-amey-001",
+    "id": "cca-f-foundation-001",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5520,11 +5520,11 @@
     "title": "Support resolution agent — Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-002",
+    "id": "cca-f-foundation-002",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -5553,11 +5553,11 @@
     "title": "Support resolution agent — Tool Design & MCP Integration"
   },
   {
-    "id": "cca-f-amey-003",
+    "id": "cca-f-foundation-003",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5585,11 +5585,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-004",
+    "id": "cca-f-foundation-004",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5617,11 +5617,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-005",
+    "id": "cca-f-foundation-005",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -5649,11 +5649,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-006",
+    "id": "cca-f-foundation-006",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -5682,11 +5682,11 @@
     "title": "Claude Code in CI — Claude Code Configuration & Workflows"
   },
   {
-    "id": "cca-f-amey-007",
+    "id": "cca-f-foundation-007",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -5715,11 +5715,11 @@
     "title": "Claude Code in CI — Prompt Engineering & Structured Output"
   },
   {
-    "id": "cca-f-amey-008",
+    "id": "cca-f-foundation-008",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -5747,11 +5747,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-009",
+    "id": "cca-f-foundation-009",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -5779,11 +5779,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-010",
+    "id": "cca-f-foundation-010",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -5812,11 +5812,11 @@
     "title": "Developer productivity agent — Tool Design & MCP Integration"
   },
   {
-    "id": "cca-f-amey-011",
+    "id": "cca-f-foundation-011",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5845,11 +5845,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-012",
+    "id": "cca-f-foundation-012",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5878,11 +5878,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-013",
+    "id": "cca-f-foundation-013",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5911,11 +5911,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-014",
+    "id": "cca-f-foundation-014",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5944,11 +5944,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-015",
+    "id": "cca-f-foundation-015",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -5977,11 +5977,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-016",
+    "id": "cca-f-foundation-016",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6010,11 +6010,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-017",
+    "id": "cca-f-foundation-017",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6043,11 +6043,11 @@
     "title": "Agentic Architecture & Orchestration"
   },
   {
-    "id": "cca-f-amey-018",
+    "id": "cca-f-foundation-018",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -6076,11 +6076,11 @@
     "title": "Claude Code Configuration & Workflows"
   },
   {
-    "id": "cca-f-amey-019",
+    "id": "cca-f-foundation-019",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -6109,11 +6109,11 @@
     "title": "Claude Code Configuration & Workflows"
   },
   {
-    "id": "cca-f-amey-020",
+    "id": "cca-f-foundation-020",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6142,11 +6142,11 @@
     "title": "Claude Code Configuration & Workflows"
   },
   {
-    "id": "cca-f-amey-021",
+    "id": "cca-f-foundation-021",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -6175,11 +6175,11 @@
     "title": "Claude Code Configuration & Workflows"
   },
   {
-    "id": "cca-f-amey-022",
+    "id": "cca-f-foundation-022",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -6208,11 +6208,11 @@
     "title": "Claude Code Configuration & Workflows"
   },
   {
-    "id": "cca-f-amey-023",
+    "id": "cca-f-foundation-023",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -6241,11 +6241,11 @@
     "title": "Prompt Engineering & Structured Output"
   },
   {
-    "id": "cca-f-amey-024",
+    "id": "cca-f-foundation-024",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -6274,11 +6274,11 @@
     "title": "Prompt Engineering & Structured Output"
   },
   {
-    "id": "cca-f-amey-025",
+    "id": "cca-f-foundation-025",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -6307,11 +6307,11 @@
     "title": "Prompt Engineering & Structured Output"
   },
   {
-    "id": "cca-f-amey-026",
+    "id": "cca-f-foundation-026",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -6340,11 +6340,11 @@
     "title": "Prompt Engineering & Structured Output"
   },
   {
-    "id": "cca-f-amey-027",
+    "id": "cca-f-foundation-027",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -6373,11 +6373,11 @@
     "title": "Prompt Engineering & Structured Output"
   },
   {
-    "id": "cca-f-amey-028",
+    "id": "cca-f-foundation-028",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -6406,11 +6406,11 @@
     "title": "Tool Design & MCP Integration"
   },
   {
-    "id": "cca-f-amey-029",
+    "id": "cca-f-foundation-029",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -6439,11 +6439,11 @@
     "title": "Tool Design & MCP Integration"
   },
   {
-    "id": "cca-f-amey-030",
+    "id": "cca-f-foundation-030",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -6472,11 +6472,11 @@
     "title": "Tool Design & MCP Integration"
   },
   {
-    "id": "cca-f-amey-031",
+    "id": "cca-f-foundation-031",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -6505,11 +6505,11 @@
     "title": "Tool Design & MCP Integration"
   },
   {
-    "id": "cca-f-amey-032",
+    "id": "cca-f-foundation-032",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6538,11 +6538,11 @@
     "title": "Context Management & Reliability"
   },
   {
-    "id": "cca-f-amey-033",
+    "id": "cca-f-foundation-033",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "intermediate",
@@ -6571,11 +6571,11 @@
     "title": "Context Management & Reliability"
   },
   {
-    "id": "cca-f-amey-034",
+    "id": "cca-f-foundation-034",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "intermediate",
@@ -6604,11 +6604,11 @@
     "title": "Context Management & Reliability"
   },
   {
-    "id": "cca-f-amey-035",
+    "id": "cca-f-foundation-035",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-35",
+    "sourceId": "foundations-prep-35",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6637,11 +6637,11 @@
     "title": "Context Management & Reliability"
   },
   {
-    "id": "cca-f-amey-thakur-arc-012",
+    "id": "cca-f-archeval-012",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-arc",
+    "sourceId": "architectural-eval-6",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6669,11 +6669,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-thakur-arc-013",
+    "id": "cca-f-archeval-013",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-arc",
+    "sourceId": "architectural-eval-6",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6701,11 +6701,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-thakur-arc-041",
+    "id": "cca-f-archeval-041",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-arc",
+    "sourceId": "architectural-eval-6",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -6733,11 +6733,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-thakur-arc-052",
+    "id": "cca-f-archeval-052",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-arc",
+    "sourceId": "architectural-eval-6",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6765,11 +6765,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-thakur-arc-067",
+    "id": "cca-f-archeval-067",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-arc",
+    "sourceId": "architectural-eval-6",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -6797,11 +6797,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-amey-thakur-arc-069",
+    "id": "cca-f-archeval-069",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-arc",
+    "sourceId": "architectural-eval-6",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -19885,11 +19885,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-163",
+    "id": "cca-f-associate-163",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -19917,11 +19917,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-164",
+    "id": "cca-f-associate-164",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -19949,11 +19949,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-165",
+    "id": "cca-f-associate-165",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -19981,11 +19981,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-168",
+    "id": "cca-f-associate-168",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20013,11 +20013,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-169",
+    "id": "cca-f-associate-169",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20045,11 +20045,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-196",
+    "id": "cca-f-associate-196",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20077,11 +20077,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-197",
+    "id": "cca-f-associate-197",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20109,11 +20109,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-198",
+    "id": "cca-f-associate-198",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20141,11 +20141,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-199",
+    "id": "cca-f-associate-199",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20173,11 +20173,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-200",
+    "id": "cca-f-associate-200",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20205,11 +20205,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-201",
+    "id": "cca-f-associate-201",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20237,11 +20237,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-202",
+    "id": "cca-f-associate-202",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20269,11 +20269,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-203",
+    "id": "cca-f-associate-203",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20301,11 +20301,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-204",
+    "id": "cca-f-associate-204",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20333,11 +20333,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-205",
+    "id": "cca-f-associate-205",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20365,11 +20365,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-206",
+    "id": "cca-f-associate-206",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20397,11 +20397,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-207",
+    "id": "cca-f-associate-207",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20429,11 +20429,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-208",
+    "id": "cca-f-associate-208",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20461,11 +20461,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-209",
+    "id": "cca-f-associate-209",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20493,11 +20493,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-210",
+    "id": "cca-f-associate-210",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20525,11 +20525,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-211",
+    "id": "cca-f-associate-211",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20557,11 +20557,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-212",
+    "id": "cca-f-associate-212",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20589,11 +20589,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-213",
+    "id": "cca-f-associate-213",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20621,11 +20621,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-214",
+    "id": "cca-f-associate-214",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20653,11 +20653,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-215",
+    "id": "cca-f-associate-215",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20685,11 +20685,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-216",
+    "id": "cca-f-associate-216",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20717,11 +20717,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-217",
+    "id": "cca-f-associate-217",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20749,11 +20749,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-218",
+    "id": "cca-f-associate-218",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20781,11 +20781,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-219",
+    "id": "cca-f-associate-219",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20813,11 +20813,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-220",
+    "id": "cca-f-associate-220",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20845,11 +20845,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-221",
+    "id": "cca-f-associate-221",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20877,11 +20877,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-222",
+    "id": "cca-f-associate-222",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20909,11 +20909,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-223",
+    "id": "cca-f-associate-223",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20941,11 +20941,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-224",
+    "id": "cca-f-associate-224",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -20973,11 +20973,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-225",
+    "id": "cca-f-associate-225",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21005,11 +21005,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-226",
+    "id": "cca-f-associate-226",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21037,11 +21037,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-227",
+    "id": "cca-f-associate-227",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21069,11 +21069,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-228",
+    "id": "cca-f-associate-228",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21101,11 +21101,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-229",
+    "id": "cca-f-associate-229",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21133,11 +21133,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-230",
+    "id": "cca-f-associate-230",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21165,11 +21165,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-231",
+    "id": "cca-f-associate-231",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21197,11 +21197,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-232",
+    "id": "cca-f-associate-232",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21229,11 +21229,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-233",
+    "id": "cca-f-associate-233",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21261,11 +21261,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-234",
+    "id": "cca-f-associate-234",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21293,11 +21293,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-235",
+    "id": "cca-f-associate-235",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21325,11 +21325,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-236",
+    "id": "cca-f-associate-236",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21357,11 +21357,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-237",
+    "id": "cca-f-associate-237",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21389,11 +21389,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-238",
+    "id": "cca-f-associate-238",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21421,11 +21421,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-239",
+    "id": "cca-f-associate-239",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21453,11 +21453,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-ameyjson-240",
+    "id": "cca-f-associate-240",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "amey-thakur-json",
+    "sourceId": "associate-prep-50",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21485,11 +21485,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-001",
+    "id": "cca-f-scenario-001",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21517,11 +21517,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-002",
+    "id": "cca-f-scenario-002",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21549,11 +21549,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-003",
+    "id": "cca-f-scenario-003",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21581,11 +21581,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-004",
+    "id": "cca-f-scenario-004",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21613,11 +21613,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-005",
+    "id": "cca-f-scenario-005",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21645,11 +21645,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-006",
+    "id": "cca-f-scenario-006",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21677,11 +21677,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-007",
+    "id": "cca-f-scenario-007",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21709,11 +21709,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-008",
+    "id": "cca-f-scenario-008",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21741,11 +21741,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-009",
+    "id": "cca-f-scenario-009",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21773,11 +21773,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-010",
+    "id": "cca-f-scenario-010",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21805,11 +21805,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-011",
+    "id": "cca-f-scenario-011",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21837,11 +21837,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-012",
+    "id": "cca-f-scenario-012",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21869,11 +21869,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-013",
+    "id": "cca-f-scenario-013",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21901,11 +21901,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-014",
+    "id": "cca-f-scenario-014",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21933,11 +21933,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-015",
+    "id": "cca-f-scenario-015",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21965,11 +21965,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-016",
+    "id": "cca-f-scenario-016",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -21997,11 +21997,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-017",
+    "id": "cca-f-scenario-017",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22029,11 +22029,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-018",
+    "id": "cca-f-scenario-018",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22061,11 +22061,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-019",
+    "id": "cca-f-scenario-019",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22093,11 +22093,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-020",
+    "id": "cca-f-scenario-020",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22125,11 +22125,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-021",
+    "id": "cca-f-scenario-021",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22157,11 +22157,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-022",
+    "id": "cca-f-scenario-022",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22189,11 +22189,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-023",
+    "id": "cca-f-scenario-023",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22221,11 +22221,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-024",
+    "id": "cca-f-scenario-024",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22253,11 +22253,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-025",
+    "id": "cca-f-scenario-025",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22285,11 +22285,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-026",
+    "id": "cca-f-scenario-026",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22317,11 +22317,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-027",
+    "id": "cca-f-scenario-027",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22349,11 +22349,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-028",
+    "id": "cca-f-scenario-028",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -22381,11 +22381,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-029",
+    "id": "cca-f-scenario-029",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22413,11 +22413,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-030",
+    "id": "cca-f-scenario-030",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22445,11 +22445,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-031",
+    "id": "cca-f-scenario-031",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22477,11 +22477,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-032",
+    "id": "cca-f-scenario-032",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22509,11 +22509,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-033",
+    "id": "cca-f-scenario-033",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22541,11 +22541,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-034",
+    "id": "cca-f-scenario-034",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22573,11 +22573,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-035",
+    "id": "cca-f-scenario-035",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22605,11 +22605,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-036",
+    "id": "cca-f-scenario-036",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22637,11 +22637,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-037",
+    "id": "cca-f-scenario-037",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22669,11 +22669,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-038",
+    "id": "cca-f-scenario-038",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22701,11 +22701,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-039",
+    "id": "cca-f-scenario-039",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22733,11 +22733,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-040",
+    "id": "cca-f-scenario-040",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -22765,11 +22765,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-041",
+    "id": "cca-f-scenario-041",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22797,11 +22797,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-042",
+    "id": "cca-f-scenario-042",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22829,11 +22829,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-043",
+    "id": "cca-f-scenario-043",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22861,11 +22861,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-044",
+    "id": "cca-f-scenario-044",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -22893,11 +22893,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-045",
+    "id": "cca-f-scenario-045",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -22925,11 +22925,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-046",
+    "id": "cca-f-scenario-046",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22957,11 +22957,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-047",
+    "id": "cca-f-scenario-047",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -22989,11 +22989,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-048",
+    "id": "cca-f-scenario-048",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -23021,11 +23021,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-049",
+    "id": "cca-f-scenario-049",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -23053,11 +23053,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-050",
+    "id": "cca-f-scenario-050",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23085,11 +23085,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-051",
+    "id": "cca-f-scenario-051",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23117,11 +23117,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-052",
+    "id": "cca-f-scenario-052",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -23149,11 +23149,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-053",
+    "id": "cca-f-scenario-053",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -23181,11 +23181,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-054",
+    "id": "cca-f-scenario-054",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -23213,11 +23213,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-055",
+    "id": "cca-f-scenario-055",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23245,11 +23245,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-056",
+    "id": "cca-f-scenario-056",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -23277,11 +23277,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-057",
+    "id": "cca-f-scenario-057",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23309,11 +23309,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-058",
+    "id": "cca-f-scenario-058",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23341,11 +23341,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-059",
+    "id": "cca-f-scenario-059",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23373,11 +23373,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-060",
+    "id": "cca-f-scenario-060",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23405,11 +23405,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-061",
+    "id": "cca-f-scenario-061",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23437,11 +23437,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-062",
+    "id": "cca-f-scenario-062",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23469,11 +23469,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-063",
+    "id": "cca-f-scenario-063",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23501,11 +23501,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-064",
+    "id": "cca-f-scenario-064",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23533,11 +23533,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-065",
+    "id": "cca-f-scenario-065",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23565,11 +23565,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-066",
+    "id": "cca-f-scenario-066",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23597,11 +23597,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-067",
+    "id": "cca-f-scenario-067",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23629,11 +23629,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-068",
+    "id": "cca-f-scenario-068",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23661,11 +23661,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-069",
+    "id": "cca-f-scenario-069",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23693,11 +23693,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-070",
+    "id": "cca-f-scenario-070",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23725,11 +23725,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-071",
+    "id": "cca-f-scenario-071",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -23757,11 +23757,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-072",
+    "id": "cca-f-scenario-072",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -23789,11 +23789,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-073",
+    "id": "cca-f-scenario-073",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23821,11 +23821,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-074",
+    "id": "cca-f-scenario-074",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23853,11 +23853,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-075",
+    "id": "cca-f-scenario-075",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23885,11 +23885,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-076",
+    "id": "cca-f-scenario-076",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23917,11 +23917,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-077",
+    "id": "cca-f-scenario-077",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23949,11 +23949,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-078",
+    "id": "cca-f-scenario-078",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -23981,11 +23981,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-079",
+    "id": "cca-f-scenario-079",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24013,11 +24013,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-080",
+    "id": "cca-f-scenario-080",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24045,11 +24045,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-081",
+    "id": "cca-f-scenario-081",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24077,11 +24077,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-082",
+    "id": "cca-f-scenario-082",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -24109,11 +24109,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-083",
+    "id": "cca-f-scenario-083",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24141,11 +24141,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-084",
+    "id": "cca-f-scenario-084",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24173,11 +24173,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-085",
+    "id": "cca-f-scenario-085",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24205,11 +24205,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-086",
+    "id": "cca-f-scenario-086",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24237,11 +24237,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-087",
+    "id": "cca-f-scenario-087",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24269,11 +24269,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-larionov-088",
+    "id": "cca-f-scenario-088",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "larionov-88",
+    "sourceId": "situational-scenarios-88",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24301,11 +24301,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-001",
+    "id": "cca-f-guide-001",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24333,11 +24333,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-002",
+    "id": "cca-f-guide-002",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24365,11 +24365,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-003",
+    "id": "cca-f-guide-003",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24397,11 +24397,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-004",
+    "id": "cca-f-guide-004",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24429,11 +24429,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-005",
+    "id": "cca-f-guide-005",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24461,11 +24461,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-006",
+    "id": "cca-f-guide-006",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24493,11 +24493,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-007",
+    "id": "cca-f-guide-007",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24525,11 +24525,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-008",
+    "id": "cca-f-guide-008",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24557,11 +24557,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-009",
+    "id": "cca-f-guide-009",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24589,11 +24589,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-010",
+    "id": "cca-f-guide-010",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24621,11 +24621,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-011",
+    "id": "cca-f-guide-011",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24653,11 +24653,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-012",
+    "id": "cca-f-guide-012",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24685,11 +24685,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-013",
+    "id": "cca-f-guide-013",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24717,11 +24717,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-014",
+    "id": "cca-f-guide-014",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24749,11 +24749,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-015",
+    "id": "cca-f-guide-015",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24781,11 +24781,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-016",
+    "id": "cca-f-guide-016",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24813,11 +24813,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-017",
+    "id": "cca-f-guide-017",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24845,11 +24845,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-018",
+    "id": "cca-f-guide-018",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24877,11 +24877,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-019",
+    "id": "cca-f-guide-019",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24909,11 +24909,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-020",
+    "id": "cca-f-guide-020",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24941,11 +24941,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-021",
+    "id": "cca-f-guide-021",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -24973,11 +24973,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-022",
+    "id": "cca-f-guide-022",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25005,11 +25005,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-023",
+    "id": "cca-f-guide-023",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25037,11 +25037,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-024",
+    "id": "cca-f-guide-024",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25069,11 +25069,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-025",
+    "id": "cca-f-guide-025",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25101,11 +25101,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-026",
+    "id": "cca-f-guide-026",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25133,11 +25133,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-027",
+    "id": "cca-f-guide-027",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25165,11 +25165,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-028",
+    "id": "cca-f-guide-028",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25197,11 +25197,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-029",
+    "id": "cca-f-guide-029",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25229,11 +25229,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-030",
+    "id": "cca-f-guide-030",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25261,11 +25261,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-031",
+    "id": "cca-f-guide-031",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25293,11 +25293,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-032",
+    "id": "cca-f-guide-032",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25325,11 +25325,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-033",
+    "id": "cca-f-guide-033",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25357,11 +25357,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-034",
+    "id": "cca-f-guide-034",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25389,11 +25389,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-035",
+    "id": "cca-f-guide-035",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25421,11 +25421,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-036",
+    "id": "cca-f-guide-036",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25453,11 +25453,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-037",
+    "id": "cca-f-guide-037",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25485,11 +25485,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-038",
+    "id": "cca-f-guide-038",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25517,11 +25517,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-039",
+    "id": "cca-f-guide-039",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25549,11 +25549,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-040",
+    "id": "cca-f-guide-040",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25581,11 +25581,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-041",
+    "id": "cca-f-guide-041",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25613,11 +25613,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-042",
+    "id": "cca-f-guide-042",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25645,11 +25645,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-043",
+    "id": "cca-f-guide-043",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25677,11 +25677,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-044",
+    "id": "cca-f-guide-044",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25709,11 +25709,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-045",
+    "id": "cca-f-guide-045",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25741,11 +25741,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-046",
+    "id": "cca-f-guide-046",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25773,11 +25773,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-047",
+    "id": "cca-f-guide-047",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25805,11 +25805,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-048",
+    "id": "cca-f-guide-048",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25837,11 +25837,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-049",
+    "id": "cca-f-guide-049",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25869,11 +25869,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-050",
+    "id": "cca-f-guide-050",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25901,11 +25901,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-051",
+    "id": "cca-f-guide-051",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25933,11 +25933,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-052",
+    "id": "cca-f-guide-052",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25965,11 +25965,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-053",
+    "id": "cca-f-guide-053",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -25997,11 +25997,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-054",
+    "id": "cca-f-guide-054",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26029,11 +26029,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-055",
+    "id": "cca-f-guide-055",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26061,11 +26061,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-056",
+    "id": "cca-f-guide-056",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26093,11 +26093,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-057",
+    "id": "cca-f-guide-057",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26125,11 +26125,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-058",
+    "id": "cca-f-guide-058",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -26157,11 +26157,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-059",
+    "id": "cca-f-guide-059",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26189,11 +26189,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-060",
+    "id": "cca-f-guide-060",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26221,11 +26221,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-061",
+    "id": "cca-f-guide-061",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26253,11 +26253,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-062",
+    "id": "cca-f-guide-062",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26285,11 +26285,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-063",
+    "id": "cca-f-guide-063",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26317,11 +26317,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-067",
+    "id": "cca-f-guide-067",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26349,11 +26349,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-068",
+    "id": "cca-f-guide-068",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26381,11 +26381,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-069",
+    "id": "cca-f-guide-069",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26413,11 +26413,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-070",
+    "id": "cca-f-guide-070",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26445,11 +26445,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-071",
+    "id": "cca-f-guide-071",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -26477,11 +26477,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-072",
+    "id": "cca-f-guide-072",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26509,11 +26509,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-073",
+    "id": "cca-f-guide-073",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26541,11 +26541,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-074",
+    "id": "cca-f-guide-074",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26573,11 +26573,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-075",
+    "id": "cca-f-guide-075",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26605,11 +26605,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-076",
+    "id": "cca-f-guide-076",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26637,11 +26637,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-077",
+    "id": "cca-f-guide-077",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26669,11 +26669,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-078",
+    "id": "cca-f-guide-078",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26701,11 +26701,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-079",
+    "id": "cca-f-guide-079",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26733,11 +26733,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-080",
+    "id": "cca-f-guide-080",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26765,11 +26765,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-081",
+    "id": "cca-f-guide-081",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26797,11 +26797,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-082",
+    "id": "cca-f-guide-082",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26829,11 +26829,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-083",
+    "id": "cca-f-guide-083",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26861,11 +26861,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-084",
+    "id": "cca-f-guide-084",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26893,11 +26893,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-085",
+    "id": "cca-f-guide-085",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -26925,11 +26925,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-086",
+    "id": "cca-f-guide-086",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26957,11 +26957,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-087",
+    "id": "cca-f-guide-087",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -26989,11 +26989,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-088",
+    "id": "cca-f-guide-088",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27021,11 +27021,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-089",
+    "id": "cca-f-guide-089",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27053,11 +27053,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-090",
+    "id": "cca-f-guide-090",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27085,11 +27085,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-091",
+    "id": "cca-f-guide-091",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27117,11 +27117,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-092",
+    "id": "cca-f-guide-092",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27149,11 +27149,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-093",
+    "id": "cca-f-guide-093",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27181,11 +27181,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-094",
+    "id": "cca-f-guide-094",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27213,11 +27213,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-095",
+    "id": "cca-f-guide-095",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27245,11 +27245,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-096",
+    "id": "cca-f-guide-096",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27277,11 +27277,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-097",
+    "id": "cca-f-guide-097",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27309,11 +27309,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-098",
+    "id": "cca-f-guide-098",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27341,11 +27341,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-099",
+    "id": "cca-f-guide-099",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27373,11 +27373,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-100",
+    "id": "cca-f-guide-100",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27405,11 +27405,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-101",
+    "id": "cca-f-guide-101",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27437,11 +27437,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-102",
+    "id": "cca-f-guide-102",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27469,11 +27469,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-103",
+    "id": "cca-f-guide-103",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27501,11 +27501,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-104",
+    "id": "cca-f-guide-104",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27533,11 +27533,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-105",
+    "id": "cca-f-guide-105",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27565,11 +27565,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-106",
+    "id": "cca-f-guide-106",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27597,11 +27597,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-107",
+    "id": "cca-f-guide-107",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27629,11 +27629,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-108",
+    "id": "cca-f-guide-108",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27661,11 +27661,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-109",
+    "id": "cca-f-guide-109",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -27693,11 +27693,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-112",
+    "id": "cca-f-guide-112",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -27725,11 +27725,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-113",
+    "id": "cca-f-guide-113",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27757,11 +27757,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-114",
+    "id": "cca-f-guide-114",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27789,11 +27789,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-115",
+    "id": "cca-f-guide-115",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27821,11 +27821,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-116",
+    "id": "cca-f-guide-116",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27853,11 +27853,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-117",
+    "id": "cca-f-guide-117",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27885,11 +27885,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-118",
+    "id": "cca-f-guide-118",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27917,11 +27917,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-119",
+    "id": "cca-f-guide-119",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27949,11 +27949,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-120",
+    "id": "cca-f-guide-120",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -27981,11 +27981,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-121",
+    "id": "cca-f-guide-121",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28013,11 +28013,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-122",
+    "id": "cca-f-guide-122",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28045,11 +28045,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-123",
+    "id": "cca-f-guide-123",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28077,11 +28077,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-124",
+    "id": "cca-f-guide-124",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28109,11 +28109,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-125",
+    "id": "cca-f-guide-125",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28141,11 +28141,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-126",
+    "id": "cca-f-guide-126",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28173,11 +28173,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-127",
+    "id": "cca-f-guide-127",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -28205,11 +28205,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-128",
+    "id": "cca-f-guide-128",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28237,11 +28237,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-129",
+    "id": "cca-f-guide-129",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28269,11 +28269,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-130",
+    "id": "cca-f-guide-130",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28301,11 +28301,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-131",
+    "id": "cca-f-guide-131",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28333,11 +28333,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-132",
+    "id": "cca-f-guide-132",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28365,11 +28365,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-133",
+    "id": "cca-f-guide-133",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28397,11 +28397,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-134",
+    "id": "cca-f-guide-134",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28429,11 +28429,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-135",
+    "id": "cca-f-guide-135",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28461,11 +28461,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-136",
+    "id": "cca-f-guide-136",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28493,11 +28493,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-137",
+    "id": "cca-f-guide-137",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28525,11 +28525,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-138",
+    "id": "cca-f-guide-138",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28557,11 +28557,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-139",
+    "id": "cca-f-guide-139",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28589,11 +28589,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-140",
+    "id": "cca-f-guide-140",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28621,11 +28621,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-141",
+    "id": "cca-f-guide-141",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28653,11 +28653,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-142",
+    "id": "cca-f-guide-142",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28685,11 +28685,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-143",
+    "id": "cca-f-guide-143",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28717,11 +28717,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-144",
+    "id": "cca-f-guide-144",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28749,11 +28749,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-145",
+    "id": "cca-f-guide-145",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28781,11 +28781,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-146",
+    "id": "cca-f-guide-146",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28813,11 +28813,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-147",
+    "id": "cca-f-guide-147",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28845,11 +28845,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-148",
+    "id": "cca-f-guide-148",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -28877,11 +28877,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-149",
+    "id": "cca-f-guide-149",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28909,11 +28909,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-150",
+    "id": "cca-f-guide-150",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28941,11 +28941,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-151",
+    "id": "cca-f-guide-151",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -28973,11 +28973,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-152",
+    "id": "cca-f-guide-152",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29005,11 +29005,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-153",
+    "id": "cca-f-guide-153",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29037,11 +29037,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-154",
+    "id": "cca-f-guide-154",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29069,11 +29069,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-155",
+    "id": "cca-f-guide-155",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29101,11 +29101,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-156",
+    "id": "cca-f-guide-156",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29133,11 +29133,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-157",
+    "id": "cca-f-guide-157",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29165,11 +29165,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-158",
+    "id": "cca-f-guide-158",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29197,11 +29197,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-159",
+    "id": "cca-f-guide-159",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29229,11 +29229,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-160",
+    "id": "cca-f-guide-160",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29261,11 +29261,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-161",
+    "id": "cca-f-guide-161",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29293,11 +29293,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-162",
+    "id": "cca-f-guide-162",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -29325,11 +29325,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-165",
+    "id": "cca-f-guide-165",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29357,11 +29357,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-166",
+    "id": "cca-f-guide-166",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29389,11 +29389,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-167",
+    "id": "cca-f-guide-167",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29421,11 +29421,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-168",
+    "id": "cca-f-guide-168",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29453,11 +29453,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-169",
+    "id": "cca-f-guide-169",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29485,11 +29485,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-170",
+    "id": "cca-f-guide-170",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29517,11 +29517,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-171",
+    "id": "cca-f-guide-171",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29549,11 +29549,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-172",
+    "id": "cca-f-guide-172",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29581,11 +29581,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-173",
+    "id": "cca-f-guide-173",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29613,11 +29613,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-174",
+    "id": "cca-f-guide-174",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29645,11 +29645,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-175",
+    "id": "cca-f-guide-175",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29677,11 +29677,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-176",
+    "id": "cca-f-guide-176",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29709,11 +29709,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-177",
+    "id": "cca-f-guide-177",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29741,11 +29741,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-178",
+    "id": "cca-f-guide-178",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29773,11 +29773,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-179",
+    "id": "cca-f-guide-179",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29805,11 +29805,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-180",
+    "id": "cca-f-guide-180",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29837,11 +29837,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-181",
+    "id": "cca-f-guide-181",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29869,11 +29869,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-182",
+    "id": "cca-f-guide-182",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29901,11 +29901,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-183",
+    "id": "cca-f-guide-183",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29933,11 +29933,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-184",
+    "id": "cca-f-guide-184",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29965,11 +29965,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-185",
+    "id": "cca-f-guide-185",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -29997,11 +29997,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-186",
+    "id": "cca-f-guide-186",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30029,11 +30029,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-187",
+    "id": "cca-f-guide-187",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "intermediate",
@@ -30061,11 +30061,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-188",
+    "id": "cca-f-guide-188",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30093,11 +30093,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-189",
+    "id": "cca-f-guide-189",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30125,11 +30125,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-190",
+    "id": "cca-f-guide-190",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30157,11 +30157,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-191",
+    "id": "cca-f-guide-191",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30189,11 +30189,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-192",
+    "id": "cca-f-guide-192",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30221,11 +30221,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-193",
+    "id": "cca-f-guide-193",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30253,11 +30253,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-194",
+    "id": "cca-f-guide-194",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30285,11 +30285,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-195",
+    "id": "cca-f-guide-195",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30317,11 +30317,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-196",
+    "id": "cca-f-guide-196",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30349,11 +30349,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-197",
+    "id": "cca-f-guide-197",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30381,11 +30381,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-198",
+    "id": "cca-f-guide-198",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30413,11 +30413,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-199",
+    "id": "cca-f-guide-199",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30445,11 +30445,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-200",
+    "id": "cca-f-guide-200",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30477,11 +30477,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-201",
+    "id": "cca-f-guide-201",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30509,11 +30509,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-202",
+    "id": "cca-f-guide-202",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30541,11 +30541,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-203",
+    "id": "cca-f-guide-203",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30573,11 +30573,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-204",
+    "id": "cca-f-guide-204",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30605,11 +30605,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-205",
+    "id": "cca-f-guide-205",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30637,11 +30637,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-206",
+    "id": "cca-f-guide-206",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30669,11 +30669,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-207",
+    "id": "cca-f-guide-207",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30701,11 +30701,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-210",
+    "id": "cca-f-guide-210",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30733,11 +30733,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-211",
+    "id": "cca-f-guide-211",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30765,11 +30765,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-212",
+    "id": "cca-f-guide-212",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30797,11 +30797,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-213",
+    "id": "cca-f-guide-213",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30829,11 +30829,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-214",
+    "id": "cca-f-guide-214",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30861,11 +30861,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-215",
+    "id": "cca-f-guide-215",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30893,11 +30893,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-216",
+    "id": "cca-f-guide-216",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30925,11 +30925,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-217",
+    "id": "cca-f-guide-217",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30957,11 +30957,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-218",
+    "id": "cca-f-guide-218",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -30989,11 +30989,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-219",
+    "id": "cca-f-guide-219",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31021,11 +31021,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-220",
+    "id": "cca-f-guide-220",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31053,11 +31053,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-221",
+    "id": "cca-f-guide-221",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31085,11 +31085,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-222",
+    "id": "cca-f-guide-222",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31117,11 +31117,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-223",
+    "id": "cca-f-guide-223",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31149,11 +31149,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-224",
+    "id": "cca-f-guide-224",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31181,11 +31181,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-225",
+    "id": "cca-f-guide-225",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31213,11 +31213,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-226",
+    "id": "cca-f-guide-226",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31245,11 +31245,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-227",
+    "id": "cca-f-guide-227",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31277,11 +31277,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-228",
+    "id": "cca-f-guide-228",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31309,11 +31309,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-229",
+    "id": "cca-f-guide-229",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "intermediate",
@@ -31341,11 +31341,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-230",
+    "id": "cca-f-guide-230",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31373,11 +31373,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-231",
+    "id": "cca-f-guide-231",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31405,11 +31405,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-232",
+    "id": "cca-f-guide-232",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31437,11 +31437,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-233",
+    "id": "cca-f-guide-233",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31469,11 +31469,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-234",
+    "id": "cca-f-guide-234",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -31501,11 +31501,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-235",
+    "id": "cca-f-guide-235",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31533,11 +31533,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-236",
+    "id": "cca-f-guide-236",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31565,11 +31565,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-237",
+    "id": "cca-f-guide-237",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31597,11 +31597,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-238",
+    "id": "cca-f-guide-238",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31629,11 +31629,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-239",
+    "id": "cca-f-guide-239",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31661,11 +31661,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-240",
+    "id": "cca-f-guide-240",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31693,11 +31693,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-241",
+    "id": "cca-f-guide-241",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31725,11 +31725,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-242",
+    "id": "cca-f-guide-242",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31757,11 +31757,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-243",
+    "id": "cca-f-guide-243",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31789,11 +31789,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-244",
+    "id": "cca-f-guide-244",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31821,11 +31821,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-245",
+    "id": "cca-f-guide-245",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31853,11 +31853,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-246",
+    "id": "cca-f-guide-246",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31885,11 +31885,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-247",
+    "id": "cca-f-guide-247",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
@@ -31917,11 +31917,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-248",
+    "id": "cca-f-guide-248",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "intermediate",
@@ -31949,11 +31949,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-249",
+    "id": "cca-f-guide-249",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -31981,11 +31981,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-250",
+    "id": "cca-f-guide-250",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -32013,11 +32013,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-251",
+    "id": "cca-f-guide-251",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "intermediate",
@@ -32045,11 +32045,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-252",
+    "id": "cca-f-guide-252",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -32077,11 +32077,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-253",
+    "id": "cca-f-guide-253",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -32109,11 +32109,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-254",
+    "id": "cca-f-guide-254",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -32141,11 +32141,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-walter-255",
+    "id": "cca-f-guide-255",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "walter-257",
+    "sourceId": "claude-architect-guide-257",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
@@ -32173,11 +32173,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-001",
+    "id": "cca-f-practice60-001",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32205,11 +32205,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-002",
+    "id": "cca-f-practice60-002",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32237,11 +32237,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-003",
+    "id": "cca-f-practice60-003",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32269,11 +32269,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-004",
+    "id": "cca-f-practice60-004",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32301,11 +32301,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-005",
+    "id": "cca-f-practice60-005",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32333,11 +32333,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-006",
+    "id": "cca-f-practice60-006",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -32365,11 +32365,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-007",
+    "id": "cca-f-practice60-007",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -32397,11 +32397,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-008",
+    "id": "cca-f-practice60-008",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -32429,11 +32429,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-009",
+    "id": "cca-f-practice60-009",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -32461,11 +32461,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-010",
+    "id": "cca-f-practice60-010",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -32493,11 +32493,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-011",
+    "id": "cca-f-practice60-011",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -32525,11 +32525,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-012",
+    "id": "cca-f-practice60-012",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -32557,11 +32557,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-013",
+    "id": "cca-f-practice60-013",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -32589,11 +32589,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-014",
+    "id": "cca-f-practice60-014",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -32621,11 +32621,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-015",
+    "id": "cca-f-practice60-015",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -32653,11 +32653,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-016",
+    "id": "cca-f-practice60-016",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -32685,11 +32685,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-017",
+    "id": "cca-f-practice60-017",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -32717,11 +32717,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-018",
+    "id": "cca-f-practice60-018",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -32749,11 +32749,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-019",
+    "id": "cca-f-practice60-019",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -32781,11 +32781,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-020",
+    "id": "cca-f-practice60-020",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -32813,11 +32813,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-021",
+    "id": "cca-f-practice60-021",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -32845,11 +32845,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-022",
+    "id": "cca-f-practice60-022",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32877,11 +32877,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-023",
+    "id": "cca-f-practice60-023",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32909,11 +32909,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-024",
+    "id": "cca-f-practice60-024",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32941,11 +32941,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-025",
+    "id": "cca-f-practice60-025",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -32973,11 +32973,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-026",
+    "id": "cca-f-practice60-026",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33005,11 +33005,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-027",
+    "id": "cca-f-practice60-027",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33037,11 +33037,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-028",
+    "id": "cca-f-practice60-028",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33069,11 +33069,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-029",
+    "id": "cca-f-practice60-029",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33101,11 +33101,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-030",
+    "id": "cca-f-practice60-030",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33133,11 +33133,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-031",
+    "id": "cca-f-practice60-031",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33165,11 +33165,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-032",
+    "id": "cca-f-practice60-032",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33197,11 +33197,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-033",
+    "id": "cca-f-practice60-033",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33229,11 +33229,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-034",
+    "id": "cca-f-practice60-034",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -33261,11 +33261,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-035",
+    "id": "cca-f-practice60-035",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -33293,11 +33293,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-036",
+    "id": "cca-f-practice60-036",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D5 Context Management & Reliability",
     "difficulty": "hard",
@@ -33325,11 +33325,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-037",
+    "id": "cca-f-practice60-037",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33357,11 +33357,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-038",
+    "id": "cca-f-practice60-038",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33389,11 +33389,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-039",
+    "id": "cca-f-practice60-039",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "hard",
@@ -33421,11 +33421,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-040",
+    "id": "cca-f-practice60-040",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33453,11 +33453,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-041",
+    "id": "cca-f-practice60-041",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33485,11 +33485,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-042",
+    "id": "cca-f-practice60-042",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33517,11 +33517,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-043",
+    "id": "cca-f-practice60-043",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "hard",
@@ -33549,11 +33549,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-044",
+    "id": "cca-f-practice60-044",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -33581,11 +33581,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-045",
+    "id": "cca-f-practice60-045",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -33613,11 +33613,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-046",
+    "id": "cca-f-practice60-046",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -33645,11 +33645,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-047",
+    "id": "cca-f-practice60-047",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -33677,11 +33677,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-048",
+    "id": "cca-f-practice60-048",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -33709,11 +33709,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-049",
+    "id": "cca-f-practice60-049",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D3 Claude Code Configuration & Workflows",
     "difficulty": "hard",
@@ -33741,11 +33741,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-050",
+    "id": "cca-f-practice60-050",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33773,11 +33773,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-051",
+    "id": "cca-f-practice60-051",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33805,11 +33805,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-052",
+    "id": "cca-f-practice60-052",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33837,11 +33837,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-053",
+    "id": "cca-f-practice60-053",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33869,11 +33869,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-054",
+    "id": "cca-f-practice60-054",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33901,11 +33901,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-055",
+    "id": "cca-f-practice60-055",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33933,11 +33933,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-056",
+    "id": "cca-f-practice60-056",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33965,11 +33965,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-057",
+    "id": "cca-f-practice60-057",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -33997,11 +33997,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-058",
+    "id": "cca-f-practice60-058",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -34029,11 +34029,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-059",
+    "id": "cca-f-practice60-059",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",
@@ -34061,11 +34061,11 @@
     "mockEligible": true
   },
   {
-    "id": "cca-f-szymon-060",
+    "id": "cca-f-practice60-060",
     "exam": "cca-f",
     "status": "ready",
     "reviewStatus": "approved",
-    "sourceId": "szymon-paluch",
+    "sourceId": "practice-exam-60",
     "contentVersion": 1,
     "domain": "D4 Prompt Engineering & Structured Output",
     "difficulty": "hard",

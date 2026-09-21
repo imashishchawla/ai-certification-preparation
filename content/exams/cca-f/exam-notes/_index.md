@@ -52,4 +52,4 @@ Welcome to the **Exam Notes & Domain Cheat Sheets** section. These notes summari
 ## 2. Master Cheat Sheets & Exam Summaries
 
 * 📄 <a href="/exams/cca-f/study-guides/cca-prep-cheatsheet/"><strong>Comprehensive CCAF Master Cheat Sheet</strong></a> — Complete cross-domain breakdown with code samples.
-* 📄 <a href="/exams/cca-f/study-guides/amey-thakur-cheat-sheet/"><strong>Amey Thakur Quick Exam Reference Cheat Sheet</strong></a> — Key concepts and high-yield notes.
+* 📄 <a href="/exams/cca-f/study-guides/claude-architecture-quick-cheat-sheet/"><strong>Architecture & Foundations Quick Reference Cheat Sheet</strong></a> — Key concepts and high-yield notes.

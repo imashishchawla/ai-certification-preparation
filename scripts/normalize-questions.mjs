@@ -100,8 +100,8 @@ if (fs.existsSync(ccaPrepPath)) {
   });
 }
 
-// 2. Parse Amey Thakur 35 Practice Questions
-const amey35Path = path.join(rootDir, '.data/exams/cca-f/raw/practice-questions/amey-thakur-practice-questions.md');
+// 2. Parse Core 35 Practice Questions
+const amey35Path = path.join(rootDir, '.data/exams/cca-f/raw/practice-questions/architect-practice-questions-bank.md');
 if (fs.existsSync(amey35Path)) {
   const content = fs.readFileSync(amey35Path, 'utf8');
   const blocks = content.split(/^\*\*\d+\.\s+/m).slice(1);
@@ -142,11 +142,11 @@ if (fs.existsSync(amey35Path)) {
 
     if (options.length === 4 && correct) {
       questions.push({
-        id: `cca-f-amey-${String(index + 1).padStart(3, '0')}`,
+        id: `cca-f-foundation-${String(index + 1).padStart(3, '0')}`,
         exam: 'cca-f',
         status: 'ready',
         reviewStatus: 'approved',
-        sourceId: 'amey-thakur-35',
+        sourceId: 'foundations-prep-35',
         contentVersion: 1,
         domain,
         difficulty: 'intermediate',

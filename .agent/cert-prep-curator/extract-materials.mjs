@@ -49,11 +49,11 @@ function parseWalterBank(filePath, examId = 'cca-f') {
     if (options.length === 4 && correct && prompt) {
       const relevance = checkExamRelevance(prompt + ' ' + explanation);
       questions.push({
-        id: `${examId}-walter-${String(idx + 1).padStart(3, '0')}`,
+        id: `${examId}-guide-${String(idx + 1).padStart(3, '0')}`,
         exam: examId,
         status: 'ready',
         reviewStatus: 'approved',
-        sourceId: 'walter-257',
+        sourceId: 'claude-architect-guide-257',
         contentVersion: 1,
         domain: relevance.domain || 'D1 Agentic Architecture & Orchestration',
         difficulty: 'intermediate',
@@ -177,11 +177,11 @@ function parseLarionovBank(filePath, examId = 'cca-f') {
     if (options.length === 4 && correct && prompt) {
       const relevance = checkExamRelevance(prompt + ' ' + explanation);
       questions.push({
-        id: `${examId}-larionov-${String(idx + 1).padStart(3, '0')}`,
+        id: `${examId}-scenario-${String(idx + 1).padStart(3, '0')}`,
         exam: examId,
         status: 'ready',
         reviewStatus: 'approved',
-        sourceId: 'larionov-88',
+        sourceId: 'situational-scenarios-88',
         contentVersion: 1,
         domain: relevance.domain || 'D1 Agentic Architecture & Orchestration',
         difficulty: 'intermediate',
@@ -198,9 +198,9 @@ function parseLarionovBank(filePath, examId = 'cca-f') {
 }
 
 /**
- * Parses Amey Thakur JSON question bank.
+ * Parses Associate Foundations JSON question bank.
  */
-function parseAmeyJsonBank(filePath, examId = 'cca-f') {
+function parseAssociateJsonBank(filePath, examId = 'cca-f') {
   if (!fs.existsSync(filePath)) return [];
   const raw = fs.readFileSync(filePath, 'utf8');
   const data = JSON.parse(raw);
@@ -222,11 +222,11 @@ function parseAmeyJsonBank(filePath, examId = 'cca-f') {
 
     const relevance = checkExamRelevance(q.question + ' ' + (q.rationale || ''));
     questions.push({
-      id: `${examId}-ameyjson-${String(idx + 1).padStart(3, '0')}`,
+      id: `${examId}-associate-${String(idx + 1).padStart(3, '0')}`,
       exam: examId,
       status: 'ready',
       reviewStatus: 'approved',
-      sourceId: 'amey-thakur-json',
+      sourceId: 'associate-prep-50',
       contentVersion: 1,
       domain: relevance.domain || 'D1 Agentic Architecture & Orchestration',
       difficulty: 'intermediate',
@@ -350,11 +350,11 @@ function parseSzymonPaluch(filePath, examId = 'cca-f') {
     const itemNumber = String(idx + 1).padStart(3, '0');
 
     questions.push({
-      id: `${examId}-szymon-${itemNumber}`,
+      id: `${examId}-practice60-${itemNumber}`,
       exam: examId,
       status: 'ready',
       reviewStatus: 'approved',
-      sourceId: 'szymon-paluch',
+      sourceId: 'practice-exam-60',
       contentVersion: 1,
       domain: domainMap[q.domain] || 'D1 Agentic Architecture & Orchestration',
       difficulty: 'hard',
@@ -394,11 +394,11 @@ export function extractAndMergeAllMaterials(rootDir, examId = 'cca-f') {
   const certyiqActivePath = fs.existsSync(certyiqAllPath) ? certyiqAllPath : certyiqCorePath;
 
   const candidateBanks = [
-    { name: 'Walter 257 Bank', questions: parseWalterBank(path.join(rawPracticeDir, 'claudecertificationguide-257-question-bank.md'), examId) },
-    { name: 'CCA 400 Bank', questions: parseCCABank(path.join(rawPracticeDir, 'claudecertifiedarchitects-400-question-bank.md'), examId) },
-    { name: 'Amey Thakur JSON', questions: parseAmeyJsonBank(path.join(rawPracticeDir, 'amey-thakur-question-bank.json'), examId) },
-    { name: 'Paul Larionov Bank', questions: parseLarionovBank(path.join(rawPracticeDir, 'paullarionov-guide-questions.md'), examId) },
-    { name: 'Szymon Paluch 60 Exam', questions: parseSzymonPaluch(path.join(rawMockDir, 'szymon-paluch/szymonpaluch_com_claude-certified-architect-practice-exam.txt'), examId) },
+    { name: 'Comprehensive Architecture Guide 257 Bank', questions: parseWalterBank(path.join(rawPracticeDir, 'claude-architect-257-question-bank.md'), examId) },
+    { name: 'CCA 400 Question Bank', questions: parseCCABank(path.join(rawPracticeDir, 'claudecertifiedarchitects-400-question-bank.md'), examId) },
+    { name: 'Associate Prep JSON Bank', questions: parseAssociateJsonBank(path.join(rawPracticeDir, 'architect-associate-prep-questions.json'), examId) },
+    { name: 'Situational Scenario 88 Bank', questions: parseLarionovBank(path.join(rawPracticeDir, 'situational-scenarios-88-bank.md'), examId) },
+    { name: 'Architecture Practice 60 Exam', questions: parseSzymonPaluch(path.join(rawMockDir, 'architect-practice-exam-60/claude-certified-architect-practice-exam.html'), examId) },
     { name: 'CertyIQ API Bank', questions: parseCertyIQ(certyiqActivePath, examId) }
   ];
 

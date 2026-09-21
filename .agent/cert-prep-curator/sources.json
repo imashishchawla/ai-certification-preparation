@@ -92,8 +92,8 @@
       "domains": ["D2"]
     },
     {
-      "id": "walter-claudecertificationguide",
-      "name": "Walter (claudecertificationguide.com)",
+      "id": "claude-certification-guide",
+      "name": "Claude Certification Guide Platform",
       "category": "mock-exams-questions",
       "trustTier": "tier-2-verified",
       "baseUrl": "https://claudecertificationguide.com",
@@ -124,8 +124,8 @@
       "domains": ["D1", "D2", "D3", "D4", "D5"]
     },
     {
-      "id": "szymon-paluch",
-      "name": "Szymon Paluch (szymonpaluch.com)",
+      "id": "claude-architect-practice-exam",
+      "name": "Architecture Practice Exam Bank (60 Q)",
       "category": "mock-exams-questions",
       "trustTier": "tier-2-verified",
       "baseUrl": "https://szymonpaluch.com",
@@ -153,8 +153,8 @@
       "domains": ["D1", "D2", "D3", "D4", "D5"]
     },
     {
-      "id": "amey-thakur-bank",
-      "name": "Amey Thakur Question Bank & Mocks",
+      "id": "architect-associate-prep-bank",
+      "name": "Architect & Associate Exam Prep Bank",
       "category": "mock-exams-questions",
       "trustTier": "tier-2-verified",
       "baseUrl": "https://raw.githubusercontent.com",
@@ -184,8 +184,8 @@
       "domains": ["D1", "D2", "D3", "D4", "D5"]
     },
     {
-      "id": "paul-larionov-guide",
-      "name": "Paul Larionov Architect Guide",
+      "id": "situational-scenario-guide",
+      "name": "Architecture Scenario & Theory Guide",
       "category": "study-guides-deep-dives",
       "trustTier": "tier-2-verified",
       "baseUrl": "https://raw.githubusercontent.com",
@@ -199,8 +199,8 @@
       "domains": ["D1", "D2", "D3", "D4", "D5"]
     },
     {
-      "id": "dnacenta-community-guide",
-      "name": "dnacenta Community Guide",
+      "id": "community-architecture-guide",
+      "name": "Community Architecture Foundations Guide",
       "category": "study-guides-deep-dives",
       "trustTier": "tier-2-verified",
       "baseUrl": "https://raw.githubusercontent.com",

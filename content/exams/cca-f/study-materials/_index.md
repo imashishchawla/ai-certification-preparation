@@ -18,17 +18,17 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
     </div>
     <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Anthropic Official CCAF v1.0 Exam Guide</h3>
     <p>Anthropic's official 40-page v1.0 Foundations certification exam guide covering exam format, 5 domain task statements, weighted scoring, and official sample questions.</p>
-    <a href="/assets/cca-f/pdfs/official-exam-guide-nehasharma.pdf" target="_blank" class="reveal-btn" style="display: inline-block; text-decoration: none;">View / Download PDF (nehasharma mirror) →</a>
+    <a href="/assets/cca-f/pdfs/official-exam-guide-foundations-v1.pdf" target="_blank" class="reveal-btn" style="display: inline-block; text-decoration: none;">View / Download Official Guide (Mirror) →</a>
   </div>
 
   <div class="question-card">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-      <span class="tag">WAYBACK ARCHIVE</span>
+      <span class="tag">REFERENCE ARCHIVE</span>
       <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · 583 KB · 40 Pages</span>
     </div>
-    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Official Exam Guide (Wayback Machine Recovery)</h3>
-    <p>Identical official 40-page v1.0 exam guide snapshot recovered from the Wayback Machine archive.</p>
-    <a href="/assets/cca-f/pdfs/official-exam-guide-39page-webb.archive.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Wayback mirror) →</a>
+    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Official Exam Guide (Foundations Reference)</h3>
+    <p>Official 40-page v1.0 exam guide reference snapshot recovered from verified archives.</p>
+    <a href="/assets/cca-f/pdfs/official-exam-guide-foundations-reference.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Reference Archive) →</a>
   </div>
 
   <div class="question-card">
@@ -46,9 +46,9 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
       <span class="tag">COMMUNITY GUIDE</span>
       <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · 83 Pages</span>
     </div>
-    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">dnacenta Community CCAF Study Guide</h3>
+    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Community Architecture Foundations Study Guide</h3>
     <p>Comprehensive 83-page community study guide covering all 5 exam domains with code snippets and architecture diagrams.</p>
-    <a href="/assets/cca-f/pdfs/dnacenta-guide_en.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (dnacenta) →</a>
+    <a href="/assets/cca-f/pdfs/claude-architect-comprehensive-guide.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download Comprehensive Guide (PDF) →</a>
   </div>
 
   <div class="question-card">
@@ -64,11 +64,11 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
   <div class="question-card">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
       <span class="tag">THEORY PDF</span>
-      <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · Paullarionov</span>
+      <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · 3,400 Lines</span>
     </div>
-    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Paullarionov Theory Study Guide PDF</h3>
-    <p>PDF export of the 3,400-line Paullarionov theory study guide covering API, tool use, Agent SDK, hooks, and MCP.</p>
-    <a href="/assets/cca-f/pdfs/guide_en-github.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Paullarionov) →</a>
+    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Architecture Scenario & Theory Study Guide PDF</h3>
+    <p>PDF export of the comprehensive theory study guide covering API, tool use, Agent SDK, hooks, and MCP.</p>
+    <a href="/assets/cca-f/pdfs/guide_en-github.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download Theory Study Guide (PDF) →</a>
   </div>
 
   <div class="question-card">

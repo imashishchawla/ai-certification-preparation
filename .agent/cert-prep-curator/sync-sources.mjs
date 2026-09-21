@@ -101,6 +101,8 @@ export async function syncSources(rootDir, examId = 'cca-f', options = { dryRun:
       }
       continue;
     }
+
+    for (const endpoint of (source.endpoints || [])) {
       if (!isUrlTrusted(endpoint, sources)) {
         console.warn(`[Source Sync] UNTRUSTED SOURCE BLOCKED: ${endpoint}`);
         errors++;
