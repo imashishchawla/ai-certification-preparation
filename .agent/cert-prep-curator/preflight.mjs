@@ -1,14 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 
-export function runPreflight(rootDir) {
+export function runPreflight(rootDir, examId = 'cca-f') {
   console.log('[Cert Prep Curator] Running preflight checks...');
   const errors = [];
 
+  // Required repository directories (tracked in git)
   const reqDirs = [
-    'content/exams/cca-f',
-    'data/questions/cca-f',
-    '.data/exams/cca-f',
+    `content/exams/${examId}`,
+    `data/questions/${examId}`,
     'themes/retro-prep',
     'scripts'
   ];
@@ -20,11 +20,22 @@ export function runPreflight(rootDir) {
     }
   });
 
-  const reqFiles = ['hugo.toml', 'data/exams.toml', 'data/questions/cca-f/questions.json'];
+  const reqFiles = ['hugo.toml', 'data/exams.toml', `data/questions/${examId}/questions.json`];
   reqFiles.forEach(f => {
     const p = path.join(rootDir, f);
     if (!fs.existsSync(p)) {
       errors.push(`Missing required file: ${f}`);
+    }
+  });
+
+  // Ensure local runtime working directories exist (gitignored)
+  const runtimeDirs = [
+    `.data/exams/${examId}`
+  ];
+  runtimeDirs.forEach(d => {
+    const p = path.join(rootDir, d);
+    if (!fs.existsSync(p)) {
+      fs.mkdirSync(p, { recursive: true });
     }
   });
 
@@ -40,6 +51,7 @@ export function runPreflight(rootDir) {
 
 if (process.argv[1].endsWith('preflight.mjs')) {
   const rootDir = process.cwd();
-  const ok = runPreflight(rootDir);
+  const examId = process.argv[2] || 'cca-f';
+  const ok = runPreflight(rootDir, examId);
   process.exit(ok ? 0 : 1);
 }

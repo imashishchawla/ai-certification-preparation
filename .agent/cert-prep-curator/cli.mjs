@@ -18,7 +18,8 @@ console.log(`Command: ${command}`);
 async function main() {
   switch (command) {
     case 'preflight': {
-      const ok = runPreflight(rootDir);
+      const exam = args[1] || 'cca-f';
+      const ok = runPreflight(rootDir, exam);
       process.exit(ok ? 0 : 1);
       break;
     }
@@ -65,7 +66,7 @@ async function main() {
       console.log(`[Cert Prep Curator] Starting full autonomous curation cycle for ${exam}...`);
       
       console.log('\n--- Step 1: Preflight Checks ---');
-      const preflightOk = runPreflight(rootDir);
+      const preflightOk = runPreflight(rootDir, exam);
       if (!preflightOk) process.exit(1);
 
       console.log('\n--- Step 2: Database Deduplication Sweep ---');
