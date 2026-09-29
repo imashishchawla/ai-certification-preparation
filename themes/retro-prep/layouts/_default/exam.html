@@ -1,0 +1,73 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+{{/* ── Look up this exam's metadata from data/exams.toml ── */}}
+{{ $examId := .File.Dir | path.Base }}
+{{ $exam := dict }}
+{{ range site.Data.exams.exams }}
+  {{ if eq .id $examId }}{{ $exam = . }}{{ end }}
+{{ end }}
+
+{{/* ── Page header ── */}}
+<div style="border-bottom: 2px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem;">
+  {{ if $exam.code }}
+  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+    {{ if eq $exam.status "active" }}
+      <span class="tag" style="background: var(--accent); color: #fff; border: none;">✓ ACTIVE</span>
+    {{ else if eq $exam.status "onboarding" }}
+      <span class="tag" style="background: #b45309; color: #fff; border: none;">⏳ ONBOARDING</span>
+    {{ else }}
+      <span class="tag" style="background: var(--muted); color: #fff; border: none;">○ PLANNED</span>
+    {{ end }}
+    <span class="muted" style="font-size: 0.85rem; font-weight: bold; font-family: var(--font-heading);">{{ $exam.code }}</span>
+  </div>
+  {{ end }}
+  <h1 style="margin: 0; font-size: 1.6rem; border: none; padding: 0;">
+    {{ .Title }}
+  </h1>
+  {{ if $exam.description }}
+  <p class="muted" style="margin: 0.5rem 0 0; font-size: 0.95rem;">{{ $exam.description }}</p>
+  {{ end }}
+</div>
+
+{{/* ── Exam stats bar ── */}}
+{{ if $exam.code }}
+<div style="display: flex; gap: 1.5rem; flex-wrap: wrap; padding: 0.75rem 0 1.5rem; font-family: var(--font-heading); font-size: 0.82rem; color: var(--muted); border-bottom: 1px dashed var(--border); margin-bottom: 2rem;">
+  {{ if $exam.questions }}<span><strong style="color: var(--fg);">{{ $exam.questions }}</strong> questions</span>{{ end }}
+  {{ if $exam.duration_minutes }}<span><strong style="color: var(--fg);">{{ $exam.duration_minutes }}</strong> min</span>{{ end }}
+  {{ if $exam.practice_pass_percent }}<span>Pass <strong style="color: var(--fg);">{{ $exam.practice_pass_percent }}%</strong></span>{{ end }}
+  {{ if $exam.price_usd }}<span><strong style="color: var(--fg);">${{ $exam.price_usd }}</strong></span>{{ end }}
+  {{ if $exam.domain_weights }}
+  <span><strong style="color: var(--fg);">{{ len $exam.domain_weights }}</strong> exam domains</span>
+  {{ end }}
+</div>
+{{ end }}
+
+{{/* ── Page content (from _index.md body) ── */}}
+{{ if .Content }}
+<div class="content">
+  {{ .Content }}
+</div>
+{{ end }}
+
+{{/* ── Sub-page navigation cards ── */}}
+{{ $pages := .Pages | first 10 }}
+{{ if $pages }}
+<h2 style="margin-top: 2rem; font-size: 1rem; font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); border-bottom: 1px dashed var(--border); padding-bottom: 0.5rem;">
+  In This Section
+</h2>
+<div class="card-grid card-grid-3" style="margin-top: 1rem;">
+  {{ range $pages }}
+  <a href="{{ .Permalink }}" style="text-decoration: none;">
+    <div class="question-card" style="margin-bottom: 0;">
+      <h3 style="margin: 0 0 0.4rem; font-size: 0.95rem; color: var(--accent);">{{ .Title }}</h3>
+      {{ if .Params.description }}
+      <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">{{ .Params.description }}</p>
+      {{ end }}
+    </div>
+  </a>
+  {{ end }}
+</div>
+{{ end }}
+
+{{ end }}

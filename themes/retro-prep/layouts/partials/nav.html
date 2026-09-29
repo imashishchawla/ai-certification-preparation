@@ -5,35 +5,40 @@
     </a>
     
     <nav class="nav-links">
+      {{/* ── Exams dropdown: active + onboarding only (planned have no content pages) ── */}}
       <details class="dropdown">
         <summary>Exams ▾</summary>
         <div class="dropdown-menu">
           <a href="{{ "exams/" | relLangURL }}" style="font-weight: bold; border-bottom: 1px dashed var(--border);">All Certifications</a>
           {{ range site.Data.exams.exams }}
-            <a href="{{ .path | relLangURL }}">{{ .name }} ({{ .code }})</a>
+            {{ if ne .status "planned" }}
+              <a href="{{ .path | relLangURL }}">{{ .name }} ({{ .code }})</a>
+            {{ end }}
           {{ end }}
         </div>
       </details>
 
-      <details class="dropdown">
-        <summary>CCAF Prep ▾</summary>
-        <div class="dropdown-menu">
-          <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase;">2. Practice Library</div>
-          <a href="{{ "exams/cca-f/sample-questions/" | relLangURL }}">Sample Questions (200+)</a>
-          <a href="{{ "exams/cca-f/mock-test/" | relLangURL }}">Timed Mock Test (60Q/120M)</a>
-          
-          <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase; border-top: 1px dashed var(--border); margin-top: 0.25rem; padding-top: 0.5rem;">1. Study Material</div>
-          <a href="{{ "exams/cca-f/study-guides/" | relLangURL }}">Study Guides</a>
-          <a href="{{ "exams/cca-f/exam-notes/" | relLangURL }}">Exam Notes</a>
-          <a href="{{ "exams/cca-f/articles/" | relLangURL }}">Technical Articles</a>
-          <a href="{{ "exams/cca-f/study-materials/" | relLangURL }}">Official Documents & PDFs</a>
-          <a href="{{ "exams/cca-f/resources/" | relLangURL }}">Resources & Anti-Patterns</a>
-        </div>
-      </details>
-
-      <a href="{{ "exams/cca-f/sample-questions/" | relLangURL }}">Sample Questions</a>
-      <a href="{{ "exams/cca-f/mock-test/" | relLangURL }}">Mock Test</a>
-      <a href="{{ "exams/cca-f/study-guides/" | relLangURL }}">Study Guides</a>
+      {{/* ── Per-exam sub-nav dropdowns: one per active exam ── */}}
+      {{ range site.Data.exams.exams }}
+        {{ if eq .status "active" }}
+        {{ $examPath := .path }}
+        {{ $examCode := .code }}
+        <details class="dropdown">
+          <summary>{{ $examCode }} Prep ▾</summary>
+          <div class="dropdown-menu">
+            <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase;">Practice Library</div>
+            <a href="{{ (printf "%ssample-questions/" $examPath) | relLangURL }}">Sample Questions (200+)</a>
+            <a href="{{ (printf "%smock-test/" $examPath) | relLangURL }}">Timed Mock Test</a>
+            <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase; border-top: 1px dashed var(--border); margin-top: 0.25rem; padding-top: 0.5rem;">Study Material</div>
+            <a href="{{ (printf "%sstudy-guides/" $examPath) | relLangURL }}">Study Guides</a>
+            <a href="{{ (printf "%sexam-notes/" $examPath) | relLangURL }}">Exam Notes</a>
+            <a href="{{ (printf "%sarticles/" $examPath) | relLangURL }}">Technical Articles</a>
+            <a href="{{ (printf "%sstudy-materials/" $examPath) | relLangURL }}">Official Documents &amp; PDFs</a>
+            <a href="{{ (printf "%sresources/" $examPath) | relLangURL }}">Resources &amp; Anti-Patterns</a>
+          </div>
+        </details>
+        {{ end }}
+      {{ end }}
 
       <button id="themeToggle" class="theme-toggle" aria-label="Toggle light and dark theme">☀/☾</button>
     </nav>
