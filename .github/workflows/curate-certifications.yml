@@ -1,0 +1,121 @@
+name: Curate Certifications
+
+on:
+  repository_dispatch:
+    types: [certification-curation]   # dispatched by Cloudflare Worker (scheduled + manual)
+  workflow_dispatch:
+    inputs:
+      category:
+        description: 'Exam category to curate (all | category-a | category-b)'
+        required: false
+        default: 'all'
+
+permissions:
+  contents: write   # commit curated data back to main
+
+concurrency:
+  group: cert-curation
+  cancel-in-progress: false  # never cancel a running curation
+
+jobs:
+  curate:
+    runs-on: ubuntu-latest
+    env:
+      # CURATOR_WORKER_URL and CLOUDFLARE_ACCOUNT_ID are repo Variables (not secrets)
+      CURATOR_WORKER_URL: ${{ vars.CURATOR_WORKER_URL }}
+      # STATUS_HMAC_SECRET is a repo Secret
+      STATUS_HMAC_SECRET: ${{ secrets.STATUS_HMAC_SECRET }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Determine exam category
+        id: category
+        run: |
+          CATEGORY="${{ github.event.client_payload.category || github.event.inputs.category || 'all' }}"
+          echo "category=${CATEGORY}" >> $GITHUB_OUTPUT
+          echo "[curate] Running for category: ${CATEGORY}"
+
+      # ── CCA-F (category-a) ──────────────────────────────────────────────────
+      - name: Curate — cca-f
+        if: ${{ steps.category.outputs.category == 'all' || steps.category.outputs.category == 'category-a' }}
+        run: |
+          node .agent/cert-prep-curator/cli.mjs preflight cca-f
+          node .agent/cert-prep-curator/cli.mjs dedup-db cca-f
+          node .agent/cert-prep-curator/cli.mjs sync cca-f
+          node .agent/cert-prep-curator/cli.mjs extract-materials cca-f
+          node .agent/cert-prep-curator/cli.mjs validate cca-f
+
+      # ── Terraform Associate (category-b) ────────────────────────────────────
+      - name: Curate — terraform-associate
+        if: ${{ steps.category.outputs.category == 'all' || steps.category.outputs.category == 'category-b' }}
+        run: |
+          node .agent/cert-prep-curator/cli.mjs preflight terraform-associate
+          node .agent/cert-prep-curator/cli.mjs dedup-db terraform-associate
+          node .agent/cert-prep-curator/cli.mjs sync terraform-associate
+          node .agent/cert-prep-curator/cli.mjs extract-materials terraform-associate
+          node .agent/cert-prep-curator/cli.mjs validate terraform-associate
+
+      # ── Push results if anything changed ────────────────────────────────────
+      - name: Check for curated data changes
+        id: diff
+        run: |
+          if [ -n "$(git status --porcelain data/ content/)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit & push curated updates
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "cert-prep-curator[bot]"
+          git config user.email "curator-bot@users.noreply.github.com"
+          git add data/ content/
+          CATEGORY="${{ steps.category.outputs.category }}"
+          git commit -m "chore(curator): automated curation run — category=${CATEGORY} [skip ci]"
+          git push origin main
+
+      # ── Write R2 release-gate + audit records (via HMAC-signed Worker proxy) ─
+      - name: Push release-gate records to R2
+        if: ${{ env.CURATOR_WORKER_URL != '' && env.STATUS_HMAC_SECRET != '' }}
+        run: |
+          for EXAM_ID in cca-f terraform-associate; do
+            Q_FILE="data/questions/${EXAM_ID}/questions.json"
+            if [ ! -f "$Q_FILE" ]; then continue; fi
+            # Use --input-type=commonjs so require() works even when root package.json has "type":"module"
+            COUNT=$(node --input-type=commonjs -e "const q=require('fs').readFileSync('${Q_FILE}','utf8');const a=JSON.parse(q);console.log(a.filter(x=>x.status==='released').length)")
+            PASSED=$([ "$COUNT" -ge 60 ] && echo "true" || echo "false")
+            PAYLOAD="{\"id\":\"${EXAM_ID}\",\"passed\":${PASSED},\"releasedQuestions\":${COUNT},\"reason\":\"${COUNT} questions released\"}"
+            TIMESTAMP=$(date +%s%3N)
+            # Use printf so \n expands to real newlines — matching the Worker's HMAC canonical string
+            MESSAGE=$(printf "PUT\n/r2/release-gate/${EXAM_ID}\n${TIMESTAMP}")
+            SIG=$(printf "%s" "$MESSAGE" | openssl dgst -sha256 -hmac "${STATUS_HMAC_SECRET}" | awk '{print $2}')
+            curl -sf -X PUT "${CURATOR_WORKER_URL}/r2/release-gate/${EXAM_ID}" \
+              -H "Content-Type: application/json" \
+              -H "X-Curator-Timestamp: ${TIMESTAMP}" \
+              -H "X-Curator-Signature: ${SIG}" \
+              -d "${PAYLOAD}" || echo "[curate] WARNING: release-gate push failed for ${EXAM_ID}"
+          done
+
+      # ── Trigger deploy workflow ──────────────────────────────────────────────
+      - name: Trigger deploy workflow
+        if: steps.diff.outputs.changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy.yml',
+              ref: 'main'
+            });

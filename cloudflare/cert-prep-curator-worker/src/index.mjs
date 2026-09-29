@@ -1,120 +1,197 @@
 /**
- * Cloudflare Worker Adapter for AI Certification Prep Curator Agent
+ * Cloudflare Worker — Cert Prep Curator Control Plane (v2)
+ *
+ * Responsibilities:
+ *  1. Scheduled cron (Sun/Mon 18:30 UTC = Mon/Tue 00:00 IST)
+ *     — dispatches a `certification-curation` repository_dispatch event to GitHub
+ *     — includes a { category } payload so the Actions workflow can pick the right exams
+ *     — idempotency guard via R2 prevents duplicate runs from the twin cron entries
+ *
+ *  2. HMAC-authenticated R2 proxy (GitHub Actions → Worker → R2)
+ *     — all write paths require X-Curator-Timestamp + X-Curator-Signature headers
+ *     — read paths for release-gate are unauthenticated (public status)
+ *     — no CORS headers: this is a server-to-server control-plane Worker only
+ *
+ *  3. Health endpoint (unauthenticated, exam-agnostic)
+ *
+ * Secrets required (set via wrangler secret put):
+ *   GITHUB_DISPATCH_TOKEN    fine-grained PAT, scope: Actions Read & Write
+ *   STATUS_HMAC_SECRET       shared hex secret (also set as GitHub repo secret)
  */
 
+import { verifyHmac } from './hmac.mjs';
+import {
+  getReleaseGate, putReleaseGate,
+  getAuditSummary, putAuditSummary,
+  shouldTriggerRun, markRunTriggered
+} from './r2-proxy.mjs';
+
+const jsonResp = (data, status = 200) =>
+  new Response(JSON.stringify(data, null, 2), {
+    status,
+    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+  });
+
+// ── Route table ──────────────────────────────────────────────────────────────
+
 export default {
-  async fetch(request, env, ctx) {
-    const url = new URL(request.url);
-    const path = url.pathname;
+  // ── Scheduled cron handler ────────────────────────────────────────────────
+  async scheduled(event, env, ctx) {
+    console.log('[Worker] Scheduled cron fired:', event.cron);
 
-    const corsHeaders = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-      'Content-Type': 'application/json; charset=utf-8'
-    };
-
-    if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: corsHeaders });
+    if (!env.GITHUB_DISPATCH_TOKEN || !env.GITHUB_REPO) {
+      console.error('[Worker] Missing GITHUB_DISPATCH_TOKEN or GITHUB_REPO — cannot dispatch');
+      return;
     }
 
-    // Health & Agent Metadata Endpoint
-    if (path === '/' || path === '/health') {
-      const statusData = {
-        agent: env.AGENT_NAME || 'cert-prep-curator',
-        version: env.AGENT_VERSION || '1.0.0',
-        status: 'healthy',
-        activeExam: env.EXAM_CODE || 'CCAF',
-        totalQuestions: parseInt(env.TOTAL_QUESTIONS || '1130', 10),
-        repository: env.GITHUB_REPO || 'imashishchawla/ai-certification-preparation',
-        pagesUrl: `https://${(env.GITHUB_REPO || 'imashishchawla').split('/')[0]}.github.io/ai-certification-preparation/`,
-        timestamp: new Date().toISOString()
-      };
-      return new Response(JSON.stringify(statusData, null, 2), { headers: corsHeaders });
-    }
-
-    // Exam Tracks API
-    if (path === '/api/v1/exams') {
-      const exams = [
-        {
-          id: 'cca-f',
-          code: 'CCAF',
-          name: 'Claude Certified Architect — Foundations',
-          provider: 'Anthropic',
-          status: 'active',
-          questionsCount: parseInt(env.TOTAL_QUESTIONS || '1130', 10),
-          mockTestFormat: '60Q / 120M'
-        },
-        {
-          id: 'ccar-p',
-          code: 'CCAR-P',
-          name: 'Claude Certified Architect — Professional',
-          provider: 'Anthropic',
-          status: 'planned',
-          questionsCount: 0,
-          mockTestFormat: '60Q / 120M'
-        }
-      ];
-      return new Response(JSON.stringify({ exams }, null, 2), { headers: corsHeaders });
-    }
-
-    // Detailed Status & Preflight Check API
-    if (path === '/api/v1/status') {
-      const totalQ = parseInt(env.TOTAL_QUESTIONS || '1130', 10);
-      const auditReport = {
-        preflight: 'PASSED',
-        questionValidation: `PASSED (${totalQ} valid questions)`,
-        linkIntegrity: 'PASSED (0 external leaks)',
-        domains: {
-          D1: { name: 'Agentic Architecture & Orchestration', weight: '27%', targetMockCount: 16 },
-          D2: { name: 'Tool Design & MCP Integration', weight: '18%', targetMockCount: 11 },
-          D3: { name: 'Claude Code Configuration & Workflows', weight: '20%', targetMockCount: 12 },
-          D4: { name: 'Prompt Engineering & Structured Output', weight: '20%', targetMockCount: 12 },
-          D5: { name: 'Context Management & Reliability', weight: '15%', targetMockCount: 9 }
-        }
-      };
-      return new Response(JSON.stringify(auditReport, null, 2), { headers: corsHeaders });
-    }
-
-    // Curator Agent Trigger Webhook
-    if (path === '/api/v1/curate' && request.method === 'POST') {
-      try {
-        const body = await request.json().catch(() => ({}));
-        const responseData = {
-          success: true,
-          action: 'curation-triggered',
-          triggeredBy: body.triggeredBy || 'webhook',
-          exam: body.exam || 'cca-f',
-          message: 'Cert Prep Curator agent task scheduled successfully.',
-          timestamp: new Date().toISOString()
-        };
-        return new Response(JSON.stringify(responseData, null, 2), { headers: corsHeaders });
-      } catch (err) {
-        return new Response(JSON.stringify({ success: false, error: err.message }), { status: 400, headers: corsHeaders });
+    // Idempotency guard — skip if a run was triggered within the last 23 hours
+    if (env.CERT_PREP_STATE) {
+      const proceed = await shouldTriggerRun(env.CERT_PREP_STATE);
+      if (!proceed) {
+        console.log('[Worker] Idempotency guard: run already triggered recently — skipping');
+        return;
       }
     }
 
-    return new Response(JSON.stringify({ error: 'Endpoint not found', path }), { status: 404, headers: corsHeaders });
-  },
-
-  async scheduled(event, env, ctx) {
-    console.log('[Cloudflare Worker] Weekly scheduled cron fired.');
-    if (env.GITHUB_TOKEN && env.GITHUB_REPO) {
-      try {
-        await fetch(`https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`, {
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`,
+        {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${env.GITHUB_TOKEN}`,
-            'User-Agent': 'Cloudflare-Worker-Cert-Prep-Curator',
-            'Accept': 'application/vnd.github.v3+json',
+            Authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`,
+            'User-Agent': 'Cloudflare-Worker-Cert-Prep-Curator/2.0',
+            Accept: 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ event_type: 'weekly-curator-sync' })
-        });
-        console.log('[Cloudflare Worker] Triggered GitHub curation workflow successfully.');
-      } catch (err) {
-        console.error('[Cloudflare Worker] Failed to dispatch GitHub workflow:', err);
+          body: JSON.stringify({
+            event_type: 'certification-curation',
+            client_payload: { category: 'all', source: 'scheduled-cron' }
+          })
+        }
+      );
+
+      if (!res.ok) {
+        const body = await res.text();
+        console.error(`[Worker] GitHub dispatch failed: HTTP ${res.status} — ${body}`);
+        return;
       }
+
+      console.log('[Worker] GitHub dispatch succeeded — certification-curation event fired');
+
+      if (env.CERT_PREP_STATE) {
+        await markRunTriggered(env.CERT_PREP_STATE);
+      }
+    } catch (err) {
+      console.error('[Worker] GitHub dispatch threw:', err.message);
     }
+  },
+
+  // ── HTTP handler ──────────────────────────────────────────────────────────
+  async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    const p = url.pathname;
+    const method = request.method;
+
+    // ── Health (public, no auth) ─────────────────────────────────────────────
+    if ((p === '/' || p === '/health') && method === 'GET') {
+      return jsonResp({
+        agent: env.AGENT_NAME || 'cert-prep-curator',
+        version: env.AGENT_VERSION || '2.0.0',
+        status: 'healthy',
+        repository: env.GITHUB_REPO || 'unknown',
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // ── Public release-gate reads ────────────────────────────────────────────
+    // GET /r2/release-gate           — list all exam gate records
+    // GET /r2/release-gate/:examId   — get one exam's gate record
+    if (method === 'GET' && p.startsWith('/r2/release-gate')) {
+      if (!env.CERT_PREP_STATE) {
+        return jsonResp({ error: 'R2 binding not configured' }, 503);
+      }
+      const parts = p.split('/');          // ['', 'r2', 'release-gate', examId?]
+      const examId = parts[3] || null;
+      return getReleaseGate(env.CERT_PREP_STATE, examId);
+    }
+
+    // ── All write + audit read paths require HMAC auth ───────────────────────
+    if (!env.STATUS_HMAC_SECRET) {
+      return jsonResp({ error: 'Worker not configured: STATUS_HMAC_SECRET missing' }, 503);
+    }
+
+    const hmacResult = await verifyHmac(request, env.STATUS_HMAC_SECRET);
+    if (!hmacResult.ok) {
+      return jsonResp({ error: `Unauthorized: ${hmacResult.reason}` }, 401);
+    }
+
+    if (!env.CERT_PREP_STATE) {
+      return jsonResp({ error: 'R2 binding not configured' }, 503);
+    }
+
+    // PUT /r2/release-gate/:examId
+    if (method === 'PUT' && p.startsWith('/r2/release-gate/')) {
+      const examId = p.split('/')[3];
+      let body;
+      try { body = await request.json(); } catch { body = {}; }
+      return putReleaseGate(env.CERT_PREP_STATE, examId, body);
+    }
+
+    // GET /r2/audit/:examId
+    if (method === 'GET' && p.startsWith('/r2/audit/')) {
+      const examId = p.split('/')[3];
+      return getAuditSummary(env.CERT_PREP_STATE, examId);
+    }
+
+    // PUT /r2/audit/:examId
+    if (method === 'PUT' && p.startsWith('/r2/audit/')) {
+      const examId = p.split('/')[3];
+      let body;
+      try { body = await request.json(); } catch { body = {}; }
+      return putAuditSummary(env.CERT_PREP_STATE, examId, body);
+    }
+
+    // Manual curation trigger (HMAC-authenticated)
+    if (method === 'POST' && p === '/api/v1/curate') {
+      let body;
+      try { body = await request.json(); } catch { body = {}; }
+      const category = body.category || 'all';
+
+      if (!env.GITHUB_DISPATCH_TOKEN || !env.GITHUB_REPO) {
+        return jsonResp({ error: 'GITHUB_DISPATCH_TOKEN or GITHUB_REPO not configured' }, 503);
+      }
+
+      const res = await fetch(
+        `https://api.github.com/repos/${env.GITHUB_REPO}/dispatches`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${env.GITHUB_DISPATCH_TOKEN}`,
+            'User-Agent': 'Cloudflare-Worker-Cert-Prep-Curator/2.0',
+            Accept: 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            event_type: 'certification-curation',
+            client_payload: { category, source: 'manual-trigger', ...body }
+          })
+        }
+      );
+
+      if (!res.ok) {
+        const errText = await res.text();
+        return jsonResp({ error: `GitHub dispatch failed: ${errText}` }, 502);
+      }
+
+      return jsonResp({
+        ok: true,
+        action: 'certification-curation dispatched',
+        category,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    return jsonResp({ error: 'Endpoint not found', path: p }, 404);
   }
 };

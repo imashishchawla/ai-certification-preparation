@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "source.schema.json",
+  "title": "Source",
+  "description": "Validates a single source entry in sources.json (under exams.<exam-id>.sources[])",
+  "type": "object",
+  "required": [
+    "id",
+    "exam_ids",
+    "name",
+    "url",
+    "trust_tier",
+    "active",
+    "publication_mode",
+    "parser_adapter"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique stable identifier for this source"
+    },
+    "exam_ids": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Exams this source applies to"
+    },
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "allowed_redirect_hosts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "trust_tier": {
+      "type": "string",
+      "enum": ["tier-1-official", "tier-2-verified", "tier-2-curated", "tier-3-community"],
+      "description": "tier-1-official = provider-published; tier-2 = verified third-party; tier-3 = community"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "publication_mode": {
+      "type": "string",
+      "enum": [
+        "reference-only",
+        "document-source",
+        "question-source",
+        "study-guide-source"
+      ],
+      "description": "reference-only = never extract questions; question-source = extract questions"
+    },
+    "parser_adapter": {
+      "type": "string",
+      "description": "Which adapter processes this source (e.g. hashicorp-adapter, certyiq-api, http-generic)"
+    },
+    "certyiq_stream": {
+      "type": "string",
+      "description": "CertyIQ stream value for certyiq-api adapter (e.g. hashicorp, anthropic)"
+    },
+    "certyiq_papers": {
+      "type": "array",
+      "description": "Paper configs for certyiq-api adapter — drives sync-certyiq.mjs",
+      "items": {
+        "type": "object",
+        "required": ["name", "id", "pages"],
+        "properties": {
+          "name": { "type": "string" },
+          "id":   { "type": "string" },
+          "pages": { "type": "integer", "minimum": 1 },
+          "isCore": { "type": "boolean" }
+        }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^D[0-9]+$" }
+    },
+    "refresh_frequency": {
+      "type": "string",
+      "enum": ["daily", "weekly", "monthly", "on-change"]
+    },
+    "max_size_bytes": {
+      "type": "integer"
+    },
+    "timeout_seconds": {
+      "type": "integer"
+    }
+  }
+}

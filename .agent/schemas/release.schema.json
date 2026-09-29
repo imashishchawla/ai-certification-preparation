@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "release.schema.json",
+  "title": "Release",
+  "description": "Validates a release gate record stored in R2 at releases/<exam-id>/latest.json",
+  "type": "object",
+  "required": [
+    "exam",
+    "examVersion",
+    "generatedAt",
+    "generatedAtIst",
+    "runId",
+    "questionCounts",
+    "gatesPassed",
+    "status"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "exam": {
+      "type": "string",
+      "description": "Exam ID (e.g. cca-f, terraform-associate)"
+    },
+    "examVersion": {
+      "type": "string",
+      "description": "Exam version string (e.g. 004)"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp when this release record was generated"
+    },
+    "generatedAtIst": {
+      "type": "string",
+      "description": "Human-readable IST timestamp (e.g. 2026-09-28T05:30:00+05:30)"
+    },
+    "runId": {
+      "type": "string",
+      "description": "GitHub Actions run ID or Worker invocation ID that produced this record"
+    },
+    "questionCounts": {
+      "type": "object",
+      "required": ["total", "mockEligible", "byDomain"],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total questions in bank with status=ready"
+        },
+        "mockEligible": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Questions with mockEligible=true and status=ready"
+        },
+        "byDomain": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Per-domain ready question counts keyed by domain code (D1, D2, ...)"
+        }
+      }
+    },
+    "gatesPassed": {
+      "type": "object",
+      "required": ["minimumMockQuestions", "allDomainsPresent", "noQuarantinedBlocking"],
+      "properties": {
+        "minimumMockQuestions": {
+          "type": "boolean",
+          "description": "mockEligible count >= exam minimum_mock_questions"
+        },
+        "allDomainsPresent": {
+          "type": "boolean",
+          "description": "Every exam domain has at least 1 ready question"
+        },
+        "noQuarantinedBlocking": {
+          "type": "boolean",
+          "description": "No quarantined questions that block release (status=quarantined with blocking=true)"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["passed", "failed", "skipped"],
+      "description": "passed = all gates true and release was published; failed = one or more gates false"
+    },
+    "failureReasons": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Human-readable reasons why status=failed (omit or empty array when passed)"
+    },
+    "shardManifest": {
+      "type": "object",
+      "description": "Map of shard filename to question count for this release",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "sourcesSynced": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Source IDs that were synced in the run that produced this release"
+    },
+    "sourcesSkipped": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Source IDs that were skipped (inactive or errored) in this run"
+    }
+  }
+}

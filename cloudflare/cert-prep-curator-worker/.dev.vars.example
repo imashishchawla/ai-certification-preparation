@@ -1,0 +1,24 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Cloudflare Worker LOCAL development secrets
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Copy this file to .dev.vars (gitignored) and fill in your real values.
+# Used by `wrangler dev` only — never deployed to Cloudflare.
+#
+# Production equivalents:
+#   GITHUB_DISPATCH_TOKEN  → set via:  wrangler secret put GITHUB_DISPATCH_TOKEN
+#   STATUS_HMAC_SECRET     → set via:  wrangler secret put STATUS_HMAC_SECRET
+#
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Fine-grained GitHub PAT
+#   Scopes required: Actions (Read & Write)
+#   Create at: https://github.com/settings/personal-access-tokens
+#   Used by:   Worker cron + POST /api/v1/curate  to dispatch repository_dispatch events
+GITHUB_DISPATCH_TOKEN=github_pat_REPLACE_ME
+
+# Shared HMAC hex secret (must match STATUS_HMAC_SECRET GitHub repo secret exactly)
+#   Generate with:  node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+#   Worker uses:    verify incoming signatures from GitHub Actions
+#   Actions use:    sign outbound requests to Worker R2 proxy endpoints
+STATUS_HMAC_SECRET=REPLACE_WITH_64_CHAR_HEX_STRING

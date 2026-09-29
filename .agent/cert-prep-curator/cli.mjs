@@ -3,7 +3,6 @@ import { runValidation } from './validate-output.mjs';
 import { scaffoldExam } from './scaffold-exam.mjs';
 import { deduplicateExistingDatabase } from './deduplicate.mjs';
 import { syncSources } from './sync-sources.mjs';
-import { curateAndExtractQuestions } from './extract-ai.mjs';
 import { extractAndMergeAllMaterials } from './extract-materials.mjs';
 import { execSync } from 'child_process';
 import http from 'http';
@@ -51,11 +50,6 @@ async function main() {
       await syncSources(rootDir, exam, { dryRun });
       break;
     }
-    case 'extract-ai': {
-      const exam = args[1] || 'cca-f';
-      await curateAndExtractQuestions(rootDir, exam);
-      break;
-    }
     case 'extract-materials': {
       const exam = args[1] || 'cca-f';
       extractAndMergeAllMaterials(rootDir, exam);
@@ -78,14 +72,11 @@ async function main() {
       console.log('\n--- Step 4: Multi-Source Material Extraction & Deduplication ---');
       extractAndMergeAllMaterials(rootDir, exam);
 
-      console.log('\n--- Step 5: AI Question Extraction & Relevance Filtering ---');
-      await curateAndExtractQuestions(rootDir, exam);
-
-      console.log('\n--- Step 6: Question Schema & Integrity Validation ---');
+      console.log('\n--- Step 5: Question Schema & Integrity Validation ---');
       const valOk = runValidation(rootDir, exam);
       if (!valOk) process.exit(1);
 
-      console.log('\n--- Step 7: Site Build & External Link Check ---');
+      console.log('\n--- Step 6: Site Build & External Link Check ---');
       buildSite();
       console.log('\n[Cert Prep Curator] Curation cycle completed successfully.');
       break;
@@ -119,7 +110,6 @@ Available commands:
   node .agent/cert-prep-curator/cli.mjs dedup-db <examId>             Deduplicate question database
   node .agent/cert-prep-curator/cli.mjs sync <examId> [--dry-run]     Sync allowlisted sources to .data/
   node .agent/cert-prep-curator/cli.mjs extract-materials <examId>   Extract & deduplicate questions from raw materials
-  node .agent/cert-prep-curator/cli.mjs extract-ai <examId>           Extract new questions using AI
   node .agent/cert-prep-curator/cli.mjs curate <examId>               Run full end-to-end curation cycle
   node .agent/cert-prep-curator/cli.mjs validate <examId>             Validate question schema & keys
   node .agent/cert-prep-curator/cli.mjs scaffold <id> <name> <code>   Scaffold new exam folder structure

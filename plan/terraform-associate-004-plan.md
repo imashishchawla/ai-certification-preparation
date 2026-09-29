@@ -242,14 +242,28 @@ The Worker must send:
 {
   "event_type": "certification-curation",
   "client_payload": {
-    "scheduleCategory": "category-a-or-category-b",
-    "exam": "active-in-category",
-    "triggeredBy": "cloudflare-cron"
+    "scheduleCategory": "category-a",
+    "triggeredBy": "cloudflare-worker"
   }
 }
 ```
 
-The current `/api/v1/curate` response only reports success. It must authenticate the caller, dispatch the workflow, check GitHub's response, and return the actual GitHub run request result.
+The Worker uses the cron expression as the authoritative category mapping, and fails closed for any unregistered expression:
+
+```javascript
+const categoryByCron = {
+  "30 18 * * 6": "category-a",
+  "30 18 * * 0": "category-b",
+};
+
+const scheduleCategory = categoryByCron[event.cron];
+
+if (!scheduleCategory) {
+  throw new Error(`Unregistered schedule: ${event.cron}`);
+}
+```
+
+Keep `scheduleCategory` consistent across the Worker, GitHub workflow, and ledger metadata. The `/api/v1/curate` response must authenticate the caller, dispatch the workflow, check GitHub's response, and return the actual GitHub run request result.
 
 ### 3.3 Only one workflow may deploy Pages
 
@@ -261,28 +275,83 @@ curate-certifications.yml
 ├── Run per-exam fetch and validation matrix jobs
 ├── Upload per-exam candidate artifacts; matrix jobs never push
 ├── Merge successful artifacts in one promotion job
-├── Create at most one commit and capture release_sha
+├── Apply changes on latest origin/main with complete revalidation & bounded retry
+├── Create at most one commit using GITHUB_TOKEN and capture release_sha
 └── Call deploy.yml through workflow_call with release_sha
 
-deploy.yml
-├── Accept release_sha through workflow_call or workflow_dispatch
+deploy.yml (concurrency: group: github-pages-production, cancel-in-progress: false)
+├── Preparation job resolves and validates target release_sha
 ├── Check out the exact release_sha
-├── Validate every active exam using its current canonical data
-├── Generate browser artifacts
-├── Build and test Hugo
+├── Build Hugo into public/
+├── Generate browser shards into public/data/exams/<exam-id>/
+├── Generate public/release.json
+├── Validate schemas, link integrity, browser engines, and regressions
+├── Upload single GitHub Pages artifact
 ├── Deploy to GitHub Pages
-└── Verify that the public release reports release_sha
+└── Verify that the live public release reports release_sha
 ```
 
-The curation workflow will no longer deploy Pages directly. It invokes `deploy.yml` as the reusable, single production publisher. The deployment must not depend on a push made by `GITHUB_TOKEN`; it receives and checks out the promoted commit through the explicit `release_sha` input.
+The curation workflow will no longer deploy Pages directly. It invokes `deploy.yml` as the reusable, single production publisher.
 
-<!-- CHANGE COMMENT (2026-09-28): Matrix jobs now publish temporary artifacts only. A single promotion job prevents concurrent Git pushes, and the reusable deployment workflow receives the exact promoted SHA. -->
+Dual triggers for `deploy.yml`:
+```yaml
+on:
+  workflow_call:
+    inputs:
+      release_sha:
+        required: true
+        type: string
 
-### 3.4 Remove the manually synchronized public question copy
+  push:
+    branches: [main]
 
-`data/questions/<exam-id>/questions.json` will be canonical. The Pages build will generate browser-ready data into `public/data/exams/<exam-id>/`.
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Optional commit SHA
+        required: false
+        type: string
 
-The pipeline will not depend on manually keeping `data/questions/` and `static/data/questions/` synchronized.
+concurrency:
+  group: github-pages-production
+  cancel-in-progress: false
+```
+
+Important token invariant: the promotion push must use GitHub Actions' built-in `GITHUB_TOKEN`. GitHub does not start another workflow from a push performed using that token, ensuring that the explicit `workflow_call` remains the authoritative deployment path. A PAT or GitHub App token used for the promotion push could trigger duplicate recursive deployments.
+
+A dedicated preparation job resolves and validates the target SHA (the promoted SHA for `workflow_call`, or `github.sha` for push and manual runs).
+
+<!-- CHANGE COMMENT (2026-09-28): Matrix jobs now publish temporary artifacts only. A single promotion job prevents concurrent Git pushes, and the reusable deployment workflow receives the exact promoted SHA under github-pages-production concurrency. -->
+
+### 3.4 Post-Hugo browser artifact generation
+
+`data/questions/<exam-id>/questions.json` remains canonical in Git. The deployment pipeline will generate browser-ready data directly into `public/data/exams/<exam-id>/` after Hugo builds.
+
+Preferred deployment order:
+```text
+Checkout exact release SHA
+        |
+        v
+Build Hugo into public/
+        |
+        v
+Generate browser shards into public/data/exams/<exam-id>/
+(250 questions/shard, manifest with checksums, counts, schema version, release SHA)
+        |
+        v
+Generate public/release.json
+        |
+        v
+Run schema, browser, link, and regression tests
+        |
+        v
+Upload one GitHub Pages artifact
+        |
+        v
+Deploy and verify release SHA
+```
+
+This avoids maintaining both canonical and browser-ready question banks in Git history, and does not depend on `static/data/questions/` being ignored or synchronized.
 
 ---
 
@@ -290,20 +359,36 @@ The pipeline will not depend on manually keeping `data/questions/` and `static/d
 
 ### 4.1 Weekly schedule categories
 
-Active exams are divided into configurable schedule categories. Only the active exams assigned to the category due at that trigger are placed into the matrix.
+Active and onboarding exams are divided into configurable schedule categories. The primary schedule is triggered by Cloudflare Workers; GitHub's scheduled cron acts as a fallback delayed by 15 minutes to allow Cloudflare's run to complete or record its ledger.
 
-| Schedule category | Asia/Kolkata start | Equivalent UTC cron |
-|---|---:|---:|
-| Category A | Sunday 00:00 | `30 18 * * 6` |
-| Category B | Monday 00:00 | `30 18 * * 0` |
+| Schedule category | Asia/Kolkata start | Cloudflare primary cron (UTC) | GitHub fallback cron (UTC) |
+|---|---:|---:|---:|
+| Category A | Sunday 00:00 | `30 18 * * 6` | `45 18 * * 6` (+15 min) |
+| Category B | Monday 00:00 | `30 18 * * 0` | `45 18 * * 0` (+15 min) |
 
-<!-- CHANGE COMMENT (2026-09-28): Replaced the single Monday 05:00 run with schedule-driven exam categories so future certifications can be distributed across weekly windows without changing workflow code. -->
+<!-- CHANGE COMMENT (2026-09-28): Staggered GitHub fallback by 15 minutes after Cloudflare primary. The fallback checks the R2 ledger and exits cleanly if Cloudflare already started or completed the weekly run. -->
+
+#### Synchronization vs. Publication Rules (Onboarding Deadlock Fix)
+To prevent onboarding deadlock where new certifications with `status = "onboarding"` are never processed:
+
+```text
+Synchronize when:
+  sync_enabled = true
+  AND status is in ['onboarding', 'active']
+  AND schedule category matches
+
+Publish publicly when:
+  status = 'active'
+  AND all release gates pass
+```
+
+Onboarding exams may build and validate their question bank in scheduled matrix runs, but remain strictly hidden from navigation, public browser artifacts, and mock exams until activation.
 
 Cloudflare is the primary scheduler. GitHub's schedule is a fallback. GitHub Actions concurrency is the authoritative execution lock. The R2 schedule record provides an idempotency ledger so a queued duplicate can exit after observing that the exam/week run already completed.
 
 ### 4.2 Per-exam runtime configuration
 
-Every active exam must define its own time budget:
+Every active or onboarding exam must define its own time budget:
 
 ```toml
 [[exams]]
@@ -318,6 +403,7 @@ question_shard_size = 250
 
 [[exams]]
 id = "terraform-associate"
+status = "onboarding"
 sync_enabled = true
 schedule_category = "category-b"
 sync_timeout_minutes = 45
@@ -327,6 +413,7 @@ minimum_mock_questions = 60
 question_shard_size = 250
 practice_pass_percent = 70
 practice_threshold_is_official = false
+scoring_policy = "all_or_nothing"
 ```
 
 Initial budgets:
@@ -562,27 +649,119 @@ The pipeline may extract questions only from entries registered as question sour
 
 For every scheduled category run:
 
-1. Resolve the due category from the Worker payload, GitHub cron value, or validated manual input.
-2. Load `data/exams.toml` and select only exams that are active, synchronization-enabled, and assigned to that category.
+### 8.1 Standard 16 Named Workflow Stages
+Every workflow execution displays these 16 explicit named stages in GitHub Actions:
+```text
+01 Resolve trigger and category
+02 Validate configuration and credentials
+03 Check concurrency and weekly ledger
+04 Build exam matrix
+05 Fetch registered sources
+06 Parse and normalize source content
+07 Validate exam candidate
+08 Upload per-exam result
+09 Combine and revalidate candidates
+10 Promote canonical data
+11 Build Hugo
+12 Generate browser artifacts
+13 Run release tests
+14 Deploy GitHub Pages
+15 Verify live release
+16 Record final run status
+```
+
+### 8.2 Matrix Job Naming & Timeout Resilience
+The per-exam matrix job uses descriptive naming:
+```yaml
+name: "${{ matrix.exam_id }} • curate and validate"
+strategy:
+  fail-fast: false
+  matrix:
+    exam: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+```
+
+**Timeout Resilience:** If a matrix job is cancelled or killed by its runtime timeout, the promotion job detects the missing artifact and synthesizes a structured failure:
+```json
+{
+  "status": "failed",
+  "error_code": "EXAM_JOB_MISSING_RESULT",
+  "retryable": true
+}
+```
+Operational run failures are **always recorded** in R2 using `if: always()` via the Cloudflare Worker HMAC proxy; only `live.json` and `last-known-good.json` wait for successful Pages deployment verification.
+
+### 8.3 Observability, Annotations, and Error Families
+Every stage failure:
+1. Exits nonzero.
+2. Emits a GitHub workflow annotation: `::error title=SRC_FETCH_TIMEOUT::[SRC_FETCH_TIMEOUT] terraform-associate/hashicorp-sample exceeded 30 seconds`.
+3. Appends a Markdown summary table to `$GITHUB_STEP_SUMMARY`.
+4. Uploads sanitized JSON diagnostics with `if: always()` and a 14-day retention limit.
+
+Standardized Error Families:
+* `AUTH_*`: Authentication, permissions, or missing token errors.
+* `CONFIG_*`: Invalid exam, source, objective, or schedule configuration.
+* `LEDGER_*`: R2 ledger, concurrency, or idempotency verification failures.
+* `SOURCE_*`: Fetch, redirect, MIME type, size limit, or timeout failures.
+* `PARSE_*`: Source adapter extraction or content structure parsing failures.
+* `VALIDATION_*`: Schema, option count, answer integrity, or duplicate check failures.
+* `PROMOTION_*`: Revalidation, commit creation, or push rejection failures.
+* `BUILD_*`: Hugo compilation or browser artifact generation errors.
+* `DEPLOY_*`: GitHub Pages upload or deployment failures.
+* `VERIFY_*`: Live release SHA or `/release.json` verification failures.
+
+### 8.4 Reusable Workflow Permissions & Job Separation
+Job-level permissions strictly separate matrix ingestion from deployment:
+```yaml
+jobs:
+  promote:
+    permissions:
+      contents: write
+
+  deploy:
+    needs: promote
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      release_sha: ${{ needs.promote.outputs.release_sha }}
+    secrets:
+      STATUS_HMAC_SECRET: ${{ secrets.STATUS_HMAC_SECRET }}
+```
+
+### 8.5 Branch-Protection Preflight
+Before executing automated promotion pushes, preflight verification confirms:
+* Repository Actions settings permit read/write workflow tokens.
+* `main` branch protection allows the GitHub Actions bot to push the single promotion commit without requiring a pull request or human review.
+* If direct bot pushes to `main` are prohibited by enterprise policy, an automation branch with GitHub auto-merge rules must be used instead.
+
+### 8.6 Step-by-Step Curation & Deployment Sequence
+1. Resolve the due category from Worker payload (`scheduleCategory`), GitHub cron value, or validated manual input.
+2. Load `data/exams.toml` and select exams where `sync_enabled = true`, `status` is in `['onboarding', 'active']`, and `schedule_category` matches.
 3. Enter the category/week GitHub concurrency group and check the compact R2 idempotency ledger.
-4. Run one bounded matrix job for each selected exam.
-5. Load the exam configuration, time budget, and registered source entries.
-6. Match discovered URLs against `.agent/cert-prep-curator/sources.json`; treat `plan/sources.md` as its generated readable view.
-7. Record an unregistered URL as a discovery candidate only. Do not fetch or publish it.
-8. For an active Tier 1 or Tier 2 source, apply its registered publication mode.
-9. Use ETag, Last-Modified, and source hashes to fetch only new or changed allowed content.
-10. Validate URL match, redirects, MIME type, size, timeout, and content hash.
-11. Parse through the registered adapter and extract only content present in the source.
-12. Normalize without changing meaning, categorize, deduplicate, and validate provenance and answer integrity.
-13. On failure, upload a compact failed-exam result and retain that exam's previous canonical content.
-14. On success, upload a validated per-exam update artifact; the matrix job must not commit or push.
-15. In one promotion job, merge successful exam artifacts with unchanged canonical data for failed or skipped exams.
-16. Run cross-exam canonical validation and create at most one commit on `main`.
-17. Capture the promoted commit as `release_sha`; if nothing changed, reuse the current canonical SHA.
-18. Call the reusable `deploy.yml` with `release_sha`.
-19. Check out the exact SHA, generate browser artifacts, validate all active canonical exams, build Hugo, and run link/browser/regression tests.
-20. Deploy GitHub Pages only when every deployment gate passes.
-21. Verify the public release reports the expected SHA, then write compact run and release status to R2.
+4. Run bounded matrix jobs for each selected exam.
+5. Match discovered URLs against `.agent/cert-prep-curator/sources.json`; unregistered URLs are recorded as discovery candidates only (never fetched or published).
+6. Fetch only new or changed registered content using ETag/hash checks; parse with registered adapter and extract only content present in source (no generated questions).
+7. Normalize without altering meaning, categorize, deduplicate, and validate provenance and answer integrity.
+8. On failure, upload compact failure result; on success, upload validated exam-update artifact with `base_sha`. Matrix jobs never commit or push.
+9. In one promotion job:
+    a. Fetch latest `origin/main`.
+    b. Merge passing exam artifacts onto latest `main`, retaining previous canonical data for failed or skipped exams.
+    c. Rerun full schema, duplicate, cross-exam, and publication validation.
+    d. Create single promotion commit using GitHub Actions' built-in `GITHUB_TOKEN`.
+    e. Push normally (never force-push). If rejected (main moved), retry once from new `main`; if second fails, stop safely.
+10. Capture promoted commit as `release_sha`; call reusable `deploy.yml` with `release_sha` and `STATUS_HMAC_SECRET`.
+11. In `deploy.yml` (under `concurrency: group: github-pages-production, cancel-in-progress: false`):
+    a. Preparation job resolves and validates target SHA.
+    b. Check out exact `release_sha`.
+    c. Build Hugo into `public/`.
+    d. Generate browser shards into `public/data/exams/<exam-id>/` (250 items/shard, manifest with checksums, counts, schema version, release SHA).
+    e. Generate `public/release.json`.
+    f. Run schema, link, browser, and regression tests.
+    g. Upload single GitHub Pages artifact.
+    h. Deploy to GitHub Pages.
+12. Verify live public release reports expected SHA in `/release.json`, then write compact run and release status to R2 via Worker HMAC proxy using `if: always()`.
 
 No question-generation API or model is part of this flow.
 
@@ -604,7 +783,8 @@ No question-generation API or model is part of this flow.
 
 - Question text, answer, and options were present in the source.
 - Exam, domain, and objective are valid.
-- Question type and selection limits are valid.
+- Question type and selection limits are valid (`true_false`, `single_choice`, `multiple_choice`).
+- Multiple-select scoring: strict 0/1 all-or-nothing scoring; learning mode displays missed/incorrect choices without partial credit (documented as simulator scoring policy, not HashiCorp's confirmed algorithm).
 - Every correct answer exists in the option list.
 - IDs are unique.
 - No answer marker leaks into the prompt or options.
@@ -735,15 +915,16 @@ SINGLE PROMOTION JOB
 DEPLOYMENT HANDOFF
   Call reusable `deploy.yml` through `workflow_call(release_sha)`
         |
+        +--> Preparation job resolves & validates target release_sha
         +--> Check out exact `release_sha`
-        +--> Generate browser manifests, mock indexes, and domain shards
-        +--> Validate every active exam's current canonical data
-        +--> Build Hugo with production Pages base URL
+        +--> Build Hugo with production Pages base URL into `public/`
+        +--> Generate browser shards into `public/data/exams/<exam-id>/`
+        +--> Generate `public/release.json` with release_sha
         +--> Run schema, link, browser, and regression tests
         |
         +--> Failed: do not deploy; previous Pages release remains live
         |
-        +--> Passed: `actions/deploy-pages` publishes GitHub Pages
+        +--> Passed: `actions/deploy-pages` publishes GitHub Pages under `github-pages-production` concurrency
         |
         v
 PUBLIC VERIFICATION AND STATUS
@@ -759,78 +940,131 @@ PUBLIC VERIFICATION AND STATUS
 
 ---
 
+## 11. Security and Credential Topology
+
+### 11.1 Cloudflare Worker Credentials
+- **Production arrangement (GitHub App preferred):**
+  | Name | Location | Purpose |
+  |---|---|---|
+  | `GITHUB_APP_PRIVATE_KEY` | Worker Secret | Mint short-lived GitHub App installation tokens |
+  | `STATUS_HMAC_SECRET` | Worker Secret | Authenticate status/ledger callbacks from Actions |
+  | `GITHUB_APP_ID` | `wrangler.toml` Variable | GitHub App identity |
+  | `GITHUB_APP_INSTALLATION_ID` | `wrangler.toml` Variable | Repository installation |
+  | `GITHUB_REPO` | `wrangler.toml` Variable | Target `owner/repository` |
+  | `GITHUB_AUTH_MODE` | `wrangler.toml` Variable | `app` or `pat` |
+  | `CONTROL_BUCKET` | R2 Binding | Native binding to read/write compact operational objects |
+- **Initial prototype:** Fine-grained Personal Access Token stored via `npx wrangler secret put GITHUB_DISPATCH_TOKEN` with access strictly limited to repository dispatch (`contents: write`).
+- **Enforced Worker Configuration:**
+  ```toml
+  [secrets]
+  required = ["GITHUB_APP_PRIVATE_KEY", "STATUS_HMAC_SECRET"]
+  ```
+
+### 11.2 GitHub Actions Credentials & Secrets
+| Name | Type | Required When |
+|---|---|---|
+| `STATUS_HMAC_SECRET` | Repository Secret | Actions sends run/status updates to the Worker |
+| `FIRECRAWL_API_KEY` | Repository Secret | Only if Firecrawl is enabled for registered-source retrieval |
+| `CLOUDFLARE_API_TOKEN` | Repository Secret | Only if GitHub Actions deploys the Worker |
+| `CLOUDFLARE_ACCOUNT_ID` | Repository Variable | Only if GitHub Actions deploys the Worker |
+| `CURATOR_WORKER_URL` | Repository Variable | Actions calls Worker status endpoints |
+
+The built-in `GITHUB_TOKEN` is used for the promotion commit to prevent recursive push-trigger executions.
+
+### 11.3 R2 Storage Security Topology (HMAC Proxy)
+GitHub Actions **does not receive R2 credentials**:
+```text
+GitHub Actions
+    │ (Signed status payload via HMAC)
+    ▼
+Cloudflare Worker (POST /api/v1/status)
+    │ (Native R2 binding: CONTROL_BUCKET)
+    ▼
+R2 certification-control Bucket
+```
+The Worker validates the HMAC timestamp, nonce, and body digest before writing to allowlisted R2 paths.
+
+### 11.4 Firecrawl Boundaries
+Firecrawl is optional and operates solely within GitHub Actions source ingestion—**never in the Cloudflare Worker**. Its scope is strictly restricted to fetching/rendering URLs already registered as active Tier 1 or Tier 2 sources requiring JavaScript execution. It never auto-promotes discovered URLs, never bypasses the registry, and never generates questions.
+
+### 11.5 Local Protection (.gitignore)
+Before creating local credentials, `.gitignore` is updated to ignore:
+```gitignore
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+```
+
+---
+
 ## 12. Implementation Phases
 
-### Phase 1: Contracts and regression baseline
-
+### Phase 1: Contracts, configuration, and preflight
 - Add exam, source, question, release, and audit schemas.
+- Run branch-protection preflight: confirm Actions bot can push to `main` without PR review block.
+- Update `.gitignore` with `.env*` and `.dev.vars*`.
 - Capture passing CCA-F validation and browser behavior.
-- Correct Terraform exam facts and objective mappings.
+- Correct Terraform exam facts, objectives `1a`-`8d`, and set initial `status = "onboarding"`.
 
 ### Phase 2: Generic catalog and source registry
-
-- Upgrade the source registry to its multi-exam schema.
-- Update every source-registry consumer.
-- Add dynamic exam scheduling and time budgets.
+- Upgrade source registry to multi-exam schema (version 2.0.0).
+- Update source-registry consumers.
+- Add dynamic exam scheduling, staggered fallbacks, and runtime budgets.
 
 ### Phase 3: Generic question and site engines
-
 - Support true/false, single-answer, and multiple-answer records.
+- Implement strict 0/1 all-or-nothing multi-select scoring (documented as simulator policy).
 - Replace hardcoded CCA-F template and JavaScript values.
 - Consolidate duplicate layouts and JavaScript copies.
-- Generate public artifacts from canonical data during the build.
+- Post-Hugo generation of browser artifacts into `public/data/exams/<exam-id>/`.
 
 ### Phase 4: Cloudflare control plane and minimal R2 state
-
-- Secure the Worker endpoints.
-- Implement real GitHub dispatch.
-- Add R2 bindings, locks, status, source fingerprints, and release pointers.
+- Secure Worker endpoints with fail-closed category routing.
+- Implement HMAC-authenticated status proxy to R2.
+- Enforce R2 allowlist and retention rules.
 - Remove hardcoded Worker exam counts and domains.
 
 ### Phase 5: GitHub workflow separation
+- Make matrix jobs upload per-exam artifacts without committing (`base_sha` recorded).
+- Add single promotion job with complete revalidation and bounded retry.
+- Reusable `deploy.yml` with preparation job and `github-pages-production` concurrency.
+- Staggered fallback schedules (Category A: `45 18 * * 6`, Category B: `45 18 * * 0`).
 
-- Make matrix jobs upload per-exam artifacts without committing.
-- Add one promotion job that creates at most one canonical commit.
-- Make `deploy.yml` the sole Pages publisher.
-- Pass the exact promoted `release_sha` to `deploy.yml` through `workflow_call`.
-- Add the Category A Sunday 00:00 and Category B Monday 00:00 triggers and fallback schedules.
-- Add per-exam timeouts and matrix execution.
-
-### Phase 6: Terraform Associate content
-
-- Register the exam and objectives.
-- Register approved sources.
-- Create the categorized page structure.
-- Ingest and validate source-backed questions and documents.
-- Require sufficient validated inventory before activation.
+### Phase 6: Terraform Associate content (onboarding)
+- Register exam and 8 official domains.
+- Register approved Tier 1 and Tier 2 sources.
+- Create categorized 8-domain study guides and notes.
+- Ingest and validate source-backed questions without inventing content.
+- Keep in `onboarding` until release gates pass ($\ge 60$ verified questions).
 
 ### Phase 7: End-to-end release verification
-
 - Run schema, source, question, Hugo, rendered-link, and browser checks.
 - Verify CCA-F regression behavior.
-- Verify the Terraform practice and mock experience.
+- Verify Terraform practice and mock experience.
 - Verify GitHub Pages deployment and Worker/R2 status reporting.
 
 ---
 
-## 13. Estimated Repository Impact
+## 13. Estimated Repository Impact & File Manifest
 
-Implementation forecast:
+### Document Inventory
+There are two unique repository plan documents:
+1. `plan/terraform-associate-004-plan.md` (Canonical technical blueprint)
+2. `plan/terraform_associate_004_implementation_plan.md` (Operational contracts and checklist)
 
-| Change | Estimated files |
-|---|---:|
-| Created | 51 |
-| Modified | 34 |
-| Deleted or replaced | 7 |
-| Total source-controlled changes | 92 |
+### Browser Artifact Inventory (19 Initial Files)
+- **CCA-F (9 files):** 7 domain shards (D1 has 735 questions, requiring 3 shards at 250/shard; D2–D5 require 1 shard each) + 1 manifest + 1 mock index.
+- **Terraform Associate (10 files):** 8 domain shards + 1 manifest + 1 mock index.
+- **Total Initial Generated Shards:** 19 files generated post-Hugo in `public/data/exams/`.
 
-Initial ignored build artifacts:
-
-- Seven CCA-F browser artifacts: manifest, mock index, and five domain shards.
-- Ten Terraform browser artifacts: manifest, mock index, and eight domain shards.
-- Additional numbered shards will be generated only when a domain exceeds its configured shard size.
-
-The count excludes temporary fetched source files because they exist only in the GitHub Actions workspace and are discarded after processing.
+### Source-Controlled File Changes (92 Total Planned)
+- **Created (51 files):** 5 schemas, 1 skill, 2 scripts (`build-browser-artifacts.mjs`, `verify-live-release.mjs`), 17 Terraform content pages, 8 supplementary guides/notes, 2 data files, 4 working dirs, 1 workflow (`curate-certifications.yml`), 2 adapters, 2 libs (`logger.mjs`, `hmac-client.mjs`), 2 Worker modules (`hmac.mjs`, `r2-proxy.mjs`), 1 test workflow, 6 test scripts.
+- **Modified (34 files):** `.gitignore`, `data/exams.toml`, `plan/sources.md`, `sources.json`, `agent.toml`, `cli.mjs`, `preflight.mjs`, `sync-sources.mjs`, `deduplicate.mjs`, `validate-output.mjs`, `scaffold-exam.mjs`, `validate-questions.mjs`, `normalize-questions.mjs`, `check-external-links.mjs`, `audit-rendered-pages.mjs`, 5 layouts, 2 JS engines, CSS, `deploy.yml`, 3 Worker files, `package.json`, `serve.mjs`, 3 content pages, `README.md`, `seo-spider.mjs`.
+- **Deleted (4 files):** `extract-ai.mjs`, `weekly-curator.yml`, `static/data/questions/cca-f/questions.json`, `sync-certyiq.mjs`.
+- **Replaced (3 files):** `sources.json` (multi-exam schema), `sample-questions/list.html` (dynamic exam binding), `question-reveal.js` (multi-type engine).
 
 ---
 

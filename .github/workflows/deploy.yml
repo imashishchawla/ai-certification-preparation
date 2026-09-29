@@ -4,6 +4,7 @@ on:
   push:
     branches: [main, master]
   workflow_dispatch:
+  workflow_call:   # called by curate-certifications.yml after a successful curation run
 
 permissions:
   contents: read
@@ -11,12 +12,17 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: github-pages-production
   cancel-in-progress: false
 
 jobs:
-  build:
+  # ── Preparation: verify release gates + build browser artifacts ─────────────
+  prepare:
     runs-on: ubuntu-latest
+    env:
+      CURATOR_WORKER_URL: ${{ vars.CURATOR_WORKER_URL }}
+      # STATUS_HMAC_SECRET is NOT needed here — GET /r2/release-gate is a public endpoint.
+      # It IS needed in curate-certifications.yml (PUT release-gate writes must be signed).
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,22 +30,39 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify release gates
+        # Skipped gracefully when CURATOR_WORKER_URL is not yet set (pre-Worker-deploy)
+        if: ${{ vars.CURATOR_WORKER_URL != '' }}
+        run: node scripts/verify-live-release.mjs
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.166.0'
           extended: true
 
-      - name: Build
+      - name: Build Hugo site
         run: hugo --minify --baseURL "https://imashishchawla.github.io/ai-certification-preparation/"
 
-      - name: Upload artifact
+      - name: Build browser artifacts (post-Hugo shards)
+        run: node scripts/build-browser-artifacts.mjs
+
+      - name: Check external links
+        run: node scripts/check-external-links.mjs
+
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
+  # ── Deploy: publish the uploaded artifact to GitHub Pages ───────────────────
   deploy:
-    needs: build
+    needs: prepare
     runs-on: ubuntu-latest
     environment:
       name: github-pages

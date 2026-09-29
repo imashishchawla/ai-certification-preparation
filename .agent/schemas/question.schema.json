@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "question.schema.json",
+  "title": "Question",
+  "description": "Validates a single question object in data/questions/<exam-id>/questions.json",
+  "type": "object",
+  "required": [
+    "id",
+    "exam",
+    "examVersion",
+    "domain",
+    "objective",
+    "questionType",
+    "prompt",
+    "options",
+    "correct",
+    "sourceId",
+    "sourceLocator",
+    "sourceHash",
+    "status",
+    "mockEligible"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique stable question ID (e.g. cca-f-D1-0001)"
+    },
+    "exam": {
+      "type": "string",
+      "description": "Exam ID this question belongs to (e.g. cca-f, terraform-associate)"
+    },
+    "examVersion": {
+      "type": "string",
+      "description": "Exam version string (e.g. 004, 2024)"
+    },
+    "domain": {
+      "type": "string",
+      "pattern": "^D[0-9]+$",
+      "description": "Domain code (e.g. D1, D2)"
+    },
+    "objective": {
+      "type": "string",
+      "description": "Sub-objective code (e.g. 1a, 2c)"
+    },
+    "questionType": {
+      "type": "string",
+      "enum": ["true_false", "single_choice", "multiple_choice"]
+    },
+    "prompt": {
+      "type": "string",
+      "minLength": 10,
+      "description": "The question text as found verbatim in the source"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "text"],
+        "properties": {
+          "key":  { "type": "string" },
+          "text": { "type": "string", "minLength": 1 }
+        }
+      },
+      "minItems": 2
+    },
+    "correct": {
+      "description": "Key(s) of correct option(s). String for single/true_false, array for multiple_choice.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" }, "minItems": 2 }
+      ]
+    },
+    "explanation": {
+      "type": "string",
+      "description": "Explanation found in source content; omit field entirely if not present in source"
+    },
+    "sourceId": {
+      "type": "string",
+      "description": "ID of the registered source this question was extracted from"
+    },
+    "sourceLocator": {
+      "type": "string",
+      "description": "Page number, section heading, or URL fragment within the source"
+    },
+    "sourceHash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA-256 of the source content at extraction time"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["ready", "quarantined", "pending-review", "rejected"],
+      "description": "ready = passes all gates; quarantined = failed validation"
+    },
+    "mockEligible": {
+      "type": "boolean",
+      "description": "true = may appear in timed mock exam draws"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["basic", "intermediate", "advanced"]
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audit-summary.schema.json",
+  "title": "AuditSummary",
+  "description": "Validates a curation run audit summary stored in R2 at runs/<exam-id>/<run-id>/audit.json",
+  "type": "object",
+  "required": [
+    "runId",
+    "exam",
+    "startedAt",
+    "startedAtIst",
+    "completedAt",
+    "completedAtIst",
+    "triggerType",
+    "triggerCategory",
+    "outcome",
+    "sourcesAttempted",
+    "sourcesSucceeded",
+    "sourcesFailed",
+    "questionsAdded",
+    "questionsUpdated",
+    "questionsQuarantined",
+    "releaseGateResult"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "runId": {
+      "type": "string",
+      "description": "GitHub Actions run ID or Worker invocation ID"
+    },
+    "exam": {
+      "type": "string",
+      "description": "Exam ID (e.g. cca-f, terraform-associate)"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp when the curation run started"
+    },
+    "startedAtIst": {
+      "type": "string",
+      "description": "Human-readable IST timestamp for display"
+    },
+    "completedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp when the run completed"
+    },
+    "completedAtIst": {
+      "type": "string",
+      "description": "Human-readable IST timestamp for display"
+    },
+    "durationSeconds": {
+      "type": "number",
+      "minimum": 0
+    },
+    "triggerType": {
+      "type": "string",
+      "enum": ["scheduled", "manual", "workflow_call"],
+      "description": "How this run was initiated"
+    },
+    "triggerCategory": {
+      "type": "string",
+      "enum": ["category-a", "category-b"],
+      "description": "Worker schedule category that dispatched this run"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["success", "partial", "failure", "skipped"],
+      "description": "success = all sources ok and release passed; partial = some sources failed but release still passed; failure = release gate failed or critical error; skipped = exam inactive"
+    },
+    "sourcesAttempted": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sourcesSucceeded": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sourcesFailed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "questionsAdded": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Net new questions added to the bank in this run"
+    },
+    "questionsUpdated": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Existing questions whose content changed (sourceHash mismatch)"
+    },
+    "questionsQuarantined": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Questions moved to quarantined status during this run"
+    },
+    "releaseGateResult": {
+      "type": "string",
+      "enum": ["passed", "failed", "skipped"],
+      "description": "Result of release gate evaluation after this run"
+    },
+    "deployTriggered": {
+      "type": "boolean",
+      "description": "true if this run triggered a GitHub Pages deploy workflow"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sourceId", "errorCode", "message"],
+        "properties": {
+          "sourceId": { "type": "string" },
+          "errorCode": { "type": "string" },
+          "message": { "type": "string" },
+          "retryable": { "type": "boolean" }
+        }
+      },
+      "description": "Per-source errors encountered during this run"
+    },
+    "sourceDetails": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["sourceId", "status"],
+        "properties": {
+          "sourceId": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["ok", "skipped", "error", "timeout"]
+          },
+          "questionsExtracted": { "type": "integer", "minimum": 0 },
+          "durationSeconds": { "type": "number", "minimum": 0 }
+        }
+      },
+      "description": "Per-source processing summary"
+    }
+  }
+}

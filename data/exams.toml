@@ -46,3 +46,37 @@ pass_score = 700
 price_usd = 125
 path = "exams/ccdv-f/"
 description = "Developer certification covering Anthropic API integration, SDK usage, and tool calling."
+
+[[exams]]
+id = "terraform-associate"
+code = "TA-004"
+name = "HashiCorp Certified: Terraform Associate (004)"
+provider = "HashiCorp"
+status = "onboarding"
+version = "004"
+terraform_version_tested = "1.12"
+questions = 0
+duration_minutes = 60
+practice_pass_percent = 70
+practice_threshold_is_official = false
+scoring_policy = "all_or_nothing"
+pass_score = 700
+price_usd = 70
+path = "exams/terraform-associate/"
+objective_catalog = "data/objectives/terraform-associate.json"
+description = "Entry-level certification covering Terraform fundamentals, IaC concepts, state management, modules, workflows, and Terraform Cloud. Version 004 targets Terraform ≥1.0, tested against 1.12."
+sync_enabled = true
+schedule_category = "category-b"
+sync_timeout_minutes = 45
+minimum_mock_questions = 60
+
+[exams.domain_weights]
+"D1 Understand Infrastructure as Code (IaC) Concepts" = 16
+"D2 Understand Terraform's Purpose" = 9
+"D3 Understand Terraform Basics" = 15
+"D4 Use the Terraform CLI" = 22
+"D5 Interact with Terraform Modules" = 12
+"D6 Use the Core Terraform Workflow" = 10
+"D7 Implement and Maintain State" = 10
+"D8 Read, Generate, and Modify Configuration" = 6
+

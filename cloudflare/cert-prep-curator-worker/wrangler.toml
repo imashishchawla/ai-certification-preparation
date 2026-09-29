@@ -1,13 +1,26 @@
 name = "cert-prep-curator-worker"
 main = "src/index.mjs"
-compatibility_date = "2026-09-01"
+compatibility_date = "2025-07-14"
+workers_dev = true
+preview_urls = false
 
 [vars]
-AGENT_NAME = "cert-prep-curator"
-AGENT_VERSION = "1.0.0"
-EXAM_CODE = "CCAF"
-TOTAL_QUESTIONS = 1130
-GITHUB_REPO = "imashishchawla/ai-certification-preparation"
+AGENT_NAME    = "cert-prep-curator"
+AGENT_VERSION = "2.0.0"
+GITHUB_REPO   = "imashishchawla/ai-certification-preparation"
+
+# Secrets — set via:  wrangler secret put <NAME>
+#   GITHUB_DISPATCH_TOKEN   fine-grained PAT (Actions: Read & Write) — Worker only
+#   STATUS_HMAC_SECRET      shared hex secret — also set as GitHub repo secret
+#   R2_BUCKET_NAME          R2 bucket name — Worker only
+
+[[r2_buckets]]
+binding = "CERT_PREP_STATE"
+bucket_name = "cert-prep-curator-state"
+preview_bucket_name = "cert-prep-curator-state-preview"
 
 [triggers]
-crons = ["0 3 * * 1"]
+# Fires twice per week — Sun 18:30 UTC = Mon 00:00 IST, Sat 18:30 UTC = Sun 00:00 IST
+# Only one will actually trigger curation (idempotency guard in Worker)
+# Note: Cloudflare cron uses 1-7 for Mon-Sun (0 is invalid; use 7 for Sunday)
+crons = ["30 18 * * 7", "30 18 * * 6"]

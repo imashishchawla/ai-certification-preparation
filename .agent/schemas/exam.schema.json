@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "exam.schema.json",
+  "title": "Exam",
+  "description": "Validates a single exam entry from data/exams.toml (after conversion to JSON for validation)",
+  "type": "object",
+  "required": [
+    "id",
+    "code",
+    "name",
+    "provider",
+    "status",
+    "sync_enabled",
+    "schedule_category",
+    "sync_timeout_minutes",
+    "minimum_mock_questions"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Slug used as directory name and URL segment"
+    },
+    "code": {
+      "type": "string",
+      "description": "Official exam code (e.g. CCAF, TA-004)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Full official exam name"
+    },
+    "provider": {
+      "type": "string",
+      "description": "Certification provider (e.g. Anthropic, HashiCorp)"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["onboarding", "active", "planned", "retired"],
+      "description": "onboarding = hidden from public nav; active = fully live; planned = not yet started"
+    },
+    "sync_enabled": {
+      "type": "boolean"
+    },
+    "schedule_category": {
+      "type": "string",
+      "enum": ["category-a", "category-b"],
+      "description": "category-a = Sunday 00:00 IST; category-b = Monday 00:00 IST"
+    },
+    "sync_timeout_minutes": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 360
+    },
+    "minimum_mock_questions": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "duration_minutes": {
+      "type": "integer"
+    },
+    "practice_pass_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "practice_threshold_is_official": {
+      "type": "boolean",
+      "description": "false = simulator policy only, not HashiCorp or provider confirmed"
+    },
+    "scoring_policy": {
+      "type": "string",
+      "enum": ["all_or_nothing", "partial_credit"]
+    },
+    "path": {
+      "type": "string"
+    },
+    "objective_catalog": {
+      "type": "string"
+    }
+  }
+}
