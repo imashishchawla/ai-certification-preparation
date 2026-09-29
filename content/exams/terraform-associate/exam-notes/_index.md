@@ -2,7 +2,7 @@
 title: "Exam Notes — Terraform Associate (004)"
 description: "Concise exam notes and quick-reference cards for HashiCorp Certified Terraform Associate (004)."
 exam_id: "terraform-associate"
-layout: "exam-notes"
+layout: "list"
 draft: false
 ---
 

@@ -107,11 +107,15 @@ jobs:
           done
 
       # ── Trigger deploy workflow ──────────────────────────────────────────────
+      # NOTE: GITHUB_TOKEN cannot trigger other workflows (GitHub blocks it to
+      # prevent infinite loops). WORKFLOW_DISPATCH_TOKEN is a fine-grained PAT
+      # with Actions: Read & Write on this repo. Add it at:
+      #   github.com/imashishchawla/ai-certification-preparation/settings/secrets/actions
       - name: Trigger deploy workflow
         if: steps.diff.outputs.changed == 'true'
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,

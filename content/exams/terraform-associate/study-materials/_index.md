@@ -2,7 +2,7 @@
 title: "Study Materials — Terraform Associate (004)"
 description: "Official HashiCorp documentation links and reference materials for Terraform Associate (004) exam preparation."
 exam_id: "terraform-associate"
-layout: "study-materials"
+layout: "list"
 draft: false
 ---
 

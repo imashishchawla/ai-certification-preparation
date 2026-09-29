@@ -12,7 +12,7 @@ GITHUB_REPO   = "imashishchawla/ai-certification-preparation"
 # Secrets — set via:  wrangler secret put <NAME>
 #   GITHUB_DISPATCH_TOKEN   fine-grained PAT (Actions: Read & Write) — Worker only
 #   STATUS_HMAC_SECRET      shared hex secret — also set as GitHub repo secret
-#   R2_BUCKET_NAME          R2 bucket name — Worker only
+# Note: R2 is accessed via the CERT_PREP_STATE binding below, not via a secret.
 
 [[r2_buckets]]
 binding = "CERT_PREP_STATE"
