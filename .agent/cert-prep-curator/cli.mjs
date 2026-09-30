@@ -1,3 +1,5 @@
+import fs from 'fs';
+import path from 'path';
 import { runPreflight } from './preflight.mjs';
 import { runValidation } from './validate-output.mjs';
 import { scaffoldExam } from './scaffold-exam.mjs';
@@ -45,9 +47,22 @@ async function main() {
       break;
     }
     case 'sync': {
-      const exam = args[1] || 'cca-f';
+      const examArg = args[1] || 'cca-f';
       const dryRun = args.includes('--dry-run');
-      await syncSources(rootDir, exam, { dryRun });
+      if (examArg === 'all') {
+        const sourcesPath = path.join(rootDir, '.agent/cert-prep-curator/sources.json');
+        const registry = JSON.parse(fs.readFileSync(sourcesPath, 'utf8'));
+        const exams = Object.keys(registry.exams || {});
+        console.log(`[Sync All] Found ${exams.length} configured exams: ${exams.join(', ')}`);
+        for (const exam of exams) {
+          console.log(`\n========================================`);
+          console.log(`[Sync All] Starting sync for: ${exam}`);
+          console.log(`========================================`);
+          await syncSources(rootDir, exam, { dryRun });
+        }
+      } else {
+        await syncSources(rootDir, examArg, { dryRun });
+      }
       break;
     }
     case 'extract-materials': {

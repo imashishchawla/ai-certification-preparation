@@ -11,6 +11,7 @@
     "normalize": "node scripts/normalize-questions.mjs",
     "dedup": "node .agent/cert-prep-curator/cli.mjs dedup-db cca-f",
     "sync": "node .agent/cert-prep-curator/cli.mjs sync cca-f",
+    "sync:all": "node .agent/cert-prep-curator/cli.mjs sync all",
     "preflight": "node .agent/cert-prep-curator/cli.mjs preflight",
     "curate": "node .agent/cert-prep-curator/cli.mjs curate cca-f",
     "curator": "node .agent/cert-prep-curator/cli.mjs"
