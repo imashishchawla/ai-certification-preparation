@@ -1,5 +1,5 @@
 ---
-title: "Amey-Thakur — Maintainer Notes"
+title: "Architect Foundations Scenario Study Notes"
 meta: "Study notes"
 tags: ["study", "guide"]
 ---

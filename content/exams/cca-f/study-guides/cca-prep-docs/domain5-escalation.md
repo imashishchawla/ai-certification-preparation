@@ -1,5 +1,5 @@
 ---
-title: "Domain5 Escalation"
+title: "D5 · Escalation patterns & reliability"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

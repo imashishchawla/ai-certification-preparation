@@ -1,5 +1,5 @@
 ---
-title: "5 Context Management__5 3 Error Propagation"
+title: "5.3 — Error Propagation in Multi-Agent Systems"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

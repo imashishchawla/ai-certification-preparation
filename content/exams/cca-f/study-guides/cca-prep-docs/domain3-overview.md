@@ -1,5 +1,5 @@
 ---
-title: "Domain3 Overview"
+title: "D3 · Claude Code Configuration & Workflows Overview"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Exam Patterns, Cheat Sheet & The Calm Method"
+title: "Architect Foundations Exam Patterns & Decision Rules"
 description: "Core architectural decision rules, 21 golden patterns, distractor elimination heuristics, and 24 scenario practice questions for CCA-F."
 date: 2026-09-21
 tags: ["study-guide", "exam-patterns", "cheat-sheet", "calm-method", "cca-f"]

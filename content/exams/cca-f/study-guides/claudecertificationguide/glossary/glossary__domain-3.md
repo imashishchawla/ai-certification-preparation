@@ -1,5 +1,5 @@
 ---
-title: "Glossary__domain 3"
+title: "D3 Glossary: Claude Code Configuration & Workflows"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

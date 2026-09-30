@@ -1,5 +1,5 @@
 ---
-title: "2 Tool Design Mcp__2 5 Built In Tools"
+title: "2.5 — Built-in Tools"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

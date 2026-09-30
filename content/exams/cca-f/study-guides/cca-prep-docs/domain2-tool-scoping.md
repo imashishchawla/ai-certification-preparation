@@ -1,5 +1,5 @@
 ---
-title: "Domain2 Tool Scoping"
+title: "D2 · Tool scoping & tool_choice"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Glossary__domain 2"
+title: "D2 Glossary: Tool Design & MCP Integration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

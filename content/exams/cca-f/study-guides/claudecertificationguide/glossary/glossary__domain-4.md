@@ -1,5 +1,5 @@
 ---
-title: "Glossary__domain 4"
+title: "D4 Glossary: Prompt Engineering & Structured Output"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

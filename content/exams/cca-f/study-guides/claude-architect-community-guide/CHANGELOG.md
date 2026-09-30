@@ -1,5 +1,5 @@
 ---
-title: "CHANGELOG"
+title: "Community Study Guide Update History"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

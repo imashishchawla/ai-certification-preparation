@@ -1,5 +1,5 @@
 ---
-title: "D2 Tool Design Mcp"
+title: "D2 · Tool Design & MCP Integration — Extended Notes"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

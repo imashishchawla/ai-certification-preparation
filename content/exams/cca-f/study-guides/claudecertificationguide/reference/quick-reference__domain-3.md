@@ -1,5 +1,5 @@
 ---
-title: "Quick Reference__domain 3"
+title: "D3 Quick Reference: Claude Code Configuration & Workflows"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

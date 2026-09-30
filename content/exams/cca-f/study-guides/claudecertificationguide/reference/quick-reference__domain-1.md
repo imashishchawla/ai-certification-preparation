@@ -1,5 +1,5 @@
 ---
-title: "Quick Reference__domain 1"
+title: "D1 Quick Reference: Agentic Architecture & Orchestration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

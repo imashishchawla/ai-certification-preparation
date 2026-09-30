@@ -1,5 +1,5 @@
 ---
-title: "Domain2 Tool Descriptions"
+title: "D2 · Writing effective tool descriptions"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

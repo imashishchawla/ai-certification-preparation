@@ -1,5 +1,5 @@
 ---
-title: "3 Claude Code Config__3 1 Claude Md Hierarchy"
+title: "3.1 — CLAUDE.md Hierarchy, Scoping, and Modular Organisation"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

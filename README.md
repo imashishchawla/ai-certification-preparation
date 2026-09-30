@@ -2,7 +2,7 @@
 
 [![Cyberspace Status](https://img.shields.io/badge/TERMINAL-ONLINE-00FF66?style=for-the-badge&logo=gnubash&logoColor=000)](https://imashishchawla.github.io/ai-certification-preparation/)
 [![Access Tier](https://img.shields.io/badge/ACCESS-100%25%20FREE-FFB000?style=for-the-badge)](https://imashishchawla.github.io/ai-certification-preparation/)
-[![Sync Pulse](https://img.shields.io/badge/SYNC%20PULSE-MON%2000%3A00%20UTC-00E5FF?style=for-the-badge&logo=githubactions&logoColor=fff)](https://github.com/imashishchawla/ai-certification-preparation/actions)
+[![Sync Pulse](https://img.shields.io/badge/SYNC%20PULSE-SUN%2012%3A00%20UTC-00E5FF?style=for-the-badge&logo=githubactions&logoColor=fff)](https://github.com/imashishchawla/ai-certification-preparation/actions)
 [![Question Bank](https://img.shields.io/badge/QUESTION%20DATABASE-1%2C130%20VERIFIED-FF0055?style=for-the-badge)](https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/sample-questions/)
 
 > Prepare for professional certifications in one place. Find focused study guides, practice questions, exam notes, and timed mock tests, organized into a clear learning path for each available certification.
@@ -15,8 +15,16 @@
 ### 🚀 **[https://imashishchawla.github.io/ai-certification-preparation/](https://imashishchawla.github.io/ai-certification-preparation/)**
 
 - 💾 **100% Free Forever:** No paywalls, no paid courses, no sign-ups, no tracking cookies.
-- ⚡ **Weekly Sync Pulse:** Automatically synchronizes, deduplicates, and validates new scenario questions **every Monday night at 00:00 UTC**.
+- ⚡ **Weekly Sync Pulse:** Automatically synchronizes, deduplicates, and validates new scenario questions **every Sunday at 12:00 UTC (17:30 IST)**. The weekly metrics report follows on Monday at 08:30 IST.
 - **One place to prepare:** Study material and practice tools are organized by certification track on the website.
+
+---
+
+<!-- WEEKLY-METRICS:START -->
+### Weekly platform update
+
+The first verified weekly snapshot will appear here after the scheduled report runs.
+<!-- WEEKLY-METRICS:END -->
 
 ---
 

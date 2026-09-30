@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 2 Orchestration Patterns"
+title: "1.2 — Multi-Agent Orchestration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

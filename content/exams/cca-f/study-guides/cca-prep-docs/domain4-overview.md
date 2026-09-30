@@ -1,5 +1,5 @@
 ---
-title: "Domain4 Overview"
+title: "D4 · Prompt Engineering & Structured Output Overview"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

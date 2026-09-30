@@ -1,5 +1,5 @@
 ---
-title: "README"
+title: "Community Architect Foundations Study Track"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Amey-Thakur — Domain Task Statements"
+title: "Architect Foundations Exam Blueprint & Preparation"
 meta: "Condensed from official guide (1.1-5.6)"
 tags: ["study", "guide"]
 ---

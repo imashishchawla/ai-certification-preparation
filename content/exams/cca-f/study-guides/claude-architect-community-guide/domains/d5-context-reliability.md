@@ -1,5 +1,5 @@
 ---
-title: "D5 Context Reliability"
+title: "D5 · Context Management & Reliability — Extended Notes"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

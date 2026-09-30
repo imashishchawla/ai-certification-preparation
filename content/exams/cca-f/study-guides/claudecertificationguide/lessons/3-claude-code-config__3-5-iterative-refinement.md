@@ -1,5 +1,5 @@
 ---
-title: "3 Claude Code Config__3 5 Iterative Refinement"
+title: "3.5 — Iterative Refinement Techniques"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

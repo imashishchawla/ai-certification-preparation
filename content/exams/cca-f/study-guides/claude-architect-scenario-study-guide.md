@@ -1,5 +1,5 @@
 ---
-title: "Claude Architect Scenario & Theory Guide"
+title: "Architect Foundations Scenario & Theory Manual"
 meta: "3400 lines · API, Agent SDK, MCP, Claude Code, hooks, sessions"
 tags: ["study", "guide"]
 ---

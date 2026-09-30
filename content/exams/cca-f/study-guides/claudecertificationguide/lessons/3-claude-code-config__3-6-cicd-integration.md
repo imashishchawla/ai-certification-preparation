@@ -1,5 +1,5 @@
 ---
-title: "3 Claude Code Config__3 6 Cicd Integration"
+title: "3.6 — CI/CD Integration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Ccdv F Developer Foundations Page"
+title: "Developer Foundations: Planned Exam Guide"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

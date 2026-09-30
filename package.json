@@ -8,6 +8,7 @@
     "dev": "node scripts/serve.mjs",
     "build": "hugo --minify && node scripts/build-browser-artifacts.mjs && node scripts/audit-rendered-pages.mjs && node scripts/seo-spider.mjs && node scripts/verify-site-build.mjs && node scripts/check-external-links.mjs",
     "validate": "node scripts/validate-questions.mjs",
+    "report:weekly:preview": "node scripts/weekly-report.mjs --dry-run",
     "normalize": "node scripts/normalize-questions.mjs",
     "dedup": "node .agent/cert-prep-curator/cli.mjs dedup-db cca-f",
     "sync": "node .agent/cert-prep-curator/cli.mjs sync cca-f",

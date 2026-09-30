@@ -1,5 +1,5 @@
 ---
-title: "4 Prompt Engineering__4 6 Multi Pass Review"
+title: "4.6 — Multi-Instance and Multi-Pass Review"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

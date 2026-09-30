@@ -1,5 +1,5 @@
 ---
-title: "README Upstream"
+title: "Community Architect Foundations Guide: Source Overview"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

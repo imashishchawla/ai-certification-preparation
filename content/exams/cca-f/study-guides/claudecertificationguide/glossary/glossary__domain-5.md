@@ -1,5 +1,5 @@
 ---
-title: "Glossary__domain 5"
+title: "D5 Glossary: Context Management & Reliability"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

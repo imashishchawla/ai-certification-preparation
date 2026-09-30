@@ -1,5 +1,5 @@
 ---
-title: "D3 Claude Code Config"
+title: "D3 · Claude Code Configuration & Workflows — Extended Notes"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

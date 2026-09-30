@@ -1,5 +1,5 @@
 ---
-title: "Guide Main Document"
+title: "Architect Foundations Complete Study Plan"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

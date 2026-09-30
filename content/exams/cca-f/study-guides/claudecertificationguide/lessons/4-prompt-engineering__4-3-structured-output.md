@@ -1,5 +1,5 @@
 ---
-title: "4 Prompt Engineering__4 3 Structured Output"
+title: "4.3 — Structured Output with Tool Use"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

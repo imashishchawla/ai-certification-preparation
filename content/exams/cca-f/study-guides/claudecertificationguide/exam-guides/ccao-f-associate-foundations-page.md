@@ -1,5 +1,5 @@
 ---
-title: "Ccao F Associate Foundations Page"
+title: "Associate Foundations: Planned Exam Guide"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

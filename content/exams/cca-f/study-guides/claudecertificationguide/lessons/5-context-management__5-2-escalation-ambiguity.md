@@ -1,5 +1,5 @@
 ---
-title: "5 Context Management__5 2 Escalation Ambiguity"
+title: "5.2 — Escalation & Ambiguity Resolution"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

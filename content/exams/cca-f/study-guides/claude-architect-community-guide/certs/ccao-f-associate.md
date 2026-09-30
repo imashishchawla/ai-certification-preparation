@@ -1,5 +1,5 @@
 ---
-title: "Ccao F Associate"
+title: "Claude Certified Associate — Foundations (CCAO-F)"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

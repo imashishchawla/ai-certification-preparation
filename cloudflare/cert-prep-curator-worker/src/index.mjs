@@ -44,11 +44,11 @@ export default {
       return;
     }
 
-    // Idempotency guard — skip if a run was triggered within the last 23 hours
+    // Idempotency guard — skip if this reporting week already triggered a run.
     if (env.CERT_PREP_STATE) {
       const proceed = await shouldTriggerRun(env.CERT_PREP_STATE);
       if (!proceed) {
-        console.log('[Worker] Idempotency guard: run already triggered recently — skipping');
+        console.log('[Worker] Idempotency guard: run already triggered this week — skipping');
         return;
       }
     }

@@ -1,5 +1,5 @@
 ---
-title: "Domain5 Overview"
+title: "D5 · Context Management & Reliability Overview"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

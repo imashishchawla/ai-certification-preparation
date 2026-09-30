@@ -1,5 +1,5 @@
 ---
-title: "Ccar P Architect Professional"
+title: "Claude Certified Architect — Professional (CCAR-P)"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

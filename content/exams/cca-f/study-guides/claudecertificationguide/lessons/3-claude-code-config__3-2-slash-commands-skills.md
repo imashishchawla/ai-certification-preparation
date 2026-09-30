@@ -1,5 +1,5 @@
 ---
-title: "3 Claude Code Config__3 2 Slash Commands Skills"
+title: "3.2 — Custom Slash Commands and Skills"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

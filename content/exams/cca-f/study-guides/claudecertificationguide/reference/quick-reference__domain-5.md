@@ -1,5 +1,5 @@
 ---
-title: "Quick Reference__domain 5"
+title: "D5 Quick Reference: Context Management & Reliability"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

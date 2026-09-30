@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 6 Task Decomposition"
+title: "1.6 — Task Decomposition Strategies"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

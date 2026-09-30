@@ -1,5 +1,5 @@
 ---
-title: "Ccar P Architect Professional Page"
+title: "Architect Professional: Planned Exam Guide"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

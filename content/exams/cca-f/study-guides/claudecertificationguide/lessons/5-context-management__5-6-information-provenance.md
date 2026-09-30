@@ -1,5 +1,5 @@
 ---
-title: "5 Context Management__5 6 Information Provenance"
+title: "5.6 — Information Provenance & Multi-Source Synthesis"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

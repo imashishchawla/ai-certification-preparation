@@ -1,5 +1,5 @@
 ---
-title: "Domain3 Cicd"
+title: "D3 · CI/CD integration"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "2 Tool Design Mcp__2 2 Structured Error Responses"
+title: "2.2 — Structured Error Responses"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

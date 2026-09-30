@@ -1,5 +1,5 @@
 ---
-title: "Domain5 Context Strategies"
+title: "D5 · Context management strategies"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "4 Prompt Engineering__4 2 Few Shot Prompting"
+title: "4.2 — Few-Shot Prompting"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

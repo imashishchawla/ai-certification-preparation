@@ -1,5 +1,5 @@
 ---
-title: "5 Context Management__5 4 Codebase Exploration"
+title: "5.4 — Codebase Exploration & Context Degradation"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

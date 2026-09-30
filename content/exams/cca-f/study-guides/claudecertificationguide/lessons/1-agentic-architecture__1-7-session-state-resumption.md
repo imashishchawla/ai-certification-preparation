@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 7 Session State Resumption"
+title: "1.7 — Session State and Resumption"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

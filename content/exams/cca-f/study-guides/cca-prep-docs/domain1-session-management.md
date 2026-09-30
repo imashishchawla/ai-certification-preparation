@@ -1,5 +1,5 @@
 ---
-title: "Domain1 Session Management"
+title: "D1 · Session management"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

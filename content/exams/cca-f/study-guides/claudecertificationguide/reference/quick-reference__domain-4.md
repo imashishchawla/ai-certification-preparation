@@ -1,5 +1,5 @@
 ---
-title: "Quick Reference__domain 4"
+title: "D4 Quick Reference: Prompt Engineering & Structured Output"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Domain1 Overview"
+title: "D1 · Agentic Architecture & Orchestration Overview"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

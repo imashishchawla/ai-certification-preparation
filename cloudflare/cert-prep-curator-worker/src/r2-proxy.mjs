@@ -4,7 +4,7 @@
  * Keys stored in R2:
  *   exams/<examId>/release-gate.json   — release gate record (set by curator workflow)
  *   exams/<examId>/audit-latest.json   — latest curation run audit summary
- *   scheduler/last-run.json            — idempotency guard for scheduled cron
+ *   scheduler/weeks/<ISO-week>.json     — idempotency guard for scheduled cron
  */
 
 const json = (data, status = 200) =>
@@ -76,22 +76,35 @@ export async function putAuditSummary(r2, examId, body) {
 
 // ── Scheduler idempotency guard ───────────────────────────────────────────────
 
-const IDEMPOTENCY_WINDOW_MS = 23 * 60 * 60 * 1000; // 23 hours
+export function schedulerWeek(now = new Date()) {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(now);
+  const date = Object.fromEntries(parts.map(part => [part.type, part.value]));
+  const monday = new Date(Date.UTC(+date.year, +date.month - 1, +date.day));
+  monday.setUTCDate(monday.getUTCDate() - (monday.getUTCDay() + 6) % 7);
+  const thursday = new Date(monday);
+  thursday.setUTCDate(thursday.getUTCDate() + 3);
+  const first = new Date(Date.UTC(thursday.getUTCFullYear(), 0, 4));
+  first.setUTCDate(first.getUTCDate() - (first.getUTCDay() + 6) % 7);
+  const week = Math.round((monday - first) / 604800000) + 1;
+  return thursday.getUTCFullYear() + '-W' + String(week).padStart(2, '0');
+}
+
+function schedulerKey(now = new Date()) {
+  return `scheduler/weeks/${schedulerWeek(now)}.json`;
+}
 
 /**
- * Check whether a curation run was already triggered today.
+ * Check whether a curation run was already triggered in this reporting week.
  * Returns true if a new run should proceed.
  */
 export async function shouldTriggerRun(r2) {
-  const obj = await r2.get('scheduler/last-run.json');
-  if (!obj) return true;
-  const record = await obj.json();
-  const lastRun = new Date(record.triggeredAt).getTime();
-  return Date.now() - lastRun > IDEMPOTENCY_WINDOW_MS;
+  return !(await r2.get(schedulerKey()));
 }
 
 export async function markRunTriggered(r2) {
-  await r2.put('scheduler/last-run.json', JSON.stringify({ triggeredAt: new Date().toISOString() }), {
+  await r2.put(schedulerKey(), JSON.stringify({ triggeredAt: new Date().toISOString() }), {
     httpMetadata: { contentType: 'application/json' }
   });
 }

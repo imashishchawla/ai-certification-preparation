@@ -1,5 +1,5 @@
 ---
-title: "4 Prompt Engineering__4 1 System Prompts"
+title: "4.1 — System Prompts with Explicit Criteria"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

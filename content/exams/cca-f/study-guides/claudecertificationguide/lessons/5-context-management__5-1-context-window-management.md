@@ -1,5 +1,5 @@
 ---
-title: "5 Context Management__5 1 Context Window Management"
+title: "5.1 — Context Window Management"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

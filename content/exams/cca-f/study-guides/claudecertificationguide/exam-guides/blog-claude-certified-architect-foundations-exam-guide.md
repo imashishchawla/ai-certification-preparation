@@ -1,5 +1,5 @@
 ---
-title: "Blog Claude Certified Architect Foundations Exam Guide"
+title: "Architect Foundations Exam Blueprint Explained"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

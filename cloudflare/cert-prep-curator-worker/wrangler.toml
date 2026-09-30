@@ -20,7 +20,6 @@ bucket_name = "cert-prep-curator-state"
 preview_bucket_name = "cert-prep-curator-state-preview"
 
 [triggers]
-# Fires twice per week — Sun 18:30 UTC = Mon 00:00 IST, Sat 18:30 UTC = Sun 00:00 IST
-# Only one will actually trigger curation (idempotency guard in Worker)
+# Sun 12:00 UTC = Sun 17:30 IST; leaves time for deployment before Monday's report.
 # Note: Cloudflare cron uses 1-7 for Mon-Sun (0 is invalid; use 7 for Sunday)
-crons = ["30 18 * * 7", "30 18 * * 6"]
+crons = ["0 12 * * 7"]

@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 3 Subagent Invocation Context"
+title: "1.3 — Subagent Invocation and Context Passing"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

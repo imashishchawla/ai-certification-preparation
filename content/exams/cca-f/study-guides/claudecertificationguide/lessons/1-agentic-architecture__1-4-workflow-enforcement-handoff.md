@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 4 Workflow Enforcement Handoff"
+title: "1.4 — Workflow Enforcement and Handoff"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Glossary__domain 1"
+title: "D1 Glossary: Agentic Architecture & Orchestration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

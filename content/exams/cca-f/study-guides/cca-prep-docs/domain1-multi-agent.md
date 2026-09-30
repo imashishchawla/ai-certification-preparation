@@ -1,5 +1,5 @@
 ---
-title: "Domain1 Multi Agent"
+title: "D1 · Multi-agent orchestration"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

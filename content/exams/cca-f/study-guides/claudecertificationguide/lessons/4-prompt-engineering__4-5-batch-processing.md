@@ -1,5 +1,5 @@
 ---
-title: "4 Prompt Engineering__4 5 Batch Processing"
+title: "4.5 — Batch Processing Strategies"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

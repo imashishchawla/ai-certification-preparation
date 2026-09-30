@@ -1,5 +1,5 @@
 ---
-title: "4 Prompt Engineering__4 4 Validation Retry Loops"
+title: "4.4 — Validation, Retry, and Feedback Loops"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

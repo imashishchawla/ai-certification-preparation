@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 1 Agentic Loops"
+title: "1.1 — Agentic Loops"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

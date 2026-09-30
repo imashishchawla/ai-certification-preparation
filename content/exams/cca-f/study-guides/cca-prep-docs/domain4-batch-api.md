@@ -1,5 +1,5 @@
 ---
-title: "Domain4 Batch Api"
+title: "D4 · Message Batches API"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

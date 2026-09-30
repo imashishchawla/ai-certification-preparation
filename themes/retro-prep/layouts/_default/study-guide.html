@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+<article class="study-guide">
+  <header class="study-guide-header">
+    <p class="study-guide-kicker">{{ with .Params.exam_code }}{{ . }} <span aria-hidden="true">/</span> {{ end }}{{ .Params.guide_kind | default "Study guide" }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.guide_summary }}<p class="study-guide-summary">{{ . }}</p>{{ else }}{{ with .Description }}<p class="study-guide-summary">{{ . }}</p>{{ end }}{{ end }}
+    <div class="study-guide-meta">
+      {{ with .Params.study_time }}<span>Read time: {{ . }}</span>{{ end }}
+      {{ with .Params.exam_lens }}<span>Exam focus: {{ . }}</span>{{ end }}
+      <a href="#guide-content">Skip to guide ↓</a>
+    </div>
+  </header>
+
+  <div class="study-guide-grid">
+    <div class="study-guide-main" id="guide-content">
+      {{ with .Params.exam_tip }}<aside class="study-guide-tip"><strong>How to use this guide</strong><p>{{ . }}</p></aside>{{ end }}
+      <div class="study-guide-body content">{{ .Content }}</div>
+      <footer class="study-guide-end"><a href="{{ .CurrentSection.RelPermalink }}">← More study guides</a><a href="#main-content">Back to top ↑</a></footer>
+    </div>
+    {{ with .TableOfContents }}
+    <aside class="study-guide-sidebar" aria-label="On this page">
+      <div class="study-guide-sidebar-inner">
+        <p class="study-guide-sidebar-label">On this page</p>
+        {{ . }}
+        <a class="study-guide-sidebar-back" href="{{ $.CurrentSection.RelPermalink }}">All study guides ↗</a>
+      </div>
+    </aside>
+    {{ end }}
+  </div>
+</article>
+{{ end }}

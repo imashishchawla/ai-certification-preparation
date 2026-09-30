@@ -1,5 +1,5 @@
 ---
-title: "Ccdv F Developer"
+title: "Claude Certified Developer — Foundations (CCDV-F)"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

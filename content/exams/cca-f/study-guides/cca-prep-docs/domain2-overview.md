@@ -1,5 +1,5 @@
 ---
-title: "Domain2 Overview"
+title: "D2 · Tool Design & MCP Integration Overview"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

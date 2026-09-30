@@ -1,5 +1,5 @@
 ---
-title: "README"
+title: "Architect Foundations 30-Lesson Curriculum"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

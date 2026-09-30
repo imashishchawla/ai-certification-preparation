@@ -1,5 +1,5 @@
 ---
-title: "Domain1 Agentic Loops"
+title: "D1 · Agentic loops"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

@@ -1,520 +1,121 @@
 ---
-title: "Cheat Sheet"
-meta: "29-entry printable cheat sheet with code"
-tags: ["study", "guide"]
+title: "Architect Foundations: exam decision cheat sheet"
+description: "A scenario-first quick reference for the five Claude Certified Architect – Foundations domains."
+guide_kind: "Cheat sheet"
+guide_summary: "Recognize the constraint in a scenario, choose a reliable design, and explain why the tempting alternative fails."
+exam_code: "CCAR-F"
+study_time: "12–15 minutes"
+exam_lens: "Five domains · six published scenarios"
+exam_tip: "Read the decision rules once, then cover the answer column and rehearse each scenario aloud. Use the linked lessons when you cannot explain a tradeoff."
+tags: ["study", "guide", "cheat-sheet", "cca-f"]
 ---
-# CCA-Prep Cheat Sheet (29 quick-reference entries)
 
-Source: github.com/vinipx/cca-prep · src/data/cheatsheet.ts
+## Start with the shape of the exam
 
+The [official exam guide](/ai-certification-preparation/exams/cca-f/study-materials/) describes **60 multiple-choice and multiple-response questions in 120 minutes**. Four of six published production scenarios are selected for a sitting. A question usually gives you a system, a constraint, and several plausible actions. Identify the constraint before choosing a tool or pattern.
 
-## 1. [Agentic loops] D1 Agentic Architecture & Orchestration — stop_reason control flow
+| Domain | Weight | Ask yourself first |
+| --- | ---: | --- |
+| D1 · Agentic architecture & orchestration | 27% | Who owns the loop, handoff, and state? |
+| D2 · Tool design & MCP integration | 18% | Which tool, scope, or error signal gives the model a safe next step? |
+| D3 · Claude Code configuration & workflows | 20% | Where should the instruction live, and when should execution pause for a plan? |
+| D4 · Prompt engineering & structured output | 20% | How is the output constrained, validated, and corrected? |
+| D5 · Context management & reliability | 15% | What information must survive, and when should a human take over? |
 
-Continue loop when stop_reason === "tool_use". Execute tools, append results to conversation history, call Claude again. Terminate when stop_reason === "end_turn". Never use text content checks as a stop signal.
+**Fast question method:** (1) Name the scenario and required outcome. (2) Mark any hard constraint: latency, policy, context, cost, or output shape. (3) Choose the control that enforces that constraint. (4) Eliminate answers that merely ask the model to remember it.
 
-```
+## D1 · Agentic architecture & orchestration
+
+| If the question describes… | Choose or check… | Watch for… |
+| --- | --- | --- |
+| A tool-using agent that must continue after a tool call | Branch on `stop_reason`: run tools on `tool_use`, return tool results, call the model again; finish on `end_turn`. | Treating assistant text as a completion signal. |
+| Several specialist agents | A coordinator that delegates, passes task context explicitly, and combines results. | Assuming subagents share all conversation context. |
+| A policy that must always block an action | A pre-execution hook or application check. Use a post-tool hook for normalization after execution. | Relying on prompt wording to guarantee a hard rule. |
+| A previous session | Resume when its context is useful; fork to explore divergent paths; start fresh if prior observations are stale. | Reusing stale tool output after files or systems changed. |
+| Large codebase exploration | Give an explorer a narrow question and request a concise, sourced return. | Pulling every file and tool result into the coordinator context. |
+
+```js
 while (true) {
-  const response = await claude.messages.create({...});
+  const response = await claude.messages.create({ /* ... */ });
   if (response.stop_reason === 'end_turn') break;
-  // stop_reason === 'tool_use' — execute tools
-  const toolResults = await executeTools(response.content);
+  if (response.stop_reason !== 'tool_use') throw new Error('Unexpected stop reason');
+  const results = await executeTools(response.content);
   messages.push({ role: 'assistant', content: response.content });
-  messages.push({ role: 'user', content: toolResults });
+  messages.push({ role: 'user', content: results });
 }
 ```
 
-## 2. [Multi-agent] D1 Agentic Architecture & Orchestration — Hub-and-spoke coordinator pattern
+**Scenario cue:** In customer support, separate the agent's proposed refund from the application rule that permits it. In research, specify what each specialist receives and what the coordinator verifies on return.
 
-Coordinator manages ALL inter-subagent communication, error handling, and information routing. Subagents receive isolated context — must be passed explicitly in each prompt. Coordinator decomposes tasks, delegates, aggregates results, and routes errors. Subagents never communicate directly with each other.
+## D2 · Tool design & MCP integration
 
-## 3. [Hooks] D1 Agentic Architecture & Orchestration — Programmatic enforcement via hooks
+| If the question describes… | Choose or check… | Watch for… |
+| --- | --- | --- |
+| The wrong tool being called | Make descriptions distinguish purpose, inputs, output, and when to use each tool. Narrow overlapping choices. | Adding prompt keywords while tools remain ambiguous. |
+| No matching records | Return a valid empty result. | Labeling “no records” as an execution failure and retrying forever. |
+| A tool failure | Return an error signal with actionable context; classify whether retry makes sense. | Hiding a timeout or permission error as an empty success. |
+| A shared external integration | Configure an MCP server at the appropriate project or user scope and pass secrets through environment configuration. | Committing personal credentials or exposing every tool to every agent. |
+| Filesystem versus external data | Use built-in file/search tools for local code; use MCP tools for external actions and data, resources for browsable context. | Building a custom tool for an action the built-in tools already cover. |
 
-PostToolUse hooks normalize data between tool calls (timestamps, status codes, heterogeneous formats). Interception hooks block policy-violating calls before execution (refunds > $500). Use hooks for GUARANTEED compliance. Use prompt instructions only for guidance — they have a non-zero failure rate on compliance-critical paths.
+**Remember:** In MCP, `isError: false` with empty content can be a successful query. `isError: true` means the call failed. A tool contract can additionally describe transient, validation, business, and permission failures; these categories are an application design pattern, not mandatory MCP fields.
 
-## 4. [Session management] D1 Agentic Architecture & Orchestration — --resume vs fork_session
+**Scenario cue:** A customer lookup with no orders is different from a database timeout. The next step should differ too.
 
---resume <session-name>: continues a named prior session. Use when prior context is mostly still valid. Best practice: explicitly inform Claude about any files that changed since the last session.
+## D3 · Claude Code configuration & workflows
 
-fork_session: creates independent branches from a shared baseline. Use to explore two divergent approaches (e.g., two refactoring strategies) without interference.
+| If the question describes… | Choose or check… | Watch for… |
+| --- | --- | --- |
+| A rule for everyone on a project | Put it in a project `CLAUDE.md`; use a nearer directory file or path-scoped rule for narrower work. | Storing shared rules only in a personal user file. |
+| A reusable workflow | Use a skill or command with clear purpose and scope. | Copying a long workflow into every prompt. |
+| A broad or risky change | Review a plan before execution; use direct execution for small, clear tasks. | Treating a plan as a substitute for validation or approval. |
+| CI that needs parseable findings | Use non-interactive output with an explicit schema, then validate the result. | Parsing free-form prose as a stable machine contract. |
+| A prior session after repository changes | Resume with a clear note about changed files, or restart when the old context is unreliable. | Assuming the agent automatically knows what changed. |
 
-Start fresh when: prior tool results are stale due to major system changes.
+**Scope ladder:** user preferences → project instructions → directory or path-specific instructions. Prefer the narrowest shared location that covers the work. For CI findings, include evidence or a `detected_pattern` field if dismissal trends will help tune false positives.
 
-## 5. [Tool descriptions] D2 Tool Design & MCP Integration — Tool descriptions are the routing mechanism
+**Scenario cue:** In code generation, the question often hinges on *where* a convention should live. In CI/CD, it often hinges on how the output is consumed downstream.
 
-Tool descriptions are the primary signal Claude uses for tool selection. Each description must state: (1) exact purpose, (2) required input format, (3) what it returns, (4) when to use it vs. similar alternatives, (5) edge cases. Overlapping descriptions cause misrouting. System prompt keywords can create unintended tool associations — review prompts for conflicts.
+## D4 · Prompt engineering & structured output
 
-## 6. [MCP errors] D2 Tool Design & MCP Integration — Structured MCP error fields
+| If the question describes… | Choose or check… | Watch for… |
+| --- | --- | --- |
+| A strict JSON contract | Define a schema, validate the response, and retry with the exact field error when needed. | Assuming a “return JSON” prompt proves validity. |
+| A category list that may grow | Add an `other` route with a detail field and a review path. | Forcing an unfamiliar value into the nearest wrong enum. |
+| Repeated review misses | Review locally per file, then examine cross-file flow; record prior findings for a dedup pass. | Asking one pass to inspect too many files at equal depth. |
+| Many independent, non-urgent requests | Consider Message Batches when asynchronous completion is acceptable. | Putting a live user wait or blocking CI step behind batch latency. |
+| Tool selection must happen | Choose an appropriate `tool_choice` mode and constrain the available tools. | Treating optional tool use as a guaranteed call. |
 
-Every MCP error response must include:
-• isError: true/false
-• errorCategory: "transient" | "validation" | "business" | "permission"
-• isRetryable: true/false
-• message: human-readable description
+**Validation loop:** generate → parse and validate → return a precise field-level error → retry within a limit → escalate persistent failure. For extraction, carry source or provenance with each field so a reviewer can check it.
 
-Critical distinction: isError: false + empty array = successful query with no results (do NOT retry). isError: true = execution failure (handle per errorCategory).
+**Scenario cue:** For document extraction, schema validity and factual correctness are separate checks. For code review, a finding needs enough evidence to act on and enough structure to measure false positives.
 
-```
-// Transient — retry appropriate
-{ isError: true, errorCategory: 'transient', isRetryable: true, message: 'DB timeout' }
+## D5 · Context management & reliability
 
-// Business rule — do not retry
-{ isError: true, errorCategory: 'business', isRetryable: false, message: 'Refund exceeds $500 limit' }
+| If the question describes… | Choose or check… | Watch for… |
+| --- | --- | --- |
+| Important details lost in long context | Split work into focused passes and preserve exact facts in a compact record. | Simply increasing the context window. |
+| Long tool responses | Trim irrelevant fields before adding them to conversation history. | Dropping fields needed for later decisions or error handling. |
+| An agent failure | Propagate failure type, retryability, attempted action, and partial results to the coordinator. | Returning `[]` so failure looks like “nothing found.” |
+| An uncertain extraction | Calibrate confidence against labeled examples and route doubtful fields to review. | Treating an uncalibrated score as proof. |
+| A final research report | Use tables for comparisons, prose for reasoning, and explicit source conflicts. | Flattening all evidence into one undifferentiated summary. |
 
-// Valid empty result — NOT an error
-{ isError: false, content: [], message: 'No records found' }
-```
+**Scenario cue:** In support, preserve exact order IDs and amounts through summarization. In research, keep citations attached to claims and show conflicting sources. In extraction, route ambiguous or unsupported fields to a human.
 
-## 7. [CLAUDE.md] D3 Claude Code Configuration & Workflows — CLAUDE.md hierarchy and use cases
+## Six scenarios to rehearse
 
-Hierarchy (most specific wins): subdirectory CLAUDE.md > project root CLAUDE.md > global user ~/.claude/CLAUDE.md.
+Four of these six published scenarios frame a sitting. Rehearse each as a sequence of decisions, rather than memorizing a single answer.
 
-Project root: coding standards, architecture decisions, naming conventions, PR format, shared tooling.
-Subdirectory: technology-specific rules (React patterns in /frontend, Python conventions in /backend).
-Global user: personal defaults and preferences.
+| Scenario | Likely decision pressure | Rehearsal question |
+| --- | --- | --- |
+| Customer support resolution | Agent loop, tool errors, refund policy, escalation | What happens after a tool fails or a refund exceeds policy? |
+| Code generation with Claude Code | Instruction scope, skills, plan versus execution | Where should the team rule live? |
+| Multi-agent research | Delegation, context, citations, synthesis | What must the coordinator pass and verify? |
+| Developer productivity tooling | Built-in tools, MCP scope, codebase exploration | Which work stays local and which needs an integration? |
+| Claude Code in CI/CD | Structured findings, false positives, latency | Can downstream automation trust the output shape? |
+| Structured data extraction | Schema, retries, provenance, review | What happens when a field is valid JSON but unsupported? |
 
-Loaded automatically at every session start — no additional configuration needed.
+For full walkthroughs, use the [scenario exercises](/ai-certification-preparation/exams/cca-f/study-guides/cca-prep-exam-scenarios/). For domain depth, return to the [study guide index](/ai-certification-preparation/exams/cca-f/study-guides/).
 
-## 8. [Plan mode] D3 Claude Code Configuration & Workflows — When to require plan mode
+## Source and scope
 
-Plan mode shows Claude's full intended action sequence BEFORE any execution begins. Mandatory for: large-scale refactors, database schema migrations, CI/CD deployments, changes spanning 10+ files, any irreversible production operations.
-
-Invoke with /plan or the plan mode flag. Review the plan carefully. Approve, modify specific steps, or cancel entirely.
-
-## 9. [Structured output] D4 Prompt Engineering & Structured Output — Validation retry loop pattern
-
-Step 1: Request output with JSON schema defined.
-Step 2: Validate response against schema.
-Step 3: If validation fails, return specific error to Claude: exact field + expected type/format + actual wrong value + example correction.
-Step 4: Claude regenerates with that feedback.
-Repeat until valid or max retries exceeded.
-On persistent failures: set requires_human_review: true and route to manual queue.
-
-## 10. [Batch API] D4 Prompt Engineering & Structured Output — Message Batches API decision criteria
-
-Use Batches API when ALL of these are true:
-✓ No real-time user waiting for the response
-✓ Deadline is hours away (not seconds)
-✓ Volume is high (100+ requests)
-✓ ~50% cost savings justify the variable latency
-
-NEVER use for:
-✗ Live user queries (chat, search)
-✗ Blocking workflows with hard SLAs
-✗ Any step a user is actively waiting on
-
-## 11. [Context & reliability] D5 Context Management & Reliability — Attention dilution — diagnosis and fix
-
-Symptom: agent misses details from the middle of long documents or contexts.
-Root cause: attention dilution — not a context window size problem.
-
-Fix pattern:
-1. Split document into logical sections
-2. Process each section with its own focused context pass
-3. Run a separate integration/synthesis pass over all section summaries
-
-A larger context window does NOT fix this — it just relocates the diluted zone. Never substitute window size for focused passes.
-
-## 12. [CLAUDE.md] D3 Claude Code Configuration & Workflows — CLAUDE.md configuration hierarchy
-
-Three levels, each with a different scope:
-
-1. User-level (~/.claude/CLAUDE.md) — personal only, never shared via version control. Use for personal preferences.
-
-2. Project-level (root CLAUDE.md or .claude/CLAUDE.md) — committed to version control, applies to all team members.
-
-3. Directory-level (subdirectory CLAUDE.md) — applies only when working in that directory.
-
-Path-scoped rules (.claude/rules/*.md with YAML frontmatter) apply only to files matching glob patterns. Use these over directory-level CLAUDE.md when conventions span multiple directories (e.g., test files spread throughout the codebase).
-
-@import syntax: reference external files from any CLAUDE.md for modular configuration.
-
-```
-# .claude/rules/testing.md
----
-paths: ["**/*.test.tsx", "**/*.spec.ts"]
----
-# Testing conventions
-- Use React Testing Library
-- Prefer userEvent over fireEvent
-- Always test accessibility
-```
-
-## 13. [Skills] D3 Claude Code Configuration & Workflows — Skill SKILL.md frontmatter options
-
-Three key frontmatter options for skills in .claude/skills/:
-
-context: fork — runs the skill in an isolated sub-agent context. Intermediate tool output stays isolated; only the final response returns. Use for verbose analysis or exploration skills.
-
-allowed-tools — restrict which tools the skill can call during execution. Prevents destructive actions.
-
-argument-hint — display text shown when the skill is invoked without arguments, prompting for required parameters.
-
-Project-scoped skills: .claude/skills/ (committed, shared)
-User-scoped skills: ~/.claude/skills/ (personal, not shared)
-
-```
-# .claude/skills/analyze-codebase.md
----
-context: fork
-allowed-tools: Read, Grep, Glob
-argument-hint: "module-name to analyze (e.g., auth, payments)"
----
-Analyze the architecture of the specified module...
-```
-
-## 14. [Session management] D1 Agentic Architecture & Orchestration — Session resumption vs fork_session
-
---resume <session-name> — continues a specific prior named session. Use when prior context is still valid (no major file changes). When resuming after file changes, explicitly inform the agent about what changed for targeted re-analysis.
-
-fork_session — creates two independent branches from a shared session baseline. Use when exploring two divergent approaches from the same starting point (e.g., comparing two refactoring strategies).
-
-Starting fresh with summaries — preferred when prior tool results are stale (many files changed). Inject a structured summary of key findings into the new session's initial context.
-
-/compact — reduces context usage during extended sessions when context fills with verbose discovery output.
-
-## 15. [MCP servers] D2 Tool Design & MCP Integration — MCP server scoping: project vs user
-
-Project-scoped .mcp.json (project root):
-• Committed to version control
-• Available to ALL team members automatically on clone/pull
-• Use for: shared team tooling (GitHub, Jira, internal databases)
-• Use environment variable expansion for credentials: ${GITHUB_TOKEN}
-
-User-scoped ~/.claude.json:
-• Personal only, never version-controlled
-• Use for: personal experimental servers or user-specific integrations
-
-Both scopes are active simultaneously — you can have project and user servers configured at the same time.
-
-```
-// .mcp.json (committed to version control)
-{
-  "mcpServers": {
-    "github": {
-      "command": "npx",
-      "args": ["@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      }
-    }
-  }
-}
-```
-
-## 16. [Built-in tools] D2 Tool Design & MCP Integration — Built-in tool selection guide
-
-Grep — search file CONTENTS for patterns
-• Finding all callers of a function
-• Finding all imports of a module
-• Finding error message strings
-• Pattern: grep → find entry points → Read to follow
-
-Glob — find FILES by name/extension pattern
-• Find all *.test.tsx files
-• Find all files in src/api/**
-• Find all Terraform *.tf files
-
-Read — load FULL FILE CONTENTS for one file
-Edit — targeted modification using UNIQUE anchor text; fallback: Read + Write when anchor is non-unique
-Write — create new files or full rewrites
-Bash — shell commands not covered by above tools
-
-Rule: Grep for content search, Glob for file name patterns, never use Bash for what a dedicated tool can do.
-
-## 17. [Structured output] D4 Prompt Engineering & Structured Output — tool_choice options — when to use each
-
-"auto" (default) — Claude may call a tool OR return conversational text. No guarantee of tool use. Use when tool calling is optional.
-
-"any" — Claude MUST call at least one tool, its choice. Use when you need guaranteed structured output but multiple extraction schemas are valid (e.g., document type unknown).
-
-Forced {"type": "tool", "name": "X"} — Claude MUST call this specific named tool. Use when a specific tool must run FIRST before any other step (e.g., extract_metadata before enrichment tools).
-
-For multi-step pipelines: use forced selection on the first turn, then "auto" or "any" for subsequent turns.
-
-```
-// Guarantee a specific tool runs first
-const response = await claude.messages.create({
-  tools: [extractMetadata, enrichContent],
-  tool_choice: { type: 'tool', name: 'extract_metadata' },
-  messages,
-});
-
-// Then allow free tool selection for enrichment
-const enriched = await claude.messages.create({
-  tools: [enrichContent, validateOutput],
-  tool_choice: { type: 'any' },
-  messages: [...messages, response],
-});
-```
-
-## 18. [Batch API] D4 Prompt Engineering & Structured Output — Message Batches API — use vs avoid
-
-Message Batches API: ~50% cost savings, up to 24-hour processing window, no guaranteed latency SLA. Responses correlated via custom_id fields.
-
-USE for (latency-tolerant, non-blocking):
-✓ Overnight technical debt reports
-✓ Weekly security audits
-✓ Nightly test generation
-✓ Bulk document classification
-✓ Any job where results are reviewed hours later
-
-AVOID for (blocking, latency-sensitive):
-✗ Pre-merge CI checks (developers waiting)
-✗ Live user queries
-✗ Any workflow with a hard sub-minute SLA
-
-Note: Batch API does NOT support multi-turn tool calling within a single request.
-
-## 19. [Review architecture] D4 Prompt Engineering & Structured Output — Multi-pass code review architecture
-
-Problem: single-pass review of many files causes attention dilution — inconsistent depth, missed bugs, contradictory feedback.
-
-Solution — split into focused passes:
-
-Pass 1 (per-file local): analyze each file individually for local issues (correctness, security, style). Each file gets its own focused context.
-
-Pass 2 (cross-file integration): examine cross-file data flow, interface contracts, and integration points across all files together.
-
-Additional patterns:
-• Independent review instance: use a fresh session (no generation context) for final review
-• Dedup pass: when re-running after new commits, include prior findings and instruct Claude to report only new or still-unaddressed issues
-
-## 20. [Context management] D5 Context Management & Reliability — Structured facts extraction pattern
-
-Problem: progressive summarization loses numerical precision — "$43.27" becomes "$43" or "approximately $40."
-
-Solution: extract transactional facts into a persistent "case facts" block included VERBATIM in every subsequent prompt, outside the summarized conversation history.
-
-What to extract:
-• Exact amounts (disputed charges, refund amounts)
-• Dates and order numbers
-• Account and case IDs
-• Statuses confirmed by the customer
-• Policy thresholds exceeded
-
-The conversation history can be compressed; the facts block must stay exact.
-
-```
-// Injected at the top of every prompt in the session
-const caseFacts = {
-  customerId: 'C-98234',
-  disputedAmount: 43.27,  // exact — never summarize
-  orderIds: ['ORD-1122', 'ORD-1133'],
-  confirmedIssue: 'double charge on 2024-11-03',
-};
-```
-
-## 21. [Error propagation] D5 Context Management & Reliability — Structured error propagation response format
-
-When a subagent fails, return structured error context — not empty results and not a generic "error" status.
-
-Required fields in error response:
-• errorCategory: "transient" | "validation" | "permission" | "business"
-• isRetryable: boolean — should the coordinator retry?
-• failureType: what specifically went wrong
-• attemptedQuery: what the subagent tried
-• partialResults: any data retrieved before failure
-• alternativeApproach: suggestions for recovery
-
-Never return empty results on failure (coordinator mistakes it for "found nothing").
-Never terminate the entire workflow on a single subagent failure.
-
-```
-// Structured error context returned by a subagent
-return {
-  isError: true,
-  errorCategory: 'transient',
-  isRetryable: true,
-  failureType: 'timeout',
-  attemptedQuery: 'AI adoption in healthcare 2024',
-  partialResults: ['article1.pdf summary'],
-  alternativeApproach: 'Try splitting query into two narrower searches',
-};
-```
-
-## 22. [Context management] D1 Agentic Architecture & Orchestration — Trimming verbose tool outputs before context accumulation
-
-Tool results often return far more data than the agent needs. A 40-field order object trimmed to 5 relevant fields before being appended to context costs ~90% fewer tokens — preventing exhaustion without losing semantic value.
-
-When to trim:
-• API responses with many irrelevant fields
-• File system listings where only a few paths are needed
-• Database records where only specific columns matter
-
-When NOT to trim:
-• When downstream agents need the full record
-• When the "irrelevant" fields might be referenced in error handling
-
-Trim at the tool result layer, before appending to conversation history.
-
-```
-// Before appending tool result to context, extract only needed fields
-const rawOrder = await getOrder(orderId); // 40 fields
-const relevantOrder = {
-  orderId: rawOrder.orderId,
-  status: rawOrder.status,
-  amount: rawOrder.amount,
-  customerId: rawOrder.customerId,
-  lastUpdated: rawOrder.lastUpdated,
-  // 35 fields omitted — not needed for this agent's task
-};
-messages.push({ role: 'user', content: JSON.stringify(relevantOrder) });
-```
-
-## 23. [Multi-agent] D1 Agentic Architecture & Orchestration — Explore subagent pattern for context budget preservation
-
-Spawn a dedicated Explore subagent for verbose discovery work. The subagent's tool calls — file listings, search results, directory trees — accumulate in its own isolated context. Only the structured summary returns to the coordinator.
-
-Coordinator context stays clean for high-level orchestration.
-
-Use when:
-• Discovering which files match a complex pattern across a large repo
-• Scanning many documents to find relevant ones
-• Any exploratory task that generates output the coordinator does not need verbatim
-
-The coordinator's prompt to the Explore subagent should specify: what to look for and what format to return the summary in.
-
-## 24. [MCP servers] D2 Tool Design & MCP Integration — MCP Resources as content catalogs
-
-MCP Resources expose WHAT data is available — they are content catalogs, not actions.
-
-Use Resources when:
-• Agents need to know which documents, issues, or schemas exist before deciding what to fetch
-• Exploratory tool calls waste quota when the agent does not know what is available
-• The data set is large and browsable (e.g., 500 Jira issues, a documentation hierarchy)
-
-Use Tools when:
-• The agent needs to perform an operation (create, update, fetch a specific item)
-
-Pattern: agent browses Resource catalog → selects relevant items → calls Tools to fetch only those items.
-
-This avoids blind tool calls like "fetch all issues and filter" when 450 of 500 are irrelevant.
-
-## 25. [CI/CD] D3 Claude Code Configuration & Workflows — --output-format json + --json-schema for CI structured findings
-
-For CI pipelines that need to post findings as inline PR comments or feed downstream tooling, use structured output flags instead of parsing prose.
-
-`--output-format json` — Claude Code emits JSON instead of Markdown prose.
-`--json-schema <schema-file>` — enforces a specific JSON shape.
-
-Combined with `-p` (non-interactive), this produces a fully machine-parseable output.
-
-Typical CI workflow:
-1. Claude Code runs review with these flags
-2. CI script parses the JSON findings
-3. Script posts each finding as an inline PR comment via the GitHub API
-
-Do not parse prose for structured data — use these flags instead.
-
-```
-# CI step: structured review output
-claude -p "Review for security issues" \
-  --output-format json \
-  --json-schema .claude/review-schema.json \
-  > findings.json
-
-# findings.json shape (defined by review-schema.json):
-# [{ "file": "src/auth.ts", "line": 42, "severity": "high", "message": "..." }]
-```
-
-## 26. [Structured output] D4 Prompt Engineering & Structured Output — "other" + detail string pattern for extensible enums
-
-Pure enums force the model to pick the nearest wrong category when a value does not fit — degrading accuracy silently.
-
-Pattern: add "other" to the enum + a companion detail field.
-
-Rules:
-• `category_detail` is null when `category !== "other"`
-• `category_detail` is a non-null string when `category === "other"`
-• Downstream: items with `category === "other"` are routed to human review
-
-Benefits:
-• Preserves controlled vocabulary for known types (enables aggregation, filtering)
-• Gives a structured escape hatch for novel cases
-• Surfaces unknown types for later enum expansion — do not silently fail
-
-```
-// Schema
-{
-  "category": {
-    "type": "string",
-    "enum": ["medical", "dental", "pharmacy", "vision", "other"]
-  },
-  "category_detail": {
-    "type": ["string", "null"],
-    "description": "Required when category is 'other'. Null otherwise."
-  }
-}
-
-// Valid outputs:
-{ "category": "dental", "category_detail": null }
-{ "category": "other", "category_detail": "holistic wellness treatment" }
-```
-
-## 27. [Structured output] D4 Prompt Engineering & Structured Output — detected_pattern field for false positive analysis
-
-Add a `detected_pattern` field to structured review findings to name the code construct that triggered each finding.
-
-When developers dismiss findings, log which patterns were dismissed. Over time, high-dismissal patterns are false positive candidates for prompt tuning.
-
-Workflow:
-1. Pipeline outputs `{ finding: "...", detected_pattern: "eval_in_userland" }`
-2. Developer dismisses the finding → pattern is logged
-3. Weekly: patterns dismissed > 70% of the time are flagged for review
-4. Tune prompt to exclude or handle those patterns differently
-
-Without this field: you know precision is low but not WHY or WHERE to fix it.
-
-```
-// Structured finding with pattern annotation
-{
-  "file": "src/renderer.js",
-  "line": 88,
-  "severity": "medium",
-  "message": "Dynamic code execution via eval()",
-  "detected_pattern": "eval_in_userland",  // ← enables false positive analysis
-  "dismissed": false  // set to true when developer dismisses
-}
-```
-
-## 28. [Context management] D5 Context Management & Reliability — Field-level confidence calibration workflow
-
-Per-field confidence scores are a valid routing signal when calibrated against labeled data — not when used raw.
-
-Calibration workflow:
-1. Extraction pipeline outputs { value: "2026-03-15", confidence: 0.82 } per field
-2. Team manually labels 500+ extractions as correct / incorrect
-3. Plot accuracy vs. confidence score — find the threshold where accuracy ≥ 95%
-4. Route fields below that threshold to human review
-5. Re-calibrate quarterly as document types evolve
-
-Key distinction from the anti-pattern:
-• Anti-pattern: raw, uncalibrated confidence as a blanket escalation signal
-• Valid use: empirically validated per-field threshold for review routing
-
-```
-// Extraction output per field
-{
-  "invoice_number": { "value": "INV-2024-0892", "confidence": 0.97 },
-  "invoice_date":   { "value": "2024-11-03",    "confidence": 0.91 },
-  "line_items":     { "value": [...],             "confidence": 0.61 }  // → human review
-}
-
-// Routing logic (threshold calibrated from labeled validation set)
-const REVIEW_THRESHOLD = 0.87; // empirically: accuracy ≥ 95% above this
-const needsReview = fields.filter(f => f.confidence < REVIEW_THRESHOLD);
-```
-
-## 29. [Context management] D5 Context Management & Reliability — Rendering content types appropriately in synthesis output
-
-Do not homogenize all synthesis output to prose. Different content types communicate more clearly in different formats.
-
-• Financial / numerical data → tables (enables direct comparison)
-• Narrative findings, analysis → prose paragraphs
-• Technical specifications, APIs → structured lists or code blocks
-• Contested findings with conflicting sources → side-by-side comparison
-• Time series data → table with date column
-
-Why it matters: converting a 10-row financial comparison to prose strips the structure that makes comparison possible. Converting a nuanced narrative to bullet points loses the connective reasoning.
-
-Instruct synthesis agents explicitly: "present financial data as tables, narrative analysis as prose, and flagged conflicts as side-by-side comparisons."
+This is a condensed, reorganized study aid based on the [community CCA prep cheatsheet](https://github.com/vinipx/cca-prep/blob/main/src/data/cheatsheet.ts), with the exam structure cross-checked against the [local official guide](/ai-certification-preparation/exams/cca-f/study-materials/). The decision cues are study advice, not official exam questions or guaranteed answers. Check current product documentation for exact CLI options and API behavior before using examples in production.

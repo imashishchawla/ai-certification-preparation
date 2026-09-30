@@ -1,5 +1,5 @@
 ---
-title: "Scenarios"
+title: "Architect Foundations Scenario Practice Bank"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

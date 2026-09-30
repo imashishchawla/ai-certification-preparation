@@ -1,5 +1,5 @@
 ---
-title: "Domain2 Mcp Errors"
+title: "D2 · MCP error handling"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

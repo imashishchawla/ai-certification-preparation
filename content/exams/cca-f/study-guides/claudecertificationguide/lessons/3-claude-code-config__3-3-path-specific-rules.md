@@ -1,5 +1,5 @@
 ---
-title: "3 Claude Code Config__3 3 Path Specific Rules"
+title: "3.3 — Path-Specific Rules for Conditional Convention Loading"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

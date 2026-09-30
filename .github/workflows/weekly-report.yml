@@ -1,0 +1,163 @@
+name: Weekly Platform Report
+
+on:
+  schedule:
+    # Monday 08:30 IST, after the Sunday 12:00 UTC curation dispatch.
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      retry_email:
+        description: 'Retry delivery of an existing frozen weekly report'
+        type: boolean
+        default: false
+      week_date:
+        description: 'Any YYYY-MM-DD date inside the report week (optional)'
+        type: string
+        required: false
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: weekly-platform-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    env:
+      WEEKLY_REPORT_OUTPUT_DIR: ${{ runner.temp }}/weekly-platform-report
+      WEEKLY_REPORT_WEEK_DATE: ${{ inputs.week_date }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      REPORT_EMAIL_FROM: ${{ vars.REPORT_EMAIL_FROM }}
+      REPORT_EMAIL_TO: ${{ secrets.REPORT_EMAIL_TO }}
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Hugo
+        if: ${{ !inputs.retry_email }}
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.166.0'
+          extended: true
+
+      - name: Verify latest live deployment
+        id: deployment
+        if: ${{ !inputs.retry_email }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/check-weekly-deployment.mjs
+          node scripts/verify-live-site.mjs
+
+      - name: Verify scheduled curation
+        id: curation
+        if: ${{ !inputs.retry_email }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/check-weekly-curation.mjs
+
+      - name: Build and audit published content
+        id: build
+        if: ${{ !inputs.retry_email }}
+        run: |
+          node scripts/write-analytics-config.mjs "${RUNNER_TEMP}/weekly-analytics.toml"
+          hugo --minify --cleanDestinationDir --baseURL "https://imashishchawla.github.io/ai-certification-preparation/" --config "hugo.toml,${RUNNER_TEMP}/weekly-analytics.toml"
+          node scripts/build-browser-artifacts.mjs
+          node scripts/audit-rendered-pages.mjs
+          node scripts/seo-spider.mjs
+          node scripts/verify-site-build.mjs
+          node scripts/check-external-links.mjs
+        env:
+          GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
+          CF_ANALYTICS_TOKEN: ${{ vars.CF_ANALYTICS_TOKEN }}
+
+      - name: Generate weekly report and README
+        id: generate
+        if: ${{ !inputs.retry_email }}
+        env:
+          WEEKLY_CURATION_STATUS: verified
+          WEEKLY_BUILD_STATUS: passed
+          WEEKLY_DEPLOYMENT_STATUS: verified
+        run: |
+          if [ -n "${WEEKLY_REPORT_WEEK_DATE}" ]; then
+            node scripts/weekly-report.mjs --publish --week-date "${WEEKLY_REPORT_WEEK_DATE}" --output-dir "${WEEKLY_REPORT_OUTPUT_DIR}"
+          else
+            node scripts/weekly-report.mjs --publish --output-dir "${WEEKLY_REPORT_OUTPUT_DIR}"
+          fi
+
+      - name: Preserve report payload
+        if: ${{ steps.generate.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-report-${{ github.run_id }}
+          path: ${{ env.WEEKLY_REPORT_OUTPUT_DIR }}
+          retention-days: 90
+
+      - name: Commit report and README
+        id: commit
+        if: ${{ !inputs.retry_email }}
+        run: |
+          git config user.name "cert-prep-reporter[bot]"
+          git config user.email "reporter-bot@users.noreply.github.com"
+          git add README.md data/weekly-ledger.json
+          if git diff --cached --quiet; then
+            echo "Report already committed"
+          else
+            git commit -m "docs(report): weekly platform snapshot [skip ci]"
+            git fetch origin main
+            if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD^)" ]; then
+              echo "Main changed during reporting; refusing to overwrite it" >&2
+              exit 1
+            fi
+            git push origin HEAD:main
+          fi
+
+      - name: Render frozen report for email retry
+        if: ${{ inputs.retry_email }}
+        run: |
+          if [ -n "${WEEKLY_REPORT_WEEK_DATE}" ]; then
+            node scripts/weekly-report.mjs --dry-run --week-date "${WEEKLY_REPORT_WEEK_DATE}" --output-dir "${WEEKLY_REPORT_OUTPUT_DIR}"
+          else
+            node scripts/weekly-report.mjs --dry-run --output-dir "${WEEKLY_REPORT_OUTPUT_DIR}"
+          fi
+          cat "${WEEKLY_REPORT_OUTPUT_DIR}/summary.md" >> "${GITHUB_STEP_SUMMARY}"
+
+      - name: Send weekly email
+        id: email
+        if: ${{ success() }}
+        run: node scripts/send-weekly-email.mjs
+
+      - name: Send failure notice
+        id: failure_email
+        if: ${{ failure() && !inputs.retry_email && steps.email.outcome != 'failure' && steps.checkout.outcome == 'success' }}
+        env:
+          WEEKLY_FAILED_STAGE: ${{ steps.deployment.outcome == 'failure' && 'deployment verification' || steps.curation.outcome == 'failure' && 'curation verification' || steps.build.outcome == 'failure' && 'build or audit' || steps.generate.outcome == 'failure' && 'report generation' || 'report commit' }}
+        run: node scripts/send-weekly-email.mjs --failure
+
+      - name: Persist email delivery status
+        if: ${{ always() && steps.checkout.outcome == 'success' && (inputs.retry_email || steps.commit.outcome == 'success') }}
+        run: |
+          git config user.name "cert-prep-reporter[bot]"
+          git config user.email "reporter-bot@users.noreply.github.com"
+          git add data/weekly-ledger.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(report): record weekly email delivery [skip ci]"
+            git fetch origin main
+            if [ "$(git rev-parse origin/main)" != "$(git rev-parse HEAD^)" ]; then
+              echo "Main changed during email delivery; refusing to overwrite it" >&2
+              exit 1
+            fi
+            git push origin HEAD:main
+          fi

@@ -1,5 +1,5 @@
 ---
-title: "Domain4 Few Shot"
+title: "D4 · Few-shot prompting"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

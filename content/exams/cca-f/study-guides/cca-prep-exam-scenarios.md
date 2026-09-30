@@ -1,5 +1,5 @@
 ---
-title: "Exam Scenarios"
+title: "Six Published Architect Foundations Exam Scenarios"
 meta: "Six published exam scenarios"
 tags: ["study", "guide"]
 ---

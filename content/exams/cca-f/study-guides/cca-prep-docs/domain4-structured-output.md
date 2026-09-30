@@ -1,5 +1,5 @@
 ---
-title: "Domain4 Structured Output"
+title: "D4 · Structured output & JSON schemas"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

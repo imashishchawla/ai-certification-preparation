@@ -1,5 +1,5 @@
 ---
-title: "2 Tool Design Mcp__2 1 Tool Schema Design"
+title: "2.1 — Tool Interface Design"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

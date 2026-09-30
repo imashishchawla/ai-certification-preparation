@@ -1,5 +1,5 @@
 ---
-title: "2 Tool Design Mcp__2 4 Mcp Server Integration"
+title: "2.4 — MCP Server Integration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

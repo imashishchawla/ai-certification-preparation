@@ -1,5 +1,5 @@
 ---
-title: "Amey-Thakur — One-Page Cheat Sheet"
+title: "Architect Foundations One-Page Review"
 meta: "Condensed reference"
 tags: ["study", "guide"]
 ---

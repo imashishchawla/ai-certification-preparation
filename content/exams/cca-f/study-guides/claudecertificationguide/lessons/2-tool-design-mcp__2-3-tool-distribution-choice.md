@@ -1,5 +1,5 @@
 ---
-title: "2 Tool Design Mcp__2 3 Tool Distribution Choice"
+title: "2.3 — Tool Distribution & Tool Choice"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

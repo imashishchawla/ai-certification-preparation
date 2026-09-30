@@ -1,5 +1,5 @@
 ---
-title: "Domain1 Hooks"
+title: "D1 · Agent SDK hooks"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

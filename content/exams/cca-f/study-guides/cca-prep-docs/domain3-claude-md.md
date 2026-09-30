@@ -1,5 +1,5 @@
 ---
-title: "Domain3 Claude Md"
+title: "D3 · CLAUDE.md deep dive"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

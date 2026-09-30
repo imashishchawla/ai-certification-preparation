@@ -1,5 +1,5 @@
 ---
-title: "Quick Reference__domain 2"
+title: "D2 Quick Reference: Tool Design & MCP Integration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

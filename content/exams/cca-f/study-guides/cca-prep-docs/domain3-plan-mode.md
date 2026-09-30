@@ -1,5 +1,5 @@
 ---
-title: "Domain3 Plan Mode"
+title: "D3 · Plan mode"
 meta: "cca-prep deep dive"
 tags: ["study", "cca-prep"]
 ---

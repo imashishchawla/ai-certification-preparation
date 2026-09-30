@@ -1,5 +1,5 @@
 ---
-title: "D4 Prompt Engineering"
+title: "D4 · Prompt Engineering & Structured Output — Extended Notes"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---

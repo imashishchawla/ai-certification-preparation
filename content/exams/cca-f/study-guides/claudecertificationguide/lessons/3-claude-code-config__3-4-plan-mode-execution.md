@@ -1,5 +1,5 @@
 ---
-title: "3 Claude Code Config__3 4 Plan Mode Execution"
+title: "3.4 — Plan Mode vs Direct Execution"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

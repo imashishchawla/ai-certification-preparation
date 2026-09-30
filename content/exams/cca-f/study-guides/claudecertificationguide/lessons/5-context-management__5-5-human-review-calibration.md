@@ -1,5 +1,5 @@
 ---
-title: "5 Context Management__5 5 Human Review Calibration"
+title: "5.5 — Human Review & Confidence Calibration"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

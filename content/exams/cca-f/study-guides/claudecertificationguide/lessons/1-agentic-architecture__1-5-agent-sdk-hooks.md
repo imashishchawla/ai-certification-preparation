@@ -1,5 +1,5 @@
 ---
-title: "1 Agentic Architecture__1 5 Agent Sdk Hooks"
+title: "1.5 — Agent SDK Hooks"
 meta: "ClaudeCertificationGuide lesson"
 tags: ["study", "claudecertificationguide"]
 ---

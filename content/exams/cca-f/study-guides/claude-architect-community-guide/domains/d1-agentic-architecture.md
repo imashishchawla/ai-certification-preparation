@@ -1,5 +1,5 @@
 ---
-title: "D1 Agentic Architecture"
+title: "D1 · Agentic Architecture & Orchestration — Extended Notes"
 meta: "community architect guide"
 tags: ["study", "community-guide"]
 ---
