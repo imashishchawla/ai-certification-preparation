@@ -55,17 +55,11 @@ jobs:
         # generated override config file. If either variable is empty, its param is simply absent
         # and Hugo silently skips the analytics snippet in head.html (the {{ with }} guards fire).
         run: |
-          # Write an ephemeral override config with the analytics params.
-          # Use a tab-stripped heredoc (<<-) so YAML indentation doesn't leak
-          # leading whitespace into the TOML keys.
-          cat > /tmp/analytics.toml <<'TOMLEOF'
-[params]
-ga_measurement_id  = "${GA_MEASUREMENT_ID}"
-cf_analytics_token = "${CF_ANALYTICS_TOKEN}"
-TOMLEOF
-          # Replace the shell variable placeholders now that the file is written
-          sed -i "s|\${GA_MEASUREMENT_ID}|${GA_MEASUREMENT_ID}|g" /tmp/analytics.toml
-          sed -i "s|\${CF_ANALYTICS_TOKEN}|${CF_ANALYTICS_TOKEN}|g" /tmp/analytics.toml
+          # Write an ephemeral TOML override with the analytics params.
+          # printf avoids heredoc syntax that can confuse YAML parsers.
+          printf '[params]\nga_measurement_id  = "%s"\ncf_analytics_token = "%s"\n' \
+            "${GA_MEASUREMENT_ID}" "${CF_ANALYTICS_TOKEN}" \
+            > /tmp/analytics.toml
           hugo --minify \
                --baseURL "https://imashishchawla.github.io/ai-certification-preparation/" \
                --config hugo.toml,/tmp/analytics.toml
