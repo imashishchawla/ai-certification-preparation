@@ -1,283 +1,101 @@
-# Unified Master Implementation Plan: Question Normalization, Fullscreen Pearson VUE Mock Exam & Weekly Metrics Automation
+# Master enhancement plan: question quality, mock exam, and weekly reporting
 
-> **Document Version:** 3.0.0 · **Date:** 2026-09-30<br>
-> **Status:** Consolidated Master Plan for Review<br>
-> **Scope:** Merges Question Data Sanitization (Query 1), Fullscreen Pearson VUE Mock Exam Simulator (Query 2), and Autonomous Weekly Metrics & Email Reporting.
+Version 4.0 · 2026-09-30
 
----
+## Current status and scope
 
-## 1. Executive Summary & Architecture
+| Module | Status | Outcome |
+| --- | --- | --- |
+| A · Question prompt cleanup | Planned | Remove parser metadata from 385 published CCA-F prompts while retaining useful structured metadata. |
+| B · Exam-inspired mock test | Planned | Give learners a focused 60-question practice experience with review controls and accessible navigation. |
+| C · Weekly platform report | Implemented; first verified run pending | Use the existing reporter, history ledger, README section, and scheduled email workflow. |
 
-This unified plan brings together three core platform evolutions designed to elevate the **Certification Prep** library to enterprise proctored testing standards and establish an automated weekly growth audit:
+Modules A and B are the implementation work remaining in this plan. Module C needs operational verification and email configuration, rather than a second reporting engine. The detailed reporting specification is in [weekly-metrics-reporting-plan.md](weekly-metrics-reporting-plan.md); the earlier mock-test proposal is in [mock-test-and-question-normalization-plan.md](mock-test-and-question-normalization-plan.md). This document governs where either proposal conflicts with the current repository.
 
-```
-                                  [PLATFORM ENHANCEMENTS]
-                                             │
-      ┌──────────────────────────────────────┼──────────────────────────────────────┐
-      ▼                                      ▼                                      ▼
-[MODULE A: Question Normalization]  [MODULE B: Pearson VUE Mock Exam]  [MODULE C: Weekly Metrics Automation]
-• Sanitize 385 contaminated prompts • Browser Fullscreen API (⛶)      • Track PDFs, Docs, Pages, Questions
-• Strip headers (133 · D4 · [...])  • Hide Domain/Difficulty spoilers  • Persistent data/weekly-ledger.json
-• Extract Section/Topic/Scenario    • Flag for Review (⚑) persistent   • Auto-update README.md table
-• Clean "Scenario: ... Situation:"  • Review Screen (Incomplete/Flagged)• Email digest (Resend/SMTP)
-• Harden upstream extractors        • Post-exam Domain Scorecard D1–D5 • GitHub Actions CI/CD step summary
-```
+## Module A · Clean questions without losing source meaning
 
----
+### Verified inventory
 
-## 2. Module A: Question Normalization & Section Separation
+The current `data/questions/cca-f/questions.json` has 1,130 questions. Three source-specific prompt prefixes affect **385** records:
 
-### 2.1 The Problem
-An audit of [data/questions/cca-f/questions.json](file:///Users/ashishchawla/Documents/My-DIY-Projects/n8-rev-build/neighter/data/questions/cca-f/questions.json) revealed that **385 out of 1,130 questions** have raw upstream parser metadata inadvertently prepended to their `prompt` string:
+| Source ID | Records | Prefix to remove or format |
+| --- | ---: | --- |
+| `claude-architect-guide-257` | 246 | Section/topic, `**Difficulty:** application`, and scenario tag. |
+| `situational-scenarios-88` | 88 | `(Scenario: Name) Situation:**`. |
+| `cca-prep-170-qu` | 51 | Question number, domain heading, and `[basic]`, `[intermediate]`, `[advanced]`, or `[exam]`. |
 
-| Upstream Source | Contaminated Count | Example Leaked String in `prompt` | Root Cause |
-|---|:---:|---|---|
-| `claude-architect-guide-257` | **246** | `5.5 human-review-calibration / stratified-sampling · **Difficulty:** application · scenario: s6 A legal document...` | Parser incorporated curriculum outline numbering and difficulty annotations directly into prompt text. |
-| `situational-scenarios-88` | **88** | `(Scenario: Customer Support Agent) Situation:** The agent resolves only...` | Markdown scenario headings and unescaped asterisks were left unparsed. |
-| `cca-prep-170-qu` | **51** | `133 · D4 Prompt Engineering & Structured Output · [intermediate] A team generates...` | Question counter, domain label, and difficulty brackets were concatenated into the question text. |
+The previous plan's literal regexes matched only 0 of the 246 guide prompts and 31 of the 51 numbered prompts. The revised candidate anchors below matched 246, 88, and 51 records respectively in the current file. They are a starting contract for tests, not permission to apply a broad replacement to unrelated sources.
 
-### 2.2 Sanitization & Extraction Engine (`scripts/clean-question-prompts.mjs`)
-The normalization script will parse every question in `data/questions/cca-f/questions.json` and apply targeted regex extractors:
-
-```
-[Raw Contaminated Prompt]
-   │
-   ├─► Pattern 1 (cca-prep-170-qu): `^\s*\d+\s*·\s*D\d+[^·]+·\s*\[(basic|intermediate|advanced)\]\s*`
-   │      ├── Extract Domain: `D4 Prompt Engineering & Structured Output` → assign to q.domain
-   │      ├── Extract Difficulty: `intermediate` → assign to q.difficulty
-   │      └── Strip prefix → Clean prompt begins immediately with natural question text.
-   │
-   ├─► Pattern 2 (claude-architect-guide-257): `^\s*(\d+\.\d+)\s+([^/]+)/([^\s·]+)\s*·\s*\*\*Difficulty:\*\*\s*([^\s·]+)\s*·\s*scenario:\s*(\w+)\s*`
-   │      ├── Extract Section: `5.5 human-review-calibration` → assign to q.section
-   │      ├── Extract Topic: `stratified-sampling` → assign to q.topic
-   │      ├── Extract Difficulty: `application` → map to `intermediate`
-   │      ├── Extract Scenario Tag: `s6` → assign to q.scenarioTag
-   │      └── Clean prompt: `Scenario: A legal document extraction pipeline has been running...`
-   │
-   └─► Pattern 3 (situational-scenarios-88): `^\(Scenario:\s*([^)]+)\)\s*Situation:\*\*\s*`
-          └── Format cleanly: `Scenario: Customer Support Agent. Situation: The agent resolves only 55% of issues with a target of 80%...`
+```js
+const numbered = /^\s*\d+\s*·\s*(D[1-5])\s+([^·]+?)\s*·\s*\[(basic|intermediate|advanced|exam)\]\s*/;
+const guide = /^\s*(\d+\.\d+)\s+([^/]+?)\s*\/\s*([^·]+?)\s*·\s*\*\*Difficulty:\*\*\s*([^·]+?)\s*·\s*scenario:\s*(\w+)\s*/;
+const scenario = /^\(Scenario:\s*([^)]+)\)\s*Situation:\*\*\s*/;
 ```
 
-### 2.3 JSON Data Schema Preservation
-To preserve deep pedagogical indexing without polluting the candidate-facing prompt, the question schema in `.agent/schemas/question.schema.json` will formally support:
-* `section`: string (e.g. `"5.5 human-review-calibration"`)
-* `topic`: string (e.g. `"stratified-sampling"`)
-* `scenarioTag`: string (e.g. `"Customer Support Agent"`)
-* `prompt`: **Clean, unpolluted question text only**.
+### Data contract and migration
 
-### 2.4 Upstream Parser Hardening
-Update [.agent/cert-prep-curator/extract-materials.mjs](file:///Users/ashishchawla/Documents/My-DIY-Projects/n8-rev-build/neighter/.agent/cert-prep-curator/extract-materials.mjs) so that subsequent curation runs (`npm run curate` or `sync all`) automatically execute sanitization before admitting new items into the database.
+1. Reconcile `.agent/schemas/question.schema.json` with the records and the actual validator before migration. Current records and `scripts/validate-questions.mjs` use `options[].id` and full domain names such as `D1 Agentic Architecture & Orchestration`; the JSON schema currently specifies `options[].key` and a short `D1` code. Select one canonical contract and update its consumers together. Change the schema's description of `prompt` from verbatim source text to clean candidate-facing text.
+2. Add optional `section`, `topic`, and `scenarioTag` fields without changing stable IDs, `sourceId`, correct answers, options, explanations, publication state, or mock eligibility. Keep the existing full domain string unless the whole browser and curation contract is deliberately migrated. Do not replace an existing difficulty value with a guessed value. The 246 guide records already have `intermediate`; preserve the raw `application` label only if a separately named source metadata field is useful.
+3. Implement `scripts/clean-question-prompts.mjs` as an idempotent, source-scoped migration with a default dry run. It must print match counts, unmatched examples, a sample before/after diff, and a machine-readable change manifest. A write mode must refuse to run unless each source count and the total 385 match the reviewed expectation, or an explicitly reviewed new baseline is supplied.
+4. Keep meaningful scenario context in the prompt. For example, format `(Scenario: Customer Support Agent) Situation:** ...` as `Scenario: Customer Support Agent. Situation: ...`. Strip only parser metadata; preserve the question's actual conditions, constraints, and wording.
+5. Harden the source-specific code that creates these records. Check both `.agent/cert-prep-curator/extract-materials.mjs` and `scripts/normalize-questions.mjs`, plus any other adapter that regenerates the affected source IDs. A later curation or normalization run must not restore the prefixes.
 
----
+### Module A acceptance
 
-## 3. Module B: Pearson VUE Fullscreen Proctored Mock Exam
+- Exactly the reviewed 385 records change on the initial migration; the script reports 246/88/51 matches and no unexpected source matches.
+- Running the migration again changes zero records. Re-running the relevant extraction/normalization path does not reintroduce prefixes.
+- Question count remains 1,130, IDs remain unique, and every record retains its answer, four options, explanation, and publication state. The source-specific prompt-prefix checks and `npm run validate` pass.
+- Published browser question and mock artifacts are rebuilt and sampled in both practice mode and the mock test.
 
-### 3.1 Overview of Pearson VUE Simulation
-In official certification exams (Pearson VUE, OnVUE, AWS, HashiCorp, Anthropic), the interface is engineered to simulate realistic proctored conditions:
-1. It runs in **Fullscreen Mode**, eliminating browser tabs, notifications, and website menus.
-2. It **never reveals** the domain category or difficulty during the live exam.
-3. It provides professional test-taker utilities: **Flag for Review**, **Question Review Matrix**, **Targeted Review Filters**, and **Pre-Submission Confirmation**.
+## Module B · Exam-inspired mock test
 
-### 3.2 Full Feature Specification for `static/js/mock-test.js`
+### Experience and naming
 
-#### 1. Fullscreen Proctored Mode (Fullscreen API)
-- Clicking **"Start Mock Exam"** calls `document.documentElement.requestFullscreen()`, instantly taking over the display.
-- Top bar includes a dedicated `⛶ Toggle Fullscreen` button.
-- If the candidate exits fullscreen (`Esc`), the timer continues and a non-intrusive banner appears:<br>
-  *⚠️ Exam Mode: Fullscreen was minimized. [Click to Return to Fullscreen]*
+Use **“exam-inspired practice test”** in learner-facing copy. Pearson VUE publishes examples of Flag for Review and Review All/Incomplete/Flagged controls, which are useful design references. This site is not Pearson VUE, OnVUE, or a proctored exam; browser fullscreen does not provide exam security. The official CCA-F guide describes 60 single-answer multiple-choice questions, 120 minutes, and a passing **scaled score of 720 on a 100–1,000 scale**. It does not define 72% correct as the official passing threshold. Keep the site's 72% setting explicitly labeled **practice target** and its result as **practice pass/fail**, with no implied scaled-score conversion.
 
-#### 2. Proctor Status Header (Top Bar)
-- **Exam Title:** `Claude Certified Architect — Foundations (CCAF)`
-- **Question Counter:** `Question 14 of 60`
-- **Answered Counter:** `52 Answered · 8 Unanswered`
-- **Digital Timer:** `⏱ 01:45:12` (turns amber at <10 mins, pulsing red at <5 mins, auto-submits at 00:00:00).
-- **Flag for Review Action:** Toggleable `⚑ Flag for Review` button with active indicator.
+### Active test behavior
 
-#### 3. Zero Metadata Spoilers
-- Strictly remove `<span class="question-domain">` and `<span>[intermediate]</span>` from the active question screen.
-- Candidates see only the clean question text and choices (A, B, C, D).
+- Keep the current 60-question draw, domain quotas, 120-minute deadline, and persisted attempt. Restrict the mock pool to published, `mockEligible` questions; the current artifact builder publishes all released questions into `mock-pool.json`. Verify the draw never duplicates an ID and meets each quota when enough eligible questions exist.
+- On the learner's **Start Mock Exam** click, request fullscreen and handle the returned promise. If fullscreen is unavailable or declined, continue the practice test in normal page view. Track `fullscreenchange`; show a return-to-fullscreen option after an exit without stopping or resetting the timer. The fullscreen toggle remains optional.
+- Show a compact header with exam title, current question number, answered/unanswered counts, flag state, and remaining time. Show warnings below 10 and 5 minutes; the deadline remains based on the saved timestamp, not interval ticks.
+- Hide domain and difficulty labels while the attempt is active, including in prompt prefixes, browser text, accessible names, review rows, and dialogs. Show the clean prompt and four choices. Answer correctness and rationale appear only after submission.
+- Add Previous, Next, Review Screen, and End Exam controls. From the review screen, provide direct question jumps and Review All, Review Incomplete, and Review Flagged. Persist answers, flags, current position, and review state in the attempt; keep their behavior after refresh.
+- Before a voluntary submit, display exact answered, unanswered, and flagged counts with Return and Confirm actions. At time expiry, submit once immediately and record that it was timed out; no modal may delay expiry.
+- Support keyboard shortcuts only when they do not intercept typing in an input, dialog, or assistive control. Keep visible focus, labeled buttons, semantic radio groups, and a keyboard-operable review matrix. Do not trap focus on the page or depend on color alone for state.
 
-#### 4. Pearson VUE Bottom Navigation
-- `◄ Previous`: Steps to previous question (disabled on Question 1).
-- `Next ►`: Steps to next question.
-- `Review Screen`: Opens the comprehensive question matrix.
-- `End Exam`: Triggers the pre-submission confirmation dialog.
+### Results
 
-#### 5. Pearson VUE Question Review Screen
-A dedicated review screen that candidates can open at any time or automatically upon finishing Question 60:
-- Displays a 60-question review table:
-  - **Question #:** `Question 1` to `Question 60`
-  - **Status:** `Answered (Choice B)` or `Unanswered`
-  - **Flag:** `⚑ Flagged`
-- **3 Targeted Review Actions:**
-  - `Review All (60)`: Steps sequentially through all questions.
-  - `Review Incomplete (N)`: Steps *only* through unanswered questions (saves critical exam time!).
-  - `Review Flagged (M)`: Steps *only* through flagged questions.
-  - Clicking any row jumps directly to that question.
+Show raw practice score, elapsed time, practice target, and a D1–D5 breakdown. Show each answer, correct choice, explanation, domain, and difficulty only after submission. Explain that a raw practice percentage is not Anthropic's scaled exam score. Retake starts a new attempt without exposing the previous answer key in the active view.
 
-#### 6. Pre-Submission Confirmation Dialog
-Prevents accidental submission:
-> **Submit Exam Confirmation**<br>
-> Total Questions: 60<br>
-> Questions Answered: 56<br>
-> Questions Unanswered: 4 ⚠️<br>
-> Questions Flagged for Review: 3 ⚑<br>
->
-> *Are you sure you want to end your exam? Once submitted, you cannot change your answers.*<br>
-> `[ Return to Exam ]` &nbsp;&nbsp; `[ Confirm & Submit Exam ]`
+### Module B acceptance
 
-#### 7. Keyboard Navigation
-- `Alt + N` / `ArrowRight`: Next question
-- `Alt + P` / `ArrowLeft`: Previous question
-- `Alt + F`: Toggle Flag for review
-- Keys `A`, `B`, `C`, `D` or `1`, `2`, `3`, `4`: Select option
+- On a supported browser, Start requests fullscreen from the click. Denial, unsupported fullscreen, Escape, refresh, and return to fullscreen leave a usable exam and an accurate countdown.
+- All 60 questions appear in the review matrix. Answered, unanswered, and flagged filters and counts stay correct after navigation and refresh; zero-match filters have a clear empty state.
+- Active question and review views expose no domain, difficulty, correct answer, or explanation. Results reveal those details after exactly one submission.
+- Keyboard-only navigation, radio selection, flagging, review, submission dialog, and screen-reader labels work on desktop and a narrow viewport. Timer expiry and voluntary submission have distinct tested paths.
+- The reviewed question bank still passes validation, the site build and audits pass, and the mock test is exercised in an actual browser.
 
-#### 8. Post-Exam Results Screen (Where Domain Analytics Belong)
-Revealed **only after submission**:
-- **Official Score Badge:** `52 / 60 (86.7%)` vs 72% Target (`PRACTICE PASS`).
-- **Domain Breakdown Table:** Percentage and raw scores across all 5 domains (D1 to D5).
-- **Question Review List:** Shows Your Answer, Correct Answer, Rationale, and reveals the Domain Category and Difficulty tag for learning review.
+## Module C · Operate the existing weekly report
 
----
+The implementation is already in `scripts/weekly-report.mjs`, `scripts/send-weekly-email.mjs`, `.github/workflows/weekly-report.yml`, `data/weekly-ledger.json`, and the sentinel-bounded README section. Do not add `scripts/generate-weekly-report.mjs`, seed example W39/W40 entries, put email dispatch into `curate-certifications.yml`, or add an SMTP fallback as part of this plan.
 
-## 4. Module C: Automated Weekly Growth & Metrics Reporting System
+The current reporter measures **published questions**, Markdown documents, rendered HTML pages, and PDF/other learner downloads, in that order. It also measures site storage and downloadable-file storage. It keeps every verified snapshot in the ledger, displays up to five weeks in the full report and email, and only two in README. Starting with the third recorded week, displayed week labels include dates. The ledger currently has **no verified weekly snapshots**; counts such as 1,130/114/128/8 are local observations, not historical week-over-week growth.
 
-### 4.1 Tracked Metrics Specification
-| Metric | Detection Method | Baseline (2026-W40) |
-|---|---|:---:|
-| 📄 **PDF Compendiums** | Files matching `static/assets/**/pdfs/*.pdf` | **8 PDFs** |
-| 📚 **Curriculum Documents** | Files matching `content/**/*.md` (lessons, notes, guides) | **114 documents** |
-| 🌐 **Rendered Web Pages** | Files matching `public/**/*.html` | **128 pages** |
-| ❓ **Verified Questions** | Sum of questions in `data/questions/*/questions.json` | **1,130 questions**<br>*(CCA-F: 1,130 · TA-004: 0)* |
+### Operational checks remaining
 
-### 4.2 Historical Ledger Schema (`data/weekly-ledger.json`)
-Maintains a versioned JSON array of weekly snapshots:
-```json
-{
-  "version": "1.0.0",
-  "history": [
-    {
-      "week_id": "2026-W39",
-      "date": "2026-09-23T00:00:00Z",
-      "commit_sha": "154aaad",
-      "metrics": {
-        "pdfs": 8,
-        "documents": 100,
-        "rendered_pages": 116,
-        "questions_total": 1130,
-        "questions_by_exam": { "cca-f": 1130, "terraform-associate": 0 },
-        "sources_synced": 16
-      }
-    },
-    {
-      "week_id": "2026-W40",
-      "date": "2026-09-30T11:04:26Z",
-      "commit_sha": "5645010",
-      "metrics": {
-        "pdfs": 8,
-        "documents": 114,
-        "rendered_pages": 128,
-        "questions_total": 1130,
-        "questions_by_exam": { "cca-f": 1130, "terraform-associate": 0 },
-        "sources_synced": 23
-      },
-      "delta": {
-        "pdfs": 0,
-        "documents": 14,
-        "rendered_pages": 12,
-        "questions_total": 0,
-        "highlights": [
-          "Cataloged HashiCorp Certified: Terraform Associate 004 in master source registry",
-          "Cached 23 official HashiCorp 004 documentation and sample question endpoints",
-          "Generated subpath-aligned certification landing pages and catalog views"
-        ]
-      }
-    }
-  ]
-}
-```
+1. Confirm GitHub repository settings provide `RESEND_API_KEY` and `REPORT_EMAIL_TO` as secrets and a verified `REPORT_EMAIL_FROM` variable. Missing settings or provider failure must remain visible as a failed notification; do not silently report email success.
+2. Observe the first scheduled curation, compatible Pages deployment, Monday report run, README update, and provider message ID. Verify that the email and README render from the same frozen snapshot and that no example history was inserted.
+3. Exercise a dry run and a frozen email retry. A retry must not change the week totals or send a duplicate message. If provider outcome is uncertain, reconcile it before retrying.
+4. Keep the weekly workflow separate from ordinary curation. A failed curation, build, or deployment must send a failure/status notice when email is configured and must not publish unverified live totals.
 
-### 4.3 Self-Updating `README.md`
-The reporter script updates the metrics table in [README.md](file:///Users/ashishchawla/Documents/My-DIY-Projects/n8-rev-build/neighter/README.md) using safe regex substitution between sentinels:
+## Execution order
 
-```markdown
-<!-- WEEKLY-METRICS:START -->
-### 📈 Weekly Platform Pulse (Week 40 · 2026)
+| Phase | Work | Gate |
+| --- | --- | --- |
+| 1 | Align question contract and build reviewed cleanup fixtures for all three source formats. | Counts 246/88/51, schema and browser consumers identified. |
+| 2 | Run dry-run cleanup, inspect sample diffs, migrate 385 prompts, and harden regeneration paths. | Idempotent rerun, unchanged IDs/answers, validators and browser artifacts pass. |
+| 3 | Implement mock exam controls and presentation in `static/js/mock-test.js` and theme CSS. | Accessible navigation, saved state, timeout, and results checks pass. |
+| 4 | Run `npm run build` and browser checks on the practice page and mock test. | No broken links or rendered-page defects; no active-exam spoilers. |
+| 5 | Verify Module C's first scheduled run and email configuration. | One real ledger entry, matching README/email, recorded delivery state. |
 
-| Tracked Metric | Last Week (W39) | This Week (W40) | Net Growth | Status |
-|---|---:|---:|---:|:---:|
-| 📄 **Official PDFs & Guides** | 8 | 8 | — | ✅ Synchronized |
-| 📚 **Lessons & Study Docs** | 100 | 114 | **+14** | 🚀 Active |
-| 🌐 **Rendered Web Pages** | 116 | 128 | **+12** | 🚀 Expanded |
-| ❓ **Active Practice Questions** | 1,130 | 1,130 | — | 🛡️ Verified |
-
-> *Last Automated Sync:* `2026-09-30 11:04 UTC` · *Commit:* [`5645010`](https://github.com/imashishchawla/ai-certification-preparation/commit/5645010)
-<!-- WEEKLY-METRICS:END -->
-```
-
-### 4.4 Email Digest & GitHub Actions Dispatch
-- **Engine (`scripts/generate-weekly-report.mjs`):** Generates both HTML and text email bodies.
-- **Dispatch Channels:**
-  - **Primary:** Resend REST API (via secret `RESEND_API_KEY` + variable `NOTIFICATION_EMAIL`).
-  - **Fallback:** GitHub Action SMTP (`dawidd6/action-send-mail`).
-  - **Fail-Open:** Missing email credentials log a notice, update `README.md`, write to `$GITHUB_STEP_SUMMARY`, and exit cleanly without failing the build.
-
----
-
-## 5. Execution Roadmap
-
-```
-Phase 1: Question Prompt Sanitization
-  ├── Create scripts/clean-question-prompts.mjs
-  ├── Run batch cleanup across all 1,130 questions in data/questions/cca-f/questions.json
-  ├── Validate with npm run validate
-  └── Update .agent/cert-prep-curator/extract-materials.mjs
-
-Phase 2: Pearson VUE Mock Exam Simulator
-  ├── Overhaul static/js/mock-test.js:
-  │     ├── Fullscreen API integration (requestFullscreen, exit banner, toggle button)
-  │     ├── Remove domain/difficulty headers from active question card
-  │     ├── Implement Flag for Review (⚑) persistent state
-  │     ├── Build Pearson VUE Review Screen (Review All / Incomplete / Flagged)
-  │     ├── Build Pre-Submission Confirmation Dialog
-  │     └── Implement keyboard shortcuts (Alt+N, Alt+P, Alt+F, A-D)
-  └── Update theme CSS for proctored top/bottom bars and review table
-
-Phase 3: Weekly Metrics & Reporting Engine
-  ├── Create data/weekly-ledger.json with baseline W39 and W40 records
-  ├── Create scripts/generate-weekly-report.mjs
-  ├── Inject sentinel markers into README.md
-  └── Test local execution via npm run report:weekly
-
-Phase 4: CI/CD Pipeline Integration
-  ├── Update .github/workflows/curate-certifications.yml:
-  │     ├── Run scripts/clean-question-prompts.mjs
-  │     ├── Run scripts/generate-weekly-report.mjs
-  │     ├── Include README.md and data/weekly-ledger.json in automated commit
-  │     └── Add email dispatch step
-  └── Add npm script shortcuts in package.json
-
-Phase 5: End-to-End Build & Validation
-  ├── Run node scripts/build-browser-artifacts.mjs
-  ├── Run npm run build (audit rendered pages, SEO spider, zero external link check)
-  └── Verify fullscreen mock test and cleaned questions in browser
-```
-
----
-
-## 6. Acceptance & Verification Criteria
-
-1. **Question Prompt Sanitization:**
-   - Zero questions in `data/questions/cca-f/questions.json` match `^\d+\s*·`, `·\s*\[(basic|intermediate|advanced)\]`, or `\*\*Difficulty:\*\*`.
-   - `npm run validate` passes with 100% valid question schema.
-2. **Pearson VUE Mock Exam Simulator:**
-   - "Start Mock Exam" expands into Fullscreen mode.
-   - Zero domain category or difficulty tags shown during live test.
-   - Review Screen shows all 60 questions and filters by Incomplete and Flagged.
-   - Pre-submission modal warns of unanswered questions.
-   - Domain Breakdown (D1–D5) and rationales appear accurately on Results Screen.
-3. **Weekly Growth Automation:**
-   - `data/weekly-ledger.json` accurately reflects deltas.
-   - `README.md` self-updates between sentinels.
-   - Email dispatch executes or fails open safely.
-   - `npm run build` generates 100% valid static site with 0 errors.
+Phases 1–4 change the site. Phase 5 is operational verification of the reporting system already shipped.
