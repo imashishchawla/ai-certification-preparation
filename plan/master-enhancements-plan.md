@@ -65,13 +65,22 @@ Use **“exam-inspired practice test”** in learner-facing copy. Pearson VUE pu
 
 ### Results
 
-Show raw practice score, elapsed time, practice target, and a D1–D5 breakdown. Show each answer, correct choice, explanation, domain, and difficulty only after submission. Explain that a raw practice percentage is not Anthropic's scaled exam score. Retake starts a new attempt without exposing the previous answer key in the active view.
+Show raw practice score, elapsed time, practice target, and a D1–D5 breakdown. Explain that a raw practice percentage is not Anthropic's scaled exam score. Retake starts a new attempt without exposing the previous answer key in the active view.
+
+Under **Question Review**, provide interactive filter buttons so learners can isolate and remediate their mistakes without scrolling past passing items:
+- **All Questions (60)**
+- **Incorrect Only (X)** — highlighted filter showing only questions where the learner's answer differed from the correct answer, with its architectural rationale.
+- **Correct Only (Y)**
+- Optional filter by domain chip (D1–D5).
+
+Each reviewed question card displays: Question number, domain, difficulty, candidate choice, correct choice, and complete architectural rationale.
 
 ### Module B acceptance
 
 - On a supported browser, Start requests fullscreen from the click. Denial, unsupported fullscreen, Escape, refresh, and return to fullscreen leave a usable exam and an accurate countdown.
 - All 60 questions appear in the review matrix. Answered, unanswered, and flagged filters and counts stay correct after navigation and refresh; zero-match filters have a clear empty state.
 - Active question and review views expose no domain, difficulty, correct answer, or explanation. Results reveal those details after exactly one submission.
+- Results view provides interactive filtering for **All**, **Incorrect Only**, and **Correct Only** with accurate counts, enabling immediate focus on mistakes.
 - Keyboard-only navigation, radio selection, flagging, review, submission dialog, and screen-reader labels work on desktop and a narrow viewport. Timer expiry and voluntary submission have distinct tested paths.
 - The reviewed question bank still passes validation, the site build and audits pass, and the mock test is exercised in an actual browser.
 
