@@ -27,7 +27,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     env:
-      WEEKLY_REPORT_OUTPUT_DIR: ${{ runner.temp }}/weekly-platform-report
+      WEEKLY_REPORT_OUTPUT_DIR: /tmp/weekly-platform-report
       WEEKLY_REPORT_WEEK_DATE: ${{ inputs.week_date }}
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
       REPORT_EMAIL_FROM: ${{ vars.REPORT_EMAIL_FROM }}
