@@ -10,7 +10,7 @@
         <summary>Exams ▾</summary>
         <div class="dropdown-menu">
           <a href="{{ "exams/" | relLangURL }}" style="font-weight: bold; border-bottom: 1px dashed var(--border);">All Certifications</a>
-          {{ range site.Data.exams.exams }}
+          {{ range hugo.Data.exams.exams }}
             {{ if ne .status "planned" }}
               <a href="{{ .path | relLangURL }}">{{ .name }} ({{ .code }})</a>
             {{ end }}
@@ -19,7 +19,7 @@
       </details>
 
       {{/* ── Per-exam sub-nav dropdowns: one per active exam ── */}}
-      {{ range site.Data.exams.exams }}
+      {{ range hugo.Data.exams.exams }}
         {{ if eq .status "active" }}
         {{ $examPath := .path }}
         {{ $examCode := .code }}

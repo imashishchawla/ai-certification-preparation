@@ -14,10 +14,30 @@ canonifyURLs = false
     style = 'github'
     lineNos = false
 
+# ── Sitemap configuration ────────────────────────────────────────────────────
+[sitemap]
+  changefreq = 'weekly'
+  filename   = 'sitemap.xml'
+  priority   = 0.5
+
 [params]
-  description = 'Self-contained retro preparation site for AI certification exams'
-  show_toc = true
+  description  = 'Free AI & cloud certification exam prep — practice questions, timed mock tests, and study guides for Claude Certified Architect (CCAF), Terraform Associate, and more. No login required.'
+  author       = 'AI Cert Prep'
+  show_toc     = true
+
+  # ── Analytics (injected by CI — never hardcode values here) ─────────────────
+  # ga_measurement_id  — set via GitHub Actions variable GA_MEASUREMENT_ID
+  # cf_analytics_token — set via GitHub Actions variable CF_ANALYTICS_TOKEN
+  # Both are public-safe beacon IDs, not secrets.
+
+  # ── Google Search Console verification ──────────────────────────────────────
+  # Paste the content="..." value from the GSC HTML tag verification method.
+  # This is public-safe — it only proves site ownership to Google.
+  google_site_verification = 'nObZHvVJRHCR2DCcYj3zheofRz997pqo7yPZQ8S_zbU'
+
+  # ── Open Graph image ─────────────────────────────────────────────────────────
+  # og_image = '/ai-certification-preparation/images/og-default.png'
 
 [taxonomies]
-  tag = 'tags'
+  tag      = 'tags'
   category = 'categories'

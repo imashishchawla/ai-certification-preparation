@@ -16,14 +16,14 @@
 
 {{/* ── Stats strip ─────────────────────────────────────────────────────────── */}}
 {{ $activeCount := 0 }}{{ $onboardingCount := 0 }}{{ $plannedCount := 0 }}{{ $totalQ := 0 }}
-{{ range site.Data.exams.exams }}
+{{ range hugo.Data.exams.exams }}
   {{ if eq .status "active"     }}{{ $activeCount    = add $activeCount 1 }}{{ end }}
   {{ if eq .status "onboarding" }}{{ $onboardingCount = add $onboardingCount 1 }}{{ end }}
   {{ if eq .status "planned"    }}{{ $plannedCount    = add $plannedCount 1 }}{{ end }}
   {{ $totalQ = add $totalQ .questions }}
 {{ end }}
 <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; padding: 0.9rem 0 1.5rem; font-family: var(--font-heading); font-size: 0.82rem; color: var(--muted); border-bottom: 1px dashed var(--border); margin-bottom: 2rem;">
-  <span><strong style="color: var(--fg);">{{ len site.Data.exams.exams }}</strong> exams tracked</span>
+  <span><strong style="color: var(--fg);">{{ len hugo.Data.exams.exams }}</strong> exams tracked</span>
   <span><strong style="color: var(--correct-fg);">{{ $activeCount }}</strong> active</span>
   {{ if gt $onboardingCount 0 }}<span><strong style="color: #b45309;">{{ $onboardingCount }}</strong> onboarding</span>{{ end }}
   {{ if gt $plannedCount 0 }}<span><strong style="color: var(--muted);">{{ $plannedCount }}</strong> planned</span>{{ end }}
@@ -32,7 +32,7 @@
 
 {{/* ── Group exams by provider ─────────────────────────────────────────────── */}}
 {{ $providers := slice }}
-{{ range site.Data.exams.exams }}
+{{ range hugo.Data.exams.exams }}
   {{ if not (in $providers .provider) }}
     {{ $providers = $providers | append .provider }}
   {{ end }}
@@ -40,7 +40,7 @@
 
 {{ range $providers }}
   {{ $provider := . }}
-  {{ $exams := where site.Data.exams.exams "provider" $provider }}
+  {{ $exams := where hugo.Data.exams.exams "provider" $provider }}
 
 <section style="margin-bottom: 3rem;">
   {{/* Provider heading */}}

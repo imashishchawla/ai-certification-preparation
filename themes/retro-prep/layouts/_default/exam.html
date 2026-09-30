@@ -4,7 +4,7 @@
 {{/* ── Look up this exam's metadata from data/exams.toml ── */}}
 {{ $examId := .File.Dir | path.Base }}
 {{ $exam := dict }}
-{{ range site.Data.exams.exams }}
+{{ range hugo.Data.exams.exams }}
   {{ if eq .id $examId }}{{ $exam = . }}{{ end }}
 {{ end }}
 

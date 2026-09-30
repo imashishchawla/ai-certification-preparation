@@ -1,9 +1,63 @@
+{{/* ═══════════════════════════════════════════════════════════════════════════
+     head.html — meta, SEO, analytics
+     Analytics IDs are injected by Hugo at build time from hugo.toml [params].
+     CI sets them via:  hugo --environment production -e params.ga_measurement_id=$GA_MEASUREMENT_ID
+     Never hardcode real values here.
+═══════════════════════════════════════════════════════════════════════════ */}}
+
+{{/* ── Core charset / viewport ──────────────────────────────────────────── */}}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{{/* ── Page title ─────────────────────────────────────────────────────────── */}}
+<title>{{ if .IsHome }}{{ .Site.Title }} | Free AI Certification Practice{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+
+{{/* ── Meta description ────────────────────────────────────────────────────── */}}
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+{{/* ── Author + robots ─────────────────────────────────────────────────────── */}}
+{{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+{{/* ── Canonical URL (prevents duplicate-content penalties) ─────────────────── */}}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* ── Keywords (low SEO weight but harmless) ─────────────────────────────── */}}
+{{ if .IsHome }}
+<meta name="keywords" content="AI certification exam prep, Claude Certified Architect, CCAF practice questions, Terraform Associate study guide, free certification practice tests, agentic AI certification, AI exam mock test">
+{{ else if .Title }}
+<meta name="keywords" content="{{ .Title }}, AI certification, Claude certification, practice questions, study guide, mock test">
+{{ end }}
+
+{{/* ── Open Graph (Facebook, LinkedIn previews) ───────────────────────────── */}}
+<meta property="og:type"        content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:url"         content="{{ .Permalink }}">
+<meta property="og:title"       content="{{ if .IsHome }}{{ .Site.Title }} | Free AI Certification Practice{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:site_name"   content="{{ .Site.Title }}">
+<meta property="og:locale"      content="en_US">
+{{ with .Site.Params.og_image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+
+{{/* ── Twitter / X Card ───────────────────────────────────────────────────── */}}
+<meta name="twitter:card"        content="summary">
+<meta name="twitter:title"       content="{{ if .IsHome }}{{ .Site.Title }} | Free AI Certification Practice{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+{{ with .Site.Params.og_image }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
+
+{{/* ── Google Search Console site verification (uncomment after getting token) */}}
+{{ with .Site.Params.google_site_verification }}
+<meta name="google-site-verification" content="{{ . }}">
+{{ end }}
+
+{{/* ── Sitemap link hint for crawlers ─────────────────────────────────────── */}}
+<link rel="sitemap" type="application/xml" href="{{ "sitemap.xml" | absURL }}">
+
+{{/* ── Stylesheet (fingerprinted for cache-busting) ───────────────────────── */}}
 {{ $style := resources.Get "css/theme.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+
+{{/* ── Dark-mode FOUC prevention (must run before first paint) ───────────── */}}
 <script>
   (function() {
     var savedTheme = localStorage.getItem('theme');
@@ -14,3 +68,28 @@
     }
   })();
 </script>
+
+{{/* ── Cloudflare Web Analytics (cookie-free, privacy-first, free tier) ─────
+     Token injected via hugo.toml params.cf_analytics_token at build time.
+     CI command: hugo ... (see deploy.yml for the -e param injection pattern)
+     To add manually: set params.cf_analytics_token in hugo.toml [params]
+─────────────────────────────────────────────────────────────────────────── */}}
+{{ with .Site.Params.cf_analytics_token }}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "{{ . }}"}'></script>
+{{ end }}
+
+{{/* ── Google Analytics 4 (only loads when Measurement ID is configured) ─────
+     Token injected via hugo.toml params.ga_measurement_id at build time.
+     Requires accepting cookies under GDPR — Cloudflare Analytics above is
+     cookie-free and sufficient for unique-visitor counts.
+─────────────────────────────────────────────────────────────────────────── */}}
+{{ with .Site.Params.ga_measurement_id }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ . }}', { 'anonymize_ip': true });
+</script>
+{{ end }}

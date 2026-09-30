@@ -23,6 +23,9 @@ jobs:
       CURATOR_WORKER_URL: ${{ vars.CURATOR_WORKER_URL }}
       # STATUS_HMAC_SECRET is NOT needed here — GET /r2/release-gate is a public endpoint.
       # It IS needed in curate-certifications.yml (PUT release-gate writes must be signed).
+      # Analytics IDs are public-safe beacon tokens — stored as repo Variables (not Secrets).
+      GA_MEASUREMENT_ID:   ${{ vars.GA_MEASUREMENT_ID }}
+      CF_ANALYTICS_TOKEN:  ${{ vars.CF_ANALYTICS_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,7 +50,25 @@ jobs:
           extended: true
 
       - name: Build Hugo site
-        run: hugo --minify --baseURL "https://imashishchawla.github.io/ai-certification-preparation/"
+        # GA_MEASUREMENT_ID and CF_ANALYTICS_TOKEN come from GitHub repo Variables (not Secrets).
+        # They are public-safe beacon IDs injected into hugo.toml [params] at build time via a
+        # generated override config file. If either variable is empty, its param is simply absent
+        # and Hugo silently skips the analytics snippet in head.html (the {{ with }} guards fire).
+        run: |
+          # Write an ephemeral override config with the analytics params.
+          # Use a tab-stripped heredoc (<<-) so YAML indentation doesn't leak
+          # leading whitespace into the TOML keys.
+          cat > /tmp/analytics.toml <<'TOMLEOF'
+[params]
+ga_measurement_id  = "${GA_MEASUREMENT_ID}"
+cf_analytics_token = "${CF_ANALYTICS_TOKEN}"
+TOMLEOF
+          # Replace the shell variable placeholders now that the file is written
+          sed -i "s|\${GA_MEASUREMENT_ID}|${GA_MEASUREMENT_ID}|g" /tmp/analytics.toml
+          sed -i "s|\${CF_ANALYTICS_TOKEN}|${CF_ANALYTICS_TOKEN}|g" /tmp/analytics.toml
+          hugo --minify \
+               --baseURL "https://imashishchawla.github.io/ai-certification-preparation/" \
+               --config hugo.toml,/tmp/analytics.toml
 
       - name: Build browser artifacts (post-Hugo shards)
         run: node scripts/build-browser-artifacts.mjs

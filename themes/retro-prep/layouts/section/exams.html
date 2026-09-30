@@ -5,7 +5,7 @@
 <p class="muted">Browse all active and planned AI certification preparation tracks. Select an exam below to access sample questions, timed mock tests, and study guides.</p>
 
 <div class="card-grid" style="grid-template-columns: 1fr;">
-  {{ range site.Data.exams.exams }}
+  {{ range hugo.Data.exams.exams }}
     {{ if eq .status "active" }}
     <div class="question-card" style="border-left: 6px solid var(--accent);">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
