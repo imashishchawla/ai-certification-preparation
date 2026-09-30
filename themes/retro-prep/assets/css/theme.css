@@ -415,6 +415,309 @@ th {
   font-size: 0.95rem;
 }
 
+/* Pearson VUE Proctored Mock Test Simulation */
+#mockTestApp:fullscreen,
+#mockTestApp:-webkit-full-screen,
+#mockTestApp:-moz-full-screen,
+#mockTestApp:-ms-fullscreen {
+  background: var(--bg);
+  color: var(--fg);
+  padding: 1.5rem;
+  overflow-y: auto;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.proctor-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: var(--card);
+  border: 2px solid var(--border);
+  box-shadow: 3px 3px 0 var(--border);
+  padding: 0.75rem 1rem;
+  border-radius: 3px;
+  margin-bottom: 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.proctor-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+}
+
+.proctor-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.fullscreen-warning-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: var(--wrong-bg);
+  color: var(--wrong-fg);
+  border: 2px solid var(--wrong-border);
+  border-radius: 3px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+}
+
+.btn-flag {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  padding: 0.4rem 0.75rem;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+  min-height: 38px;
+}
+.btn-flag:hover {
+  border-color: var(--accent);
+}
+.btn-flag.flagged {
+  background: #fef08a;
+  color: #854d0e;
+  border-color: #ca8a04;
+  font-weight: bold;
+}
+[data-theme="dark"] .btn-flag.flagged {
+  background: #854d0e;
+  color: #fef08a;
+  border-color: #facc15;
+}
+
+.btn-fs-toggle {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  padding: 0.4rem 0.75rem;
+  border: 2px solid var(--border);
+  background: var(--code-bg);
+  color: var(--fg);
+  border-radius: 2px;
+  cursor: pointer;
+  min-height: 38px;
+}
+.btn-fs-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.review-matrix-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px dashed var(--border);
+}
+
+.review-stats-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.review-pill {
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--code-bg);
+}
+
+.review-pill.highlight-unanswered {
+  background: var(--wrong-bg);
+  color: var(--wrong-fg);
+  border-color: var(--wrong-border);
+  font-weight: bold;
+}
+
+.review-pill.highlight-flagged {
+  background: #fef08a;
+  color: #854d0e;
+  border-color: #ca8a04;
+  font-weight: bold;
+}
+[data-theme="dark"] .review-pill.highlight-flagged {
+  background: #854d0e;
+  color: #fef08a;
+  border-color: #facc15;
+}
+
+.review-actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.review-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
+  gap: 6px;
+  margin: 1.25rem 0 1.75rem;
+}
+
+.matrix-chip {
+  text-align: center;
+  padding: 0.5rem 0.2rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  cursor: pointer;
+  position: relative;
+  background: var(--card);
+  transition: transform 0.1s, border-color 0.1s;
+}
+.matrix-chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.matrix-chip.answered {
+  background: var(--code-bg);
+  border-color: var(--border);
+}
+.matrix-chip.unanswered {
+  background: var(--bg);
+  border-style: dashed;
+  color: var(--muted);
+}
+.matrix-chip.flagged::after {
+  content: '⚑';
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  color: #ca8a04;
+  font-size: 0.72rem;
+  font-weight: bold;
+}
+
+.review-table-wrapper {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+}
+.review-table th, .review-table td {
+  border: 1px solid var(--border);
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+}
+.review-table th {
+  background: var(--code-bg);
+}
+.review-table tr:hover td {
+  background: var(--code-bg);
+}
+
+/* Modal Dialog */
+.mock-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1rem;
+}
+
+.mock-modal-dialog {
+  background: var(--card);
+  border: 3px double var(--border);
+  box-shadow: 6px 6px 0 var(--border);
+  max-width: 540px;
+  width: 100%;
+  padding: 1.75rem;
+  border-radius: 3px;
+}
+
+.mock-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+/* Results Filtering Toolbar */
+.results-filter-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin: 1.5rem 0 1rem;
+  padding: 0.75rem;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.filter-btn {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  padding: 0.45rem 0.9rem;
+  border: 2px solid var(--border);
+  background: var(--card);
+  color: var(--fg);
+  cursor: pointer;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s ease;
+  min-height: 40px;
+}
+.filter-btn:hover {
+  border-color: var(--accent);
+}
+.filter-btn.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--border);
+  font-weight: bold;
+}
+.filter-btn.filter-incorrect.active {
+  background: var(--wrong-border);
+  color: #fff;
+}
+.filter-btn.filter-correct.active {
+  background: var(--correct-border);
+  color: #fff;
+}
+
 /* Footer */
 .site-footer {
   border-top: 3px double var(--border);

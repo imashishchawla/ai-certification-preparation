@@ -47,8 +47,21 @@ function parseWalterBank(filePath, examId = 'cca-f') {
     }
 
     if (options.length === 4 && correct && prompt) {
-      const relevance = checkExamRelevance(prompt + ' ' + explanation);
-      questions.push({
+      let cleanPrompt = prompt;
+      let section = '';
+      let topic = '';
+      let scenarioTag = '';
+      const guideRegex = /^\s*(\d+\.\d+)\s+([^/]+?)\s*\/\s*([^·]+?)\s*·\s*\*\*Difficulty:\*\*\s*([^·]+?)\s*·\s*scenario:\s*(\w+)\s*/;
+      if (guideRegex.test(prompt)) {
+        const gm = prompt.match(guideRegex);
+        section = `${gm[1]} ${gm[2].trim()}`;
+        topic = gm[3].trim();
+        scenarioTag = gm[5].trim();
+        const stripped = prompt.replace(guideRegex, '').trim();
+        cleanPrompt = stripped.startsWith('Scenario:') ? stripped : `Scenario: ${stripped}`;
+      }
+      const relevance = checkExamRelevance(cleanPrompt + ' ' + explanation);
+      const qObj = {
         id: `${examId}-guide-${String(idx + 1).padStart(3, '0')}`,
         exam: examId,
         status: 'ready',
@@ -57,12 +70,16 @@ function parseWalterBank(filePath, examId = 'cca-f') {
         contentVersion: 1,
         domain: relevance.domain || 'D1 Agentic Architecture & Orchestration',
         difficulty: 'intermediate',
-        prompt,
+        prompt: cleanPrompt,
         options,
         correct,
         explanation: explanation || `Option ${correct} is correct per architectural guidelines.`,
         mockEligible: true
-      });
+      };
+      if (section) qObj.section = section;
+      if (topic) qObj.topic = topic;
+      if (scenarioTag) qObj.scenarioTag = scenarioTag;
+      questions.push(qObj);
     }
   });
 
@@ -175,8 +192,16 @@ function parseLarionovBank(filePath, examId = 'cca-f') {
     }
 
     if (options.length === 4 && correct && prompt) {
-      const relevance = checkExamRelevance(prompt + ' ' + explanation);
-      questions.push({
+      let cleanPrompt = prompt;
+      let scenarioTag = '';
+      const scenarioRegex = /^\(Scenario:\s*([^)]+)\)\s*Situation:\*\*\s*/;
+      if (scenarioRegex.test(prompt)) {
+        const sm = prompt.match(scenarioRegex);
+        scenarioTag = sm[1].trim();
+        cleanPrompt = `Scenario: ${scenarioTag}. Situation: ${prompt.replace(scenarioRegex, '').trim()}`;
+      }
+      const relevance = checkExamRelevance(cleanPrompt + ' ' + explanation);
+      const qObj = {
         id: `${examId}-scenario-${String(idx + 1).padStart(3, '0')}`,
         exam: examId,
         status: 'ready',
@@ -185,12 +210,14 @@ function parseLarionovBank(filePath, examId = 'cca-f') {
         contentVersion: 1,
         domain: relevance.domain || 'D1 Agentic Architecture & Orchestration',
         difficulty: 'intermediate',
-        prompt,
+        prompt: cleanPrompt,
         options,
         correct,
         explanation: explanation || `Option ${correct} is correct.`,
         mockEligible: true
-      });
+      };
+      if (scenarioTag) qObj.scenarioTag = scenarioTag;
+      questions.push(qObj);
     }
   });
 

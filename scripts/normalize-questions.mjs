@@ -90,7 +90,7 @@ if (fs.existsSync(ccaPrepPath)) {
         contentVersion: 1,
         domain,
         difficulty,
-        prompt: promptText || headerLine,
+        prompt: (promptText || headerLine).replace(/^\s*\d+\s*·\s*(D[1-5])\s+[^·]+?·\s*\[(basic|intermediate|advanced|exam)\]\s*/, '').trim(),
         options,
         correct,
         explanation: explanation || `Option ${correct} is the correct answer.`,

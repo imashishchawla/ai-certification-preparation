@@ -36,12 +36,24 @@
     },
     "domain": {
       "type": "string",
-      "pattern": "^D[0-9]+$",
-      "description": "Domain code (e.g. D1, D2)"
+      "pattern": "^D[0-9]+.*$",
+      "description": "Domain code or full name (e.g. D1 Agentic Architecture & Orchestration)"
     },
     "objective": {
       "type": "string",
       "description": "Sub-objective code (e.g. 1a, 2c)"
+    },
+    "section": {
+      "type": "string",
+      "description": "Optional section reference (e.g. 5.5 human-review-calibration)"
+    },
+    "topic": {
+      "type": "string",
+      "description": "Optional topic taxonomy tag (e.g. stratified-sampling)"
+    },
+    "scenarioTag": {
+      "type": "string",
+      "description": "Optional scenario identifier (e.g. Customer Support Agent or s6)"
     },
     "questionType": {
       "type": "string",
@@ -50,14 +62,15 @@
     "prompt": {
       "type": "string",
       "minLength": 10,
-      "description": "The question text as found verbatim in the source"
+      "description": "Clean, candidate-facing question prompt text"
     },
     "options": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["key", "text"],
+        "required": ["text"],
         "properties": {
+          "id":   { "type": "string" },
           "key":  { "type": "string" },
           "text": { "type": "string", "minLength": 1 }
         }
