@@ -1,246 +1,62 @@
 {
-  "$schema": "../.agent/schemas/exam.schema.json",
   "exam": "terraform-associate",
   "examVersion": "004",
-  "lastUpdated": "2026-09-28",
-  "source": "https://www.hashicorp.com/certification/terraform-associate",
-  "totalWeightPercent": 100,
+  "lastUpdated": "2026-09-30",
+  "source": "https://developer.hashicorp.com/certifications/infrastructure-automation",
+  "note": "HashiCorp publishes objectives but does not publish domain weights on this page.",
   "domains": [
-    {
-      "code": "D1",
-      "name": "Understand Infrastructure as Code (IaC) Concepts",
-      "weightPercent": 16,
-      "objectives": [
-        {
-          "code": "1a",
-          "text": "Explain what IaC is",
-          "notes": "Define Infrastructure as Code, contrast with manual provisioning"
-        },
-        {
-          "code": "1b",
-          "text": "Describe advantages of IaC patterns",
-          "notes": "Idempotency, consistency, repeatability, version control, auditability"
-        }
-      ]
-    },
-    {
-      "code": "D2",
-      "name": "Understand Terraform's Purpose",
-      "weightPercent": 9,
-      "objectives": [
-        {
-          "code": "2a",
-          "text": "Explain multi-cloud and provider-agnostic benefits",
-          "notes": "Single workflow across AWS, Azure, GCP, and other providers"
-        },
-        {
-          "code": "2b",
-          "text": "Explain the benefits of state",
-          "notes": "State as the source of truth; resource tracking; performance"
-        }
-      ]
-    },
-    {
-      "code": "D3",
-      "name": "Understand Terraform Basics",
-      "weightPercent": 15,
-      "objectives": [
-        {
-          "code": "3a",
-          "text": "Install and version Terraform providers",
-          "notes": "terraform init, provider registry, version constraints, .terraform.lock.hcl"
-        },
-        {
-          "code": "3b",
-          "text": "Describe plugin-based architecture",
-          "notes": "Core vs providers; how providers extend Terraform"
-        },
-        {
-          "code": "3c",
-          "text": "Write Terraform configuration using multiple providers",
-          "notes": "Provider blocks, aliases, required_providers"
-        },
-        {
-          "code": "3d",
-          "text": "Describe how Terraform finds and fetches providers",
-          "notes": "Registry search order, mirror, filesystem_mirror, network_mirror"
-        },
-        {
-          "code": "3e",
-          "text": "Define and describe the purpose of Terraform Registry",
-          "notes": "Public registry, private registry, verified vs community modules/providers"
-        }
-      ]
-    },
-    {
-      "code": "D4",
-      "name": "Use the Terraform CLI (outside of core workflow)",
-      "weightPercent": 22,
-      "objectives": [
-        {
-          "code": "4a",
-          "text": "Given a scenario: choose when to use terraform fmt",
-          "notes": "Canonical formatting; CI enforcement"
-        },
-        {
-          "code": "4b",
-          "text": "Given a scenario: choose when to use terraform taint",
-          "notes": "Deprecated in ≥0.15.2; replaced by -replace flag in terraform apply"
-        },
-        {
-          "code": "4c",
-          "text": "Given a scenario: choose when to use terraform import",
-          "notes": "Bring existing infrastructure under Terraform management"
-        },
-        {
-          "code": "4d",
-          "text": "Given a scenario: choose when to use terraform workspace",
-          "notes": "Multiple state files from same config; use cases and limitations"
-        },
-        {
-          "code": "4e",
-          "text": "Given a scenario: choose when to use terraform state",
-          "notes": "State manipulation commands: list, mv, rm, pull, push, show"
-        },
-        {
-          "code": "4f",
-          "text": "Given a scenario: choose when to enable verbose logging",
-          "notes": "TF_LOG levels: TRACE, DEBUG, INFO, WARN, ERROR; TF_LOG_PATH"
-        }
-      ]
-    },
-    {
-      "code": "D5",
-      "name": "Interact with Terraform Modules",
-      "weightPercent": 12,
-      "objectives": [
-        {
-          "code": "5a",
-          "text": "Contrast and use different module source options",
-          "notes": "Registry, GitHub, Bitbucket, local paths, S3, GCS, HTTP URLs"
-        },
-        {
-          "code": "5b",
-          "text": "Interact with module inputs and outputs",
-          "notes": "Variable passing, output access via module.<name>.<output>"
-        },
-        {
-          "code": "5c",
-          "text": "Describe variable scope within modules and child modules",
-          "notes": "No implicit inheritance; explicit passing required"
-        },
-        {
-          "code": "5d",
-          "text": "Set module version",
-          "notes": "version argument in module block; semantic versioning constraints"
-        }
-      ]
-    },
-    {
-      "code": "D6",
-      "name": "Use the Core Terraform Workflow",
-      "weightPercent": 10,
-      "objectives": [
-        {
-          "code": "6a",
-          "text": "Describe Terraform workflow (Write → Plan → Apply)",
-          "notes": "Core three-step loop; team vs individual workflows"
-        },
-        {
-          "code": "6b",
-          "text": "Initialize a Terraform working directory (terraform init)",
-          "notes": "Provider download, backend init, module download"
-        },
-        {
-          "code": "6c",
-          "text": "Validate a Terraform configuration (terraform validate)",
-          "notes": "Syntax and semantic validation without provider calls"
-        },
-        {
-          "code": "6d",
-          "text": "Generate and review an execution plan (terraform plan)",
-          "notes": "-out flag, plan files, -refresh-only, targeted plans"
-        },
-        {
-          "code": "6e",
-          "text": "Execute changes to infrastructure (terraform apply)",
-          "notes": "Auto-approve, plan file input, partial apply failure behaviour"
-        },
-        {
-          "code": "6f",
-          "text": "Destroy Terraform managed infrastructure (terraform destroy)",
-          "notes": "terraform destroy vs terraform apply -destroy; target flag"
-        }
-      ]
-    },
-    {
-      "code": "D7",
-      "name": "Implement and Maintain State",
-      "weightPercent": 10,
-      "objectives": [
-        {
-          "code": "7a",
-          "text": "Describe default local backend",
-          "notes": "terraform.tfstate; .terraform directory; local limitations"
-        },
-        {
-          "code": "7b",
-          "text": "Describe state locking",
-          "notes": "Prevents concurrent state writes; DynamoDB for S3 backend; Consul"
-        },
-        {
-          "code": "7c",
-          "text": "Handle backend authentication methods",
-          "notes": "Environment variables, shared credentials, IAM roles, access keys"
-        },
-        {
-          "code": "7d",
-          "text": "Describe remote state storage mechanisms and supported standard backends",
-          "notes": "S3, Consul, Terraform Cloud/Enterprise (enhanced), azurerm, gcs"
-        },
-        {
-          "code": "7e",
-          "text": "Describe effect of Terraform refresh on state",
-          "notes": "terraform refresh; -refresh=false; refresh-only plan/apply"
-        },
-        {
-          "code": "7f",
-          "text": "Describe backend block and cloud integration in configuration",
-          "notes": "terraform.cloud block vs backend block; HCP Terraform integration"
-        },
-        {
-          "code": "7g",
-          "text": "Understand secret management in state files",
-          "notes": "Sensitive values stored in plain text; encryption at rest best practices"
-        }
-      ]
-    },
-    {
-      "code": "D8",
-      "name": "Read, Generate, and Modify Configuration",
-      "weightPercent": 6,
-      "objectives": [
-        {
-          "code": "8a",
-          "text": "Demonstrate use of variables and outputs",
-          "notes": "Variable types, defaults, validation, sensitive flag; output sensitive"
-        },
-        {
-          "code": "8b",
-          "text": "Describe secure secret injection best practices",
-          "notes": "Vault provider, environment variables, -var flag; avoid tfvars in VCS"
-        },
-        {
-          "code": "8c",
-          "text": "Understand the use of collection and structural types",
-          "notes": "list, map, set, object, tuple; type constraints; for expressions"
-        },
-        {
-          "code": "8d",
-          "text": "Create and differentiate resource and data configuration",
-          "notes": "resource vs data blocks; data source lifecycle; depends_on with data"
-        }
-      ]
-    }
+    { "code": "D1", "name": "Infrastructure as Code (IaC) with Terraform", "objectives": [
+      { "code": "1a", "text": "Explain what IaC is" },
+      { "code": "1b", "text": "Describe the advantages of IaC patterns" },
+      { "code": "1c", "text": "Explain how Terraform manages multi-cloud, hybrid cloud, and service-agnostic workflows" }
+    ] },
+    { "code": "D2", "name": "Terraform fundamentals", "objectives": [
+      { "code": "2a", "text": "Install and version Terraform providers" },
+      { "code": "2b", "text": "Describe how Terraform uses providers" },
+      { "code": "2c", "text": "Write Terraform configuration using multiple providers" },
+      { "code": "2d", "text": "Explain how Terraform uses and manages state" }
+    ] },
+    { "code": "D3", "name": "Core Terraform workflow", "objectives": [
+      { "code": "3a", "text": "Describe the Terraform workflow" },
+      { "code": "3b", "text": "Initialize a Terraform working directory" },
+      { "code": "3c", "text": "Validate a Terraform configuration" },
+      { "code": "3d", "text": "Generate and review an execution plan for Terraform" },
+      { "code": "3e", "text": "Apply changes to infrastructure with Terraform" },
+      { "code": "3f", "text": "Destroy Terraform-managed infrastructure" },
+      { "code": "3g", "text": "Apply formatting and style adjustments to a configuration" }
+    ] },
+    { "code": "D4", "name": "Terraform configuration", "objectives": [
+      { "code": "4a", "text": "Use and differentiate resource and data blocks" },
+      { "code": "4b", "text": "Refer to resource attributes and create cross-resource references" },
+      { "code": "4c", "text": "Use variables and outputs" },
+      { "code": "4d", "text": "Understand and use complex types" },
+      { "code": "4e", "text": "Write dynamic configuration using expressions and functions" },
+      { "code": "4f", "text": "Define resource dependencies in configuration" },
+      { "code": "4g", "text": "Validate configuration using custom conditions" },
+      { "code": "4h", "text": "Understand best practices for managing sensitive data, including secrets management with Vault" }
+    ] },
+    { "code": "D5", "name": "Terraform modules", "objectives": [
+      { "code": "5a", "text": "Explain how Terraform sources modules" },
+      { "code": "5b", "text": "Describe variable scope within modules" },
+      { "code": "5c", "text": "Use modules in configuration" },
+      { "code": "5d", "text": "Manage module versions" }
+    ] },
+    { "code": "D6", "name": "Terraform state management", "objectives": [
+      { "code": "6a", "text": "Describe the local backend" },
+      { "code": "6b", "text": "Describe state locking" },
+      { "code": "6c", "text": "Configure remote state using the backend block" },
+      { "code": "6d", "text": "Manage resource drift and Terraform state" }
+    ] },
+    { "code": "D7", "name": "Maintain infrastructure with Terraform", "objectives": [
+      { "code": "7a", "text": "Import existing infrastructure into your Terraform workspace" },
+      { "code": "7b", "text": "Use the CLI to inspect state" },
+      { "code": "7c", "text": "Describe when and how to use verbose logging" }
+    ] },
+    { "code": "D8", "name": "HCP Terraform", "objectives": [
+      { "code": "8a", "text": "Use HCP Terraform to create infrastructure" },
+      { "code": "8b", "text": "Describe HCP Terraform collaboration and governance features" },
+      { "code": "8c", "text": "Describe how to organize and use HCP Terraform workspaces and projects" },
+      { "code": "8d", "text": "Configure and use HCP Terraform integration" }
+    ] }
   ]
 }

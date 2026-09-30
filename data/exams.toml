@@ -5,6 +5,8 @@ name = "Claude Certified Architect — Foundations"
 provider = "Anthropic"
 status = "active"
 questions = 1130
+legacy_ready_published = true
+official_source = "https://www.anthropic.com/news/claude-partner-network"
 duration_minutes = 120
 practice_pass_percent = 72
 pass_score = 720
@@ -22,30 +24,22 @@ description = "Foundations-level certification covering agentic architecture, to
 [[exams]]
 id = "ccar-p"
 code = "CCAR-P"
-name = "Claude Certified Architect — Professional"
+name = "Advanced Claude architecture preparation"
 provider = "Anthropic"
 status = "planned"
-questions = 60
-duration_minutes = 120
-practice_pass_percent = 72
-pass_score = 720
-price_usd = 250
+questions = 0
 path = "exams/ccar-p/"
-description = "Advanced professional certification for enterprise multi-agent deployment, safety, and governance."
+description = "A future study area for advanced Claude architecture and governance topics."
 
 [[exams]]
 id = "ccdv-f"
 code = "CCDV-F"
-name = "Claude Certified Developer — Foundations"
+name = "Claude developer preparation"
 provider = "Anthropic"
 status = "planned"
-questions = 50
-duration_minutes = 90
-practice_pass_percent = 70
-pass_score = 700
-price_usd = 125
+questions = 0
 path = "exams/ccdv-f/"
-description = "Developer certification covering Anthropic API integration, SDK usage, and tool calling."
+description = "A future study area for Claude API, SDK, and tool integration."
 
 [[exams]]
 id = "terraform-associate"
@@ -60,23 +54,13 @@ duration_minutes = 60
 practice_pass_percent = 70
 practice_threshold_is_official = false
 scoring_policy = "all_or_nothing"
-pass_score = 700
-price_usd = 70
+price_usd = 70.50
+official_source = "https://developer.hashicorp.com/certifications/infrastructure-automation"
+source_checked = "2026-09-30"
 path = "exams/terraform-associate/"
 objective_catalog = "data/objectives/terraform-associate.json"
-description = "Entry-level certification covering Terraform fundamentals, IaC concepts, state management, modules, workflows, and Terraform Cloud. Version 004 targets Terraform ≥1.0, tested against 1.12."
+description = "Foundational Terraform certification covering infrastructure as code, configuration, state, modules, and HCP Terraform. Version 004 tests Terraform 1.12."
 sync_enabled = true
 schedule_category = "category-b"
 sync_timeout_minutes = 45
 minimum_mock_questions = 60
-
-[exams.domain_weights]
-"D1 Understand Infrastructure as Code (IaC) Concepts" = 16
-"D2 Understand Terraform's Purpose" = 9
-"D3 Understand Terraform Basics" = 15
-"D4 Use the Terraform CLI" = 22
-"D5 Interact with Terraform Modules" = 12
-"D6 Use the Core Terraform Workflow" = 10
-"D7 Implement and Maintain State" = 10
-"D8 Read, Generate, and Modify Configuration" = 6
-

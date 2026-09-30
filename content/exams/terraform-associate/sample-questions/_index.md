@@ -2,7 +2,11 @@
 title: "Sample Questions — Terraform Associate (004)"
 description: "Sample practice questions for HashiCorp Certified Terraform Associate (004)."
 exam_id: "terraform-associate"
-layout: "list"
+noindex: true
+sitemap:
+  disable: true
+layout: "sample-questions"
+type: "sample-questions"
 draft: false
 ---
 

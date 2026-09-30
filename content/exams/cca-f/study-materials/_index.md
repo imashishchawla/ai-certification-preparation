@@ -4,7 +4,7 @@ description: "List of all official Anthropic PDF exam guides, scraped engineerin
 layout: "single"
 ---
 
-Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All materials below are stored locally for offline study.
+Browse reference documents and PDFs collected for the CCAF preparation track. Check the linked publisher sources for the latest versions.
 
 ---
 
@@ -86,7 +86,7 @@ Welcome to the **Official Documents & PDFs** repository for the CCAF exam. All m
 
 ## 2. Official Scraped Documentation
 
-Scraped official Anthropic and MCP documentation mirrored locally for offline reading.
+Reference copies of Anthropic and MCP documentation are available here. Use the publisher's current documentation for final verification.
 
 | Document Title | Category | Local File Path |
 |---|---|---|

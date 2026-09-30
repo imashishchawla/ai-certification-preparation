@@ -2,23 +2,23 @@
   var container = document.getElementById('mockTestApp');
   if (!container) return;
 
-  var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation')
-    ? '/ai-certification-preparation'
-    : (window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '');
-  var fetchUrl = pathPrefix + '/data/questions/cca-f/questions.json';
+  var examId = container.dataset.examId;
+  var examName = container.dataset.examName;
+  var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation') ? '/ai-certification-preparation' : '';
+  var fetchUrl = pathPrefix + '/data/exams/' + encodeURIComponent(examId) + '/mock-pool.json';
 
-  var STORAGE_KEY = 'ccaf_mock_attempt_v1';
-  var TOTAL_TEST_QUESTIONS = 60;
-  var TEST_DURATION_MINUTES = 120;
-  var PASS_PERCENT = 72;
+  var STORAGE_KEY = examId + '_mock_attempt_v2';
+  var TOTAL_TEST_QUESTIONS = Number(container.dataset.questionCount) || 60;
+  var TEST_DURATION_MINUTES = Number(container.dataset.durationMinutes) || 120;
+  var PASS_PERCENT = Number(container.dataset.practicePassPercent) || 70;
 
-  var domainQuotas = {
+  var domainQuotas = examId === 'cca-f' ? {
     'D1 Agentic Architecture & Orchestration': 16,
     'D2 Tool Design & MCP Integration': 11,
     'D3 Claude Code Configuration & Workflows': 12,
     'D4 Prompt Engineering & Structured Output': 12,
     'D5 Context Management & Reliability': 9
-  };
+  } : {};
 
   var allQuestions = [];
   var activeAttempt = null;
@@ -31,15 +31,10 @@
     });
   }
 
-  loadQuestions(fetchUrl)
-    .catch(function() {
-      // Fallback relative url
-      return loadQuestions('/data/questions/cca-f/questions.json');
-    })
-    .catch(function() {
-      return loadQuestions('../../../data/questions/cca-f/questions.json');
-    })
-    .then(function(data) {
+  loadQuestions(fetchUrl).then(function(data) {
+      if (!Array.isArray(data) || data.length < TOTAL_TEST_QUESTIONS) {
+        throw new Error('The published question pool is below the practice-test minimum');
+      }
       allQuestions = data;
       initApp();
     })
@@ -52,7 +47,7 @@
     if (saved) {
       try {
         var parsed = JSON.parse(saved);
-        if (parsed && parsed.examId === 'cca-f' && parsed.questions && parsed.questions.length === TOTAL_TEST_QUESTIONS) {
+        if (parsed && parsed.examId === examId && parsed.questions && parsed.questions.length === TOTAL_TEST_QUESTIONS) {
           activeAttempt = parsed;
         }
       } catch (e) {
@@ -62,15 +57,15 @@
 
     if (activeAttempt) {
       if (activeAttempt.submitted) {
-        renderResultsView();
+        renderResultsView(false);
       } else if (Date.now() >= activeAttempt.deadlineTimestamp) {
         autoSubmitExam();
       } else {
-        renderExamView();
+        renderExamView(false);
         startTimer();
       }
     } else {
-      renderStartView();
+      renderStartView(false);
     }
   }
 
@@ -110,7 +105,7 @@
     var now = Date.now();
     activeAttempt = {
       attemptId: 'att_' + now + '_' + Math.floor(Math.random() * 1000),
-      examId: 'cca-f',
+      examId: examId,
       startedAt: now,
       deadlineTimestamp: now + (TEST_DURATION_MINUTES * 60 * 1000),
       questions: selected,
@@ -165,40 +160,41 @@
     }
   }
 
-  function renderStartView() {
+  function renderStartView(moveFocus) {
     var html = '';
     html += '<div class="question-card" style="text-align: center; padding: 2.5rem;">';
-    html += '  <h2 style="margin-top: 0;">CCAF Practice Mock Exam (60Q / 120M)</h2>';
+    html += '  <h2 id="mockViewHeading" tabindex="-1" style="margin-top: 0;">' + escapeHtml(examName) + ' practice test</h2>';
     html += '  <p style="max-width: 650px; margin: 1rem auto; color: var(--muted);">';
-    html += '    This simulated practice exam draws 60 scenario-based questions balanced by official CCAF domain weights. Answers and explanations are hidden during the test.';
+    html += '    This timed practice test draws ' + TOTAL_TEST_QUESTIONS + ' questions from the published question pool. Answers and explanations are hidden until submission.';
     html += '  </p>';
     html += '  <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0;">';
     html += '    <div style="border: 2px solid var(--border); padding: 1rem; border-radius: 4px; min-width: 140px; background: var(--bg);">';
-    html += '      <div style="font-size: 1.8rem; font-family: var(--font-heading); font-weight: bold; color: var(--accent);">60</div>';
+    html += '      <div style="font-size: 1.8rem; font-family: var(--font-heading); font-weight: bold; color: var(--accent);">' + TOTAL_TEST_QUESTIONS + '</div>';
     html += '      <div style="font-size: 0.85rem; color: var(--muted);">Questions</div>';
     html += '    </div>';
     html += '    <div style="border: 2px solid var(--border); padding: 1rem; border-radius: 4px; min-width: 140px; background: var(--bg);">';
-    html += '      <div style="font-size: 1.8rem; font-family: var(--font-heading); font-weight: bold; color: var(--accent);">120m</div>';
+    html += '      <div style="font-size: 1.8rem; font-family: var(--font-heading); font-weight: bold; color: var(--accent);">' + TEST_DURATION_MINUTES + 'm</div>';
     html += '      <div style="font-size: 0.85rem; color: var(--muted);">Time Limit</div>';
     html += '    </div>';
     html += '    <div style="border: 2px solid var(--border); padding: 1rem; border-radius: 4px; min-width: 140px; background: var(--bg);">';
-    html += '      <div style="font-size: 1.8rem; font-family: var(--font-heading); font-weight: bold; color: var(--accent);">72%</div>';
-    html += '      <div style="font-size: 0.85rem; color: var(--muted);">Pass Mark</div>';
+    html += '      <div style="font-size: 1.8rem; font-family: var(--font-heading); font-weight: bold; color: var(--accent);">' + PASS_PERCENT + '%</div>';
+    html += '      <div style="font-size: 0.85rem; color: var(--muted);">Practice Target</div>';
     html += '    </div>';
     html += '  </div>';
     html += '  <button id="btnStartExam" class="reveal-btn" style="font-size: 1.1rem; padding: 0.75rem 2rem;">Start Mock Exam ►</button>';
     html += '</div>';
 
     container.innerHTML = html;
+    if (moveFocus) document.getElementById('mockViewHeading').focus();
 
     document.getElementById('btnStartExam').addEventListener('click', function() {
       createNewAttempt();
-      renderExamView();
+      renderExamView(true);
       startTimer();
     });
   }
 
-  function renderExamView() {
+  function renderExamView(moveFocus) {
     var idx = activeAttempt.currentIndex;
     var q = activeAttempt.questions[idx];
     var total = TOTAL_TEST_QUESTIONS;
@@ -209,7 +205,7 @@
     html += '  <div style="font-family: var(--font-heading); font-size: 0.9rem;">';
     html += '    <strong>Question ' + (idx + 1) + '</strong> of ' + total + ' &nbsp;·&nbsp; <span class="muted">' + answeredCount + ' answered</span>';
     html += '  </div>';
-    html += '  <div id="mockTimer" style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--accent); font-weight: bold;">⏱ TIME LEFT: 120:00</div>';
+    html += '  <div id="mockTimer" role="timer" aria-live="off" style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--accent); font-weight: bold;">Time remaining</div>';
     html += '  <button id="btnEndExam" class="reveal-btn" style="background: var(--wrong-border); padding: 0.35rem 0.8rem; font-size: 0.85rem;">End Exam</button>';
     html += '</div>';
 
@@ -218,7 +214,7 @@
     html += '    <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
     html += '    <span>[' + (q.difficulty || 'intermediate') + ']</span>';
     html += '  </div>';
-    html += '  <div class="question-prompt">' + (idx + 1) + '. ' + escapeHtml(q.prompt) + '</div>';
+    html += '  <h2 id="mockViewHeading" tabindex="-1" class="question-prompt">' + (idx + 1) + '. ' + escapeHtml(q.prompt) + '</h2>';
     html += '  <div class="options-list">';
 
     var currentAnswer = activeAttempt.answers[q.id];
@@ -254,6 +250,7 @@
     html += '</div>';
 
     container.innerHTML = html;
+    if (moveFocus) document.getElementById('mockViewHeading').focus();
 
     container.querySelectorAll('input[name="mockRadio"]').forEach(function(radio) {
       radio.addEventListener('change', function() {
@@ -268,7 +265,7 @@
         if (activeAttempt.currentIndex > 0) {
           activeAttempt.currentIndex--;
           saveState();
-          renderExamView();
+          renderExamView(true);
         }
       });
     }
@@ -279,7 +276,7 @@
         if (activeAttempt.currentIndex < total - 1) {
           activeAttempt.currentIndex++;
           saveState();
-          renderExamView();
+          renderExamView(true);
         }
       });
     }
@@ -320,10 +317,10 @@
     activeAttempt.submitted = true;
     activeAttempt.submittedAt = Date.now();
     saveState();
-    renderResultsView();
+    renderResultsView(true);
   }
 
-  function renderResultsView() {
+  function renderResultsView(moveFocus) {
     var correctCount = 0;
     var domainStats = {};
 
@@ -351,8 +348,8 @@
     html += '      <span class="tag" style="background: ' + (isPassed ? 'var(--correct-border)' : 'var(--wrong-border)') + '; color: #fff;">';
     html += '        ' + (isPassed ? 'PRACTICE PASS' : 'PRACTICE FAIL') + ' (Threshold: ' + PASS_PERCENT + '%)';
     html += '      </span>';
-    html += '      <h2 style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Exam Score: ' + correctCount + ' / ' + TOTAL_TEST_QUESTIONS + ' (' + scorePercent + '%)</h2>';
-    html += '      <p class="muted">Practice estimate. Scaled score passing mark is 720/1000.</p>';
+    html += '      <h2 id="mockViewHeading" tabindex="-1" style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Practice score: ' + correctCount + ' / ' + TOTAL_TEST_QUESTIONS + ' (' + scorePercent + '%)</h2>';
+    html += '      <p class="muted">This is a practice result using this site’s target. It is not an official exam score.</p>';
     html += '    </div>';
     html += '    <div style="display: flex; gap: 0.75rem;">';
     html += '      <button id="btnRetake" class="reveal-btn">Retake Exam ↻</button>';
@@ -401,15 +398,16 @@
     html += '</div>';
 
     container.innerHTML = html;
+    if (moveFocus) document.getElementById('mockViewHeading').focus();
 
     document.getElementById('btnRetake').addEventListener('click', function() {
       sessionStorage.removeItem(STORAGE_KEY);
       activeAttempt = null;
-      renderStartView();
+      renderStartView(true);
     });
 
     document.getElementById('btnShare').addEventListener('click', function() {
-      var text = 'CCAF Practice Mock Test Result: ' + correctCount + '/60 (' + scorePercent + '%) - ' + (isPassed ? 'PASSED' : 'FAILED') + '. Practice offline at AI Cert Prep.';
+      var text = examName + ' practice test result: ' + correctCount + '/' + TOTAL_TEST_QUESTIONS + ' (' + scorePercent + '%). Certification Prep — Practice Library.';
       if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(function() {
           alert('Result copied to clipboard:\n\n' + text);

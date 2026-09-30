@@ -1,0 +1,66 @@
+{{- $active := where hugo.Data.exams.exams "status" "active" -}}
+{{- $inDevelopment := where hugo.Data.exams.exams "status" "in" (slice "onboarding" "planned") -}}
+{{- $totalQuestions := 0 -}}
+{{- range $active -}}
+  {{- $totalQuestions = add $totalQuestions (partial "published-question-count.html" .) -}}
+{{- end -}}
+
+<div class="directory-hero">
+  <p class="eyebrow">One place to prepare</p>
+  <h1>{{ if .IsHome }}Certification Prep — Practice Library{{ else }}All Certifications{{ end }}</h1>
+  <p class="directory-intro">Prepare for professional certifications in one place. Find focused study guides, practice questions, exam notes, and timed mock tests, organized into a clear learning path for each available certification.</p>
+  <div class="directory-stats" aria-label="Library status">
+    <span><strong>{{ len $active }}</strong> active {{ if eq (len $active) 1 }}track{{ else }}tracks{{ end }}</span>
+    <span><strong>{{ $totalQuestions }}</strong> published practice questions</span>
+    <span><strong>{{ len $inDevelopment }}</strong> in development</span>
+  </div>
+</div>
+
+<section class="directory-section" aria-labelledby="active-certifications">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Available now</p>
+      <h2 id="active-certifications">Active certifications</h2>
+    </div>
+    <p>Study and practice with resources ready to use today.</p>
+  </div>
+  <div class="card-grid card-grid-3 {{ if eq (len $active) 1 }}single-active{{ end }}">
+    {{ range $active }}
+      {{ $count := partial "published-question-count.html" . }}
+      <article class="cert-card cert-card-active">
+        <div class="cert-card-copy">
+          <div class="cert-card-top"><span class="provider-name">{{ .provider }}</span><span class="status-label status-active">Active</span></div>
+          <h3><a href="{{ .path | relLangURL }}">{{ .name }}</a></h3>
+          <p>{{ .description }}</p>
+          <p class="cert-meta">{{ $count }} practice questions · Study guides · Timed mock test</p>
+        </div>
+        <a href="{{ .path | relLangURL }}" class="reveal-btn cert-action">Explore {{ .code }} track <span aria-hidden="true">→</span></a>
+      </article>
+    {{ end }}
+  </div>
+</section>
+
+<section class="directory-section" aria-labelledby="development-certifications">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Coming next</p>
+      <h2 id="development-certifications">In development</h2>
+    </div>
+    <p>Tracks being prepared or considered for future coverage.</p>
+  </div>
+  <div class="card-grid card-grid-3">
+    {{ range sort $inDevelopment "status" }}
+      <article class="cert-card cert-card-development">
+        <div class="cert-card-top"><span class="provider-name">{{ .provider }}</span><span class="status-label {{ if eq .status "onboarding" }}status-onboarding{{ else }}status-planned{{ end }}">{{ if eq .status "onboarding" }}In preparation{{ else }}Planned{{ end }}</span></div>
+        <h3>{{ .name }}</h3>
+        <p>{{ .description }}</p>
+        {{ if eq .status "onboarding" }}
+          <p class="cert-meta">Official exam outline available · Question bank not yet published</p>
+          <a href="{{ .path | relLangURL }}" class="cert-text-link">View available exam information <span aria-hidden="true">→</span></a>
+        {{ else }}
+          <p class="cert-meta">Certification details will be added after official confirmation.</p>
+        {{ end }}
+      </article>
+    {{ end }}
+  </div>
+</section>

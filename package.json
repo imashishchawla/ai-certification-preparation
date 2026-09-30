@@ -1,12 +1,12 @@
 {
   "name": "ai-certification-preparation",
   "version": "1.0.0",
-  "description": "Retro-styled, self-contained AI certification preparation library for CCAF and future tracks.",
+  "description": "Certification study guides, practice questions, and mock tests in one website.",
   "main": "scripts/serve.mjs",
   "scripts": {
     "start": "node scripts/serve.mjs",
     "dev": "node scripts/serve.mjs",
-    "build": "hugo --minify && node scripts/check-external-links.mjs",
+    "build": "hugo --minify && node scripts/build-browser-artifacts.mjs && node scripts/audit-rendered-pages.mjs && node scripts/seo-spider.mjs && node scripts/verify-site-build.mjs && node scripts/check-external-links.mjs",
     "validate": "node scripts/validate-questions.mjs",
     "normalize": "node scripts/normalize-questions.mjs",
     "dedup": "node .agent/cert-prep-curator/cli.mjs dedup-db cca-f",

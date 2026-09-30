@@ -6,8 +6,8 @@
  * and writes browser-ready shards into public/data/exams/<examId>/.
  *
  * Shards produced per exam:
- *   public/data/exams/<examId>/questions.json        — full bank (all statuses)
- *   public/data/exams/<examId>/mock-pool.json        — released questions only (status=released)
+ *   public/data/exams/<examId>/questions.json        — published practice questions only
+ *   public/data/exams/<examId>/mock-pool.json        — published mock pool only
  *   public/data/exams/<examId>/manifest.json         — count + domain distribution + build metadata
  *
  * These files are NOT committed to git (public/ is gitignored after CI builds them).
@@ -51,11 +51,15 @@ function buildForExam(examId) {
     process.exit(1);
   }
 
-  const releasedQuestions = allQuestions.filter(q => q.status === 'released');
+  // CCAF predates the released status and its reviewed ready bank is already public.
+  // Other exams require explicit release before their questions enter browser artifacts.
+  const publishedQuestions = allQuestions.filter(q =>
+    q.status === 'released' || (examId === 'cca-f' && q.status === 'ready')
+  );
 
   // Domain distribution from released pool
   const domainCounts = {};
-  releasedQuestions.forEach(q => {
+  publishedQuestions.forEach(q => {
     const d = q.domain || 'unknown';
     domainCounts[d] = (domainCounts[d] || 0) + 1;
   });
@@ -64,18 +68,19 @@ function buildForExam(examId) {
     examId,
     buildAt: new Date().toISOString(),
     totalQuestions: allQuestions.length,
-    releasedQuestions: releasedQuestions.length,
+    publishedQuestions: publishedQuestions.length,
+    releasedQuestions: allQuestions.filter(q => q.status === 'released').length,
     domainDistribution: domainCounts
   };
 
   const outDir = path.join(rootDir, `public/data/exams/${examId}`);
   fs.mkdirSync(outDir, { recursive: true });
 
-  fs.writeFileSync(path.join(outDir, 'questions.json'), JSON.stringify(allQuestions, null, 2));
-  fs.writeFileSync(path.join(outDir, 'mock-pool.json'), JSON.stringify(releasedQuestions, null, 2));
+  fs.writeFileSync(path.join(outDir, 'questions.json'), JSON.stringify(publishedQuestions, null, 2));
+  fs.writeFileSync(path.join(outDir, 'mock-pool.json'), JSON.stringify(publishedQuestions, null, 2));
   fs.writeFileSync(path.join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
-  console.log(`[build-artifacts] ${examId}: ${allQuestions.length} total, ${releasedQuestions.length} released → ${outDir}`);
+  console.log(`[build-artifacts] ${examId}: ${allQuestions.length} total, ${publishedQuestions.length} published → ${outDir}`);
 }
 
 const requested = process.argv.slice(2);

@@ -7,7 +7,7 @@
  * - Zero broken internal links
  * - Zero unrendered Hugo template tags
  * - Zero personal names
- * - Correct data counts (1,130 active questions)
+ * - CCAF page count matches the published browser artifact
  */
 
 import fs from 'node:fs';
@@ -15,6 +15,7 @@ import path from 'node:path';
 
 const rootDir = process.cwd();
 const publicDir = path.join(rootDir, 'public');
+const ccaPublishedCount = JSON.parse(fs.readFileSync(path.join(publicDir, 'data/exams/cca-f/questions.json'), 'utf8')).length;
 
 if (!fs.existsSync(publicDir)) {
   console.error('[ERROR] public/ does not exist. Run hugo build first.');
@@ -97,12 +98,12 @@ for (const pagePath of allPages) {
   }
 
   // 6. Check question counter accuracy on sample questions & exam index
-  if (relPath.includes('sample-questions')) {
+  if (relPath.startsWith('exams/cca-f/sample-questions/')) {
     if (html.includes('Practice 205')) {
       pageErrors.push('Stale question count: mentions "Practice 205" instead of 1,130');
     }
-    if (!html.includes('1130') && !html.includes('1,130')) {
-      pageErrors.push('Missing dynamic 1130 question counter badge');
+    if (!html.includes(String(ccaPublishedCount)) && !html.includes(ccaPublishedCount.toLocaleString('en-US'))) {
+      pageErrors.push(`Question count does not match published CCAF artifact (${ccaPublishedCount})`);
     }
   }
 
@@ -125,7 +126,7 @@ if (issuesCount === 0) {
   console.log(`- 100% Subpath-aligned asset URLs (/ai-certification-preparation/)`);
   console.log(`- Zero unrendered template tags`);
   console.log(`- Zero forbidden personal names`);
-  console.log(`- 1,130 dynamic question counters verified`);
+  console.log(`- CCAF question count matches ${ccaPublishedCount} published questions`);
 } else {
   console.error(`❌ Found ${issuesCount} issues across pages.`);
   process.exit(1);

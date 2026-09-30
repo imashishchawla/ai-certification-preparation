@@ -1,0 +1,14 @@
+{{ $examId := .Params.exam_id | default "cca-f" }}
+{{ $exam := index (where hugo.Data.exams.exams "id" $examId) 0 }}
+{{ partial "breadcrumbs.html" . }}
+<h1>{{ .Title }}</h1>
+{{ if eq $exam.status "active" }}
+  <p class="muted">Take a timed practice test for {{ $exam.name }}. Your score is a practice result, not an official certification result.</p>
+  <div id="mockTestApp" data-exam-id="{{ $exam.id }}" data-exam-name="{{ $exam.name }}" data-question-count="{{ $exam.minimum_mock_questions | default 60 }}" data-duration-minutes="{{ $exam.duration_minutes }}" data-practice-pass-percent="{{ $exam.practice_pass_percent }}">
+    <p class="muted">Loading practice test...</p>
+  </div>
+  <script src="{{ "js/mock-test.js" | relLangURL }}?v={{ sha256 (readFile "static/js/mock-test.js") }}"></script>
+{{ else }}
+  <div class="notice-panel">The timed practice test is in preparation and will open after its question bank passes the release gate.</div>
+  {{ .Content }}
+{{ end }}

@@ -4,7 +4,7 @@
       <span>AI CERT</span> PREP
     </a>
     
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Main navigation">
       {{/* ── Exams dropdown: active + onboarding only (planned have no content pages) ── */}}
       <details class="dropdown">
         <summary>Exams ▾</summary>
@@ -27,10 +27,11 @@
           <summary>{{ $examCode }} Prep ▾</summary>
           <div class="dropdown-menu">
             <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase;">Practice Library</div>
-            <a href="{{ (printf "%ssample-questions/" $examPath) | relLangURL }}">Sample Questions (200+)</a>
+            <a href="{{ (printf "%ssample-questions/" $examPath) | relLangURL }}">Practice Questions</a>
             <a href="{{ (printf "%smock-test/" $examPath) | relLangURL }}">Timed Mock Test</a>
             <div style="padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--muted); font-weight: bold; text-transform: uppercase; border-top: 1px dashed var(--border); margin-top: 0.25rem; padding-top: 0.5rem;">Study Material</div>
             <a href="{{ (printf "%sstudy-guides/" $examPath) | relLangURL }}">Study Guides</a>
+            {{ if eq $examCode "CCAF" }}<a href="{{ (printf "%sdomains/" $examPath) | relLangURL }}">Exam Domains</a>{{ end }}
             <a href="{{ (printf "%sexam-notes/" $examPath) | relLangURL }}">Exam Notes</a>
             <a href="{{ (printf "%sarticles/" $examPath) | relLangURL }}">Technical Articles</a>
             <a href="{{ (printf "%sstudy-materials/" $examPath) | relLangURL }}">Official Documents &amp; PDFs</a>

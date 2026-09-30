@@ -42,9 +42,9 @@ function crawlDir(dir) {
       
       // Extract all element IDs for fragment verification
       const ids = new Set();
-      const idMatches = html.matchAll(/\bid=["']([^"']+)["']/gi);
+      const idMatches = html.matchAll(/\bid=(?:["']([^"']+)["']|([^\s>]+))/gi);
       for (const m of idMatches) {
-        ids.add(m[1]);
+        ids.add(m[1] || m[2]);
       }
 
       htmlFiles.set(route, { filePath: full, relFromPublic, html, ids });
@@ -116,6 +116,7 @@ for (const [route, page] of htmlFiles.entries()) {
 
     // Separate URL and hash fragment
     let [pathPart, fragment] = rawHref.split('#');
+    pathPart = pathPart.split('?')[0];
 
     let resolvedRoute = '';
     if (pathPart.startsWith(BASE_PREFIX)) {
@@ -168,7 +169,7 @@ for (const [route, page] of htmlFiles.entries()) {
     if (src.startsWith(BASE_PREFIX)) {
       assetRel = src.slice(BASE_PREFIX.length);
     }
-    assetRel = assetRel.replace(/^\//, '');
+    assetRel = assetRel.split(/[?#]/)[0].replace(/^\//, '');
 
     if (!allAssetFiles.has(assetRel)) {
       brokenAssets.push({ page: route, src });

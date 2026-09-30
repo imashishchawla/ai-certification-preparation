@@ -1,8 +1,12 @@
 ---
 title: "Mock Test — Terraform Associate (004)"
-description: "Timed 57-question mock exam simulator for HashiCorp Certified Terraform Associate (004)."
+description: "A timed practice test for Terraform Associate (004), available after question-bank review."
 exam_id: "terraform-associate"
-layout: "list"
+noindex: true
+sitemap:
+  disable: true
+layout: "mock-test"
+type: "mock-test"
 draft: false
 ---
 

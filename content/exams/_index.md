@@ -1,6 +1,6 @@
 ---
-title: "AI Certification Exams"
-description: "Browse all active and planned AI certification preparation tracks."
+title: "All Certifications"
+description: "Browse available certification practice tracks and see what is in development."
 type: "exams"
 layout: "catalog"
 ---

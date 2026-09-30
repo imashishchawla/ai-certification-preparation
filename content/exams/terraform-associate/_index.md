@@ -1,45 +1,36 @@
 ---
 title: "HashiCorp Certified: Terraform Associate (004)"
-description: "Free practice questions, mock exams, study guides, and exam notes for HashiCorp Certified Terraform Associate (004) — the entry-level Infrastructure as Code certification."
+description: "Verified exam overview and official preparation links for Terraform Associate (004). Practice questions and mock tests are in development."
 exam_id: "terraform-associate"
 exam_code: "TA-004"
 provider: "HashiCorp"
 status: "onboarding"
 version: "004"
 duration_minutes: 60
-pass_score: 700
-price_usd: 70
+price_usd: 70.50
 terraform_version_tested: "1.12"
-scoring_policy: "all_or_nothing"
 layout: "exam"
 draft: false
 ---
 
-HashiCorp Certified: Terraform Associate (004) is the entry-level Infrastructure as Code certification from HashiCorp, validating your ability to understand and use Terraform to provision, manage, and automate cloud infrastructure.
+Terraform Associate (004) is HashiCorp's foundational infrastructure automation certification. This preparation track is in development. Our practice questions and mock test are not available yet.
 
-> **Status:** This exam is currently in the onboarding phase. Practice questions and mock tests will be available once the question bank passes minimum release gates (60+ validated questions).
+## Verified exam details
 
-## Exam Overview
-
-| Property | Value |
+| Detail | Current information |
 |---|---|
-| Exam code | TA-004 |
-| Version | 004 (targets Terraform ≥ 1.0, tested against 1.12) |
-| Duration | 60 minutes |
-| Pass score | 700 / 1000 |
-| Price | USD 70 |
-| Format | Multiple-choice, multi-select |
-| Scoring | All-or-nothing on multi-select questions |
+| Exam version | 004 |
+| Terraform version tested | 1.12 |
+| Duration | One hour |
+| Format | Online proctored; multiple-choice |
+| Listed price | $70.50 USD, plus applicable taxes and fees |
 
-## Domains & Weights
+HashiCorp lists eight objective areas: infrastructure as code, Terraform fundamentals, the core workflow, configuration, modules, state management, infrastructure maintenance, and HCP Terraform. It does not publish domain weights or a passing score on the [official certification page](https://developer.hashicorp.com/certifications/infrastructure-automation), so this site does not present either as an official figure.
 
-| Domain | Weight |
-|---|---|
-| D1 — Understand Infrastructure as Code (IaC) Concepts | 16% |
-| D2 — Understand Terraform's Purpose | 9% |
-| D3 — Understand Terraform Basics | 15% |
-| D4 — Use the Terraform CLI | 22% |
-| D5 — Interact with Terraform Modules | 12% |
-| D6 — Use the Core Terraform Workflow | 10% |
-| D7 — Implement and Maintain State | 10% |
-| D8 — Read, Generate, and Modify Configuration | 6% |
+## Start with official preparation material
+
+- [Terraform Associate (004) certification details and objectives](https://developer.hashicorp.com/certifications/infrastructure-automation)
+- [Official Terraform Associate (004) learning path](https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-study-004)
+- [Official sample question formats](https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-questions-004)
+
+Exam facts checked against HashiCorp on **2026-09-30**. Practice material will be added only after source review and the question-bank release gate pass.

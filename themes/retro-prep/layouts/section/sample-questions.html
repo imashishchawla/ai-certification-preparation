@@ -1,17 +1,1 @@
-{{ define "main" }}
-{{ partial "breadcrumbs.html" . }}
-
-{{ $exam := index (where hugo.Data.exams.exams "id" "cca-f") 0 }}
-<h1>Sample Questions (Interactive Practice)</h1>
-<p class="muted">Practice <strong id="totalQuestionsCount">{{ $exam.questions }}</strong> normalized scenario questions across all 5 official CCAF exam domains — select an option and click <strong>Reveal answer</strong> to verify explanations.</p>
-
-<div id="domainFilters" style="margin-bottom: 1.5rem;"></div>
-
-<div id="questionsContainer">
-  <p class="muted">Loading practice questions...</p>
-</div>
-
-<div id="paginationContainer" style="margin-top: 2rem; margin-bottom: 2rem;"></div>
-
-<script src="{{ "js/question-reveal.js" | relLangURL }}"></script>
-{{ end }}
+{{ define "main" }}{{ partial "practice-page.html" . }}{{ end }}

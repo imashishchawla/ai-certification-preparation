@@ -1,0 +1,12 @@
+{{- $exam := . -}}
+{{- $count := 0 -}}
+{{- $path := printf "data/questions/%s/questions.json" $exam.id -}}
+{{- if fileExists $path -}}
+  {{- $questions := os.ReadFile $path | transform.Unmarshal -}}
+  {{- range $questions -}}
+    {{- if or (eq .status "released") (and $exam.legacy_ready_published (eq .status "ready")) -}}
+      {{- $count = add $count 1 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $count -}}

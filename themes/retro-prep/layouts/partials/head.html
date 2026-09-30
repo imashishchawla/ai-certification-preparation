@@ -8,17 +8,18 @@
 {{/* ── Core charset / viewport ──────────────────────────────────────────── */}}
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relLangURL }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 {{/* ── Page title ─────────────────────────────────────────────────────────── */}}
-<title>{{ if .IsHome }}{{ .Site.Title }} | Free AI Certification Practice{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 
 {{/* ── Meta description ────────────────────────────────────────────────────── */}}
 <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
 {{/* ── Author + robots ─────────────────────────────────────────────────────── */}}
 {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="robots" content="{{ if .Params.noindex }}noindex, follow{{ else }}index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1{{ end }}">
 
 {{/* ── Canonical URL (prevents duplicate-content penalties) ─────────────────── */}}
 <link rel="canonical" href="{{ .Permalink }}">
@@ -31,17 +32,17 @@
 {{ end }}
 
 {{/* ── Open Graph (Facebook, LinkedIn previews) ───────────────────────────── */}}
-<meta property="og:type"        content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+<meta property="og:type"        content="{{ if eq .Kind "page" }}article{{ else }}website{{ end }}">
 <meta property="og:url"         content="{{ .Permalink }}">
-<meta property="og:title"       content="{{ if .IsHome }}{{ .Site.Title }} | Free AI Certification Practice{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+<meta property="og:title"       content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
 <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 <meta property="og:site_name"   content="{{ .Site.Title }}">
 <meta property="og:locale"      content="en_US">
 {{ with .Site.Params.og_image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
 
 {{/* ── Twitter / X Card ───────────────────────────────────────────────────── */}}
-<meta name="twitter:card"        content="summary">
-<meta name="twitter:title"       content="{{ if .IsHome }}{{ .Site.Title }} | Free AI Certification Practice{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
 <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 {{ with .Site.Params.og_image }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
 

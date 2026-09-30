@@ -1,5 +1,5 @@
 baseURL = 'https://imashishchawla.github.io/ai-certification-preparation/'
-title = 'AI Certification Exam Prep'
+title = 'Certification Prep — Practice Library'
 theme = 'retro-prep'
 defaultContentLanguage = 'en'
 enableGitInfo = false
@@ -21,7 +21,7 @@ canonifyURLs = false
   priority   = 0.5
 
 [params]
-  description  = 'Free AI & cloud certification exam prep — practice questions, timed mock tests, and study guides for Claude Certified Architect (CCAF), Terraform Associate, and more. No login required.'
+  description  = 'Prepare for professional certifications in one place with focused study guides, practice questions, exam notes, and timed mock tests.'
   author       = 'AI Cert Prep'
   show_toc     = true
 
@@ -36,7 +36,7 @@ canonifyURLs = false
   google_site_verification = 'nObZHvVJRHCR2DCcYj3zheofRz997pqo7yPZQ8S_zbU'
 
   # ── Open Graph image ─────────────────────────────────────────────────────────
-  # og_image = '/ai-certification-preparation/images/og-default.png'
+  og_image = '/ai-certification-preparation/images/og-default.png'
 
 [taxonomies]
   tag      = 'tags'

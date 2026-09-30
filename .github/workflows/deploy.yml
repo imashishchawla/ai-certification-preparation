@@ -51,21 +51,22 @@ jobs:
 
       - name: Build Hugo site
         # GA_MEASUREMENT_ID and CF_ANALYTICS_TOKEN come from GitHub repo Variables (not Secrets).
-        # They are public-safe beacon IDs injected into hugo.toml [params] at build time via a
-        # generated override config file. If either variable is empty, its param is simply absent
-        # and Hugo silently skips the analytics snippet in head.html (the {{ with }} guards fire).
+        # The Cloudflare variable may be a bare token or a dashboard-provided beacon snippet.
+        # Normalize it to a token before writing TOML; never print its value in build logs.
         run: |
-          # Write an ephemeral TOML override with the analytics params.
-          # printf avoids heredoc syntax that can confuse YAML parsers.
-          printf '[params]\nga_measurement_id  = "%s"\ncf_analytics_token = "%s"\n' \
-            "${GA_MEASUREMENT_ID}" "${CF_ANALYTICS_TOKEN}" \
-            > /tmp/analytics.toml
+          node scripts/write-analytics-config.mjs /tmp/analytics.toml
           hugo --minify \
                --baseURL "https://imashishchawla.github.io/ai-certification-preparation/" \
                --config hugo.toml,/tmp/analytics.toml
 
       - name: Build browser artifacts (post-Hugo shards)
         run: node scripts/build-browser-artifacts.mjs
+
+      - name: Audit rendered pages
+        run: |
+          node scripts/audit-rendered-pages.mjs
+          node scripts/seo-spider.mjs
+          node scripts/verify-site-build.mjs
 
       - name: Check external links
         run: node scripts/check-external-links.mjs
@@ -86,3 +87,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Checkout verification script
+        uses: actions/checkout@v4
+
+      - name: Verify published site
+        run: node scripts/verify-live-site.mjs

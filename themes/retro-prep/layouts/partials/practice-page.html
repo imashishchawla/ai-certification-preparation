@@ -1,0 +1,16 @@
+{{ $examId := .Params.exam_id | default "cca-f" }}
+{{ $exam := index (where hugo.Data.exams.exams "id" $examId) 0 }}
+{{ partial "breadcrumbs.html" . }}
+<h1>{{ .Title }}</h1>
+{{ if eq $exam.status "active" }}
+  {{ $count := partial "published-question-count.html" $exam }}
+  <p class="muted">Practice {{ $count }} published questions across the {{ $exam.name }} subject areas. Choose an answer, then reveal the explanation.</p>
+  <p id="practiceStatus" class="sr-only" role="status" aria-live="polite"></p>
+  <div id="domainFilters" aria-label="Question filters"></div>
+  <div id="questionsContainer" data-exam-id="{{ $exam.id }}"><p class="muted">Loading practice questions...</p></div>
+  <div id="paginationContainer" aria-label="Question pages"></div>
+  <script src="{{ "js/question-reveal.js" | relLangURL }}?v={{ sha256 (readFile "static/js/question-reveal.js") }}"></script>
+{{ else }}
+  <div class="notice-panel">Practice questions for this track are in preparation. They will appear after content review and the release gate pass.</div>
+  {{ .Content }}
+{{ end }}

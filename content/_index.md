@@ -1,6 +1,6 @@
 ---
-title: "AI Certification Exam Prep"
-description: "An offline reference handbook & examination engine for AI certification prep — featuring Claude Certified Architect (CCAF) scenario questions, official study guides, and timed mock tests."
+title: "Certification Prep — Practice Library"
+description: "Prepare for professional certifications in one place with focused study guides, practice questions, exam notes, and timed mock tests."
 ---
 
-An offline reference handbook & examination engine for AI certification prep — featuring Claude Certified Architect (CCAF) scenario questions, official study guides, and timed mock tests.
+Focused study and practice for professional certifications, organized into clear learning paths.

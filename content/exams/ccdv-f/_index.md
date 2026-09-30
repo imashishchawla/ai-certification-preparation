@@ -1,32 +1,12 @@
 ---
-title: "Claude Certified Developer — Foundations (CCDV-F)"
-description: "Developer certification covering Anthropic API integration, SDK usage, and tool calling."
+title: "Claude Developer Preparation"
+description: "A planned study area for Claude API and developer workflows. No exam specifications are announced here."
+noindex: true
+sitemap:
+  disable: true
 layout: "single"
 ---
 
-<div class="card" style="border-left: 6px solid #d97706; background: rgba(217, 119, 6, 0.05); padding: 1.5rem; margin-bottom: 2rem;">
-  <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-    <span class="badge" style="background: #d97706; color: #fff;">PLANNED CERTIFICATION</span>
-    <span class="muted">Status: In Preparation</span>
-  </div>
-  <h2 style="margin: 0.5rem 0;">CCDV-F Practice Track Coming Soon</h2>
-  <p>The <strong>Claude Certified Developer — Foundations (CCDV-F)</strong> certification exam materials are currently being prepared.</p>
-</div>
+This is a planned subject area for future study material. Anthropic has said more certifications for developers will follow, but has not confirmed an exam name, format, fee, or date on its [Claude Partner Network announcement](https://www.anthropic.com/news/claude-partner-network).
 
-## Exam Overview
-
-* **Provider:** Anthropic
-* **Level:** Developer Foundations
-* **Format:** 50 Questions / 90 Minutes
-* **Passing Score:** 70% (700 / 1000)
-* **Estimated Exam Fee:** $150 USD
-
----
-
-## What to Do Next
-
-Start with the **Claude Certified Architect — Foundations (CCAF)** exam prep library:
-
-* 👉 <a href="/ai-certification-preparation/exams/cca-f/"><strong>CCAF Exam Overview & Study Center</strong></a>
-* 📝 <a href="/ai-certification-preparation/exams/cca-f/sample-questions/"><strong>CCAF 200+ Practice Questions</strong></a>
-* ⏱️ <a href="/ai-certification-preparation/exams/cca-f/mock-test/"><strong>CCAF Timed Mock Test Engine</strong></a>
+For material available now, visit the [Claude Certified Architect, Foundations preparation track](/ai-certification-preparation/exams/cca-f/).

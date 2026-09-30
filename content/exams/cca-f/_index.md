@@ -62,6 +62,12 @@ layout: "single"
     <p>All study-related material included here: theory deep-dives covering agentic loops, hooks, multi-agent pipelines, MCP, and session state.</p>
   </a>
 
+  <a href="/ai-certification-preparation/exams/cca-f/domains/" class="card">
+    <span class="tag">DOMAIN PATHS</span>
+    <h3>Explore the Five Domains</h3>
+    <p>Start with a focused overview of each subject area, then move into study material and practice questions.</p>
+  </a>
+
   <a href="/ai-certification-preparation/exams/cca-f/exam-notes/" class="card">
     <span class="tag">NOTES & HACKS</span>
     <h3>Exam Notes</h3>
@@ -93,9 +99,9 @@ layout: "single"
 
 <div class="card-grid">
   <a href="/ai-certification-preparation/exams/cca-f/sample-questions/" class="card" style="border-left: 6px solid var(--accent);">
-    <span class="tag">PRACTICE (200+ Qs)</span>
+    <span class="tag">PRACTICE (1,130 Qs)</span>
     <h3>Sample Questions (Domain Categorized)</h3>
-    <p>Browse 200+ normalized practice questions categorized across all 5 official exam domains. 50 Qs per page, 4 choices (A–D), Reveal Answer, and detailed rationales.</p>
+    <p>Browse 1,130 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
   </a>
 
   <a href="/ai-certification-preparation/exams/cca-f/mock-test/" class="card" style="border-left: 6px solid var(--focus-ring);">

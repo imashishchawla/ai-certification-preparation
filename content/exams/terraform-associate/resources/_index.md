@@ -1,5 +1,8 @@
 ---
 title: "Resources — Terraform Associate (004)"
+noindex: true
+sitemap:
+  disable: true
 description: "Curated resource links for HashiCorp Certified Terraform Associate (004) exam preparation."
 exam_id: "terraform-associate"
 layout: "list"
