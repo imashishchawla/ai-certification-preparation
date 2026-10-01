@@ -7,10 +7,14 @@
       "sources": [
         {
           "id": "anthropic-official-exam-guide",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Anthropic Official Exam Guide v1.0",
           "url": "https://everpath-course-content.s3-accelerate.amazonaws.com/Claude+Certified+Architect+%E2%80%93+Foundations+Certification+Exam+Guide.pdf",
-          "allowed_redirect_hosts": ["everpath-course-content.s3-accelerate.amazonaws.com"],
+          "allowed_redirect_hosts": [
+            "everpath-course-content.s3-accelerate.amazonaws.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -19,14 +23,24 @@
           "refresh_frequency": "on-change",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-materials/",
-          "domains": ["D1", "D2", "D3", "D4", "D5"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ]
         },
         {
           "id": "anthropic-partner-academy",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Anthropic Partner Academy (Skilljar)",
           "url": "https://anthropic-partners.skilljar.com",
-          "allowed_redirect_hosts": ["anthropic-partners.skilljar.com"],
+          "allowed_redirect_hosts": [
+            "anthropic-partners.skilljar.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -35,14 +49,24 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-materials/",
-          "domains": ["D1", "D2", "D3", "D4", "D5"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ]
         },
         {
           "id": "claude-code-docs",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Claude Code CLI Documentation",
           "url": "https://code.claude.com",
-          "allowed_redirect_hosts": ["code.claude.com"],
+          "allowed_redirect_hosts": [
+            "code.claude.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -51,7 +75,9 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-materials/",
-          "domains": ["D3"],
+          "domains": [
+            "D3"
+          ],
           "endpoints": [
             "https://code.claude.com/docs/en/memory.md",
             "https://code.claude.com/docs/en/skills.md",
@@ -67,10 +93,14 @@
         },
         {
           "id": "anthropic-platform-docs",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Anthropic Platform & Agent SDK",
           "url": "https://docs.anthropic.com",
-          "allowed_redirect_hosts": ["docs.anthropic.com"],
+          "allowed_redirect_hosts": [
+            "docs.anthropic.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -79,7 +109,12 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-materials/",
-          "domains": ["D1", "D2", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://docs.anthropic.com/en/agent-sdk/overview.md",
             "https://docs.anthropic.com/en/agent-sdk/hooks.md",
@@ -92,10 +127,14 @@
         },
         {
           "id": "mcp-specification",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Model Context Protocol (MCP) Official Spec",
           "url": "https://modelcontextprotocol.io",
-          "allowed_redirect_hosts": ["modelcontextprotocol.io"],
+          "allowed_redirect_hosts": [
+            "modelcontextprotocol.io"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -104,7 +143,9 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-materials/",
-          "domains": ["D2"],
+          "domains": [
+            "D2"
+          ],
           "endpoints": [
             "https://modelcontextprotocol.io/docs/concepts/tools.md",
             "https://modelcontextprotocol.io/docs/concepts/resources.md",
@@ -113,32 +154,67 @@
         },
         {
           "id": "certyiq-cca-f",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "CertyIQ — CCA-F Question Banks",
           "url": "https://certyiq.com",
-          "allowed_redirect_hosts": ["certyiq.com", "dev.certyiq.com"],
+          "allowed_redirect_hosts": [
+            "certyiq.com",
+            "dev.certyiq.com"
+          ],
           "trust_tier": "tier-2-curated",
           "active": true,
           "publication_mode": "question-source",
           "parser_adapter": "certyiq-api",
           "certyiq_stream": "anthropic",
           "certyiq_papers": [
-            { "name": "Claude Certified Architect - Foundations", "id": "claude-certified-architect", "pages": 2, "isCore": true },
-            { "name": "Claude Certified Developer Foundations",   "id": "ccdv-f",                    "pages": 1, "isCore": false },
-            { "name": "Claude Certified Associate Foundations CCAO-F", "id": "ccao-f",             "pages": 1, "isCore": false },
-            { "name": "Claude Certified Architect Professional (CCAR-P)", "id": "ccar-p",          "pages": 1, "isCore": false }
+            {
+              "name": "Claude Certified Architect - Foundations",
+              "id": "claude-certified-architect",
+              "pages": 2,
+              "isCore": true
+            },
+            {
+              "name": "Claude Certified Developer Foundations",
+              "id": "ccdv-f",
+              "pages": 1,
+              "isCore": false
+            },
+            {
+              "name": "Claude Certified Associate Foundations CCAO-F",
+              "id": "ccao-f",
+              "pages": 1,
+              "isCore": false
+            },
+            {
+              "name": "Claude Certified Architect Professional (CCAR-P)",
+              "id": "ccar-p",
+              "pages": 1,
+              "isCore": false
+            }
           ],
           "refresh_frequency": "weekly",
           "timeout_seconds": 60,
           "destination": "data/questions/cca-f/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ]
         },
         {
           "id": "claude-certification-guide",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Claude Certification Guide Platform",
           "url": "https://claudecertificationguide.com",
-          "allowed_redirect_hosts": ["claudecertificationguide.com"],
+          "allowed_redirect_hosts": [
+            "claudecertificationguide.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "question-source",
@@ -147,7 +223,13 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "data/questions/cca-f/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://claudecertificationguide.com/mock-exam/start",
             "https://claudecertificationguide.com/practice-questions",
@@ -156,10 +238,14 @@
         },
         {
           "id": "claude-architect-practice-exam",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Architecture Practice Exam Bank (60 Q)",
           "url": "https://szymonpaluch.com",
-          "allowed_redirect_hosts": ["szymonpaluch.com"],
+          "allowed_redirect_hosts": [
+            "szymonpaluch.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "question-source",
@@ -168,7 +254,13 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "data/questions/cca-f/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://szymonpaluch.com/claude-certified-architect-practice-exam",
             "https://szymonpaluch.com/claude-certification-guide"
@@ -176,10 +268,14 @@
         },
         {
           "id": "claudecertifiedarchitects",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "claudecertifiedarchitects.com Bank",
           "url": "https://claudecertifiedarchitects.com",
-          "allowed_redirect_hosts": ["claudecertifiedarchitects.com"],
+          "allowed_redirect_hosts": [
+            "claudecertifiedarchitects.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "question-source",
@@ -188,17 +284,27 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "data/questions/cca-f/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://claudecertifiedarchitects.com/app.js"
           ]
         },
         {
           "id": "architect-associate-prep-bank",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Architect & Associate Exam Prep Bank",
           "url": "https://raw.githubusercontent.com",
-          "allowed_redirect_hosts": ["raw.githubusercontent.com"],
+          "allowed_redirect_hosts": [
+            "raw.githubusercontent.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "question-source",
@@ -207,7 +313,13 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "data/questions/cca-f/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://raw.githubusercontent.com/amey-thakur/claude-architect/main/questions.json",
             "https://raw.githubusercontent.com/amey-thakur/claude-architect/main/mock-exams.md"
@@ -215,10 +327,14 @@
         },
         {
           "id": "cca-prep-claudecertprep",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "cca-prep (claudecertprep.com)",
           "url": "https://claudecertprep.com",
-          "allowed_redirect_hosts": ["claudecertprep.com"],
+          "allowed_redirect_hosts": [
+            "claudecertprep.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "question-source",
@@ -227,7 +343,13 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "data/questions/cca-f/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://claudecertprep.com/questions.json",
             "https://claudecertprep.com/antipatterns.json",
@@ -236,10 +358,14 @@
         },
         {
           "id": "situational-scenario-guide",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Architecture Scenario & Theory Guide",
           "url": "https://raw.githubusercontent.com",
-          "allowed_redirect_hosts": ["raw.githubusercontent.com"],
+          "allowed_redirect_hosts": [
+            "raw.githubusercontent.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "study-guide-source",
@@ -248,7 +374,13 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-guides/",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://raw.githubusercontent.com/paullarionov/claude-architect-guide/main/guide_en.md",
             "https://raw.githubusercontent.com/paullarionov/claude-architect-guide/main/questions.md"
@@ -256,10 +388,14 @@
         },
         {
           "id": "community-architecture-guide",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Community Architecture Foundations Guide",
           "url": "https://raw.githubusercontent.com",
-          "allowed_redirect_hosts": ["raw.githubusercontent.com"],
+          "allowed_redirect_hosts": [
+            "raw.githubusercontent.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "study-guide-source",
@@ -268,17 +404,28 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-guides/",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://raw.githubusercontent.com/dnacenta/claude-certified-architect/main/README.md"
           ]
         },
         {
           "id": "anthropic-engineering-research",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Anthropic Engineering Research Articles",
           "url": "https://www.anthropic.com",
-          "allowed_redirect_hosts": ["www.anthropic.com", "anthropic.com"],
+          "allowed_redirect_hosts": [
+            "www.anthropic.com",
+            "anthropic.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "study-guide-source",
@@ -287,7 +434,10 @@
           "refresh_frequency": "monthly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/study-guides/",
-          "domains": ["D1", "D3"],
+          "domains": [
+            "D1",
+            "D3"
+          ],
           "endpoints": [
             "https://www.anthropic.com/engineering/building-effective-agents.md",
             "https://www.anthropic.com/engineering/claude-code-best-practices.md"
@@ -295,10 +445,14 @@
         },
         {
           "id": "spectrum-ai-labs",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Spectrum AI Labs Certification Breakdown",
           "url": "https://spectrumailab.com",
-          "allowed_redirect_hosts": ["spectrumailab.com"],
+          "allowed_redirect_hosts": [
+            "spectrumailab.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "reference-only",
@@ -307,17 +461,27 @@
           "refresh_frequency": "monthly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/articles/",
-          "domains": ["D1", "D2", "D3", "D4", "D5"],
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://spectrumailab.com/blog/claude-certification-exams-2026.md"
           ]
         },
         {
           "id": "claude-architect-guide-tokenomics",
-          "exam_ids": ["cca-f"],
+          "exam_ids": [
+            "cca-f"
+          ],
           "name": "Claude Architect Guide (Tokenomics & Caching)",
           "url": "https://claudearchitectguide.com",
-          "allowed_redirect_hosts": ["claudearchitectguide.com"],
+          "allowed_redirect_hosts": [
+            "claudearchitectguide.com"
+          ],
           "trust_tier": "tier-2-verified",
           "active": true,
           "publication_mode": "reference-only",
@@ -326,7 +490,10 @@
           "refresh_frequency": "monthly",
           "timeout_seconds": 30,
           "destination": "content/exams/cca-f/articles/",
-          "domains": ["D4", "D5"],
+          "domains": [
+            "D4",
+            "D5"
+          ],
           "endpoints": [
             "https://claudearchitectguide.com/certifications/cost-analysis.md"
           ]
@@ -337,10 +504,14 @@
       "sources": [
         {
           "id": "hashicorp-official-study-guide",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "HashiCorp Terraform Associate Certification — Official Study Guide",
           "url": "https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-study-004",
-          "allowed_redirect_hosts": ["developer.hashicorp.com"],
+          "allowed_redirect_hosts": [
+            "developer.hashicorp.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -349,14 +520,27 @@
           "refresh_frequency": "monthly",
           "timeout_seconds": 30,
           "destination": "content/exams/terraform-associate/study-materials/",
-          "domains": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
         },
         {
           "id": "hashicorp-official-sample-questions",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "HashiCorp Terraform Associate (004) — Official Sample Questions",
           "url": "https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-questions-004",
-          "allowed_redirect_hosts": ["developer.hashicorp.com"],
+          "allowed_redirect_hosts": [
+            "developer.hashicorp.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "question-source",
@@ -365,14 +549,27 @@
           "refresh_frequency": "monthly",
           "timeout_seconds": 30,
           "destination": "data/questions/terraform-associate/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
         },
         {
           "id": "hashicorp-exam-objectives-004",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "HashiCorp Terraform Associate (004) — Exam Objectives",
           "url": "https://developer.hashicorp.com/terraform/tutorials/certification-004",
-          "allowed_redirect_hosts": ["developer.hashicorp.com"],
+          "allowed_redirect_hosts": [
+            "developer.hashicorp.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -381,14 +578,27 @@
           "refresh_frequency": "on-change",
           "timeout_seconds": 30,
           "destination": "content/exams/terraform-associate/study-materials/",
-          "domains": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
         },
         {
           "id": "hashicorp-terraform-docs",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "Terraform Language Documentation (developer.hashicorp.com)",
           "url": "https://developer.hashicorp.com/terraform/language",
-          "allowed_redirect_hosts": ["developer.hashicorp.com"],
+          "allowed_redirect_hosts": [
+            "developer.hashicorp.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -397,7 +607,12 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/terraform-associate/study-materials/",
-          "domains": ["D3", "D6", "D7", "D8"],
+          "domains": [
+            "D3",
+            "D6",
+            "D7",
+            "D8"
+          ],
           "endpoints": [
             "https://developer.hashicorp.com/terraform/language/providers",
             "https://developer.hashicorp.com/terraform/language/modules",
@@ -411,10 +626,14 @@
         },
         {
           "id": "hashicorp-terraform-cli-docs",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "Terraform CLI Documentation",
           "url": "https://developer.hashicorp.com/terraform/cli",
-          "allowed_redirect_hosts": ["developer.hashicorp.com"],
+          "allowed_redirect_hosts": [
+            "developer.hashicorp.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "document-source",
@@ -423,7 +642,10 @@
           "refresh_frequency": "weekly",
           "timeout_seconds": 30,
           "destination": "content/exams/terraform-associate/study-materials/",
-          "domains": ["D4", "D6"],
+          "domains": [
+            "D4",
+            "D6"
+          ],
           "endpoints": [
             "https://developer.hashicorp.com/terraform/cli/commands",
             "https://developer.hashicorp.com/terraform/cli/commands/init",
@@ -439,31 +661,64 @@
         },
         {
           "id": "certyiq-terraform-associate",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "CertyIQ — Terraform Associate Question Banks",
           "url": "https://certyiq.com",
-          "allowed_redirect_hosts": ["certyiq.com", "dev.certyiq.com"],
+          "allowed_redirect_hosts": [
+            "certyiq.com",
+            "dev.certyiq.com"
+          ],
           "trust_tier": "tier-2-curated",
           "active": true,
           "publication_mode": "question-source",
           "parser_adapter": "certyiq-api",
           "certyiq_stream": "hashicorp",
           "certyiq_papers": [
-            { "name": "HashiCorp Certified: Terraform Associate (004)", "id": "terraform-associate-004", "pages": 4, "isCore": true },
-            { "name": "HashiCorp Certified: Terraform Associate (003)", "id": "terraform-associate-003", "pages": 3, "isCore": false },
-            { "name": "HashiCorp Certified: Terraform Associate",       "id": "terraform-associate",     "pages": 2, "isCore": false }
+            {
+              "name": "HashiCorp Certified: Terraform Associate (004)",
+              "id": "terraform-associate-004",
+              "pages": 4,
+              "isCore": true
+            },
+            {
+              "name": "HashiCorp Certified: Terraform Associate (003)",
+              "id": "terraform-associate-003",
+              "pages": 3,
+              "isCore": false
+            },
+            {
+              "name": "HashiCorp Certified: Terraform Associate",
+              "id": "terraform-associate",
+              "pages": 2,
+              "isCore": false
+            }
           ],
           "refresh_frequency": "weekly",
           "timeout_seconds": 60,
           "destination": "data/questions/terraform-associate/questions.json",
-          "domains": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
         },
         {
           "id": "hashicorp-terraform-review-guide",
-          "exam_ids": ["terraform-associate"],
+          "exam_ids": [
+            "terraform-associate"
+          ],
           "name": "HashiCorp Terraform Associate (004) — Review Guide",
           "url": "https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-review-004",
-          "allowed_redirect_hosts": ["developer.hashicorp.com"],
+          "allowed_redirect_hosts": [
+            "developer.hashicorp.com"
+          ],
           "trust_tier": "tier-1-official",
           "active": true,
           "publication_mode": "study-guide-source",
@@ -472,7 +727,142 @@
           "refresh_frequency": "monthly",
           "timeout_seconds": 30,
           "destination": "content/exams/terraform-associate/study-guides/",
-          "domains": ["D1", "D2", "D3", "D4", "D5", "D6", "D7", "D8"]
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
+        }
+      ]
+    },
+    "ccao-f": {
+      "sources": [
+        {
+          "id": "certyiq-ccao-f",
+          "exam_ids": [
+            "ccao-f"
+          ],
+          "name": "CertyIQ CCAO-F cached question stream",
+          "url": "https://certyiq.com",
+          "allowed_redirect_hosts": [
+            "certyiq.com",
+            "dev.certyiq.com"
+          ],
+          "trust_tier": "tier-2-curated",
+          "active": false,
+          "publication_mode": "question-source",
+          "parser_adapter": "certyiq-api",
+          "certyiq_stream": "anthropic",
+          "certyiq_papers": [
+            {
+              "name": "CCAO-F",
+              "id": "ccao-f",
+              "pages": 1,
+              "isCore": false
+            }
+          ],
+          "refresh_frequency": "weekly",
+          "timeout_seconds": 60,
+          "destination": "data/questions/ccao-f/questions.json",
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
+        }
+      ]
+    },
+    "ccar-p": {
+      "sources": [
+        {
+          "id": "certyiq-ccar-p",
+          "exam_ids": [
+            "ccar-p"
+          ],
+          "name": "CertyIQ CCAR-P cached question stream",
+          "url": "https://certyiq.com",
+          "allowed_redirect_hosts": [
+            "certyiq.com",
+            "dev.certyiq.com"
+          ],
+          "trust_tier": "tier-2-curated",
+          "active": false,
+          "publication_mode": "question-source",
+          "parser_adapter": "certyiq-api",
+          "certyiq_stream": "anthropic",
+          "certyiq_papers": [
+            {
+              "name": "CCAR-P",
+              "id": "ccar-p",
+              "pages": 1,
+              "isCore": false
+            }
+          ],
+          "refresh_frequency": "weekly",
+          "timeout_seconds": 60,
+          "destination": "data/questions/ccar-p/questions.json",
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
+        }
+      ]
+    },
+    "ccdv-f": {
+      "sources": [
+        {
+          "id": "certyiq-ccdv-f",
+          "exam_ids": [
+            "ccdv-f"
+          ],
+          "name": "CertyIQ CCDV-F cached question stream",
+          "url": "https://certyiq.com",
+          "allowed_redirect_hosts": [
+            "certyiq.com",
+            "dev.certyiq.com"
+          ],
+          "trust_tier": "tier-2-curated",
+          "active": false,
+          "publication_mode": "question-source",
+          "parser_adapter": "certyiq-api",
+          "certyiq_stream": "anthropic",
+          "certyiq_papers": [
+            {
+              "name": "CCDV-F",
+              "id": "ccdv-f",
+              "pages": 1,
+              "isCore": false
+            }
+          ],
+          "refresh_frequency": "weekly",
+          "timeout_seconds": 60,
+          "destination": "data/questions/ccdv-f/questions.json",
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
         }
       ]
     }

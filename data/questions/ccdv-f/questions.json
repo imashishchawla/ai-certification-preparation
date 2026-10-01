@@ -1,0 +1,464 @@
+[
+  {
+    "id": "ccdv-f-certyiq-002",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A developer creates an AI coding assistant for a known workflow with repeatable steps. Which design approach is appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use a fixed sequence of prompts"
+      },
+      {
+        "id": "B",
+        "text": "Allow unlimited autonomous exploration"
+      },
+      {
+        "id": "C",
+        "text": "Remove all workflow instructions"
+      },
+      {
+        "id": "D",
+        "text": "Use random decision paths"
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "explanation": "A. Use a fixed sequence of prompts\nCorrect\nFor a known, repeatable workflow , a fixed sequence of prompts provides predictable and consistent execution. It guides the AI assistant through each required step in the correct order.\nB. Allow unlimited autonomous exploration\nIncorrect\nUnlimited exploration can make the assistant unpredictable and is unnecessary when the workflow is already well-defined.\nC. Remove all workflow instructions\nIncorrect\nWithout workflow instructions, the assistant may produce inconsistent results and fail to follow the required process.\nD. Use random decision paths\nIncorrect\nRandom decision paths are inappropriate for repeatable workflows because they reduce consistency and predictability.\nFinal Answer: A\nA = Use a fixed sequence of prompts — this is the appropriate design for a known workflow with repeatable steps.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-2",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-004",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A team needs to update every file ending with `.fixture.json` across a monorepo. Searching for the word “fixture” creates noisy results and misses sparse files. Which tool-use strategy should be adopted?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Bash commands and paste the entire directory listing."
+      },
+      {
+        "id": "B",
+        "text": "Use Glob patterns like `**/*.fixture.json` and then Read matching files."
+      },
+      {
+        "id": "C",
+        "text": "Read all possible files before searching."
+      },
+      {
+        "id": "D",
+        "text": "Use Grep for \"fixture\" and infer matching files."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Use Bash commands and paste the entire directory listing.\nIncorrect\nA full directory listing can be unnecessarily large and does not precisely identify the files that match the required filename pattern.\nB. Use Glob patterns like **/*.fixture.json and then Read matching files.\nCorrect\nGlob is designed for finding files based on filename patterns. Using **/*.fixture.json efficiently identifies all matching files across the monorepo, after which Read can inspect their contents before making updates.\nC. Read all possible files before searching.\nIncorrect\nReading all files is inefficient and consumes unnecessary context. The team should first identify the relevant files using a precise pattern.\nD. Use Grep for \"fixture\" and infer matching files.\nIncorrect\nGrep searches file contents, not filenames. It can produce noisy results and miss files that do not contain the word fixture .\nFinal Answer: B\nB = Use Glob patterns like **/*.fixture.json and then Read matching files — Glob precisely finds files by name/pattern, making it the appropriate tool for this task.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-4",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-005",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "Scenario: Developer Productivity with Claude Your CI job invokes Claude Code successfully and posts a single pull request summary comment. The team now wants automated inline comments for each finding, but the integration frequently breaks because Claude sometimes adds prose, changes field names, or formats findings as markdown. What change best supports reliable automation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Parse Claude's markdown bullets with regular expressions."
+      },
+      {
+        "id": "B",
+        "text": "Strengthen the prompt to demand valid JSON only."
+      },
+      {
+        "id": "C",
+        "text": "Run Claude Code with `--output-format json` and `--json-schema`, then map validated findings to inline PR comments."
+      },
+      {
+        "id": "D",
+        "text": "Store previous comments and ask Claude to rewrite them into records."
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "explanation": "A. Parse Claude's markdown bullets with regular expressions.\nIncorrect\nMarkdown parsing with regular expressions is fragile. Changes in formatting or wording can easily break the automation.\nB. Strengthen the prompt to demand valid JSON only.\nIncorrect\nPrompt instructions alone do not guarantee reliable structured output. Claude may still add prose, change fields, or produce invalid JSON.\nC. Run Claude Code with --output-format json and --json-schema , then map validated findings to inline PR comments.\nCorrect\nUsing structured JSON output with a defined schema provides predictable field names and a machine-readable format. The CI workflow can validate the findings and reliably map each result to the appropriate inline pull request comment.\nD. Store previous comments and ask Claude to rewrite them into records.\nIncorrect\nReprocessing previous comments introduces unnecessary complexity and still does not guarantee a stable, validated structure for automation.\nFinal Answer: C\nC = Use --output-format json with --json-schema and map the validated findings to inline PR comments — this provides reliable, structured output for CI automation.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-5",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-006",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "Scenario: Multi-Agent Research System The document analysis subagent receives coordinator-selected PDFs and reports from an approved catalog, but it has a generic URL retrieval tool. It sometimes follows links inside documents to: l blogs l login pages l duplicate HTML summaries and then cites those pages instead of the approved sources. What change best addresses this?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keep fetch_url available, but add prompt instructions warning the subagent never to open links found inside documents."
+      },
+      {
+        "id": "B",
+        "text": "Replace fetch_url with a load_document tool that accepts catalog document IDs or approved URLs and validates before fetching."
+      },
+      {
+        "id": "C",
+        "text": "Give the document analysis subagent web search tools too, so it can independently confirm whether linked pages are relevant."
+      },
+      {
+        "id": "D",
+        "text": "Allow fetch_url for any link, then have synthesis discard citations whose domains are not in the approved catalog."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Keep fetch_url available, but add prompt instructions warning the subagent never to open links found inside documents.\nIncorrect\nPrompt instructions can help guide behavior, but they do not technically prevent the subagent from accessing unapproved URLs. A tool-level restriction is more reliable.\nB. Replace fetch_url with a load_document tool that accepts catalog document IDs or approved URLs and validates before fetching.\nCorrect\nA constrained load_document tool enforces the approved-source boundary at the tool level. By accepting only catalog document IDs or validated approved URLs, the subagent cannot freely follow arbitrary links found inside documents.\nC. Give the document analysis subagent web search tools too, so it can independently confirm whether linked pages are relevant.\nIncorrect\nThis expands the subagent's access to external sources and increases the possibility of citing unapproved content.\nD. Allow fetch_url for any link, then have synthesis discard citations whose domains are not in the approved catalog.\nIncorrect\nThis allows the document analysis agent to retrieve and potentially rely on unapproved information before synthesis filters the citations. Prevention at the retrieval layer is safer and more reliable.\nFinal Answer: B\nB = Replace fetch_url with a validated load_document tool — enforce the approved-source boundary at the tool level rather than relying only on prompts or downstream filtering.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-6",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-008",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "Scenario: Structured Data Extraction Your QA pipeline flags mistakes in supplier contracts. Analysts accept many findings about missing renewal clauses but reject most findings involving informal pricing language. Current logs store only: l Document ID l Field name l Confidence l Finding text What change should you make first?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase QA confidence threshold globally."
+      },
+      {
+        "id": "B",
+        "text": "Add a structured detected_pattern field to each QA finding, then analyze acceptance rates by pattern and document type."
+      },
+      {
+        "id": "C",
+        "text": "Store only analyst decisions."
+      },
+      {
+        "id": "D",
+        "text": "Tell Claude to report only findings analysts accept."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Increase QA confidence threshold globally.\nIncorrect\nA global confidence threshold would affect all findings and could incorrectly remove useful renewal-clause findings. The problem appears to depend on the type of detected pattern , not simply confidence.\nB. Add a structured detected_pattern field to each QA finding, then analyze acceptance rates by pattern and document type.\nCorrect\nAdding a structured detected_pattern field makes findings easier to categorize and analyze. The team can determine which patterns—such as missing renewal clauses or informal pricing language—have higher or lower acceptance rates and then improve the system based on evidence.\nC. Store only analyst decisions.\nIncorrect\nStoring only acceptance/rejection decisions loses important information about what pattern generated the finding, making it difficult to identify why certain findings are rejected.\nD. Tell Claude to report only findings analysts accept.\nIncorrect\nThis would hide potentially useful findings rather than improving the detection process. It also prevents the team from analyzing rejected findings and understanding systematic errors.\nFinal Answer: B\nB = Add a structured detected_pattern field and analyze acceptance rates by pattern and document type — this provides the data needed to identify systematic QA errors and improve extraction quality.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-8",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-010",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A customer support agent alternates unpredictably between `get_customer` and `lookup_order` when handling mixed requests. The MCP tool catalog only contains short autogenerated descriptions. What change should you make first to improve tool selection reliability?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Update the system prompt to tell Claude to think carefully before selecting tools."
+      },
+      {
+        "id": "B",
+        "text": "Add a keyword router that maps phrases like “order” or “refund” to one tool."
+      },
+      {
+        "id": "C",
+        "text": "Consolidate get_customer and lookup_order into one broad lookup tool."
+      },
+      {
+        "id": "D",
+        "text": "Rewrite each MCP tool description to specify purpose, accepted identifiers, returned fields, edge cases, and boundaries."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Update the system prompt to tell Claude to think carefully before selecting tools.\nIncorrect\nSimply telling Claude to think carefully does not provide the detailed information needed to distinguish between similar tools. Better tool metadata is more effective.\nB. Add a keyword router that maps phrases like “order” or “refund” to one tool.\nIncorrect\nKeyword routing is brittle because real customer requests can contain multiple concepts or ambiguous language. It can also bypass the model's understanding of the tools' actual capabilities.\nC. Consolidate get_customer and lookup_order into one broad lookup tool.\nIncorrect\nCombining the tools reduces specialization and can make the tool interface less clear. It does not address the underlying problem of insufficient tool descriptions.\nD. Rewrite each MCP tool description to specify purpose, accepted identifiers, returned fields, edge cases, and boundaries.\nCorrect\nDetailed tool descriptions give Claude the information needed to differentiate similar tools and select the appropriate one . Clearly defining each tool's purpose, inputs, outputs, edge cases, and boundaries improves reliable tool selection.\nFinal Answer: D\nD = Rewrite each MCP tool description with clear purpose, identifiers, returned fields, edge cases, and boundaries — high-quality tool descriptions are critical for reliable MCP tool selection.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-10",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-012",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A debugging agent investigates unfamiliar systems where the correct solution is unknown at the beginning. Which strategy should it use?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Follow a completely fixed workflow"
+      },
+      {
+        "id": "B",
+        "text": "Use adaptive planning based on discoveries"
+      },
+      {
+        "id": "C",
+        "text": "Ignore intermediate findings"
+      },
+      {
+        "id": "D",
+        "text": "Always restart from the beginning"
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Follow a completely fixed workflow\nIncorrect\nA completely fixed workflow works best for predictable, repeatable tasks. In unfamiliar systems, new discoveries may require the agent to change its approach.\nB. Use adaptive planning based on discoveries\nCorrect\nAn unfamiliar debugging problem requires the agent to inspect findings, update its understanding, and adjust the plan dynamically . Adaptive planning allows the agent to respond to new evidence and pursue the most promising path toward a solution.\nC. Ignore intermediate findings\nIncorrect\nIntermediate findings provide important evidence about the system and should be used to guide subsequent debugging steps.\nD. Always restart from the beginning\nIncorrect\nRestarting from scratch wastes previous discoveries and makes debugging less efficient.\nFinal Answer: B\nB = Use adaptive planning based on discoveries — when the correct solution is initially unknown, the agent should continuously update its plan based on new evidence.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-12",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-013",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "An engineer asks Claude to add a caching layer around a legacy authorization module. The system has multiple tenants, audit logging, and inconsistent invalidation behavior. What should happen before modifying files?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Implement a simple cache wrapper and iterate later."
+      },
+      {
+        "id": "B",
+        "text": "Ask targeted questions about invariants, invalidation, audit requirements, and failure modes."
+      },
+      {
+        "id": "C",
+        "text": "Provide performance goals and let Claude infer rules."
+      },
+      {
+        "id": "D",
+        "text": "Copy caching patterns from another module."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Implement a simple cache wrapper and iterate later.\nIncorrect\nImplementing immediately could introduce serious issues in authorization, tenant isolation, audit logging, or cache invalidation. These requirements should be clarified first.\nB. Ask targeted questions about invariants, invalidation, audit requirements, and failure modes.\nCorrect\nBefore modifying a complex legacy system, Claude should clarify the security and operational constraints . Targeted questions help identify authorization invariants, tenant boundaries, invalidation rules, audit requirements, and failure scenarios before implementation begins.\nC. Provide performance goals and let Claude infer rules.\nIncorrect\nPerformance goals alone do not define critical authorization and security requirements. Letting Claude infer these rules could result in unsafe assumptions.\nD. Copy caching patterns from another module.\nIncorrect\nAnother module may have different authorization, tenant, or invalidation requirements. Reusing its pattern without validating the assumptions could introduce defects.\nFinal Answer: B\nB = Ask targeted questions about invariants, invalidation, audit requirements, and failure modes — clarify critical constraints before making changes to a complex legacy authorization system.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-13",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-015",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A structured extraction system divides documents into sections and sends them to extraction subagents. One subagent temporarily loses access to its source system. The current implementation either returns an empty successful extraction or aborts the entire document. What should you change?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Return an empty extraction object for the failed section."
+      },
+      {
+        "id": "B",
+        "text": "Terminate the entire document workflow whenever any subagent fails."
+      },
+      {
+        "id": "C",
+        "text": "Have subagents report unresolved failures with attempted section, failure type, partial fields, and recovery suggestions."
+      },
+      {
+        "id": "D",
+        "text": "Retry the failed section until it succeeds before returning anything."
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "explanation": "A. Return an empty extraction object for the failed section.\nIncorrect\nAn empty extraction can incorrectly suggest that the section contained no relevant information. It hides the actual failure and makes downstream results less trustworthy.\nB. Terminate the entire document workflow whenever any subagent fails.\nIncorrect\nA single subagent failure should not necessarily cause the entire document workflow to fail. Other sections may still be successfully processed.\nC. Have subagents report unresolved failures with attempted section, failure type, partial fields, and recovery suggestions.\nCorrect\nSubagents should return structured failure information rather than silently producing empty results. Reporting the attempted section, failure type, partial results, and recovery suggestions allows the coordinator to distinguish genuine empty results from unresolved failures and decide how to recover.\nD. Retry the failed section until it succeeds before returning anything.\nIncorrect\nIndefinite retries can block the entire workflow and may not resolve a persistent source-system failure. Failures should be reported explicitly so the workflow can continue or recover appropriately.\nFinal Answer: C\nC = Report unresolved failures with attempted section, failure type, partial fields, and recovery suggestions — this preserves failure context and allows reliable downstream handling without aborting the entire document.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-15",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-016",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A multi-agent research system occasionally generates reports while the synthesis agent is still incomplete, resulting in missing or unverifiable citations. What change prevents invalid reports?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Generate reports immediately and remove invalid citations afterward."
+      },
+      {
+        "id": "B",
+        "text": "Tell the report agent to refuse incomplete synthesis."
+      },
+      {
+        "id": "C",
+        "text": "Check whether synthesis messages contain words like “complete.”"
+      },
+      {
+        "id": "D",
+        "text": "Block report-generation tasks until synthesis returns a structured citation manifest and success status."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Generate reports immediately and remove invalid citations afterward.\nIncorrect\nThis allows incomplete reports to be generated. Removing citations afterward does not guarantee that the remaining evidence is complete or verifiable.\nB. Tell the report agent to refuse incomplete synthesis.\nIncorrect\nThis relies on the report agent correctly recognizing incomplete input. It is better to enforce the dependency before the report-generation task starts.\nC. Check whether synthesis messages contain words like “complete.”\nIncorrect\nKeyword checks are unreliable. A message can say “complete” while still missing required citations or evidence.\nD. Block report-generation tasks until synthesis returns a structured citation manifest and success status.\nCorrect\nThis creates an explicit workflow gate . The report cannot start until the synthesis agent provides a structured citation manifest and confirms successful completion. This ensures the report is based on complete and verifiable evidence.\nFinal Answer: D\nD = Block report generation until the synthesis agent returns a structured citation manifest and success status, preventing incomplete or unverifiable reports from being produced.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-16",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-017",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A migration assistant sometimes starts dependency analysis before collecting required package manager and framework versions. What change most reliably enforces the correct first step?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Detect whether Claude mentions metadata completion in natural language."
+      },
+      {
+        "id": "B",
+        "text": "Force the metadata extraction tool with tool_choice for the first request."
+      },
+      {
+        "id": "C",
+        "text": "Set tool_choice to any for the first request."
+      },
+      {
+        "id": "D",
+        "text": "Strengthen the system prompt requiring metadata extraction first."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Detect whether Claude mentions metadata completion in natural language.\nIncorrect\nNatural-language detection is unreliable. Claude may mention that metadata is complete without actually calling the required extraction tool or obtaining all necessary information.\nB. Force the metadata extraction tool with tool_choice for the first request.\nCorrect\nUsing tool_choice explicitly forces the required metadata extraction tool to run first. This provides a deterministic workflow and prevents dependency analysis from starting before the required package manager and framework versions are collected.\nC. Set tool_choice to any for the first request.\nIncorrect\nany allows the model to choose any available tool . It does not guarantee that the metadata extraction tool will be selected first.\nD. Strengthen the system prompt requiring metadata extraction first.\nIncorrect\nA stronger prompt can guide the model, but it does not reliably enforce tool execution order. Explicit tool selection provides a stronger control mechanism.\nFinal Answer: B\nB = Force the metadata extraction tool with tool_choice for the first request, ensuring the required metadata is collected before dependency analysis begins.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-17",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-018",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A team wants Claude-generated pull request reviews to integrate with existing development systems. What output approach should be selected?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Free-form text responses"
+      },
+      {
+        "id": "B",
+        "text": "Structured JSON with validation rules"
+      },
+      {
+        "id": "C",
+        "text": "Long markdown explanations only"
+      },
+      {
+        "id": "D",
+        "text": "Unformatted comments"
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Free-form text responses\nIncorrect\nFree-form text can vary in structure and wording, making it difficult for automated development systems to reliably parse and process the review results.\nB. Structured JSON with validation rules\nCorrect\nStructured JSON provides a consistent, machine-readable format . Validation rules or a defined schema ensure required fields, data types, and structure remain consistent, making the output easier to integrate with existing PR and development tools.\nC. Long markdown explanations only\nIncorrect\nMarkdown is useful for human-readable reviews but is less reliable for automated processing because formatting and content can vary.\nD. Unformatted comments\nIncorrect\nUnformatted comments lack a predictable structure and make automated integration and downstream processing difficult.\nFinal Answer: B\nB = Structured JSON with validation rules ensures consistent, machine-readable PR review output that can be reliably integrated with existing development systems.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-18",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-020",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A developer wants Claude to return API responses that can be directly consumed by another application. Which technique should be used?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Request formatted paragraphs"
+      },
+      {
+        "id": "B",
+        "text": "Use structured output with defined fieldscorrect"
+      },
+      {
+        "id": "C",
+        "text": "Ask Claude for longer explanations"
+      },
+      {
+        "id": "D",
+        "text": "Allow unrestricted responses"
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Request formatted paragraphs\nIncorrect\nParagraphs are designed for human readability and do not provide a predictable structure that another application can reliably parse.\nB. Use structured output with defined fields\nCorrect\nStructured output with defined fields provides a consistent, machine-readable response format . This allows another application to reliably parse and consume the API response.\nC. Ask Claude for longer explanations\nIncorrect\nLonger explanations add more natural-language content but do not guarantee a predictable structure for automated processing.\nD. Allow unrestricted responses\nIncorrect\nUnrestricted responses can vary in format and content, making reliable application-to-application integration difficult.\nFinal Answer: B\nB = Use structured output with defined fields to produce consistent, machine-readable API responses that another application can consume directly.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-20",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccdv-f-certyiq-021",
+    "exam": "ccdv-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "Multiple backend problems are returned to an agent as the same message: “Operation failed.” Problems include invalid order IDs, temporary service timeouts, expired tokens, and policy restrictions. What change most improves recovery behavior?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Retry every failed tool call twice before escalation."
+      },
+      {
+        "id": "B",
+        "text": "Keep generic failures and let Claude infer retryability."
+      },
+      {
+        "id": "C",
+        "text": "Map failures to customer sentiment levels."
+      },
+      {
+        "id": "D",
+        "text": "Return structured MCP errors with categories, retryability, and user-safe details."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Retry every failed tool call twice before escalation.\nIncorrect\nNot every failure is retryable. Retrying invalid order IDs or policy restrictions wastes resources and can make failures worse.\nB. Keep generic failures and let Claude infer retryability.\nIncorrect\nA generic error message does not provide enough reliable information for the agent to determine whether a failure should be retried, corrected, or escalated.\nC. Map failures to customer sentiment levels.\nIncorrect\nCustomer sentiment does not determine the technical recovery strategy. The agent needs actionable information about the actual failure.\nD. Return structured MCP errors with categories, retryability, and user-safe details.\nCorrect\nStructured MCP errors give the agent explicit recovery information . For example, a timeout can be marked retryable, while an invalid order ID or policy restriction can be marked non-retryable. User-safe details also allow the agent to communicate an appropriate explanation without exposing sensitive backend information.\nFinal Answer: D\nD = Return structured MCP errors containing failure categories, retryability, and user-safe details so the agent can choose the appropriate recovery action.",
+    "sourceId": "certyiq-ccdv-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccdv-f.json#question-21",
+    "sourceHash": "sha256:f5da81a6b073cc53fc473f9ee12b6c7b56a2e3356a38f59b87ec878eb05c3d42",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  }
+]

@@ -7,16 +7,11 @@
   "required": [
     "id",
     "exam",
-    "examVersion",
     "domain",
-    "objective",
-    "questionType",
     "prompt",
     "options",
     "correct",
     "sourceId",
-    "sourceLocator",
-    "sourceHash",
     "status",
     "mockEligible"
   ],
@@ -68,10 +63,9 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["text"],
+        "required": ["id", "text"],
         "properties": {
           "id":   { "type": "string" },
-          "key":  { "type": "string" },
           "text": { "type": "string", "minLength": 1 }
         }
       },
@@ -103,7 +97,7 @@
     },
     "status": {
       "type": "string",
-      "enum": ["ready", "quarantined", "pending-review", "rejected"],
+      "enum": ["ready", "released", "quarantined", "pending-review", "rejected"],
       "description": "ready = passes all gates; quarantined = failed validation"
     },
     "mockEligible": {
@@ -112,7 +106,7 @@
     },
     "difficulty": {
       "type": "string",
-      "enum": ["basic", "intermediate", "advanced"]
+      "enum": ["basic", "intermediate", "advanced", "hard", "exam"]
     }
   }
 }

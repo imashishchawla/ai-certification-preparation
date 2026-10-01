@@ -1,6 +1,7 @@
 [[exams]]
 id = "cca-f"
-code = "CCAF"
+code = "CCAR-F"
+legacy_code = "CCA-F"
 name = "Claude Certified Architect — Foundations"
 provider = "Anthropic"
 status = "active"
@@ -8,6 +9,7 @@ questions = 1130
 legacy_ready_published = true
 official_source = "https://www.anthropic.com/news/claude-partner-network"
 duration_minutes = 120
+total_seat_minutes = 135
 practice_pass_percent = 72
 pass_score = 720
 price_usd = 125
@@ -20,6 +22,16 @@ description = "Foundations-level certification covering agentic architecture, to
 "D3 Claude Code Configuration & Workflows" = 20
 "D4 Prompt Engineering & Structured Output" = 20
 "D5 Context Management & Reliability" = 15
+
+[[exams]]
+id = "ccao-f"
+code = "CCAO-F"
+name = "Claude Certified Associate — Foundations"
+provider = "Anthropic"
+status = "planned"
+questions = 0
+path = "exams/ccao-f/"
+description = "A future study area for foundational Claude task execution, evaluation, solution design, and responsible use."
 
 [[exams]]
 id = "ccar-p"

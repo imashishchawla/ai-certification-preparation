@@ -1,22 +1,26 @@
 # Master enhancement plan: question quality, mock exam, and weekly reporting
 
-Version 4.0 · 2026-09-30
+Version 4.1 · 2026-10-01
 
 ## Current status and scope
 
 | Module | Status | Outcome |
 | --- | --- | --- |
-| A · Question prompt cleanup | Planned | Remove parser metadata from 385 published CCA-F prompts while retaining useful structured metadata. |
-| B · Exam-inspired mock test | Planned | Give learners a focused 60-question practice experience with review controls and accessible navigation. |
+| A · Question prompt cleanup | Implemented and validated | Removed parser metadata from exactly 385 CCA-F prompts while retaining stable IDs, answers, options, explanations, and original difficulty values. |
+| B · Exam-inspired mock test | Implemented and locally validated; production verification pending | Provides a focused 60-question practice experience with fullscreen, review controls, and answer-by-answer results. |
 | C · Weekly platform report | Implemented; first verified run pending | Use the existing reporter, history ledger, README section, and scheduled email workflow. |
 
-Modules A and B are the implementation work remaining in this plan. Module C needs operational verification and email configuration, rather than a second reporting engine. The detailed reporting specification is in [weekly-metrics-reporting-plan.md](weekly-metrics-reporting-plan.md); the earlier mock-test proposal is in [mock-test-and-question-normalization-plan.md](mock-test-and-question-normalization-plan.md). This document governs where either proposal conflicts with the current repository.
+Modules A and B are implemented. Module C needs operational verification and email configuration, rather than a second reporting engine. The detailed reporting specification is in [weekly-metrics-reporting-plan.md](weekly-metrics-reporting-plan.md); the earlier mock-test proposal is in [mock-test-and-question-normalization-plan.md](mock-test-and-question-normalization-plan.md). This document governs where either proposal conflicts with the current repository.
+
+Saved mock attempts refresh their question text and answer keys from the current published mock pool by stable ID when reopened. This preserves answers, flags, and review position while replacing any pre-cleanup prompt text. An attempt containing a question no longer in the published pool is discarded.
+
+`npm run normalize` now writes validated legacy-source candidates to `.data/exams/cca-f/normalized/legacy-source-candidates.json` for review. It does not overwrite the 1,130-question canonical or static bank.
 
 ## Module A · Clean questions without losing source meaning
 
 ### Verified inventory
 
-The current `data/questions/cca-f/questions.json` has 1,130 questions. Three source-specific prompt prefixes affect **385** records:
+The `data/questions/cca-f/questions.json` bank has 1,130 questions. Three source-specific prompt prefixes affected **385** records before migration:
 
 | Source ID | Records | Prefix to remove or format |
 | --- | ---: | --- |
@@ -34,7 +38,7 @@ const scenario = /^\(Scenario:\s*([^)]+)\)\s*Situation:\*\*\s*/;
 
 ### Data contract and migration
 
-1. Reconcile `.agent/schemas/question.schema.json` with the records and the actual validator before migration. Current records and `scripts/validate-questions.mjs` use `options[].id` and full domain names such as `D1 Agentic Architecture & Orchestration`; the JSON schema currently specifies `options[].key` and a short `D1` code. Select one canonical contract and update its consumers together. Change the schema's description of `prompt` from verbatim source text to clean candidate-facing text.
+1. Reconcile `.agent/schemas/question.schema.json` with the records and the actual validator before migration. This is complete: `options[].id` and full domain names are the published contract, legacy CCA-F records validate against the schema, and `prompt` means clean candidate-facing text.
 2. Add optional `section`, `topic`, and `scenarioTag` fields without changing stable IDs, `sourceId`, correct answers, options, explanations, publication state, or mock eligibility. Keep the existing full domain string unless the whole browser and curation contract is deliberately migrated. Do not replace an existing difficulty value with a guessed value. The 246 guide records already have `intermediate`; preserve the raw `application` label only if a separately named source metadata field is useful.
 3. Implement `scripts/clean-question-prompts.mjs` as an idempotent, source-scoped migration with a default dry run. It must print match counts, unmatched examples, a sample before/after diff, and a machine-readable change manifest. A write mode must refuse to run unless each source count and the total 385 match the reviewed expectation, or an explicitly reviewed new baseline is supplied.
 4. Keep meaningful scenario context in the prompt. For example, format `(Scenario: Customer Support Agent) Situation:** ...` as `Scenario: Customer Support Agent. Situation: ...`. Strip only parser metadata; preserve the question's actual conditions, constraints, and wording.
@@ -55,7 +59,7 @@ Use **“exam-inspired practice test”** in learner-facing copy. Pearson VUE pu
 
 ### Active test behavior
 
-- Keep the current 60-question draw, domain quotas, 120-minute deadline, and persisted attempt. Restrict the mock pool to published, `mockEligible` questions; the current artifact builder publishes all released questions into `mock-pool.json`. Verify the draw never duplicates an ID and meets each quota when enough eligible questions exist.
+- Keep the 60-question draw, domain quotas, 120-minute deadline, and persisted attempt. The artifact builder now restricts `mock-pool.json` to published, `mockEligible` questions. Verify the draw never duplicates an ID and meets each quota when enough eligible questions exist.
 - On the learner's **Start Mock Exam** click, request fullscreen and handle the returned promise. If fullscreen is unavailable or declined, continue the practice test in normal page view. Track `fullscreenchange`; show a return-to-fullscreen option after an exit without stopping or resetting the timer. The fullscreen toggle remains optional.
 - Show a compact header with exam title, current question number, answered/unanswered counts, flag state, and remaining time. Show warnings below 10 and 5 minutes; the deadline remains based on the saved timestamp, not interval ticks.
 - Hide domain and difficulty labels while the attempt is active, including in prompt prefixes, browser text, accessible names, review rows, and dialogs. Show the clean prompt and four choices. Answer correctness and rationale appear only after submission.
@@ -74,6 +78,7 @@ Under **Question Review**, provide interactive filter buttons so learners can is
 - Optional filter by domain chip (D1–D5).
 
 Each reviewed question card displays: Question number, domain, difficulty, candidate choice, correct choice, and complete architectural rationale.
+Display every answer option with its full text, and label the correct option and the learner's selected option. The **Copy Full Review** control copies the score, every question, all options, the correct and selected answers, and explanations for sharing or later study. If browser clipboard access is unavailable, it downloads the same report as a text file.
 
 ### Module B acceptance
 

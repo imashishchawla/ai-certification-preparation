@@ -1,6 +1,6 @@
 ---
-title: "Claude Certified Architect — Foundations (CCAF)"
-description: "Exam guide, study materials, practice questions, and mock tests for CCAF."
+title: "Claude Certified Architect — Foundations (CCAR-F)"
+description: "Exam guide, study materials, practice questions, and mock tests for CCAR-F (previously referenced as CCA-F)."
 layout: "single"
 ---
 
@@ -8,8 +8,10 @@ layout: "single"
 
 | Specification | Value |
 |---|---|
+| **Exam code** | CCAR-F (previously CCA-F) |
 | **Questions** | 60 items |
-| **Duration** | 120 minutes |
+| **Testing time** | 120 minutes |
+| **Total seat time** | About 135 minutes, including check-in, instructions, and the post-exam survey |
 | **Passing Score** | 720 / 1000 scaled (72%) |
 | **Exam Fee** | $125 USD |
 | **Provider** | Pearson VUE (proctored) |

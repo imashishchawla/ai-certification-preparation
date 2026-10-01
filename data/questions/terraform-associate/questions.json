@@ -1,1 +1,173 @@
-[]
+[
+  {
+    "id": "terraform-associate-official-004-001",
+    "exam": "terraform-associate",
+    "examVersion": "004",
+    "domain": "D4 Terraform configuration",
+    "prompt": "Usernames and passwords referenced in the Terraform code, even as variables, will end up in plain text in the state file.",
+    "options": [
+      {
+        "id": "A",
+        "text": "True"
+      },
+      {
+        "id": "B",
+        "text": "False"
+      }
+    ],
+    "correct": "A",
+    "questionType": "true_false",
+    "sourceId": "hashicorp-official-sample-questions",
+    "sourceLocator": ".data/exams/terraform-associate/raw/question-source/hashicorp-official-sample-questions/developer_hashicorp_com_terraform_tutorials_certification-004_associate-questions-004.txt#sample-1",
+    "sourceHash": "sha256:15a61cf739904e033bee7612dbb825fbdd84c5394961c42f5ba5d231177a7063",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": false
+  },
+  {
+    "id": "terraform-associate-official-004-002",
+    "exam": "terraform-associate",
+    "examVersion": "004",
+    "domain": "D4 Terraform configuration",
+    "prompt": "Consider the following configuration snippet:\nvariable \"vpc_cidrs\" {\ntype = map\ndefault = {\nus-east-1 = \"10.0.0.0/16\"\nus-east-2 = \"10.1.0.0/16\"\nus-west-1 = \"10.2.0.0/16\"\nus-west-2 = \"10.3.0.0/16\"\n}\n}\nresource \"aws_vpc\" \"shared\" {\ncidr_block = _____________\n}\nHow would you define the cidr_block for us-east-1 in the aws_vpc resource using a variable?",
+    "options": [
+      {
+        "id": "A",
+        "text": "var.vpc_cidrs[\"us-east-1\"]"
+      },
+      {
+        "id": "B",
+        "text": "var.vpc_cidrs.0"
+      },
+      {
+        "id": "C",
+        "text": "vpc_cidrs[\"us-east-1\"]"
+      },
+      {
+        "id": "D",
+        "text": "var.vpc_cidrs[0]"
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "sourceId": "hashicorp-official-sample-questions",
+    "sourceLocator": ".data/exams/terraform-associate/raw/question-source/hashicorp-official-sample-questions/developer_hashicorp_com_terraform_tutorials_certification-004_associate-questions-004.txt#sample-2",
+    "sourceHash": "sha256:15a61cf739904e033bee7612dbb825fbdd84c5394961c42f5ba5d231177a7063",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": false
+  },
+  {
+    "id": "terraform-associate-official-004-003",
+    "exam": "terraform-associate",
+    "examVersion": "004",
+    "domain": "D4 Terraform configuration",
+    "prompt": "You have defined the values for your variables in the file terraform.tfvars, and saved it in the same directory as your Terraform configuration. Which of the following commands will use those values when creating an execution plan?",
+    "options": [
+      {
+        "id": "A",
+        "text": "terraform plan"
+      },
+      {
+        "id": "B",
+        "text": "terraform plan -var-file=terraform.tfvars"
+      },
+      {
+        "id": "C",
+        "text": "All of the above"
+      },
+      {
+        "id": "D",
+        "text": "None of the above"
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "sourceId": "hashicorp-official-sample-questions",
+    "sourceLocator": ".data/exams/terraform-associate/raw/question-source/hashicorp-official-sample-questions/developer_hashicorp_com_terraform_tutorials_certification-004_associate-questions-004.txt#sample-3",
+    "sourceHash": "sha256:15a61cf739904e033bee7612dbb825fbdd84c5394961c42f5ba5d231177a7063",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": false
+  },
+  {
+    "id": "terraform-associate-official-004-004",
+    "exam": "terraform-associate",
+    "examVersion": "004",
+    "domain": "D6 Terraform state management",
+    "prompt": "Which of the following Terraform commands will automatically refresh the state unless supplied with additional flags or arguments?\nPick the 2 correct responses below",
+    "options": [
+      {
+        "id": "A",
+        "text": "terraform plan"
+      },
+      {
+        "id": "B",
+        "text": "terraform state"
+      },
+      {
+        "id": "C",
+        "text": "terraform apply"
+      },
+      {
+        "id": "D",
+        "text": "terraform validate"
+      },
+      {
+        "id": "E",
+        "text": "terraform output"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "questionType": "multiple_choice",
+    "sourceId": "hashicorp-official-sample-questions",
+    "sourceLocator": ".data/exams/terraform-associate/raw/question-source/hashicorp-official-sample-questions/developer_hashicorp_com_terraform_tutorials_certification-004_associate-questions-004.txt#sample-4",
+    "sourceHash": "sha256:15a61cf739904e033bee7612dbb825fbdd84c5394961c42f5ba5d231177a7063",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": false
+  },
+  {
+    "id": "terraform-associate-official-004-005",
+    "exam": "terraform-associate",
+    "examVersion": "004",
+    "domain": "D3 Core Terraform workflow",
+    "prompt": "What happens when you apply Terraform configuration?\nPick the 2 correct responses below",
+    "options": [
+      {
+        "id": "A",
+        "text": "Terraform makes any infrastructure changes defined in your configuration."
+      },
+      {
+        "id": "B",
+        "text": "Terraform gets the plugins that the configuration requires."
+      },
+      {
+        "id": "C",
+        "text": "Terraform updates the state file with any configuration changes it made."
+      },
+      {
+        "id": "D",
+        "text": "Terraform corrects formatting errors in your configuration."
+      },
+      {
+        "id": "E",
+        "text": "Terraform destroys and recreates all your infrastructure from scratch."
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "questionType": "multiple_choice",
+    "sourceId": "hashicorp-official-sample-questions",
+    "sourceLocator": ".data/exams/terraform-associate/raw/question-source/hashicorp-official-sample-questions/developer_hashicorp_com_terraform_tutorials_certification-004_associate-questions-004.txt#sample-5",
+    "sourceHash": "sha256:15a61cf739904e033bee7612dbb825fbdd84c5394961c42f5ba5d231177a7063",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": false
+  }
+]

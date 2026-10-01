@@ -1,0 +1,666 @@
+[
+  {
+    "id": "ccar-p-certyiq-001",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are compiling guardrail tactics for a customer-facing assistant. Which two tactics belong on the guardrail list? Each correct answer presents a complete solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Embed approved override phrases that let trusted users relax guardrails on demand."
+      },
+      {
+        "id": "B",
+        "text": "Lower sampling temperature globally to reduce the chance of off-policy completions."
+      },
+      {
+        "id": "C",
+        "text": "Rely on a single hardened system prompt that enumerates every disallowed behavior."
+      },
+      {
+        "id": "D",
+        "text": "Layer prompt-level guardrails with runtime content checks rather than relying on either alone."
+      },
+      {
+        "id": "E",
+        "text": "Validate the model output against a structured schema before downstream actions are taken."
+      }
+    ],
+    "correct": [
+      "D",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Embed approved override phrases that let trusted users relax guardrails on demand.\nIncorrect\nAllowing users to bypass guardrails through special phrases can create a security and policy risk . Guardrails should not be easily disabled through conversational instructions, even for trusted users.\nB. Lower sampling temperature globally to reduce the chance of off-policy completions.\nIncorrect\nLowering temperature can make outputs more consistent and predictable , but it is not a reliable substitute for explicit safety controls. Model randomness settings alone cannot enforce policy boundaries.\nC. Rely on a single hardened system prompt that enumerates every disallowed behavior.\nIncorrect\nA system prompt is an important layer, but relying on one control alone is not sufficient. Complex customer-facing systems benefit from multiple independent safeguards.\nD. Layer prompt-level guardrails with runtime content checks rather than relying on either alone.\nCorrect\nUsing multiple guardrail layers provides defense in depth . Prompt-level instructions establish behavioral boundaries, while runtime checks can detect or block problematic content before it reaches users or downstream systems.\nE. Validate the model output against a structured schema before downstream actions are taken.\nCorrect\nStructured output validation helps ensure that the model response conforms to the expected format and required fields before it is passed to downstream systems. This reduces the risk of malformed or unexpected model output triggering unintended actions.\nFinal Answer: D and E",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-1",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-002",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A Claude architect is implementing safety controls for a customer-facing advice assistant that must never provide regulated investment recommendations. Which two guardrail implementations most directly enforce this constraint? (Select two.)",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase response temperature to introduce variability that reduces the likelihood of specific recommendations."
+      },
+      {
+        "id": "B",
+        "text": "Log all user queries to a SIEM for post-hoc compliance review."
+      },
+      {
+        "id": "C",
+        "text": "Limit session length to reduce the volume of queries processed per user per day."
+      },
+      {
+        "id": "D",
+        "text": "Define explicit out-of-scope categories in the system prompt with fixed refusal phrasing for investment advicerequests."
+      },
+      {
+        "id": "E",
+        "text": "Add an output classifier that detects and blocks responses containing regulated investment- recommendation language."
+      }
+    ],
+    "correct": [
+      "D",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Increase response temperature to introduce variability that reduces the likelihood of specific recommendations.\nIncorrect\nIncreasing temperature makes responses more variable and less predictable . It does not enforce a safety boundary and could actually make it harder to consistently prevent prohibited investment recommendations.\nB. Log all user queries to a SIEM for post-hoc compliance review.\nIncorrect\nLogging supports monitoring, auditing, and investigation , but it is a post-hoc control. It does not directly prevent the assistant from generating a prohibited investment recommendation before the response reaches the user.\nC. Limit session length to reduce the volume of queries processed per user per day.\nIncorrect\nLimiting session length may reduce overall usage, but it does not prevent the model from providing a regulated investment recommendation within an allowed session . It is therefore not a direct enforcement mechanism for this requirement.\nD. Define explicit out-of-scope categories in the system prompt with fixed refusal phrasing for investment advice requests.\nCorrect\nExplicitly defining out-of-scope behavior in the system instructions establishes a clear boundary for the assistant. Fixed refusal guidance also makes the expected response more consistent when users request prohibited investment recommendations.\nE. Add an output classifier that detects and blocks responses containing regulated investment-recommendation language.\nCorrect\nAn output classifier provides a runtime enforcement layer that can detect prohibited content before it reaches the customer. This complements prompt-level guardrails and provides an additional control if the model attempts to generate restricted advice.\nFinal Answer: D and E",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-2",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-003",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are configuring tool permissions for a Claude-based assistant. The assistant's defined responsibilities require read access to a knowledge base and write access to a draft queue, and nothing else. Which scoping design best applies least privilege?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Allow access to every tool in the catalog and rely on the model to decline tools it should not use."
+      },
+      {
+        "id": "B",
+        "text": "Per-role allow-list of exactly the read-knowledge-base and write-draft-queue tools, enforced at the orchestration layer."
+      },
+      {
+        "id": "C",
+        "text": "Disable all tools entirely to achieve a minimal permission surface, accepting that the assistant can no longer perform the read-knowledge-base or write-draft-queue tasks it was designed for."
+      },
+      {
+        "id": "D",
+        "text": "Allow access to all tools with read permissions globally and restrict write permissions to the draft- queue tool, without scoping to only the specific tools required for defined tasks."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Allow access to every tool in the catalog and rely on the model to decline tools it should not use.\nIncorrect\nThis does not follow the least-privilege principle because the assistant receives access to tools it does not need. Relying on the model to voluntarily avoid those tools is not an adequate security control.\nB. Per-role allow-list of exactly the read-knowledge-base and write-draft-queue tools, enforced at the orchestration layer.\nCorrect\nThis is the strongest least-privilege design. The assistant receives access to only the two tools required for its defined responsibilities . Enforcing the allow-list at the orchestration layer provides a technical permission boundary rather than relying on the model's behavior.\nC. Disable all tools entirely to achieve a minimal permission surface, accepting that the assistant can no longer perform the read-knowledge-base or write-draft-queue tasks it was designed for.\nIncorrect\nAlthough disabling all tools minimizes permissions, it also prevents the assistant from performing its required responsibilities . Least privilege means granting the minimum permissions necessary to accomplish the intended task, not removing necessary access.\nD. Allow access to all tools with read permissions globally and restrict write permissions to the draft-queue tool, without scoping to only the specific tools required for defined tasks.\nIncorrect\nThis still grants unnecessary access to tools outside the assistant's responsibilities. Least privilege requires permissions to be scoped to the specific capabilities the assistant actually needs.\nFinal Answer: B. Per-role allow-list of exactly the read-knowledge-base and write-draft-queue tools, enforced at the orchestration layer.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-3",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-004",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are compiling team-setup practices for a Claude Code rollout across an engineering organization. Which two practices belong on the list? (Select two.) Each correct answer presents a complete solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use project scope for personal editor preferences so the preferences apply consistently within the project."
+      },
+      {
+        "id": "B",
+        "text": "Apply managed configuration centrally for security-critical settings that must not be overridden by individual engineers."
+      },
+      {
+        "id": "C",
+        "text": "Use local scope for security-critical permission rules so each engineer can adapt them to ongoing work."
+      },
+      {
+        "id": "D",
+        "text": "Use user scope for team-shared MCP servers so every engineer on the team has consistent access."
+      },
+      {
+        "id": "E",
+        "text": "Use project scope for team-shared Model Context Protocol (MCP) servers and permission rules under version control."
+      }
+    ],
+    "correct": [
+      "B",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Use project scope for personal editor preferences so the preferences apply consistently within the project.\nIncorrect\nProject scope is intended for team-shared configuration , not personal preferences. Personal editor preferences should generally remain at the user or local scope so they do not affect other engineers working on the project.\nB. Apply managed configuration centrally for security-critical settings that must not be overridden by individual engineers.\nCorrect\nManaged configuration is appropriate for security-critical controls that need consistent enforcement across the organization. Central management prevents individual engineers from overriding important security policies.\nC. Use local scope for security-critical permission rules so each engineer can adapt them to ongoing work.\nIncorrect\nSecurity-critical permission rules should not be individually adjustable when organizational consistency is required. Local configuration could allow engineers to weaken or bypass important security controls .\nD. Use user scope for team-shared MCP servers so every engineer on the team has consistent access.\nIncorrect\nUser scope applies to an individual engineer , not the entire project team. Team-shared MCP servers should be configured at a shared project or managed organizational level.\nE. Use project scope for team-shared Model Context Protocol (MCP) servers and permission rules under version control.\nCorrect\nProject scope is appropriate for team-shared configuration . Keeping MCP server settings and permission rules under version control improves consistency, reviewability, and change tracking across the engineering organization.\nFinal Answer: B and E",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-4",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-005",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are designing a content moderation classifier that processes high volumes of user-generated comments under a tight per-message latency budget using well-defined classification labels. Which model selection best aligns with the workload?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Sonnet, because larger general-purpose models are preferred even when workload latency requirements are strict."
+      },
+      {
+        "id": "B",
+        "text": "Haiku, because its latency and cost profile align with high-volume classification workloads that require limited reasoning depth."
+      },
+      {
+        "id": "C",
+        "text": "Sonnet with extended thinking enabled, because deeper reasoning should be applied to every moderation request to improve edge-case handling."
+      },
+      {
+        "id": "D",
+        "text": "Opus, because every moderation decision requires maximum reasoning depth regardless of classification complexity."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Sonnet, because larger general-purpose models are preferred even when workload latency requirements are strict.\nIncorrect\nSonnet provides strong general-purpose capabilities, but this workload emphasizes high volume, low latency, and well-defined classification tasks . A lighter model is generally a better fit when deep reasoning is not required.\nB. Haiku, because its latency and cost profile align with high-volume classification workloads that require limited reasoning depth.\nCorrect\nHaiku is well suited to fast, high-volume workloads where the task is clearly defined and does not require extensive reasoning. Its efficiency helps meet strict latency requirements while controlling resource consumption.\nC. Sonnet with extended thinking enabled, because deeper reasoning should be applied to every moderation request to improve edge-case handling.\nIncorrect\nExtended Thinking adds deeper reasoning but can increase latency and resource consumption . Applying it to every high-volume classification request is unnecessary when the labels and task are already well defined.\nD. Opus, because every moderation decision requires maximum reasoning depth regardless of classification complexity.\nIncorrect\nMaximum reasoning capability is not required for every moderation task. Using a highly capable model for simple, high-volume classification can result in unnecessary cost and latency .\nFinal Answer: B. Haiku, because its latency and cost profile align with high-volume classification workloads that require limited reasoning depth.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-5",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-006",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are supporting an engineer whose Claude Code session reports a permission denial when the engineer expected the action to be allowed. Which resolution step is most appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Inspect the active permission rules across all scopes-managed, command-line, local, project, and user-to identify which rule is denying the action and confirm whether it should be amended or remain denied."
+      },
+      {
+        "id": "B",
+        "text": "Tell the engineer to retry the denied action verbatim repeatedly until the denial stops appearing, without inspecting the active permission rules to determine whether the denial is intentional."
+      },
+      {
+        "id": "C",
+        "text": "Disable the permission system entirely across all scopes to remove the denial, eliminating all tool-pattern and deny-rule controls rather than identifying and amending the specific rule."
+      },
+      {
+        "id": "D",
+        "text": "Grant the engineer unrestricted Bash access to bypass the specific rule causing the denial, removing all tool-pattern constraints rather than amending only the rule in"
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "explanation": "A. Inspect the active permission rules across all scopes—managed, command-line, local, project, and user—to identify which rule is denying the action and confirm whether it should be amended or remain denied.\nCorrect\nThe appropriate approach is to diagnose the active permission configuration rather than bypassing the security controls. Reviewing the applicable rules across scopes helps identify the exact rule responsible for the denial and determine whether the rule is intentional or needs to be changed.\nB. Tell the engineer to retry the denied action verbatim repeatedly until the denial stops appearing, without inspecting the active permission rules to determine whether the denial is intentional.\nIncorrect\nRepeated retries do not address the underlying permission configuration. The denial may be intentional, so the correct approach is to inspect and understand the active rules first .\nC. Disable the permission system entirely across all scopes to remove the denial, eliminating all tool-pattern and deny-rule controls rather than identifying and amending the specific rule.\nIncorrect\nDisabling the permission system removes important security controls and violates the principle of least privilege. Only the specific rule that is incorrectly denying the required action should be considered for amendment.\nD. Grant the engineer unrestricted Bash access to bypass the specific rule causing the denial, removing all tool-pattern constraints rather than amending only the rule in question.\nIncorrect\nUnrestricted Bash access creates an unnecessarily broad security exposure . The appropriate solution is to identify and adjust the specific permission rule if necessary, rather than granting unrestricted capabilities.\nFinal Answer: A. Inspect the active permission rules across all applicable scopes to identify and resolve the specific denial.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-6",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-007",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A managed agent deployment for claims triage has grown from 6 tools to 34 tools over 18 months as product teams added capabilities. Triage accuracy has declined from 91 percent to 78 percent, and average tool- selection latency has increased by 2.3 seconds. A junior engineer has proposed adding a tool-router agent in front of the current agent to filter the tool list per request. Which two findings should you present to justify capability decomposition before adding the router? (Select two.) Each correct answer presents part of the solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tool descriptions overlap across multiple claim categories within the agent's tool set."
+      },
+      {
+        "id": "B",
+        "text": "Several tools have not been invoked across the most recent 90 days of traffic."
+      },
+      {
+        "id": "C",
+        "text": "The router pattern is well documented across publicly available agent literature."
+      },
+      {
+        "id": "D",
+        "text": "The proposed router introduces an additional model call on every incoming request."
+      },
+      {
+        "id": "E",
+        "text": "The 34 tools serve four distinct claim-workflow domains within the triage scope."
+      }
+    ],
+    "correct": [
+      "D",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Tool descriptions overlap across multiple claim categories within the agent's tool set.\nIncorrect\nOverlapping tool descriptions can contribute to tool-selection confusion, but this finding alone does not directly establish that the agent should first be decomposed into separate capability domains .\nB. Several tools have not been invoked across the most recent 90 days of traffic.\nIncorrect\nUnused tools are useful evidence for tool rationalization or removal , but they do not directly demonstrate that the 34-tool set should be divided into separate capability domains.\nC. The router pattern is well documented across publicly available agent literature.\nIncorrect\nThe existence of a documented routing pattern does not establish that it is the right architectural solution for this deployment. The team should first understand the underlying capability structure and performance problem .\nD. The proposed router introduces an additional model call on every incoming request.\nCorrect\nAdding another agent introduces additional model-call overhead , which can increase latency and complexity. Since the existing system already has a 2.3-second increase in tool-selection latency, adding another model call may worsen the problem rather than address its root cause.\nE. The 34 tools serve four distinct claim-workflow domains within the triage scope.\nCorrect\nThis is strong evidence for capability decomposition . If the tools naturally fall into four distinct workflow domains, the system can potentially be divided into more focused agents or capability groups, reducing the number of tools each agent must reason over.\nFinal Answer: D and E",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-7",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-009",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A Claude architect is auditing configuration scope assignments. Which two statements correctly identify an appropriate use of user-scope configuration versus other scopes? (Select two.)",
+    "options": [
+      {
+        "id": "A",
+        "text": "Defining MCP server endpoints shared by all contributors to a specific repository."
+      },
+      {
+        "id": "B",
+        "text": "Storing API authentication keys so they are not committed to version control."
+      },
+      {
+        "id": "C",
+        "text": "Enforcing a company-wide policy that disables a feature for all engineers."
+      },
+      {
+        "id": "D",
+        "text": "Persisting personal editor theme preferences that follow an engineer across projects."
+      },
+      {
+        "id": "E",
+        "text": "Saving a preferred Claude response language that applies to all repositories the engineer uses."
+      }
+    ],
+    "correct": [
+      "D",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Defining MCP server endpoints shared by all contributors to a specific repository.\nIncorrect\nMCP servers shared by contributors to a particular repository are better suited to project scope , because project-level configuration can be shared and maintained with the project rather than tied to one individual engineer.\nB. Storing API authentication keys so they are not committed to version control.\nIncorrect\nAuthentication keys and other secrets require secure secret-management practices . Simply placing them in user-scope configuration is not the appropriate general solution for protecting sensitive credentials.\nC. Enforcing a company-wide policy that disables a feature for all engineers.\nIncorrect\nCompany-wide security or policy requirements should be enforced through managed/organizational configuration , rather than user scope. Individual engineers should not be able to override centrally required controls.\nD. Persisting personal editor theme preferences that follow an engineer across projects.\nCorrect\nUser scope is appropriate for personal preferences that should follow an individual engineer across different projects. An editor theme is a good example because it does not need to be shared with the entire team.\nE. Saving a preferred Claude response language that applies to all repositories the engineer uses.\nCorrect\nA preferred response language is also an individual user preference . User scope allows the preference to persist across the engineer's different repositories and projects without imposing it on other team members.\nFinal Answer: D and E",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-9",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-010",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A research summarization assistant has been deployed for six months. A user has flagged that a generated summary contained a fabricated citation. The product team has asked whether the incident requires architectural action or whether it is an isolated case. Which two Diligence-competency actions should you take? (Select two.) Each correct answer presents part of the solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Disable the assistant immediately for all current users without any prior diagnostic analysis."
+      },
+      {
+        "id": "B",
+        "text": "Review whether citation-grounding controls exist anywhere in the current generation pipeline."
+      },
+      {
+        "id": "C",
+        "text": "Sample recent summaries to estimate the fabrication frequency across the population."
+      },
+      {
+        "id": "D",
+        "text": "Treat the incident as an anecdotal isolated case and take no further investigative action."
+      },
+      {
+        "id": "E",
+        "text": "Communicate to users that the assistant does not fabricate output as a matter of design."
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Disable the assistant immediately for all current users without any prior diagnostic analysis.\nIncorrect\nImmediately disabling the assistant may be appropriate in an extreme safety situation, but this scenario first requires evidence-based investigation . The team needs to understand the scope and cause of the issue before deciding on an architectural response.\nB. Review whether citation-grounding controls exist anywhere in the current generation pipeline.\nCorrect\nReviewing the existing pipeline determines whether there are controls designed to prevent unsupported or fabricated citations . This helps identify potential architectural weaknesses and whether additional grounding or validation mechanisms are needed.\nC. Sample recent summaries to estimate the fabrication frequency across the population.\nCorrect\nSampling recent outputs helps determine whether the reported citation is an isolated event or part of a recurring pattern . Measuring the frequency provides evidence for deciding whether broader corrective or architectural action is warranted.\nD. Treat the incident as an anecdotal isolated case and take no further investigative action.\nIncorrect\nA single reported incident should not automatically be dismissed. Diligence requires investigating and assessing the broader risk before concluding that the problem is isolated.\nE. Communicate to users that the assistant does not fabricate output as a matter of design.\nIncorrect\nA design intention does not prove that the system cannot produce fabricated content. Such a statement could create a false sense of reliability rather than addressing the reported incident.\nFinal Answer: B and C",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-10",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-011",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A customer support team has proposed delegating customer refund decisions to a Claude-driven workflow with no human review for refunds under 50 USD. The team's reasoning is that small refunds are low-risk and human review would erase the efficiency gain. Which Delegation-competency principle should quide your response?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Delegation should be avoided entirely wherever financial transactions occur in the workflow."
+      },
+      {
+        "id": "B",
+        "text": "Delegation should always include human review on every decision the workflow produces."
+      },
+      {
+        "id": "C",
+        "text": "Delegation scope should reflect the type of risk involved, not the transaction size alone."
+      },
+      {
+        "id": "D",
+        "text": "Delegation scope should be set primarily by maximizing efficiency gains across the workflow."
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "explanation": "A. Delegation should be avoided entirely wherever financial transactions occur in the workflow.\nIncorrect\nDelegation is not automatically inappropriate simply because a workflow involves financial transactions. The appropriate approach is to assess the specific risks and consequences and determine what level of human oversight is necessary.\nB. Delegation should always include human review on every decision the workflow produces.\nIncorrect\nHuman review is important for higher-risk decisions, but requiring manual review for every single decision is unnecessarily rigid. Appropriate delegation depends on the risk associated with the task and its potential impact.\nC. Delegation scope should reflect the type of risk involved, not the transaction size alone.\nCorrect\nThe risk associated with an action is more important than the dollar amount alone. Even a small refund could involve fraud, customer disputes, policy exceptions, or other consequences. Delegation should therefore consider factors such as financial, legal, customer, and reputational risk when determining the appropriate level of human oversight.\nD. Delegation scope should be set primarily by maximizing efficiency gains across the workflow.\nIncorrect\nEfficiency is an important consideration, but it should not override risk management and accountability . Delegation decisions should balance productivity with the potential consequences of automated decisions.\nFinal Answer: C. Delegation scope should reflect the type of risk involved, not the transaction size alone.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-11",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-012",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You must present an architectural recommendation to deploy a Claude-based contract review assistant to a steering committee that includes the CFO, the general counsel, and the CIO. Each stakeholder cares about different aspects of the decision. How should you structure the recommendation document?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Lead with detailed cost projections across the full multi-year horizon before the rationale section."
+      },
+      {
+        "id": "B",
+        "text": "Lead with the technical architecture diagram and the full component list before any other section."
+      },
+      {
+        "id": "C",
+        "text": "Present the same dense narrative throughout with no stakeholder differentiation in any section."
+      },
+      {
+        "id": "D",
+        "text": "Lead with the architectural decision, then address each stakeholder's primary concerns directly."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Lead with detailed cost projections across the full multi-year horizon before the rationale section.\nIncorrect\nCost is highly relevant to the CFO, but leading exclusively with detailed financial projections may not address the legal, technical, and strategic concerns of the other stakeholders.\nB. Lead with the technical architecture diagram and the full component list before any other section.\nIncorrect\nThe technical architecture is particularly important to the CIO, but beginning with a detailed component list may overwhelm stakeholders who primarily need to understand the decision, rationale, risks, and business impact .\nC. Present the same dense narrative throughout with no stakeholder differentiation in any section.\nIncorrect\nDifferent stakeholders have different responsibilities and concerns. A one-size-fits-all narrative may fail to address the specific information each decision-maker needs .\nD. Lead with the architectural decision, then address each stakeholder's primary concerns directly.\nCorrect\nThe strongest approach is to state the recommendation clearly at the beginning and then address the key concerns of each stakeholder. For example, the CFO may focus on cost and ROI, the General Counsel on legal risk and compliance, and the CIO on architecture, security, integration, and operational considerations.\nThis structure makes the recommendation decision-oriented, concise, and relevant to the entire steering committee .\nFinal Answer: D. Lead with the architectural decision, then address each stakeholder's primary concerns directly.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-12",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-014",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are producing an architecture guide for a new deployment and must complete the planning steps before drafting each section. Which two steps must be completed BEFORE drafting each section of the guide? (Select two.) Each correct answer presents part of the solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Translate the guide into the supported regional languages for the candidate population."
+      },
+      {
+        "id": "B",
+        "text": "Establish the document under version control with a defined review cadence and approver list."
+      },
+      {
+        "id": "C",
+        "text": "Identify the audience and the questions the guide must answer for that audience."
+      },
+      {
+        "id": "D",
+        "text": "Outline the guide sections covering the overview, components, contracts, flows, runbooks, and limitations."
+      },
+      {
+        "id": "E",
+        "text": "Validate the guide with the implementation team and incorporate corrections."
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Translate the guide into the supported regional languages for the candidate population.\nIncorrect\nTranslation is a later-stage activity. Before drafting, the priority is to establish who the guide is for and what information it needs to contain .\nB. Establish the document under version control with a defined review cadence and approver list.\nIncorrect\nVersion control, review cadence, and approval processes are valuable for document governance, but they are not the primary content-planning steps required before drafting the sections.\nC. Identify the audience and the questions the guide must answer for that audience.\nCorrect\nBefore writing, you should understand the intended audience and their information needs . This ensures that each section is written at the appropriate technical level and addresses the questions stakeholders actually need answered.\nD. Outline the guide sections covering the overview, components, contracts, flows, runbooks, and limitations.\nCorrect\nCreating an outline establishes the guide's structure and scope before detailed writing begins. It helps ensure important architecture topics are covered systematically and prevents unnecessary duplication or omissions.\nE. Validate the guide with the implementation team and incorporate corrections.\nIncorrect\nValidation with the implementation team is an important review and refinement step , but it happens after the relevant content has been drafted rather than before drafting each section.\nFinal Answer: C and D",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-14",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-015",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are responding to an adversarial input pattern in which users include text claiming admin authority and instructing the model to bypass safety restrictions. Which combination of controls most effectively mitigates this attack pattern?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Prompt-level instructions that treat user content as untrusted data, runtime classifiers that detect override attempts, scoped tool permissions that cannot be elevated by user content, and audit logging of attempts."
+      },
+      {
+        "id": "B",
+        "text": "Granting users any privilege level they assert in their message content, on the assumption that cooperative behavior requires honoring self-declared authority without independent verification."
+      },
+      {
+        "id": "C",
+        "text": "Trusting that the model will intrinsically recognize and reject all bypass attempts without prompt-level instructions, runtime classifiers, scoped permissions, or audit logging."
+      },
+      {
+        "id": "D",
+        "text": "Removing all safety restrictions and guardrails to eliminate the attack surface that bypass attempts target, accepting that this makes the assistant unrestricted for all inputs."
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "explanation": "A. Prompt-level instructions that treat user content as untrusted data, runtime classifiers that detect override attempts, scoped tool permissions that cannot be elevated by user content, and audit logging of attempts.\nCorrect\nThis approach provides defense in depth . User-provided claims of authority are treated as untrusted input, runtime controls can identify suspicious override attempts, and scoped permissions prevent the user from escalating privileges simply through prompt content. Audit logging also supports monitoring, investigation, and incident response .\nB. Granting users any privilege level they assert in their message content, on the assumption that cooperative behavior requires honoring self-declared authority without independent verification.\nIncorrect\nUser-supplied text is not a reliable source of authorization. Allowing users to declare their own privileges creates a serious privilege-escalation risk .\nC. Trusting that the model will intrinsically recognize and reject all bypass attempts without prompt-level instructions, runtime classifiers, scoped permissions, or audit logging.\nIncorrect\nA model should not be treated as the sole security boundary . Multiple technical and procedural controls are needed because adversarial inputs can sometimes bypass model-level instructions.\nD. Removing all safety restrictions and guardrails to eliminate the attack surface that bypass attempts target, accepting that this makes the assistant unrestricted for all inputs.\nIncorrect\nRemoving safety controls does not mitigate the attack; it eliminates the protections that are intended to prevent unsafe behavior.\nFinal Answer: A. Use layered prompt, runtime, permission, and audit controls.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-15",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-016",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a solution architect designing a Claude-based assistant with access to 60 internal tools across multiple business domains. Loading every tool definition on every request increases token usage and time to first response. Which design pattern best addresses this issue without sacrificing capability breadth?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the maximum context length and load all 60 tool definitions on every request, accepting the higher token cost and latency as necessary for full capability."
+      },
+      {
+        "id": "B",
+        "text": "Apply progressive tool discovery so a curated initial subset is exposed and additional tools are loaded on demand based on the task."
+      },
+      {
+        "id": "C",
+        "text": "Hard-code a fixed set of five tools per request to reduce token usage, regardless of whether those tools are relevant to the current task."
+      },
+      {
+        "id": "D",
+        "text": "Use a separate model call to summarize all 60 tool definitions before each user turn."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Increase the maximum context length and load all 60 tool definitions on every request, accepting the higher token cost and latency as necessary for full capability.\nIncorrect\nIncreasing context capacity does not solve the underlying efficiency problem. Loading all 60 tool definitions on every request still consumes tokens and processing time , even when most tools are irrelevant to the current task.\nB. Apply progressive tool discovery so a curated initial subset is exposed and additional tools are loaded on demand based on the task.\nCorrect\nProgressive tool discovery reduces the amount of tool information that must be loaded initially. A relevant subset can be exposed first, and additional tools can be discovered or loaded when the task requires them. This preserves broad capability while reducing initial token usage and latency .\nC. Hard-code a fixed set of five tools per request to reduce token usage, regardless of whether those tools are relevant to the current task.\nIncorrect\nAlthough this reduces token usage, it can restrict capability and prevent Claude from accessing tools required for a particular request. The selection should be task-relevant rather than an arbitrary fixed number.\nD. Use a separate model call to summarize all 60 tool definitions before each user turn.\nIncorrect\nThis adds another model call and therefore introduces additional latency and resource consumption . It also does not necessarily provide Claude with the precise tool definitions needed for reliable tool use.\nFinal Answer: B. Apply progressive tool discovery so relevant tools are exposed initially and additional tools are loaded on demand.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-16",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-017",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are presenting an architectural decision to a mixed audience that includes an executive sponsor and the engineering leads who will implement the decision. Which presentation strategy best serves both audiences?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Open with a deep dive into low-level implementation details targeted at engineering leads, and stop there without addressing the business outcomes or trade-offs the executive sponsor needs."
+      },
+      {
+        "id": "B",
+        "text": "Skip the rationale, alternatives, and trade-off discussion entirely and simply announce the chosen decision, leaving both audiences without the context needed to implement or validate it."
+      },
+      {
+        "id": "C",
+        "text": "Lead with the decision, the business outcomes it serves, and the trade-offs accepted; follow with the technical rationale, alternatives, and implementation implications for the engineering audience."
+      },
+      {
+        "id": "D",
+        "text": "Present a single undifferentiated narrative that addresses technical and business concerns with equal weight throughout, treating both audiences as requiring the same depth on every section."
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "explanation": "A. Open with a deep dive into low-level implementation details targeted at engineering leads, and stop there without addressing the business outcomes or trade-offs the executive sponsor needs.\nIncorrect\nThis approach focuses almost entirely on the engineering audience and fails to address the executive sponsor's need to understand business outcomes, strategic rationale, risks, and trade-offs .\nB. Skip the rationale, alternatives, and trade-off discussion entirely and simply announce the chosen decision, leaving both audiences without the context needed to implement or validate it.\nIncorrect\nSimply announcing the decision does not provide enough context. Both audiences need to understand why the decision was made , what alternatives were considered, and what trade-offs were accepted.\nC. Lead with the decision, the business outcomes it serves, and the trade-offs accepted; follow with the technical rationale, alternatives, and implementation implications for the engineering audience.\nCorrect\nThis structure serves both audiences effectively. Executives get the decision, business value, and key trade-offs early , while engineering leads receive the technical rationale, alternatives, and implementation details needed to execute the decision.\nD. Present a single undifferentiated narrative that addresses technical and business concerns with equal weight throughout, treating both audiences as requiring the same depth on every section.\nIncorrect\nDifferent stakeholders have different information needs. Giving every section equal technical and business depth can make the presentation less focused and less useful for both audiences.\nFinal Answer: C. Lead with the decision, business outcomes, and trade-offs, followed by the technical rationale and implementation implications.",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-17",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-018",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are designing a test strategy for a Claude-based pipeline that handles sensitive financial data. hich two test types should be prioritized to cover both safety under attack and cross-component correctness? (Select two.)",
+    "options": [
+      {
+        "id": "A",
+        "text": "Integration tests that verify end-to-end pipeline behavior across all components."
+      },
+      {
+        "id": "B",
+        "text": "Smoke tests that verify core paths after each deployment."
+      },
+      {
+        "id": "C",
+        "text": "Unit tests targeting only individual prompt-template rendering logic."
+      },
+      {
+        "id": "D",
+        "text": "Regression tests against a stable reference set of previously known-good outputs."
+      },
+      {
+        "id": "E",
+        "text": "Adversarial tests using prompt-injection and malformed-input cases."
+      }
+    ],
+    "correct": [
+      "A",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Integration tests that verify end-to-end pipeline behavior across all components.\nCorrect\nIntegration tests verify that the different components of the pipeline work correctly together . For a sensitive financial-data workflow, this is important because failures can occur at the boundaries between components even when individual components work correctly in isolation.\nB. Smoke tests that verify core paths after each deployment.\nIncorrect\nSmoke tests are useful for quickly checking whether the system's basic functionality works after deployment, but they do not provide sufficient coverage for adversarial safety or detailed cross-component correctness.\nC. Unit tests targeting only individual prompt-template rendering logic.\nIncorrect\nUnit tests are valuable for testing isolated logic, but testing only prompt-template rendering does not adequately cover the end-to-end pipeline or attacks such as prompt injection and malformed inputs.\nD. Regression tests against a stable reference set of previously known-good outputs.\nIncorrect\nRegression testing is useful for detecting unexpected changes in output behavior , but it does not directly provide targeted coverage for adversarial attacks or verify all cross-component interactions.\nE. Adversarial tests using prompt-injection and malformed-input cases.\nCorrect\nAdversarial testing directly evaluates how the system behaves under malicious, unexpected, or malformed inputs . For a financial-data pipeline, this helps identify safety weaknesses and potential ways attackers could manipulate the system.\nFinal Answer: A and E\nA = Cross-component correctness\nE = Safety under attack",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-18",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-019",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are running a risk assessment on a planned Claude-based deployment and must complete the inventory steps before assessing threats against assets. Which two steps must be completed BEFORE assessing threats against assets to estimate likelihood and impact? (Select two.) Each correct answer presents part of the solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Recommend mitigations and residual-risk acceptance for the risks that remain after analysis."
+      },
+      {
+        "id": "B",
+        "text": "Recommend mitigations and residual-risk acceptance for risks that remain."
+      },
+      {
+        "id": "C",
+        "text": "Enumerate the threat actors and attack vectors relevant to the deployment."
+      },
+      {
+        "id": "D",
+        "text": "Document the assessment outcome with risks, mitigations, residual risk, and acceptance owners."
+      },
+      {
+        "id": "E",
+        "text": "Identify the assets that the deployment touches, along with the sensitivity of each asset."
+      }
+    ],
+    "correct": [
+      "C",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Recommend mitigations and residual-risk acceptance for the risks that remain after analysis.\nIncorrect\nMitigations and residual-risk acceptance are later stages of the risk-assessment process. You first need to identify the assets and relevant threats before determining appropriate controls.\nB. Recommend mitigations and residual-risk acceptance for risks that remain.\nIncorrect\nThis is also a post-analysis activity . Mitigation decisions depend on understanding the risks, their likelihood, their impact, and the controls already available.\nC. Enumerate the threat actors and attack vectors relevant to the deployment.\nCorrect\nIdentifying relevant threat actors and attack vectors is necessary before estimating risk. Understanding who could attack the system and how they might do so helps establish the likelihood and potential impact of threats against the identified assets.\nD. Document the assessment outcome with risks, mitigations, residual risk, and acceptance owners.\nIncorrect\nDocumenting the final assessment is generally performed after the analysis has been completed. You need the risk findings and mitigation decisions before producing the final assessment record.\nE. Identify the assets that the deployment touches, along with the sensitivity of each asset.\nCorrect\nAsset identification is a foundational step. Knowing which assets are involved and how sensitive they are provides the basis for evaluating the potential impact if those assets are compromised.\nFinal Answer: C and E\nC = Identify relevant threats and attack vectors\nE = Identify affected assets and their sensitivity",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-19",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccar-p-certyiq-020",
+    "exam": "ccar-p",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A senior architect is managing stakeholder expectations for a Claude-based reporting assistant midway through development. Stakeholders have escalating concerns about response latency. Which two actions most directly address stakeholder expectation alignment in this situation? (Select two.)",
+    "options": [
+      {
+        "id": "A",
+        "text": "Replace the current Claude model with a third-party model that may offer lower latency without evaluation."
+      },
+      {
+        "id": "B",
+        "text": "Pause all development and reallocate engineering resources entirely to latency optimization."
+      },
+      {
+        "id": "C",
+        "text": "Present measured p50 and p95 latency baselines against the agreed SLA thresholds so stakeholders have accurate data."
+      },
+      {
+        "id": "D",
+        "text": "Revise the SLA definition collaboratively with stakeholders if current targets are not achievable given production constraints."
+      },
+      {
+        "id": "E",
+        "text": "Communicate that latency concerns are a known LLM limitation and outside the architecture team's control."
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Replace the current Claude model with a third-party model that may offer lower latency without evaluation.\nIncorrect\nReplacing the model without proper evaluation does not address stakeholder alignment. It could introduce new quality, security, compatibility, or performance risks . Model changes should be based on measured requirements and controlled evaluation.\nB. Pause all development and reallocate engineering resources entirely to latency optimization.\nIncorrect\nThis is a broad project-management decision rather than a direct stakeholder-alignment action. It may also unnecessarily disrupt other development priorities without first establishing the actual performance gap.\nC. Present measured p50 and p95 latency baselines against the agreed SLA thresholds so stakeholders have accurate data.\nCorrect\nProviding objective performance measurements gives stakeholders a clear understanding of the current state. Comparing p50 and p95 latency with the agreed SLA helps distinguish actual performance gaps from perception and supports informed decisions.\nD. Revise the SLA definition collaboratively with stakeholders if current targets are not achievable given production constraints.\nCorrect\nIf the original SLA is unrealistic given validated production constraints, the appropriate approach is to review and revise it collaboratively with stakeholders. This creates shared expectations rather than silently accepting an unachievable target.\nE. Communicate that latency concerns are a known LLM limitation and outside the architecture team's control.\nIncorrect\nThis approach dismisses stakeholder concerns instead of addressing them. Architecture teams should provide measured evidence, options, and trade-offs rather than treating performance as completely outside their responsibility.\nFinal Answer: C and D\nC = Establish objective latency baselines against the SLA\nD = Collaboratively revise the SLA when justified by production constraints",
+    "sourceId": "certyiq-ccar-p",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccar-p.json#question-20",
+    "sourceHash": "sha256:772f73cdf400af20c833788862f7040d76a8071ea297a751ecfa730041b78c8d",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  }
+]

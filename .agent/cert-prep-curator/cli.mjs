@@ -102,12 +102,10 @@ async function main() {
       break;
     }
     case 'normalize': {
-      console.log('[Cert Prep Curator] Normalizing question data...');
+      console.log('[Cert Prep Curator] Staging normalized legacy-source candidates...');
       try {
         const out = execSync('node scripts/normalize-questions.mjs', { encoding: 'utf8' });
         console.log(out);
-        const valOk = runValidation(rootDir, 'cca-f');
-        process.exit(valOk ? 0 : 1);
       } catch (err) {
         console.error(err.message);
         process.exit(1);

@@ -18,6 +18,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { publishedQuestionsForExam, mockQuestionsForExam } from './browser-question-pool.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
@@ -53,9 +54,8 @@ function buildForExam(examId) {
 
   // CCAF predates the released status and its reviewed ready bank is already public.
   // Other exams require explicit release before their questions enter browser artifacts.
-  const publishedQuestions = allQuestions.filter(q =>
-    q.status === 'released' || (examId === 'cca-f' && q.status === 'ready')
-  );
+  const publishedQuestions = publishedQuestionsForExam(allQuestions, examId);
+  const mockQuestions = mockQuestionsForExam(allQuestions, examId);
 
   // Domain distribution from released pool
   const domainCounts = {};
@@ -69,6 +69,7 @@ function buildForExam(examId) {
     buildAt: new Date().toISOString(),
     totalQuestions: allQuestions.length,
     publishedQuestions: publishedQuestions.length,
+    mockQuestions: mockQuestions.length,
     releasedQuestions: allQuestions.filter(q => q.status === 'released').length,
     domainDistribution: domainCounts
   };
@@ -77,7 +78,7 @@ function buildForExam(examId) {
   fs.mkdirSync(outDir, { recursive: true });
 
   fs.writeFileSync(path.join(outDir, 'questions.json'), JSON.stringify(publishedQuestions, null, 2));
-  fs.writeFileSync(path.join(outDir, 'mock-pool.json'), JSON.stringify(publishedQuestions, null, 2));
+  fs.writeFileSync(path.join(outDir, 'mock-pool.json'), JSON.stringify(mockQuestions, null, 2));
   fs.writeFileSync(path.join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
   console.log(`[build-artifacts] ${examId}: ${allQuestions.length} total, ${publishedQuestions.length} published → ${outDir}`);

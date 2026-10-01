@@ -25,6 +25,7 @@
   var timerInterval = null;
   var exitWarningDismissed = false;
   var activeResultFilter = 'all';
+  var focusBeforeModal = null;
 
   function isFullscreen() {
     return !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
@@ -33,14 +34,18 @@
   function requestExamFullscreen() {
     var el = container;
     if (el.requestFullscreen) {
-      el.requestFullscreen().catch(function() {});
+      return el.requestFullscreen().then(function() { return true; }).catch(function() { return false; });
     } else if (el.webkitRequestFullscreen) {
       el.webkitRequestFullscreen();
+      return Promise.resolve(true);
     } else if (el.mozRequestFullScreen) {
       el.mozRequestFullScreen();
+      return Promise.resolve(true);
     } else if (el.msRequestFullscreen) {
       el.msRequestFullscreen();
+      return Promise.resolve(true);
     }
+    return Promise.resolve(false);
   }
 
   function exitExamFullscreen() {
@@ -90,6 +95,17 @@
         if (e.key === 'Escape') {
           closeSubmissionModal();
           e.preventDefault();
+        } else if (e.key === 'Tab') {
+          var controls = modal.querySelectorAll('button');
+          var first = controls[0];
+          var last = controls[controls.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            last.focus();
+            e.preventDefault();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            first.focus();
+            e.preventDefault();
+          }
         }
         return;
       }
@@ -97,8 +113,7 @@
       if (!activeAttempt || activeAttempt.submitted || activeAttempt.reviewMode) return;
 
       var tag = e.target && e.target.tagName ? e.target.tagName.toLowerCase() : '';
-      if (tag === 'input' && e.target.type === 'text') return;
-      if (tag === 'textarea') return;
+      if (['input', 'textarea', 'select', 'button'].includes(tag) || e.target.isContentEditable) return;
 
       // Alt+N or ArrowRight -> Next
       if ((e.altKey && (e.key === 'n' || e.key === 'N')) || (!e.altKey && !e.ctrlKey && !e.metaKey && e.key === 'ArrowRight')) {
@@ -166,9 +181,18 @@
       try {
         var parsed = JSON.parse(saved);
         if (parsed && parsed.examId === examId && parsed.questions && parsed.questions.length === TOTAL_TEST_QUESTIONS) {
-          parsed.flags = parsed.flags || {};
-          parsed.reviewMode = !!parsed.reviewMode;
-          activeAttempt = parsed;
+          var currentById = new Map(allQuestions.map(function(question) { return [question.id, question]; }));
+          var savedIds = parsed.questions.map(function(question) { return question.id; });
+          if (new Set(savedIds).size === TOTAL_TEST_QUESTIONS && savedIds.every(function(id) { return currentById.has(id); })) {
+            parsed.questions = savedIds.map(function(id) { return currentById.get(id); });
+            parsed.flags = parsed.flags || {};
+            parsed.reviewMode = !!parsed.reviewMode;
+            parsed.reviewFilter = ['all', 'incomplete', 'flagged'].includes(parsed.reviewFilter) ? parsed.reviewFilter : 'all';
+            activeAttempt = parsed;
+            saveState();
+          } else {
+            sessionStorage.removeItem(STORAGE_KEY);
+          }
         }
       } catch (e) {
         sessionStorage.removeItem(STORAGE_KEY);
@@ -205,6 +229,7 @@
 
   function createNewAttempt() {
     var selected = [];
+    activeResultFilter = 'all';
 
     Object.keys(domainQuotas).forEach(function(dom) {
       var quota = domainQuotas[dom];
@@ -235,8 +260,10 @@
       answers: {},
       flags: {},
       currentIndex: 0,
+      reviewFilter: 'all',
       submitted: false,
       submittedAt: null,
+      timedOut: false,
       reviewMode: false
     };
 
@@ -280,6 +307,8 @@
 
     timerEls.forEach(function(el) {
       el.textContent = '⏱ ' + formatted;
+      if (totalSec <= 300) el.textContent += ' · Under 5 minutes';
+      else if (totalSec <= 600) el.textContent += ' · Under 10 minutes';
       if (totalSec < 300) {
         el.style.color = 'var(--wrong-fg)';
         el.style.fontWeight = 'bold';
@@ -292,7 +321,7 @@
     html += '<div class="question-card" style="text-align: center; padding: 2.5rem;">';
     html += '  <h2 id="mockViewHeading" tabindex="-1" style="margin-top: 0;">' + escapeHtml(examName) + ' practice test</h2>';
     html += '  <p style="max-width: 680px; margin: 1rem auto; color: var(--muted);">';
-    html += '    Experience a realistic, Pearson VUE-style timed proctored exam. Answers, explanations, category domains, and difficulty indicators are concealed during the test.';
+    html += '    Take an exam-inspired practice test. Answers, explanations, domains, and difficulty indicators stay hidden until you submit.';
     html += '  </p>';
     html += '  <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 1.5rem 0;">';
     html += '    <div style="border: 2px solid var(--border); padding: 1rem; border-radius: 4px; min-width: 140px; background: var(--bg);">';
@@ -310,17 +339,17 @@
     html += '  </div>';
 
     html += '  <div style="max-width: 580px; margin: 1.25rem auto 1.75rem; text-align: left; background: var(--code-bg); border: 1px solid var(--border); padding: 1rem 1.25rem; border-radius: 3px; font-size: 0.88rem;">';
-    html += '    <strong>Proctored Simulation Features:</strong>';
+    html += '    <strong>Practice test features:</strong>';
     html += '    <ul style="margin: 0.5rem 0 0 1.2rem; padding: 0;">';
-    html += '      <li>Fullscreen proctored view with exit detection banner.</li>';
+    html += '      <li>Optional fullscreen view with a return button if you exit it.</li>';
     html += '      <li>Flag for review button (<code>Alt+F</code>) to mark questions for later review.</li>';
-    html += '      <li>Dedicated Pearson VUE Question Review Screen matrix (1–' + TOTAL_TEST_QUESTIONS + ').</li>';
+    html += '      <li>Question review screen for all ' + TOTAL_TEST_QUESTIONS + ' items.</li>';
     html += '      <li>Keyboard shortcuts: <code>Alt+N</code> (Next), <code>Alt+P</code> (Previous), <code>A</code>–<code>D</code> (Select option).</li>';
     html += '      <li>Post-exam interactive filters to isolate incorrect and correct answers.</li>';
     html += '    </ul>';
     html += '  </div>';
 
-    html += '  <button id="btnStartExam" class="reveal-btn" style="font-size: 1.1rem; padding: 0.75rem 2.25rem;">Start Proctored Exam ►</button>';
+    html += '  <button id="btnStartExam" class="reveal-btn" style="font-size: 1.1rem; padding: 0.75rem 2.25rem;">Start Practice Test ►</button>';
     html += '</div>';
 
     container.innerHTML = html;
@@ -345,13 +374,21 @@
     var total = TOTAL_TEST_QUESTIONS;
     var answeredCount = Object.keys(activeAttempt.answers).length;
     var isFlagged = !!(activeAttempt.flags && activeAttempt.flags[q.id]);
+    var reviewFilter = activeAttempt.reviewFilter || 'all';
+    var reviewIndices = activeAttempt.questions.map(function(question, index) { return { question: question, index: index }; }).filter(function(item) {
+      if (reviewFilter === 'incomplete') return !activeAttempt.answers[item.question.id];
+      if (reviewFilter === 'flagged') return !!activeAttempt.flags[item.question.id];
+      return true;
+    }).map(function(item) { return item.index; });
+    var previousIndex = reviewIndices.filter(function(index) { return index < idx; }).pop();
+    var nextIndex = reviewIndices.find(function(index) { return index > idx; });
 
     var html = '';
 
     // Fullscreen Warning Banner
     var showWarning = !isFullscreen() && !exitWarningDismissed;
     html += '<div id="fullscreenWarningBanner" class="fullscreen-warning-banner" style="display: ' + (showWarning ? 'flex' : 'none') + ';">';
-    html += '  <div>⚠️ <strong>Exam Notice:</strong> Fullscreen mode is not active. Real certification exams require proctored fullscreen simulation.</div>';
+    html += '  <div><strong>Fullscreen is off.</strong> Your practice test continues normally. You can return to fullscreen at any time.</div>';
     html += '  <div style="display: flex; gap: 0.5rem; align-items: center;">';
     html += '    <button id="btnBannerReEnterFs" class="btn-fs-toggle" style="background: var(--card);">Re-enter Fullscreen</button>';
     html += '    <button id="btnBannerDismiss" style="background: none; border: none; cursor: pointer; color: var(--wrong-fg); font-weight: bold; font-size: 1.1rem;" title="Dismiss warning">✕</button>';
@@ -361,9 +398,11 @@
     // Sticky Top Proctor Bar
     html += '<div class="proctor-bar">';
     html += '  <div class="proctor-meta">';
-    html += '    <strong>Question ' + (idx + 1) + '</strong> of ' + total;
+    html += '    <strong>' + escapeHtml(examName) + '</strong>';
+    html += '    <span style="color: var(--muted);">Question ' + (idx + 1) + ' of ' + total + '</span>';
     html += '    <span style="color: var(--muted);">·</span>';
-    html += '    <span style="color: var(--muted);">' + answeredCount + ' answered</span>';
+    html += '    <span class="mock-answer-count" style="color: var(--muted);">' + answeredCount + ' answered · ' + (total - answeredCount) + ' unanswered</span>';
+    if (reviewFilter !== 'all') html += '    <span class="review-pill">Reviewing ' + (reviewFilter === 'incomplete' ? 'incomplete' : 'flagged') + ' questions</span>';
     html += '  </div>';
 
     html += '  <div class="proctor-actions">';
@@ -383,7 +422,7 @@
     html += '    Question ' + (idx + 1) + '. ' + escapeHtml(q.prompt);
     html += '  </h2>';
 
-    html += '  <div class="options-list">';
+    html += '  <div class="options-list" role="radiogroup" aria-label="Answers for question ' + (idx + 1) + '">';
     var currentAnswer = activeAttempt.answers[q.id];
     q.options.forEach(function(opt) {
       var optKey = opt.id || opt.key;
@@ -398,7 +437,7 @@
 
     // Bottom Navigation Bar
     html += '  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; border-top: 1px dashed var(--border); padding-top: 1.25rem;">';
-    if (idx > 0) {
+    if (previousIndex !== undefined) {
       html += '    <button id="btnPrev" class="reveal-btn">◄ Previous [Alt+P]</button>';
     } else {
       html += '    <div></div>';
@@ -408,10 +447,10 @@
     html += '      Progress: ' + Math.round(((idx + 1) / total) * 100) + '% &nbsp;(' + answeredCount + '/' + total + ')';
     html += '    </div>';
 
-    if (idx < total - 1) {
+    if (nextIndex !== undefined) {
       html += '    <button id="btnNext" class="reveal-btn">Next ► [Alt+N]</button>';
     } else {
-      html += '    <button id="btnFinish" class="reveal-btn" style="background: var(--accent); color: var(--accent-contrast);">Review &amp; Submit ▤</button>';
+      html += '    <button id="btnFinish" class="reveal-btn" style="background: var(--accent); color: var(--accent-contrast);">Review Screen ▤</button>';
     }
 
     html += '  </div>';
@@ -472,8 +511,8 @@
         activeAttempt.answers[q.id] = this.value;
         saveState();
         var answeredNow = Object.keys(activeAttempt.answers).length;
-        var metaEl = container.querySelector('.proctor-meta span:last-child');
-        if (metaEl) metaEl.textContent = answeredNow + ' answered';
+        var metaEl = container.querySelector('.mock-answer-count');
+        if (metaEl) metaEl.textContent = answeredNow + ' answered · ' + (total - answeredNow) + ' unanswered';
       });
     });
 
@@ -481,8 +520,8 @@
     var btnPrev = document.getElementById('btnPrev');
     if (btnPrev) {
       btnPrev.addEventListener('click', function() {
-        if (activeAttempt.currentIndex > 0) {
-          activeAttempt.currentIndex--;
+        if (previousIndex !== undefined) {
+          activeAttempt.currentIndex = previousIndex;
           saveState();
           renderExamView(true);
         }
@@ -492,8 +531,8 @@
     var btnNext = document.getElementById('btnNext');
     if (btnNext) {
       btnNext.addEventListener('click', function() {
-        if (activeAttempt.currentIndex < total - 1) {
-          activeAttempt.currentIndex++;
+        if (nextIndex !== undefined) {
+          activeAttempt.currentIndex = nextIndex;
           saveState();
           renderExamView(true);
         }
@@ -540,7 +579,7 @@
     // Sticky Top Proctor Bar
     html += '<div class="proctor-bar">';
     html += '  <div class="proctor-meta">';
-    html += '    <strong>Exam Review Screen</strong>';
+    html += '    <strong>Question Review Screen</strong>';
     html += '    <span style="color: var(--muted);">·</span>';
     html += '    <span style="color: var(--muted);">' + answeredCount + ' / ' + total + ' Answered</span>';
     html += '  </div>';
@@ -585,9 +624,9 @@
       var cls = isAns ? 'answered' : 'unanswered';
       if (isFlg) cls += ' flagged';
       var title = 'Question ' + (i + 1) + ': ' + (isAns ? 'Answered' : 'Unanswered') + (isFlg ? ' (Flagged)' : '');
-      html += '    <div class="matrix-chip ' + cls + '" data-index="' + i + '" title="' + title + '" tabindex="0" role="button">';
+      html += '    <button type="button" class="matrix-chip ' + cls + '" data-index="' + i + '" aria-label="' + title + '">';
       html += '      ' + (i + 1);
-      html += '    </div>';
+      html += '    </button>';
     });
     html += '  </div>';
 
@@ -631,9 +670,10 @@
       });
     }
 
-    function jumpTo(idx) {
+    function jumpTo(idx, filter) {
       activeAttempt.reviewMode = false;
       activeAttempt.currentIndex = idx;
+      activeAttempt.reviewFilter = filter || 'all';
       saveState();
       renderExamView(true);
     }
@@ -642,13 +682,6 @@
       chip.addEventListener('click', function() {
         var idx = Number(this.dataset.index);
         jumpTo(idx);
-      });
-      chip.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          var idx = Number(this.dataset.index);
-          jumpTo(idx);
-        }
       });
     });
 
@@ -692,7 +725,7 @@
           }
         }
         if (firstUnans >= 0) {
-          jumpTo(firstUnans);
+          jumpTo(firstUnans, 'incomplete');
         } else {
           alert('All questions have been answered!');
         }
@@ -711,7 +744,7 @@
           }
         }
         if (firstFlagged >= 0) {
-          jumpTo(firstFlagged);
+          jumpTo(firstFlagged, 'flagged');
         } else {
           alert('No questions are currently flagged for review.');
         }
@@ -734,7 +767,8 @@
   }
 
   function showSubmissionModal() {
-    closeSubmissionModal();
+    closeSubmissionModal(false);
+    focusBeforeModal = document.activeElement;
 
     var total = TOTAL_TEST_QUESTIONS;
     var answeredCount = Object.keys(activeAttempt.answers).length;
@@ -784,7 +818,7 @@
     html += '</div>';
 
     modal.innerHTML = html;
-    document.body.appendChild(modal);
+    container.appendChild(modal);
 
     document.getElementById('btnModalCancel').focus();
 
@@ -793,29 +827,33 @@
     });
 
     document.getElementById('btnModalConfirm').addEventListener('click', function() {
-      closeSubmissionModal();
-      submitExam();
+      closeSubmissionModal(false);
+      submitExam(false);
     });
   }
 
-  function closeSubmissionModal() {
+  function closeSubmissionModal(restoreFocus) {
     var modal = document.getElementById('mockSubmitModal');
     if (modal && modal.parentNode) {
       modal.parentNode.removeChild(modal);
     }
+    if (restoreFocus !== false && focusBeforeModal && document.contains(focusBeforeModal)) focusBeforeModal.focus();
+    focusBeforeModal = null;
   }
 
   function autoSubmitExam() {
-    closeSubmissionModal();
+    closeSubmissionModal(false);
     if (!activeAttempt.submitted) {
-      submitExam();
+      submitExam(true);
     }
   }
 
-  function submitExam() {
+  function submitExam(timedOut) {
+    if (activeAttempt.submitted) return;
     if (timerInterval) clearInterval(timerInterval);
     activeAttempt.submitted = true;
     activeAttempt.submittedAt = Date.now();
+    activeAttempt.timedOut = !!timedOut || activeAttempt.submittedAt >= activeAttempt.deadlineTimestamp;
     activeAttempt.reviewMode = false;
     saveState();
     if (isFullscreen()) {
@@ -845,6 +883,9 @@
     var incorrectCount = TOTAL_TEST_QUESTIONS - correctCount;
     var scorePercent = Math.round((correctCount / TOTAL_TEST_QUESTIONS) * 100);
     var isPassed = scorePercent >= PASS_PERCENT;
+    var elapsedSeconds = Math.max(0, Math.floor((Math.min(activeAttempt.submittedAt, activeAttempt.deadlineTimestamp) - activeAttempt.startedAt) / 1000));
+    var elapsedMinutes = Math.floor(elapsedSeconds / 60);
+    var elapsedRemainder = String(elapsedSeconds % 60).padStart(2, '0');
 
     var html = '';
     html += '<div class="question-card" style="border-left: 6px solid ' + (isPassed ? 'var(--correct-border)' : 'var(--wrong-border)') + ';">';
@@ -854,11 +895,11 @@
     html += '        ' + (isPassed ? 'PRACTICE PASS' : 'PRACTICE FAIL') + ' (Threshold: ' + PASS_PERCENT + '%)';
     html += '      </span>';
     html += '      <h2 id="mockViewHeading" tabindex="-1" style="margin-top: 0.5rem; margin-bottom: 0.25rem;">Practice score: ' + correctCount + ' / ' + TOTAL_TEST_QUESTIONS + ' (' + scorePercent + '%)</h2>';
-    html += '      <p class="muted">Proctored practice simulation result. Official exams may require 720/1000 scaled score.</p>';
+    html += '      <p class="muted">' + (activeAttempt.timedOut ? 'Time expired; your answers were submitted automatically. ' : '') + 'Time used: ' + elapsedMinutes + ':' + elapsedRemainder + '. This raw practice percentage is not an official scaled exam score.</p>';
     html += '    </div>';
     html += '    <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">';
     html += '      <button id="btnRetake" class="reveal-btn">Retake Exam ↻</button>';
-    html += '      <button id="btnShare" class="reveal-btn" style="background: var(--code-bg); color: var(--fg); border: 2px solid var(--border);">Share Result 📋</button>';
+    html += '      <button id="btnShare" class="reveal-btn" style="background: var(--code-bg); color: var(--fg); border: 2px solid var(--border);">Copy Full Review 📋</button>';
     html += '    </div>';
     html += '  </div>';
 
@@ -874,7 +915,7 @@
       html += '        <td>' + escapeHtml(dom) + '</td>';
       html += '        <td>' + st.total + '</td>';
       html += '        <td>' + st.correct + '</td>';
-      html += '        <td><strong style="color: ' + (pct >= 70 ? 'var(--correct-fg)' : 'var(--wrong-fg)') + ';">' + pct + '%</strong></td>';
+      html += '        <td><strong style="color: ' + (pct >= PASS_PERCENT ? 'var(--correct-fg)' : 'var(--wrong-fg)') + ';">' + pct + '%</strong></td>';
       html += '      </tr>';
     });
     html += '    </tbody>';
@@ -929,13 +970,47 @@
     });
 
     document.getElementById('btnShare').addEventListener('click', function() {
-      var text = examName + ' practice test result: ' + correctCount + '/' + TOTAL_TEST_QUESTIONS + ' (' + scorePercent + '%). ' + (isPassed ? 'PASSED' : 'NOT YET PASSED') + '. AI Certification Preparation.';
+      var button = this;
+      var text = [
+        examName + ' — full practice test review',
+        'Score: ' + correctCount + '/' + TOTAL_TEST_QUESTIONS + ' (' + scorePercent + '%)',
+        'Practice target: ' + PASS_PERCENT + '% · Time used: ' + elapsedMinutes + ':' + elapsedRemainder,
+        'This is a practice score, not an official scaled exam score.',
+        ''
+      ];
+      activeAttempt.questions.forEach(function(q, index) {
+        var chosen = activeAttempt.answers[q.id];
+        text.push('Question ' + (index + 1) + ': ' + q.prompt);
+        q.options.forEach(function(option) {
+          var marks = [];
+          if (option.id === q.correct) marks.push('Correct answer');
+          if (option.id === chosen) marks.push('Your answer');
+          text.push('  ' + option.id + '. ' + option.text + (marks.length ? ' [' + marks.join('; ') + ']' : ''));
+        });
+        if (!chosen) text.push('  Your answer: Not answered');
+        text.push('Explanation:');
+        text.push(formatExplanationForShare(q.explanation), '');
+      });
+      var report = text.join('\n');
+      function downloadReport() {
+        var url = URL.createObjectURL(new Blob([report], { type: 'text/plain;charset=utf-8' }));
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = examId + '-practice-review.txt';
+        container.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+        button.textContent = 'Full review downloaded ✓';
+      }
       if (navigator.clipboard) {
-        navigator.clipboard.writeText(text).then(function() {
-          alert('Result copied to clipboard:\n\n' + text);
+        navigator.clipboard.writeText(report).then(function() {
+          button.textContent = 'Full review copied ✓';
+        }).catch(function() {
+          downloadReport();
         });
       } else {
-        alert(text);
+        downloadReport();
       }
     });
   }
@@ -995,24 +1070,98 @@
       if (isFlg) {
         html += '      <span style="background: #fef08a; color: #854d0e; padding: 0.1rem 0.4rem; border-radius: 2px; font-weight: bold; font-size: 0.78rem;">⚑ Flagged during test</span>';
       }
-      html += '      <span style="font-weight: bold; padding: 0.15rem 0.5rem; border-radius: 2px; color: #fff; background: ' + (isRight ? 'var(--correct-border)' : 'var(--wrong-border)') + ';">' + (isRight ? '✓ Correct' : '✗ Incorrect') + '</span>';
+      html += '      <span style="font-weight: bold; padding: 0.15rem 0.5rem; border-radius: 2px; color: #fff; background: ' + (isRight ? 'var(--correct-border)' : 'var(--wrong-border)') + ';">' + (isRight ? '✓ Correct' : userAns === 'None' ? 'Not answered' : '✗ Incorrect') + '</span>';
       html += '    </div>';
       html += '  </div>';
 
       html += '  <div style="font-weight: 600; font-size: 1.02rem; margin-bottom: 0.75rem; line-height: 1.5;">' + escapeHtml(q.prompt) + '</div>';
 
-      html += '  <div style="font-size: 0.92rem; margin-bottom: 0.75rem; padding: 0.6rem 0.8rem; background: var(--code-bg); border-radius: 3px;">';
-      html += '    Your answer: <strong style="color: ' + (isRight ? 'var(--correct-fg)' : 'var(--wrong-fg)') + ';">' + userAns + '</strong>';
-      html += '    &nbsp;|&nbsp; Correct answer: <strong style="color: var(--correct-fg);">' + q.correct + '</strong>';
-      html += '  </div>';
+      html += '  <ol class="result-options" aria-label="All answer choices for question ' + (i + 1) + '">';
+      q.options.forEach(function(option) {
+        var selected = option.id === userAns;
+        var correct = option.id === q.correct;
+        var cls = correct ? 'is-correct' : selected ? 'is-incorrect-selection' : '';
+        html += '    <li class="result-option ' + cls + '"><span><strong>' + escapeHtml(option.id) + '.</strong> ' + escapeHtml(option.text) + '</span>';
+        if (correct) html += ' <strong class="result-option-status">✓ Correct answer' + (selected ? ' · Your answer' : '') + '</strong>';
+        else if (selected) html += ' <strong class="result-option-status">✗ Your answer</strong>';
+        html += '</li>';
+      });
+      html += '  </ol>';
 
-      html += '  <div style="font-size: 0.88rem; color: var(--fg); background: var(--code-bg); border-left: 4px solid var(--accent); padding: 0.75rem 1rem; border-radius: 2px; line-height: 1.55;">';
-      html += '    <strong>Explanation:</strong> ' + escapeHtml(q.explanation);
-      html += '  </div>';
+      html += formatExplanation(q.explanation);
       html += '</div>';
     });
 
     listContainer.innerHTML = html;
+  }
+
+  function formatExplanation(raw) {
+    var lines = String(raw || 'No explanation available.').replace(/\r\n?/g, '\n').trim().split(/\n+/);
+    var html = '<section class="result-explanation" aria-label="Explanation"><h4>Explanation</h4>';
+    var inList = false;
+
+    lines.forEach(function(rawLine) {
+      var line = rawLine.trim().replace(/^\*\*Rationale:\*\*\s*/, '');
+      if (!line) return;
+
+      var isPoint = /^[-*]\s+/.test(line);
+      if (isPoint && !inList) {
+        html += '<ul class="result-explanation-points">';
+        inList = true;
+      } else if (!isPoint && inList) {
+        html += '</ul>';
+        inList = false;
+      }
+
+      if (isPoint) {
+        html += '<li>' + formatExplanationInline(line.replace(/^[-*]\s+/, '')) + '</li>';
+      } else if (/^Refs?:\s*/i.test(line)) {
+        html += '<p class="result-explanation-references"><strong>References:</strong> ' + formatExplanationInline(line.replace(/^Refs?:\s*/i, '')) + '</p>';
+      } else {
+        html += '<p>' + formatExplanationInline(line) + '</p>';
+      }
+    });
+
+    if (inList) html += '</ul>';
+    return html + '</section>';
+  }
+
+  function formatExplanationInline(raw) {
+    // Keep source wording while turning its small Markdown subset into readable text.
+    var withoutLinkUrls = stripExplanationLinkUrls(raw);
+    var codeSpans = [];
+    var formatted = escapeHtml(withoutLinkUrls)
+      .replace(/```/g, function() {
+        var index = codeSpans.push('<code>```</code>') - 1;
+        return '\u0001' + index + '\u0001';
+      })
+      .replace(/`([^`]+)`/g, function(match, code) {
+        var index = codeSpans.push('<code>' + code + '</code>') - 1;
+        return '\u0001' + index + '\u0001';
+      })
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\s)_([^_\n]+)_(?=\s|$)/g, '$1<em>$2</em>');
+    return formatted.replace(/\u0001(\d+)\u0001/g, function(match, index) {
+      return codeSpans[Number(index)];
+    });
+  }
+
+  function formatExplanationForShare(raw) {
+    return String(raw || 'No explanation available.')
+      .replace(/^\*\*Rationale:\*\*\s*/i, '')
+      .replace(/^Refs?:\s*/gim, 'References: ')
+      .split('\n')
+      .map(function(line) {
+        return '  ' + stripExplanationLinkUrls(line)
+          .replace(/\*\*([^*]+)\*\*/g, '$1')
+          .replace(/`([^`]+)`/g, '$1')
+          .replace(/^_([^_]+)_/, '$1');
+      })
+      .join('\n');
+  }
+
+  function stripExplanationLinkUrls(raw) {
+    return raw.replace(/\[([^\]]+)\]\(https?:\/\/[^\s)]+\)/g, '$1');
   }
 
   function escapeHtml(str) {

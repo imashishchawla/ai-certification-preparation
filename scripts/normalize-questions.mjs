@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import { validateQuestionBank } from './question-validation.mjs';
 
 const rootDir = process.cwd();
-const outputFilePath = path.join(rootDir, 'data/questions/cca-f/questions.json');
-const staticOutputPath = path.join(rootDir, 'static/data/questions/cca-f/questions.json');
+const outputFilePath = path.join(rootDir, '.data/exams/cca-f/normalized/legacy-source-candidates.json');
 
 const domainNames = {
   d1: 'D1 Agentic Architecture & Orchestration',
@@ -160,12 +160,15 @@ if (fs.existsSync(amey35Path)) {
   });
 }
 
-// Ensure parent dirs exist
-fs.mkdirSync(path.dirname(outputFilePath), { recursive: true });
-fs.mkdirSync(path.dirname(staticOutputPath), { recursive: true });
+const errors = validateQuestionBank(questions, 'cca-f');
+if (errors.length) {
+  errors.slice(0, 20).forEach(error => console.error(error));
+  throw new Error(`Staged candidates failed validation (${errors.length} errors)`);
+}
 
+// Keep legacy-source output in local staging for review before any canonical merge.
+fs.mkdirSync(path.dirname(outputFilePath), { recursive: true });
 const jsonStr = JSON.stringify(questions, null, 2);
 fs.writeFileSync(outputFilePath, jsonStr);
-fs.writeFileSync(staticOutputPath, jsonStr);
 
-console.log(`Normalized ${questions.length} questions into ${outputFilePath} and ${staticOutputPath}`);
+console.log(`Staged ${questions.length} normalized legacy-source candidates at ${outputFilePath}. Published question banks were not changed.`);

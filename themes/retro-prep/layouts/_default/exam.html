@@ -34,7 +34,8 @@
 {{ if $exam.code }}
 <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; padding: 0.75rem 0 1.5rem; font-family: var(--font-heading); font-size: 0.82rem; color: var(--muted); border-bottom: 1px dashed var(--border); margin-bottom: 2rem;">
   {{ if $exam.questions }}<span><strong style="color: var(--fg);">{{ $exam.questions }}</strong> questions</span>{{ end }}
-  {{ if $exam.duration_minutes }}<span><strong style="color: var(--fg);">{{ $exam.duration_minutes }}</strong> min</span>{{ end }}
+  {{ if $exam.duration_minutes }}<span><strong style="color: var(--fg);">{{ $exam.duration_minutes }}</strong> min testing time</span>{{ end }}
+  {{ if $exam.total_seat_minutes }}<span>About <strong style="color: var(--fg);">{{ $exam.total_seat_minutes }}</strong> min total seat time</span>{{ end }}
   {{ if and (eq $exam.status "active") $exam.practice_pass_percent }}<span>Practice target <strong style="color: var(--fg);">{{ $exam.practice_pass_percent }}%</strong></span>{{ end }}
   {{ if $exam.domain_weights }}
   <span><strong style="color: var(--fg);">{{ len $exam.domain_weights }}</strong> exam domains</span>

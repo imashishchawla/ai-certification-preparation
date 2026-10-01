@@ -1,57 +1,49 @@
 # Certification Prep — Practice Library
 
-[![Cyberspace Status](https://img.shields.io/badge/TERMINAL-ONLINE-00FF66?style=for-the-badge&logo=gnubash&logoColor=000)](https://imashishchawla.github.io/ai-certification-preparation/)
-[![Access Tier](https://img.shields.io/badge/ACCESS-100%25%20FREE-FFB000?style=for-the-badge)](https://imashishchawla.github.io/ai-certification-preparation/)
-[![Sync Pulse](https://img.shields.io/badge/SYNC%20PULSE-SUN%2012%3A00%20UTC-00E5FF?style=for-the-badge&logo=githubactions&logoColor=fff)](https://github.com/imashishchawla/ai-certification-preparation/actions)
-[![Question Bank](https://img.shields.io/badge/QUESTION%20DATABASE-1%2C130%20VERIFIED-FF0055?style=for-the-badge)](https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/sample-questions/)
+![Access Tier](https://img.shields.io/badge/ACCESS-100%25%20FREE-FFB000?style=for-the-badge)
+![Sync Pulse](https://img.shields.io/badge/SYNC%20PULSE-SUN%2012%3A00%20UTC-00E5FF?style=for-the-badge&logo=githubactions&logoColor=fff)
+![Question Bank](https://img.shields.io/badge/QUESTION%20DATABASE-1%2C130%20VERIFIED-FF0055?style=for-the-badge)
 
-> Prepare for professional certifications in one place. Find focused study guides, practice questions, exam notes, and timed mock tests, organized into a clear learning path for each available certification.
+> Prepare for professional certifications in one place. Find focused study guides, practice questions, exam notes, and timed mock tests, organised into a clear learning path for each available certification.
 
 ---
 
-### 🌐 Live Cyberspace Terminal
+### 🌐 [**https://imashishchawla.github.io/ai-certification-preparation/**](https://imashishchawla.github.io/ai-certification-preparation/)
 
-**Boot the live website right in your browser:**  
-### 🚀 **[https://imashishchawla.github.io/ai-certification-preparation/](https://imashishchawla.github.io/ai-certification-preparation/)**
-
-- 💾 **100% Free Forever:** No paywalls, no paid courses, no sign-ups, no tracking cookies.
+- 💾 **100% Free :** No paywalls, no paid courses, no sign-ups, no tracking cookies.
 - ⚡ **Weekly Sync Pulse:** Automatically synchronizes, deduplicates, and validates new scenario questions **every Sunday at 12:00 UTC (17:30 IST)**. The weekly metrics report follows on Monday at 08:30 IST.
 - **One place to prepare:** Study material and practice tools are organized by certification track on the website.
 
 ---
 
 <!-- WEEKLY-METRICS:START -->
+
 ### Weekly platform update
 
 The first verified weekly snapshot will appear here after the scheduled report runs.
+
 <!-- WEEKLY-METRICS:END -->
 
 ---
 
-## 📺 Visual Terminal Deck (Screenshots)
+### 1. Interactive Scenario Practice
 
-### 1. The Holo-Deck Command Center
-Explore all certification tracks, track status, exam durations, and domain breakdowns from a single retro dashboard.
-
-![Command Center & Certification Matrix](static/screenshots/home-hub.png)
-
----
-
-### 2. Interactive Scenario Practice (1,130 Questions)
 Filter by domain (D1 to D5), toggle difficulty tiers (`basic`, `intermediate`, `advanced`), test your reflexes, and click **Reveal answer** for comprehensive architectural rationale and official reference links.
 
 ![Interactive Practice Simulator](static/screenshots/sample-questions.png)
 
 ---
 
-### 3. Timed Arcade Mock Exam (Survival Mode)
-Simulate the official proctored experience: 60 randomized questions, 120-minute countdown timer, domain-weighted distribution, and a 72% pass/fail grading protocol.
+### 2. Timed Arcade Mock Exam (Survival Mode)
+
+Simulate the official exam's 60 questions and 120-minute answer period with a domain-weighted practice test. Allow about 135 minutes for total seat time, including check-in, instructions, and the post-exam survey.
 
 ![Timed Mock Exam Simulator](static/screenshots/mock-test.png)
 
 ---
 
-### 4. The Netrunner Archives (Study Guides & Lessons)
+### 4. The Netrunner Archives (Study Guides &amp; Lessons)
+
 Complete 30-lesson structured curriculum, deep architectural breakdowns, 21 Golden Rules, distractor patterns, and master cheat sheets.
 
 ![Study Guides & Domain Lessons](static/screenshots/study-guides.png)
@@ -60,52 +52,24 @@ Complete 30-lesson structured curriculum, deep architectural breakdowns, 21 Gold
 
 ## 💾 Exam Matrix: Published vs. In Pipeline
 
-### 🟢 Active & Operational Now
+### 🟢 Active &amp; Operational Now
 
-#### **Claude Certified Architect — Foundations (CCA-F / CCAR-F)**
+#### **Claude Certified Architect — Foundations (CCAR-F; legacy code CCA-F)**
+
 - **1,130 Interactive Practice Questions:** Full coverage across all 5 official exam domains:
-  - **D1 Agentic Architecture & Orchestration (27%)**
-  - **D2 Tool Design & MCP (18%)**
-  - **D3 Claude Code Config & Workflows (20%)**
-  - **D4 Prompt Engineering & Structured Output (20%)**
-  - **D5 Context Management & Reliability (15%)**
-- **Timed Mock Simulator:** 60 questions, 120 minutes, domain-weighted, score reports.
+  - **D1 Agentic Architecture &amp; Orchestration (27%)**
+  - **D2 Tool Design &amp; MCP (18%)**
+  - **D3 Claude Code Config &amp; Workflows (20%)**
+  - **D4 Prompt Engineering &amp; Structured Output (20%)**
+  - **D5 Context Management &amp; Reliability (15%)**
+- **Timed Mock Simulator:** 60 questions, 120-minute answer period, domain-weighted, with score reports.
 - **30-Lesson Structured Curriculum:** Step-by-step deep dives covering loops, subagents, MCP servers, hooks, context budgeting, and prompt caching.
-- **Master Cheat Sheets & Exam Notes:** 21 Golden Rules, distractor patterns, and the Calm Method scenario heuristics.
-- **Official Documentation & PDF Compendiums:** Curated exam guides and reference material.
+- **Master Cheat Sheets &amp; Exam Notes:** 21 Golden Rules, distractor patterns, and the Calm Method scenario heuristics.
+- **Official Documentation &amp; PDF Compendiums:** Curated exam guides and reference material.
 
 ---
 
-### 🟡 In The Pipeline (Upcoming Missions)
-
-- **Advanced Claude architecture preparation:** A planned study area; exam details will be published only after official confirmation.
-- **Claude developer preparation:** A planned study area for API and SDK topics; exam details will be published only after official confirmation.
-- **Cross-Cloud AI Certifications:** Planned expansion into foundational AI engineering badges across major cloud platforms.
-
----
-
-## 📊 Complete Database Breakdown by Source
-
-Every single question in our bank is normalized, categorized by domain and difficulty, deduplicated, and verified against official specifications.
-
-| Source ID | Source / Topic Description | Count | Percentage |
-|---|---|---:|---:|
-| `cca-prep-170` | Foundations Core Prep Set (170) | 170 | 15.0% |
-| `foundations-prep-35` | Foundations Focused Architecture Question Set (35) | 35 | 3.1% |
-| `architectural-eval-6` | Architectural Evaluation Scenarios (6) | 6 | 0.5% |
-| `cca-prep-170-qu` | Foundations Extended Question Supplement (51) | 51 | 4.5% |
-| `cca-400` | Comprehensive Architecture & Agentic Practice Question Bank (357) | 357 | 31.6% |
-| `associate-prep-50` | Associate Architecture Preparation Suite (50) | 50 | 4.4% |
-| `situational-scenarios-88` | Situational Scenario & Architecture Practice Bank (88) | 88 | 7.8% |
-| `claude-architect-guide-257` | Claude Certified Architect Guide & Domain Drills (246) | 246 | 21.8% |
-| `practice-exam-60` | Timed Mock Practice Exam (60) | 60 | 5.3% |
-| `certyiq` | CertYIQ Practice Question Bank (45) | 45 | 4.0% |
-| `calm-method-patterns` | Calm Method Heuristics & Exam Patterns Practice (22) | 22 | 1.9% |
-| **TOTAL** | **Active Verified Question Bank** | **1,130** | **100.0%** |
-
----
-
-## 🤝 Join the Cyberpunk Crew (Community & Collaborators)
+## 🤝 Join the Team (Community &amp; Collaborators)
 
 Did we miss an architectural scenario, a key exam pattern, or a newly released feature? Found a typo or a glitch in the matrix? 
 
@@ -116,5 +80,7 @@ Did we miss an architectural scenario, a key exam pattern, or a newly released f
 ---
 
 <div align="center">
-  <sub>Built with ♥ for the global developer and AI architect community. 100% Free · Open Knowledge · Cyberpunk Spirit</sub>
+
+  <sub>Built with ♥ </sub>
+
 </div>

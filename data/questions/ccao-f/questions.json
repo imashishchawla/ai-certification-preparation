@@ -1,0 +1,690 @@
+[
+  {
+    "id": "ccao-f-certyiq-001",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a knowledge worker deciding whether to escalate a Claude-generated output. Which is the correct order of decision steps?",
+    "options": [
+      {
+        "id": "A",
+        "text": "3,1,5,4,2"
+      },
+      {
+        "id": "B",
+        "text": "1,3,5,4,2"
+      },
+      {
+        "id": "C",
+        "text": "4, 3, 2, 1, 5"
+      },
+      {
+        "id": "D",
+        "text": "5,1,3,4,2"
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. 3, 1, 5, 4, 2\nIncorrect\nStarting with Step 3 , comparing the risk profile to escalation criteria, is premature. You should first understand the audience and potential impact of an incorrect output before evaluating its risk against escalation criteria.\nB. 1, 3, 5, 4, 2\nCorrect\nThe correct sequence is 1 → 3 → 5 → 4 → 2 .\nFirst, identify the audience and potential impact . Next, compare the output's risk profile with the organization's escalation criteria . Then, assess accuracy, completeness, and unverified claims . Based on these findings, decide whether to use, iterate, or escalate . Finally, document the decision and rationale for traceability.\nC. 4, 3, 2, 1, 5\nIncorrect\nThis sequence begins by deciding what to do before properly assessing the audience, risk, and quality of the AI-generated output. A decision to use, iterate, or escalate should come after the necessary evaluation.\nD. 5, 1, 3, 4, 2\nIncorrect\nAlthough Step 5 —assessing accuracy and completeness—is important, it should not be the first step. The decision process should begin by understanding who will use the output and what the consequences could be if it is wrong .\nFinal Answer: B. 1, 3, 5, 4, 2",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-1",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-002",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are writing system-level instructions for a Project that supports recurring writing tasks. Which step should be performed first when writing the system-level instructions?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Refine the drafted instructions based on observed gaps from validation runs."
+      },
+      {
+        "id": "B",
+        "text": "Validate the drafted instructions against representative requests for the Project."
+      },
+      {
+        "id": "C",
+        "text": "Distribute the finalized instructions to collaborators on the Project."
+      },
+      {
+        "id": "D",
+        "text": "Define the purpose of the Project and the boundaries the instructions must respect."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Refine the drafted instructions based on observed gaps from validation runs\nIncorrect\nRefining instructions should happen after validation . You first need to draft the instructions, test them against representative requests, identify gaps, and then refine them based on the results.\nB. Validate the drafted instructions against representative requests for the Project\nIncorrect\nValidation is an important step, but it should not be performed first. Before testing the instructions, you must clearly establish the purpose of the Project and the boundaries that the instructions need to follow.\nC. Distribute the finalized instructions to collaborators on the Project\nIncorrect\nDistribution should happen after the instructions have been defined, validated, and refined. Sharing unvalidated instructions can lead to inconsistent results and unnecessary rework.\nD. Define the purpose of the Project and the boundaries the instructions must respect\nCorrect\nThe first step is to define the Project's purpose and boundaries . This establishes what the system-level instructions should accomplish, what tasks are in scope, and what limitations or requirements must be respected. Once these foundations are clear, the instructions can be drafted, validated, refined, and eventually shared with collaborators.\nFinal Answer: D. Define the purpose of the Project and the boundaries the instructions must respect",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-2",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-003",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A knowledge worker is explaining how to use feedback to improve Claude-supported work over time. Which description is most accurate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Capture general impressions after each run and apply them as broad prompt rewrites, since broad rewrites cover more potential issues than targeted changes."
+      },
+      {
+        "id": "B",
+        "text": "Capture feedback as an aggregate quality score per run, since aggregate scores show whether quality is improving without requiring detail on individual issues."
+      },
+      {
+        "id": "C",
+        "text": "Capture specific feedback after each run, translate it into targeted prompt or workflow changes, and observe whether subsequent runs improve."
+      },
+      {
+        "id": "D",
+        "text": "Capture feedback only after several runs so patterns emerge from the volume of observations, then apply changes based on the patterns rather than any single run."
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "explanation": "A. Capture general impressions after each run and apply them as broad prompt rewrites, since broad rewrites cover more potential issues than targeted changes.\nIncorrect\nBroad prompt rewrites can introduce unnecessary changes and make it difficult to determine what actually improved or degraded the output. Feedback should be converted into specific, targeted improvements rather than broad rewrites.\nB. Capture feedback as an aggregate quality score per run, since aggregate scores show whether quality is improving without requiring detail on individual issues.\nIncorrect\nAn aggregate score alone does not provide enough information to understand what went wrong or what needs to change . Specific feedback about individual issues is more useful for making effective prompt or workflow improvements.\nC. Capture specific feedback after each run, translate it into targeted prompt or workflow changes, and observe whether subsequent runs improve.\nCorrect\nThe most effective approach is to capture specific feedback after each run , identify the exact issue, and make a targeted change to the prompt or workflow. Then, observe subsequent runs to determine whether the change improves the results. This creates a continuous feedback and improvement cycle.\nD. Capture feedback only after several runs so patterns emerge from the volume of observations, then apply changes based on the patterns rather than any single run.\nIncorrect\nWaiting several runs before capturing feedback can delay important improvements and allow the same problem to continue. Feedback should be captured after each run , while observations are fresh. Individual feedback can then be used for targeted improvements, while patterns across multiple runs can provide additional validation.\nFinal Answer: C. Capture specific feedback after each run, translate it into targeted prompt or workflow changes, and observe whether subsequent runs improve.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-3",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-004",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are an operations assistant asking Claude to summarize 200 weekly metric records across multiple regions. Which output format communicates the data most clearly?",
+    "options": [
+      {
+        "id": "A",
+        "text": "a structured table with one record per row and one metric per column, sorted by region"
+      },
+      {
+        "id": "B",
+        "text": "a narrative summary organized by region, describing trends and notable records in prose"
+      },
+      {
+        "id": "C",
+        "text": "a series of regional narrative briefs, each describing weekly performance in paragraph form"
+      },
+      {
+        "id": "D",
+        "text": "a bulleted list of observations grouped by region without consistent metrics across entries"
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "explanation": "A. A structured table with one record per row and one metric per column, sorted by region\nCorrect\nA structured table is the clearest format for a large set of comparable metric records. Keeping one record per row and one metric per column makes it easy to compare weekly performance across regions, identify trends, and locate specific records. Sorting by region further improves readability and consistency.\nB. A narrative summary organized by region, describing trends and notable records in prose\nIncorrect\nA narrative summary can be useful for explaining major trends, but it is less effective for presenting 200 individual metric records . Important details can become difficult to find and compare when the data is presented primarily as prose.\nC. A series of regional narrative briefs, each describing weekly performance in paragraph form\nIncorrect\nRegional briefs may provide useful context, but paragraph-based reporting makes it harder to perform quick comparisons across weeks, regions, and metrics . A structured format is more appropriate for large amounts of standardized data.\nD. A bulleted list of observations grouped by region without consistent metrics across entries\nIncorrect\nInconsistent metrics make it difficult to compare records reliably. A bulleted list can highlight observations, but it does not provide the consistent structure and comparability needed for 200 weekly metric records.\nFinal Answer: A. A structured table with one record per row and one metric per column, sorted by region",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-4",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-005",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "An analyst has been asked to compute summary statistics from an uploaded sales data file and produce a chart for a weekly report. Which output approach best fits the task?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Code Execution to perform the calculations and generate the chart, then verify the computed results against the source data before sharing the output."
+      },
+      {
+        "id": "B",
+        "text": "Request a narrative description of the data in the chat response without computing values, leaving the summary statistics and the chart unproduced and the weekly report incomplete."
+      },
+      {
+        "id": "C",
+        "text": "Ask Claude to estimate the summary statistics from a brief preview of the file, accepting unverified figures rather than running the calculations against the full uploaded dataset."
+      },
+      {
+        "id": "D",
+        "text": "Produce a written placeholder for the chart in the chat response without generating the actual visualization, leaving the weekly report without the visual output it requires."
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "explanation": "A. Use Code Execution to perform the calculations and generate the chart, then verify the computed results against the source data before sharing the output.\nCorrect\nCode Execution is the appropriate approach when accurate calculations and data visualizations are required. It allows Claude to process the full uploaded dataset , calculate the required summary statistics, and generate the actual chart. The results should then be verified against the source data before being included in the weekly report.\nB. Request a narrative description of the data in the chat response without computing values, leaving the summary statistics and the chart unproduced and the weekly report incomplete.\nIncorrect\nA narrative description does not satisfy the task because the analyst specifically needs computed summary statistics and a chart . The required calculations and visualization should actually be produced rather than replaced with a textual description.\nC. Ask Claude to estimate the summary statistics from a brief preview of the file, accepting unverified figures rather than running the calculations against the full uploaded dataset.\nIncorrect\nEstimating statistics from a preview can produce inaccurate or incomplete results , especially when the file contains many records. Calculations should be performed against the full dataset , and the results should be verified before they are shared.\nD. Produce a written placeholder for the chart in the chat response without generating the actual visualization, leaving the weekly report without the visual output it requires.\nIncorrect\nA written placeholder does not fulfill the requirement to produce a chart . When the report requires a visualization, the actual chart should be generated using the available data and verified before inclusion.\nFinal Answer: A. Use Code Execution to perform the calculations and generate the chart, then verify the computed results against the source data before sharing the output.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-5",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-006",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "An operations assistant is using Claude to support process optimization for an existing intake workflow. The assistant has access to the current process documentation and recent cycle-time data. Which activity best uses Claude to support this process optimization task?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Claude to interview each team member who works on the intake process and synthesize the interview output into a redesigned workflow."
+      },
+      {
+        "id": "B",
+        "text": "Map the current intake process, identify likely bottlenecks based on the cycle-time data, and propose optimization options for human review."
+      },
+      {
+        "id": "C",
+        "text": "Apply Claude to predict the cycle-time impact of each proposed change and rank them so the team can implement improvements in priority order."
+      },
+      {
+        "id": "D",
+        "text": "Generate an optimized version of the intake process based on industry benchmarks, then compare it to the current process to identify gaps."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Use Claude to interview each team member who works on the intake process and synthesize the interview output into a redesigned workflow.\nIncorrect\nClaude can help analyze and synthesize interview responses, but conducting interviews with every team member is not the best use of Claude based on the available process documentation and cycle-time data . The task should begin by analyzing the existing workflow and identifying evidence-based bottlenecks.\nB. Map the current intake process, identify likely bottlenecks based on the cycle-time data, and propose optimization options for human review.\nCorrect\nThis is the best approach because Claude can analyze the existing process documentation and cycle-time data , map the current workflow, identify potential bottlenecks, and suggest practical optimization options. The proposed changes should remain subject to human review and decision-making before implementation.\nC. Apply Claude to predict the cycle-time impact of each proposed change and rank them so the team can implement improvements in priority order.\nIncorrect\nClaude can help analyze potential impacts and compare options, but relying on it to predict and rank cycle-time improvements without sufficient validation can create unsupported assumptions. The safer approach is to first identify bottlenecks and propose options for human evaluation.\nD. Generate an optimized version of the intake process based on industry benchmarks, then compare it to the current process to identify gaps.\nIncorrect\nIndustry benchmarks can provide useful context, but they should not replace analysis of the organization's actual workflow and cycle-time data . An optimization should be grounded first in the current process, observed bottlenecks, and available evidence.\nFinal Answer: B. Map the current intake process, identify likely bottlenecks based on the cycle-time data, and propose optimization options for human review.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-6",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-007",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A knowledge worker is explaining the purpose of an organizational Al governance tramework to a colleague. Which description is most accurate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A governance framework documents the Al policies the organization is legally required to adopt, focusing on regulatory compliance rather than day-to-day use."
+      },
+      {
+        "id": "B",
+        "text": "A governance framework defines the training every employee must complete before using Al tools, with separate equirements for each tool the organization licenses."
+      },
+      {
+        "id": "C",
+        "text": "A governance framework lists the Al tools the organization licenses and the cost of each, so users can pick the most cost-effective tool for each task."
+      },
+      {
+        "id": "D",
+        "text": "A governance framework defines approved tools, allowed data, required reviews, and reporting paths so Al is used consistently and accountably."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. A governance framework documents the AI policies the organization is legally required to adopt, focusing on regulatory compliance rather than day-to-day use.\nIncorrect\nRegulatory compliance can be part of AI governance, but a governance framework is broader than legal requirements alone . It also establishes practical rules for how AI should be used, including data handling, reviews, accountability, and risk management.\nB. A governance framework defines the training every employee must complete before using AI tools, with separate requirements for each tool the organization licenses.\nIncorrect\nEmployee training may be included in an AI governance program, but training requirements alone do not constitute a complete governance framework. Governance also addresses approved tools, permitted data, oversight, review processes, and accountability .\nC. A governance framework lists the AI tools the organization licenses and the cost of each, so users can pick the most cost-effective tool for each task.\nIncorrect\nA list of approved AI tools and their costs may be useful for procurement or tool management, but it does not provide the necessary governance controls . AI governance focuses on responsible and accountable use rather than simply choosing the cheapest tool.\nD. A governance framework defines approved tools, allowed data, required reviews, and reporting paths so AI is used consistently and accountably.\nCorrect\nAn organizational AI governance framework establishes clear rules for responsible and consistent AI use. It can define which tools are approved, what data may be used, when human review is required, and how issues or risks should be reported . This helps ensure AI is used safely, consistently, and with clear accountability.\nFinal Answer: D. A governance framework defines approved tools, allowed data, required reviews, and reporting paths so AI is used consistently and accountably.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-7",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-008",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are organizing connected data sources for a team and must complete the planning steps before authorizingany connection. Which two planning steps must be completed BEFORE authorizing a new Connector? (Select two.) Each correct answer presents part of the solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Decommission any unused legacy Connectors that may still be authorized."
+      },
+      {
+        "id": "B",
+        "text": "Migrate every existing report off the prior data source onto the new Connector."
+      },
+      {
+        "id": "C",
+        "text": "Confirm the data classification of the source and the team's permission to use it."
+      },
+      {
+        "id": "D",
+        "text": "Confirm the Connector is on the approved-vendor list maintained by IT."
+      },
+      {
+        "id": "E",
+        "text": "Train every team member on the new Connector through formal training sessions."
+      }
+    ],
+    "correct": [
+      "C",
+      "D"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Decommission any unused legacy Connectors that may still be authorized\nIncorrect\nDecommissioning unused legacy Connectors may be useful for cleanup and security management , but it is not a required planning step before authorizing a new Connector. The priority is to verify the data and vendor authorization requirements for the new connection.\nB. Migrate every existing report off the prior data source onto the new Connector\nIncorrect\nMigrating existing reports is an implementation or migration activity that may be performed after the Connector has been authorized . It is not a prerequisite for deciding whether the new Connector can be approved.\nC. Confirm the data classification of the source and the team's permission to use it\nCorrect\nBefore authorizing a Connector, the team must understand the classification and sensitivity of the data and confirm that the team has the appropriate permission to access and use it . This helps prevent unauthorized or inappropriate data access.\nD. Confirm the Connector is on the approved-vendor list maintained by IT\nCorrect\nThe Connector should be verified against the organization's approved-vendor list before authorization. This ensures that the connection complies with organizational security, governance, and vendor-management requirements.\nE. Train every team member on the new Connector through formal training sessions\nIncorrect\nTraining may be beneficial before users begin working with a new Connector, but requiring formal training for every team member is not a prerequisite for authorizing the connection. Authorization should first focus on data permissions and approved-vendor status .\nFinal Answer: C and D\nC. Confirm the data classification of the source and the team's permission to use it\nD. Confirm the Connector is on the approved-vendor list maintained by IT",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-8",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-009",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "An HR associate is preparing to use Claude on a sensitive personnel matter. The organization's Al policy explicitly states that information related to ongoing investigations must not be entered into Al tools. Which response best aligns with the policy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Enter the investigation-related information into Claude only after the investigation closes, since the policy applies during the investigation period."
+      },
+      {
+        "id": "B",
+        "text": "Enter a paraphrased version of the investigation-related information that removes identifying details, since paraphrasing addresses the spirit of the policy."
+      },
+      {
+        "id": "C",
+        "text": "Enter the investigation-related information into Claude in an Incognito chat, since Incognito chats do not retain information and therefore fall outside the policy's intent."
+      },
+      {
+        "id": "D",
+        "text": "Refrain from entering investigation-related information into Claude and consult HR leadership for an approved alternative way to handle the matter."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Enter the investigation-related information into Claude only after the investigation closes, since the policy applies during the investigation period.\nIncorrect\nAlthough the policy specifically prohibits using investigation-related information while the investigation is ongoing , this option does not address the appropriate action for the current situation. The associate should follow the policy now and use an approved alternative process rather than planning to use AI later.\nB. Enter a paraphrased version of the investigation-related information that removes identifying details, since paraphrasing addresses the spirit of the policy.\nIncorrect\nParaphrasing does not necessarily make the information acceptable for AI use. The policy states that information related to ongoing investigations must not be entered into AI tools . Removing names or identifying details does not override an explicit organizational restriction.\nC. Enter the investigation-related information into Claude in an Incognito chat, since Incognito chats do not retain information and therefore fall outside the policy's intent.\nIncorrect\nUsing an Incognito chat does not override an organization's AI policy. Data-handling restrictions apply regardless of the chat mode being used. The associate should not enter prohibited investigation information into Claude.\nD. Refrain from entering investigation-related information into Claude and consult HR leadership for an approved alternative way to handle the matter.\nCorrect\nThe associate should follow the organization's AI policy and avoid entering prohibited investigation-related information into Claude. Consulting HR leadership can help identify an approved and appropriate alternative workflow for handling the sensitive matter.\nFinal Answer: D. Refrain from entering investigation-related information into Claude and consult HR leadership for an approved alternative way to handle the matter.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-9",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-010",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are an operations lead mapping production tasks to Claude model strengths to set realistic expectations. Which two production tasks fit Claude's strengths most clearly? (Select two.) Each correct answer presents a complete solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "synthesizing a single executive summary across many long source documents"
+      },
+      {
+        "id": "B",
+        "text": "monitoring a live sensor data stream and flagging anomalies as they occur in real time"
+      },
+      {
+        "id": "C",
+        "text": "drafting a tone-and-audience-aware customer-facing email under human review"
+      },
+      {
+        "id": "D",
+        "text": "issuing a binding legal determination based solely on Claude's analysis of case documents"
+      },
+      {
+        "id": "E",
+        "text": "calculating the precise settlement value of a derivative contract using live market inputs"
+      }
+    ],
+    "correct": [
+      "A",
+      "C"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Synthesizing a single executive summary across many long source documents\nCorrect\nClaude is well suited to analyzing and synthesizing large amounts of text from multiple documents. It can identify key themes, findings, and important details and combine them into a concise executive summary. The final output should still be reviewed by a human for accuracy and completeness.\nB. Monitoring a live sensor data stream and flagging anomalies as they occur in real time\nIncorrect\nReal-time monitoring of continuous sensor data requires specialized stream-processing, monitoring, and anomaly-detection systems . Claude can help interpret or summarize results from such systems, but continuous real-time sensor monitoring is not its clearest production strength.\nC. Drafting a tone-and-audience-aware customer-facing email under human review\nCorrect\nClaude is well suited to drafting and adapting written communication based on tone, audience, and context. Human review is especially appropriate for customer-facing communications to ensure the content is accurate, appropriate, and aligned with organizational requirements.\nD. Issuing a binding legal determination based solely on Claude's analysis of case documents\nIncorrect\nClaude should not be relied upon to make a binding legal determination . Legal decisions can have significant consequences and require qualified human professionals, appropriate legal authority, and careful review.\nE. Calculating the precise settlement value of a derivative contract using live market inputs\nIncorrect\nPrecise financial calculations using live market data require specialized, validated financial systems and reliable real-time inputs. Claude may assist with explanation or analysis, but it should not be treated as the authoritative system for precise settlement calculations.\nFinal Answer: A and C\nA. Synthesizing a single executive summary across many long source documents\nC. Drafting a tone-and-audience-aware customer-facing email under human review",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-10",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-011",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are configuring a new Claude Project for a specific recurring workload Which Project configuration step should be performed first?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add reference materials and instructions that the Project will rely on."
+      },
+      {
+        "id": "B",
+        "text": "Invite collaborators to the Project and confirm the appropriate access levels."
+      },
+      {
+        "id": "C",
+        "text": "Test the configured Project on a representative request from the workload."
+      },
+      {
+        "id": "D",
+        "text": "Define the purpose of the Project and the recurring tasks it must support."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Add reference materials and instructions that the Project will rely on.\nIncorrect\nReference materials and instructions are important for configuring a Project, but they should be added after defining the Project's purpose and scope . Without first identifying the recurring workload, it is difficult to determine which instructions and materials are actually relevant.\nB. Invite collaborators to the Project and confirm the appropriate access levels.\nIncorrect\nCollaborators and access levels should be configured after the Project's purpose and requirements have been established. Inviting users too early can create unnecessary access or require changes later.\nC. Test the configured Project on a representative request from the workload.\nIncorrect\nTesting is an important validation step, but it should happen after the Project has been configured . First, you need to define what the Project is intended to accomplish and which recurring tasks it should support.\nD. Define the purpose of the Project and the recurring tasks it must support.\nCorrect\nThe first step is to define the Project's purpose and recurring workload . This establishes the Project's scope and provides the foundation for selecting appropriate instructions, reference materials, collaborators, and validation requests. Once the purpose is clear, the remaining configuration steps can be performed systematically.\nFinal Answer: D. Define the purpose of the Project and the recurring tasks it must support.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-11",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-012",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a knowledge worker who decomposed a \"draft a board memo\" request into fifteen tiny steps and noticed the output now feels disjointed because related ideas were split apart. Which adjustment is most appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Remove all sequencing so the steps run in random order."
+      },
+      {
+        "id": "B",
+        "text": "Consolidate related steps into fewer cohesive sections that group naturally connected ideas."
+      },
+      {
+        "id": "C",
+        "text": "Combine the original request back into one unstructured sentence."
+      },
+      {
+        "id": "D",
+        "text": "Subdivide each tiny step into ten more tiny steps for additional precision."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. Remove all sequencing so the steps run in random order.\nIncorrect\nRemoving sequencing would make the workflow less organized and predictable . The problem is not that the steps have an order; the problem is that too many related ideas have been separated.\nB. Consolidate related steps into fewer cohesive sections that group naturally connected ideas.\nCorrect\nThe best approach is to combine related steps into cohesive sections . Grouping naturally connected ideas reduces unnecessary fragmentation while preserving the useful structure of the task. This helps Claude produce a more coherent, connected, and logically organized board memo .\nC. Combine the original request back into one unstructured sentence.\nIncorrect\nReturning to one unstructured sentence removes useful task structure and can make the request less clear and harder to execute consistently . The goal is to find the right level of decomposition, not eliminate structure completely.\nD. Subdivide each tiny step into ten more tiny steps for additional precision.\nIncorrect\nAdding even more tiny steps would increase fragmentation and complexity , making it more difficult to keep related ideas together. The appropriate solution is to consolidate related steps rather than further subdivide them.\nFinal Answer: B. Consolidate related steps into fewer cohesive sections that group naturally connected ideas.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-12",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-013",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "A knowledge worker often switches between Claude and another Al service while working on a long-running project. Which Claude feature most directly reduces repetitive context-setting between sessions?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rely on a single static Artifact pasted into each chat as the only continuity mechanism, ignoring the Memory feature that is purpose-built for retaining work-relevant context across sessions."
+      },
+      {
+        "id": "B",
+        "text": "Disable Memory entirely and re-paste the same context paragraphs at the start of every Claude session, even though Memory is designed to retain that context across conversations automatically."
+      },
+      {
+        "id": "C",
+        "text": "Open every Claude session in Incognito mode, which prevents the conversation from contributing to Memory and therefore eliminates the cross-session continuity the project would benefit from."
+      },
+      {
+        "id": "D",
+        "text": "Enable Memory and use the import capability to bring relevant context from the other Al service into Claude as a starting point for the project's work."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Rely on a single static Artifact pasted into each chat as the only continuity mechanism, ignoring the Memory feature that is purpose-built for retaining work-relevant context across sessions.\nIncorrect\nAn Artifact is useful for presenting or working with specific content, but repeatedly pasting it into every session does not provide efficient cross-session continuity. Memory is designed to retain relevant context and reduce repetitive context-setting.\nB. Disable Memory entirely and re-paste the same context paragraphs at the start of every Claude session, even though Memory is designed to retain that context across conversations automatically.\nIncorrect\nDisabling Memory and manually re-entering the same information creates unnecessary repetitive work . When appropriate, Memory can retain relevant information across conversations and reduce the need to repeatedly provide the same context.\nC. Open every Claude session in Incognito mode, which prevents the conversation from contributing to Memory and therefore eliminates the cross-session continuity the project would benefit from.\nIncorrect\nIncognito mode is designed to provide a session without normal conversation history or Memory continuity. Therefore, using it for a long-running project would work against the goal of maintaining context between sessions .\nD. Enable Memory and use the import capability to bring relevant context from the other AI service into Claude as a starting point for the project's work.\nCorrect\nEnabling Memory helps Claude retain relevant work-related context across sessions, reducing repetitive context-setting. Importing relevant context from another AI service can also provide Claude with the necessary background to continue the project more efficiently.\nFinal Answer: D. Enable Memory and use the import capability to bring relevant context from the other AI service into Claude as a starting point for the project's work.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-13",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-014",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a project lead reviewing a teammate's habit of using the same prompt template for every task regardless of type. Which feedback is most warranted?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The habit is ideal because a single template guarantees consistent quality across all task types."
+      },
+      {
+        "id": "B",
+        "text": "The prompting strategy should be adapted to each task type because one template does not produce equally strong outputs across all tasks."
+      },
+      {
+        "id": "C",
+        "text": "The prompting strategy should not change between tasks because adapting it wastes time and adds no value."
+      },
+      {
+        "id": "D",
+        "text": "Task type has no effect on the appropriate prompting strategy."
+      }
+    ],
+    "correct": "B",
+    "questionType": "single_choice",
+    "explanation": "A. The habit is ideal because a single template guarantees consistent quality across all task types.\nIncorrect\nUsing one template for every task does not guarantee consistent quality. Different tasks have different goals, requirements, context, and output formats , so a generic template may not provide Claude with the information needed to produce the best result.\nB. The prompting strategy should be adapted to each task type because one template does not produce equally strong outputs across all tasks.\nCorrect\nPrompting should be adapted to the specific task . For example, a summarization task may require source boundaries and a desired level of detail, while a drafting task may require audience, tone, and format. Tailoring the prompt helps Claude produce more relevant, accurate, and useful outputs .\nC. The prompting strategy should not change between tasks because adapting it wastes time and adds no value.\nIncorrect\nAdapting prompts can require some additional effort, but it often improves output quality and efficiency overall . A task-specific prompt can reduce revisions and make the workflow more effective.\nD. Task type has no effect on the appropriate prompting strategy.\nIncorrect\nTask type directly affects how a prompt should be structured. Different tasks may require different instructions, context, constraints, examples, and output formats , so the prompting strategy should reflect the nature of the task.\nFinal Answer: B. The prompting strategy should be adapted to each task type because one template does not produce equally strong outputs across all tasks.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-14",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-015",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You received a vague request to \"look at our pricing.\" After discovery, the goal is confirmed: produce a structured competitor-pricing summary the team can act on, not new pricing ideas. Which strategy best fits the clarified task?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use a comparative analysis strategy that contrasts the company's pricing against a single named competitor, since pairwise comparison produces the clearest output."
+      },
+      {
+        "id": "B",
+        "text": "Use a divergent brainstorming approach to generate a wide range of possible competitor-pricing observations, then narrow to the most likely ones."
+      },
+      {
+        "id": "C",
+        "text": "Use an open conversational strategy that explores competitor pricing iteratively across several prompts, allowing the structure to emerge from the conversation."
+      },
+      {
+        "id": "D",
+        "text": "Use a research strategy that gathers structured information about competitor pricing, names sources, and notes confidence in each finding."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Use a comparative analysis strategy that contrasts the company's pricing against a single named competitor, since pairwise comparison produces the clearest output.\nIncorrect\nA single-competitor comparison is too narrow for a task that requires a structured competitor-pricing summary . The clarified goal is to gather and organize competitor pricing information rather than limit the analysis to one competitor.\nB. Use a divergent brainstorming approach to generate a wide range of possible competitor-pricing observations, then narrow to the most likely ones.\nIncorrect\nBrainstorming is better suited to generating ideas and possibilities . The task requires factual, structured competitor-pricing information that the team can act on, so research and source-based analysis are more appropriate.\nC. Use an open conversational strategy that explores competitor pricing iteratively across several prompts, allowing the structure to emerge from the conversation.\nIncorrect\nAn open-ended conversation may help during initial discovery, but the goal has already been clarified. The required output is a structured summary , so the strategy should explicitly focus on gathering, organizing, sourcing, and assessing competitor-pricing information.\nD. Use a research strategy that gathers structured information about competitor pricing, names sources, and notes confidence in each finding.\nCorrect\nA research strategy best matches the clarified task. It focuses on collecting structured competitor-pricing information, identifying sources , and indicating the confidence or reliability of each finding. This produces an actionable summary while helping the team distinguish verified information from uncertain or incomplete data.\nFinal Answer: D. Use a research strategy that gathers structured information about competitor pricing, names sources, and notes confidence in each finding.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-15",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-016",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are an HR specialist reviewing data items proposed for inclusion in a Claude prompt. Which two data items are appropriate to include in a Claude prompt for a routine task? (Select two.) Each correct answer presents a complete solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "A redacted job description that the model will adapt for a posting."
+      },
+      {
+        "id": "B",
+        "text": "Accommodation request notes from an employee's HR file needed to draft a role-adjustment memo."
+      },
+      {
+        "id": "C",
+        "text": "Employee identification numbers and hire dates for the team roster included to help Claude personalize onboarding communications."
+      },
+      {
+        "id": "D",
+        "text": "A compensation-band summary that includes employee names and current salary figures for a specific team."
+      },
+      {
+        "id": "E",
+        "text": "An anonymized summary of an HR policy that the model will rephrase."
+      }
+    ],
+    "correct": [
+      "A",
+      "E"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. A redacted job description that the model will adapt for a posting.\nCorrect\nA redacted job description is appropriate for a routine AI-assisted writing task because it can provide the necessary role information without exposing unnecessary sensitive employee information. Claude can use it to adapt or rewrite the content for a job posting.\nB. Accommodation request notes from an employee's HR file needed to draft a role-adjustment memo.\nIncorrect\nAccommodation request notes can contain highly sensitive personal and employment information . Such information should not be entered into Claude for a routine task unless the organization's policies specifically authorize that use and appropriate protections are in place.\nC. Employee identification numbers and hire dates for the team roster included to help Claude personalize onboarding communications.\nIncorrect\nEmployee identification numbers and hire dates are personal employee information and are unnecessary for most onboarding-writing tasks. Claude can draft personalized communications using non-sensitive placeholders or generalized information instead.\nD. A compensation-band summary that includes employee names and current salary figures for a specific team.\nIncorrect\nEmployee names combined with current salary information constitute sensitive personnel and compensation data . This information is unnecessary for a routine prompt and should not be included when a less sensitive, aggregated or anonymized alternative can accomplish the task.\nE. An anonymized summary of an HR policy that the model will rephrase.\nCorrect\nAn anonymized HR policy summary is appropriate because it provides Claude with the content needed for the rewriting task without exposing identifiable employee information. This follows the principle of using the minimum necessary data for the task.\nFinal Answer: A and E\nA. A redacted job description that the model will adapt for a posting.\nE. An anonymized summary of an HR policy that the model will rephrase.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-16",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-017",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a marketing manager using Claude to ideate concepts for a campaign and must complete the framing steps before generating concepts. Which two framing steps must be completed BEFORE asking Claude to generate concepts? (Select two.) Each correct answer presents part of the solution.",
+    "options": [
+      {
+        "id": "A",
+        "text": "Review the Claude-generated concepts and select the two strongest for further development."
+      },
+      {
+        "id": "B",
+        "text": "Define the brand voice and the audience the concepts will address."
+      },
+      {
+        "id": "C",
+        "text": "Define the goal of the campaign and its success metrics."
+      },
+      {
+        "id": "D",
+        "text": "Select a finalist concept and prepare it for stakeholder approval."
+      },
+      {
+        "id": "E",
+        "text": "Schedule the campaign launch and rollout dates with the agency."
+      }
+    ],
+    "correct": [
+      "B",
+      "C"
+    ],
+    "questionType": "multiple_choice",
+    "explanation": "A. Review the Claude-generated concepts and select the two strongest for further development.\nIncorrect\nReviewing and selecting concepts happens after Claude has generated the ideas . It is part of the evaluation and refinement stage, not the initial framing stage.\nB. Define the brand voice and the audience the concepts will address.\nCorrect\nDefining the brand voice and target audience provides Claude with important context for generating relevant campaign concepts. It helps ensure the ideas match the organization's communication style and are appropriate for the intended audience.\nC. Define the goal of the campaign and its success metrics.\nCorrect\nThe campaign's goal and success metrics should be established before generating concepts. These criteria give Claude a clear direction and provide a basis for later evaluating whether the proposed concepts support the campaign objectives.\nD. Select a finalist concept and prepare it for stakeholder approval.\nIncorrect\nSelecting a finalist is a later-stage activity that occurs after concepts have been generated and evaluated. It is not part of the initial framing process.\nE. Schedule the campaign launch and rollout dates with the agency.\nIncorrect\nLaunch scheduling is an implementation and planning activity that generally occurs after the campaign direction and concept have been selected. It is not required before asking Claude to generate initial concepts.\nFinal Answer: B and C\nB. Define the brand voice and the audience the concepts will address.\nC. Define the goal of the campaign and its success metrics.",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-17",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-018",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a product designer using Claude in a solution-design exercise. Which solution-design step should be performed first when using Claude?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Generate candidate solution concepts using Claude across diverse styles."
+      },
+      {
+        "id": "B",
+        "text": "Produce detailed mock-ups of the chosen solution for stakeholder review."
+      },
+      {
+        "id": "C",
+        "text": "Compare the candidate concepts against the constraints and select a finalist."
+      },
+      {
+        "id": "D",
+        "text": "Articulate the problem the solution must address and the constraints in play."
+      }
+    ],
+    "correct": "D",
+    "questionType": "single_choice",
+    "explanation": "A. Generate candidate solution concepts using Claude across diverse styles.\nIncorrect\nGenerating concepts should happen after the problem and constraints have been clearly defined . Without a clear understanding of the problem, Claude may produce ideas that are creative but do not address the actual requirements.\nB. Produce detailed mock-ups of the chosen solution for stakeholder review.\nIncorrect\nDetailed mock-ups are a later-stage design activity . A solution must first be defined and selected before investing effort in detailed visual representations or prototypes.\nC. Compare the candidate concepts against the constraints and select a finalist.\nIncorrect\nCandidate concepts need to exist before they can be compared and evaluated. Therefore, this step comes after problem framing and concept generation , not at the beginning.\nD. Articulate the problem the solution must address and the constraints in play.\nCorrect\nThe first step is to clearly define the problem and identify the relevant constraints . This gives Claude the context needed to generate useful solution concepts and ensures that later ideas can be evaluated against the actual requirements.\nFinal Answer: D. Articulate the problem the solution must address and the constraints in play. ✅",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-18",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-019",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are a customer-success manager considering whether to escalate a Claude-generated response. Which factor most strongly raises the impact of the output and supports escalation before external use?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The response is an internal draft summarizing the associate's notes from a customer call for their own reference."
+      },
+      {
+        "id": "B",
+        "text": "The response is a brief internal announcement about an upcoming team all-hands meeting."
+      },
+      {
+        "id": "C",
+        "text": "The response is an unchanged draft for a paying customer that includes a service-level commitment."
+      },
+      {
+        "id": "D",
+        "text": "The response is a casual rephrasing of an internal team status update."
+      }
+    ],
+    "correct": "C",
+    "questionType": "single_choice",
+    "explanation": "A. The response is an internal draft summarizing the associate's notes from a customer call for their own reference.\nIncorrect\nThis is an internal reference document and is not being sent directly to the customer. Because the potential external impact is relatively low, it generally does not create the same level of escalation need as a customer-facing commitment.\nB. The response is a brief internal announcement about an upcoming team all-hands meeting.\nIncorrect\nAn internal announcement about a routine team event has limited impact if an error occurs . It does not create a significant customer, contractual, or business commitment that would normally require escalation.\nC. The response is an unchanged draft for a paying customer that includes a service-level commitment.\nCorrect\nA customer-facing response containing a service-level commitment has a significantly higher impact because it may create expectations or commitments toward a paying customer. Before external use, the response should receive appropriate human review or escalation , particularly if Claude generated the commitment.\nD. The response is a casual rephrasing of an internal team status update.\nIncorrect\nA casual internal rephrasing generally has low external and business impact . Since it does not create a customer-facing commitment or significant decision, it is less likely to require escalation.\nFinal Answer: C. The response is an unchanged draft for a paying customer that includes a service-level commitment. ✅",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-19",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  },
+  {
+    "id": "ccao-f-certyiq-020",
+    "exam": "ccao-f",
+    "domain": "D0 Pending objective mapping",
+    "prompt": "You are reviewing a Claude-generated report whose tone is confident throughout. Which question best separates plausibility from verification?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Can each specific claim be traced to a credible source or to the supplied input material?"
+      },
+      {
+        "id": "B",
+        "text": "Does the response cover the topic comprehensively based on its length and section count?"
+      },
+      {
+        "id": "C",
+        "text": "Does the response open with a clear, well-framed statement of the main finding?"
+      },
+      {
+        "id": "D",
+        "text": "Does the response use varied sentence structure across sections?"
+      }
+    ],
+    "correct": "A",
+    "questionType": "single_choice",
+    "explanation": "A. Can each specific claim be traced to a credible source or to the supplied input material?\nCorrect\nA confident or plausible-sounding response is not necessarily accurate. The strongest way to verify the report is to determine whether each specific claim can be supported by a credible source or the provided source material . This helps distinguish information that merely sounds reasonable from information that has actually been verified.\nB. Does the response cover the topic comprehensively based on its length and section count?\nIncorrect\nLength and the number of sections do not prove that the information is accurate. A long and detailed report can still contain unsupported or incorrect claims .\nC. Does the response open with a clear, well-framed statement of the main finding?\nIncorrect\nA clear opening improves communication and readability , but it does not verify whether the report's claims are true. Verification requires checking the claims against reliable evidence.\nD. Does the response use varied sentence structure across sections?\nIncorrect\nSentence variety is a matter of writing quality and style , not factual verification. A well-written response can still contain inaccurate or unsupported information.\nFinal Answer: A. Can each specific claim be traced to a credible source or to the supplied input material?",
+    "sourceId": "certyiq-ccao-f",
+    "sourceLocator": ".data/exams/cca-f/raw/mock-exams-questions/certyiq-cca-f/ccao-f.json#question-20",
+    "sourceHash": "sha256:2edc56b7124e609fb57ac5b96824d9616551c3fb59e37bd90f7fde8da773e10a",
+    "status": "pending-review",
+    "reviewStatus": "needs-review",
+    "mockEligible": false
+  }
+]
