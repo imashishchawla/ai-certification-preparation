@@ -24,6 +24,37 @@ The [official exam guide](/ai-certification-preparation/exams/cca-f/study-materi
 
 **Fast question method:** (1) Name the scenario and required outcome. (2) Mark any hard constraint: latency, policy, context, cost, or output shape. (3) Choose the control that enforces that constraint. (4) Eliminate answers that merely ask the model to remember it.
 
+## Model Family Selection: Haiku vs. Sonnet vs. Opus
+
+The exam frequently tests selecting the optimal model tier based on latency, cost, and cognitive reasoning complexity.
+
+| Model Tier | Primary Architectural Role | When It Is the WINNING Choice | When It Is a DISTRACTOR (Trap) |
+| :--- | :--- | :--- | :--- |
+| **Claude Haiku** | **Fast, Low-Cost Tier**<br>• High-volume triage<br>• Initial routing & classification<br>• Lightweight validation | • 100,000+ daily incoming support tickets to triage.<br>• Fast pre-filtering before invoking specialist agents.<br>• Simple schema format checks & regex alternatives.<br>• Tight latency budgets (sub-second SLAs). | • Complex multi-step dynamic task decomposition.<br>• Deep synthesis of conflicting multi-source filings.<br>• Large monorepo refactoring and AST analysis. |
+| **Claude Sonnet** | **Balanced Workhorse Tier**<br>• Primary coding agent<br>• Agentic tool calling loops<br>• Claude Code CLI execution | • Default choice for Claude Code CLI and CI/CD pipelines.<br>• Multi-turn tool execution loops (calling MCP tools).<br>• PR code review and test generation.<br>• Balanced cost/speed/intelligence profile. | • Extremely high-volume simple categorization (use Haiku).<br>• Highly speculative edge-case legal synthesis where cost is no object (use Opus). |
+| **Claude Opus** | **Deep Reasoning Tier**<br>• High-ambiguity synthesis<br>• Multi-agent coordinator<br>• Complex system architecture | • Executive synthesis resolving contradictory evidence.<br>• Strategic task decomposition of vague problems.<br>• High-stakes compliance where edge-case accuracy overrides speed and cost. | • High-throughput real-time user chat (too slow/costly).<br>• Automated linting and basic formatting in CI/CD.<br>• Simple CRUD tool calling. |
+
+## Claude Code Extensibility: Enforcement Hierarchy
+
+Domain 2 and Domain 3 test where rules and tools should live across operating systems and CI/CD pipelines.
+
+| Mechanism | Location | Scope / Loading | Enforcement Level | Architectural Fit |
+| :--- | :--- | :--- | :--- | :--- |
+| **`CLAUDE.md`** | Root project directory | Session start (repo-wide) | **Soft (Probabilistic)** | Shared coding style, project overview, architectural conventions. |
+| **`.claude/rules/*.md`** | `.claude/rules/` | Path-scoped via `globs` | **Soft (Targeted)** | Language-specific rules in monorepos (e.g. `globs: ["services/api/**/*.go"]`). Preserves context. |
+| **`Hooks`** | `~/.claude/settings.json` | `PreToolUse`, `PostToolUse` | **Hard (Deterministic)** | Mandatory shell enforcement: auto-formatters, linters, blocking unauthorized file mutations. |
+| **`Skills`** | `.claude/skills/<name>/SKILL.md` | On-demand (`/skill-name`) | Variable | Reusable multi-step workflows. Loads on-demand to save context tokens (replaces legacy `.claude/commands/`). |
+| **`Subagents`** | Coordinator prompt / SDK | Isolated sub-process | **Context-Isolated** | Complex tasks requiring dedicated tools and scratchpad memory; uses `context: fork`. |
+
+## MCP Across Operating Systems & CI/CD Pipelines
+
+| MCP Primitive | Protocol Function | When to Use on Exam |
+| :--- | :--- | :--- |
+| **`Tools`** | Executable functions with side-effects or dynamic queries | When the model needs to query an external database, execute a shell script, or mutate state. |
+| **`Resources`** | Read-only static/dynamic data or document catalogs | Exposing browsable schemas, API docs, or static catalogs without burning extra tool-call turns. |
+| **`Prompts`** | Pre-defined interactive templates | Standardized user-facing prompt workflows. |
+| **Configuration** | Project `.mcp.json` vs User `~/.claude.json` | Always pass credentials via **environment variable expansion** (`${API_KEY}`). Never commit plain-text tokens. |
+
 ## D1 · Agentic architecture & orchestration
 
 | If the question describes… | Choose or check… | Watch for… |
