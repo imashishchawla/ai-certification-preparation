@@ -101,9 +101,9 @@ layout: "single"
 
 <div class="card-grid">
   <a href="/ai-certification-preparation/exams/cca-f/sample-questions/" class="card" style="border-left: 6px solid var(--accent);">
-    <span class="tag">PRACTICE (1,130 Qs)</span>
+    <span class="tag">PRACTICE (1,188 Qs)</span>
     <h3>Sample Questions (Domain Categorized)</h3>
-    <p>Browse 1,130 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
+    <p>Browse 1,188 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
   </a>
 
   <a href="/ai-certification-preparation/exams/cca-f/mock-test/" class="card" style="border-left: 6px solid var(--focus-ring);">
