@@ -155,6 +155,62 @@
     });
   }
 
+  function formatScenarioHtml(text) {
+    if (!text) return '';
+    var escaped = escapeHtml(text);
+    // Format `code` snippets
+    escaped = escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
+    // Format **bold**
+    escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Split into paragraphs on double newline, or <br> on single newline
+    var paragraphs = escaped.split(/\n\s*\n/);
+    return paragraphs.map(function(p) {
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+  }
+
+  function extractQuestionSections(q) {
+    // 1. Explicit scenario field
+    if (q.scenario && typeof q.scenario === 'string' && q.scenario.trim().length > 0) {
+      return {
+        topicBrief: q.topicBrief || q.scenarioTitle || (q.scenarioTag ? 'Topic Brief: ' + q.scenarioTag : 'Topic Brief & System Context'),
+        roleContext: q.roleContext || 'Role: AI Systems Architect / Engineer',
+        scenarioText: q.scenario.trim(),
+        questionPrompt: q.prompt.trim()
+      };
+    }
+
+    // 2. Format: Scenario: <Topic>. Situation: <Text>. <Question>?
+    var m1 = q.prompt.match(/^Scenario:\s*(.+?)\.\s*Situation:\s*(.+?)\.\s*([A-Z][^.!?]*\?)$/is);
+    if (m1) {
+      return {
+        topicBrief: 'Topic Brief: ' + m1[1].trim(),
+        roleContext: 'Role: AI Architect Handling Claude SDK & CLI',
+        scenarioText: 'Situation:\n' + m1[2].trim() + '.',
+        questionPrompt: m1[3].trim()
+      };
+    }
+
+    // 3. Format: "You are an engineer / architect..." or "A team / company is..."
+    var m2 = q.prompt.match(/^((?:You are|An? |Your |A company|A client|In a |Consider a )[\s\S]+?\.\s*)(Which|What|How|Why|Select|Identify|Where|Choose)\b([\s\S]+)$/i);
+    if (m2 && m2[1].length > 70) {
+      return {
+        topicBrief: q.scenarioTag ? 'Topic Brief: ' + q.scenarioTag : 'Topic Brief & Scenario Context',
+        roleContext: 'Role: AI Systems Engineer / Architect',
+        scenarioText: m2[1].trim(),
+        questionPrompt: (m2[2] + m2[3]).trim()
+      };
+    }
+
+    // 4. General question: provide domain context brief on left
+    return {
+      topicBrief: 'Topic Brief: ' + (q.domain || 'Claude Architecture Foundations'),
+      roleContext: 'Role: Claude Certified Architect (CCAR-F)',
+      scenarioText: 'You are an AI Solutions Architect designing, configuring, and troubleshooting production-grade agentic systems with the Claude Agent SDK, Claude Code CLI, and the Model Context Protocol (MCP).\n\nEvaluate the following architectural requirement according to Anthropic production best practices and deterministic safety boundaries.',
+      questionPrompt: q.prompt.trim()
+    };
+  }
+
   function loadQuestions(url) {
     return fetch(url).then(function(res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -416,13 +472,32 @@
     html += '  </div>';
     html += '</div>';
 
-    // Question Card - Strictly ZERO SPOILERS (No domain, no difficulty!)
-    html += '<div class="question-card">';
-    html += '  <h2 id="mockViewHeading" tabindex="-1" class="question-prompt" style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 1.5rem;">';
-    html += '    Question ' + (idx + 1) + '. ' + escapeHtml(q.prompt);
-    html += '  </h2>';
+    var sections = extractQuestionSections(q);
 
-    html += '  <div class="options-list" role="radiogroup" aria-label="Answers for question ' + (idx + 1) + '">';
+    // Two-Section Pearson VUE Split Layout: Left ~30% Topic Brief, Right ~70% Question
+    html += '<div class="exam-split-layout">';
+
+    // Left Section: Topic Brief & Scenario Context
+    html += '  <aside class="exam-scenario-pane" aria-label="Topic Brief & System Context">';
+    html += '    <div class="exam-scenario-header">';
+    html += '      <span class="exam-scenario-badge">' + escapeHtml(sections.topicBrief) + '</span>';
+    html += '      <span class="exam-scenario-role">' + escapeHtml(sections.roleContext) + '</span>';
+    html += '    </div>';
+    html += '    <div class="exam-scenario-content">';
+    html += '      ' + formatScenarioHtml(sections.scenarioText);
+    html += '    </div>';
+    html += '  </aside>';
+
+    // Right Section: Question & Options
+    html += '  <main class="exam-question-pane">';
+    html += '    <div class="question-header">';
+    html += '      <span class="question-domain">Question ' + (idx + 1) + ' of ' + total + '</span>';
+    html += '    </div>';
+    html += '    <h2 id="mockViewHeading" tabindex="-1" class="question-prompt" style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 1.5rem;">';
+    html += '      ' + escapeHtml(sections.questionPrompt);
+    html += '    </h2>';
+
+    html += '    <div class="options-list" role="radiogroup" aria-label="Answers for question ' + (idx + 1) + '">';
     var currentAnswer = activeAttempt.answers[q.id];
     q.options.forEach(function(opt) {
       var optKey = opt.id || opt.key;
@@ -433,27 +508,28 @@
       html += '      <span>' + escapeHtml(opt.text) + '</span>';
       html += '    </label>';
     });
-    html += '  </div>';
-
-    // Bottom Navigation Bar
-    html += '  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; border-top: 1px dashed var(--border); padding-top: 1.25rem;">';
-    if (previousIndex !== undefined) {
-      html += '    <button id="btnPrev" class="reveal-btn">◄ Previous [Alt+P]</button>';
-    } else {
-      html += '    <div></div>';
-    }
-
-    html += '    <div style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--muted);">';
-    html += '      Progress: ' + Math.round(((idx + 1) / total) * 100) + '% &nbsp;(' + answeredCount + '/' + total + ')';
     html += '    </div>';
 
-    if (nextIndex !== undefined) {
-      html += '    <button id="btnNext" class="reveal-btn">Next ► [Alt+N]</button>';
+    // Bottom Navigation Bar
+    html += '    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; border-top: 1px dashed var(--border); padding-top: 1.25rem;">';
+    if (previousIndex !== undefined) {
+      html += '      <button id="btnPrev" class="reveal-btn">◄ Previous [Alt+P]</button>';
     } else {
-      html += '    <button id="btnFinish" class="reveal-btn" style="background: var(--accent); color: var(--accent-contrast);">Review Screen ▤</button>';
+      html += '      <div></div>';
     }
 
-    html += '  </div>';
+    html += '      <div style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--muted);">';
+    html += '        Progress: ' + Math.round(((idx + 1) / total) * 100) + '% &nbsp;(' + answeredCount + '/' + total + ')';
+    html += '      </div>';
+
+    if (nextIndex !== undefined) {
+      html += '      <button id="btnNext" class="reveal-btn">Next ► [Alt+N]</button>';
+    } else {
+      html += '      <button id="btnFinish" class="reveal-btn" style="background: var(--accent); color: var(--accent-contrast);">Review Screen ▤</button>';
+    }
+
+    html += '    </div>';
+    html += '  </main>';
     html += '</div>';
 
     container.innerHTML = html;

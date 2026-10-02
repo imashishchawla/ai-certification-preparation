@@ -368,6 +368,96 @@ th {
   border: 2px solid var(--wrong-border) !important;
 }
 
+/* Pearson VUE Split Screen Layout (Left ~30% Topic Brief, Right ~70% Question) */
+.exam-split-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 32%) 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+}
+
+.exam-scenario-pane {
+  background: var(--code-bg);
+  border: 2px solid var(--border);
+  box-shadow: 4px 4px 0 var(--border);
+  border-radius: 2px;
+  padding: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  position: sticky;
+  top: 4.5rem;
+}
+
+.exam-scenario-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.exam-scenario-badge {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--card);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+.exam-scenario-role {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--fg);
+}
+
+.exam-scenario-content {
+  color: var(--fg);
+}
+
+.exam-scenario-content p {
+  margin: 0 0 0.75rem;
+}
+
+.exam-scenario-content code {
+  font-family: var(--font-mono);
+  background: var(--card);
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.85em;
+}
+
+.exam-question-pane {
+  background: var(--card);
+  border: 2px solid var(--border);
+  box-shadow: 4px 4px 0 var(--border);
+  border-radius: 2px;
+  padding: 1.5rem;
+}
+
+@media (max-width: 860px) {
+  .exam-split-layout {
+    grid-template-columns: 1fr;
+  }
+  .exam-scenario-pane {
+    position: static;
+    max-height: none;
+    margin-bottom: 1rem;
+  }
+}
+
 .badge-correct {
   margin-left: auto;
   font-family: var(--font-heading);
