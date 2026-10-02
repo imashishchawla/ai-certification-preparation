@@ -139,62 +139,6 @@
     return filtered;
   }
 
-  function formatScenarioHtml(text) {
-    if (!text) return '';
-    var escaped = escapeHtml(text);
-    // Format `code` snippets
-    escaped = escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
-    // Format **bold**
-    escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    // Split into paragraphs on double newline, or <br> on single newline
-    var paragraphs = escaped.split(/\n\s*\n/);
-    return paragraphs.map(function(p) {
-      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
-    }).join('');
-  }
-
-  function extractQuestionSections(q) {
-    // 1. Explicit scenario field
-    if (q.scenario && typeof q.scenario === 'string' && q.scenario.trim().length > 0) {
-      return {
-        topicBrief: q.topicBrief || q.scenarioTitle || (q.scenarioTag ? 'Topic Brief: ' + q.scenarioTag : 'Topic Brief & System Context'),
-        roleContext: q.roleContext || 'Role: AI Systems Architect / Engineer',
-        scenarioText: q.scenario.trim(),
-        questionPrompt: q.prompt.trim()
-      };
-    }
-
-    // 2. Format: Scenario: <Topic>. Situation: <Text>. <Question>?
-    var m1 = q.prompt.match(/^Scenario:\s*(.+?)\.\s*Situation:\s*(.+?)\.\s*([A-Z][^.!?]*\?)$/is);
-    if (m1) {
-      return {
-        topicBrief: 'Topic Brief: ' + m1[1].trim(),
-        roleContext: 'Role: AI Architect Handling Claude SDK & CLI',
-        scenarioText: 'Situation:\n' + m1[2].trim() + '.',
-        questionPrompt: m1[3].trim()
-      };
-    }
-
-    // 3. Format: "You are an engineer / architect..." or "A team / company is..."
-    var m2 = q.prompt.match(/^((?:You are|An? |Your |A company|A client|In a |Consider a )[\s\S]+?\.\s*)(Which|What|How|Why|Select|Identify|Where|Choose)\b([\s\S]+)$/i);
-    if (m2 && m2[1].length > 70) {
-      return {
-        topicBrief: q.scenarioTag ? 'Topic Brief: ' + q.scenarioTag : 'Topic Brief & Scenario Context',
-        roleContext: 'Role: AI Systems Engineer / Architect',
-        scenarioText: m2[1].trim(),
-        questionPrompt: (m2[2] + m2[3]).trim()
-      };
-    }
-
-    // 4. General question: provide domain context brief on left
-    return {
-      topicBrief: 'Topic Brief: ' + (q.domain || 'Claude Architecture Foundations'),
-      roleContext: 'Role: Claude Certified Architect (CCAR-F)',
-      scenarioText: 'You are an AI Solutions Architect designing, configuring, and troubleshooting production-grade agentic systems with the Claude Agent SDK, Claude Code CLI, and the Model Context Protocol (MCP).\n\nEvaluate the following architectural requirement according to Anthropic production best practices and deterministic safety boundaries.',
-      questionPrompt: q.prompt.trim()
-    };
-  }
-
   function renderQuestions() {
     var filtered = getFilteredQuestions();
     var totalQuestions = filtered.length;
@@ -217,49 +161,32 @@
     var html = '';
     pageItems.forEach(function(q, idx) {
       var globalIndex = startIndex + idx + 1;
-      var sections = extractQuestionSections(q);
-
-      html += '<div class="exam-split-layout" id="q-card-' + q.id + '">';
-
-      // Left Section: Topic Brief & Scenario Context
-      html += '  <aside class="exam-scenario-pane" aria-label="Topic Brief & System Context">';
-      html += '    <div class="exam-scenario-header">';
-      html += '      <span class="exam-scenario-badge">' + escapeHtml(sections.topicBrief) + '</span>';
-      html += '      <span class="exam-scenario-role">' + escapeHtml(sections.roleContext) + '</span>';
-      html += '    </div>';
-      html += '    <div class="exam-scenario-content">';
-      html += '      ' + formatScenarioHtml(sections.scenarioText);
-      html += '    </div>';
-      html += '  </aside>';
-
-      // Right Section: Question & Options
-      html += '  <main class="exam-question-pane">';
-      html += '    <div class="question-header">';
-      html += '      <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
-      html += '      <span>[' + (q.difficulty || 'intermediate') + ']</span>';
-      html += '    </div>';
+      html += '<div class="question-card" id="q-card-' + q.id + '">';
+      html += '  <div class="question-header">';
+      html += '    <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
+      html += '    <span>[' + (q.difficulty || 'intermediate') + ']</span>';
+      html += '  </div>';
       
       if (q.title) {
-        html += '    <div style="font-weight: bold; font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 0.5rem;">' + escapeHtml(q.title) + '</div>';
+        html += '  <div style="font-weight: bold; font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 0.5rem;">' + escapeHtml(q.title) + '</div>';
       }
 
-      html += '    <div class="question-prompt">' + globalIndex + '. ' + escapeHtml(sections.questionPrompt) + '</div>';
-      html += '    <div class="options-list">';
+      html += '  <div class="question-prompt">' + globalIndex + '. ' + escapeHtml(q.prompt) + '</div>';
+      html += '  <div class="options-list">';
       
       q.options.forEach(function(opt) {
-        html += '      <label class="option-label" id="opt-' + q.id + '-' + opt.id + '">';
-        html += '        <input type="radio" name="input-' + q.id + '" value="' + opt.id + '">';
-        html += '        <span class="option-letter">' + opt.id + '.</span>';
-        html += '        <span>' + escapeHtml(opt.text) + '</span>';
-        html += '      </label>';
+        html += '    <label class="option-label" id="opt-' + q.id + '-' + opt.id + '">';
+        html += '      <input type="radio" name="input-' + q.id + '" value="' + opt.id + '">';
+        html += '      <span class="option-letter">' + opt.id + '.</span>';
+        html += '      <span>' + escapeHtml(opt.text) + '</span>';
+        html += '    </label>';
       });
 
-      html += '    </div>';
-      html += '    <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '" aria-expanded="false" aria-controls="exp-' + q.id + '">Reveal answer</button>';
-      html += '    <div class="explanation-box" id="exp-' + q.id + '" hidden>';
-      html += '      <strong>Rationale:</strong> ' + escapeHtml(q.explanation);
-      html += '    </div>';
-      html += '  </main>';
+      html += '  </div>';
+      html += '  <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '" aria-expanded="false" aria-controls="exp-' + q.id + '">Reveal answer</button>';
+      html += '  <div class="explanation-box" id="exp-' + q.id + '" hidden>';
+      html += '    <strong>Rationale:</strong> ' + escapeHtml(q.explanation);
+      html += '  </div>';
       html += '</div>';
     });
 

@@ -3,19 +3,16 @@
   var filterContainer = document.getElementById('domainFilters');
   var paginationContainer = document.getElementById('paginationContainer');
   if (!container) return;
-  var statusEl = document.getElementById('practiceStatus');
-  var examId = container.dataset.examId;
 
   var allQuestions = [];
   var activeDomain = 'All';
-  var requestedDomain = new URLSearchParams(window.location.search).get('domain');
   var activeDifficulty = 'All';
   var activeSort = 'oldest'; // 'oldest' (Old to New) | 'newest' (New to Old)
   var currentPage = 1;
   var pageSize = 50;
 
-  var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation') ? '/ai-certification-preparation' : '';
-  var fetchUrl = pathPrefix + '/data/exams/' + encodeURIComponent(examId) + '/questions.json';
+  var pathPrefix = window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '';
+  var fetchUrl = pathPrefix + '/data/questions/cca-f/questions.json';
 
   function loadData(url) {
     return fetch(url).then(function(res) {
@@ -24,16 +21,15 @@
     });
   }
 
-  loadData(fetchUrl).then(function(data) {
-      if (!Array.isArray(data) || data.length === 0) throw new Error('No published questions are available');
+  loadData(fetchUrl)
+    .catch(function() {
+      return loadData('/data/questions/cca-f/questions.json');
+    })
+    .catch(function() {
+      return loadData('../../data/questions/cca-f/questions.json');
+    })
+    .then(function(data) {
       allQuestions = data;
-      if (requestedDomain && data.some(function(q) { return (q.domain || '').startsWith(requestedDomain); })) {
-        activeDomain = requestedDomain;
-      }
-      var countEl = document.getElementById('totalQuestionsCount');
-      if (countEl) {
-        countEl.textContent = data.length.toLocaleString();
-      }
       renderFilters();
       renderQuestions();
     })
@@ -43,10 +39,7 @@
 
   function renderFilters() {
     if (!filterContainer) return;
-    var domains = ['All'].concat(Array.from(new Set(allQuestions.map(function(q) {
-      var match = (q.domain || '').match(/^D\d+/);
-      return match ? match[0] : null;
-    }).filter(Boolean))).sort());
+    var domains = ['All', 'D1', 'D2', 'D3', 'D4', 'D5'];
     var difficulties = ['All', 'basic', 'intermediate', 'advanced'];
 
     var html = '<div style="display: flex; flex-direction: column; gap: 0.75rem; background: var(--card); border: 2px solid var(--border); padding: 1rem; border-radius: 2px; margin-bottom: 1.5rem; box-shadow: 3px 3px 0 var(--border);">';
@@ -56,8 +49,8 @@
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Domain:</span>';
     domains.forEach(function(d) {
       var label = d === 'All' ? 'All Domains (' + allQuestions.length + ')' : d;
-      var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: var(--accent-contrast);"' : '';
-      html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" aria-pressed="' + (d === activeDomain) + '" ' + activeStyle + '>' + label + '</button>';
+      var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: #fff;"' : '';
+      html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" ' + activeStyle + '>' + label + '</button>';
     });
     html += '</div>';
 
@@ -69,18 +62,18 @@
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Difficulty:</span>';
     difficulties.forEach(function(diff) {
       var label = diff === 'All' ? '[All]' : '[' + diff + ']';
-      var activeStyle = diff === activeDifficulty ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-      html += '<button class="reveal-btn diff-btn" data-diff="' + diff + '" aria-pressed="' + (diff === activeDifficulty) + '" ' + activeStyle + '>' + label + '</button>';
+      var activeStyle = diff === activeDifficulty ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+      html += '<button class="reveal-btn diff-btn" data-diff="' + diff + '" ' + activeStyle + '>' + label + '</button>';
     });
     html += '</div>';
 
     // Sorting
     html += '<div style="display: flex; align-items: center; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; color: var(--muted);">Sort:</span>';
-    var oldestActive = activeSort === 'oldest' ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-    var newestActive = activeSort === 'newest' ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-    html += '<button class="reveal-btn sort-btn" data-sort="oldest" aria-pressed="' + (activeSort === 'oldest') + '" ' + oldestActive + '>Old to New</button>';
-    html += '<button class="reveal-btn sort-btn" data-sort="newest" aria-pressed="' + (activeSort === 'newest') + '" ' + newestActive + '>New to Old</button>';
+    var oldestActive = activeSort === 'oldest' ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+    var newestActive = activeSort === 'newest' ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+    html += '<button class="reveal-btn sort-btn" data-sort="oldest" ' + oldestActive + '>Old to New</button>';
+    html += '<button class="reveal-btn sort-btn" data-sort="newest" ' + newestActive + '>New to Old</button>';
     html += '</div>';
 
     html += '</div></div>';
@@ -92,7 +85,6 @@
         currentPage = 1;
         renderFilters();
         renderQuestions();
-        requestAnimationFrame(function() { filterContainer.querySelector('.domain-btn[data-domain="' + activeDomain + '"]').focus(); });
       });
     });
 
@@ -102,7 +94,6 @@
         currentPage = 1;
         renderFilters();
         renderQuestions();
-        requestAnimationFrame(function() { filterContainer.querySelector('.diff-btn[data-diff="' + activeDifficulty + '"]').focus(); });
       });
     });
 
@@ -112,7 +103,6 @@
         currentPage = 1;
         renderFilters();
         renderQuestions();
-        requestAnimationFrame(function() { filterContainer.querySelector('.sort-btn[data-sort="' + activeSort + '"]').focus(); });
       });
     });
   }
@@ -139,66 +129,9 @@
     return filtered;
   }
 
-  function formatScenarioHtml(text) {
-    if (!text) return '';
-    var escaped = escapeHtml(text);
-    // Format `code` snippets
-    escaped = escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
-    // Format **bold**
-    escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-    // Split into paragraphs on double newline, or <br> on single newline
-    var paragraphs = escaped.split(/\n\s*\n/);
-    return paragraphs.map(function(p) {
-      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
-    }).join('');
-  }
-
-  function extractQuestionSections(q) {
-    // 1. Explicit scenario field
-    if (q.scenario && typeof q.scenario === 'string' && q.scenario.trim().length > 0) {
-      return {
-        topicBrief: q.topicBrief || q.scenarioTitle || (q.scenarioTag ? 'Topic Brief: ' + q.scenarioTag : 'Topic Brief & System Context'),
-        roleContext: q.roleContext || 'Role: AI Systems Architect / Engineer',
-        scenarioText: q.scenario.trim(),
-        questionPrompt: q.prompt.trim()
-      };
-    }
-
-    // 2. Format: Scenario: <Topic>. Situation: <Text>. <Question>?
-    var m1 = q.prompt.match(/^Scenario:\s*(.+?)\.\s*Situation:\s*(.+?)\.\s*([A-Z][^.!?]*\?)$/is);
-    if (m1) {
-      return {
-        topicBrief: 'Topic Brief: ' + m1[1].trim(),
-        roleContext: 'Role: AI Architect Handling Claude SDK & CLI',
-        scenarioText: 'Situation:\n' + m1[2].trim() + '.',
-        questionPrompt: m1[3].trim()
-      };
-    }
-
-    // 3. Format: "You are an engineer / architect..." or "A team / company is..."
-    var m2 = q.prompt.match(/^((?:You are|An? |Your |A company|A client|In a |Consider a )[\s\S]+?\.\s*)(Which|What|How|Why|Select|Identify|Where|Choose)\b([\s\S]+)$/i);
-    if (m2 && m2[1].length > 70) {
-      return {
-        topicBrief: q.scenarioTag ? 'Topic Brief: ' + q.scenarioTag : 'Topic Brief & Scenario Context',
-        roleContext: 'Role: AI Systems Engineer / Architect',
-        scenarioText: m2[1].trim(),
-        questionPrompt: (m2[2] + m2[3]).trim()
-      };
-    }
-
-    // 4. General question: provide domain context brief on left
-    return {
-      topicBrief: 'Topic Brief: ' + (q.domain || 'Claude Architecture Foundations'),
-      roleContext: 'Role: Claude Certified Architect (CCAR-F)',
-      scenarioText: 'You are an AI Solutions Architect designing, configuring, and troubleshooting production-grade agentic systems with the Claude Agent SDK, Claude Code CLI, and the Model Context Protocol (MCP).\n\nEvaluate the following architectural requirement according to Anthropic production best practices and deterministic safety boundaries.',
-      questionPrompt: q.prompt.trim()
-    };
-  }
-
   function renderQuestions() {
     var filtered = getFilteredQuestions();
     var totalQuestions = filtered.length;
-    if (statusEl) statusEl.textContent = totalQuestions + ' practice questions match the current filters.';
 
     if (totalQuestions === 0) {
       container.innerHTML = '<div class="card" style="padding: 2rem; text-align: center;"><p class="muted">No questions found matching your filter criteria.</p></div>';
@@ -217,49 +150,32 @@
     var html = '';
     pageItems.forEach(function(q, idx) {
       var globalIndex = startIndex + idx + 1;
-      var sections = extractQuestionSections(q);
-
-      html += '<div class="exam-split-layout" id="q-card-' + q.id + '">';
-
-      // Left Section: Topic Brief & Scenario Context
-      html += '  <aside class="exam-scenario-pane" aria-label="Topic Brief & System Context">';
-      html += '    <div class="exam-scenario-header">';
-      html += '      <span class="exam-scenario-badge">' + escapeHtml(sections.topicBrief) + '</span>';
-      html += '      <span class="exam-scenario-role">' + escapeHtml(sections.roleContext) + '</span>';
-      html += '    </div>';
-      html += '    <div class="exam-scenario-content">';
-      html += '      ' + formatScenarioHtml(sections.scenarioText);
-      html += '    </div>';
-      html += '  </aside>';
-
-      // Right Section: Question & Options
-      html += '  <main class="exam-question-pane">';
-      html += '    <div class="question-header">';
-      html += '      <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
-      html += '      <span>[' + (q.difficulty || 'intermediate') + ']</span>';
-      html += '    </div>';
+      html += '<div class="question-card" id="q-card-' + q.id + '">';
+      html += '  <div class="question-header">';
+      html += '    <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
+      html += '    <span>[' + (q.difficulty || 'intermediate') + ']</span>';
+      html += '  </div>';
       
       if (q.title) {
-        html += '    <div style="font-weight: bold; font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 0.5rem;">' + escapeHtml(q.title) + '</div>';
+        html += '  <div style="font-weight: bold; font-family: var(--font-heading); font-size: 1.05rem; margin-bottom: 0.6rem; color: var(--accent); border-left: 3px solid var(--accent); padding-left: 0.5rem;">' + escapeHtml(q.title) + '</div>';
       }
 
-      html += '    <div class="question-prompt">' + globalIndex + '. ' + escapeHtml(sections.questionPrompt) + '</div>';
-      html += '    <div class="options-list">';
+      html += '  <div class="question-prompt">' + globalIndex + '. ' + escapeHtml(q.prompt) + '</div>';
+      html += '  <div class="options-list">';
       
       q.options.forEach(function(opt) {
-        html += '      <label class="option-label" id="opt-' + q.id + '-' + opt.id + '">';
-        html += '        <input type="radio" name="input-' + q.id + '" value="' + opt.id + '">';
-        html += '        <span class="option-letter">' + opt.id + '.</span>';
-        html += '        <span>' + escapeHtml(opt.text) + '</span>';
-        html += '      </label>';
+        html += '    <label class="option-label" id="opt-' + q.id + '-' + opt.id + '">';
+        html += '      <input type="radio" name="input-' + q.id + '" value="' + opt.id + '">';
+        html += '      <span class="option-letter">' + opt.id + '.</span>';
+        html += '      <span>' + escapeHtml(opt.text) + '</span>';
+        html += '    </label>';
       });
 
-      html += '    </div>';
-      html += '    <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '" aria-expanded="false" aria-controls="exp-' + q.id + '">Reveal answer</button>';
-      html += '    <div class="explanation-box" id="exp-' + q.id + '" hidden>';
-      html += '      <strong>Rationale:</strong> ' + escapeHtml(q.explanation);
-      html += '    </div>';
-      html += '  </main>';
+      html += '  </div>';
+      html += '  <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '">Reveal answer</button>';
+      html += '  <div class="explanation-box" id="exp-' + q.id + '" style="display: none;">';
+      html += '    <strong>Rationale:</strong> ' + escapeHtml(q.explanation);
+      html += '  </div>';
       html += '</div>';
     });
 
@@ -271,11 +187,10 @@
         var qid = this.getAttribute('data-qid');
         var qObj = allQuestions.find(function(item) { return item.id === qid; });
         var expBox = document.getElementById('exp-' + qid);
-        var isRevealed = !expBox.hidden;
+        var isRevealed = expBox.style.display !== 'none';
 
         if (isRevealed) {
-          expBox.hidden = true;
-          this.setAttribute('aria-expanded', 'false');
+          expBox.style.display = 'none';
           this.textContent = 'Reveal answer';
           qObj.options.forEach(function(opt) {
             var lbl = document.getElementById('opt-' + qid + '-' + opt.id);
@@ -286,8 +201,7 @@
             }
           });
         } else {
-          expBox.hidden = false;
-          this.setAttribute('aria-expanded', 'true');
+          expBox.style.display = 'block';
           this.textContent = 'Unreveal answer';
           qObj.options.forEach(function(opt) {
             var lbl = document.getElementById('opt-' + qid + '-' + opt.id);
@@ -329,7 +243,7 @@
     }
 
     for (var p = 1; p <= totalPages; p++) {
-      var activeAttr = p === currentPage ? 'style="background: var(--accent); color: var(--accent-contrast);" aria-current="page"' : '';
+      var activeAttr = p === currentPage ? 'style="background: var(--accent); color: #fff;"' : '';
       html += '<button class="reveal-btn page-btn" data-page="' + p + '" ' + activeAttr + '>' + p + '</button>';
     }
 
@@ -346,8 +260,7 @@
       btn.addEventListener('click', function() {
         currentPage = parseInt(this.getAttribute('data-page'), 10);
         renderQuestions();
-        container.setAttribute('tabindex', '-1');
-        container.focus();
+        window.scrollTo({ top: container.offsetTop - 100, behavior: 'smooth' });
       });
     });
   }
