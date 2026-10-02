@@ -8,7 +8,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "In an agentic loop, what does a `stop_reason` value of `\"tool_use\"` indicate?",
+    "prompt": "The application runner inspects the API response and observes `stop_reason: \"tool_use\"`. What does this status code indicate your client-side agentic loop runner must do before returning a final answer to the user?",
     "options": [
       {
         "id": "A",
@@ -29,7 +29,10 @@
     ],
     "correct": "A",
     "explanation": "`stop_reason: \"tool_use\"` means Claude wants to invoke one or more tools. Your loop must execute those tools, append the results to the conversation history, and call Claude again. The loop only terminates when `stop_reason` is `\"end_turn\"` (or a budget/turn limit is hit).\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop) · [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Agentic Loop Execution & Stop Signals",
+    "roleContext": "Role: AI Systems Engineer Handling Claude Agent SDK",
+    "scenario": "You are building an autonomous customer support bot using the Claude Agent SDK. During an active execution turn, the model emits an API response requesting a query to the customer order database via `lookup_order`."
   },
   {
     "id": "cca-f-prep-002",
@@ -40,7 +43,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "What does `stop_reason: \"end_turn\"` signal in an agentic loop?",
+    "prompt": "The runner inspects the response and receives `stop_reason: \"end_turn\"`. What does this control signal indicate regarding the agentic loop lifecycle?",
     "options": [
       {
         "id": "A",
@@ -61,7 +64,10 @@
     ],
     "correct": "B",
     "explanation": "`end_turn` means Claude has produced a final text-only response with no pending tool calls. This is the correct loop termination signal. Do not check text content or other heuristics to decide when to stop — always use `stop_reason`.\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Agentic Loop Termination Lifecycle",
+    "roleContext": "Role: AI Systems Engineer Handling Claude Agent SDK",
+    "scenario": "An autonomous agent has completed multiple tool calls, querying database records and calculating account refunds. In its most recent turn, the model outputs a natural language summary to the customer."
   },
   {
     "id": "cca-f-prep-003",
@@ -72,7 +78,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "What is the role of a coordinator agent in a hub-and-spoke multi-agent architecture?",
+    "prompt": "What is the primary architectural responsibility of the central coordinator agent in this hub-and-spoke multi-agent topology?",
     "options": [
       {
         "id": "A",
@@ -93,7 +99,10 @@
     ],
     "correct": "C",
     "explanation": "In hub-and-spoke, the coordinator is the central hub. It decomposes the task, delegates to specialist subagents, routes information, and aggregates results. Subagents communicate only through the coordinator — never directly with each other.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Hub-and-Spoke Coordinator Patterns",
+    "roleContext": "Role: Lead AI Architect Designing Multi-Agent Systems",
+    "scenario": "You are architecting an enterprise legal research platform with five specialized worker subagents (contract analysis, case law search, compliance check, citation verifier, and report formatter)."
   },
   {
     "id": "cca-f-prep-004",
@@ -104,7 +113,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "Which SDK option caps the number of tool-use turns in an agentic loop?",
+    "prompt": "Which Claude Agent SDK parameter should you configure in the runner to enforce a hard ceiling on the maximum number of tool-use turns allowed per execution?",
     "options": [
       {
         "id": "A",
@@ -125,7 +134,10 @@
     ],
     "correct": "D",
     "explanation": "`max_turns` (Python) / `maxTurns` (TypeScript) limits how many tool-use turns the loop can run. It counts tool-use turns only, not the final text response. `max_budget_usd` / `maxBudgetUsd` is the cost-based equivalent.\nRefs: [Agent SDK — turns and budget](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Preventing Runaway Agentic Loops",
+    "roleContext": "Role: Cloud Systems Engineer Handling Production Cost Controls",
+    "scenario": "An autonomous debugging agent occasionally gets trapped in an infinite cycle of failing bash commands and retry loops, threatening to exhaust API token budgets and incur runaway costs."
   },
   {
     "id": "cca-f-prep-005",
@@ -136,7 +148,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "After a coordinator spawns a subagent using the Task tool, does the subagent automatically have access to the coordinator's conversation history?",
+    "prompt": "Does the spawned subagent automatically inherit and have access to the coordinator's entire conversation history?",
     "options": [
       {
         "id": "A",
@@ -157,7 +169,10 @@
     ],
     "correct": "A",
     "explanation": "Subagents are isolated. They have no access to the coordinator's conversation history unless the coordinator explicitly includes the relevant information in the subagent's prompt. This is one of the most commonly tested facts on the exam.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Subagent Context Scoping & Isolation",
+    "roleContext": "Role: AI Pipeline Architect Building Hierarchical Agents",
+    "scenario": "A coordinator agent with 45,000 tokens of accumulated conversational history spawns a specialized code analysis subagent using the Task tool to audit a single cryptographic function."
   },
   {
     "id": "cca-f-prep-006",
@@ -168,7 +183,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "A developer implements an agentic loop that checks `response.content[0].text` to decide whether to stop. What is wrong with this approach?",
+    "prompt": "Why is parsing natural language text rather than inspecting `stop_reason` considered a dangerous anti-pattern in production agentic systems?",
     "options": [
       {
         "id": "A",
@@ -189,7 +204,10 @@
     ],
     "correct": "B",
     "explanation": "`stop_reason` is the correct and only reliable termination signal. Parsing text content (e.g., looking for \"Done\" or \"Finished\") is an anti-pattern: Claude's phrasing varies and the text may contain the word even mid-task. Always use `stop_reason === \"end_turn\"` to terminate the loop.\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Anti-Patterns in Loop Termination",
+    "roleContext": "Role: Senior AI Engineer Refactoring Legacy Agent Code",
+    "scenario": "A junior developer writes an agentic loop runner with the logic: `if (response.content[0].text.includes(\"Done\") || response.content[0].text.includes(\"I am finished\")) break;`."
   },
   {
     "id": "cca-f-prep-007",
@@ -232,7 +250,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "You want to spawn multiple subagents to run in parallel. How do you achieve this with the Task tool?",
+    "prompt": "How should the coordinator formulate its tool invocation to spawn three worker subagents to run in parallel using the Task tool?",
     "options": [
       {
         "id": "A",
@@ -253,7 +271,10 @@
     ],
     "correct": "D",
     "explanation": "Parallel subagent execution is triggered by emitting multiple Task tool calls in a single coordinator response (single turn). If you make separate Task calls across separate turns, they execute sequentially. The SDK interprets multiple tool calls in one response as concurrent invocations.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Parallel Subagent Spawning via Task Tool",
+    "roleContext": "Role: Performance Architect Optimizing Multi-Agent Latency",
+    "scenario": "A coordinator agent needs to analyze three independent microservice repositories simultaneously to meet a 30-second pipeline latency SLA."
   },
   {
     "id": "cca-f-prep-009",
@@ -296,7 +317,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Which mechanism must be included in the coordinator's `allowedTools` for it to spawn subagents?",
+    "prompt": "Which specific tool must be explicitly included in the coordinator's `allowedTools` list to permit subagent delegation?",
     "options": [
       {
         "id": "A",
@@ -317,7 +338,10 @@
     ],
     "correct": "B",
     "explanation": "The `Task` tool is the Agent SDK mechanism for spawning subagents. If \"Task\" is not included in the coordinator's `allowedTools`, the coordinator cannot invoke subagents — the call will either fail or Claude will not attempt it.\nRefs: [Agent SDK quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Coordinator Tool Permissions & Spawning",
+    "roleContext": "Role: DevSecOps Engineer Configuring Agent Tool Sandboxes",
+    "scenario": "You are defining an AgentDefinition for a high-level coordinator agent. You need to ensure the coordinator has permission to spawn and delegate tasks to specialized subagents without granting it arbitrary bash access."
   },
   {
     "id": "cca-f-prep-011",
@@ -328,7 +352,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "A PostToolUse hook is best used to accomplish which of the following?",
+    "prompt": "Which production task is a `PostToolUse` hook best architected to accomplish?",
     "options": [
       {
         "id": "A",
@@ -349,7 +373,10 @@
     ],
     "correct": "C",
     "explanation": "PostToolUse hooks intercept tool results *after* execution but *before* Claude processes them. They are ideal for normalizing heterogeneous data — e.g., converting Unix timestamps, ISO 8601 strings, and numeric codes from different MCP tools into a consistent format. Blocking tool calls before execution requires a pre-call interception hook.\nRefs: [Agent SDK — hooks documentation](https://github.com/anthropics/claude-agent-sdk-python)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: PostToolUse Hook Applications",
+    "roleContext": "Role: AI Platform Engineer Implementing Guardrails",
+    "scenario": "You are designing safety guardrails in `.claude/settings.json` for a codebase refactoring agent that executes bash tests and edits source files."
   },
   {
     "id": "cca-f-prep-012",
@@ -392,7 +419,7 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "`fork_session` is most appropriate when you want to:",
+    "prompt": "Under what operational circumstance is `fork_session` the most appropriate mechanism to employ?",
     "options": [
       {
         "id": "A",
@@ -413,7 +440,10 @@
     ],
     "correct": "A",
     "explanation": "`fork_session` creates parallel branches from a shared starting point — ideal when you want to explore two divergent approaches (e.g., two refactoring strategies, two testing architectures) without them interfering with each other. It is not for resuming sessions or distributed execution.\nRefs: [Claude Code — sessions and forking](https://code.claude.com/docs/en/overview)",
-    "mockEligible": true
+    "mockEligible": true,
+    "topicBrief": "Topic Brief: Session Forking vs In-Place Resumption",
+    "roleContext": "Role: AI Architect Designing Code Exploration Workflows",
+    "scenario": "An engineer has established a deep investigation session into a legacy billing bug and wants to test two radically different refactoring strategies without contaminating the baseline session state."
   },
   {
     "id": "cca-f-prep-014",

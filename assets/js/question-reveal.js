@@ -40,7 +40,12 @@
   function renderFilters() {
     if (!filterContainer) return;
     var domains = ['All', 'D1', 'D2', 'D3', 'D4', 'D5'];
-    var difficulties = ['All', 'basic', 'intermediate', 'advanced'];
+    var difficulties = [
+      { id: 'All', label: 'All' },
+      { id: 'quick-drills', label: 'Quick Drills' },
+      { id: 'intermediate', label: 'Intermediate' },
+      { id: 'difficult', label: 'Difficult' }
+    ];
 
     var html = '<div style="display: flex; flex-direction: column; gap: 0.75rem; background: var(--card); border: 2px solid var(--border); padding: 1rem; border-radius: 2px; margin-bottom: 1.5rem; box-shadow: 3px 3px 0 var(--border);">';
     
@@ -61,9 +66,8 @@
     html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Difficulty:</span>';
     difficulties.forEach(function(diff) {
-      var label = diff === 'All' ? '[All]' : '[' + diff + ']';
-      var activeStyle = diff === activeDifficulty ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-      html += '<button class="reveal-btn diff-btn" data-diff="' + diff + '" ' + activeStyle + '>' + label + '</button>';
+      var activeStyle = diff.id === activeDifficulty ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+      html += '<button class="reveal-btn diff-btn" data-diff="' + diff.id + '" ' + activeStyle + '>[' + diff.label + ']</button>';
     });
     html += '</div>';
 
@@ -118,7 +122,19 @@
 
     if (activeDifficulty !== 'All') {
       filtered = filtered.filter(function(q) {
-        return (q.difficulty || 'intermediate').toLowerCase() === activeDifficulty.toLowerCase();
+        var diff = (q.difficulty || 'intermediate').toLowerCase();
+        var isShort = (q.prompt || '').length < 140;
+
+        if (activeDifficulty === 'quick-drills') {
+          return diff === 'basic' || isShort || q.type === 'quick-drill';
+        }
+        if (activeDifficulty === 'difficult') {
+          return diff === 'advanced' || diff === 'hard' || diff === 'exam';
+        }
+        if (activeDifficulty === 'intermediate') {
+          return (diff === 'intermediate' || !q.difficulty) && !isShort && diff !== 'advanced' && diff !== 'hard' && diff !== 'exam';
+        }
+        return true;
       });
     }
 

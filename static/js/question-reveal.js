@@ -3,19 +3,16 @@
   var filterContainer = document.getElementById('domainFilters');
   var paginationContainer = document.getElementById('paginationContainer');
   if (!container) return;
-  var statusEl = document.getElementById('practiceStatus');
-  var examId = container.dataset.examId;
 
   var allQuestions = [];
   var activeDomain = 'All';
-  var requestedDomain = new URLSearchParams(window.location.search).get('domain');
   var activeDifficulty = 'All';
   var activeSort = 'oldest'; // 'oldest' (Old to New) | 'newest' (New to Old)
   var currentPage = 1;
   var pageSize = 50;
 
-  var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation') ? '/ai-certification-preparation' : '';
-  var fetchUrl = pathPrefix + '/data/exams/' + encodeURIComponent(examId) + '/questions.json';
+  var pathPrefix = window.location.pathname.startsWith('/ccaf-exam') ? '/ccaf-exam' : '';
+  var fetchUrl = pathPrefix + '/data/questions/cca-f/questions.json';
 
   function loadData(url) {
     return fetch(url).then(function(res) {
@@ -24,16 +21,15 @@
     });
   }
 
-  loadData(fetchUrl).then(function(data) {
-      if (!Array.isArray(data) || data.length === 0) throw new Error('No published questions are available');
+  loadData(fetchUrl)
+    .catch(function() {
+      return loadData('/data/questions/cca-f/questions.json');
+    })
+    .catch(function() {
+      return loadData('../../data/questions/cca-f/questions.json');
+    })
+    .then(function(data) {
       allQuestions = data;
-      if (requestedDomain && data.some(function(q) { return (q.domain || '').startsWith(requestedDomain); })) {
-        activeDomain = requestedDomain;
-      }
-      var countEl = document.getElementById('totalQuestionsCount');
-      if (countEl) {
-        countEl.textContent = data.length.toLocaleString();
-      }
       renderFilters();
       renderQuestions();
     })
@@ -43,11 +39,13 @@
 
   function renderFilters() {
     if (!filterContainer) return;
-    var domains = ['All'].concat(Array.from(new Set(allQuestions.map(function(q) {
-      var match = (q.domain || '').match(/^D\d+/);
-      return match ? match[0] : null;
-    }).filter(Boolean))).sort());
-    var difficulties = ['All', 'basic', 'intermediate', 'advanced'];
+    var domains = ['All', 'D1', 'D2', 'D3', 'D4', 'D5'];
+    var difficulties = [
+      { id: 'All', label: 'All' },
+      { id: 'quick-drills', label: 'Quick Drills' },
+      { id: 'intermediate', label: 'Intermediate' },
+      { id: 'difficult', label: 'Difficult' }
+    ];
 
     var html = '<div style="display: flex; flex-direction: column; gap: 0.75rem; background: var(--card); border: 2px solid var(--border); padding: 1rem; border-radius: 2px; margin-bottom: 1.5rem; box-shadow: 3px 3px 0 var(--border);">';
     
@@ -56,8 +54,8 @@
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Domain:</span>';
     domains.forEach(function(d) {
       var label = d === 'All' ? 'All Domains (' + allQuestions.length + ')' : d;
-      var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: var(--accent-contrast);"' : '';
-      html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" aria-pressed="' + (d === activeDomain) + '" ' + activeStyle + '>' + label + '</button>';
+      var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: #fff;"' : '';
+      html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" ' + activeStyle + '>' + label + '</button>';
     });
     html += '</div>';
 
@@ -68,19 +66,18 @@
     html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Difficulty:</span>';
     difficulties.forEach(function(diff) {
-      var label = diff === 'All' ? '[All]' : '[' + diff + ']';
-      var activeStyle = diff === activeDifficulty ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-      html += '<button class="reveal-btn diff-btn" data-diff="' + diff + '" aria-pressed="' + (diff === activeDifficulty) + '" ' + activeStyle + '>' + label + '</button>';
+      var activeStyle = diff.id === activeDifficulty ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+      html += '<button class="reveal-btn diff-btn" data-diff="' + diff.id + '" ' + activeStyle + '>[' + diff.label + ']</button>';
     });
     html += '</div>';
 
     // Sorting
     html += '<div style="display: flex; align-items: center; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; color: var(--muted);">Sort:</span>';
-    var oldestActive = activeSort === 'oldest' ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-    var newestActive = activeSort === 'newest' ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-    html += '<button class="reveal-btn sort-btn" data-sort="oldest" aria-pressed="' + (activeSort === 'oldest') + '" ' + oldestActive + '>Old to New</button>';
-    html += '<button class="reveal-btn sort-btn" data-sort="newest" aria-pressed="' + (activeSort === 'newest') + '" ' + newestActive + '>New to Old</button>';
+    var oldestActive = activeSort === 'oldest' ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+    var newestActive = activeSort === 'newest' ? 'style="background: var(--accent); color: #fff;"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
+    html += '<button class="reveal-btn sort-btn" data-sort="oldest" ' + oldestActive + '>Old to New</button>';
+    html += '<button class="reveal-btn sort-btn" data-sort="newest" ' + newestActive + '>New to Old</button>';
     html += '</div>';
 
     html += '</div></div>';
@@ -92,7 +89,6 @@
         currentPage = 1;
         renderFilters();
         renderQuestions();
-        requestAnimationFrame(function() { filterContainer.querySelector('.domain-btn[data-domain="' + activeDomain + '"]').focus(); });
       });
     });
 
@@ -102,7 +98,6 @@
         currentPage = 1;
         renderFilters();
         renderQuestions();
-        requestAnimationFrame(function() { filterContainer.querySelector('.diff-btn[data-diff="' + activeDifficulty + '"]').focus(); });
       });
     });
 
@@ -112,7 +107,6 @@
         currentPage = 1;
         renderFilters();
         renderQuestions();
-        requestAnimationFrame(function() { filterContainer.querySelector('.sort-btn[data-sort="' + activeSort + '"]').focus(); });
       });
     });
   }
@@ -128,7 +122,19 @@
 
     if (activeDifficulty !== 'All') {
       filtered = filtered.filter(function(q) {
-        return (q.difficulty || 'intermediate').toLowerCase() === activeDifficulty.toLowerCase();
+        var diff = (q.difficulty || 'intermediate').toLowerCase();
+        var isShort = (q.prompt || '').length < 140;
+
+        if (activeDifficulty === 'quick-drills') {
+          return diff === 'basic' || isShort || q.type === 'quick-drill';
+        }
+        if (activeDifficulty === 'difficult') {
+          return diff === 'advanced' || diff === 'hard' || diff === 'exam';
+        }
+        if (activeDifficulty === 'intermediate') {
+          return (diff === 'intermediate' || !q.difficulty) && !isShort && diff !== 'advanced' && diff !== 'hard' && diff !== 'exam';
+        }
+        return true;
       });
     }
 
@@ -142,7 +148,6 @@
   function renderQuestions() {
     var filtered = getFilteredQuestions();
     var totalQuestions = filtered.length;
-    if (statusEl) statusEl.textContent = totalQuestions + ' practice questions match the current filters.';
 
     if (totalQuestions === 0) {
       container.innerHTML = '<div class="card" style="padding: 2rem; text-align: center;"><p class="muted">No questions found matching your filter criteria.</p></div>';
@@ -183,8 +188,8 @@
       });
 
       html += '  </div>';
-      html += '  <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '" aria-expanded="false" aria-controls="exp-' + q.id + '">Reveal answer</button>';
-      html += '  <div class="explanation-box" id="exp-' + q.id + '" hidden>';
+      html += '  <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '">Reveal answer</button>';
+      html += '  <div class="explanation-box" id="exp-' + q.id + '" style="display: none;">';
       html += '    <strong>Rationale:</strong> ' + escapeHtml(q.explanation);
       html += '  </div>';
       html += '</div>';
@@ -198,11 +203,10 @@
         var qid = this.getAttribute('data-qid');
         var qObj = allQuestions.find(function(item) { return item.id === qid; });
         var expBox = document.getElementById('exp-' + qid);
-        var isRevealed = !expBox.hidden;
+        var isRevealed = expBox.style.display !== 'none';
 
         if (isRevealed) {
-          expBox.hidden = true;
-          this.setAttribute('aria-expanded', 'false');
+          expBox.style.display = 'none';
           this.textContent = 'Reveal answer';
           qObj.options.forEach(function(opt) {
             var lbl = document.getElementById('opt-' + qid + '-' + opt.id);
@@ -213,8 +217,7 @@
             }
           });
         } else {
-          expBox.hidden = false;
-          this.setAttribute('aria-expanded', 'true');
+          expBox.style.display = 'block';
           this.textContent = 'Unreveal answer';
           qObj.options.forEach(function(opt) {
             var lbl = document.getElementById('opt-' + qid + '-' + opt.id);
@@ -256,7 +259,7 @@
     }
 
     for (var p = 1; p <= totalPages; p++) {
-      var activeAttr = p === currentPage ? 'style="background: var(--accent); color: var(--accent-contrast);" aria-current="page"' : '';
+      var activeAttr = p === currentPage ? 'style="background: var(--accent); color: #fff;"' : '';
       html += '<button class="reveal-btn page-btn" data-page="' + p + '" ' + activeAttr + '>' + p + '</button>';
     }
 
@@ -273,8 +276,7 @@
       btn.addEventListener('click', function() {
         currentPage = parseInt(this.getAttribute('data-page'), 10);
         renderQuestions();
-        container.setAttribute('tabindex', '-1');
-        container.focus();
+        window.scrollTo({ top: container.offsetTop - 100, behavior: 'smooth' });
       });
     });
   }
