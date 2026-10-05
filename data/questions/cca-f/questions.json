@@ -37120,9 +37120,15 @@
     "sourceId": "claudecertifiedarchitects",
     "sourceLocator": ".data/exams/cca-f/raw/practice-questions/claudecertifiedarchitects-5-sample-questions.md#Q1",
     "sourceHash": "sha256:a22133466c4fb62ecffac2df2cc0cf045effa5da69b19a236489ca4a5b30ecc3",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Subagent Error Handling",
+    "topic": "subagent-failure-modes",
+    "topicBrief": "Topic Brief: Subagent Partial Failure & Coordinator Recovery",
+    "roleContext": "Role: AI Systems Architect Designing Parallel Workflows"
   },
   {
     "id": "cca-f-sample5-002",
@@ -37152,9 +37158,15 @@
     "sourceId": "claudecertifiedarchitects",
     "sourceLocator": ".data/exams/cca-f/raw/practice-questions/claudecertifiedarchitects-5-sample-questions.md#Q2",
     "sourceHash": "sha256:a22133466c4fb62ecffac2df2cc0cf045effa5da69b19a236489ca4a5b30ecc3",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Permissions & Command Execution",
+    "topic": "permission-boundaries",
+    "topicBrief": "Topic Brief: Tool & Command Execution Security Controls",
+    "roleContext": "Role: Lead Developer Configuring Claude Code Workflows"
   },
   {
     "id": "cca-f-sample5-003",
@@ -37184,9 +37196,15 @@
     "sourceId": "claudecertifiedarchitects",
     "sourceLocator": ".data/exams/cca-f/raw/practice-questions/claudecertifiedarchitects-5-sample-questions.md#Q3",
     "sourceHash": "sha256:a22133466c4fb62ecffac2df2cc0cf045effa5da69b19a236489ca4a5b30ecc3",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "System Prompt Architecture",
+    "topic": "system-prompt-clarity",
+    "topicBrief": "Topic Brief: Eliminating Vague System Prompt Instructions",
+    "roleContext": "Role: Prompt Architect Designing Support Workflows"
   },
   {
     "id": "cca-f-sample5-004",
@@ -37216,9 +37234,15 @@
     "sourceId": "claudecertifiedarchitects",
     "sourceLocator": ".data/exams/cca-f/raw/practice-questions/claudecertifiedarchitects-5-sample-questions.md#Q4",
     "sourceHash": "sha256:a22133466c4fb62ecffac2df2cc0cf045effa5da69b19a236489ca4a5b30ecc3",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Tool Design & Consolidation",
+    "topic": "tool-consolidation",
+    "topicBrief": "Topic Brief: Overlapping Tool Schemas & Tool Selection Ambiguity",
+    "roleContext": "Role: AI Architect Designing Tool Definitions"
   },
   {
     "id": "cca-f-sample5-005",
@@ -37248,9 +37272,15 @@
     "sourceId": "claudecertifiedarchitects",
     "sourceLocator": ".data/exams/cca-f/raw/practice-questions/claudecertifiedarchitects-5-sample-questions.md#Q5",
     "sourceHash": "sha256:a22133466c4fb62ecffac2df2cc0cf045effa5da69b19a236489ca4a5b30ecc3",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Context Management",
+    "topic": "context-budgeting",
+    "topicBrief": "Topic Brief: Managing Long-Running Context Near Token Limits",
+    "roleContext": "Role: Systems Architect Managing Agent State Persistence"
   },
   {
     "id": "cca-f-community-d1-001",
@@ -37280,9 +37310,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d1-agentic-architecture.md#Q1",
     "sourceHash": "sha256:ea5900818e4be58142775b64be229c1928123271a01589d7ceffe7398aab9cab",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Agentic Loop Lifecycle",
+    "topic": "stop-reason-inspection",
+    "topicBrief": "Topic Brief: Agentic Loop State Machine & Stop Reasons",
+    "roleContext": "Role: AI Engineer Implementing Orchestration Loops"
   },
   {
     "id": "cca-f-community-d1-002",
@@ -37312,9 +37348,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d1-agentic-architecture.md#Q2",
     "sourceHash": "sha256:ea5900818e4be58142775b64be229c1928123271a01589d7ceffe7398aab9cab",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Coordinator & Subagent Communication",
+    "topic": "context-isolation",
+    "topicBrief": "Topic Brief: Targeted Context Handoffs in Multi-Agent Systems",
+    "roleContext": "Role: Principal Architect Designing Multi-Agent Systems"
   },
   {
     "id": "cca-f-community-d1-003",
@@ -37344,9 +37386,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d1-agentic-architecture.md#Q3",
     "sourceHash": "sha256:ea5900818e4be58142775b64be229c1928123271a01589d7ceffe7398aab9cab",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Human-in-the-Loop & High Stakes Actions",
+    "topic": "human-in-the-loop",
+    "topicBrief": "Topic Brief: Regulatory Compliance & Human Authorization Gates",
+    "roleContext": "Role: Compliance Architect Designing Financial Agent Workflows"
   },
   {
     "id": "cca-f-community-d2-001",
@@ -37376,9 +37424,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d2-tool-design-mcp.md#Q1",
     "sourceHash": "sha256:cc2814ffc17f63859b189e77cf09500c33f511842176a32910ca9ed7b937ae68",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Tool Registry & Selection Accuracy",
+    "topic": "tool-registry-pruning",
+    "topicBrief": "Topic Brief: Mitigating Tool Explosion in Agent Configuration",
+    "roleContext": "Role: Tool Integration Specialist"
   },
   {
     "id": "cca-f-community-d2-002",
@@ -37408,9 +37462,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d2-tool-design-mcp.md#Q2",
     "sourceHash": "sha256:cc2814ffc17f63859b189e77cf09500c33f511842176a32910ca9ed7b937ae68",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Tool Result Semantics",
+    "topic": "empty-result-handling",
+    "topicBrief": "Topic Brief: Handling Empty Tool Results & Absent Data",
+    "roleContext": "Role: Agent Developer Implementing Retrieval Tools"
   },
   {
     "id": "cca-f-community-d2-003",
@@ -37440,9 +37500,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d2-tool-design-mcp.md#Q3",
     "sourceHash": "sha256:cc2814ffc17f63859b189e77cf09500c33f511842176a32910ca9ed7b937ae68",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "MCP Security & Credentials",
+    "topic": "mcp-credential-storage",
+    "topicBrief": "Topic Brief: Secret Management in MCP Server Configurations",
+    "roleContext": "Role: DevSecOps Engineer Configuring MCP Infrastructures"
   },
   {
     "id": "cca-f-community-d2-004",
@@ -37472,9 +37538,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d2-tool-design-mcp.md#Q4",
     "sourceHash": "sha256:cc2814ffc17f63859b189e77cf09500c33f511842176a32910ca9ed7b937ae68",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Large-Scale MCP Architecture",
+    "topic": "mcp-tool-aggregation",
+    "topicBrief": "Topic Brief: Scalable Routing Across Multi-Server MCP Registries",
+    "roleContext": "Role: Platform Architect Designing Enterprise Tool Gateways"
   },
   {
     "id": "cca-f-community-d2-005",
@@ -37504,9 +37576,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d2-tool-design-mcp.md#Q5",
     "sourceHash": "sha256:cc2814ffc17f63859b189e77cf09500c33f511842176a32910ca9ed7b937ae68",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Tool Choice & Schema Forcing",
+    "topic": "tool-choice-forcing",
+    "topicBrief": "Topic Brief: Schema Enforcement via tool_choice Strictness",
+    "roleContext": "Role: Lead Extraction Pipeline Architect"
   },
   {
     "id": "cca-f-community-d3-001",
@@ -37536,9 +37614,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d3-claude-code-config.md#Q1",
     "sourceHash": "sha256:cb0d655333d9f3a80cfe265936bcc6544deb6bd454a7600e21802d6cd940a555",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Claude Code Rules & Scope",
+    "topic": "rules-hierarchy",
+    "topicBrief": "Topic Brief: Scoping Repository Rules for Testing Patterns",
+    "roleContext": "Role: Senior Developer Configuring Repository Guidelines"
   },
   {
     "id": "cca-f-community-d3-003",
@@ -37568,9 +37652,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d3-claude-code-config.md#Q3",
     "sourceHash": "sha256:cb0d655333d9f3a80cfe265936bcc6544deb6bd454a7600e21802d6cd940a555",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Automated CI/CD Workflows",
+    "topic": "ci-automation",
+    "topicBrief": "Topic Brief: Headless Execution & Non-Interactive Claude Code in CI",
+    "roleContext": "Role: DevOps Architect Implementing AI Review Automation"
   },
   {
     "id": "cca-f-community-d4-001",
@@ -37600,9 +37690,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d4-prompt-engineering.md#Q1",
     "sourceHash": "sha256:2312854323887d30977fc69ac9ad0ffc905adb44fc1f87481fe2f83c1f80a4ac",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Evaluation & Criteria Definition",
+    "topic": "prompt-eval-criteria",
+    "topicBrief": "Topic Brief: Replacing Subjective Prompt Directives with Concrete Metrics",
+    "roleContext": "Role: Quality Assurance Lead"
   },
   {
     "id": "cca-f-community-d4-002",
@@ -37632,9 +37728,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d4-prompt-engineering.md#Q2",
     "sourceHash": "sha256:2312854323887d30977fc69ac9ad0ffc905adb44fc1f87481fe2f83c1f80a4ac",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Structured Extraction & Semantic Validation",
+    "topic": "schema-vs-semantics",
+    "topicBrief": "Topic Brief: Structural Schema Validation vs Mathematical Correctness",
+    "roleContext": "Role: Data Processing Architect"
   },
   {
     "id": "cca-f-community-d4-003",
@@ -37664,9 +37766,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d4-prompt-engineering.md#Q3",
     "sourceHash": "sha256:2312854323887d30977fc69ac9ad0ffc905adb44fc1f87481fe2f83c1f80a4ac",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Anthropic Batch API Workflows",
+    "topic": "batch-api-recovery",
+    "topicBrief": "Topic Brief: Custom ID Correlation & Granular Error Retries in Batches",
+    "roleContext": "Role: High-Throughput Pipeline Architect"
   },
   {
     "id": "cca-f-community-d4-004",
@@ -37696,9 +37804,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d4-prompt-engineering.md#Q4",
     "sourceHash": "sha256:2312854323887d30977fc69ac9ad0ffc905adb44fc1f87481fe2f83c1f80a4ac",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Frontier Model Thinking & Sampling Parameters",
+    "topic": "adaptive-thinking-migration",
+    "topicBrief": "Topic Brief: Migrating Fixed Token Budgets to Adaptive Thinking",
+    "roleContext": "Role: AI Framework Architect Migrating to Frontier Models"
   },
   {
     "id": "cca-f-community-d5-001",
@@ -37728,9 +37842,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q1",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Transactional State Preservation",
+    "topic": "persistent-fact-blocks",
+    "topicBrief": "Topic Brief: Preserving Critical Entity Metadata Across Summaries",
+    "roleContext": "Role: Customer Support Architecture Lead"
   },
   {
     "id": "cca-f-community-d5-002",
@@ -37760,9 +37880,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q2",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Human Escalation Thresholds",
+    "topic": "escalation-calibration",
+    "topicBrief": "Topic Brief: Decoupling Emotional Intensity from Technical Complexity",
+    "roleContext": "Role: Conversational AI Reliability Engineer"
   },
   {
     "id": "cca-f-community-d5-003",
@@ -37792,9 +37918,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q3",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Model Evaluation & Stratification",
+    "topic": "stratified-evaluation",
+    "topicBrief": "Topic Brief: Uncovering Subpopulation Failure Modes in Benchmark Metrics",
+    "roleContext": "Role: AI Evaluation & Benchmark Lead"
   },
   {
     "id": "cca-f-community-d5-004",
@@ -37824,9 +37956,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q4",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "intermediate",
+    "section": "Multi-Agent Conflict Resolution",
+    "topic": "discrepancy-attribution",
+    "topicBrief": "Topic Brief: Transparent Source Attribution for Conflicting Claims",
+    "roleContext": "Role: Research Pipeline Architect"
   },
   {
     "id": "cca-f-community-d5-005",
@@ -37856,9 +37994,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q5",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Compaction State & Turn History",
+    "topic": "server-side-compaction-blocks",
+    "topicBrief": "Topic Brief: Preserving Compaction Metadata Blocks in API History",
+    "roleContext": "Role: Stateful Conversation Systems Architect"
   },
   {
     "id": "cca-f-community-d5-006",
@@ -37888,9 +38032,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q6",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "advanced",
+    "section": "Generation Pacing & Token Budgets",
+    "topic": "task-budget-pacing",
+    "topicBrief": "Topic Brief: Pacing Complex Chain-of-Thought with Task Budgets",
+    "roleContext": "Role: Reasoning Systems Architect"
   },
   {
     "id": "cca-f-community-d5-007",
@@ -37920,9 +38070,15 @@
     "sourceId": "community-architecture-guide",
     "sourceLocator": ".data/exams/cca-f/raw/study-guides/claude-architect-community-guide/domains/d5-context-reliability.md#Q7",
     "sourceHash": "sha256:ff36190051b2982b216305f2ade5c28000f90c8231ff04b13f5a73abf0e993d0",
-    "status": "pending-review",
-    "reviewStatus": "needs-review",
-    "mockEligible": false
+    "status": "ready",
+    "reviewStatus": "approved",
+    "mockEligible": true,
+    "contentVersion": 1,
+    "difficulty": "hard",
+    "section": "Thinking Block Integrity & Context Pruning",
+    "topic": "thinking-prefix-integrity",
+    "topicBrief": "Topic Brief: Prefix Dependency Constraints on Reasoning Blocks",
+    "roleContext": "Role: Core Runtime Infrastructure Architect"
   },
   {
     "id": "cca-f-deficit-001",
