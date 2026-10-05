@@ -24,6 +24,16 @@ The [official exam guide](/ai-certification-preparation/exams/cca-f/study-materi
 
 **Fast question method:** (1) Name the scenario and required outcome. (2) Mark any hard constraint: latency, policy, context, cost, or output shape. (3) Choose the control that enforces that constraint. (4) Eliminate answers that merely ask the model to remember it.
 
+## The Golden Pattern: Architecture Over Instructions
+
+Pearson VUE scenario questions frequently present plausible-sounding distractors that attempt to patch systemic failures with soft prompt instructions or brute-force compute. The winning option always enforces **structural and architectural constraints**:
+
+| Scenario Dilemma | ❌ Tempting Distractor Traps (Soft Patches & Brute Force) | ✅ Winning Architectural Invariant |
+| :--- | :--- | :--- |
+| **Long-session staleness**<br>*(Turn 40+ refactor referencing file versions from early turns)* | • Add system prompt reminder: *"Always use the latest file version"*<br>• Swap to a model with a larger context window (only delays staleness)<br>• Re-paste the entire repository into context on every turn | **Periodic Re-Grounding Steps**: Pull fresh file state directly from live files via tools instead of trusting accumulated conversational history. |
+| **Downstream parser breakage**<br>*(Edge-case invoices or OCR anomalies producing malformed JSON)* | • Prompt reminder: *"Always return strictly valid JSON without preamble"*<br>• Swap in a larger/smarter model tier (doesn't guarantee syntax compliance) | **Output-Layer Schema Validation & Automated Retry**: Enforce JSON schema via tool use (`tool_choice`), validate syntactically at the client boundary, and trigger an automated retry upon schema failure. |
+| **Multi-agent concurrency conflicts**<br>*(Two subagents writing to a shared summary document simultaneously)* | • Add prompt instructions: *"Write carefully without overwriting peer findings"*<br>• Merge both subagents into a single monolithic agent (reintroduces context bloat) | **Isolated Output Slots + Sequenced Coordinator Merge**: Assign each subagent dedicated isolated output buffers/artifacts, and have the coordinator merge them in a final sequenced pass. |
+
 ## Model Family Selection: Haiku vs. Sonnet vs. Opus
 
 The exam frequently tests selecting the optimal model tier based on latency, cost, and cognitive reasoning complexity.
