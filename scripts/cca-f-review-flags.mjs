@@ -12,6 +12,22 @@ export const duplicatePairs = [
   ['cca-f-associate-169', 'cca-f-foundation-009']
 ];
 
+// Retain the complete, scenario-based version after reviewing each answer key.
+export const replacementPairs = [
+  ['cca-f-curated-045', 'cca-f-scenario-077'],
+  ['cca-f-curated-050', 'cca-f-scenario-078'],
+  ['cca-f-curated-052', 'cca-f-scenario-081'],
+  ['cca-f-curated-054', 'cca-f-scenario-083'],
+  ['cca-f-curated-066', 'cca-f-scenario-074'],
+  ['cca-f-curated-080', 'cca-f-prep-009'],
+  ['cca-f-curated-088', 'cca-f-cca-146'],
+  ['cca-f-curated-116', 'cca-f-cca-210'],
+  ['cca-f-curated-135', 'cca-f-cca-043'],
+  ['cca-f-curated-139', 'cca-f-cca-236'],
+  ['cca-f-curated-139', 'cca-f-curated-152'],
+  ['cca-f-curated-153', 'cca-f-curated-162']
+];
+
 export const unusableIds = '012 013 041 052 067 069'.split(' ').map(suffix => `cca-f-archeval-${suffix}`);
 
 export const malformedSourceItems = [
@@ -40,16 +56,19 @@ export const scopeExclusions = [
   { id: 'cca-f-community-d2-005', reason: 'Model-specific Fable 5.1 migration behavior is beyond the guide\'s tool-choice objective.' },
   { id: 'cca-f-community-d4-004', reason: 'Model-specific thinking and temperature migration behavior has no mapped task statement.' },
   { id: 'cca-f-community-d5-007', reason: 'Model-specific thinking-block prefix mechanics exceed the guide\'s context-management tasks.' },
-  { id: 'cca-f-certyiq-ccar-p-093', reason: 'First-launch operating-system permission dialogs for an MCP server test hosting/setup, not an Architect Foundations task statement.' }
+  { id: 'cca-f-certyiq-ccar-p-093', reason: 'First-launch operating-system permission dialogs for an MCP server test hosting/setup, not an Architect Foundations task statement.' },
+  { id: 'cca-f-scenario-085', reason: 'The same webhook scenario has conflicting answer keys across source versions, and this record\'s explanation mislabels its keyed option; the guide does not resolve the injection-location choice.' },
+  { id: 'cca-f-curated-130', reason: 'The keyed trained classifier is not clearly preferable to coordinator routing in this changing workload; more than one answer is defensible.' }
 ];
 
 export const reviewFlags = new Map([
   ...duplicatePairs.map(([keep, exclude]) => [exclude, { code: 'duplicate', duplicateOf: keep }]),
+  ...replacementPairs.map(([keep, exclude]) => [exclude, { code: 'duplicate', duplicateOf: keep }]),
   ...unusableIds.map(id => [id, { code: 'unusable-options', reason: 'All four choices are literal letter placeholders.' }]),
   ...malformedSourceItems.map(({ id, reason }) => [id, { code: 'malformed-source', reason }]),
   ...scopeExclusions.map(({ id, reason }) => [id, { code: 'exam-scope-or-key', reason }])
 ]);
 
-if (reviewFlags.size !== duplicatePairs.length + unusableIds.length + malformedSourceItems.length + scopeExclusions.length) {
+if (reviewFlags.size !== duplicatePairs.length + replacementPairs.length + unusableIds.length + malformedSourceItems.length + scopeExclusions.length) {
   throw new Error('Overlapping CCA-F review flags need a manual decision');
 }

@@ -26,22 +26,30 @@ The site now displays live counts on the category buttons. For CCAR-F, the bucke
 
 | Button | Rule | Current count |
 | --- | --- | ---: |
-| All | Every published CCAR-F question | 1,138 |
-| Quick Drills | 204 study-only items plus 13 `basic` items | 217 |
-| Intermediate | Published, mock-eligible items tagged `intermediate` | 706 |
-| Difficult | Published, mock-eligible items tagged `advanced`, `hard`, or `exam` | 215 |
+| All | Every published CCAR-F question | 1,149 |
+| Quick Drills | Study-only items and published `basic` items | 212 |
+| Intermediate | Published, mock-eligible items tagged `intermediate` | 690 |
+| Difficult | Published, mock-eligible items tagged `advanced`, `hard`, or `exam` | 247 |
 
 Counts recalculate within a selected domain. They are **counts of our editorial tags**, not measured difficulty or a guarantee of exam similarity. In particular, the existing `exam` value mixes format with difficulty and should eventually become a separate `examStyle` field. The category counts sum to All; the old length-based filters overlapped.
 
 | Domain | Quick Drills | Intermediate | Difficult | All |
 | --- | ---: | ---: | ---: | ---: |
-| D1 Agentic Architecture | 130 | 506 | 57 | 693 |
-| D2 Tool Design & MCP | 29 | 60 | 35 | 124 |
-| D3 Claude Code | 23 | 86 | 37 | 146 |
-| D4 Prompt Engineering | 18 | 28 | 49 | 95 |
-| D5 Context & Reliability | 17 | 26 | 37 | 80 |
+| D1 Agentic Architecture | 128 | 445 | 63 | 636 |
+| D2 Tool Design & MCP | 27 | 71 | 38 | 136 |
+| D3 Claude Code | 22 | 95 | 40 | 157 |
+| D4 Prompt Engineering | 18 | 35 | 61 | 114 |
+| D5 Context & Reliability | 17 | 44 | 45 | 106 |
 
 This skew is a warning about tag provenance: D1 has far more questions but a much smaller share tagged Difficult than D4/D5. Do not force arbitrary target counts such as 100/200/300 by relabeling questions. Reclassify after editorial review or actual response data.
+
+## Question-bank curation
+
+The source bank has 1,285 CCAR-F records. The public bank contains 1,149 approved records. Ninety-one reviewed scenario questions were added to the source bank; three of those are quarantined (two duplicates and one ambiguous answer key), leaving 88 published. Ten fuller scenario questions replaced shorter overlaps. Existing records remain in the source bank with `status: quarantined` and a `duplicateOf` pointer, so each decision is reversible and only the retained version appears publicly.
+
+The older scenario set also contained 86 trailing import markers in options. These markers were removed. Sixty-one published records whose explanation named a different answer letter from their key were quarantined pending a full answer and cross-reference review. A validation gate now rejects either defect in published records. The conflicting webhook answer-key item remains quarantined; neither version is treated as verified.
+
+The retained replacements are `cca-f-curated-045`, `050`, `052`, `054`, `066`, `080`, `088`, `116`, `135`, and `139`. The internal overlaps `cca-f-curated-152` and `162` were quarantined in favor of `139` and `153`; `cca-f-curated-130` was quarantined because its keyed routing choice is not uniquely supported by the scenario. The current public counts reflect these decisions.
 
 ## Priority recommendation
 

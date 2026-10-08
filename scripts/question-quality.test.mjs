@@ -30,6 +30,14 @@ test('published question gate rejects known exclusions, duplicate prompts and pl
   assert.match(validateQuestionBank([placeholder], 'cca-f').join('\n'), /letter placeholder/);
 });
 
+test('published question gate rejects import markers and explanations naming a different key', () => {
+  const marked = { ...sample, options: sample.options.map((option, index) => ({ ...option, text: option.text + (index === 0 ? ' ****' : '') })) };
+  assert.match(validateQuestionBank([marked], 'cca-f').join('\n'), /import marker/);
+  const otherAnswer = ['A', 'B', 'C', 'D'].find(id => id !== sample.correct);
+  const mislabeled = { ...sample, explanation: `**Why ${otherAnswer}: A rationale for the wrong option.` };
+  assert.match(validateQuestionBank([mislabeled], 'cca-f').join('\n'), /explanation names/);
+});
+
 test('mock pool excludes published but ineligible questions', () => {
   const ready = { ...sample, id: 'ready-eligible', status: 'ready', mockEligible: true };
   const ineligible = { ...sample, id: 'ready-ineligible', status: 'ready', mockEligible: false };

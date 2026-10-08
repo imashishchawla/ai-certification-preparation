@@ -56,7 +56,7 @@ Complete 30-lesson structured curriculum, deep architectural breakdowns, 21 Gold
 
 #### **Claude Certified Architect — Foundations (CCAR-F; legacy code CCA-F)**
 
-- **1,138 Interactive Practice Questions:** Coverage across all 5 official exam domains:
+- **1,149 Interactive Practice Questions:** Coverage across all 5 official exam domains:
   - **D1 Agentic Architecture &amp; Orchestration (27%)**
   - **D2 Tool Design &amp; MCP (18%)**
   - **D3 Claude Code Config &amp; Workflows (20%)**

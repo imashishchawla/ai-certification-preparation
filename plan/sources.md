@@ -2,7 +2,7 @@
 
 > **Document Version:** 2.0.0 · **Updated:** 2026-09-30  
 > **Exams Covered:**  
-> 1. `cca-f` — Claude Certified Architect — Foundations (Active · 1,138 published questions)
+> 1. `cca-f` — Claude Certified Architect — Foundations (Active · 1,149 published questions)
 > 2. `terraform-associate` (`TA-004`) — HashiCorp Certified: Terraform Associate (004) (Onboarding · Tests Terraform 1.12+)  
 > 3. `ccar-p` — Claude Certified Architect — Professional (Planned · 63 questions · 120 min)  
 > 4. `ccdv-f` — Claude Certified Developer — Foundations (Planned · 53 questions · 120 min)  
@@ -153,7 +153,7 @@ These sources were audited during intelligence gathering but are excluded from a
 
 | Exam ID | Code | Status | Question Bank Size (Current) | Target Question Bank Size | Primary Question Ingestion Sources |
 |---|---|:---:|:---:|:---:|---|
-| **`cca-f`** | `CCAR-F` | **Active** | **1,138** | 1,200+ | Szymon Paluch (60Q), Claude Cert Guide (257Q), CCA Architects (400Q), Amey Thakur (320Q), CCA-Prep (170Q), CertyIQ, original editorial calibration (6Q) |
+| **`cca-f`** | `CCAR-F` | **Active** | **1,149** | 1,200+ | Szymon Paluch (60Q), Claude Cert Guide (257Q), CCA Architects (400Q), Amey Thakur (320Q), CCA-Prep (170Q), CertyIQ, licensed practice questions, original editorial calibration (6Q) |
 | **`terraform-associate`** | `TA-004` | **Onboarding** | **0** (Scaffolded) | **350+** | HashiCorp Official Questions 004, ExamTopics (358Q), Brad McCoy (100Q), Bryan Krausen (Benchmark), CertyIQ |
 | **`ccar-p`** | `CCAR-P` | **Planned** | 0 | 250+ | Anthropic Enterprise Docs, Tutorials Dojo, Preporato, Claude Cert Guide Professional |
 | **`ccdv-f`** | `CCDV-F` | **Planned** | 0 | 200+ | Anthropic API/Cookbook, Preporato, CertSafari, Claude Cert Guide Developer |

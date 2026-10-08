@@ -88,9 +88,18 @@ export function validateQuestionBank(questions, examId) {
     if (typeof question.prompt === 'string' && (answerLeak.test(question.prompt) || leakedPrefix.test(question.prompt))) {
       errors.push(`${label}: prompt contains answer or parser metadata`);
     }
+    if (active && typeof question.explanation === 'string') {
+      const namedAnswer = question.explanation.match(/^\*\*Why ([A-D]):/);
+      if (namedAnswer && namedAnswer[1] !== question.correct) {
+        errors.push(`${label}: explanation names ${namedAnswer[1]} but answer key is ${question.correct}`);
+      }
+    }
     question.options.forEach((option, optionIndex) => {
       if (typeof option?.text === 'string' && answerLeak.test(option.text)) {
         errors.push(`${label}: option ${optionIndex + 1} contains an answer marker`);
+      }
+      if (active && typeof option?.text === 'string' && option.text.includes('****')) {
+        errors.push(`${label}: option ${optionIndex + 1} contains an import marker`);
       }
       if (active && /^\s*\*?\s*[A-E]\s*$/i.test(option?.text || '')) {
         errors.push(`${label}: option ${optionIndex + 1} is only a letter placeholder`);
