@@ -23,6 +23,7 @@
   var allQuestions = [];
   var activeAttempt = null;
   var timerInterval = null;
+  var timerHidden = false;
   var exitWarningDismissed = false;
   var activeResultFilter = 'all';
   var focusBeforeModal = null;
@@ -352,6 +353,14 @@
   function updateTimerDisplay(remainingMs) {
     var timerEls = container.querySelectorAll('.mockTimer');
     if (!timerEls.length) return;
+    if (timerHidden) {
+      timerEls.forEach(function(el) {
+        el.textContent = '⏱ Hidden';
+        el.style.color = 'var(--muted)';
+        el.style.fontWeight = 'normal';
+      });
+      return;
+    }
     var totalSec = Math.max(0, Math.floor(remainingMs / 1000));
     var hrs = Math.floor(totalSec / 3600);
     var mins = Math.floor((totalSec % 3600) / 60);
@@ -363,10 +372,13 @@
 
     timerEls.forEach(function(el) {
       el.textContent = '⏱ ' + formatted;
-      if (totalSec <= 300) el.textContent += ' · Under 5 minutes';
-      else if (totalSec <= 600) el.textContent += ' · Under 10 minutes';
+      if (totalSec <= 300) el.textContent += ' · Under 5m';
+      else if (totalSec <= 600) el.textContent += ' · Under 10m';
       if (totalSec < 300) {
         el.style.color = 'var(--wrong-fg)';
+        el.style.fontWeight = 'bold';
+      } else {
+        el.style.color = 'var(--accent)';
         el.style.fontWeight = 'bold';
       }
     });
@@ -466,7 +478,10 @@
     html += '      <span>' + (isFlagged ? '⚑ Flagged for Review' : '⚐ Flag for Review') + '</span>';
     html += '    </button>';
     html += '    <button id="btnToggleFs" class="btn-fs-toggle" title="Toggle Fullscreen">' + (isFullscreen() ? '⛶ Exit Fullscreen' : '⛶ Fullscreen') + '</button>';
-    html += '    <div class="mockTimer" role="timer" aria-live="off" style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--accent); font-weight: bold; min-width: 90px; text-align: center;">⏱ --:--</div>';
+    html += '    <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 3px;">';
+    html += '      <div class="mockTimer" role="timer" aria-live="off" style="font-family: var(--font-heading); font-size: 1rem; color: var(--accent); font-weight: bold; min-width: 75px; text-align: center;">⏱ --:--</div>';
+    html += '      <button id="btnToggleHideTimer" type="button" style="background: none; border: none; font-size: 0.75rem; color: var(--muted); cursor: pointer; text-decoration: underline; padding: 0;" title="Toggle timer visibility">[' + (timerHidden ? 'Show' : 'Hide') + ']</button>';
+    html += '    </div>';
     html += '    <button id="btnReviewScreenTop" class="reveal-btn" style="background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); padding: 0.35rem 0.8rem; font-size: 0.85rem;">Review Screen ▤</button>';
     html += '    <button id="btnEndExam" class="reveal-btn" style="background: var(--wrong-border); padding: 0.35rem 0.8rem; font-size: 0.85rem;">End Exam</button>';
     html += '  </div>';
@@ -499,14 +514,20 @@
 
     html += '    <div class="options-list" role="radiogroup" aria-label="Answers for question ' + (idx + 1) + '">';
     var currentAnswer = activeAttempt.answers[q.id];
+    activeAttempt.strikeouts = activeAttempt.strikeouts || {};
+    var currentStrikes = activeAttempt.strikeouts[q.id] || [];
     q.options.forEach(function(opt) {
       var optKey = opt.id || opt.key;
       var isChecked = currentAnswer === optKey ? 'checked' : '';
-      html += '    <label class="option-label">';
-      html += '      <input type="radio" name="mockRadio" value="' + optKey + '" ' + isChecked + '>';
-      html += '      <span class="option-letter">' + optKey + '.</span>';
-      html += '      <span>' + escapeHtml(opt.text) + '</span>';
-      html += '    </label>';
+      var isStruck = currentStrikes.indexOf(optKey) !== -1;
+      html += '    <div class="option-row" style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">';
+      html += '      <label class="option-label" style="flex: 1; margin-bottom: 0; ' + (isStruck ? 'opacity: 0.45; text-decoration: line-through;' : '') + '">';
+      html += '        <input type="radio" name="mockRadio" value="' + optKey + '" ' + isChecked + '>';
+      html += '        <span class="option-letter">' + optKey + '.</span>';
+      html += '        <span>' + escapeHtml(opt.text) + '</span>';
+      html += '      </label>';
+      html += '      <button type="button" class="btn-strikeout" data-opt="' + optKey + '" title="Strike out option (eliminate distractor)" style="background: none; border: 1px solid var(--border); border-radius: 3px; font-size: 0.75rem; color: var(--muted); cursor: pointer; padding: 0.35rem 0.5rem;" aria-label="Strike out option ' + optKey + '">' + (isStruck ? 'Undo ✕' : '✕') + '</button>';
+      html += '    </div>';
     });
     html += '    </div>';
 
@@ -580,6 +601,36 @@
         toggleExamFullscreen();
       });
     }
+
+    // Toggle Hide Timer
+    var btnToggleHideTimer = document.getElementById('btnToggleHideTimer');
+    if (btnToggleHideTimer) {
+      btnToggleHideTimer.addEventListener('click', function() {
+        timerHidden = !timerHidden;
+        var remainingMs = activeAttempt.deadlineTimestamp - Date.now();
+        updateTimerDisplay(remainingMs);
+        btnToggleHideTimer.textContent = '[' + (timerHidden ? 'Show' : 'Hide') + ']';
+      });
+    }
+
+    // Strikeout distractor toggle
+    container.querySelectorAll('.btn-strikeout').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var optKey = this.dataset.opt;
+        activeAttempt.strikeouts = activeAttempt.strikeouts || {};
+        var arr = activeAttempt.strikeouts[q.id] || [];
+        var idxInArr = arr.indexOf(optKey);
+        if (idxInArr !== -1) {
+          arr.splice(idxInArr, 1);
+        } else {
+          arr.push(optKey);
+        }
+        activeAttempt.strikeouts[q.id] = arr;
+        saveState();
+        renderExamView(false);
+      });
+    });
 
     // Radio change
     container.querySelectorAll('input[name="mockRadio"]').forEach(function(radio) {
@@ -662,7 +713,10 @@
 
     html += '  <div class="proctor-actions">';
     html += '    <button id="btnToggleFsReview" class="btn-fs-toggle" title="Toggle Fullscreen">' + (isFullscreen() ? '⛶ Exit Fullscreen' : '⛶ Fullscreen') + '</button>';
-    html += '    <div class="mockTimer" role="timer" aria-live="off" style="font-family: var(--font-heading); font-size: 1.05rem; color: var(--accent); font-weight: bold; min-width: 90px; text-align: center;">⏱ --:--</div>';
+    html += '    <div style="display: flex; align-items: center; gap: 0.35rem; background: var(--bg); border: 1px solid var(--border); padding: 0.2rem 0.5rem; border-radius: 3px;">';
+    html += '      <div class="mockTimer" role="timer" aria-live="off" style="font-family: var(--font-heading); font-size: 1rem; color: var(--accent); font-weight: bold; min-width: 75px; text-align: center;">⏱ --:--</div>';
+    html += '      <button id="btnToggleHideTimerReview" type="button" style="background: none; border: none; font-size: 0.75rem; color: var(--muted); cursor: pointer; text-decoration: underline; padding: 0;" title="Toggle timer visibility">[' + (timerHidden ? 'Show' : 'Hide') + ']</button>';
+    html += '    </div>';
     html += '    <button id="btnReturnToQuestionTop" class="reveal-btn" style="background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); padding: 0.35rem 0.8rem; font-size: 0.85rem;">Return to Question ' + (activeAttempt.currentIndex + 1) + ' ◄</button>';
     html += '    <button id="btnEndExamReview" class="reveal-btn" style="background: var(--wrong-border); padding: 0.35rem 0.8rem; font-size: 0.85rem;">End Exam</button>';
     html += '  </div>';
@@ -743,6 +797,16 @@
     if (btnToggleFsReview) {
       btnToggleFsReview.addEventListener('click', function() {
         toggleExamFullscreen();
+      });
+    }
+
+    var btnToggleHideTimerReview = document.getElementById('btnToggleHideTimerReview');
+    if (btnToggleHideTimerReview) {
+      btnToggleHideTimerReview.addEventListener('click', function() {
+        timerHidden = !timerHidden;
+        var remainingMs = activeAttempt.deadlineTimestamp - Date.now();
+        updateTimerDisplay(remainingMs);
+        btnToggleHideTimerReview.textContent = '[' + (timerHidden ? 'Show' : 'Hide') + ']';
       });
     }
 

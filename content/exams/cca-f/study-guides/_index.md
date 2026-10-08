@@ -6,3 +6,6 @@ layout: "list"
 cascade:
   layout: "study-guide"
 ---
+
+> **Last Updated: October 2026** — Enriched with real Pearson VUE exam UI breakdown, test-taker scenario experiences, and the "Architecture Over Instructions" golden pattern.
+

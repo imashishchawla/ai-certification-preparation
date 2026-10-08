@@ -59,9 +59,9 @@ layout: "single"
 
 <div class="card-grid">
   <a href="/ai-certification-preparation/exams/cca-f/study-guides/" class="card">
-    <span class="tag">THEORY & LESSONS</span>
-    <h3>Study Guides</h3>
-    <p>All study-related material included here: theory deep-dives covering agentic loops, hooks, multi-agent pipelines, MCP, and session state.</p>
+    <span class="tag" style="background: var(--accent); color: var(--accent-contrast);">UPDATED OCTOBER 2026</span>
+    <h3>Study Guides & Lessons</h3>
+    <p>Comprehensive theory deep-dives covering agentic loops, hooks, multi-agent pipelines, MCP, and session state. <em>Recently updated with Pearson VUE exam UI breakdown and test-taker scenario insights.</em></p>
   </a>
 
   <a href="/ai-certification-preparation/exams/cca-f/domains/" class="card">
@@ -101,9 +101,9 @@ layout: "single"
 
 <div class="card-grid">
   <a href="/ai-certification-preparation/exams/cca-f/sample-questions/" class="card" style="border-left: 6px solid var(--accent);">
-    <span class="tag">PRACTICE (1,138 Qs)</span>
+    <span class="tag">PRACTICE (1,133 Qs)</span>
     <h3>Sample Questions (Domain Categorized)</h3>
-    <p>Browse 1,138 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
+    <p>Browse 1,133 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
   </a>
 
   <a href="/ai-certification-preparation/exams/cca-f/mock-test/" class="card" style="border-left: 6px solid var(--focus-ring);">

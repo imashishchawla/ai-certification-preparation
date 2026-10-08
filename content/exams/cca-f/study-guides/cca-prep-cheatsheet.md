@@ -22,7 +22,59 @@ The [official exam guide](/ai-certification-preparation/exams/cca-f/study-materi
 | D4 · Prompt engineering & structured output | 20% | How is the output constrained, validated, and corrected? |
 | D5 · Context management & reliability | 15% | What information must survive, and when should a human take over? |
 
-**Fast question method:** (1) Name the scenario and required outcome. (2) Mark any hard constraint: latency, policy, context, cost, or output shape. (3) Choose the control that enforces that constraint. (4) Eliminate answers that merely ask the model to remember it.
+## Pearson VUE Interface & Real Exam Screen Layout
+
+Candidates sit for the exam either at a Pearson VUE test center or remotely via the **OnVUE** secure proctored client. Understanding the physical layout prevents cognitive overload:
+
+```
++-----------------------------------------------------------------------------------------+
+| [Pearson VUE / Anthropic]      Time Remaining: 01:48:32 [Hide]     Question 24 of 60   |
++---------------------------------------------------+-------------------------------------+
+| LEFT PANE (~30% - 35%): Case / Context            | RIGHT PANE (~65% - 70%): Action Area|
+|                                                   |                                     |
+| [Tab: Case Overview] [Tab: Tech Stack]            | Question Prompt:                    |
+|                                                   | Which architectural change will     |
+| Topic Brief: High-Throughput Document Processing  | prevent tool-call non-determinism   |
+| Role: Lead Systems Architect                      | while preserving context memory?    |
+|                                                   |                                     |
+| Situation Description:                            | ( ) A. Rewrite system prompt...     |
+| An asynchronous message queue pushes              | ( ) B. Configure isError on tool... |
+| unvalidated payload schemas into an agentic       | ( ) C. Enforce strict JSON Schema...|
+| coordinator loop. Under peak traffic, the         | ( ) D. Increase max_tokens limit... |
+| loop triggers repeated tool timeouts...           |                                     |
+|                                                   |                                     |
++---------------------------------------------------+-------------------------------------+
+| [Flag for Review] [Strikeout]                          [<< Previous]        [Next >>]   |
++-----------------------------------------------------------------------------------------+
+```
+
+### Key UI Features Described by Real Test-Takers
+1. **The Split-Screen Architecture**:
+   - **Left Pane (~30%–35%)**: Displays the **Topic Brief, Role Context, and System Scenario**. On complex multi-part scenario blocks, tabs organize architecture constraints, current configurations, and code/schema listings.
+   - **Right Pane (~65%–70%)**: The actionable question stem and 4 options (standard radio buttons for single-choice; square checkboxes with explicit instructions like *"Select TWO"* for multi-select).
+2. **Top Proctor Bar**:
+   - Live countdown clock (`HH:MM:SS`) with a **`[Hide]`** toggle button (reducing anxiety).
+   - Question counter (`Question X of 60`).
+3. **Bottom Action Bar**:
+   - **`[Flag for Review]`**: Toggle to flag tricky items for revisiting.
+   - **Strike-through Tool**: Allows eliminating false distractors directly on screen.
+   - **`[Previous]`** and **`[Next]`** buttons.
+4. **End-of-Section Review Matrix**:
+   - A complete 60-item grid showing three distinct states: **Answered**, **Unanswered (Incomplete)**, and **Flagged**. You can jump directly to any question before final submission.
+
+---
+
+## How Real Test-Takers Describe the Questions
+
+Recent debriefs from test-takers across Reddit, Medium, and community forums highlight consistent cognitive patterns:
+
+* **1. Dense Case Studies, Zero Trivia Flashcards**: You will not be asked definitions or parameter names in isolation. Every question drops you into a production engineering scenario (e.g. 40 turns deep in a debugging session, a CI pipeline failing lint checks, or subagents overwriting shared state).
+* **2. The "Honeypot" Traps**: Wrong answers frequently sound tempting and "safe" by suggesting more prompt instructions (e.g., *"Add strict rules in ALL CAPS to never call the tool twice"*). The exam deliberately treats prompt cajoling as an anti-pattern.
+* **3. The Winning Tactic: Read the Last Sentence First**:
+  > *"Because scenarios are 2–3 paragraphs of dense architectural text, read the final sentence on the right first to know exactly what outcome is required. Then scan the options to see what dials are being turned, and only then read the scenario on the left."*
+* **4. Brutal 2-Minute Time Pressure**: 120 minutes for 60 questions requires swift pacing. Successful test-takers flag ambiguous questions immediately and return to them during the End-of-Section Review Matrix.
+
+---
 
 ## The Golden Pattern: Architecture Over Instructions
 
