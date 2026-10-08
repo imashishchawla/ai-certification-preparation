@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-// Editorial mapping of the previously imported first 40 items in the
-// supplied 175-item questionnaire to the July 2026 CCAR-F task statements.
+// Editorial mapping of a previously imported source set to the July 2026
+// CCAR-F task statements.
 const taskByNumber = {
   1: '1.3', 2: '5.6', 3: '1.2', 4: '1.7', 5: '1.2', 6: '1.6',
   7: '1.2', 8: '5.6', 9: '1.2', 10: '1.3', 11: '5.6', 12: '1.3',

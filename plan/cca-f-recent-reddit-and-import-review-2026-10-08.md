@@ -1,4 +1,4 @@
-# CCAR-F recent signals and paid-question import review — 2026-10-08
+# CCAR-F recent signals and practice-category review — 2026-10-08
 
 ## Source priority
 
@@ -43,23 +43,8 @@ Counts recalculate within a selected domain. They are **counts of our editorial 
 
 This skew is a warning about tag provenance: D1 has far more questions but a much smaller share tagged Difficult than D4/D5. Do not force arbitrary target counts such as 100/200/300 by relabeling questions. Reclassify after editorial review or actual response data.
 
-## Paid-team questionnaire
-
-The PDF at the user-supplied Downloads path was reviewed on 8 October 2026. It has 140 pages, claims 175 questions, includes 175 answer labels, and has SHA-256 `6ceafb8ccc2897084f27b2b8dac49e285e73b74dfa261295a67bee8d653c7c2d`. Its cover uses the name Anthropic, but the document contains no visible publisher or reuse licence. Treat it as third-party practice material, not an official Anthropic questionnaire. A purchase or team subscription by itself does not establish public republication rights. Section 14 of the [official guide](../static/assets/cca-f/pdfs/claude-architect-foundations-study-guide.pdf) says live exam questions, options, and scenarios are confidential and may not be reproduced.
-
-The first 40 PDF items overlap a previously imported source set: 39 have corresponding `cca-f-certyiq-NNN` records in the bank; PDF question 21 has no same-numbered bank copy. The PDF text extraction has only 174 visible question-number headings: question 11's heading is missing. Question 5 has a blank extracted stem, and other lines/options are truncated. The bank copies of questions 18, 22, and 23 also contain broken stems, so they have now been quarantined. The 39 records were mapped to official D1–D5 task statements; this corrected several earlier domain labels. Eight later PDF items substantially overlap those same bank records. Within the PDF, questions 170 and 171 are identical in the extracted text, and ten other pairs have strongly similar stems. See the [publicly accessible, unlisted overlap crosswalk](../content/exams/cca-f/pdf-overlap-review/index.md) for the identifiers. The crosswalk publishes identifiers and review status only; it does not reproduce PDF content.
-
-Import sequence after receiving the PDF:
-
-1. Preserve an untouched copy outside the public site and record file hash, source, date, and permitted use.
-2. Extract each prompt, choice, key, explanation, and source page into a staging file with `pending-review` status. Flag OCR uncertainty instead of guessing missing characters or answers.
-3. Deduplicate against all 1,223 source records, including the 82 quarantined records, and compare *meaning*, not only normalized prompt text.
-4. Map each candidate to a specific CCAR-F v1.0 task and one of the six contexts. Move off-scope and unsupported-key items to quarantine; keep any licenced-but-unverified items in staging.
-5. Publish only items with a checked answer and rationale. Apply the same quality rule to paid material as to original and free material. If the reuse terms allow only internal study, do not put verbatim items into this public bank; use a private review copy instead.
-
 ## Priority recommendation
 
-1. Confirm the PDF's reuse terms, then review the unmatched items against the official task statements and answer explanations before any public import. Do not re-import the existing 39 or the repeated later items.
-2. Replace the random 60-question mock with four coherent scenario blocks after a human-reviewed mapping exists. The current mock is only domain weighted.
-3. Add multiple-response rendering and exact-set scoring because the official format includes it. Do not invent extra correct choices on existing single-answer items.
-4. Review the 805 published items without a task `section` mapping, then empirically calibrate difficulty from response data if available. Until then, show category counts but avoid claims that a category is objectively easy or hard.
+1. Replace the random 60-question mock with four coherent scenario blocks after a human-reviewed mapping exists. The current mock is only domain weighted.
+2. Add multiple-response rendering and exact-set scoring because the official format includes it. Do not invent extra correct choices on existing single-answer items.
+3. Review published items without a task `section` mapping, then empirically calibrate difficulty from response data if available. Until then, show category counts but avoid claims that a category is objectively easy or hard.
