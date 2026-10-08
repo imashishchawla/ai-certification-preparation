@@ -79,7 +79,7 @@ ${pdfInternalPairs.map(([first, second]) => `| ${first} | ${second} | ${first ==
 
 ## Import decision
 
-No new PDF question has been published from this review. The source has 175 answer labels but only 174 visible question-number headings in text extraction; question 11's heading is missing. Question 5's stem is blank in the PDF extraction, and several options or lines are truncated. The paid source's public redistribution terms remain unverified. New items need complete text, a checked answer, an official D1–D5 task mapping, and confirmed reuse rights before publication.
+No new PDF question has been imported into the reviewed question bank. The PDF itself is available through a separate unlisted link, following the user's confirmation that it may be shared publicly. The source has 175 answer labels but only 174 visible question-number headings in text extraction; question 11's heading is missing. Question 5's stem is blank in the PDF extraction, and several options or lines are truncated. New bank items need complete text, a checked answer, and an official D1–D5 task mapping before publication as practice questions.
 
 [Browse the current reviewed question bank](${prefix})
 `;
