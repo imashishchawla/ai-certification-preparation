@@ -196,6 +196,7 @@ const metadataMap = {
 
 let publishedCount = 0;
 for (const q of questions) {
+  if (q.status === 'quarantined' || q.status === 'rejected') continue;
   if (q.status !== 'ready' || q.reviewStatus !== 'approved') {
     const meta = metadataMap[q.id] || {};
     q.status = 'ready';
@@ -216,13 +217,14 @@ console.log(`[publish-all] Successfully published ${publishedCount} questions. T
 
 // Update data/exams.toml questions count
 let toml = fs.readFileSync(examsPath, 'utf8');
-toml = toml.replace(/questions = \d+/, `questions = ${questions.length}`);
+const eligibleCount = questions.filter(q => q.status === 'ready' || q.status === 'released').length;
+toml = toml.replace(/questions = \d+/, `questions = ${eligibleCount}`);
 fs.writeFileSync(examsPath, toml);
-console.log(`[publish-all] Updated data/exams.toml with questions = ${questions.length}`);
+console.log(`[publish-all] Updated data/exams.toml with questions = ${eligibleCount}`);
 
 // Update content/exams/cca-f/_index.md
 let indexMd = fs.readFileSync(indexPath, 'utf8');
-indexMd = indexMd.replace(/PRACTICE \(\d[\d,]* Qs\)/g, `PRACTICE (${questions.length.toLocaleString('en-US')} Qs)`);
-indexMd = indexMd.replace(/Browse \d[\d,]* practice questions/g, `Browse ${questions.length.toLocaleString('en-US')} practice questions`);
+indexMd = indexMd.replace(/PRACTICE \(\d[\d,]* Qs\)/g, `PRACTICE (${eligibleCount.toLocaleString('en-US')} Qs)`);
+indexMd = indexMd.replace(/Browse \d[\d,]* practice questions/g, `Browse ${eligibleCount.toLocaleString('en-US')} practice questions`);
 fs.writeFileSync(indexPath, indexMd);
-console.log(`[publish-all] Updated content/exams/cca-f/_index.md with ${questions.length.toLocaleString('en-US')} questions.`);
+console.log(`[publish-all] Updated content/exams/cca-f/_index.md with ${eligibleCount.toLocaleString('en-US')} questions.`);

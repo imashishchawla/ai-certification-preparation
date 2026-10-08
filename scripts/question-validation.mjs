@@ -1,5 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { reviewFlags } from './cca-f-review-flags.mjs';
+import { recallOnlySet, lacksMockContext } from './cca-f-format-review.mjs';
 
 const schemaPath = new URL('../.agent/schemas/question.schema.json', import.meta.url);
 const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
@@ -43,6 +45,7 @@ export function validateQuestionBank(questions, examId) {
   if (!Array.isArray(questions)) return ['Question bank must be an array'];
   const errors = [];
   const seen = new Set();
+  const seenActivePrompts = new Map();
   questions.forEach((question, index) => {
     const label = `Question ${index + 1} (${question?.id || 'missing ID'})`;
     errors.push(...validateSchema(question).map(message => `${label}: ${message}`));
@@ -50,6 +53,25 @@ export function validateQuestionBank(questions, examId) {
     if (question.exam !== examId) errors.push(`${label}: exam does not match ${examId}`);
     if (seen.has(question.id)) errors.push(`${label}: duplicate ID`);
     seen.add(question.id);
+    const active = question.status === 'ready' || question.status === 'released';
+    if (examId === 'cca-f' && active && reviewFlags.has(question.id)) {
+      errors.push(`${label}: flagged question must not be published (${reviewFlags.get(question.id).code})`);
+    }
+    if (question.status === 'quarantined' && question.mockEligible === true) {
+      errors.push(`${label}: quarantined question cannot be mock eligible`);
+    }
+    if (examId === 'cca-f' && recallOnlySet.has(question.id) && question.mockEligible === true) {
+      errors.push(`${label}: recall-only question cannot be mock eligible`);
+    }
+    if (examId === 'cca-f' && active && lacksMockContext(question) && question.mockEligible === true) {
+      errors.push(`${label}: short stem without a scenario cannot be mock eligible`);
+    }
+    if (active && typeof question.prompt === 'string') {
+      const normalized = question.prompt.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+      const earlier = seenActivePrompts.get(normalized);
+      if (earlier) errors.push(`${label}: duplicate active prompt matches ${earlier}`);
+      else if (normalized) seenActivePrompts.set(normalized, question.id);
+    }
     if (!Array.isArray(question.options)) return;
     const ids = question.options.map(option => option?.id);
     if (new Set(ids).size !== ids.length) errors.push(`${label}: duplicate option ID`);
@@ -69,6 +91,9 @@ export function validateQuestionBank(questions, examId) {
     question.options.forEach((option, optionIndex) => {
       if (typeof option?.text === 'string' && answerLeak.test(option.text)) {
         errors.push(`${label}: option ${optionIndex + 1} contains an answer marker`);
+      }
+      if (active && /^\s*\*?\s*[A-E]\s*$/i.test(option?.text || '')) {
+        errors.push(`${label}: option ${optionIndex + 1} is only a letter placeholder`);
       }
     });
   });

@@ -377,6 +377,10 @@ th {
   margin-bottom: 1.5rem;
 }
 
+.exam-split-layout.exam-no-scenario {
+  grid-template-columns: 1fr;
+}
+
 .exam-scenario-pane {
   background: var(--code-bg);
   border: 2px solid var(--border);

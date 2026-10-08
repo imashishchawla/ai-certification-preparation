@@ -12,7 +12,7 @@ layout: "single"
 | **Questions** | 60 items |
 | **Testing time** | 120 minutes |
 | **Total seat time** | About 135 minutes, including check-in, instructions, and the post-exam survey |
-| **Passing Score** | 720 / 1000 scaled (72%) |
+| **Passing Score** | 720 on Anthropic's scaled 100–1,000 score; this is not a raw percentage |
 | **Exam Fee** | $125 USD |
 | **Provider** | Pearson VUE (proctored) |
 
@@ -24,27 +24,27 @@ layout: "single"
   <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
     <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">27%</div>
     <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D1 Architecture</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">16 Questions</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈16 Questions</div>
   </div>
   <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
     <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">18%</div>
     <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D2 Tool Design</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">11 Questions</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈11 Questions</div>
   </div>
   <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
     <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">20%</div>
     <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D3 Claude Code</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">12 Questions</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈12 Questions</div>
   </div>
   <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
     <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">20%</div>
     <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D4 Prompts & JSON</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">12 Questions</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈12 Questions</div>
   </div>
   <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
     <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">15%</div>
     <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D5 Context & Rel</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">9 Questions</div>
+    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈9 Questions</div>
   </div>
   <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--accent); background: rgba(0,0,0,0.03); text-align: center;">
     <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--fg);">100%</div>
@@ -101,15 +101,15 @@ layout: "single"
 
 <div class="card-grid">
   <a href="/ai-certification-preparation/exams/cca-f/sample-questions/" class="card" style="border-left: 6px solid var(--accent);">
-    <span class="tag">PRACTICE (1,217 Qs)</span>
+    <span class="tag">PRACTICE (1,138 Qs)</span>
     <h3>Sample Questions (Domain Categorized)</h3>
-    <p>Browse 1,217 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
+    <p>Browse 1,138 practice questions across five domains. Filter by topic and difficulty, then reveal answer explanations.</p>
   </a>
 
   <a href="/ai-certification-preparation/exams/cca-f/mock-test/" class="card" style="border-left: 6px solid var(--focus-ring);">
-    <span class="tag">EXAM SIMULATION</span>
+    <span class="tag">TIMED PRACTICE</span>
     <h3>Timed Mock Test (60Q / 120M)</h3>
-    <p>Simulate the live certification exam with a randomized 60-question test balanced by official domain weights and a 120-minute timer.</p>
+    <p>Practise with 60 questions, approximate official domain weights, and a 120-minute timer. The current mock uses independent single-answer items rather than the exam's shared scenario blocks and multiple-response format.</p>
   </a>
 </div>
 

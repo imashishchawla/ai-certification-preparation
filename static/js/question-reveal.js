@@ -9,6 +9,7 @@
   var allQuestions = [];
   var activeDomain = 'All';
   var requestedDomain = new URLSearchParams(window.location.search).get('domain');
+  var requestedQuestion = new URLSearchParams(window.location.search).get('question');
   var activeDifficulty = 'All';
   var activeSort = 'oldest'; // 'oldest' (Old to New) | 'newest' (New to Old)
   var currentPage = 1;
@@ -54,6 +55,9 @@
 
   function renderFilters() {
     if (!filterContainer) return;
+    var domainQuestions = activeDomain === 'All' ? allQuestions : allQuestions.filter(function(q) {
+      return q.domain && q.domain.startsWith(activeDomain);
+    });
     var domains = ['All'].concat(Array.from(new Set(allQuestions.map(function(q) {
       var match = (q.domain || '').match(/^D\d+/);
       return match ? match[0] : null;
@@ -72,7 +76,8 @@
     html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Domain:</span>';
     domains.forEach(function(d) {
-      var label = d === 'All' ? 'All Domains (' + allQuestions.length + ')' : d;
+      var count = d === 'All' ? allQuestions.length : allQuestions.filter(function(q) { return q.domain && q.domain.startsWith(d); }).length;
+      var label = d === 'All' ? 'All Domains (' + count.toLocaleString() + ')' : d + ' (' + count.toLocaleString() + ')';
       var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: var(--accent-contrast);"' : '';
       html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" aria-pressed="' + (d === activeDomain) + '" ' + activeStyle + '>' + label + '</button>';
     });
@@ -85,8 +90,9 @@
     html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Difficulty:</span>';
     difficulties.forEach(function(diff) {
+      var count = diff.id === 'All' ? domainQuestions.length : domainQuestions.filter(function(q) { return categoryForQuestion(q) === diff.id; }).length;
       var activeStyle = diff.id === activeDifficulty ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-      html += '<button class="reveal-btn diff-btn" data-diff="' + diff.id + '" aria-pressed="' + (diff.id === activeDifficulty) + '" ' + activeStyle + '>[' + diff.label + ']</button>';
+      html += '<button class="reveal-btn diff-btn" data-diff="' + diff.id + '" aria-pressed="' + (diff.id === activeDifficulty) + '" ' + activeStyle + '>[' + diff.label + ' ' + count.toLocaleString() + ']</button>';
     });
     html += '</div>';
 
@@ -133,8 +139,21 @@
     });
   }
 
+  function categoryForQuestion(q) {
+    if (examId === 'cca-f' && q.mockEligible === false) return 'quick-drills';
+    if (q.type === 'quick-drill') return 'quick-drills';
+    var difficulty = (q.difficulty || 'intermediate').toLowerCase();
+    if (difficulty === 'basic') return 'quick-drills';
+    if (difficulty === 'advanced' || difficulty === 'hard' || difficulty === 'exam') return 'difficult';
+    return 'intermediate';
+  }
+
   function getFilteredQuestions() {
     var filtered = allQuestions.slice();
+
+    if (requestedQuestion) {
+      filtered = filtered.filter(function(q) { return q.id === requestedQuestion; });
+    }
 
     if (activeDomain !== 'All') {
       filtered = filtered.filter(function(q) {
@@ -144,19 +163,7 @@
 
     if (activeDifficulty !== 'All') {
       filtered = filtered.filter(function(q) {
-        var diff = (q.difficulty || 'intermediate').toLowerCase();
-        var isShort = (q.prompt || '').length < 140;
-
-        if (activeDifficulty === 'quick-drills') {
-          return diff === 'basic' || isShort || q.type === 'quick-drill';
-        }
-        if (activeDifficulty === 'difficult') {
-          return diff === 'advanced' || diff === 'hard' || diff === 'exam';
-        }
-        if (activeDifficulty === 'intermediate') {
-          return (diff === 'intermediate' || !q.difficulty) && !isShort && diff !== 'advanced' && diff !== 'hard' && diff !== 'exam';
-        }
-        return true;
+        return categoryForQuestion(q) === activeDifficulty;
       });
     }
 

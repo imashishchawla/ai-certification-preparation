@@ -2,13 +2,13 @@
 
 > **Document Version:** 2.0.0 · **Updated:** 2026-09-30  
 > **Exams Covered:**  
-> 1. `cca-f` — Claude Certified Architect — Foundations (Active · 1,130 questions)  
+> 1. `cca-f` — Claude Certified Architect — Foundations (Active · 1,138 published questions)
 > 2. `terraform-associate` (`TA-004`) — HashiCorp Certified: Terraform Associate (004) (Onboarding · Tests Terraform 1.12+)  
 > 3. `ccar-p` — Claude Certified Architect — Professional (Planned · 63 questions · 120 min)  
 > 4. `ccdv-f` — Claude Certified Developer — Foundations (Planned · 53 questions · 120 min)  
 >
 > **Methodology:** HTTPS sources only. All URLs are cataloged for automated or guided ingestion.  
-> **Zero-AI Generation Mandate:** Questions are strictly extracted from verified sources; the AI never synthesizes or hallucinates questions, distractors, or explanations.  
+> **Editorial question policy:** Imported questions retain source attribution. Original scenario questions may be authored against the official blueprint only when marked as editorial, mapped to a task statement, checked for duplicates, and reviewed for answer quality. They must never be presented as official or recalled live exam items.
 > **Deduplication:** Questions pass through token-similarity filtering ($>0.85$ threshold) before admission into `data/questions/<exam-id>/questions.json`.  
 > **Zero External Link Leakage:** All source URLs remain in internal registries (`.agent/cert-prep-curator/sources.json` and this plan). No raw affiliate or external outbound links are leaked into public Hugo rendered pages.
 
@@ -74,7 +74,7 @@ The **Claude Certified Architect — Foundations** exam tests enterprise agentic
 
 | # | Source Name | Format | Trust Tier | Scope & Primary Materials | Destination in Repo |
 |---|---|:---:|:---:|---|---|
-| **CCA-1** | [Anthropic Official Exam Guide v1.0](https://everpath-course-content.s3-accelerate.amazonaws.com/Claude+Certified+Architect+%E2%80%93+Foundations+Certification+Exam+Guide.pdf) | PDF | **Tier 1 (Official)** | 40-page v1.0 Exam Guide, 5 domain weightings, task statements, test format. | `content/exams/cca-f/study-materials/` |
+| **CCA-1** | [Anthropic Partner Academy exam page](https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification) and the locally archived July 2026 v1.0 guide | PDF | **Tier 1 (Official)** | 39-page v1.0 guide, five domain weights, 30 task statements, official samples, and scope lists. The separate 40-page PDF in the archive identifies itself as draft v0.1. | `content/exams/cca-f/study-materials/` |
 | **CCA-2** | [Anthropic Partner Academy (Skilljar)](https://anthropic-partners.skilljar.com) | LMS / HTML | **Tier 1 (Official)** | Official curriculum, registration details, Pearson VUE proctoring rules. | `content/exams/cca-f/study-materials/` |
 | **CCA-3** | [Claude Code CLI Documentation](https://code.claude.com) | Markdown / Web | **Tier 1 (Official)** | CLI architecture, subagents, memory files (`CLAUDE.md`), hooks, MCP integration. | `content/exams/cca-f/study-materials/` |
 | **CCA-4** | [Anthropic Platform & Agent SDK](https://docs.anthropic.com) | Markdown / Web | **Tier 1 (Official)** | Messages API, tool use, prompt caching rules, streaming, computer use. | `content/exams/cca-f/study-materials/` |
@@ -153,7 +153,7 @@ These sources were audited during intelligence gathering but are excluded from a
 
 | Exam ID | Code | Status | Question Bank Size (Current) | Target Question Bank Size | Primary Question Ingestion Sources |
 |---|---|:---:|:---:|:---:|---|
-| **`cca-f`** | `CCAF` | **Active** | **1,130** | 1,200+ | Szymon Paluch (60Q), Claude Cert Guide (257Q), CCA Architects (400Q), Amey Thakur (320Q), CCA-Prep (170Q), CertyIQ |
+| **`cca-f`** | `CCAR-F` | **Active** | **1,138** | 1,200+ | Szymon Paluch (60Q), Claude Cert Guide (257Q), CCA Architects (400Q), Amey Thakur (320Q), CCA-Prep (170Q), CertyIQ, original editorial calibration (6Q) |
 | **`terraform-associate`** | `TA-004` | **Onboarding** | **0** (Scaffolded) | **350+** | HashiCorp Official Questions 004, ExamTopics (358Q), Brad McCoy (100Q), Bryan Krausen (Benchmark), CertyIQ |
 | **`ccar-p`** | `CCAR-P` | **Planned** | 0 | 250+ | Anthropic Enterprise Docs, Tutorials Dojo, Preporato, Claude Cert Guide Professional |
 | **`ccdv-f`** | `CCDV-F` | **Planned** | 0 | 200+ | Anthropic API/Cookbook, Preporato, CertSafari, Claude Cert Guide Developer |

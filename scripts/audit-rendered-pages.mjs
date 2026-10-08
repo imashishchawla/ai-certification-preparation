@@ -100,7 +100,7 @@ for (const pagePath of allPages) {
   // 6. Check question counter accuracy on sample questions & exam index
   if (relPath.startsWith('exams/cca-f/sample-questions/')) {
     if (html.includes('Practice 205')) {
-      pageErrors.push('Stale question count: mentions "Practice 205" instead of 1,130');
+      pageErrors.push(`Stale question count: mentions "Practice 205" instead of ${ccaPublishedCount}`);
     }
     if (!html.includes(String(ccaPublishedCount)) && !html.includes(ccaPublishedCount.toLocaleString('en-US'))) {
       pageErrors.push(`Question count does not match published CCAF artifact (${ccaPublishedCount})`);

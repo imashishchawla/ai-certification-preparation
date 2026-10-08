@@ -10,13 +10,13 @@
           "exam_ids": [
             "cca-f"
           ],
-          "name": "Anthropic Official Exam Guide v1.0",
+          "name": "Anthropic archived Exam Guide draft v0.1 (superseded)",
           "url": "https://everpath-course-content.s3-accelerate.amazonaws.com/Claude+Certified+Architect+%E2%80%93+Foundations+Certification+Exam+Guide.pdf",
           "allowed_redirect_hosts": [
             "everpath-course-content.s3-accelerate.amazonaws.com"
           ],
           "trust_tier": "tier-1-official",
-          "active": true,
+          "active": false,
           "publication_mode": "document-source",
           "parser_adapter": "http-generic",
           "format": "pdf",

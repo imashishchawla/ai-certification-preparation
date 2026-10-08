@@ -202,11 +202,11 @@
       };
     }
 
-    // 4. General question: provide domain context brief on left
+    // 4. The question has no separate scenario; do not invent one.
     return {
-      topicBrief: 'Topic Brief: ' + (q.domain || 'Claude Architecture Foundations'),
-      roleContext: 'Role: Claude Certified Architect (CCAR-F)',
-      scenarioText: 'You are an AI Solutions Architect designing, configuring, and troubleshooting production-grade agentic systems with the Claude Agent SDK, Claude Code CLI, and the Model Context Protocol (MCP).\n\nEvaluate the following architectural requirement according to Anthropic production best practices and deterministic safety boundaries.',
+      topicBrief: '',
+      roleContext: '',
+      scenarioText: '',
       questionPrompt: q.prompt.trim()
     };
   }
@@ -475,18 +475,20 @@
     var sections = extractQuestionSections(q);
 
     // Two-Section Pearson VUE Split Layout: Left ~30% Topic Brief, Right ~70% Question
-    html += '<div class="exam-split-layout">';
+    html += '<div class="exam-split-layout' + (sections.scenarioText ? '' : ' exam-no-scenario') + '">';
 
     // Left Section: Topic Brief & Scenario Context
-    html += '  <aside class="exam-scenario-pane" aria-label="Topic Brief & System Context">';
-    html += '    <div class="exam-scenario-header">';
-    html += '      <span class="exam-scenario-badge">' + escapeHtml(sections.topicBrief) + '</span>';
-    html += '      <span class="exam-scenario-role">' + escapeHtml(sections.roleContext) + '</span>';
-    html += '    </div>';
-    html += '    <div class="exam-scenario-content">';
-    html += '      ' + formatScenarioHtml(sections.scenarioText);
-    html += '    </div>';
-    html += '  </aside>';
+    if (sections.scenarioText) {
+      html += '  <aside class="exam-scenario-pane" aria-label="Topic Brief & System Context">';
+      html += '    <div class="exam-scenario-header">';
+      html += '      <span class="exam-scenario-badge">' + escapeHtml(sections.topicBrief) + '</span>';
+      html += '      <span class="exam-scenario-role">' + escapeHtml(sections.roleContext) + '</span>';
+      html += '    </div>';
+      html += '    <div class="exam-scenario-content">';
+      html += '      ' + formatScenarioHtml(sections.scenarioText);
+      html += '    </div>';
+      html += '  </aside>';
+    }
 
     // Right Section: Question & Options
     html += '  <main class="exam-question-pane">';

@@ -14,11 +14,11 @@ Browse reference documents and PDFs collected for the CCAF preparation track. Ch
   <div class="question-card" style="border-left: 6px solid var(--accent);">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
       <span class="tag" style="background: var(--accent); color: #fff;">OFFICIAL EXAM GUIDE</span>
-      <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · 583 KB · 40 Pages</span>
+      <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · 39 Pages · Effective July 2026</span>
     </div>
-    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Anthropic Official CCAF v1.0 Exam Guide</h3>
-    <p>Anthropic's official 40-page v1.0 Foundations certification exam guide covering exam format, 5 domain task statements, weighted scoring, and official sample questions.</p>
-    <a href="/ai-certification-preparation/assets/cca-f/pdfs/official-exam-guide-foundations-v1.pdf" target="_blank" class="reveal-btn" style="display: inline-block; text-decoration: none;">View / Download Official Guide (Mirror) →</a>
+    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Anthropic Official CCAR-F v1.0 Exam Guide</h3>
+    <p>Anthropic's 39-page July 2026 Foundations exam guide covers the current format, five domains, task statements, official sample questions, and explicit in-scope and out-of-scope topics.</p>
+    <a href="/ai-certification-preparation/assets/cca-f/pdfs/claude-architect-foundations-study-guide.pdf" target="_blank" class="reveal-btn" style="display: inline-block; text-decoration: none;">View / Download Official Guide (Mirror) →</a>
   </div>
 
   <div class="question-card">
@@ -26,8 +26,8 @@ Browse reference documents and PDFs collected for the CCAF preparation track. Ch
       <span class="tag">REFERENCE ARCHIVE</span>
       <span class="muted" style="font-family: var(--font-heading); font-size: 0.85rem;">PDF · 583 KB · 40 Pages</span>
     </div>
-    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Official Exam Guide (Foundations Reference)</h3>
-    <p>Official 40-page v1.0 exam guide reference snapshot recovered from verified archives.</p>
+    <h3 style="margin-top: 0.5rem; margin-bottom: 0.5rem;">Earlier Exam Guide Draft (Archive)</h3>
+    <p>This 40-page archive identifies itself as version 0.1 and describes an older single-response format. Use the July 2026 v1.0 guide above for current exam scope and question format.</p>
     <a href="/ai-certification-preparation/assets/cca-f/pdfs/official-exam-guide-foundations-reference.pdf" target="_blank" class="reveal-btn" style="display: inline-block; background: var(--code-bg); color: var(--fg); border: 2px solid var(--border); text-decoration: none;">View / Download PDF (Reference Archive) →</a>
   </div>
 

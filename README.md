@@ -2,7 +2,7 @@
 
 ![Access Tier](https://img.shields.io/badge/ACCESS-100%25%20FREE-FFB000?style=for-the-badge)
 ![Sync Pulse](https://img.shields.io/badge/SYNC%20PULSE-SUN%2012%3A00%20UTC-00E5FF?style=for-the-badge&logo=githubactions&logoColor=fff)
-![Question Bank](https://img.shields.io/badge/QUESTION%20DATABASE-1%2C130%20VERIFIED-FF0055?style=for-the-badge)
+![Question Bank](https://img.shields.io/badge/QUESTION%20DATABASE-1%2C135%20PUBLISHED-FF0055?style=for-the-badge)
 
 > Prepare for professional certifications in one place. Find focused study guides, practice questions, exam notes, and timed mock tests, organised into a clear learning path for each available certification.
 
@@ -28,7 +28,7 @@ The first verified weekly snapshot will appear here after the scheduled report r
 
 ### 1. Interactive Scenario Practice
 
-Filter by domain (D1 to D5), toggle difficulty tiers (`basic`, `intermediate`, `advanced`), test your reflexes, and click **Reveal answer** for comprehensive architectural rationale and official reference links.
+Filter by domain (D1 to D5) and the counted Quick Drills, Intermediate, or Difficult practice sets, then click **Reveal answer** for the rationale and references.
 
 ![Interactive Practice Simulator](static/screenshots/sample-questions.png)
 
@@ -36,7 +36,7 @@ Filter by domain (D1 to D5), toggle difficulty tiers (`basic`, `intermediate`, `
 
 ### 2. Timed Arcade Mock Exam (Survival Mode)
 
-Simulate the official exam's 60 questions and 120-minute answer period with a domain-weighted practice test. Allow about 135 minutes for total seat time, including check-in, instructions, and the post-exam survey.
+Practise with 60 questions, a 120-minute timer, and the official domain weights. This mock currently draws independent single-answer items; it does not yet reproduce the exam's four shared scenario blocks or multiple-response format.
 
 ![Timed Mock Exam Simulator](static/screenshots/mock-test.png)
 
@@ -56,7 +56,7 @@ Complete 30-lesson structured curriculum, deep architectural breakdowns, 21 Gold
 
 #### **Claude Certified Architect — Foundations (CCAR-F; legacy code CCA-F)**
 
-- **1,130 Interactive Practice Questions:** Full coverage across all 5 official exam domains:
+- **1,138 Interactive Practice Questions:** Coverage across all 5 official exam domains:
   - **D1 Agentic Architecture &amp; Orchestration (27%)**
   - **D2 Tool Design &amp; MCP (18%)**
   - **D3 Claude Code Config &amp; Workflows (20%)**
