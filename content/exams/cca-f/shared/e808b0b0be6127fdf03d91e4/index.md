@@ -11,9 +11,26 @@ layout: "single"
 
 # CCAR-F question-bank share list
 
-This list tracks 175 reviewed question positions. **153** are represented by a published question or retained equivalent. Three have a related topic only, seven are quarantined, and twelve were not added. A related topic is not the same question.
+This list tracks 175 reviewed question positions. **153** are represented by published questions or retained equivalents. Use this interactive revision view to practice the exact questions directly with full answers, options, and explanations.
 
-[Browse the full CCAR-F question bank](/ai-certification-preparation/exams/cca-f/sample-questions/).
+<div style="background: var(--code-bg); border: 1px solid var(--border); padding: 1rem 1.25rem; border-radius: 4px; margin: 1.5rem 0;">
+  <strong>Private Last-Minute Revision Mode:</strong>
+  <p class="muted" style="margin: 0.25rem 0 0 0; font-size: 0.88rem;">Showing 153 curated review questions with instant explanation reveal. URL pagination is enabled (e.g. <code>?page=2</code>) so you can bookmark or share your exact progress.</p>
+</div>
+
+<p id="practiceStatus" class="sr-only" role="status" aria-live="polite"></p>
+<div id="questionsContainer" data-exam-id="cca-f" data-src="/data/exams/cca-f/shared-175.json" data-page-size="50" data-hide-filters="true"><p class="muted">Loading revision questions...</p></div>
+<div id="paginationContainer" aria-label="Question pages"></div>
+
+<script src="/ai-certification-preparation/js/question-reveal.js"></script>
+
+---
+
+## Complete 175-Item Status & Tracking Ledger
+
+The tracking table below records all 175 positions, including quarantined items and retained overlaps:
+
+[Browse the full 1,133-question CCAR-F bank](/ai-certification-preparation/exams/cca-f/sample-questions/).
 
 | # | Status | Question-bank link |
 | ---: | --- | --- |

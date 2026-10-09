@@ -5,18 +5,70 @@
   if (!container) return;
   var statusEl = document.getElementById('practiceStatus');
   var examId = container.dataset.examId || 'cca-f';
+  var customDataUrl = container.dataset.src;
+  var hideFilters = container.dataset.hideFilters === 'true';
 
   var allQuestions = [];
   var activeDomain = 'All';
-  var requestedDomain = new URLSearchParams(window.location.search).get('domain');
-  var requestedQuestion = new URLSearchParams(window.location.search).get('question');
   var activeDifficulty = 'All';
   var activeSort = 'oldest'; // 'oldest' (Old to New) | 'newest' (New to Old)
   var currentPage = 1;
-  var pageSize = 50;
+  var pageSize = Number(container.dataset.pageSize) || 50;
 
   var pathPrefix = window.location.pathname.startsWith('/ai-certification-preparation') ? '/ai-certification-preparation' : '';
-  var primaryUrl = pathPrefix + '/data/exams/' + encodeURIComponent(examId) + '/questions.json';
+  var primaryUrl = customDataUrl ? (pathPrefix + customDataUrl) : (pathPrefix + '/data/exams/' + encodeURIComponent(examId) + '/questions.json');
+
+  // Read initial query params from window.location
+  function readParamsFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var pDomain = params.get('domain');
+    if (pDomain) activeDomain = pDomain;
+    var pDiff = params.get('difficulty');
+    if (pDiff) activeDifficulty = pDiff;
+    var pSort = params.get('sort');
+    if (pSort === 'newest' || pSort === 'oldest') activeSort = pSort;
+    var pPage = parseInt(params.get('page'), 10);
+    if (!isNaN(pPage) && pPage >= 1) currentPage = pPage;
+  }
+
+  // Update browser URL query string without reloading
+  function updateUrlParams(targetQuestionId) {
+    var params = new URLSearchParams(window.location.search);
+
+    if (activeDomain && activeDomain !== 'All') {
+      params.set('domain', activeDomain);
+    } else {
+      params.delete('domain');
+    }
+
+    if (activeDifficulty && activeDifficulty !== 'All') {
+      params.set('difficulty', activeDifficulty);
+    } else {
+      params.delete('difficulty');
+    }
+
+    if (activeSort && activeSort !== 'oldest') {
+      params.set('sort', activeSort);
+    } else {
+      params.delete('sort');
+    }
+
+    if (currentPage > 1) {
+      params.set('page', currentPage);
+    } else {
+      params.delete('page');
+    }
+
+    if (targetQuestionId) {
+      params.set('question', targetQuestionId);
+    } else {
+      params.delete('question');
+    }
+
+    var newQuery = params.toString();
+    var newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '') + window.location.hash;
+    window.history.replaceState({ path: newUrl }, '', newUrl);
+  }
 
   function loadData(url) {
     return fetch(url).then(function(res) {
@@ -28,36 +80,75 @@
   // Graceful fallback chain across GitHub Pages, subpaths, and local dev
   loadData(primaryUrl)
     .catch(function() {
+      if (customDataUrl) return loadData(customDataUrl);
       return loadData('/ai-certification-preparation/data/exams/' + encodeURIComponent(examId) + '/questions.json');
     })
     .catch(function() {
+      if (customDataUrl) return loadData('/data' + customDataUrl);
       return loadData('/data/exams/' + encodeURIComponent(examId) + '/questions.json');
     })
     .catch(function() {
+      if (customDataUrl) return loadData('../..' + customDataUrl);
       return loadData('../../data/exams/' + encodeURIComponent(examId) + '/questions.json');
     })
     .then(function(data) {
       if (!Array.isArray(data) || data.length === 0) throw new Error('No published questions are available');
       allQuestions = data;
-      if (requestedDomain && data.some(function(q) { return (q.domain || '').startsWith(requestedDomain); })) {
-        activeDomain = requestedDomain;
-      }
+
+      readParamsFromUrl();
+
       var countEl = document.getElementById('totalQuestionsCount');
       if (countEl) {
         countEl.textContent = data.length.toLocaleString();
       }
-      renderFilters();
+
+      // Check if a specific question was requested via URL ?question=<id>
+      var requestedQuestion = new URLSearchParams(window.location.search).get('question');
+      if (requestedQuestion) {
+        var filteredList = getFilteredQuestions();
+        var qIdx = filteredList.findIndex(function(item) { return item.id === requestedQuestion; });
+        if (qIdx === -1) {
+          // If question not found in active filter, reset filters to All to find it
+          activeDomain = 'All';
+          activeDifficulty = 'All';
+          filteredList = getFilteredQuestions();
+          qIdx = filteredList.findIndex(function(item) { return item.id === requestedQuestion; });
+        }
+        if (qIdx !== -1) {
+          currentPage = Math.floor(qIdx / pageSize) + 1;
+        }
+      }
+
+      if (!hideFilters) {
+        renderFilters();
+      }
       renderQuestions();
+
+      if (requestedQuestion) {
+        scrollToQuestion(requestedQuestion);
+      }
     })
     .catch(function(err) {
       container.innerHTML = '<p style="color: var(--wrong-fg); padding: 1rem; border: 2px solid var(--wrong-border);">Failed to load questions (' + err.message + '). Check static data path.</p>';
     });
 
+  function scrollToQuestion(qid) {
+    setTimeout(function() {
+      var el = document.getElementById('q-card-' + qid);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        el.style.outline = '3px solid var(--accent)';
+        el.style.boxShadow = '0 0 15px rgba(234, 88, 12, 0.4)';
+        setTimeout(function() {
+          el.style.outline = '';
+          el.style.boxShadow = '';
+        }, 3000);
+      }
+    }, 250);
+  }
+
   function renderFilters() {
     if (!filterContainer) return;
-    var domainQuestions = activeDomain === 'All' ? allQuestions : allQuestions.filter(function(q) {
-      return q.domain && q.domain.startsWith(activeDomain);
-    });
     var domains = ['All'].concat(Array.from(new Set(allQuestions.map(function(q) {
       var match = (q.domain || '').match(/^D\d+/);
       return match ? match[0] : null;
@@ -76,8 +167,7 @@
     html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Domain:</span>';
     domains.forEach(function(d) {
-      var count = d === 'All' ? allQuestions.length : allQuestions.filter(function(q) { return q.domain && q.domain.startsWith(d); }).length;
-      var label = d === 'All' ? 'All Domains (' + count.toLocaleString() + ')' : d + ' (' + count.toLocaleString() + ')';
+      var label = d === 'All' ? 'All Domains (' + allQuestions.length + ')' : d;
       var activeStyle = d === activeDomain ? 'style="background: var(--accent); color: var(--accent-contrast);"' : '';
       html += '<button class="reveal-btn domain-btn" data-domain="' + d + '" aria-pressed="' + (d === activeDomain) + '" ' + activeStyle + '>' + label + '</button>';
     });
@@ -90,9 +180,8 @@
     html += '<div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">';
     html += '<span style="font-family: var(--font-heading); font-size: 0.85rem; font-weight: bold; min-width: 90px; color: var(--muted);">Difficulty:</span>';
     difficulties.forEach(function(diff) {
-      var count = diff.id === 'All' ? domainQuestions.length : domainQuestions.filter(function(q) { return categoryForQuestion(q) === diff.id; }).length;
       var activeStyle = diff.id === activeDifficulty ? 'style="background: var(--accent); color: var(--accent-contrast);"' : 'style="background: var(--code-bg); color: var(--fg); border: 1px solid var(--border);"';
-      html += '<button class="reveal-btn diff-btn" data-diff="' + diff.id + '" aria-pressed="' + (diff.id === activeDifficulty) + '" ' + activeStyle + '>[' + diff.label + ' ' + count.toLocaleString() + ']</button>';
+      html += '<button class="reveal-btn diff-btn" data-diff="' + diff.id + '" aria-pressed="' + (diff.id === activeDifficulty) + '" ' + activeStyle + '>[' + diff.label + ']</button>';
     });
     html += '</div>';
 
@@ -112,6 +201,7 @@
       btn.addEventListener('click', function() {
         activeDomain = this.getAttribute('data-domain');
         currentPage = 1;
+        updateUrlParams();
         renderFilters();
         renderQuestions();
         requestAnimationFrame(function() { filterContainer.querySelector('.domain-btn[data-domain="' + activeDomain + '"]').focus(); });
@@ -122,6 +212,7 @@
       btn.addEventListener('click', function() {
         activeDifficulty = this.getAttribute('data-diff');
         currentPage = 1;
+        updateUrlParams();
         renderFilters();
         renderQuestions();
         requestAnimationFrame(function() { filterContainer.querySelector('.diff-btn[data-diff="' + activeDifficulty + '"]').focus(); });
@@ -132,6 +223,7 @@
       btn.addEventListener('click', function() {
         activeSort = this.getAttribute('data-sort');
         currentPage = 1;
+        updateUrlParams();
         renderFilters();
         renderQuestions();
         requestAnimationFrame(function() { filterContainer.querySelector('.sort-btn[data-sort="' + activeSort + '"]').focus(); });
@@ -139,21 +231,8 @@
     });
   }
 
-  function categoryForQuestion(q) {
-    if (examId === 'cca-f' && q.mockEligible === false) return 'quick-drills';
-    if (q.type === 'quick-drill') return 'quick-drills';
-    var difficulty = (q.difficulty || 'intermediate').toLowerCase();
-    if (difficulty === 'basic') return 'quick-drills';
-    if (difficulty === 'advanced' || difficulty === 'hard' || difficulty === 'exam') return 'difficult';
-    return 'intermediate';
-  }
-
   function getFilteredQuestions() {
     var filtered = allQuestions.slice();
-
-    if (requestedQuestion) {
-      filtered = filtered.filter(function(q) { return q.id === requestedQuestion; });
-    }
 
     if (activeDomain !== 'All') {
       filtered = filtered.filter(function(q) {
@@ -163,7 +242,19 @@
 
     if (activeDifficulty !== 'All') {
       filtered = filtered.filter(function(q) {
-        return categoryForQuestion(q) === activeDifficulty;
+        var diff = (q.difficulty || 'intermediate').toLowerCase();
+        var isShort = (q.prompt || '').length < 140;
+
+        if (activeDifficulty === 'quick-drills') {
+          return diff === 'basic' || isShort || q.type === 'quick-drill';
+        }
+        if (activeDifficulty === 'difficult') {
+          return diff === 'advanced' || diff === 'hard' || diff === 'exam';
+        }
+        if (activeDifficulty === 'intermediate') {
+          return (diff === 'intermediate' || !q.difficulty) && !isShort && diff !== 'advanced' && diff !== 'hard' && diff !== 'exam';
+        }
+        return true;
       });
     }
 
@@ -177,15 +268,8 @@
   function renderQuestions() {
     var filtered = getFilteredQuestions();
     var totalQuestions = filtered.length;
-    if (statusEl) statusEl.textContent = totalQuestions + ' practice questions match the current filters.';
+    var totalPages = Math.max(1, Math.ceil(totalQuestions / pageSize));
 
-    if (totalQuestions === 0) {
-      container.innerHTML = '<div class="card" style="padding: 2rem; text-align: center;"><p class="muted">No questions found matching your filter criteria.</p></div>';
-      if (paginationContainer) paginationContainer.innerHTML = '';
-      return;
-    }
-
-    var totalPages = Math.ceil(totalQuestions / pageSize);
     if (currentPage > totalPages) currentPage = totalPages;
     if (currentPage < 1) currentPage = 1;
 
@@ -193,13 +277,26 @@
     var endIndex = Math.min(startIndex + pageSize, totalQuestions);
     var pageItems = filtered.slice(startIndex, endIndex);
 
+    if (statusEl) {
+      statusEl.textContent = 'Showing page ' + currentPage + ' of ' + totalPages + ' (' + totalQuestions + ' questions total)';
+    }
+
+    if (totalQuestions === 0) {
+      container.innerHTML = '<div class="notice-panel" style="margin-top: 1rem;">No questions match the selected filter criteria. Try choosing a different domain or difficulty.</div>';
+      if (paginationContainer) paginationContainer.innerHTML = '';
+      return;
+    }
+
     var html = '';
     pageItems.forEach(function(q, idx) {
       var globalIndex = startIndex + idx + 1;
       html += '<div class="question-card" id="q-card-' + q.id + '">';
       html += '  <div class="question-header">';
-      html += '    <span class="question-domain">' + escapeHtml(q.domain) + '</span>';
-      html += '    <span>[' + (q.difficulty || 'intermediate') + ']</span>';
+      html += '    <span class="question-domain">' + escapeHtml(q.domain || 'Claude Architecture') + '</span>';
+      html += '    <div style="display: flex; gap: 0.5rem; align-items: center;">';
+      html += '      <a href="?question=' + encodeURIComponent(q.id) + '" class="question-permalink" style="font-size: 0.75rem; color: var(--muted); text-decoration: none;" title="Copy direct link to this question">#' + escapeHtml(q.id) + ' 🔗</a>';
+      html += '      <span>[' + (q.difficulty || 'intermediate') + ']</span>';
+      html += '    </div>';
       html += '  </div>';
       
       if (q.title) {
@@ -267,6 +364,19 @@
         }
       });
     });
+
+    // Permalink click handlers to copy URL and update address bar
+    container.querySelectorAll('.question-permalink').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var href = this.getAttribute('href');
+        var qidMatch = href.match(/question=([^&]+)/);
+        if (qidMatch) {
+          updateUrlParams(qidMatch[1]);
+          scrollToQuestion(qidMatch[1]);
+        }
+      });
+    });
   }
 
   function renderPagination(totalQuestions, totalPages, start, end) {
@@ -278,7 +388,7 @@
 
     var html = '<div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--card); border: 2px solid var(--border); padding: 1rem; border-radius: 2px; margin-top: 1.5rem; box-shadow: 3px 3px 0 var(--border);">';
     html += '<div style="font-family: var(--font-heading); font-size: 0.85rem; color: var(--muted);">';
-    html += 'Showing ' + start + '–' + end + ' of ' + totalQuestions + ' questions';
+    html += 'Showing ' + start + '–' + end + ' of ' + totalQuestions + ' questions (Page ' + currentPage + ' of ' + totalPages + ')';
     html += '</div>';
 
     html += '<div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">';
@@ -306,9 +416,11 @@
     paginationContainer.querySelectorAll('.page-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         currentPage = parseInt(this.getAttribute('data-page'), 10);
+        updateUrlParams();
         renderQuestions();
         container.setAttribute('tabindex', '-1');
         container.focus();
+        window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
       });
     });
   }

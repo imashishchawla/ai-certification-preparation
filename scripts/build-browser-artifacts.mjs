@@ -81,6 +81,12 @@ function buildForExam(examId) {
   fs.writeFileSync(path.join(outDir, 'mock-pool.json'), JSON.stringify(mockQuestions, null, 2));
   fs.writeFileSync(path.join(outDir, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
+  // If static/data/exams/<examId>/shared-175.json exists, copy to public artifact
+  const sharedSrc = path.join(rootDir, `static/data/exams/${examId}/shared-175.json`);
+  if (fs.existsSync(sharedSrc)) {
+    fs.copyFileSync(sharedSrc, path.join(outDir, 'shared-175.json'));
+  }
+
   console.log(`[build-artifacts] ${examId}: ${allQuestions.length} total, ${publishedQuestions.length} published → ${outDir}`);
 }
 
