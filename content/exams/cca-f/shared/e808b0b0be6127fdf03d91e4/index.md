@@ -9,8 +9,6 @@ sitemap:
 layout: "single"
 ---
 
-# CCAR-F Curated Revision Questions
-
 A focused collection of **153 curated exam questions** for last-minute review. Choose an answer, then reveal the explanation and rationale.
 
 <div style="background: var(--code-bg); border: 2px solid var(--border); padding: 1rem 1.25rem; border-radius: 4px; margin: 1.5rem 0; box-shadow: 2px 2px 0 var(--border);">
