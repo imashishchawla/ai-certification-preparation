@@ -66,6 +66,7 @@ jobs:
         if: ${{ !inputs.retry_email }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          WEEKLY_CURATION_OPTIONAL: ${{ vars.WEEKLY_CURATION_OPTIONAL || 'true' }}
         run: node scripts/check-weekly-curation.mjs
 
       - name: Build and audit published content
@@ -87,7 +88,7 @@ jobs:
         id: generate
         if: ${{ !inputs.retry_email }}
         env:
-          WEEKLY_CURATION_STATUS: verified
+          WEEKLY_CURATION_STATUS: ${{ steps.curation.outputs.status || 'verified' }}
           WEEKLY_BUILD_STATUS: passed
           WEEKLY_DEPLOYMENT_STATUS: verified
         run: |

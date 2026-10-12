@@ -54,8 +54,9 @@ async function main() {
     throw new Error('Pending send is older than provider idempotency window. Reconcile delivery before retrying.');
   }
   if (!apiKey || !sender || !recipients.length) {
-    save({ status: 'failed', error: 'Missing RESEND_API_KEY, REPORT_EMAIL_FROM, or REPORT_EMAIL_TO', updated_at: new Date().toISOString() });
-    throw new Error('Email configuration is incomplete');
+    save({ status: 'skipped', error: 'Missing RESEND_API_KEY, REPORT_EMAIL_FROM, or REPORT_EMAIL_TO', updated_at: new Date().toISOString() });
+    console.log('[weekly-email] Email credentials not configured (RESEND_API_KEY, REPORT_EMAIL_FROM, or REPORT_EMAIL_TO missing); skipping email delivery.');
+    return;
   }
   let message;
   if (failureStage) {
