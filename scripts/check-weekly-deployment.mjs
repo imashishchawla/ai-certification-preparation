@@ -15,9 +15,10 @@ const response = await fetch('https://api.github.com/repos/' + repo + '/actions/
 });
 if (!response.ok) throw new Error('Cannot inspect deployment workflow: HTTP ' + response.status);
 const payload = await response.json();
-const latest = payload.workflow_runs?.[0];
-if (!latest || latest.status !== 'completed' || latest.conclusion !== 'success') {
-  throw new Error('Latest deployment run has not succeeded');
+const completedRuns = (payload.workflow_runs || []).filter(run => run.status === 'completed');
+const latest = completedRuns[0];
+if (!latest || latest.conclusion !== 'success') {
+  throw new Error('Latest completed deployment run has not succeeded');
 }
 const deployedSha = latest.head_sha;
 try {
