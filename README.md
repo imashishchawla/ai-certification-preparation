@@ -17,11 +17,20 @@
 ---
 
 <!-- WEEKLY-METRICS:START -->
+### Weekly platform update · 2026-W41
 
-### Weekly platform update
+| Metric | 2026-W41 | This week |
+| --- | --- | --- |
+| Questions | 1,149 | Baseline unavailable |
+| Markdown documents | 116 | Baseline unavailable |
+| Rendered Pages | 130 | Baseline unavailable |
+| PDF & Other documents | 8 | Baseline unavailable |
 
-The first verified weekly snapshot will appear here after the scheduled report runs.
+Site size: 22.98 MiB (Baseline unavailable); includes 9.42 MiB of downloadable files (8 PDF, 0 other).
 
+**What changed:** Baseline snapshot; no prior change comparison.  
+**New sources:** None.  
+**Status:** verified · Measured 2026-10-12T14:50:21.579Z · Source 258571c77b9f805268b56e3f83affaedae12d64e · Run https://github.com/imashishchawla/ai-certification-preparation/actions/runs/38265791617.
 <!-- WEEKLY-METRICS:END -->
 
 ---
