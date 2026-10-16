@@ -35,3 +35,7 @@ node_modules/
 !.dev.vars.example
 # Testing & Browser automation
 .playwright-mcp/
+
+# Plan & Private URLs — never commit
+plan/
+connectorurl.md

@@ -40224,5 +40224,2129 @@
       "guide": "CCAR-F Exam Guide v1.0, July 2026",
       "reviewedOn": "2026-10-08"
     }
+  },
+  {
+    "id": "cca-f-sdk-002",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 02: MCP configuration scope",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Your team wants a shared remote MCP server available to everyone and a personal experimental local server available only to you. Which configuration approach respects these scopes?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add the remote server to ~/.claude.json and the local server to .mcp.json."
+      },
+      {
+        "id": "B",
+        "text": "Add the remote server to .mcp.json and the local server to ~/.claude.json."
+      },
+      {
+        "id": "C",
+        "text": "Add both servers to the root ~/.claude.json file."
+      },
+      {
+        "id": "D",
+        "text": "Add both servers to the project .mcp.json file."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Project-scoped configuration can be versioned and shared; personal configuration keeps the experimental server private.",
+    "mockEligible": true,
+    "topicBrief": "Topic: MCP configuration scope",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Your team wants a shared remote MCP server available to everyone and a personal experimental local server available only to you. Which configuration approach respects these scopes?"
+  },
+  {
+    "id": "cca-f-sdk-003",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 03: Enforcing formatting",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "CLAUDE.md requires Prettier formatting, but Claude still produces inconsistent formatting. Stronger wording reduces violations without eliminating them. How can formatting be enforced consistently?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Configure a PostToolUse hook with an Edit/Write matcher that automatically runs Prettier on modified files."
+      },
+      {
+        "id": "B",
+        "text": "Add a Stop hook using a prompt-based check of formatting standards and request fixes."
+      },
+      {
+        "id": "C",
+        "text": "Move the rule into a path-scoped .claude/rules file for matching file types."
+      },
+      {
+        "id": "D",
+        "text": "Expand CLAUDE.md with more examples and stronger wording."
+      }
+    ],
+    "correct": "A",
+    "explanation": "An automatic formatter hook applies the requirement deterministically after edits.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Enforcing formatting",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "CLAUDE.md requires Prettier formatting, but Claude still produces inconsistent formatting. Stronger wording reduces violations without eliminating them. How can formatting be enforced consistently?"
+  },
+  {
+    "id": "cca-f-sdk-004",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 04: Fixing a migration bug",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A generated data-migration script mishandles database records containing null values in optional fields. What is the most effective way to iterate toward a working solution?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add \"think harder about edge cases\" and request a complete rewrite."
+      },
+      {
+        "id": "B",
+        "text": "Manually fix the null handling, then continue using Claude for other parts."
+      },
+      {
+        "id": "C",
+        "text": "Provide a test case with null-containing input and the expected output, then ask Claude to fix it."
+      },
+      {
+        "id": "D",
+        "text": "Describe the null-value pattern in detail and request a regenerated script with improved edge-case handling."
+      }
+    ],
+    "correct": "C",
+    "explanation": "A concrete failing test makes the required behavior precise and verifiable.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Fixing a migration bug",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A generated data-migration script mishandles database records containing null values in optional fields. What is the most effective way to iterate toward a working solution?"
+  },
+  {
+    "id": "cca-f-sdk-005",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 05: Reusing existing code patterns",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A new payment-processing module must follow established transaction, error-handling, and audit-logging patterns. Three existing modules already demonstrate those patterns, and this is a one-off task. What is the most effective approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Document each pattern in the root CLAUDE.md as a permanent project convention."
+      },
+      {
+        "id": "B",
+        "text": "Describe the three modules' patterns in natural language in the prompt."
+      },
+      {
+        "id": "C",
+        "text": "Use @ references to include the three existing modules directly in the prompt."
+      },
+      {
+        "id": "D",
+        "text": "Ask Claude to explore the whole codebase to discover the patterns before generating the module."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Direct references provide the relevant examples with minimal ambiguity and exploration overhead.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Reusing existing code patterns",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A new payment-processing module must follow established transaction, error-handling, and audit-logging patterns. Three existing modules already demonstrate those patterns, and this is a one-off task. What is the most effective approach?"
+  },
+  {
+    "id": "cca-f-sdk-006",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 06: Planning an unfamiliar feature",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A requested feature touches unfamiliar code and requires understanding the architecture before implementation. Which approach is most appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use direct execution with a broad prompt and let Claude analyze and implement as it determines best."
+      },
+      {
+        "id": "B",
+        "text": "Use direct execution, requiring tests before implementation."
+      },
+      {
+        "id": "C",
+        "text": "Enter plan mode to explore the architecture, evaluate trade-offs, and present options for approval before implementation."
+      },
+      {
+        "id": "D",
+        "text": "Start direct execution with detailed instructions about how the feature should work."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Plan mode is appropriate when architecture and implementation choices must first be investigated. The scenario is condensed because parts of the photographed wording are blurred.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Planning an unfamiliar feature",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A requested feature touches unfamiliar code and requires understanding the architecture before implementation. Which approach is most appropriate?"
+  },
+  {
+    "id": "cca-f-sdk-007",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 07: MCP prompts",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A custom MCP server provides DevOps workflow templates such as deploy_checklist and incident_response, in addition to tools. How do these MCP prompts become accessible in Claude Code?",
+    "options": [
+      {
+        "id": "A",
+        "text": "They join the tool registry and are invoked automatically by the model."
+      },
+      {
+        "id": "B",
+        "text": "They are automatically prepended to every conversation as system-level context."
+      },
+      {
+        "id": "C",
+        "text": "They are exposed as @-mentionable resources that attach when referenced."
+      },
+      {
+        "id": "D",
+        "text": "They appear as slash commands, such as /mcp__servername__deploy_checklist, with arguments passed after the command name."
+      }
+    ],
+    "correct": "D",
+    "explanation": "MCP prompts are explicitly invoked prompt templates exposed through the command interface. The command spelling is retained from the supplied question; command syntax can vary by Claude Code version.",
+    "mockEligible": true,
+    "topicBrief": "Topic: MCP prompts",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A custom MCP server provides DevOps workflow templates such as deploy_checklist and incident_response, in addition to tools. How do these MCP prompts become accessible in Claude Code?"
+  },
+  {
+    "id": "cca-f-sdk-008",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 08: Choosing enforcement mechanisms",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Three requirements are in CLAUDE.md: never modify migrations/, use structured logging instead of console.log, and format TypeScript with Prettier. Claude nevertheless edited a migration. How should these requirements be enforced?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use hooks for all three requirements, blocking migrations, checking logging, and formatting files."
+      },
+      {
+        "id": "B",
+        "text": "Move all requirements to path-scoped .claude/rules files."
+      },
+      {
+        "id": "C",
+        "text": "Restate all requirements in stronger language and add examples."
+      },
+      {
+        "id": "D",
+        "text": "Deny Edit/Write access to migrations in project permissions, keep the logging convention in CLAUDE.md, and use a PostToolUse hook to format TypeScript."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Permissions enforce access boundaries, project instructions express conventions, and hooks automate formatting.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Choosing enforcement mechanisms",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Three requirements are in CLAUDE.md: never modify migrations/, use structured logging instead of console.log, and format TypeScript with Prettier. Claude nevertheless edited a migration. How should these requirements be enforced?"
+  },
+  {
+    "id": "cca-f-sdk-009",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 09: A small isolated change",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A small, well-understood change affects a limited part of the codebase. What is the most appropriate approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Enter plan mode to create a detailed implementation strategy before making the change."
+      },
+      {
+        "id": "B",
+        "text": "Use direct execution to make the change."
+      },
+      {
+        "id": "C",
+        "text": "Enter plan mode to explore how the change might affect other parts of the codebase first."
+      },
+      {
+        "id": "D",
+        "text": "Start with extended thinking and manually reason through edge cases before implementing."
+      }
+    ],
+    "correct": "B",
+    "explanation": "A straightforward localized edit does not need a separate planning workflow. The photograph is blurred. The scenario and longer options are paraphrased; option B is legible.",
+    "mockEligible": true,
+    "topicBrief": "Topic: A small isolated change",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A small, well-understood change affects a limited part of the codebase. What is the most appropriate approach?"
+  },
+  {
+    "id": "cca-f-sdk-010",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 10: Iterating on PDF formatting",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A PDF generator retrieves the right database data, but tables overflow, dates need formatting, and page breaks are wrong. These issues interact: column widths affect table height, which affects pagination. What is the best iteration strategy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Start over with a detailed prompt listing all formatting requirements."
+      },
+      {
+        "id": "B",
+        "text": "Ask for all three fixes in a single message with exact specifications."
+      },
+      {
+        "id": "C",
+        "text": "Fix and verify column widths first, then date formatting, then page breaks, testing after each change."
+      },
+      {
+        "id": "D",
+        "text": "Show a correctly formatted sample and ask Claude to match it without describing the specific defects."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Incremental fixes with verification make interacting layout changes easier to diagnose.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Iterating on PDF formatting",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A PDF generator retrieves the right database data, but tables overflow, dates need formatting, and page breaks are wrong. These issues interact: column widths affect table height, which affects pagination. What is the best iteration strategy?"
+  },
+  {
+    "id": "cca-f-sdk-011",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 11: Path-scoped rules",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "An infrastructure repository contains Terraform modules, Kubernetes manifests, and CI/CD scripts. Its 500-line root CLAUDE.md loads irrelevant Terraform guidance during Kubernetes work. How should guidance be scoped by file type?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use @includes in the root CLAUDE.md to modularize tool-specific guidance."
+      },
+      {
+        "id": "B",
+        "text": "Create files in .claude/rules with YAML paths frontmatter, such as **/*.tf, so rules load for matching files."
+      },
+      {
+        "id": "C",
+        "text": "Put CLAUDE.md files in terraform/ and kubernetes/ for directory-specific guidance."
+      },
+      {
+        "id": "D",
+        "text": "Keep one root CLAUDE.md with clearly labeled sections and an applicability explanation."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Path patterns target file types precisely, including files spread across multiple directories.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Path-scoped rules",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An infrastructure repository contains Terraform modules, Kubernetes manifests, and CI/CD scripts. Its 500-line root CLAUDE.md loads irrelevant Terraform guidance during Kubernetes work. How should guidance be scoped by file type?"
+  },
+  {
+    "id": "cca-f-sdk-012",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 12: A shared reusable skill",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "The team frequently migrates React components to Vue. You wrote a step-by-step workflow that should be invoked with /migrate-component and remain synchronized as the team improves it. Where should the skill be stored?",
+    "options": [
+      {
+        "id": "A",
+        "text": "In ~/.claude/skills/migrate-component/SKILL.md on each developer's machine."
+      },
+      {
+        "id": "B",
+        "text": "In .claude/skills/migrate-component/SKILL.md in the project, committed to version control."
+      },
+      {
+        "id": "C",
+        "text": "As a detailed instruction block in the root CLAUDE.md."
+      },
+      {
+        "id": "D",
+        "text": "In .claude/settings.json as a skillOverrides entry."
+      }
+    ],
+    "correct": "B",
+    "explanation": "A version-controlled project skill is shared and evolves with the repository.",
+    "mockEligible": true,
+    "topicBrief": "Topic: A shared reusable skill",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The team frequently migrates React components to Vue. You wrote a step-by-step workflow that should be invoked with /migrate-component and remain synchronized as the team improves it. Where should the skill be stored?"
+  },
+  {
+    "id": "cca-f-sdk-013",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 13: A cross-module dependency migration",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "An authentication library is moving from v2 to v3. Its authenticate() API becomes asynchronous, the User type has required fields, and deprecated methods disappear. There are usages across 45 files in several modules. What is the most effective approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Paste the breaking changes into a prompt and directly update all usages."
+      },
+      {
+        "id": "B",
+        "text": "Write a custom slash command for the transformations, then run it file by file."
+      },
+      {
+        "id": "C",
+        "text": "Update the dependency and repeatedly fix each test failure as it appears."
+      },
+      {
+        "id": "D",
+        "text": "Enter plan mode to inspect usages, map affected code paths, and create a migration strategy before implementation."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The change crosses modules and includes semantic changes that require coordinated planning.",
+    "mockEligible": true,
+    "topicBrief": "Topic: A cross-module dependency migration",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An authentication library is moving from v2 to v3. Its authenticate() API becomes asynchronous, the User type has required fields, and deprecated methods disappear. There are usages across 45 files in several modules. What is the most effective approach?"
+  },
+  {
+    "id": "cca-f-sdk-014",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 14: Clarifying caching requirements",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "You ask for caching on a /products endpoint. Claude adds a five-minute in-memory TTL, but production caching must account for the deployment environment. How should the request be refined before implementation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Start with \"Add Redis caching to /products with a five-minute TTL\" and handle remaining issues through later prompts."
+      },
+      {
+        "id": "B",
+        "text": "Write a specification with core requirements and TODO markers for uncertain areas, then request proposals for each TODO."
+      },
+      {
+        "id": "C",
+        "text": "Use plan mode to explore the current /products implementation, then provide requirements after the code is understood."
+      },
+      {
+        "id": "D",
+        "text": "Ask Claude to interview you about caching requirements, including the deployment topology, cache layers, consistency, and failure modes."
+      }
+    ],
+    "correct": "D",
+    "explanation": "An interview surfaces missing requirements before the design is committed.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Clarifying caching requirements",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "You ask for caching on a /products endpoint. Claude adds a five-minute in-memory TTL, but production caching must account for the deployment environment. How should the request be refined before implementation?"
+  },
+  {
+    "id": "cca-f-sdk-015",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 15: Specifying a graph algorithm",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A complex graph-traversal algorithm has performance requirements and edge cases such as disconnected nodes, cycles, and weighted edges. Which approach best supports progressive improvement over multiple iterations?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ask Claude to research the algorithm, write a detailed implementation plan, and implement the entire solution."
+      },
+      {
+        "id": "B",
+        "text": "Provide a detailed prose specification and manually review each output, describing required changes."
+      },
+      {
+        "id": "C",
+        "text": "Provide a reference implementation, adapt it to the codebase, and add edge cases while comparing outputs."
+      },
+      {
+        "id": "D",
+        "text": "Write tests for expected behavior, edge cases, and performance first; implement to pass them and refine through failing tests."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Executable tests turn correctness and performance requirements into an objective feedback loop.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Specifying a graph algorithm",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A complex graph-traversal algorithm has performance requirements and edge cases such as disconnected nodes, cycles, and weighted edges. Which approach best supports progressive improvement over multiple iterations?"
+  },
+  {
+    "id": "cca-f-sdk-016",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 16: Schema-validation feedback",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Twelve percent of extractions fail Pydantic validation with errors such as \"expected float, got string 2.5\". Repeating the unchanged request produces the same failures. What is the best recovery approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Set temperature to zero for more consistent formatting."
+      },
+      {
+        "id": "B",
+        "text": "Reprocess all failed documents through a larger model."
+      },
+      {
+        "id": "C",
+        "text": "Send a follow-up request containing the validation error and ask the model to correct its output."
+      },
+      {
+        "id": "D",
+        "text": "Standardize problematic source formats before extraction."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Specific validation feedback gives the model the information needed to repair the failed output.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Schema-validation feedback",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Twelve percent of extractions fail Pydantic validation with errors such as \"expected float, got string 2.5\". Repeating the unchanged request produces the same failures. What is the best recovery approach?"
+  },
+  {
+    "id": "cca-f-sdk-017",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 17: When retries cannot help",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "The extractor retries failed validation and appends the specific error to the prompt. Which failure is least likely to improve through more such retries?",
+    "options": [
+      {
+        "id": "A",
+        "text": "ISO 8601 date-time strings are returned when only YYYY-MM-DD dates are allowed."
+      },
+      {
+        "id": "B",
+        "text": "The model returns \"N/A\" for a customer tax ID that exists only in an external document absent from the input."
+      },
+      {
+        "id": "C",
+        "text": "Keywords are returned as a categorized object when the schema requires an array of strings."
+      },
+      {
+        "id": "D",
+        "text": "Citation counts are returned as locale-formatted strings rather than integers."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Retrying cannot recover a fact absent from the input. The system needs the missing source or a representation of missing data.",
+    "mockEligible": true,
+    "topicBrief": "Topic: When retries cannot help",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The extractor retries failed validation and appends the specific error to the prompt. Which failure is least likely to improve through more such retries?"
+  },
+  {
+    "id": "cca-f-sdk-018",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 18: Unsupported optional values",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "An event extractor uses nullable schema fields, yet frequently invents plausible values for missing information, such as a $50 fee when the source gives no price. What is the most effective mitigation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Explicitly instruct the model to return null for any field whose information is not directly stated in the source."
+      },
+      {
+        "id": "B",
+        "text": "Upgrade to a more capable model."
+      },
+      {
+        "id": "C",
+        "text": "Make every field required and non-nullable with strict validation."
+      },
+      {
+        "id": "D",
+        "text": "Use a second LLM to check every extracted value against the source."
+      }
+    ],
+    "correct": "A",
+    "explanation": "An explicit evidence rule makes the intended behavior for absent information clear.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Unsupported optional values",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An event extractor uses nullable schema fields, yet frequently invents plausible values for missing information, such as a $50 fee when the source gives no price. What is the most effective mitigation?"
+  },
+  {
+    "id": "cca-f-sdk-019",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 19: Auditing high-confidence errors",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Documents with extraction confidence below 85% go to review. A quarterly audit finds that 12% of high-confidence outputs also contain errors, often from comparison tables, appendices, and ambiguous phrasing. How can these errors be caught and improvement measured sustainably?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Lower the confidence threshold from 85% to 70%."
+      },
+      {
+        "id": "B",
+        "text": "Review every document containing comparison tables or appendices regardless of confidence."
+      },
+      {
+        "id": "C",
+        "text": "Re-extract every high-confidence document and flag disagreements."
+      },
+      {
+        "id": "D",
+        "text": "Perform stratified random sampling of a fixed percentage of high-confidence outputs each week, measuring error rates and detecting patterns."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Representative ongoing audits expose confident mistakes and measure whether changes improve accuracy.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Auditing high-confidence errors",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Documents with extraction confidence below 85% go to review. A quarterly audit finds that 12% of high-confidence outputs also contain errors, often from comparison tables, appendices, and ambiguous phrasing. How can these errors be caught and improvement measured sustainably?"
+  },
+  {
+    "id": "cca-f-sdk-020",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 20: Calibrating confidence",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "An extraction pipeline reports confidence scores, and the team wants to automate high-confidence outputs while reviewing others. What validation is needed before deployment?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Run a one-week pilot reviewing a small fixed percentage of high-confidence outputs to estimate overall error rates."
+      },
+      {
+        "id": "B",
+        "text": "Average accuracy across document types and fields into one aggregate confidence estimate."
+      },
+      {
+        "id": "C",
+        "text": "Compare accuracy at different confidence thresholds against labeled validation data and calibrate the thresholds."
+      },
+      {
+        "id": "D",
+        "text": "Verify a high aggregate accuracy across document types and automate the remaining decisions."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Confidence thresholds should be calibrated against observed correctness on labeled data. This photograph is especially blurred. The options are paraphrased; exact percentages in the distractors could not be confirmed.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Calibrating confidence",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An extraction pipeline reports confidence scores, and the team wants to automate high-confidence outputs while reviewing others. What validation is needed before deployment?"
+  },
+  {
+    "id": "cca-f-sdk-021",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 21: Reliable JSON conformance",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "The system must extract calendar event details as JSON with title, date, time, location, and attendees. Downstream systems reject malformed or nonconforming JSON. Which option provides the most reliable schema compliance?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pre-fill the response with an opening brace, then complete and parse it."
+      },
+      {
+        "id": "B",
+        "text": "Put detailed JSON instructions and the target schema in the prompt, then parse the text response."
+      },
+      {
+        "id": "C",
+        "text": "Define a tool whose input parameters use the target schema and have Claude call it with the extracted data."
+      },
+      {
+        "id": "D",
+        "text": "Repeat instructions to output only valid JSON and retry on parsing failure."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Schema-defined tool inputs provide a structured interface for the extracted data. Choose the best listed option. Applications should still validate output; modern structured-output features may offer additional guarantees.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Reliable JSON conformance",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The system must extract calendar event details as JSON with title, date, time, location, and attendees. Downstream systems reject malformed or nonconforming JSON. Which option provides the most reliable schema compliance?"
+  },
+  {
+    "id": "cca-f-sdk-022",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 22: Reconciling invoice totals",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "In 10% of invoice extractions, line items do not sum to the stated total. Causes include source OCR errors and model extraction mistakes. Downstream accounting rejects mismatched totals. What is the best approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add examples that encourage mathematically consistent extraction by adjusting line items."
+      },
+      {
+        "id": "B",
+        "text": "Automatically adjust line-item amounts to match the stated total."
+      },
+      {
+        "id": "C",
+        "text": "Keep the extracted values, add a calculated_total from the line items, and flag differences for human review."
+      },
+      {
+        "id": "D",
+        "text": "Extract line items and totals independently, then use another model to choose which values are most likely correct."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Preserving source values and separately calculating totals exposes discrepancies without silently changing evidence.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Reconciling invoice totals",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "In 10% of invoice extractions, line items do not sum to the stated total. Causes include source OCR errors and model extraction mistakes. Downstream accounting rejects mismatched totals. What is the best approach?"
+  },
+  {
+    "id": "cca-f-sdk-023",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 23: Prioritizing limited human review",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Schema-valid extractions still need human review, but reviewers can handle only about 5% of the volume. What is the best basis for choosing cases?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Review outputs with particular formatting error types regardless of confidence."
+      },
+      {
+        "id": "B",
+        "text": "Choose a random 5% of all outputs."
+      },
+      {
+        "id": "C",
+        "text": "Review outputs with low model confidence or ambiguous or contradictory source information."
+      },
+      {
+        "id": "D",
+        "text": "Review only outputs rejected by downstream processing."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Uncertainty and conflicting evidence identify cases most likely to benefit from limited reviewer time.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Prioritizing limited human review",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Schema-valid extractions still need human review, but reviewers can handle only about 5% of the volume. What is the best basis for choosing cases?"
+  },
+  {
+    "id": "cca-f-sdk-024",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 24: Structured candidate extraction",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Candidate names, contact details, skills, and experience must be extracted from resumes into a predefined JSON schema without missing required fields or incorrect types. What is the most reliable approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Include detailed JSON instructions and an example in the system prompt."
+      },
+      {
+        "id": "B",
+        "text": "Extract into plain text first, then ask Claude to format it as JSON."
+      },
+      {
+        "id": "C",
+        "text": "Parse the answer using regular expressions with a fallback parser for malformed responses."
+      },
+      {
+        "id": "D",
+        "text": "Define a tool whose input schema matches the required JSON schema and extract data from its tool_use response."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Tool arguments provide a structured contract that is easier to validate than prose.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Structured candidate extraction",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Candidate names, contact details, skills, and experience must be extracted from resumes into a predefined JSON schema without missing required fields or incorrect types. What is the most reliable approach?"
+  },
+  {
+    "id": "cca-f-sdk-025",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 25: Learning from review corrections",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Reviewers corrected 847 outputs over three weeks. A recurring error involves informal measurements such as \"a handful\" or \"a splash\": the model invents specific quantities or leaves fields empty. What is the best use of this feedback?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Fine-tune the model on all 847 corrected examples."
+      },
+      {
+        "id": "B",
+        "text": "Add a measurement_type field with precise and informal values."
+      },
+      {
+        "id": "C",
+        "text": "Add few-shot examples showing informal measurements extracted verbatim, without conversion or omission."
+      },
+      {
+        "id": "D",
+        "text": "Use pattern matching after extraction to fill empty fields with detected informal phrases."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Targeted examples address the observed behavior directly and teach preservation of the source wording.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Learning from review corrections",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Reviewers corrected 847 outputs over three weeks. A recurring error involves informal measurements such as \"a handful\" or \"a splash\": the model invents specific quantities or leaves fields empty. What is the best use of this feedback?"
+  },
+  {
+    "id": "cca-f-sdk-026",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 26: Missing required fields",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "When source documents omit some specifications, the model fabricates plausible values to satisfy required fields. A document mentioning only dimensions receives a fictional weight of 2.3 kg. Which schema change most directly addresses this?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add instructions to extract only explicitly stated facts and avoid placeholders."
+      },
+      {
+        "id": "B",
+        "text": "Verify that every extracted value appears in the source."
+      },
+      {
+        "id": "C",
+        "text": "Add a confidence field to each specification and filter low-confidence values."
+      },
+      {
+        "id": "D",
+        "text": "Make fields that are not present in every source optional so they can be omitted."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The schema must permit missing information instead of forcing an invented value.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Missing required fields",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "When source documents omit some specifications, the model fabricates plausible values to satisfy required fields. A document mentioning only dimensions receives a fictional weight of 2.3 kg. Which schema change most directly addresses this?"
+  },
+  {
+    "id": "cca-f-sdk-027",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 27: Normalizing menu data",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Restaurant-menu extraction must produce item names, descriptions, prices, and dietary tags. Prices appear as $12 or 12.00, and dietary information appears as text or icons. What is the most reliable approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use a separate extraction call for each field."
+      },
+      {
+        "id": "B",
+        "text": "Generate several extractions per document and choose the most consistent."
+      },
+      {
+        "id": "C",
+        "text": "Extract as-is and normalize all formats in post-processing outside Claude."
+      },
+      {
+        "id": "D",
+        "text": "Define a strict output schema and explicit format-normalization rules in the prompt."
+      }
+    ],
+    "correct": "D",
+    "explanation": "A clear schema and normalization rules specify one target representation across varied source formats.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Normalizing menu data",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Restaurant-menu extraction must produce item names, descriptions, prices, and dietary tags. Prices appear as $12 or 12.00, and dietary information appears as text or icons. What is the most reliable approach?"
+  },
+  {
+    "id": "cca-f-sdk-028",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 28: Forcing extraction before enrichment",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "The pipeline offers extract_metadata, lookup_citations, and verify_doi. When asked to extract metadata and cite a paper, Claude sometimes calls lookup_citations first, which fails because it needs the extracted DOI. How should extraction be made to happen first?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Set tool_choice to the specific extract_metadata tool on every API call in the pipeline."
+      },
+      {
+        "id": "B",
+        "text": "Force extract_metadata for the extraction turn, then perform enrichment in subsequent turns after receiving the extracted metadata."
+      },
+      {
+        "id": "C",
+        "text": "Set tool_choice to any and add a system instruction to prioritize extract_metadata."
+      },
+      {
+        "id": "D",
+        "text": "Leave tool_choice as auto and put extract_metadata first in the tool definitions."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Force the prerequisite tool for the first turn, then allow the follow-up tools to use its results.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Forcing extraction before enrichment",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The pipeline offers extract_metadata, lookup_citations, and verify_doi. When asked to extract metadata and cite a paper, Claude sometimes calls lookup_citations first, which fails because it needs the extracted DOI. How should extraction be made to happen first?"
+  },
+  {
+    "id": "cca-f-sdk-029",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 29: Skills extraction consistency",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "The schema has a skills string array. Outputs vary: \"Python and SQL\" are sometimes one entry and sometimes two; implied but unstated skills appear; and similar documents produce different granularity, from many entries to a few. The prompt only says to extract all mentioned skills. What is the best improvement?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add post-extraction normalization to a canonical taxonomy and deduplicate similar terms."
+      },
+      {
+        "id": "B",
+        "text": "Add constraints specifying one skill per entry and only explicitly stated skills."
+      },
+      {
+        "id": "C",
+        "text": "Change the schema to include skill, confidence, source quote, and similar metadata."
+      },
+      {
+        "id": "D",
+        "text": "Add few-shot examples showing compound-phrase handling, explicit versus inferred skills, and appropriate entry granularity."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Examples demonstrate all three desired behaviors, including the intended level of granularity.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Skills extraction consistency",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The schema has a skills string array. Outputs vary: \"Python and SQL\" are sometimes one entry and sometimes two; implied but unstated skills appear; and similar documents produce different granularity, from many entries to a few. The prompt only says to extract all mentioned skills. What is the best improvement?"
+  },
+  {
+    "id": "cca-f-sdk-030",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 30: Contracts with amendments",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Contracts include amendments that replace original terms, such as changing a 30-day payment period to 45 days. The extractor inconsistently chooses one value without indicating which applies. What is the most effective improvement?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use a classifier to identify and remove superseded sections before the main extraction."
+      },
+      {
+        "id": "B",
+        "text": "Detect amendments after extraction and flag those outputs for manual review."
+      },
+      {
+        "id": "C",
+        "text": "Always extract the most recent amendment and ignore superseded original terms."
+      },
+      {
+        "id": "D",
+        "text": "Redesign the schema to record multiple values with their source location and effective date."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Provenance and effective dates preserve the evidence needed to determine the applicable term.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Contracts with amendments",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Contracts include amendments that replace original terms, such as changing a 30-day payment period to 45 days. The extractor inconsistently chooses one value without indicating which applies. What is the most effective improvement?"
+  },
+  {
+    "id": "cca-f-sdk-031",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 31: Resuming a long support conversation",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "A customer returns four hours later with new billing-dispute details. The previous 32-turn conversation contains verbose tool results, and the agent sometimes uses outdated details instead of checking new information. Which approach best reduces this problem?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Resume the complete history and automatically re-call all earlier tools at session start."
+      },
+      {
+        "id": "B",
+        "text": "Start a new session with a concise summary and remove the prior conversation."
+      },
+      {
+        "id": "C",
+        "text": "Resume history while trimming verbose tool_result messages and retaining key facts so current information can be fetched when needed."
+      },
+      {
+        "id": "D",
+        "text": "Resume full history and add a system instruction to always prefer the latest tool result when multiple results exist."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Retaining essential state while reducing stale tool-output detail improves the usefulness of the resumed context.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Resuming a long support conversation",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A customer returns four hours later with new billing-dispute details. The previous 32-turn conversation contains verbose tool results, and the agent sometimes uses outdated details instead of checking new information. Which approach best reduces this problem?"
+  },
+  {
+    "id": "cca-f-sdk-032",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 32: Lost verification progress",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "The agent verifies identity through multiple questions before accessing personal data. After the third answer, it asks for the customer's name again as if nothing had happened. What is the most likely cause?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The verification tool clears internal state after each successful verification step."
+      },
+      {
+        "id": "B",
+        "text": "Claude remembers only two turns by default unless configured otherwise."
+      },
+      {
+        "id": "C",
+        "text": "The prompt does not tell Claude to remember information across exchanges."
+      },
+      {
+        "id": "D",
+        "text": "Conversation history is not passed in subsequent API requests."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Without the prior messages or equivalent session state, the model cannot see verification progress.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Lost verification progress",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The agent verifies identity through multiple questions before accessing personal data. After the third answer, it asks for the customer's name again as if nothing had happened. What is the most likely cause?"
+  },
+  {
+    "id": "cca-f-sdk-033",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 33: Choosing the next tool",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "lookup_order returns an order purchased 45 days ago. How does an agentic loop decide whether to call process_refund or escalate_to_human next?",
+    "options": [
+      {
+        "id": "A",
+        "text": "It follows a preconfigured decision tree mapping order attributes to tools."
+      },
+      {
+        "id": "B",
+        "text": "The tool result is appended to the conversation and the model reasons about the next action."
+      },
+      {
+        "id": "C",
+        "text": "It executes the remaining calls from a tool sequence fixed at the start."
+      },
+      {
+        "id": "D",
+        "text": "The orchestration layer automatically chooses the next tool using the order status."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The model uses the new result and the instructions to decide its next action.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Choosing the next tool",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "lookup_order returns an order purchased 45 days ago. How does an agentic loop decide whether to call process_refund or escalate_to_human next?"
+  },
+  {
+    "id": "cca-f-sdk-034",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 34: Overlapping tools",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Adding delivery tools increased the tool set from 4 to 10 and reduced selection accuracy from 89% to 71%. Logs show confusion between issue_credit and process_refund and unnecessary check_delivery_status calls when lookup_order already has the data. Which change structurally removes the overlap?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Enable tool search with defer_loading for the six new tools."
+      },
+      {
+        "id": "B",
+        "text": "Merge issue_credit and process_refund into resolve_compensation with an action parameter, and fold delivery status into lookup_order with an include_tracking flag."
+      },
+      {
+        "id": "C",
+        "text": "Add few-shot examples for every ambiguous tool pair."
+      },
+      {
+        "id": "D",
+        "text": "Split the tools between financial-resolution and delivery-operations subagents."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Consolidation removes competing interfaces for the same information or action.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Overlapping tools",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Adding delivery tools increased the tool set from 4 to 10 and reduced selection accuracy from 89% to 71%. Logs show confusion between issue_credit and process_refund and unnecessary check_delivery_status calls when lookup_order already has the data. Which change structurally removes the overlap?"
+  },
+  {
+    "id": "cca-f-sdk-035",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 35: Guaranteeing resolution or handoff",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Production logs show that complex billing disputes require many tool calls. The agent sometimes exhausts its max_turns limit after repeated checks without completing a resolution or escalating. The business requires every interaction to end in a completed resolution or a human handoff, regardless of how the loop terminates. Which approach achieves this guarantee?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add a system instruction telling the agent to call escalate_to_human with a summary whenever a conversation requires more than five reasoning steps."
+      },
+      {
+        "id": "B",
+        "text": "Split the workflow between a verification agent using get_customer and lookup_order and a resolution agent using process_refund or escalate_to_human, each with a separate turn budget."
+      },
+      {
+        "id": "C",
+        "text": "Add orchestration-layer code that detects loop termination. If no completed resolution or escalation occurred, programmatically call escalate_to_human with the accumulated context and tool results."
+      },
+      {
+        "id": "D",
+        "text": "Add a production hook that counts tool calls and automatically escalates after the agent reaches a fixed percentage of its max_turns limit."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The orchestration layer can guarantee a handoff on every unresolved termination path, including turn-limit exhaustion. Corrected from the earlier reply. The question concerns unresolved loop termination, not premature escalation. The precise percentage in option D is blurred; its threshold-based approach is preserved.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Guaranteeing resolution or handoff",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Production logs show that complex billing disputes require many tool calls. The agent sometimes exhausts its max_turns limit after repeated checks without completing a resolution or escalating. The business requires every interaction to end in a completed resolution or a human handoff, regardless of how the loop terminates. Which approach achieves this guarantee?"
+  },
+  {
+    "id": "cca-f-sdk-036",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 36: Escalation criteria",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Which escalation strategy most reliably identifies support cases requiring human intervention?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Escalate when the customer requests a human, resolution needs a policy exception, or the agent cannot make meaningful progress."
+      },
+      {
+        "id": "B",
+        "text": "Use a rules engine mapping issue types, customer segments, and product categories to decisions, removing model judgment."
+      },
+      {
+        "id": "C",
+        "text": "Escalate only when a sentiment-based frustration score crosses a threshold."
+      },
+      {
+        "id": "D",
+        "text": "Escalate after three consecutive failed tool calls."
+      }
+    ],
+    "correct": "A",
+    "explanation": "These criteria cover explicit customer intent, authority boundaries, and inability to resolve the issue.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Escalation criteria",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Which escalation strategy most reliably identifies support cases requiring human intervention?"
+  },
+  {
+    "id": "cca-f-sdk-037",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 37: A manager-approval handoff",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "After get_customer and lookup_order, the agent finds a promotional-pricing dispute that requires manager approval beyond its authorization. How should the workflow transition?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Compile customer details, order information, and the identified issue into a structured handoff before calling escalate_to_human."
+      },
+      {
+        "id": "B",
+        "text": "Attempt process_refund and escalate only if the transaction is rejected."
+      },
+      {
+        "id": "C",
+        "text": "Save the full conversation and tool history to a database, then pass only its reference ID to the escalation tool."
+      },
+      {
+        "id": "D",
+        "text": "Pass only the customer's original message to escalate_to_human."
+      }
+    ],
+    "correct": "A",
+    "explanation": "A concise structured handoff provides the next agent with the relevant facts and the reason for escalation.",
+    "mockEligible": true,
+    "topicBrief": "Topic: A manager-approval handoff",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "After get_customer and lookup_order, the agent finds a promotional-pricing dispute that requires manager approval beyond its authorization. How should the workflow transition?"
+  },
+  {
+    "id": "cca-f-sdk-038",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 38: Avoiding futile retries",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "process_refund returns transient technical failures such as 503 and permanent business failures such as an order outside the 30-day window. All errors are plain text, and the agent retries business failures several times. How can retries be reduced while keeping customer responses useful?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Retry technical errors automatically inside the tool and pass business errors to Claude without retries."
+      },
+      {
+        "id": "B",
+        "text": "Return structured errors with retryable=false for business failures and a customer-friendly explanation."
+      },
+      {
+        "id": "C",
+        "text": "Add a mandatory check_refund_eligibility tool before every refund."
+      },
+      {
+        "id": "D",
+        "text": "Add few-shot examples teaching Claude to infer retryability by parsing message text."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Explicit retryability and a clear explanation give the model both control information and useful response content.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Avoiding futile retries",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "process_refund returns transient technical failures such as 503 and permanent business failures such as an order outside the 30-day window. All errors are plain text, and the agent retries business failures several times. How can retries be reduced while keeping customer responses useful?"
+  },
+  {
+    "id": "cca-f-sdk-039",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 39: Keeping several support issues in context",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "A long session includes a refund inquiry in turns 1-15, a subscription question in turns 16-30, and a payment-method update in turns 31-45. At turn 46, the customer asks about the refund as the context limit approaches. What best maintains continuity across all issues?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Summarize earlier turns as a narrative and keep full history only for the active issue."
+      },
+      {
+        "id": "B",
+        "text": "Persist structured case data such as order IDs, amounts, and statuses in a separate context layer."
+      },
+      {
+        "id": "C",
+        "text": "Keep only the most recent 30 turns using a sliding window."
+      },
+      {
+        "id": "D",
+        "text": "Re-fetch all relevant information through MCP tools when an earlier issue is mentioned."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Structured per-issue state retains exact values and progress even when conversation history is compressed.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Keeping several support issues in context",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A long session includes a refund inquiry in turns 1-15, a subscription question in turns 16-30, and a payment-method update in turns 31-45. At turn 46, the customer asks about the refund as the context limit approaches. What best maintains continuity across all issues?"
+  },
+  {
+    "id": "cca-f-sdk-040",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 40: Enforcing a refund limit",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Refunds above $500 must always escalate to a human. Explicit prompts still allow occasional unauthorized high-value refunds. How can compliance be guaranteed?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Intercept tool calls with a hook; block process_refund when the amount exceeds $500 and invoke human escalation."
+      },
+      {
+        "id": "B",
+        "text": "Return a plain error message asking the agent to escalate when the threshold is exceeded."
+      },
+      {
+        "id": "C",
+        "text": "Strengthen the system prompt with emphatic policy language."
+      },
+      {
+        "id": "D",
+        "text": "Add examples showing correct escalation at amounts around the threshold."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Enforce the monetary boundary in executable policy logic before the refund side effect occurs.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Enforcing a refund limit",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Refunds above $500 must always escalate to a human. Explicit prompts still allow occasional unauthorized high-value refunds. How can compliance be guaranteed?"
+  },
+  {
+    "id": "cca-f-sdk-041",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 41: Preventing fabricated order IDs",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "When a customer requests a refund, the agent calls process_refund using a fabricated order_id inferred from a tracking-like identifier instead of first using lookup_order. Which change directly addresses the cause?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Explicitly document in process_refund that order_id must come from a prior lookup_order result and must never be inferred or invented."
+      },
+      {
+        "id": "B",
+        "text": "Check server-side that the ID exists and return an error if it does not."
+      },
+      {
+        "id": "C",
+        "text": "Change tool_choice from auto to any so a tool is called every turn."
+      },
+      {
+        "id": "D",
+        "text": "Pre-parse customer messages for order IDs and inject them into the context."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The tool contract should state the required source and prerequisite for the identifier; server-side validation remains a useful additional safeguard.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Preventing fabricated order IDs",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "When a customer requests a refund, the agent calls process_refund using a fabricated order_id inferred from a tracking-like identifier instead of first using lookup_order. Which change directly addresses the cause?"
+  },
+  {
+    "id": "cca-f-sdk-042",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 42: Distinguishing tool failures",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "lookup_order returns the same generic \"Operation failed\" result for missing IDs, network problems, and permissions issues. The agent sometimes retries forever, escalates too early, or asks the user irrelevant questions. What is the best improvement?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add an analyze_error MCP tool to classify every failure."
+      },
+      {
+        "id": "B",
+        "text": "Retry every error with exponential backoff in the MCP server, returning only after retries are exhausted."
+      },
+      {
+        "id": "C",
+        "text": "Add examples that teach the model to infer the error type from message patterns."
+      },
+      {
+        "id": "D",
+        "text": "Return structured errorCategory values, an isRetryable boolean, and a description of the cause."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Explicit error semantics let the agent distinguish failures that need retries, clarification, or escalation.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Distinguishing tool failures",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "lookup_order returns the same generic \"Operation failed\" result for missing IDs, network problems, and permissions issues. The agent sometimes retries forever, escalates too early, or asks the user irrelevant questions. What is the best improvement?"
+  },
+  {
+    "id": "cca-f-sdk-043",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 43: Terminating the agentic loop",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "A warranty claim requires customer lookup, order lookup, then a refund or escalation. When implementing this loop with the Claude API, what is the primary mechanism for deciding whether to continue or stop?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Set tool_choice to none after the last expected call."
+      },
+      {
+        "id": "B",
+        "text": "Stop after a prespecified maximum number of calls."
+      },
+      {
+        "id": "C",
+        "text": "Stop whenever the response contains a text content block."
+      },
+      {
+        "id": "D",
+        "text": "Inspect stop_reason: continue on tool_use and finish on end_turn or another appropriate terminal state."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The stop reason expresses whether Claude is requesting tool execution or has completed its turn. Other stop reasons, including token limits, should be handled explicitly; a text block may coexist with tool use.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Terminating the agentic loop",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A warranty claim requires customer lookup, order lookup, then a refund or escalation. When implementing this loop with the Claude API, what is the primary mechanism for deciding whether to continue or stop?"
+  },
+  {
+    "id": "cca-f-sdk-044",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 44: A refund tool timeout",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "The agent has customer and order data, can explain the charge and confirm refund eligibility, but process_refund times out. Which response best balances resolution with error handling?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Explain the findings and eligibility, acknowledge that processing is blocked by a system issue, and offer escalation or a later retry."
+      },
+      {
+        "id": "B",
+        "text": "Promise the refund will be processed and close the conversation because the failure is probably temporary."
+      },
+      {
+        "id": "C",
+        "text": "Immediately escalate because the refund action could not be completed."
+      },
+      {
+        "id": "D",
+        "text": "Keep the conversation open and retry with exponential backoff until the refund succeeds."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The customer can still receive verified findings and an honest account of the incomplete transaction.",
+    "mockEligible": true,
+    "topicBrief": "Topic: A refund tool timeout",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The agent has customer and order data, can explain the charge and confirm refund eligibility, but process_refund times out. Which response best balances resolution with error handling?"
+  },
+  {
+    "id": "cca-f-sdk-045",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 45: Propagating tool error details",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "An MCP tool returns a generic error instead of useful failure details. The agent cannot distinguish a missing record from a temporarily unavailable service and escalates or retries inappropriately. Which change gives Claude enough information to recover?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Retry inside every tool with exponential backoff and return failures only after all retries."
+      },
+      {
+        "id": "B",
+        "text": "Add an agent-side classifier that parses existing tool-error text into retry, permanent, or invalid categories."
+      },
+      {
+        "id": "C",
+        "text": "Remove is_error and treat errors as ordinary successful tool content."
+      },
+      {
+        "id": "D",
+        "text": "Return error-specific messages with is_error=true, such as an order ID not found for validation errors or a temporarily unavailable database for transient failures."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Propagating meaningful failure details preserves the distinction between correctable inputs and temporary infrastructure failures. Some photographed wording is blurred; the scenario and options are condensed.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Propagating tool error details",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An MCP tool returns a generic error instead of useful failure details. The agent cannot distinguish a missing record from a temporarily unavailable service and escalates or retries inappropriately. Which change gives Claude enough information to recover?"
+  },
+  {
+    "id": "cca-f-sdk-046",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 46: Resuming after code changes",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "A session analyzed a legacy authentication module and read 12 files. Before the engineer resumes today, a teammate changed 3 of those files. What best balances efficiency and accuracy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Resume the session and identify the changed files for targeted reanalysis."
+      },
+      {
+        "id": "B",
+        "text": "Start a fresh session and analyze the whole current codebase again."
+      },
+      {
+        "id": "C",
+        "text": "Resume and reread all 12 previously analyzed files."
+      },
+      {
+        "id": "D",
+        "text": "Resume without mentioning the changes."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The prior investigation can be reused while refreshing the specific evidence that has changed.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Resuming after code changes",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A session analyzed a legacy authentication module and read 12 files. Before the engineer resumes today, a teammate changed 3 of those files. What best balances efficiency and accuracy?"
+  },
+  {
+    "id": "cca-f-sdk-047",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 47: Independent testing strategies",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "An agent has analyzed a complex module across 25 files. A developer wants to independently develop both an end-to-end testing strategy and a focused unit-test strategy from that shared context. How should the sessions be managed?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Resume the analysis with fork_session enabled, creating a separate branch for each testing strategy."
+      },
+      {
+        "id": "B",
+        "text": "Continue in one session and develop the strategies sequentially."
+      },
+      {
+        "id": "C",
+        "text": "Export key findings and manually put them into two new sessions."
+      },
+      {
+        "id": "D",
+        "text": "Start two fresh sessions and reread the relevant source files in each."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Forking preserves shared analysis while allowing each strategy to evolve independently.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Independent testing strategies",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An agent has analyzed a complex module across 25 files. A developer wants to independently develop both an end-to-end testing strategy and a focused unit-test strategy from that shared context. How should the sessions be managed?"
+  },
+  {
+    "id": "cca-f-sdk-048",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 48: Understanding a cache architecture",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Initial Grep searches identify 85 caching-related files across decorators, middleware, and service classes, totaling about 4,000 lines. How should the agent build architectural understanding efficiently?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Search all files for invalidate and expire and read only matching line ranges."
+      },
+      {
+        "id": "B",
+        "text": "Find files by common caching filenames, read those first, and check service files for gaps."
+      },
+      {
+        "id": "C",
+        "text": "Trace imports and class hierarchies to identify base cache classes; read their interfaces and follow concrete invalidation implementations."
+      },
+      {
+        "id": "D",
+        "text": "Read every relevant file sequentially to build a complete picture."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Following the abstraction and dependency structure provides architectural context without indiscriminate reading.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Understanding a cache architecture",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Initial Grep searches identify 85 caching-related files across decorators, middleware, and service classes, totaling about 4,000 lines. How should the agent build architectural understanding efficiently?"
+  },
+  {
+    "id": "cca-f-sdk-049",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 49: An open-ended testing task",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "An engineer requests comprehensive tests for a 200-file legacy codebase with minimal coverage, without naming priority modules. How should the agent decompose the work?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Create a fixed schedule based on directories and give each top-level directory equal effort."
+      },
+      {
+        "id": "B",
+        "text": "Start testing the first module alphabetically and discover related files through failures."
+      },
+      {
+        "id": "C",
+        "text": "Use Glob and Grep to map structure and coupling, prioritize high-impact areas, and revise the plan as dependencies emerge."
+      },
+      {
+        "id": "D",
+        "text": "Read all 200 files and create a full function inventory before writing any tests."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Initial mapping and adaptive prioritization direct effort to consequential behavior without requiring exhaustive up-front reading.",
+    "mockEligible": true,
+    "topicBrief": "Topic: An open-ended testing task",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An engineer requests comprehensive tests for a 200-file legacy codebase with minimal coverage, without naming priority modules. How should the agent decompose the work?"
+  },
+  {
+    "id": "cca-f-sdk-050",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 50: A fixed review workflow",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Every pull-request review must cover code-style compliance, potential security issues, and documentation completeness. Each check requires file reading, analysis tools, and a report section. The review follows the same three-step workflow for every PR. Which pattern is most appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Orchestrator-workers: a central LLM dynamically decides which checks are needed and delegates them."
+      },
+      {
+        "id": "B",
+        "text": "One comprehensive prompt that handles all three checks simultaneously."
+      },
+      {
+        "id": "C",
+        "text": "Prompt chaining: analyze each aspect in a separate step, then combine the outputs in a final synthesis."
+      },
+      {
+        "id": "D",
+        "text": "Routing: classify the PR as a feature, bug fix, or refactor and select a different prompt."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The checks are predetermined, so a fixed chain matches the workflow better than dynamic task decomposition. Corrected from the earlier reply: the question explicitly says that the same three steps apply to every PR.",
+    "mockEligible": true,
+    "topicBrief": "Topic: A fixed review workflow",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Every pull-request review must cover code-style compliance, potential security issues, and documentation completeness. Each check requires file reading, analysis tools, and a report section. The review follows the same three-step workflow for every PR. Which pattern is most appropriate?"
+  },
+  {
+    "id": "cca-f-sdk-051",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 51: Moving to a related subsystem",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "After 25 minutes exploring a game engine's rendering code, the agent is asked how the physics engine integrates with rendering for collision-debug overlays. Recent answers use generic patterns instead of the discovered MeshPipeline and FrameGraph details. What is the best approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Spawn a physics subagent independently, then manually synthesize its results with the main conversation."
+      },
+      {
+        "id": "B",
+        "text": "Summarize the key rendering findings, then give that summary as initial context to a physics-exploration subagent."
+      },
+      {
+        "id": "C",
+        "text": "Use /clear to reset context completely, then explore physics with file paths from CLAUDE.md."
+      },
+      {
+        "id": "D",
+        "text": "Keep the current context and use more targeted prompts naming the specific classes."
+      }
+    ],
+    "correct": "B",
+    "explanation": "A focused summary transfers the relevant findings into a fresh context for the related investigation. Corrected from the earlier reply: clearing everything would discard useful rendering knowledge.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Moving to a related subsystem",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "After 25 minutes exploring a game engine's rendering code, the agent is asked how the physics engine integrates with rendering for collision-debug overlays. Recent answers use generic patterns instead of the discovered MeshPipeline and FrameGraph details. What is the best approach?"
+  },
+  {
+    "id": "cca-f-sdk-052",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 52: Investigating an unknown error path",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "An API endpoint intermittently returns 500 errors in a codebase of more than 200 files. The responsible component is unknown, and the investigation must follow routing, middleware, business logic, and database layers. Which decomposition is most effective?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use a fixed sequence of searches and checks regardless of intermediate findings."
+      },
+      {
+        "id": "B",
+        "text": "Send parallel workers to every layer, then synthesize their results."
+      },
+      {
+        "id": "C",
+        "text": "Create a complete map of all code paths before exploring files or reading code."
+      },
+      {
+        "id": "D",
+        "text": "Dynamically generate investigation subtasks from each finding and adapt the exploration plan as the error path emerges."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The relevant next step depends on evidence discovered during the investigation.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Investigating an unknown error path",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An API endpoint intermittently returns 500 errors in a codebase of more than 200 files. The responsible component is unknown, and the investigation must follow routing, middleware, business logic, and database layers. Which decomposition is most effective?"
+  },
+  {
+    "id": "cca-f-sdk-053",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 53: Comparing refactoring approaches",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Yesterday's analysis of a legacy authentication module identified two approaches: extracting a microservice or refactoring in place. The engineer wants concrete proposed changes for each before deciding. What is the best structure?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Fork yesterday's session into two branches and explore one approach in each."
+      },
+      {
+        "id": "B",
+        "text": "Resume for the first approach, then start a fresh session and manually provide context for the second."
+      },
+      {
+        "id": "C",
+        "text": "Explore both sequentially in the same resumed conversation."
+      },
+      {
+        "id": "D",
+        "text": "Create two fresh sessions and manually add the same summary to each."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Independent forks reuse the established context without allowing one alternative to contaminate the other.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Comparing refactoring approaches",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Yesterday's analysis of a legacy authentication module identified two approaches: extracting a microservice or refactoring in place. The engineer wants concrete proposed changes for each before deciding. What is the best structure?"
+  },
+  {
+    "id": "cca-f-sdk-054",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 54: Finding aliased callers",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "A function in a core library is re-exported through wrappers that rename it for domain-specific use. The engineer needs all callers before refactoring. What strategy most reliably finds them?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Search project documentation for the original function name and follow documented integration points."
+      },
+      {
+        "id": "B",
+        "text": "Grep only for the original function name throughout the repository."
+      },
+      {
+        "id": "C",
+        "text": "Find files importing the library or wrappers, then read each to see if it uses the function."
+      },
+      {
+        "id": "D",
+        "text": "Read the library and wrapper exports to identify all exported names, then Grep for each across the codebase."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Tracing the aliases first avoids missing callers that use wrapper-specific names.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Finding aliased callers",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A function in a core library is re-exported through wrappers that rename it for domain-specific use. The engineer needs all callers before refactoring. What strategy most reliably finds them?"
+  },
+  {
+    "id": "cca-f-sdk-055",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 55: Tools across MCP servers",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "An agent has three MCP servers for Git operations, issue management, and documentation search. A user asks it to create a branch for a ticket and add documentation links to that ticket. How are the tools accessed?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The agent selects one relevant server and loads only that server's tools."
+      },
+      {
+        "id": "B",
+        "text": "It queries servers separately to discover which handles each tool and routes using name prefixes."
+      },
+      {
+        "id": "C",
+        "text": "Tools from the configured servers are discovered when connecting and made available to the agent."
+      },
+      {
+        "id": "D",
+        "text": "The application must select one server per turn; the agent can access only one server at a time."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Multiple configured MCP servers can contribute tools to the same agent workflow. Availability remains subject to configuration, permissions, and any deferred-loading behavior.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Tools across MCP servers",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An agent has three MCP servers for Git operations, issue management, and documentation search. A user asks it to create a branch for a ticket and add documentation links to that ticket. How are the tools accessed?"
+  },
+  {
+    "id": "cca-f-sdk-056",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 56: Context pressure in a large investigation",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "The agent is tracing invoice-validation data flow across a legacy module spanning 65 files. After 8 files, it is forgetting earlier findings and has not located all tests or traced critical paths. What is the best approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Delegate specific questions such as locating tests or tracing dependencies to subagents, while the main agent coordinates findings and preserves the high-level model."
+      },
+      {
+        "id": "B",
+        "text": "Clear context and revisit only the most critical files, carrying a scratchpad across resets."
+      },
+      {
+        "id": "C",
+        "text": "Use only Grep for specific function names instead of reading full files."
+      },
+      {
+        "id": "D",
+        "text": "Write a summary, clear context completely, and continue using the report as the sole reference."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Scoped investigations keep large amounts of detail out of the coordinating context while retaining a coherent overall view.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Context pressure in a large investigation",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "The agent is tracing invoice-validation data flow across a legacy module spanning 65 files. After 8 files, it is forgetting earlier findings and has not located all tests or traced critical paths. What is the best approach?"
+  },
+  {
+    "id": "cca-f-sdk-057",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 57: Making MCP capabilities discoverable",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "A healthy MCP server exposes analyze_dependencies, find_dead_code, and calculate_complexity. Claude still uses Grep when explicitly asked to trace dependencies. analyze_dependencies is described only as \"Analyzes dependency graph.\" How should tool selection be improved?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Expand descriptions to specify capabilities and output, such as direct imports, transitive dependencies, and cycles."
+      },
+      {
+        "id": "B",
+        "text": "Add a system instruction routing all dependency-related questions to MCP tools instead of Grep."
+      },
+      {
+        "id": "C",
+        "text": "Split analyze_dependencies into several granular tools so each competes with Grep."
+      },
+      {
+        "id": "D",
+        "text": "Remove Grep whenever the MCP server is connected."
+      }
+    ],
+    "correct": "A",
+    "explanation": "A specific description makes the semantic advantage of dependency analysis clear to the model.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Making MCP capabilities discoverable",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A healthy MCP server exposes analyze_dependencies, find_dead_code, and calculate_complexity. Claude still uses Grep when explicitly asked to trace dependencies. analyze_dependencies is described only as \"Analyzes dependency graph.\" How should tool selection be improved?"
+  },
+  {
+    "id": "cca-f-sdk-058",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 58: When an explicit workflow helps",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Request A is to rename getUserData to fetchUserProfile everywhere. Request B is to improve error handling throughout a data-processing module using try/catch, useful messages, and failures that do not silently corrupt data. Which benefits most from an explicit explore-propose-implement-test workflow?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Request B, the error-handling task."
+      },
+      {
+        "id": "B",
+        "text": "Request A, the function-renaming task."
+      },
+      {
+        "id": "C",
+        "text": "Both benefit equally."
+      },
+      {
+        "id": "D",
+        "text": "Neither benefits significantly."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Cross-cutting error-handling changes require investigation and design choices, whereas a simple rename is more mechanical.",
+    "mockEligible": true,
+    "topicBrief": "Topic: When an explicit workflow helps",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "Request A is to rename getUserData to fetchUserProfile everywhere. Request B is to improve error handling throughout a data-processing module using try/catch, useful messages, and failures that do not silently corrupt data. Which benefits most from an explicit explore-propose-implement-test workflow?"
+  },
+  {
+    "id": "cca-f-sdk-059",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 59: Resuming a named session",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "An engineer investigated authentication yesterday in a two-hour session named auth-deep-dive. Since then, she has worked in other sessions. How should she resume that specific exploration?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use --resume auth-deep-dive to load the named session."
+      },
+      {
+        "id": "B",
+        "text": "Use --continue to resume the most recent conversation."
+      },
+      {
+        "id": "C",
+        "text": "Start fresh and reread the same files."
+      },
+      {
+        "id": "D",
+        "text": "Use --session-id with the UUID from yesterday's transcript."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Selecting the named session resumes the intended investigation; continuing the latest session may select unrelated work.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Resuming a named session",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "An engineer investigated authentication yesterday in a two-hour session named auth-deep-dive. Since then, she has worked in other sessions. How should she resume that specific exploration?"
+  },
+  {
+    "id": "cca-f-sdk-060",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "claude-code-agent-sdk-59",
+    "sourceLocator": "Assessment Question 60: Resuming a subagent after renames",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "A subagent spent 30 minutes analyzing a legacy payment system, reading 17 files and documenting data flow. The session was interrupted when the connection dropped. A teammate then merged a PR renaming two utility functions. How should the engineer continue?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Launch a fresh subagent with a summary of the earlier findings."
+      },
+      {
+        "id": "B",
+        "text": "Resume the subagent from its previous transcript and tell it about the renamed functions."
+      },
+      {
+        "id": "C",
+        "text": "Launch a fresh subagent and put the previous transcript in its initial prompt."
+      },
+      {
+        "id": "D",
+        "text": "Resume the subagent without mentioning changes because its understanding remains valid."
+      }
+    ],
+    "correct": "B",
+    "explanation": "Resuming preserves the investigation, and explicit change information directs it to refresh stale references.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Resuming a subagent after renames",
+    "roleContext": "Role: Claude Certified Architect & Agent Systems Engineer",
+    "scenario": "A subagent spent 30 minutes analyzing a legacy payment system, reading 17 files and documenting data flow. The session was interrupted when the connection dropped. A teammate then merged a PR renaming two utility functions. How should the engineer continue?"
   }
 ]
