@@ -1,0 +1,1946 @@
+[
+  {
+    "id": "cca-f-set2-001",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 1",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI CLAUDE.md file specifies testing standards and review criteria. When Claude Code runs in the CI pipeline, should it have access to this configuration?",
+    "options": [
+      {
+        "id": "A",
+        "text": "No, CI should use independent standards separate from development standards"
+      },
+      {
+        "id": "B",
+        "text": "Yes, CI-invoked Claude Code should access CLAUDE.md so tests and reviews match your team's standards"
+      },
+      {
+        "id": "C",
+        "text": "Use a separate CI-specific CLAUDE.md for automation"
+      },
+      {
+        "id": "D",
+        "text": "Only if critical tests are involved; not all tests need team standards"
+      }
+    ],
+    "correct": "B",
+    "explanation": "CI-invoked Claude Code should access your project's CLAUDE.md configuration. This ensures automated tasks follow the same standards as manual development, creating consistency and reducing friction between automation and human work. Proper context in CI pipelines is essential for effective integration.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 1",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-002",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 2",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI code review system is designed to use multiple independent reviewer agents, each focusing on specific domains (performance, security, style). How should each agent get its analysis tools restricted?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Trust each agent to use tools responsibly within their domain"
+      },
+      {
+        "id": "B",
+        "text": "Use allowedTools in the agent definition to give each only domain-relevant tools"
+      },
+      {
+        "id": "C",
+        "text": "Configure tool access in CLAUDE.md per agent"
+      },
+      {
+        "id": "D",
+        "text": "Give all agents the same full tool set for consistency"
+      }
+    ],
+    "correct": "B",
+    "explanation": "Scoped tool access via allowedTools creates focused agents. Each reviewer gets only role-relevant tools, improving focus and reliability. This is the hub-and-spoke coordinator pattern: a coordinator orchestrates scoped subagents. Understanding tool scoping is essential for building reliable multi-agent systems.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 2",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-003",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 3",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI test generation uses Claude Code with MCP tools. An MCP tool returns an error with isRetryable: true. How should Claude Code respond?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Log the error and continue"
+      },
+      {
+        "id": "B",
+        "text": "Retry the tool call since the error is transient"
+      },
+      {
+        "id": "C",
+        "text": "Treat all errors equally regardless of isRetryable"
+      },
+      {
+        "id": "D",
+        "text": "Skip to the next tool immediately"
+      }
+    ],
+    "correct": "B",
+    "explanation": "MCP error metadata including isRetryable guides intelligent error handling. Transient errors should be retried, permanent errors should be handled differently. This metadata-driven approach is more robust than generic error handling.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 3",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-004",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 4",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. You have a custom MCP tool for database schema analysis. The tool has three operations: list_tables, check_integrity, and analyze_performance. How should you design this?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Three separate tools (one per operation) for clear separation"
+      },
+      {
+        "id": "B",
+        "text": "One tool per database type (PostgreSQL, MySQL, etc.)"
+      },
+      {
+        "id": "C",
+        "text": "One tool that always runs all operations and returns combined results"
+      },
+      {
+        "id": "D",
+        "text": "One tool with clear description and operation parameter letting Claude Code choose which to run"
+      }
+    ],
+    "correct": "D",
+    "explanation": "Tool design should balance clarity with simplicity. A single tool with clear description and parameters is better than separate tools for each capability. Clear tool design enables Claude Code to select and use tools effectively in CI pipelines.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 4",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-005",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 5",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Your system must extract event details from calendar invitations and output JSON that strictly conforms to a schema. Downstream systems reject malformed or non conformant JSON. What approach provides the most reliable schema compliance?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Define a tool with the target schema as input parameters and have the model call it with the extracted data."
+      },
+      {
+        "id": "B",
+        "text": "Pre fill the response with an opening brace and parse the completed text as JSON."
+      },
+      {
+        "id": "C",
+        "text": "Include detailed JSON formatting instructions and the target schema in the prompt."
+      },
+      {
+        "id": "D",
+        "text": "Append strict JSON only instructions and use retry logic if parsing fails."
+      }
+    ],
+    "correct": "A",
+    "explanation": "Tool based structured output is more reliable than prompt only JSON formatting because the schema is enforced at the interface level. Critical business rules and compliance requirements need deterministic enforcement mechanisms rather than relying on model behavior, which is inherently probabilistic. In practice, hooks, programmatic prerequisites, and structured tool designs provide the reliability guarantees that production systems demand.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 5",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-006",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 6",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. The extraction pipeline receives multiple document types, each with its own extraction tool and schema. With tool_choice set to auto, the model sometimes returns conversational text instead of calling a tool. You need guaranteed structured output without knowing the document type in advance. What is the most effective approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keep tool_choice as auto and add system prompt instructions requiring tool use."
+      },
+      {
+        "id": "B",
+        "text": "Add a preliminary classification call, then make a second call with tool_choice forced to the identified extraction tool."
+      },
+      {
+        "id": "C",
+        "text": "Set tool_choice to any with all extraction tools defined."
+      },
+      {
+        "id": "D",
+        "text": "Consolidate all document types into a single unified schema extraction tool and force that tool."
+      }
+    ],
+    "correct": "C",
+    "explanation": "tool_choice set to any guarantees the model will select one of the provided tools instead of returning free text. This is the simplest deterministic enforcement mechanism when the document type is not known in advance, and it avoids the extra latency and cost of a separate classification call.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 6",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-007",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 7",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Your extraction pipeline processes restaurant menus and must output structured JSON with fields for item names, descriptions, prices, and dietary tags. Menus use inconsistent formatting. What is the most reliable approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Define a strict output schema and include format normalization rules in the prompt."
+      },
+      {
+        "id": "B",
+        "text": "Extract data as is and normalize formats in post processing code afterward."
+      },
+      {
+        "id": "C",
+        "text": "Request multiple extraction attempts and select the most common format."
+      },
+      {
+        "id": "D",
+        "text": "Use separate extraction calls for each field."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The model should be guided toward a single normalized target format during extraction rather than leaving normalization entirely to later cleanup. Combining a strict schema with explicit normalization rules produces consistent output at the source.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 7",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-008",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 8",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Your extraction system retries when validation fails, appending the validation error to the prompt each time. For which failure pattern would additional retries be least effective?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The model outputs locale formatted strings where the schema requires integers."
+      },
+      {
+        "id": "B",
+        "text": "The model outputs ISO 8601 datetimes where the schema requires only dates."
+      },
+      {
+        "id": "C",
+        "text": "The model outputs et al. for co authors when the full list exists only in an external document not present in the input."
+      },
+      {
+        "id": "D",
+        "text": "The model outputs a nested object where the schema requires a flat array."
+      }
+    ],
+    "correct": "C",
+    "explanation": "Retries help with structure and formatting corrections. They do not solve missing information that is absent from the input. If the data was never in the source document, no amount of re-prompting will recover it.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 8",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-009",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 9",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Your extraction pipeline processes invoices and in many cases the sum of extracted line items does not match the extracted grand total. Downstream systems reject mismatched totals. What is the most effective approach to improve reliability?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Automatically adjust line item amounts proportionally when totals do not match."
+      },
+      {
+        "id": "B",
+        "text": "Add few shot examples encouraging the model to produce mathematically consistent extractions."
+      },
+      {
+        "id": "C",
+        "text": "Extract line items and totals independently, then use a separate validation model to reconcile discrepancies."
+      },
+      {
+        "id": "D",
+        "text": "Add a calculated_total field alongside the stated_total and flag records for human review when they differ."
+      }
+    ],
+    "correct": "D",
+    "explanation": "It is safer to preserve both the extracted total and the calculated sum and then flag mismatches, rather than silently altering financial data. Deterministic arithmetic checks plus human review beat probabilistic reconciliation for financial records.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 9",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-010",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 10",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your PR test generation system is suggesting tests identical to existing tests in the file. How can you prevent this?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Include existing test file content in the context so Claude Code sees what's already tested"
+      },
+      {
+        "id": "B",
+        "text": "Generate tests in a separate CI job to avoid context pollution"
+      },
+      {
+        "id": "C",
+        "text": "Use a database to track tested scenarios and filter duplicates"
+      },
+      {
+        "id": "D",
+        "text": "Ask Claude Code to suggest novel test cases not seen before"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Context management prevents duplication of work. When Claude Code can see existing test files, it avoids repeating tests. This is critical for iterative development where CI runs repeatedly on the same codebase. Proper context selection makes automation more efficient.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 10",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-011",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 11",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. After deployment, you find that some extractions contain semantic errors that pass schema validation, and reviewers can check only a subset of outputs. Which approach most effectively allocates reviewer attention?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Review all extractions from documents with formatting anomalies."
+      },
+      {
+        "id": "B",
+        "text": "Have the model output field level confidence scores and calibrate review thresholds using a labeled validation set."
+      },
+      {
+        "id": "C",
+        "text": "Prioritize review of all extractions where required fields are empty or marked not found."
+      },
+      {
+        "id": "D",
+        "text": "Randomly sample 20 percent of extractions for review."
+      }
+    ],
+    "correct": "B",
+    "explanation": "With limited human review capacity, calibrated field level confidence lets you focus reviewers where the risk is highest. Calibration against a labeled validation set is what turns raw confidence numbers into an actionable review threshold.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 11",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-012",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 12",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. After implementing tool use with strict schema definitions, syntax errors disappear, but some extractions still have valid JSON with empty strings or null values for required fields even though the source documents contain that information in varied formats. What is the most effective way to address these failures?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Modify the schema to make those fields optional and flag incomplete records for manual review."
+      },
+      {
+        "id": "B",
+        "text": "Build a regex based post processing layer that scans source documents for likely citation and methodology patterns."
+      },
+      {
+        "id": "C",
+        "text": "Implement retry logic that re sends requests when validation detects empty required fields."
+      },
+      {
+        "id": "D",
+        "text": "Add few shot examples showing extractions from documents with varied structures and how to locate the required information."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The issue is not syntax. It is extraction from diverse layouts and document patterns. Few shot examples that demonstrate locating the information across varied structures directly improve that behavior.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 12",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-013",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 13",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Documents arrive continuously during business hours. You want to use the batch API to reduce costs, and your SLA requires results within 30 hours of arrival. Which batching strategy is most appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Submit batches every 4 hours containing documents from that window."
+      },
+      {
+        "id": "B",
+        "text": "Submit a single end of day batch containing all documents from that day."
+      },
+      {
+        "id": "C",
+        "text": "Use the real time API for all documents instead of batch processing."
+      },
+      {
+        "id": "D",
+        "text": "Submit batches every 6 hours containing documents from that window."
+      }
+    ],
+    "correct": "D",
+    "explanation": "With a 24 hour batch window and a 30 hour SLA, a 6 hour batching cadence fits the SLA while keeping the process simpler than a more frequent schedule. A document arriving at the start of a window waits up to 6 hours, then up to 24 hours for processing, staying within 30 hours.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 13",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-014",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 14",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Monitoring shows many extractions fail Pydantic validation with specific errors such as expected float for quantity but got a range value like 2 to 3. Retrying without modification produces identical failures. What is the most effective recovery?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pre process source documents to standardize problematic formats before extraction."
+      },
+      {
+        "id": "B",
+        "text": "Use a larger model tier to reprocess failed documents."
+      },
+      {
+        "id": "C",
+        "text": "Send a follow up request including the validation error and ask the model to correct its output."
+      },
+      {
+        "id": "D",
+        "text": "Set temperature to zero to ensure consistent formatting."
+      }
+    ],
+    "correct": "C",
+    "explanation": "When the validation failure is specific and correctable, feeding the error back to the model is the most direct and efficient repair mechanism. A blind retry repeats the same failure because the model has no new information.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 14",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-015",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 15",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. The system needs to extract candidate information from resumes into a predefined JSON schema, and missing fields or wrong types will break downstream validation. What is the most reliable approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use detailed JSON instructions and a template example in the prompt."
+      },
+      {
+        "id": "B",
+        "text": "Make two API calls, first extracting text and then converting it to JSON."
+      },
+      {
+        "id": "C",
+        "text": "Parse the model's text response with regex and retry malformed outputs."
+      },
+      {
+        "id": "D",
+        "text": "Define a tool with an input schema matching the required structure and extract the data from the tool call response."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Structured tool output with an explicit schema is more reliable than prompt only approaches when downstream validation is strict, because the schema is enforced at the interface level rather than requested in prose.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 15",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-016",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 16",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Your extraction system parses e-commerce product descriptions to extract fields such as dimensions, weight, and materials. The model inconsistently extracts the materials field and sometimes omits it even when the information is present. What is the most effective way to improve consistency?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Switch to a more capable model tier."
+      },
+      {
+        "id": "B",
+        "text": "Make the materials field required instead of optional."
+      },
+      {
+        "id": "C",
+        "text": "Set temperature to zero for deterministic output."
+      },
+      {
+        "id": "D",
+        "text": "Add few shot examples showing complete input output pairs with standardized material descriptions."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The problem is inconsistent normalization behavior. Few shot examples clarify the desired representation better than simply tightening the schema, which would only force an empty or invented value.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 16",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-017",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 17",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. When designing a JSON schema for extracted data, what fields should always be included alongside the extracted data?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Extracted fields plus confidence_score, extraction_source, and extraction_timestamp for traceability"
+      },
+      {
+        "id": "B",
+        "text": "Full extraction logs for audit trails"
+      },
+      {
+        "id": "C",
+        "text": "Only the extracted fields needed by downstream systems"
+      },
+      {
+        "id": "D",
+        "text": "Extracted fields plus error_handling_metadata for debugging"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Include metadata alongside extracted data. A complete extraction includes: the data itself, confidence scores (how certain the model is), extraction source (which document, which page), and timestamp. This metadata enables downstream systems to validate extractions (only accept products with confidence > 90%), debug issues (these extractions are from an old version), and maintain audit trails.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 17",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-018",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 18",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. Your extraction system encounters documents with conflicting or ambiguous information (e.g., a product name is listed differently in two places). What should the extraction schema require?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Return an error and ask for human clarification"
+      },
+      {
+        "id": "B",
+        "text": "Extract the most common version"
+      },
+      {
+        "id": "C",
+        "text": "Extract all versions found and include a detected_conflict boolean with explanation of the conflict"
+      },
+      {
+        "id": "D",
+        "text": "Extract whichever version appears first"
+      }
+    ],
+    "correct": "C",
+    "explanation": "Make conflicts explicit in the schema. When the extraction model detects conflicting information, the schema should capture: all values found, a conflict_detected flag, and explanation of the conflict. This preserves information and lets downstream systems make informed decisions about which value to use or whether to flag for human review.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 18",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-019",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 19",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude. The system extracts information from unstructured documents, validates the output using JavaScript Object Notation (JSON) schemas, and maintains high accuracy. It must handle edge cases gracefully and integrate with downstream systems. When extraction returns a null value for a required field, how should the system respond?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Generate a placeholder value"
+      },
+      {
+        "id": "B",
+        "text": "Include the null and document why extraction failed (field not found, ambiguous, etc.)"
+      },
+      {
+        "id": "C",
+        "text": "Accept null values and pass them to downstream systems"
+      },
+      {
+        "id": "D",
+        "text": "Return an error and retry extraction with a modified prompt"
+      }
+    ],
+    "correct": "B",
+    "explanation": "When required fields are missing, document why. The schema should include a reason or extraction_status field for each critical field. For example: email: null, extraction_status: not_found, confidence: 0.0. This distinction helps downstream systems handle missing-vs-unextractable information differently, and root cause analysis reveals if extraction is failing or data is truly absent.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 19",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Structured Data Extraction You are building a structured data extraction system using Claude."
+  },
+  {
+    "id": "cca-f-set2-020",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 20",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. A customer says they have been going back and forth on a return for days and want to speak to someone who can actually help. The agent has confirmed the return is straightforward and eligible for immediate processing. What should the agent do?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Process the refund to resolve the issue, then tell the customer it is complete."
+      },
+      {
+        "id": "B",
+        "text": "Call escalate_to_human immediately to honor the customer's request."
+      },
+      {
+        "id": "C",
+        "text": "Acknowledge frustration, explain this is resolvable now, and offer to complete it or escalate."
+      },
+      {
+        "id": "D",
+        "text": "Ask what specifically has not worked in previous attempts before deciding whether to escalate or resolve automatically."
+      }
+    ],
+    "correct": "C",
+    "explanation": "This balances customer empathy with resolution efficiency. The agent acknowledges the frustration, explains that the return can be resolved immediately, and gives the customer the choice: let the agent process the refund now, or escalate to a human. This aligns with the principle of achieving high first-contact resolution while respecting customer requests for escalation.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 20",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-021",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 21",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI process uses Claude Code with the -p flag in a GitHub Actions workflow. What does this enable?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Preview mode, showing potential changes without applying them"
+      },
+      {
+        "id": "B",
+        "text": "Parallel execution of multiple Claude Code instances simultaneously"
+      },
+      {
+        "id": "C",
+        "text": "Non-interactive mode, allowing Claude Code to run without requiring approvals or human interaction"
+      },
+      {
+        "id": "D",
+        "text": "Performance profiling to measure execution time"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The -p flag enables Claude Code to run in non-interactive (print) mode, which is essential for CI/CD pipelines. This ensures automated reviews and feedback can execute without manual intervention, keeping the pipeline efficient and continuous.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 21",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-022",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 22",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. A customer says they are frustrated, have explained the issue twice, and want to talk to a real person now. The agent has not yet called any tools to investigate the account. What should the agent do?",
+    "options": [
+      {
+        "id": "A",
+        "text": "First call get_customer and lookup_order to gather account context, then escalate."
+      },
+      {
+        "id": "B",
+        "text": "Acknowledge the frustration and ask one targeted question before escalating."
+      },
+      {
+        "id": "C",
+        "text": "Briefly explain what the agent can help with and offer to resolve the issue quickly, escalating only if the customer repeats the request."
+      },
+      {
+        "id": "D",
+        "text": "Immediately call escalate_to_human with the conversation history."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The customer has explicitly requested a real person and has already explained the issue multiple times. Best practice is to escalate immediately when the customer insists, rather than forcing further automated steps. This respects customer intent, avoids worsening dissatisfaction, and ensures a smooth handoff with full conversation context.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 22",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-023",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 23",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are designing a code generation prompt that should produce Python functions. You want Claude Code to always return valid Python with no syntax errors. What is the most effective approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use tool_use with a JSON schema specifying function code and expected behavior"
+      },
+      {
+        "id": "B",
+        "text": "Include several correct Python function examples in the prompt"
+      },
+      {
+        "id": "C",
+        "text": "Ask Claude Code to validate Python syntax before responding"
+      },
+      {
+        "id": "D",
+        "text": "Use a custom linter tool to check output"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Using tool_use with a JSON schema enforces structured output. This ensures Claude Code generates Python functions that conform to the schema, reducing the risk of syntax errors. By defining expected behavior and structure, the model is guided to produce valid, executable code consistently.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 23",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-024",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 24",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI pipeline runs Claude Code with --output-format json to integrate results into your dashboard. What flag should you also use to ensure output matches your expected schema?",
+    "options": [
+      {
+        "id": "A",
+        "text": "--schema-compliance to verify schema adherence"
+      },
+      {
+        "id": "B",
+        "text": "--validate-schema to check output validity"
+      },
+      {
+        "id": "C",
+        "text": "--json-schema to specify the exact output structure expected"
+      },
+      {
+        "id": "D",
+        "text": "--strict-json for enforcement"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The --json-schema flag specifies the exact output structure expected, so JSON results integrate cleanly into a CI/CD dashboard without mismatches or parsing errors. This is the recommended approach when working with structured outputs in production pipelines.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 24",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-025",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 25",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are implementing a hub-and-spoke coordinator-subagent pattern for code review. The coordinator receives pull request feedback from multiple review subagents. What is the key architectural benefit of this pattern?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The coordinator can control all subagents synchronously, ensuring sequential execution"
+      },
+      {
+        "id": "B",
+        "text": "Subagents share the main context, reducing memory usage"
+      },
+      {
+        "id": "C",
+        "text": "The pattern eliminates the need for tool_choice configuration"
+      },
+      {
+        "id": "D",
+        "text": "Each subagent operates with isolated context, preventing context pollution and allowing parallel specialization"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The hub-and-spoke coordinator-subagent architecture enables parallel specialization with isolated context. Each subagent operates independently with its own context and tool restrictions, preventing interference and improving reliability. The coordinator aggregates results from multiple subagents. This pattern is ideal for scenarios requiring multiple specialized analyses.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 25",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-026",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 26",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. After investigating a billing dispute over many turns, you have identified duplicate charges caused by payment gateway retry logic. The required refund exceeds your authorization limit, and the human agent will not have access to the transcript. What context should you pass when escalating?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The customer's original complaint plus excerpts of tool results showing duplicate transactions."
+      },
+      {
+        "id": "B",
+        "text": "Your diagnosis and the refund amount only."
+      },
+      {
+        "id": "C",
+        "text": "A structured summary with customer ID, root cause, refund amount, and recommended action."
+      },
+      {
+        "id": "D",
+        "text": "The complete conversation transcript with all tool results."
+      }
+    ],
+    "correct": "C",
+    "explanation": "A concise structured summary gives the human the facts needed to act without forcing them to sift through an entire transcript. Structured handoff payloads are the reliable pattern for agent-to-human escalation.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 26",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-027",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 27",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. When the agent calls lookup_order and receives order details showing the item was purchased 45 days ago, how does the agentic loop determine whether to call process_refund or escalate_to_human next?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The agent executes the remaining steps in a tool sequence planned at the start of the request."
+      },
+      {
+        "id": "B",
+        "text": "The agent follows a pre configured decision tree mapping order attributes to specific tool calls."
+      },
+      {
+        "id": "C",
+        "text": "The orchestration layer automatically routes to the next tool based on the order's status field."
+      },
+      {
+        "id": "D",
+        "text": "The order details are added to the conversation and the model reasons about which action to take."
+      }
+    ],
+    "correct": "D",
+    "explanation": "In an agentic loop, tool outputs are fed back into model context and the model decides the next action based on the new information. That feedback loop, not a fixed plan or router, is what makes the architecture agentic.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 27",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-028",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 28",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You are implementing escalation logic for when the agent should call escalate_to_human. Which approach will most reliably identify cases that genuinely require human intervention?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use sentiment analysis and escalate when frustration exceeds a configured threshold."
+      },
+      {
+        "id": "B",
+        "text": "Build a rules engine mapping issue types, customer segments, and product categories to escalation decisions."
+      },
+      {
+        "id": "C",
+        "text": "Escalate after three consecutive tool calls fail to resolve the issue."
+      },
+      {
+        "id": "D",
+        "text": "Escalate when the customer requests a human, when the issue requires policy exceptions, or when the agent cannot make meaningful progress."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The strongest escalation criteria combine explicit user preference, policy boundaries, and lack of meaningful progress. Fixed counts or sentiment alone are too blunt and misfire in both directions.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 28",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-029",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 29",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. A customer raises three separate issues during one session, and the conversation is approaching context limits. What strategy best maintains the agent's ability to address all issues throughout the session?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rely on MCP tools to re fetch relevant information on demand when the customer references earlier issues."
+      },
+      {
+        "id": "B",
+        "text": "Implement a sliding window that retains only the most recent turns."
+      },
+      {
+        "id": "C",
+        "text": "Summarize earlier turns into a narrative description and preserve full history only for the active issue."
+      },
+      {
+        "id": "D",
+        "text": "Extract and persist structured issue data such as order IDs, amounts, and statuses into a separate context layer."
+      }
+    ],
+    "correct": "D",
+    "explanation": "Structured issue state preserves the important facts for each topic without depending on raw conversation history. Narrative summaries and sliding windows both risk dropping identifiers the agent still needs.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 29",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-030",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 30",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. A customer returns four hours after their initial session. Resuming with stale tool results causes the agent to reference outdated information even after fresh tool calls provide newer facts. What approach most reliably handles returning customers?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Start a new session, inject a structured summary of the previous interaction, then make fresh tool calls before engaging."
+      },
+      {
+        "id": "B",
+        "text": "Resume with full history and add a system prompt telling the agent to always prefer the most recent tool results."
+      },
+      {
+        "id": "C",
+        "text": "Resume with full history but filter out previous tool_result messages, keeping only the human and assistant turns."
+      },
+      {
+        "id": "D",
+        "text": "Resume with full history and automatically re call all previously used tools at session start."
+      }
+    ],
+    "correct": "A",
+    "explanation": "A fresh session plus a structured summary avoids stale tool outputs contaminating the context while preserving the important prior context. Prompt instructions to prefer newer results are probabilistic; removing the stale data is deterministic.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 30",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-031",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 31",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You are implementing the agentic loop and encounter a situation where process_refund returns an error: Refund failed: Account is locked pending fraud review. This is a retryable scenario in 6 hours. How should you communicate this to the agent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Return a success result and let the agent figure out what happened"
+      },
+      {
+        "id": "B",
+        "text": "Return the error as-is from the backend without any transformation or categorization"
+      },
+      {
+        "id": "C",
+        "text": "Return an error result with isError: true, errorCategory: transient, isRetryable: true, and a human-readable message explaining the fraud hold and suggesting escalation"
+      },
+      {
+        "id": "D",
+        "text": "Immediately call escalate_to_human without telling the agent about the error details"
+      }
+    ],
+    "correct": "C",
+    "explanation": "Error handling in agents is about translating backend failures into actionable information. A raw error like HTTP 400: account_locked_fraud_check is not useful to the agent or the customer. Normalize it into structured error metadata: isError, errorCategory (transient, non_retryable, permission_denied, not_found), isRetryable, and human-readable details. For a fraud hold you return isRetryable: true because the agent can offer to call back in 6 hours or escalate if the customer needs immediate resolution. In production, implement error normalization in a helper function that maps backend error codes to your error schema for consistency across all tools.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 31",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-032",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 32",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your main support agent is configured with allowedTools: [get_customer, lookup_order, process_refund, escalate_to_human]. You are concerned about scope creep where the agent might attempt operations outside its domain. What is the implication of this scoped tool access?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The agent can only call these four tools; any attempt to call tools outside this list will fail at runtime"
+      },
+      {
+        "id": "B",
+        "text": "The agent will attempt all possible operations but these four will have priority"
+      },
+      {
+        "id": "C",
+        "text": "The agent's system prompt is restricted, but it can request tools outside this list"
+      },
+      {
+        "id": "D",
+        "text": "Tool scoping is only a recommendation; the agent will ignore it if it seems necessary"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Tool scoping is a fundamental security pattern in agent architecture. Defining allowedTools in the AgentDefinition implements role-based access control. The support agent handles returns, refunds, and escalations but has no access to create_account, update_customer_password, or suspend_account. This prevents accidental or malicious misuse: if an agent is compromised or the prompt is adversarially modified, scoped access limits the damage. In a hub-and-spoke architecture each subagent gets even tighter scoping, making behavior predictable and auditable.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 32",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-033",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 33",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You have a tool called get_customer that is critical for retrieving customer details. Your tool description currently says: Retrieves customer information. A team member says this is sufficient. Why might this description be inadequate for reliable agent behavior?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tool descriptions should only be one sentence for brevity"
+      },
+      {
+        "id": "B",
+        "text": "The description is too vague. It does not specify what parameters are required, what output format to expect, what edge cases exist (e.g., customer not found), or when to use this tool vs. other alternatives"
+      },
+      {
+        "id": "C",
+        "text": "Detailed descriptions slow down the model's reasoning process"
+      },
+      {
+        "id": "D",
+        "text": "The description is fine; agents do not need detailed tool descriptions to use tools correctly"
+      }
+    ],
+    "correct": "B",
+    "explanation": "Tool descriptions are the interface between the agent and your system. The model relies on them to decide which tool to call, what input to provide, and what the output means. A better description is: Retrieves customer account details (name, email, account status, subscription info). Use this before refunds to verify active account. Input: customer_id. Returns: {id, name, email, status, subscription_active}. Returns error if customer_id not found. Including example queries and boundary explanations (does not return order history; use lookup_order for that) reduces ambiguity and directly improves first-contact resolution rates.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 33",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-034",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 34",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You are designing the process_refund tool. Your backend returns different failure modes: Insufficient funds in account, Account locked pending fraud review, and Refund window expired. How should you structure the tool's error response?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use isError: true with errorCategory (transient, non_retryable, etc.), isRetryable (boolean), and a human-readable details message so the agent can reason about next steps"
+      },
+      {
+        "id": "B",
+        "text": "Return success even on failure and embed error codes in the result for the agent to parse"
+      },
+      {
+        "id": "C",
+        "text": "Return all error messages as plain text strings without categorization"
+      },
+      {
+        "id": "D",
+        "text": "Throw exceptions and let the SDK handle error translation automatically"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Error handling in MCP tools is about translating backend failures into actionable structured data. Wrap failures in a standard schema: isError, errorCategory (transient, non_retryable, permission_denied, not_found, validation_error), isRetryable, and details. errorCategory tells the agent the class of error, isRetryable tells it whether waiting and retrying makes sense, and details provides a human-readable explanation with suggested next steps. A normalize_refund_error helper that maps backend messages to this schema keeps handling consistent across the agent.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 34",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-035",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 35",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your MCP server defines tools at the user level (~/.claude.json). Your team wants different projects to have different sets of tools. For example, one project uses process_refund, another uses process_replacement_order. How should you structure MCP server scoping?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Store tool definitions in a database and fetch them at runtime based on the project"
+      },
+      {
+        "id": "B",
+        "text": "Require each project to copy the full ~/.claude.json and edit it locally"
+      },
+      {
+        "id": "C",
+        "text": "Define all tools in ~/.claude.json and let each project's agent choose which ones to use via tool_choice"
+      },
+      {
+        "id": "D",
+        "text": "Define project-level .mcp.json files so each project can have scoped tool access independent of others"
+      }
+    ],
+    "correct": "D",
+    "explanation": "MCP server scoping manages tool availability across projects and environments. The two-level hierarchy is intentional: use ~/.claude.json for universally available tools, and project-level .mcp.json to define or override tools for a specific project. A billing project's .mcp.json specifies a billing MCP server while a fulfillment project specifies a fulfillment server. This has security benefits (a billing agent cannot reach fulfillment tools) and maintainability benefits (updates touch one project config, not a global one).",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 35",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-036",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 36",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You want the agent to dynamically decide which tool to call based on the situation. You are choosing between tool_choice: auto and tool_choice: any. What is the practical difference?",
+    "options": [
+      {
+        "id": "A",
+        "text": "any is more restrictive and prevents the model from calling certain tools"
+      },
+      {
+        "id": "B",
+        "text": "auto and any are equivalent; both let the model choose any available tool"
+      },
+      {
+        "id": "C",
+        "text": "auto prevents the model from using tools at all"
+      },
+      {
+        "id": "D",
+        "text": "auto uses model heuristics to decide whether and when to call tools; any forces the model to always call a tool in every response, even if it might not need one"
+      }
+    ],
+    "correct": "D",
+    "explanation": "tool_choice controls whether tool calling is optional or mandatory. With auto (default) the model can respond directly, call one tool, or call tools in sequence, which suits general support interactions. With any the model must include at least one tool_use block, which is useful for enforcing prerequisites: pairing any with allowedTools: [get_customer] forces identity verification before anything else. Typically you use auto for general interactions and shift programmatically to any at specific checkpoints. Note that any does not let you specify which tool; to force a specific tool you name it in tool_choice directly.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 36",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-037",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 37",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your Claude Code project has a CLAUDE.md file with custom system instructions and rules for the support agent. You are adding a new project dependency (a special tool for handling warranty claims). Should you add the warranty tool definition to the root CLAUDE.md or use the @import syntax?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Configuration should never be split across files; it violates best practices"
+      },
+      {
+        "id": "B",
+        "text": "Always add everything to the root CLAUDE.md to keep configuration centralized"
+      },
+      {
+        "id": "C",
+        "text": "Use @import to modularize the CLAUDE.md so different features (refunds, returns, warranty claims) are defined in separate files and imported as needed"
+      },
+      {
+        "id": "D",
+        "text": "Create a separate CLAUDE.md in each subdirectory and ignore the root file"
+      }
+    ],
+    "correct": "C",
+    "explanation": "CLAUDE.md uses a hierarchy and modularity design: user level (~/.claude/CLAUDE.md) for global principles, project level for project rules, directory level for feature-specific rules. When adding warranty claims, create .claude/rules/warranty-tools.md with the tool definitions and constraints, then import it in the project CLAUDE.md. This keeps configuration organized and easy to modify, and @import is the primary mechanism for managing the hierarchy without duplication.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 37",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-038",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 38",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are setting up Claude Code to work with your team's MCP resources. Your catalog contains hundreds of documentation pages. How should you structure this for efficient usage?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Create a custom tool that searches the documentation using full-text search"
+      },
+      {
+        "id": "B",
+        "text": "Store documentation paths in CLAUDE.md for reference"
+      },
+      {
+        "id": "C",
+        "text": "Load all documentation into the initial prompt context"
+      },
+      {
+        "id": "D",
+        "text": "Use MCP resources to create a catalog index that Claude Code can query without reading every page"
+      }
+    ],
+    "correct": "D",
+    "explanation": "MCP resources are designed for content catalogs, allowing Claude Code to query and retrieve information without loading everything upfront. This reduces context consumption and exploratory calls. Using MCP resources for documentation, templates, or reference material is more efficient than custom tools or context loading.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 38",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-039",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 39",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You want to restrict a subagent to use only specific tools: Grep, Glob, and Read. How do you configure this using AgentDefinition?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Create a skill with allowed-tools in the frontmatter"
+      },
+      {
+        "id": "B",
+        "text": "Use tool_choice to force only those tools"
+      },
+      {
+        "id": "C",
+        "text": "Add tool restrictions to CLAUDE.md for the subagent"
+      },
+      {
+        "id": "D",
+        "text": "Set allowedTools: [Grep, Glob, Read] in the AgentDefinition"
+      }
+    ],
+    "correct": "D",
+    "explanation": "AgentDefinition includes allowedTools configuration to restrict subagent access to specific tools. This scoped approach gives agents only role-relevant tools, improving focus and reducing errors. Subagents with restricted tool access are more reliable and predictable than agents with full tool access.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 39",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-040",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 40",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your process_refund tool returns technical errors that are transient and business errors that are permanent, but both currently return only plain text. What is the most effective way to reduce wasted retries while improving customer facing response quality?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add few shot examples showing how to distinguish retriable from non retriable errors by parsing message text."
+      },
+      {
+        "id": "B",
+        "text": "Add a check_refund_eligibility tool that must be called before process_refund."
+      },
+      {
+        "id": "C",
+        "text": "Return structured error responses with retriable false for business errors and a customer friendly explanation."
+      },
+      {
+        "id": "D",
+        "text": "Implement automatic retry logic at the tool level for technical errors only, passing business errors to the agent without retries."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The agent needs explicit structured signals that distinguish retryable from non retryable failures. Relying on message parsing is brittle, while a structured retriable flag plus a customer friendly explanation improves both loop efficiency and response quality.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 40",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set2-041",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 41",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are designing a multi-step code generation workflow. Step 1 generates a module skeleton, Step 2 adds implementations, and Step 3 creates tests. All steps depend on the previous output. Should you use prompt chaining or dynamic task decomposition?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Prompt chaining, since each step follows predictably from the previous one"
+      },
+      {
+        "id": "B",
+        "text": "Both equally; the choice does not matter for structured workflows"
+      },
+      {
+        "id": "C",
+        "text": "Dynamic task decomposition, which adapts based on intermediate results"
+      },
+      {
+        "id": "D",
+        "text": "Prompt chaining only if you can predict all possible outcomes in Step 1"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Task decomposition strategy depends on workflow predictability. Prompt chaining works well for structured, sequential workflows where each step follows logically from the previous one. Dynamic decomposition is better for open-ended problems where later steps depend on intermediate discovery.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 41",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-042",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 42",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are spawning a code analysis subagent using the Task tool. You want to limit it to reading files and searching patterns without modifying the codebase. What should you specify in the Task configuration?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A CLAUDE.md file specifically for the subagent"
+      },
+      {
+        "id": "B",
+        "text": "allowedTools configuration restricting access to Grep, Glob, and Read only"
+      },
+      {
+        "id": "C",
+        "text": "A tool_choice configuration forbidding write operations"
+      },
+      {
+        "id": "D",
+        "text": "A restrictive system prompt instructing the subagent not to modify files"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The Task tool spawns subagents with allowedTools configuration for scoped access. This is the proper way to restrict subagents to read-only operations. Hard restrictions via allowedTools are more reliable than soft instructions in prompts, and the Task tool is essential for creating isolated subagents in coordinator-subagent architectures.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 42",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-043",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 43",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. A Claude Code session is running a complex refactor. Partway through, you need to pause and resume later. What should you use to continue the session?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use fork_session to create a parallel continuation"
+      },
+      {
+        "id": "B",
+        "text": "The --resume flag to continue the session with previous context intact"
+      },
+      {
+        "id": "C",
+        "text": "Save the session output and use it as a new prompt"
+      },
+      {
+        "id": "D",
+        "text": "Start a new session and manually repeat prior steps"
+      }
+    ],
+    "correct": "B",
+    "explanation": "Session management in Claude Code uses --resume for continuation and fork_session for parallel exploration. The --resume flag preserves session state, context, and tool history, enabling efficient pause-and-resume workflows. This is crucial for long-running operations or when you need to step away and return later.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 43",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-044",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 44",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are using Claude Code to extract structured data from code comments. The extraction should be consistent and handle edge cases. What approach ensures reliability?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Provide few-shot examples showing expected extraction format for edge cases"
+      },
+      {
+        "id": "B",
+        "text": "Retry extraction multiple times and pick the best result"
+      },
+      {
+        "id": "C",
+        "text": "Request Claude Code to be extra careful with extraction"
+      },
+      {
+        "id": "D",
+        "text": "Use a verbose prompt explaining the task thoroughly"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Few-shot examples are the primary technique for improving consistency and edge-case handling. Examples show Claude Code exactly how to handle ambiguous situations, what format to use, and how to approach similar cases. This is far more effective than verbose instructions or retries. Combining examples with schema enforcement creates highly reliable extraction pipelines.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 44",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-045",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 45",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are building a code review prompt that checks for security issues. The criteria should be explicit rather than vague. Which approach is better?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use your security knowledge to find issues rather than defined criteria"
+      },
+      {
+        "id": "B",
+        "text": "Rate security overall rather than listing specific checks"
+      },
+      {
+        "id": "C",
+        "text": "Flag when code accepts user input without validation rather than Check for security issues"
+      },
+      {
+        "id": "D",
+        "text": "Identify problematic code rather than specific security patterns"
+      }
+    ],
+    "correct": "C",
+    "explanation": "Prompt engineering for structured tasks requires explicit criteria over vague instructions. Instead of check for security issues, specify flag when code accepts user input without validation. Explicit, testable criteria guide Claude Code to consistent, reliable results. Combined with few-shot examples, this creates effective automated code review.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 45",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-046",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 46",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are designing a schema for Claude Code to return code review comments. The schema has optional fields like suggestion and severity. Should you include an other field for unexpected issues?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes, but make it required to capture all issues"
+      },
+      {
+        "id": "B",
+        "text": "No, add more specific fields instead of a catch-all"
+      },
+      {
+        "id": "C",
+        "text": "Yes, include other with detail field to handle unforeseen issues without breaking schema"
+      },
+      {
+        "id": "D",
+        "text": "No, strictly defined enum fields ensure predictable output"
+      }
+    ],
+    "correct": "C",
+    "explanation": "Schema design should use required vs optional fields carefully and include an other field with a detail field for edge cases. This allows schemas to be strict for most cases while remaining flexible for unforeseen issues. Combining enum-based fields with optional catch-all fields balances predictability with resilience.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 46",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-047",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 47",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are processing thousands of code review requests in batch. The Message Batches API costs 50% less but has constraints. What is a key limitation to be aware of?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Longer latency requiring 24-hour completion window"
+      },
+      {
+        "id": "B",
+        "text": "Requires pre-payment for all requests"
+      },
+      {
+        "id": "C",
+        "text": "No multi-turn tool calling; each request is independent"
+      },
+      {
+        "id": "D",
+        "text": "Cannot be used for code review tasks"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The Message Batches API offers 50% cost savings for batch processing within a 24-hour window. The key limitation is no multi-turn tool calling; each request is independent. This makes it ideal for stateless tasks like code review and test generation, where you do not need back-and-forth interaction with the model.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 47",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-048",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 48",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are implementing a code quality checker for a large codebase. To avoid noise, you want to perform a multi-pass review: first per-file analysis, then cross-file integration checks. Why is this better than a single comprehensive review?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Single review is faster; multi-pass is unnecessary overhead"
+      },
+      {
+        "id": "B",
+        "text": "Multi-pass enables focused analysis per scope, reducing hallucinations and improving precision"
+      },
+      {
+        "id": "C",
+        "text": "Multi-pass allows parallelization for speed improvement"
+      },
+      {
+        "id": "D",
+        "text": "Single review risks missing issues; multi-pass provides redundancy"
+      }
+    ],
+    "correct": "B",
+    "explanation": "Multi-pass review separates concerns for better accuracy. Per-file local analysis handles file-specific issues, then cross-file integration analysis checks dependencies and patterns. This focused approach is more reliable than trying to do everything at once. Similar to human code review processes, structured multi-pass analysis reduces errors.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 48",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-049",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 49",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are running independent review instances for a distributed code review system. Should each instance self-review its own findings for accuracy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Yes; each instance should validate its own findings"
+      },
+      {
+        "id": "B",
+        "text": "Self-review and independent review are equivalent"
+      },
+      {
+        "id": "C",
+        "text": "Use self-review only for critical issues"
+      },
+      {
+        "id": "D",
+        "text": "No; independent review instances are more effective than self-review for catching errors"
+      }
+    ],
+    "correct": "D",
+    "explanation": "Independent review instances are more effective than self-review for finding and validating issues. Different analyses catch different errors, and fresh perspectives identify oversights. This principle applies across code review, test generation, and other quality assurance tasks.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 49",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-050",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 50",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You are building a code review system and getting too many false positives flagging suspicious patterns that are actually correct. What is the best approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use a veto process where engineers manually approve each finding"
+      },
+      {
+        "id": "B",
+        "text": "Tell Claude Code to reduce false positives in the system prompt"
+      },
+      {
+        "id": "C",
+        "text": "Define specific review criteria for each category and temporarily disable high false-positive categories"
+      },
+      {
+        "id": "D",
+        "text": "Increase the confidence threshold to filter lower-confidence findings"
+      }
+    ],
+    "correct": "C",
+    "explanation": "High false-positive categories should be temporarily disabled while you refine criteria. Specific, testable review criteria are more effective than confidence-based filtering or instructions. Understanding which patterns trigger false positives and improving criteria incrementally creates a reliable review system that developers trust.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 50",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-051",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 51",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your team's code generation process is producing duplicated variable names in some cases. What is the best approach to improve consistency?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Tell Claude Code to check for duplicates before completing"
+      },
+      {
+        "id": "B",
+        "text": "Provide test cases showing expected variable naming and how duplicates should be handled"
+      },
+      {
+        "id": "C",
+        "text": "Use a post-processing linter to rename duplicates"
+      },
+      {
+        "id": "D",
+        "text": "Add naming convention rules to CLAUDE.md"
+      }
+    ],
+    "correct": "B",
+    "explanation": "Test-driven prompt engineering using concrete examples is more effective than rules or post-processing for improving code generation quality. Examples show expected behavior, edge case handling, and desired output format. This iterative approach of concrete input/output examples combined with test validation creates progressively more reliable generation.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 51",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set2-052",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 52",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI pipeline runs automated code review on every PR. For a codebase with hundreds of files changed, how should you structure Claude Code to avoid overwhelming developers with feedback?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Run multiple independent reviewers and aggregate findings"
+      },
+      {
+        "id": "B",
+        "text": "Run per-file analysis first, then cross-file integration checks in separate passes"
+      },
+      {
+        "id": "C",
+        "text": "Review only files that changed significantly to reduce noise"
+      },
+      {
+        "id": "D",
+        "text": "Analyze all files together in one comprehensive review for consistency"
+      }
+    ],
+    "correct": "B",
+    "explanation": "Multi-pass review in CI pipelines separates local analysis from integration analysis. This structural approach reduces hallucinations, improves precision, and makes feedback manageable. Each pass focuses on specific concerns, making the review process more reliable and results more actionable.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 52",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-053",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 53",
+    "contentVersion": 1,
+    "domain": "D4 Prompt Engineering & Structured Output",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your code review system is flagging legitimate performance idioms as inefficient code. The false positives frustrate developers. What is the best approach to reduce this noise?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Require manual approval before any performance feedback is posted"
+      },
+      {
+        "id": "B",
+        "text": "Filter out low-confidence flags to reduce false positives"
+      },
+      {
+        "id": "C",
+        "text": "Tell Claude Code to be less aggressive in the review prompt"
+      },
+      {
+        "id": "D",
+        "text": "Temporarily disable the performance check category while you refine the criteria with concrete examples"
+      }
+    ],
+    "correct": "D",
+    "explanation": "Reducing false positives requires improving detection criteria, not filtering or manual approval. Temporarily disable problematic categories while refining criteria with real examples. This iterative approach builds trust in your automated review system by focusing on precision over catch-everything approaches.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 53",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  },
+  {
+    "id": "cca-f-set2-054",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set2",
+    "sourceLocator": "Practice Test 2 Question 54",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline. The system runs automated code reviews, generates test cases, and provides feedback on pull requests. You need to design prompts that provide actionable feedback and minimize false positives. Your CI review comments are repeating issues that were already discussed in previous reviews. What is the best fix?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Include prior review findings in the context so Claude Code recognizes already-discussed issues"
+      },
+      {
+        "id": "B",
+        "text": "Ask Claude Code to check previous comments before posting"
+      },
+      {
+        "id": "C",
+        "text": "Require developers to manually mark issues as resolved before re-review"
+      },
+      {
+        "id": "D",
+        "text": "Use a database to track commented issues and filter duplicates"
+      }
+    ],
+    "correct": "A",
+    "explanation": "Context management in CI review pipelines should include prior findings to avoid duplicate comments. This keeps feedback focused on new issues and changes, making review results more valuable to developers. Proper context selection is as important as the review criteria itself.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 2 Question 54",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Claude Code for Continuous Integration You are integrating Claude Code into your Continuous Integration/Continuous Deployment (CI/CD) pipeline."
+  }
+]

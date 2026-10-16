@@ -1,0 +1,2162 @@
+[
+  {
+    "id": "cca-f-set1-001",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 1",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. An engineer who just joined the team asks the agent to help them understand the authentication and authorization architecture across a large multi service codebase. What exploration strategy most effectively builds understanding under context limits?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Launch parallel subagents to explore different services simultaneously and then synthesize their findings."
+      },
+      {
+        "id": "B",
+        "text": "Read CLAUDE.md and README files first, then ask the engineer to identify the most important files."
+      },
+      {
+        "id": "C",
+        "text": "Read every file containing auth related keywords in content or filename."
+      },
+      {
+        "id": "D",
+        "text": "Use Grep to find authentication entry points, read those files, and follow imports and function calls incrementally."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Use Grep to find authentication entry points, read those files, and follow imports and function calls incrementally.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 1",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-002",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 2",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your publish_article tool calls an external CMS API that can return both transient and non transient errors. Currently every error is surfaced to the agent, which leads to wasted retries. How should error handling responsibility be partitioned between the tool and the agent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Surface all errors directly and let the agent decide what to retry."
+      },
+      {
+        "id": "B",
+        "text": "Retry all errors inside the tool and only surface failure after all attempts are exhausted."
+      },
+      {
+        "id": "C",
+        "text": "Handle transient errors with automatic retries inside the tool and surface non transient errors with descriptive messages to the agent."
+      },
+      {
+        "id": "D",
+        "text": "Catch everything and always return a generic tool unavailable message."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Handle transient errors with automatic retries inside the tool and surface non transient errors with descriptive messages to the agent.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 2",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-003",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 3",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. A scheduling agent uses one tool to retrieve available slots and another to book a slot. Many bookings fail because the slot becomes unavailable between those two calls. How should these tools be redesigned?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Keep both tools and add retry instructions to the system prompt."
+      },
+      {
+        "id": "B",
+        "text": "Combine them into a single find_and_book operation that atomically checks availability and books, returning confirmation or alternatives."
+      },
+      {
+        "id": "C",
+        "text": "Make book_appointment return richer failure details and alternative slots."
+      },
+      {
+        "id": "D",
+        "text": "Add a hold_slot tool that temporarily reserves the slot between lookup and booking."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Combine them into a single find_and_book operation that atomically checks availability and books, returning confirmation or alternatives.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 3",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-004",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 4",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your agent uses tools for property details, price history, and neighborhood information. The neighborhood tool requires an address, which forces an extra call even when the user specifies a property by ID. What tool design change best addresses this?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Create a lookup_address helper tool."
+      },
+      {
+        "id": "B",
+        "text": "Consolidate everything into one tool that returns all property and neighborhood data."
+      },
+      {
+        "id": "C",
+        "text": "Change get_neighborhood_info to accept property_id and resolve the address internally."
+      },
+      {
+        "id": "D",
+        "text": "Add retry and timeout handling to get_property_details."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Change get_neighborhood_info to accept property_id and resolve the address internally.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 4",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-005",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 5",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your search_flights tool calls an external airline API that occasionally returns a 503 Service Unavailable error. What is the most effective way to handle this in the tool implementation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Return an error message explaining that the service is temporarily unavailable."
+      },
+      {
+        "id": "B",
+        "text": "Return an empty flight list as though the search succeeded with no matches."
+      },
+      {
+        "id": "C",
+        "text": "Log the error and return an empty response."
+      },
+      {
+        "id": "D",
+        "text": "Automatically retry the request with bounded exponential backoff before returning results to the agent."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Automatically retry the request with bounded exponential backoff before returning results to the agent.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 5",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-006",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 6",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your document extraction tool returns field level confidence scores. In production, the agent sometimes proceeds with low confidence extractions and sometimes requests unnecessary human review. How should the tool\u2018s output be restructured?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Return fields with confidence scores plus a requires_review boolean computed using tested thresholds and a review_reason string."
+      },
+      {
+        "id": "B",
+        "text": "Return raw confidence scores and rely on prompt examples to teach the agent how to interpret them."
+      },
+      {
+        "id": "C",
+        "text": "Compute an aggregate extraction_quality score and return a text summary of reliability."
+      },
+      {
+        "id": "D",
+        "text": "Organize fields into verified and needs_verification objects based on confidence thresholds."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Return fields with confidence scores plus a requires_review boolean computed using tested thresholds and a review_reason string.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 6",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-007",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 7",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. When the coordinator agent calls a subagent using the Task tool, what is NOT automatically inherited by the subagent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Parent session context and conversation history"
+      },
+      {
+        "id": "B",
+        "text": "System prompt configuration"
+      },
+      {
+        "id": "C",
+        "text": "Tool definitions available to the agent"
+      },
+      {
+        "id": "D",
+        "text": "User authentication credentials"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Parent session context and conversation history. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 7",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-008",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 8",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your coordinator detects that one research subagent is making repeated incorrect tool calls. What is the most reliable way to enforce compliance at the architecture level?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Modify the subagent\u2018s system prompt to include stricter rules"
+      },
+      {
+        "id": "B",
+        "text": "Reduce the number of tools available to that subagent via allowedTools"
+      },
+      {
+        "id": "C",
+        "text": "Use a PostToolUse hook to validate tool calls before they execute"
+      },
+      {
+        "id": "D",
+        "text": "Add a validation step in the coordinator that rejects bad requests"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Modify the subagent\u2018s system prompt to include stricter rules. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 8",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-009",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 9",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your web search subagent needs to refine its queries based on initial results before synthesizing findings. How should you structure this in the agentic loop?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Let the subagent iterate internally - it sees tool results, evaluates them, and calls the search tool again if needed"
+      },
+      {
+        "id": "B",
+        "text": "Create a prompt chain that executes all searches sequentially without feedback"
+      },
+      {
+        "id": "C",
+        "text": "Queue all queries in advance and execute them in parallel"
+      },
+      {
+        "id": "D",
+        "text": "Have the coordinator re-invoke the subagent multiple times with updated prompts"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Let the subagent iterate internally - it sees tool results, evaluates them, and calls the search tool again if needed. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 9",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-010",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 10",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your synthesis subagent needs to work from research conducted by both the web search and document analysis subagents. What is the recommended pattern for providing this information?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Chain subagent calls: first get results, then invoke synthesis with those results passed as context"
+      },
+      {
+        "id": "B",
+        "text": "Pass the coordinator\u2018s summary of both subagents\u2018 findings in the Task tool call to the synthesis subagent"
+      },
+      {
+        "id": "C",
+        "text": "Have the synthesis subagent invoke both the web search and document analysis tools directly"
+      },
+      {
+        "id": "D",
+        "text": "Have each subagent store results in a shared database that the synthesis agent queries"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Have each subagent store results in a shared database that the synthesis agent queries. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 10",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-011",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 11",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. When evaluating synthesis quality, the coordinator determines that key research gaps exist. What is the most efficient pattern for addressing gaps without restarting the entire research?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Queue gap queries and execute all in a single new coordinator invocation"
+      },
+      {
+        "id": "B",
+        "text": "Invoke the search and analysis subagents again with targeted prompts to fill specific gaps"
+      },
+      {
+        "id": "C",
+        "text": "Use fork_session to branch from the current research state and explore alternatives in parallel"
+      },
+      {
+        "id": "D",
+        "text": "Summarize findings to date and start a fresh session with the new research direction"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Summarize findings to date and start a fresh session with the new research direction. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 11",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-012",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 12",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. You want the coordinator to detect when a subagent\u2018s response is incomplete and automatically trigger a refinement loop. Where should this logic be implemented?",
+    "options": [
+      {
+        "id": "A",
+        "text": "In a PostToolUse hook attached to the Task tool"
+      },
+      {
+        "id": "B",
+        "text": "In the coordinator\u2018s agentic loop - after receiving the subagent\u2018s result via the Task tool, the coordinator evaluates completeness and re-invokes if needed"
+      },
+      {
+        "id": "C",
+        "text": "In the subagent\u2018s system prompt as conditional rules"
+      },
+      {
+        "id": "D",
+        "text": "In a separate validation microservice called after all subagents complete"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: In the coordinator\u2018s agentic loop - after receiving the subagent\u2018s result via the Task tool, the coordinator evaluates completeness and re-invokes if needed. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 12",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-013",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 13",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your coordinator needs to route research tasks to subagents, but some tasks might be better served by multiple subagents. How should you structure this decision-making?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Queue all possible subagent invocations and execute in parallel regardless of relevance"
+      },
+      {
+        "id": "B",
+        "text": "Let the coordinator use model-driven reasoning to decide: based on the research question and available subagents, decide dynamically how to partition work"
+      },
+      {
+        "id": "C",
+        "text": "Create a decision tree in .claude/rules/ that lists all topic-to-subagent mappings"
+      },
+      {
+        "id": "D",
+        "text": "Hard-code rules in the coordinator\u2018s system prompt: \u2018Topic X always goes to subagent A\u2018"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Let the coordinator use model-driven reasoning to decide: based on the research question and available subagents, decide dynamically how to partition work. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 13",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-014",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 14",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. When the coordinator resumes an interrupted research session using session \u2013resume, what must happen to ensure subagents have current information about changes in the research scope?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Stale sessions cannot be resumed; always start fresh to avoid inconsistency"
+      },
+      {
+        "id": "B",
+        "text": "Subagents automatically re-read the coordinator\u2018s latest prompts and instructions"
+      },
+      {
+        "id": "C",
+        "text": "Use fork_session to branch from the previous session and let subagents discover changes"
+      },
+      {
+        "id": "D",
+        "text": "The coordinator must explicitly communicate any scope changes or new research directions to subagents in fresh invocations"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: The coordinator must explicitly communicate any scope changes or new research directions to subagents in fresh invocations. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 14",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-015",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 15",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your coordinator implements a refinement loop: after evaluating findings, if gaps exist, re-invoke the subagent with specific gap prompts. How many re-invocation rounds should you allow before considering the research \u2018good enough\u2018?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Set a hard limit (e.g., max 3 rounds) to control costs and latency"
+      },
+      {
+        "id": "B",
+        "text": "Unlimited; iterate until the subagent reports completion"
+      },
+      {
+        "id": "C",
+        "text": "Re-invoke once per unique gap identified, then synthesize the result"
+      },
+      {
+        "id": "D",
+        "text": "Use adaptive stopping: continue if new information is discovered, stop when returns diminish"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Use adaptive stopping: continue if new information is discovered, stop when returns diminish. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 15",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-016",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 16",
+    "contentVersion": 1,
+    "domain": "D1 Agentic Architecture & Orchestration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK. A coordinator agent delegates to specialized subagents: one searches the web, one analyzes documents, one synthesizes findings, and one generates reports. The system researches topics and produces comprehensive, cited reports. Your search_products tool queries an external catalog API that returns paginated results. Auto fetching every page causes long delays. How should pagination be redesigned?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Implement server side ranking and return only the top 50 items."
+      },
+      {
+        "id": "B",
+        "text": "Add a max_pages parameter controlling how many pages are fetched internally."
+      },
+      {
+        "id": "C",
+        "text": "Return the first page together with total match count and a cursor for additional pages."
+      },
+      {
+        "id": "D",
+        "text": "Create separate search_products and fetch_more_results tools for pagination."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Return the first page together with total match count and a cursor for additional pages.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 16",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Multi-Agent Research System You are building a multi-agent research system using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-017",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 17",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. An engineer previously analyzed a legacy authentication module and identified two distinct refactoring approaches. They now want to explore both in depth before deciding. What is the most effective way to structure this exploration?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Start two fresh sessions and manually summarize yesterday\u2018s findings into each."
+      },
+      {
+        "id": "B",
+        "text": "Resume the old session for the first approach, then start a new one for the second."
+      },
+      {
+        "id": "C",
+        "text": "Resume the old session and explore both approaches sequentially in one conversation."
+      },
+      {
+        "id": "D",
+        "text": "Use fork_session to create two branches from the prior analysis and explore one approach in each fork."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Use fork_session to create two branches from the prior analysis and explore one approach in each fork.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 17",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-018",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 18",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Engineers often want the agent to cross reference code changes with Jira tickets during reviews. The team wants the agent to access standard Jira data directly rather than via manual copy paste. What is the most effective approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Bash and curl directly against Jira\u2018s REST API."
+      },
+      {
+        "id": "B",
+        "text": "Integrate an existing Jira MCP server that exposes tickets, comments, and metadata as tools."
+      },
+      {
+        "id": "C",
+        "text": "Build a custom MCP server around Jira\u2018s API for this workflow."
+      },
+      {
+        "id": "D",
+        "text": "Export Jira tickets to markdown files in the repository."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Integrate an existing Jira MCP server that exposes tickets, comments, and metadata as tools.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 18",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-019",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 19",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your code review assistant must evaluate pull requests for style, security, and documentation using the same three step workflow for every PR. Which task decomposition pattern is most appropriate?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A routing pattern that first classifies the PR by type."
+      },
+      {
+        "id": "B",
+        "text": "Prompt chaining, with each aspect analyzed separately and combined in a final synthesis step."
+      },
+      {
+        "id": "C",
+        "text": "A single comprehensive prompt that handles all three aspects simultaneously."
+      },
+      {
+        "id": "D",
+        "text": "An orchestrator workers pattern that dynamically chooses which checks are needed."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Prompt chaining, with each aspect analyzed separately and combined in a final synthesis step.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 19",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-020",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 20",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. After a long exploration of a rendering subsystem, the agent starts responding with generic rendering patterns instead of the specific classes it had discovered. An engineer now asks how physics integrates with rendering for debug overlays. What is the most effective approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Clear the context completely and restart the exploration from scratch."
+      },
+      {
+        "id": "B",
+        "text": "Spawn a subagent to explore physics independently and manually synthesize later."
+      },
+      {
+        "id": "C",
+        "text": "Summarize the key rendering findings, then spawn a subagent for physics exploration with that summary in its initial context."
+      },
+      {
+        "id": "D",
+        "text": "Continue in the current context with more targeted prompts naming the specific classes."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Summarize the key rendering findings, then spawn a subagent for physics exploration with that summary in its initial context.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 20",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-021",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 21",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. An engineer asks the agent to find all callers of a function before removing it. The function is exposed through wrapper modules that rename it for domain specific use. What exploration strategy will most reliably identify all callers?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Read the library and wrapper modules to identify all exposed names for the function, then Grep for each name across the codebase."
+      },
+      {
+        "id": "B",
+        "text": "Find all files that import from the library or wrapper modules, then read them to check usage."
+      },
+      {
+        "id": "C",
+        "text": "Search project documentation to understand intended usage patterns."
+      },
+      {
+        "id": "D",
+        "text": "Use Grep to search for the function\u2018s original name across the codebase."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Read the library and wrapper modules to identify all exposed names for the function, then Grep for each name across the codebase.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 21",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-022",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 22",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. An engineer wants to understand a caching layer before adding a new invalidation trigger. The caching logic spans many files. What is the most effective next step while managing context constraints?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Grep to search for invalidate and expire patterns and read only those line ranges."
+      },
+      {
+        "id": "B",
+        "text": "Analyze imports and class hierarchies to identify the base cache class, read it first, then trace specific invalidation implementations."
+      },
+      {
+        "id": "C",
+        "text": "Sequentially load all files with the Read tool."
+      },
+      {
+        "id": "D",
+        "text": "Use Glob to find cache related filenames and read the largest files first."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Analyze imports and class hierarchies to identify the base cache class, read it first, then trace specific invalidation implementations.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 22",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-023",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 23",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. When your codebase exploration agent uses the Glob tool to find files, what is the primary value of Glob over using Bash \u2018find\u2018 command?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Glob is faster because it doesn\u2018t traverse directories"
+      },
+      {
+        "id": "B",
+        "text": "Glob can filter by file content, not just names"
+      },
+      {
+        "id": "C",
+        "text": "Glob works reliably across different operating systems with consistent pattern matching"
+      },
+      {
+        "id": "D",
+        "text": "Glob returns results sorted by modification time, making it easy to identify recently changed files"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Glob returns results sorted by modification time, making it easy to identify recently changed files. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 23",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-024",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 24",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your agent is exploring a large codebase and finds 150 matching files with a Glob pattern. To understand file relationships, what should it do next?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Read to open all 150 files and analyze them"
+      },
+      {
+        "id": "B",
+        "text": "Use Bash to generate a dependency graph automatically"
+      },
+      {
+        "id": "C",
+        "text": "Ask the user which files are important"
+      },
+      {
+        "id": "D",
+        "text": "Use Grep to search for import statements, function calls, and dependencies across the matched files"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Use Grep to search for import statements, function calls, and dependencies across the matched files. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 24",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-025",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 25",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your agent encounters a large configuration file that the Bash \u2018head\u2018 tool would normally read in pieces. Should the agent use Read tool instead?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use Read only if the file is less than 100 lines"
+      },
+      {
+        "id": "B",
+        "text": "No; always use Bash for efficiency"
+      },
+      {
+        "id": "C",
+        "text": "No; large files should always be processed with Bash piping"
+      },
+      {
+        "id": "D",
+        "text": "Yes; the Read tool is better for reading file contents, especially large files, because it provides line numbering and handles formatting"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Yes; the Read tool is better for reading file contents, especially large files, because it provides line numbering and handles formatting. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 25",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-026",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 26",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. When your agent reads a source file that hasn\u2018t been modified in 2 years, what strategy helps understand its purpose without reading all of it?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Skip it; old code is usually not important"
+      },
+      {
+        "id": "B",
+        "text": "Use Bash to count lines and estimate complexity"
+      },
+      {
+        "id": "C",
+        "text": "Use Grep to find test files or documentation that reference this module"
+      },
+      {
+        "id": "D",
+        "text": "Read the entire file to understand its full context"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Use Grep to find test files or documentation that reference this module. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 26",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-027",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 27",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your agent needs to understand how a function is used throughout the codebase. What Grep pattern should it use?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Search for the function name: \u2018grep functionName\u2018"
+      },
+      {
+        "id": "B",
+        "text": "Search for function calls: \u2018grep functionName(\u2018 or \u2018grep functionName\\\\(\u2018"
+      },
+      {
+        "id": "C",
+        "text": "Search for imports that might use this function"
+      },
+      {
+        "id": "D",
+        "text": "Try all three: search for the name, search for calls, search for imports"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Try all three: search for the name, search for calls, search for imports. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 27",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-028",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 28",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your agent is generating boilerplate code (a database migration script) and writes it to a file using the Write tool. After writing, what should the agent do?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Run Bash to execute the generated code and verify it works"
+      },
+      {
+        "id": "B",
+        "text": "Read the file back to verify the generated content matches expectations"
+      },
+      {
+        "id": "C",
+        "text": "Ask the user to review the generated code before using it"
+      },
+      {
+        "id": "D",
+        "text": "Immediately return the file path to the user"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Read the file back to verify the generated content matches expectations. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 28",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-029",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 29",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your agent encounters an Edit tool failure: \u2018old_string is not unique in the file\u2018. What\u2018s the best recovery strategy?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Ask the user to manually edit the file"
+      },
+      {
+        "id": "B",
+        "text": "Use Bash sed to make the change instead"
+      },
+      {
+        "id": "C",
+        "text": "Use Read to examine the file, then use Write with a complete file rewrite"
+      },
+      {
+        "id": "D",
+        "text": "Try Edit again with a larger substring that includes more context"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Use Read to examine the file, then use Write with a complete file rewrite. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 29",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-030",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 30",
+    "contentVersion": 1,
+    "domain": "D5 Context Management & Reliability",
+    "difficulty": "exam",
+    "prompt": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK. The agent helps engineers explore unfamiliar codebases, understand legacy systems, generate boilerplate code, and automate repetitive tasks. It uses the built-in tools (Read, Write, Bash, Grep, Glob) and integrates with Model Context Protocol (MCP) servers. Your agent needs to understand the dependency structure of a large codebase. What\u2018s the most efficient approach?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Visualize the entire codebase first with external tools"
+      },
+      {
+        "id": "B",
+        "text": "Read every file in the codebase"
+      },
+      {
+        "id": "C",
+        "text": "Use Glob to find file patterns (imports, module declarations) and Grep to map relationships"
+      },
+      {
+        "id": "D",
+        "text": "Use Bash to run build tools or language-specific analysis (gradle, npm, cargo)"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Use Glob to find file patterns (imports, module declarations) and Grep to map relationships. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 30",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Developer Productivity with Claude You are building developer productivity tools using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-031",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 31",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your team has a monorepo with different services. You want to create a custom command that generates boilerplate for a new microservice. Where should this command be stored to ensure it\u2018s version-controlled and shared across the team?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A dedicated /commands directory at the repository root"
+      },
+      {
+        "id": "B",
+        "text": ".claude/commands/ in the project root"
+      },
+      {
+        "id": "C",
+        "text": ".claude/microservice_generator.md in the project"
+      },
+      {
+        "id": "D",
+        "text": "~/.claude/commands/ in the user\u2018s home directory"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: .claude/commands/ in the project root. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 31",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-032",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 32",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. During a billing dispute resolution, your agent successfully retrieves customer info and order details, but when attempting to call process_refund, the tool returns a timeout error. The agent can explain the charges and verify refund eligibility, but cannot actually process the refund due to the backend failure. What approach best balances first contact resolution with appropriate error handling?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Implement automatic retries with exponential backoff and keep the conversation open until the refund is successfully processed."
+      },
+      {
+        "id": "B",
+        "text": "Escalate immediately to a human agent because the refund action cannot be completed."
+      },
+      {
+        "id": "C",
+        "text": "Confirm the refund will be processed and close the conversation because the system has all necessary information."
+      },
+      {
+        "id": "D",
+        "text": "Explain the billing, confirm refund eligibility, acknowledge the system issue preventing immediate processing, and offer escalation or retry later."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Explain the billing, confirm refund eligibility, acknowledge the system issue preventing immediate processing, and offer escalation or retry later.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 32",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-033",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 33",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent has called lookup_order multiple times while investigating a customer\u2018s return requests. Each response includes many fields, and tool outputs now represent the majority of the conversation context. The customer mentions two more orders they want to discuss. What is the most effective approach before making additional lookups?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Have the model generate a natural language summary of each order\u2018s key details, replacing structured responses with prose descriptions."
+      },
+      {
+        "id": "B",
+        "text": "Extract only return relevant fields such as items, purchase date, return window, and status from each existing order response, removing verbose details."
+      },
+      {
+        "id": "C",
+        "text": "Proceed with additional lookups without modifying the existing tool output context."
+      },
+      {
+        "id": "D",
+        "text": "Move all tool responses to a vector database with semantic indexing and retrieve relevant portions as the conversation continues."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Extract only return relevant fields such as items, purchase date, return window, and status from each existing order response, removing verbose details.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 33",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-034",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 34",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. When implementing your lookup_order MCP tool, the backend sometimes returns errors such as order not found or temporary database failures. What is the correct pattern for communicating these errors back to the agent?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Log the error server side and return an empty result to avoid confusing the model."
+      },
+      {
+        "id": "B",
+        "text": "Return a success response with a status field indicating the error type."
+      },
+      {
+        "id": "C",
+        "text": "Throw an exception from the tool handler so the framework can catch and log it."
+      },
+      {
+        "id": "D",
+        "text": "Return the error message in the tool result content with isError set to true."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Return the error message in the tool result content with isError set to true.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 34",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-035",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 35",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Production logs reveal inconsistent error handling because your MCP tool returns uniform error responses and does not distinguish between error types. What is the most effective improvement?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Enhance error responses with structured metadata such as errorCategory, isRetryable, and a description of the failure."
+      },
+      {
+        "id": "B",
+        "text": "Add few shot examples to the system prompt showing how to interpret error messages and choose actions."
+      },
+      {
+        "id": "C",
+        "text": "Create an analyze_error MCP tool the agent calls after any failure to determine the error category and recommended action."
+      },
+      {
+        "id": "D",
+        "text": "Implement retry logic with exponential backoff in the MCP server for all errors and return to the agent only after retries are exhausted."
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Enhance error responses with structured metadata such as errorCategory, isRetryable, and a description of the failure.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 35",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-036",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 36",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent is handling a billing dispute. After calling get_customer and lookup_order, it identifies that the dispute involves a promotional pricing error requiring manager approval, beyond the agent\u2018s authorization level. How should the workflow handle this mid process escalation?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Persist the complete conversation and tool response history to a database, then call escalate_to_human with a reference ID."
+      },
+      {
+        "id": "B",
+        "text": "Call escalate_to_human passing only the customer\u2018s original message."
+      },
+      {
+        "id": "C",
+        "text": "Attempt the refund anyway and escalate only if the system rejects the transaction."
+      },
+      {
+        "id": "D",
+        "text": "Compile a structured handoff with customer details, order info, and the identified issue before calling escalate_to_human."
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Compile a structured handoff with customer details, order info, and the identified issue before calling escalate_to_human.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 36",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-037",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 37",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate.e. The agent verifies customer identity through a multi-step process before resetting passwords. During testing, after the customer answers the third verification question, the agent asks them to provide their name again as if the earlier exchange never happened. What is the most likely cause?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The verification tool is clearing the agent\u2018s internal state after each successful validation step."
+      },
+      {
+        "id": "B",
+        "text": "The conversation history is not being passed in subsequent API requests."
+      },
+      {
+        "id": "C",
+        "text": "Claude\u2018s memory retention is limited to two conversational turns by default."
+      },
+      {
+        "id": "D",
+        "text": "The prompt lacks instructions telling Claude to remember information across multiple exchanges."
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: The conversation history is not being passed in subsequent API requests.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 37",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-038",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 38",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent processes a customer return request and after calling lookup_order, the response arrives with stop_reason set to \u2018tool_use\u2018. What should you do next in the agentic loop?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Inspect the assistant\u2018s message for tool_use blocks, extract the tool name/input, execute the tool externally, and append results back to conversation history"
+      },
+      {
+        "id": "B",
+        "text": "Treat the stop_reason as a signal to end the conversation and return results to the user"
+      },
+      {
+        "id": "C",
+        "text": "Extract the tool name and input from the stop_reason field and execute immediately"
+      },
+      {
+        "id": "D",
+        "text": "Automatically send another request to Claude without executing any tools yet"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Inspect the assistant\u2018s message for tool_use blocks, extract the tool name/input, execute the tool externally, and append results back to conversation history. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 38",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-039",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 39",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You\u2018ve implemented a hub-and-spoke coordinator-subagent architecture where the main agent delegates billing dispute resolution to a specialized subagent using the Task tool. What critical configuration detail must you handle explicitly?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The subagent automatically inherits the parent agent\u2018s conversation history and tool access"
+      },
+      {
+        "id": "B",
+        "text": "The coordinator agent should block the subagent from calling any external tools to prevent conflicts"
+      },
+      {
+        "id": "C",
+        "text": "You must explicitly pass customer context and available tools to the subagent; context is not inherited automatically"
+      },
+      {
+        "id": "D",
+        "text": "The Task tool creates a new session, but both agents continue using the same conversation object"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: You must explicitly pass customer context and available tools to the subagent; context is not inherited automatically. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 39",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-040",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 40",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent receives a request about a package that wasn\u2018t delivered. To ensure it always gathers the order details before attempting a refund, you want to enforce a prerequisite: get_customer and lookup_order must complete before process_refund is callable. How should you implement this programmatically?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Restrict process_refund using tool_choice: \u2018any\u2018 to allow only that tool in the next turn"
+      },
+      {
+        "id": "B",
+        "text": "Create a pre-configured decision tree in your orchestration code that routes to get_customer, then lookup_order, then process_refund sequentially"
+      },
+      {
+        "id": "C",
+        "text": "Write a detailed prompt asking the agent to \u2018always check customer details and order status before processing refunds\u2018"
+      },
+      {
+        "id": "D",
+        "text": "Implement a PostToolUse hook that validates whether lookup_order was called; if not, raise an error preventing process_refund from executing"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Implement a PostToolUse hook that validates whether lookup_order was called; if not, raise an error preventing process_refund from executing. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 40",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-041",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 41",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You\u2018re designing an escalation workflow. When the agent decides a customer issue needs human review, it should pass not just the customer ID but also the root cause and recommended next steps. What format best enables reliable handoff to the human support team?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Create a text summary of the conversation and pass it as a single unstructured string to escalate_to_human"
+      },
+      {
+        "id": "B",
+        "text": "Implement a structured escalation protocol where escalate_to_human receives customer ID, issue summary, root cause, and recommended actions in defined fields"
+      },
+      {
+        "id": "C",
+        "text": "Store the escalation details in a database separately and send the human agent a reference ID to look up the details"
+      },
+      {
+        "id": "D",
+        "text": "Call escalate_to_human with just the customer ID and let the human agent read the full conversation history"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Implement a structured escalation protocol where escalate_to_human receives customer ID, issue summary, root cause, and recommended actions in defined fields. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 41",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-042",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 42",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent is handling multiple customer issues in a single conversation: one customer is asking about a billing dispute AND a return. You decide to use task decomposition with the Task tool to parallelize work. What\u2018s a key advantage of this approach over a sequential single-agent flow?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Using parallel tasks eliminates the need for the agent to understand context; each subagent works independently"
+      },
+      {
+        "id": "B",
+        "text": "Task decomposition guarantees that all issues are resolved in the same turn without additional conversation rounds"
+      },
+      {
+        "id": "C",
+        "text": "Parallel subagents allow you to assign specialized agents to each issue (billing expert, returns expert) simultaneously, reducing latency and potentially catching issues that a generalist agent might miss"
+      },
+      {
+        "id": "D",
+        "text": "Task decomposition automatically merges results from parallel subagents without any manual logic"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Parallel subagents allow you to assign specialized agents to each issue (billing expert, returns expert) simultaneously, reducing latency and potentially catching issues that a generalist agent might miss. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 42",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-043",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 43",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. You\u2018re resuming a support session from yesterday using the \u2013resume flag in the Claude SDK. The agent had gathered customer details and identified a billing dispute. What\u2018s the risk of resuming a stale session versus starting fresh with a summary?",
+    "options": [
+      {
+        "id": "A",
+        "text": "There\u2018s no meaningful difference; resume and fresh start produce identical agent behavior"
+      },
+      {
+        "id": "B",
+        "text": "Resuming is always faster and has no downsides compared to starting fresh"
+      },
+      {
+        "id": "C",
+        "text": "Resuming uses the old session\u2018s context window, potentially hitting limits faster if the conversation was long"
+      },
+      {
+        "id": "D",
+        "text": "Resuming guarantees the agent remembers the context, whereas a fresh session requires re-teaching the agent what happened"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Resuming uses the old session\u2018s context window, potentially hitting limits faster if the conversation was long. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 43",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-044",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 44",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent\u2018s system prompt includes a rule: \u2018Always verify the customer identity before processing any refund.\u2018 This is critical for compliance. However, you\u2018re concerned the agent might skip this step if it feels confident about the identity from the conversation. What\u2018s the most reliable enforcement mechanism?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use tool_choice: \u2018required\u2018 to force the agent to always call get_customer first"
+      },
+      {
+        "id": "B",
+        "text": "Create a separate verification agent that must sign off before any refund can proceed"
+      },
+      {
+        "id": "C",
+        "text": "Implement a PostToolUse hook that inspects whether get_customer (identity verification) was called before allowing process_refund"
+      },
+      {
+        "id": "D",
+        "text": "Make the system prompt rule more detailed and explicit with multiple reminders about identity verification"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Implement a PostToolUse hook that inspects whether get_customer (identity verification) was called before allowing process_refund. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 44",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-045",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 45",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Your agent\u2018s conversation history is growing long. After 10 turns, the context window is 70% full. You need to make a decision: continue the conversation or summarize and reset. What\u2018s the main reason to summarize and start fresh rather than continue?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Summaries are always more accurate than full history"
+      },
+      {
+        "id": "B",
+        "text": "Continuing risks hitting context limits and losing the ability to make multiple tool calls or gather new information"
+      },
+      {
+        "id": "C",
+        "text": "Fresh sessions are always faster than continuing existing conversations"
+      },
+      {
+        "id": "D",
+        "text": "Summarizing automatically improves the agent\u2018s decision-making quality"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: Continuing risks hitting context limits and losing the ability to make multiple tool calls or gather new information. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 45",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-046",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 46",
+    "contentVersion": 1,
+    "domain": "D2 Tool Design & MCP Integration",
+    "difficulty": "exam",
+    "prompt": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK. The agent handles high-ambiguity requests like returns, billing disputes, and account issues. It has access to your backend systems through custom Model Context Protocol (MCP) tools (get_customer, lookup_order, process_refund, escalate_to_human). Your target is 80%+ first-contact resolution while knowing when to escalate. Compliance requires that refunds exceeding $500 must automatically escalate to a human agent. This rule cannot be left to model discretion. Despite clear system prompt instructions, production logs show the agent occasionally processes high value refunds directly. How should you achieve guaranteed compliance?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Add few shot examples to the prompt showing correct escalation behavior at various refund amounts."
+      },
+      {
+        "id": "B",
+        "text": "Modify the refund tool to return an error when the amount exceeds the policy limit and instruct the agent to escalate."
+      },
+      {
+        "id": "C",
+        "text": "Implement a hook to intercept tool calls, block refund requests over $500, and invoke human escalation."
+      },
+      {
+        "id": "D",
+        "text": "Strengthen the system prompt with emphatic language telling the agent never to process refunds over $500 directly."
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Implement a hook to intercept tool calls, block refund requests over $500, and invoke human escalation.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 46",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Customer Support Resolution Agent You are building a customer support resolution agent using the Claude Agent SDK."
+  },
+  {
+    "id": "cca-f-set1-047",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 47",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You\u2018re making a complex refactor that touches 8 files and requires careful architectural decisions. The changes are interconnected and depend on understanding the current design patterns. Should you use plan mode or direct execution?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use direct execution since Claude Code handles file dependencies automatically"
+      },
+      {
+        "id": "B",
+        "text": "Use plan mode only if the refactor affects more than 10 files"
+      },
+      {
+        "id": "C",
+        "text": "Use direct execution for speed, since plan mode adds unnecessary overhead"
+      },
+      {
+        "id": "D",
+        "text": "Use plan mode to outline the refactoring strategy before making changes"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Use plan mode to outline the refactoring strategy before making changes. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 47",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-048",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 48",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your project has a .claude/CLAUDE.md file and a .claude/rules/ directory with several rule files. A developer works in the /services/auth directory. How does Claude Code determine which rules apply when editing files in that directory?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Only rules explicitly imported via @import in the project CLAUDE.md"
+      },
+      {
+        "id": "B",
+        "text": "Rules are loaded in the order they appear in the .claude/rules/ directory"
+      },
+      {
+        "id": "C",
+        "text": "Rules with glob patterns matching the file path, plus the nearest directory-level CLAUDE.md, plus project-level CLAUDE.md"
+      },
+      {
+        "id": "D",
+        "text": "All rules in .claude/rules/ are always applied regardless of file path"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Rules with glob patterns matching the file path, plus the nearest directory-level CLAUDE.md, plus project-level CLAUDE.md. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 48",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-049",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 49",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You\u2018ve created a skill in .claude/skills/test_generator/ with context: fork in the frontmatter. What does this configuration do?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The skill forks the project repository, creating a temporary branch for test generation"
+      },
+      {
+        "id": "B",
+        "text": "The skill runs in parallel with the main session, allowing concurrent operations"
+      },
+      {
+        "id": "C",
+        "text": "The skill executes in the current session context, sharing all files and previous interactions"
+      },
+      {
+        "id": "D",
+        "text": "The skill runs in an isolated sub-agent with its own context, preventing pollution of the main Claude Code session"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: The skill runs in an isolated sub-agent with its own context, preventing pollution of the main Claude Code session. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 49",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-050",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 50",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You want to create a skill that can read files but should NOT have access to write, edit, or execute commands. How do you restrict the skill\u2018s capabilities?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Use allowed-tools in the skill\u2018s SKILL.md frontmatter to specify only read and glob tools"
+      },
+      {
+        "id": "B",
+        "text": "Create the skill in ~/.claude/skills/ instead of .claude/skills/"
+      },
+      {
+        "id": "C",
+        "text": "Add a no-write flag to the skill\u2018s frontmatter"
+      },
+      {
+        "id": "D",
+        "text": "Skills inherit restrictions from CLAUDE.md; define rules in the project configuration"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Use allowed-tools in the skill\u2018s SKILL.md frontmatter to specify only read and glob tools. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 50",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-051",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 51",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your team runs Claude Code in a CI/CD pipeline using the -p flag. What does this flag enable?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Non-interactive mode for CI execution without requiring user prompts or approval"
+      },
+      {
+        "id": "B",
+        "text": "Plan-mode-only execution, forcing all changes to go through planning first"
+      },
+      {
+        "id": "C",
+        "text": "Performance profiling to measure execution time and resource usage"
+      },
+      {
+        "id": "D",
+        "text": "Parallel execution, allowing multiple Claude Code instances to run simultaneously"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: Non-interactive mode for CI execution without requiring user prompts or approval. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 51",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-052",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 52",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You want Claude Code to output structured data that can be parsed by your automation tools. You need JSON format with a specific schema. Which flags should you use together?",
+    "options": [
+      {
+        "id": "A",
+        "text": "--output-format json with --json-schema to specify the structure"
+      },
+      {
+        "id": "B",
+        "text": "--output-format structured with --schema validation"
+      },
+      {
+        "id": "C",
+        "text": "--structured-output with --format json"
+      },
+      {
+        "id": "D",
+        "text": "--json-only flag with --validate-schema"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: --output-format json with --json-schema to specify the structure. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 52",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-053",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 53",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your CLAUDE.md file is getting large and hard to manage. You want to split common standards into separate files while keeping the main CLAUDE.md concise. How do you reference these separate files?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Create multiple CLAUDE.md files in different .claude/ subdirectories"
+      },
+      {
+        "id": "B",
+        "text": "Split the file manually and configure path matching in .claude/rules/"
+      },
+      {
+        "id": "C",
+        "text": "Use include: directives in the CLAUDE.md header"
+      },
+      {
+        "id": "D",
+        "text": "Use @import syntax to modularly reference other CLAUDE.md or configuration files"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: Use @import syntax to modularly reference other CLAUDE.md or configuration files. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 53",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-054",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 54",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You\u2018re generating a function from a prompt but Claude Code produces several incorrect implementations. You want to improve consistency in code generation. What approach would be most effective?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Increase the context window to give more space for explanation"
+      },
+      {
+        "id": "B",
+        "text": "Use plan mode to force more deliberate code generation"
+      },
+      {
+        "id": "C",
+        "text": "Provide concrete input/output examples and test cases to establish expected behavior patterns"
+      },
+      {
+        "id": "D",
+        "text": "Ask Claude Code to follow your naming conventions more strictly"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Provide concrete input/output examples and test cases to establish expected behavior patterns. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 54",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-055",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 55",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your project uses MCP servers for database access. Where should you store the .mcp.json configuration so it\u2018s shared with the team?",
+    "options": [
+      {
+        "id": "A",
+        "text": "In a .mcp/ directory in the project root"
+      },
+      {
+        "id": "B",
+        "text": "In the project root or .claude/ directory to be version-controlled"
+      },
+      {
+        "id": "C",
+        "text": "In ~/.claude.json in each user\u2018s home directory"
+      },
+      {
+        "id": "D",
+        "text": "In the .claude/rules/ directory with path matching"
+      }
+    ],
+    "correct": "B",
+    "explanation": "The correct approach is: In the project root or .claude/ directory to be version-controlled. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 55",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-056",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 56",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. .mcp.json contains database credentials. How should you handle credential storage securely?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Embed credentials directly in .mcp.json and restrict file permission"
+      },
+      {
+        "id": "B",
+        "text": "Use a separate .env.local file that .mcp.json references"
+      },
+      {
+        "id": "C",
+        "text": "Use environment variable expansion in .mcp.json (e.g., $DB_PASSWORD) and store variables locally"
+      },
+      {
+        "id": "D",
+        "text": "Store credentials in .claude/secrets.json with additional encryption"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Use environment variable expansion in .mcp.json (e.g., $DB_PASSWORD) and store variables locally. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 56",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-057",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 57",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You\u2018re building a code review tool and need Claude Code to search for specific patterns in thousands of files. Which built-in tool is optimized for this task?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The Glob tool combined with individual file reads"
+      },
+      {
+        "id": "B",
+        "text": "The Bash tool with find and grep commands"
+      },
+      {
+        "id": "C",
+        "text": "The Read tool, which can process multiple files sequentially"
+      },
+      {
+        "id": "D",
+        "text": "The Grep tool, which uses ripgrep for fast content pattern matching"
+      }
+    ],
+    "correct": "D",
+    "explanation": "The correct approach is: The Grep tool, which uses ripgrep for fast content pattern matching. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 57",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-058",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 58",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You\u2018re designing a custom tool for your domain and want Claude Code to use it effectively. What is the most important factor in the tool definition?",
+    "options": [
+      {
+        "id": "A",
+        "text": "A complex implementation that shows the tool\u2018s full capabilities"
+      },
+      {
+        "id": "B",
+        "text": "A list of example use cases in the tool name"
+      },
+      {
+        "id": "C",
+        "text": "A clear, descriptive tool description that helps the model understand when to use it"
+      },
+      {
+        "id": "D",
+        "text": "Detailed parameter documentation with many optional fields"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: A clear, descriptive tool description that helps the model understand when to use it. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 58",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-059",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 59",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. You have 5 custom tools but want Claude Code to use them predictably. You\u2018re getting unexpected tool selections. What\u2018s the best approach to control tool usage?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Run Claude Code with a simpler system prompt"
+      },
+      {
+        "id": "B",
+        "text": "List all tools in CLAUDE.md as required tools"
+      },
+      {
+        "id": "C",
+        "text": "Use tool_choice to force selection of specific tools for specific tasks"
+      },
+      {
+        "id": "D",
+        "text": "Give all tools identical descriptions to avoid bias"
+      }
+    ],
+    "correct": "C",
+    "explanation": "The correct approach is: Use tool_choice to force selection of specific tools for specific tasks. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 59",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  },
+  {
+    "id": "cca-f-set1-060",
+    "exam": "cca-f",
+    "status": "ready",
+    "reviewStatus": "approved",
+    "sourceId": "udemy-cca-mock-dump-set1",
+    "sourceLocator": "Practice Test 1 Question 60",
+    "contentVersion": 1,
+    "domain": "D3 Claude Code Configuration & Workflows",
+    "difficulty": "exam",
+    "prompt": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development. Your team uses it for code generation, refactoring, debugging, and documentation. You need to integrate it into your development workflow with custom slash commands, CLAUDE.md configurations, and understand when to use plan mode vs direct execution. Your MCP server returns structured errors with errorCategory and isRetryable fields. How should Claude Code handle a retryable error?",
+    "options": [
+      {
+        "id": "A",
+        "text": "The is Retryable flag indicates the tool call should be retried; Claude Code should attempt the operation again"
+      },
+      {
+        "id": "B",
+        "text": "All errors should be treated identically regardless of the isRetryable flag"
+      },
+      {
+        "id": "C",
+        "text": "Retryable errors should trigger a skip to the next tool"
+      },
+      {
+        "id": "D",
+        "text": "The errorCategory determines whether the error is retried"
+      }
+    ],
+    "correct": "A",
+    "explanation": "The correct approach is: The is Retryable flag indicates the tool call should be retried; Claude Code should attempt the operation again. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "mockEligible": true,
+    "topicBrief": "Topic: Practice Test 1 Question 60",
+    "roleContext": "Role: Claude Certified Architect & Systems Engineer",
+    "scenario": "Scenario: Code Generation with Claude Code You are using Claude Code to accelerate software development."
+  }
+]
