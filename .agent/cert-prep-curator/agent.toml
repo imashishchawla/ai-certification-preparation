@@ -13,3 +13,17 @@ build-questions = "build-questions.mjs"
 validate = "validate-output.mjs"
 stage = "stage-output.mjs"
 publish = "publish-output.mjs"
+
+[ingestion_reporting]
+# Mandatory reporting contract whenever questions are ingested from a PDF or external document:
+# Always report:
+# 1. Total questions in the PDF/document
+# 2. How many were already present in the database (duplicates/existing)
+# 3. How many were newly copied/added into the database
+require_reconciliation_summary = true
+fields = [
+  "total_questions_in_source",
+  "already_in_db",
+  "newly_copied_to_db"
+]
+
