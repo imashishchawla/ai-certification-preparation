@@ -507,7 +507,28 @@ th {
   border-left: 6px solid var(--accent);
   border-radius: 2px;
   font-size: 0.95rem;
-  white-space: pre-line;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.explanation-box p {
+  margin: 0.5rem 0;
+}
+.explanation-box p:last-child {
+  margin-bottom: 0;
+}
+.explanation-box ul {
+  margin: 0.5rem 0 0.5rem 1.25rem;
+  padding-left: 0.5rem;
+}
+.explanation-box li {
+  margin-bottom: 0.35rem;
+}
+.explanation-box code {
+  padding: 0.05rem 0.25rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-size: 0.9em;
 }
 
 /* Exam-inspired practice test */

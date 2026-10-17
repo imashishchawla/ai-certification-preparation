@@ -317,7 +317,8 @@
       html += '  </div>';
       html += '  <button class="reveal-btn toggle-reveal" data-qid="' + q.id + '" aria-expanded="false" aria-controls="exp-' + q.id + '">Reveal answer</button>';
       html += '  <div class="explanation-box" id="exp-' + q.id + '" hidden>';
-      html += '    <strong>Rationale:</strong> ' + escapeHtml(q.explanation);
+      html += '    <div style="font-weight: bold; font-family: var(--font-heading); margin-bottom: 0.6rem; color: var(--accent); font-size: 1rem;">💡 Explanation & Rationale:</div>';
+      html += formatRevealExplanation(q.explanation);
       html += '  </div>';
       html += '</div>';
     });
@@ -423,6 +424,74 @@
         window.scrollTo({ top: container.offsetTop - 80, behavior: 'smooth' });
       });
     });
+  }
+
+  function formatInline(str) {
+    var codeSpans = [];
+    var formatted = escapeHtml(str)
+      .replace(/`([^`]+)`/g, function(match, code) {
+        var idx = codeSpans.push('<code>' + code + '</code>') - 1;
+        return '\u0001' + idx + '\u0001';
+      })
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[^\w])\*([^*]+)\*([^\w]|$)/g, '$1<em>$2</em>$3')
+      .replace(/(^|[^\w])_([^_]+)_([^\w]|$)/g, '$1<em>$2</em>$3');
+
+    return formatted.replace(/\u0001(\d+)\u0001/g, function(match, idx) {
+      return codeSpans[Number(idx)];
+    });
+  }
+
+  function formatRevealExplanation(raw) {
+    if (!raw) return '<p>No explanation available.</p>';
+    var lines = String(raw).replace(/\r\n?/g, '\n').trim().split('\n');
+    var html = '';
+    var listStack = [];
+
+    lines.forEach(function(rawLine) {
+      if (!rawLine.trim()) return;
+
+      var match = rawLine.match(/^(\s*)([-*•])\s+(.*)$/);
+      if (match) {
+        var indent = match[1].length;
+        var content = match[3];
+
+        if (listStack.length === 0) {
+          html += '<ul class="explanation-points">';
+          listStack.push(0);
+          html += '<li>' + formatInline(content);
+        } else {
+          var currentIndent = listStack[listStack.length - 1];
+          if (indent > currentIndent) {
+            html += '<ul>';
+            listStack.push(indent);
+            html += '<li>' + formatInline(content);
+          } else if (indent < currentIndent) {
+            while (listStack.length > 1 && listStack[listStack.length - 1] > indent) {
+              html += '</li></ul>';
+              listStack.pop();
+            }
+            html += '</li><li>' + formatInline(content);
+          } else {
+            html += '</li><li>' + formatInline(content);
+          }
+        }
+      } else {
+        while (listStack.length > 0) {
+          html += '</li></ul>';
+          listStack.pop();
+        }
+        var trimmed = rawLine.trim();
+        html += '<p>' + formatInline(trimmed) + '</p>';
+      }
+    });
+
+    while (listStack.length > 0) {
+      html += '</li></ul>';
+      listStack.pop();
+    }
+
+    return html;
   }
 
   function escapeHtml(str) {
