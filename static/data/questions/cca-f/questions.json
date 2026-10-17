@@ -42379,7 +42379,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Use Grep to find authentication entry points, read those files, and follow imports and function calls incrementally.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use Grep to find authentication entry points, read those files, and follow imports and function calls incrementally.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Candidates often reach for parallel subagents (Option A) thinking concurrency is always better, or ask the engineer (Option B). But Option A burns massive token budgets synthesizing unconstrained findings across services without entry points, and Option B punts back to a *brand-new engineer* who explicitly doesn't know the codebase! Option C causes immediate context window exhaustion by loading every matching file.\n• Why D is Correct: Using Grep to identify authentication entry points (middleware, route decorators, token interceptors) and tracing imports/call hierarchies incrementally is Anthropic's recommended context-efficient exploration pattern.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 1",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42415,7 +42415,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Handle transient errors with automatic retries inside the tool and surface non transient errors with descriptive messages to the agent.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Handle transient errors with automatic retries inside the tool and surface non transient errors with descriptive messages to the agent.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Pushing retry loops to the LLM agent (Option A) burns expensive model tokens and conversational turns on routine HTTP 503s or timeouts. Swallowing errors or returning generic messages (Options B & D) hides critical actionable details.\n• Why C is Correct: Tools must absorb transient infrastructural failures (HTTP 429/503/timeouts) via automatic retries with backoff, while non-transient domain errors (e.g., 400 Bad Request, 401 Unauthorized, schema validation failures) must surface with descriptive error messages so the agent can adapt its plan.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 2",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42451,7 +42451,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Combine them into a single find_and_book operation that atomically checks availability and books, returning confirmation or alternatives.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Combine them into a single find_and_book operation that atomically checks availability and books, returning confirmation or alternatives.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: This tests Time-of-Check to Time-of-Use (TOCTOU) race conditions in agentic tool design. Adding prompt retries (Option A) or a hold_slot tool (Option D) adds conversational roundtrips and complex lease management.\n• Why B is Correct: Agentic roundtrips take seconds, during which external resources can change. Consolidating check and reservation into a single atomic find_and_book tool eliminates intermediate conversational latency and eliminates slot-sniping races completely.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 3",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42487,7 +42487,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Change get_neighborhood_info to accept property_id and resolve the address internally.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Change get_neighborhood_info to accept property_id and resolve the address internally.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Creating helper tools (Option A) or bloated monolithic tools (Option B) creates unnecessary tool catalog clutter and schema overhead.\n• Why C is Correct: Tool design ergonomics prioritize natural identifiers available to the user or agent. Updating get_neighborhood_info to accept property_id directly and resolve the address internally saves a full LLM turn and prevents context bloat.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 4",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42523,7 +42523,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Automatically retry the request with bounded exponential backoff before returning results to the agent.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Automatically retry the request with bounded exponential backoff before returning results to the agent.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Faking an empty result (Options B & C) hallucinates a false reality where no flights exist, leading the agent to mislead the user. Option A fails fast on temporary network blips.\n• Why D is Correct: 503 Service Unavailable is a classic transient HTTP status. The tool implementation should handle transient retries with bounded exponential backoff and jitter before bubbling up any failure.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 5",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42559,7 +42559,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Return fields with confidence scores plus a requires_review boolean computed using tested thresholds and a review_reason string.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Return fields with confidence scores plus a requires_review boolean computed using tested thresholds and a review_reason string.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Expecting an LLM to reliably perform mathematical threshold comparisons on floating-point confidence scores (Option B) produces erratic escalations. Summarizing into vague text (Option C) loses precision.\n• Why A is Correct: Provide deterministic guidance in the tool output: an explicit boolean flag (requires_review) computed via validated backend thresholds alongside review_reason, while keeping the raw field scores transparent.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 6",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42595,7 +42595,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Parent session context and conversation history. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Parent session context and conversation history. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: The trick hinges on the word 'NOT'. Developers familiar with single-agent loops often assume child subagents inherit full conversation history.\n• Why A is Correct: In the Claude Agent SDK, subagents operate in completely isolated context windows. Conversation history and turns from the parent are NEVER inherited automatically; the parent must explicitly pass required state in the task prompt.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 7",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42631,7 +42631,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Modify the subagent‘s system prompt to include stricter rules. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Modify the subagent‘s system prompt to include stricter rules. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Distractor C mentions PostToolUse, but PostToolUse executes *after* the tool has already run, making it ineffective for preventing bad calls beforehand. Restricting tools (Option B) breaks functionality if the tool is needed.\n• Why A is Correct: Modifying the subagent's system prompt to enforce strict constraints and schema requirements directly addresses the agent's decision logic and guides tool selection.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 8",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42667,7 +42667,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Let the subagent iterate internally - it sees tool results, evaluates them, and calls the search tool again if needed. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Let the subagent iterate internally - it sees tool results, evaluates them, and calls the search tool again if needed. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Micro-managing each search call from the coordinator (Option D) or forcing static linear chains (Options B & C) defeats agentic autonomy.\n• Why A is Correct: In the Claude Agent SDK, subagents run their own internal agentic loops (stop_reason: tool_use -> execute -> inspect -> iterate) until they satisfy their subtask and return end_turn.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 9",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42703,7 +42703,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Have each subagent store results in a shared database that the synthesis agent queries. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Have each subagent store results in a shared database that the synthesis agent queries. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Passing full raw research payloads through the coordinator (Option B) inflates the coordinator's context window and risks context exhaustion.\n• Why D is Correct: Subagents should offload bulky research findings to external storage (shared database, vector store, or scratchpad file), allowing the synthesis agent to query exactly what it needs out-of-band.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 10",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42739,7 +42739,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Summarize findings to date and start a fresh session with the new research direction. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Summarize findings to date and start a fresh session with the new research direction. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Continuously appending new gap explorations to an already exhausted coordinator context causes attention degradation and prompt bloating.\n• Why D is Correct: Distilling current progress into a crisp summary and initializing a fresh session focused specifically on the identified research gaps maintains clean context headroom.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 11",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42775,7 +42775,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: In the coordinator‘s agentic loop - after receiving the subagent‘s result via the Task tool, the coordinator evaluates completeness and re-invokes if needed. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: In the coordinator‘s agentic loop - after receiving the subagent‘s result via the Task tool, the coordinator evaluates completeness and re-invokes if needed. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Hooks (Option A) are for programmatic, synchronous interceptors (e.g. logging, auth validation), not semantic quality evaluation. Microservices (Option D) decouple reasoning from the orchestrator.\n• Why B is Correct: Semantic evaluation belongs in the coordinator's agentic loop: after the Task tool returns, the coordinator inspects the output against quality criteria and autonomously decides whether to trigger refinement.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 12",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42811,7 +42811,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Let the coordinator use model-driven reasoning to decide: based on the research question and available subagents, decide dynamically how to partition work. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Let the coordinator use model-driven reasoning to decide: based on the research question and available subagents, decide dynamically how to partition work. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Static routing tables and hardcoded rules (Options C & D) are brittle and cannot handle nuanced or overlapping queries.\n• Why B is Correct: Model-driven routing leverages Claude's reasoning to dynamically analyze multi-faceted questions and partition tasks among available specialist subagents.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 13",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42847,7 +42847,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: The coordinator must explicitly communicate any scope changes or new research directions to subagents in fresh invocations. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: The coordinator must explicitly communicate any scope changes or new research directions to subagents in fresh invocations. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Believing subagents automatically discover coordinator updates (Option B). Subagents are completely stateless and isolated.\n• Why D is Correct: Resuming a coordinator session does not update child subagents. The coordinator must explicitly communicate modified scope and directives when invoking subagents in new Task calls.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 14",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42883,7 +42883,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Use adaptive stopping: continue if new information is discovered, stop when returns diminish. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use adaptive stopping: continue if new information is discovered, stop when returns diminish. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Arbitrary hard limits like 3 rounds (Option A) either cut off complex investigations early or waste budget on simple queries. Unlimited loops (Option B) cause runaway token bills.\n• Why D is Correct: Adaptive stopping terminates iteration when marginal information gain plateaus, ensuring cost efficiency while maintaining thoroughness.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 15",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42919,7 +42919,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Return the first page together with total match count and a cursor for additional pages.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Return the first page together with total match count and a cursor for additional pages.. This aligns with best practices for Agentic Architecture & Orchestration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Auto-fetching all catalog pages creates latency spikes and context overflow. Creating multiple pagination tools (Option D) adds schema confusion.\n• Why C is Correct: Returning the first page of results alongside the total match count and a pagination cursor gives the model immediate visibility while allowing it to pull subsequent pages only if needed.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 16",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42955,7 +42955,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Use fork_session to create two branches from the prior analysis and explore one approach in each fork.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use fork_session to create two branches from the prior analysis and explore one approach in each fork.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Exploring contradictory refactoring paths sequentially in the same conversation (Option C) creates massive context pollution and confusion between approaches.\n• Why D is Correct: fork_session branches from the common analysis baseline, providing two isolated sessions where each refactoring path can be explored in depth without cross-contamination.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 17",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -42991,7 +42991,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Integrate an existing Jira MCP server that exposes tickets, comments, and metadata as tools.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Integrate an existing Jira MCP server that exposes tickets, comments, and metadata as tools.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Writing custom Bash curl scripts (Option A) is error-prone, insecure, and misses authentication abstractions.\n• Why B is Correct: Anthropic's Model Context Protocol (MCP) ecosystem provides standardized, battle-tested servers for major developer tools like Jira, GitHub, and Slack, avoiding custom tool maintenance.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 18",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43027,7 +43027,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Prompt chaining, with each aspect analyzed separately and combined in a final synthesis step.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Prompt chaining, with each aspect analyzed separately and combined in a final synthesis step.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Monolithic prompts (Option C) cause attention dilution where security vulnerabilities are missed in favor of easy style comments. Dynamic orchestrators (Option D) add needless complexity for fixed sequences.\n• Why B is Correct: A deterministic, multi-step workflow with fixed stages (style -> security -> docs -> synthesis) is the ideal candidate for prompt chaining, ensuring dedicated focus on each aspect.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 19",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43063,7 +43063,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Summarize the key rendering findings, then spawn a subagent for physics exploration with that summary in its initial context.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Summarize the key rendering findings, then spawn a subagent for physics exploration with that summary in its initial context.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Continuing in a saturated context (Option D) worsens the 'lost in the middle' phenomenon where the model forgets specific classes. Wiping everything (Option A) discards valuable discoveries.\n• Why C is Correct: Compressing rendering findings into a focused summary and launching a subagent initialized with that summary preserves knowledge while resetting the active context window.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 20",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43099,7 +43099,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Read the library and wrapper modules to identify all exposed names for the function, then Grep for each name across the codebase.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Read the library and wrapper modules to identify all exposed names for the function, then Grep for each name across the codebase.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: The wrapper alias trap! Grepping only for the original function name (Option D) completely misses callers invoking the aliased exports. Reading every importing file (Option B) explodes token consumption.\n• Why A is Correct: A two-phase strategy: first read the wrapper/library files to discover all alias names, then Grep across the repository for each identifier.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 21",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43135,7 +43135,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Analyze imports and class hierarchies to identify the base cache class, read it first, then trace specific invalidation implementations.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Analyze imports and class hierarchies to identify the base cache class, read it first, then trace specific invalidation implementations.. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Grepping isolated 'invalidate' lines (Option A) lacks structural context. Reading all files (Option C) wastes token capacity.\n• Why B is Correct: Structural top-down analysis: inspecting the base cache interface or class first reveals the architectural pattern and invalidation hooks, enabling targeted tracing of implementations.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 22",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43171,7 +43171,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Glob returns results sorted by modification time, making it easy to identify recently changed files. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Glob returns results sorted by modification time, making it easy to identify recently changed files. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Glob does traverse directories (disproving A) and does not filter contents (disproving B).\n• Why D is Correct: In the Claude Agent SDK and Claude Code, Glob returns files sorted by modification time (mtime), giving agents instant visibility into recently modified code.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 23",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43207,7 +43207,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Use Grep to search for import statements, function calls, and dependencies across the matched files. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use Grep to search for import statements, function calls, and dependencies across the matched files. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Reading 150 files (Option A) immediately exhausts context tokens. Asking the user (Option C) defeats autonomous assistance.\n• Why D is Correct: Using Grep across the matched files to extract import declarations and function calls constructs the dependency graph without loading full file contents.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 24",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43243,7 +43243,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Yes; the Read tool is better for reading file contents, especially large files, because it provides line numbering and handles formatting. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Yes; the Read tool is better for reading file contents, especially large files, because it provides line numbering and handles formatting. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Believing raw Bash commands are always superior to native tools (Options B & C).\n• Why D is Correct: The native Read tool provides 1-indexed line numbers, pagination, and clean syntax formatting, which downstream editing tools (like Edit) rely on for safe modifications.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 25",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43279,7 +43279,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Use Grep to find test files or documentation that reference this module. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use Grep to find test files or documentation that reference this module. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Reading legacy implementation code (Option D) consumes huge context on historical edge cases and boilerplate.\n• Why C is Correct: Test files and doc references provide high signal-to-noise: tests demonstrate exactly how the module is invoked and what contracts it satisfies.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 26",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43315,7 +43315,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Try all three: search for the name, search for calls, search for imports. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Try all three: search for the name, search for calls, search for imports. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Searching only for function calls `foo(` misses references passed as callbacks or arguments; searching only imports misses internal calls.\n• Why D is Correct: Triangulating definitions, call patterns, and import statements guarantees complete symbol discovery across varying coding styles.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 27",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43351,7 +43351,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Read the file back to verify the generated content matches expectations. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Read the file back to verify the generated content matches expectations. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Running generated database migrations blindly in Bash (Option A) is dangerous and can corrupt data. Returning without checking (Option D) risks silent write truncation.\n• Why B is Correct: The 'verify after write' principle: reading the file back confirms file system persistence and validates syntax integrity before further action.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 28",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43387,7 +43387,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Use Read to examine the file, then use Write with a complete file rewrite. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use Read to examine the file, then use Write with a complete file rewrite. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Falling into endless retry loops with ambiguous substrings (Option D) or punting to the user (Option A).\n• Why C is Correct: When unique substring matching fails due to repeated code patterns, reading the full context and rewriting the target file cleanly resolves the ambiguity.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 29",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43423,7 +43423,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Use Glob to find file patterns (imports, module declarations) and Grep to map relationships. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use Glob to find file patterns (imports, module declarations) and Grep to map relationships. This aligns with best practices for Context Management & Reliability, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Heavy external build tools (Option D) or reading every file (Option B) introduce massive latency and token bloat.\n• Why C is Correct: Combining Glob for file pattern discovery with Grep for import/module declarations creates a lightweight dependency map efficiently.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 30",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43459,7 +43459,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: .claude/commands/ in the project root. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: .claude/commands/ in the project root. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Confusing user-level configuration (~/.claude/commands/ in Option D) with project-level shared configuration.\n• Why B is Correct: Team-shared slash commands must be located in .claude/commands/ at the repository root so they are tracked by git and available to all collaborators.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 31",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43495,7 +43495,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Explain the billing, confirm refund eligibility, acknowledge the system issue preventing immediate processing, and offer escalation or retry later.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Explain the billing, confirm refund eligibility, acknowledge the system issue preventing immediate processing, and offer escalation or retry later.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Confirming the refund succeeded when the backend timed out (Option C) is a severe compliance violation. Abandoning work via immediate escalation (Option B) degrades resolution metrics.\n• Why D is Correct: High-empathy customer support: complete all possible diagnostic steps, confirm eligibility, honestly communicate the backend delay, and provide clear retry or escalation options.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 32",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43531,7 +43531,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Extract only return relevant fields such as items, purchase date, return window, and status from each existing order response, removing verbose details.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Extract only return relevant fields such as items, purchase date, return window, and status from each existing order response, removing verbose details.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Moving data to a vector DB (Option D) is excessive for a single support session. Unstructured prose (Option A) loses exact order IDs and timestamps.\n• Why B is Correct: Schema projection: filtering verbose order payloads down to the specific fields needed for returns (items, dates, status) drastically cuts token usage while preserving precision.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 33",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43567,7 +43567,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Return the error message in the tool result content with isError set to true.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Return the error message in the tool result content with isError set to true.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Throwing unhandled server exceptions (Option C) crashes the protocol connection. Returning a fake success response (Option B) misleads the model.\n• Why D is Correct: The MCP specification explicitly dictates returning error information inside the CallToolResult content with `isError: true`, allowing Claude to read the diagnostic and handle it gracefully.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 34",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43603,7 +43603,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Enhance error responses with structured metadata such as errorCategory, isRetryable, and a description of the failure.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Enhance error responses with structured metadata such as errorCategory, isRetryable, and a description of the failure.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Generic string errors force Claude to guess whether to retry or escalate. Adding analyzer tools (Option C) wastes extra roundtrips.\n• Why A is Correct: Structured error taxonomy (errorCategory, isRetryable, failure description) provides unambiguous machine-readable metadata that directs agent recovery without guesswork.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 35",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43639,7 +43639,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Compile a structured handoff with customer details, order info, and the identified issue before calling escalate_to_human.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Compile a structured handoff with customer details, order info, and the identified issue before calling escalate_to_human.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Escalating with only the raw user message (Option B) forces human agents to redo all research. Attempting an unauthorized refund (Option C) breaches business rules.\n• Why D is Correct: Structured handoff compilation: assembling the customer ID, order ID, and policy violation summary ensures human reviewers can take immediate action without re-investigating.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 36",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43675,7 +43675,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: The conversation history is not being passed in subsequent API requests.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: The conversation history is not being passed in subsequent API requests.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Believing Claude has an inherent 2-turn memory limit (Option C) or that prompt wording caused amnesia (Option D).\n• Why B is Correct: LLM APIs are completely stateless. If the backend application does not include prior user and assistant turns in the `messages` array for subsequent requests, the model has no historical context.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 37",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43711,7 +43711,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Inspect the assistant‘s message for tool_use blocks, extract the tool name/input, execute the tool externally, and append results back to conversation history. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Inspect the assistant‘s message for tool_use blocks, extract the tool name/input, execute the tool externally, and append results back to conversation history. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Believing stop_reason ends the conversation (Option B) or that stop_reason itself contains the tool parameters (Option C).\n• Why A is Correct: In the agentic loop, stop_reason: 'tool_use' signals that the assistant message contains tool_use content blocks. The client must execute those tools, build tool_result blocks, and send them back.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 38",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43747,7 +43747,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: You must explicitly pass customer context and available tools to the subagent; context is not inherited automatically. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: You must explicitly pass customer context and available tools to the subagent; context is not inherited automatically. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Assuming subagents automatically inherit the parent session's history or tool access (Option A).\n• Why C is Correct: Subagents have isolated contexts and empty message histories. The coordinator must explicitly supply all necessary context in the prompt and define permitted tools in the subagent config.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 39",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43783,7 +43783,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Implement a PostToolUse hook that validates whether lookup_order was called; if not, raise an error preventing process_refund from executing. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Implement a PostToolUse hook that validates whether lookup_order was called; if not, raise an error preventing process_refund from executing. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Relying on system prompt instructions (Option C) cannot guarantee execution order during edge cases. Tool choice (Option A) only dictates the immediate next turn.\n• Why D is Correct: Programmatic lifecycle hooks (Pre/PostToolUse) deterministically enforce prerequisites in code, throwing errors if required antecedent tools were not called.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 40",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43819,7 +43819,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Implement a structured escalation protocol where escalate_to_human receives customer ID, issue summary, root cause, and recommended actions in defined fields. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Implement a structured escalation protocol where escalate_to_human receives customer ID, issue summary, root cause, and recommended actions in defined fields. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Unstructured text summaries (Option A) or sending only an ID (Option D) lead to missing details and human inefficiency.\n• Why B is Correct: Defining explicit schema properties (customer ID, issue summary, root cause, recommendations) in escalate_to_human enforces complete, validated data transfer to human queues.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 41",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43855,7 +43855,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Parallel subagents allow you to assign specialized agents to each issue (billing expert, returns expert) simultaneously, reducing latency and potentially catching issues that a generalist agent might miss. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Parallel subagents allow you to assign specialized agents to each issue (billing expert, returns expert) simultaneously, reducing latency and potentially catching issues that a generalist agent might miss. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Subagents do not eliminate the need for context (Option A), nor do they automatically merge results without orchestration logic (Option D).\n• Why C is Correct: Parallel subagents enable role specialization (billing specialist vs return specialist) with dedicated system prompts and schemas, executing concurrently to minimize turnaround time.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 42",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43891,7 +43891,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Resuming uses the old session‘s context window, potentially hitting limits faster if the conversation was long. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Resuming uses the old session‘s context window, potentially hitting limits faster if the conversation was long. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Assuming session resume is always superior to a fresh start (Option B).\n• Why C is Correct: Resuming an existing session restores all historical conversational tokens. If the prior session was long, the agent starts near context capacity, limiting its ability to perform new tool turns.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 43",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43927,7 +43927,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Implement a PostToolUse hook that inspects whether get_customer (identity verification) was called before allowing process_refund. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Implement a PostToolUse hook that inspects whether get_customer (identity verification) was called before allowing process_refund. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Relying on stronger prompt language (Option D) or tool_choice (Option A) cannot prevent safety violations across multi-turn interactions.\n• Why C is Correct: Compliance rules require hard code guardrails: a PostToolUse or PreToolUse hook intercepts process_refund and verifies identity validation was completed.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 44",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43963,7 +43963,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: Continuing risks hitting context limits and losing the ability to make multiple tool calls or gather new information. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Continuing risks hitting context limits and losing the ability to make multiple tool calls or gather new information. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Claiming summaries are always more accurate (Option A) or fresh sessions are always faster (Option C).\n• Why B is Correct: Operating at 70%+ context capacity leaves minimal buffer for complex tool schemas and multi-turn tool outputs, risking sudden truncation mid-resolution.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 45",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -43999,7 +43999,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Implement a hook to intercept tool calls, block refund requests over $500, and invoke human escalation.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Implement a hook to intercept tool calls, block refund requests over $500, and invoke human escalation.. This aligns with best practices for Tool Design & MCP Integration, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Prompt engineering (few-shot examples in Option A or emphatic rules in Option D) cannot guarantee 100% compliance on high-risk operations.\n• Why C is Correct: Hard business policies (refunds > $500) must be enforced at the framework/hook layer, intercepting tool arguments and redirecting to human approval programmatically.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 46",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44035,7 +44035,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Use plan mode to outline the refactoring strategy before making changes. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use plan mode to outline the refactoring strategy before making changes. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Jumping into direct execution (Option A & C) across 8 interdependent files leads to broken imports, circular edits, and wasted tokens.\n• Why D is Correct: Plan mode outlines the refactoring sequence, verifies architectural dependencies, and establishes developer consensus before touching any code.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 47",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44071,7 +44071,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Rules with glob patterns matching the file path, plus the nearest directory-level CLAUDE.md, plus project-level CLAUDE.md. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Rules with glob patterns matching the file path, plus the nearest directory-level CLAUDE.md, plus project-level CLAUDE.md. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Believing only explicitly imported rules apply (Option A) or all rules apply indiscriminately (Option D).\n• Why C is Correct: Claude Code resolves configuration hierarchically: path-matching glob rules in .claude/rules/ + closest directory CLAUDE.md + project root CLAUDE.md.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 48",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44107,7 +44107,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: The skill runs in an isolated sub-agent with its own context, preventing pollution of the main Claude Code session. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: The skill runs in an isolated sub-agent with its own context, preventing pollution of the main Claude Code session. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Confusing context: fork with git branching (Option A).\n• Why D is Correct: In Claude Code skill configuration, `context: fork` runs the skill inside an isolated sub-agent, preventing temporary exploration tokens from polluting the primary session.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 49",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44143,7 +44143,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Use allowed-tools in the skill‘s SKILL.md frontmatter to specify only read and glob tools. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use allowed-tools in the skill‘s SKILL.md frontmatter to specify only read and glob tools. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Moving files to home directories (Option B) or inventing flags like no-write (Option C).\n• Why A is Correct: Claude Code skills enforce least privilege via the `allowed-tools` frontmatter field, explicitly restricting tool access to read and glob.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 50",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44179,7 +44179,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: Non-interactive mode for CI execution without requiring user prompts or approval. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Non-interactive mode for CI execution without requiring user prompts or approval. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Assuming -p stands for plan mode (Option B) or profiling (Option C) or parallel (Option D).\n• Why A is Correct: The `-p` (or `--print`) flag runs Claude Code in headless, non-interactive mode suitable for automated CI/CD pipelines without blocking on user stdin.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 51",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44215,7 +44215,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: --output-format json with --json-schema to specify the structure. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: --output-format json with --json-schema to specify the structure. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Guessing CLI flag names like --structured-output (Option C) or --json-only (Option D).\n• Why A is Correct: Claude Code's exact CLI syntax for schema-constrained machine outputs is `--output-format json` combined with `--json-schema`.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 52",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44251,7 +44251,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: Use @import syntax to modularly reference other CLAUDE.md or configuration files. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use @import syntax to modularly reference other CLAUDE.md or configuration files. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Guessing syntax like `include:` (Option C).\n• Why D is Correct: Claude Code natively supports `@import ./path/to/file.md` inside `CLAUDE.md` to split monolithic configurations into modular, maintainable files.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 53",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44287,7 +44287,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Provide concrete input/output examples and test cases to establish expected behavior patterns. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Provide concrete input/output examples and test cases to establish expected behavior patterns. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Expanding context window size (Option A) does not fix ambiguity; neither does naming conventions (Option D).\n• Why C is Correct: Concrete input/output examples and test cases ground the model in exact requirements and edge cases, dramatically reducing hallucinations.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 54",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44323,7 +44323,7 @@
       }
     ],
     "correct": "B",
-    "explanation": "The correct approach is: In the project root or .claude/ directory to be version-controlled. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: In the project root or .claude/ directory to be version-controlled. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: User-level ~/.claude.json (Option C) is not shared with team members.\n• Why B is Correct: Project-wide MCP configuration belongs in .mcp.json at the repository root or inside .claude/, where it is committed to version control for the entire team.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 55",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44359,7 +44359,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Use environment variable expansion in .mcp.json (e.g., $DB_PASSWORD) and store variables locally. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use environment variable expansion in .mcp.json (e.g., $DB_PASSWORD) and store variables locally. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Committing credentials in .mcp.json (Option A) is a major security flaw; .claude/secrets.json (Option D) is not a standard MCP feature.\n• Why C is Correct: Environment variable interpolation (e.g. `${DB_PASSWORD}`) allows .mcp.json to be safely committed while keeping sensitive secrets in local environment variables.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 56",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44395,7 +44395,7 @@
       }
     ],
     "correct": "D",
-    "explanation": "The correct approach is: The Grep tool, which uses ripgrep for fast content pattern matching. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: The Grep tool, which uses ripgrep for fast content pattern matching. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Glob (Option A) only matches file names/paths, not file contents. Reading files sequentially (Option C) exhausts context.\n• Why D is Correct: The built-in Grep tool is powered by ripgrep, optimized for high-speed regex matching across thousands of files without loading them into memory.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 57",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44431,7 +44431,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: A clear, descriptive tool description that helps the model understand when to use it. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: A clear, descriptive tool description that helps the model understand when to use it. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Overloading tool names with examples (Option B) or adding excessive optional parameters (Option D).\n• Why C is Correct: The top-level tool `description` is the primary signal Claude uses to understand when and why to select a tool during reasoning.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 58",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44467,7 +44467,7 @@
       }
     ],
     "correct": "C",
-    "explanation": "The correct approach is: Use tool_choice to force selection of specific tools for specific tasks. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: Use tool_choice to force selection of specific tools for specific tasks. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Giving all tools identical descriptions (Option D) causes total chaos.\n• Why C is Correct: Setting `tool_choice` deterministically constrains the model's next turn to call a specific tool, eliminating selection ambiguity.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 59",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",
@@ -44503,7 +44503,7 @@
       }
     ],
     "correct": "A",
-    "explanation": "The correct approach is: The is Retryable flag indicates the tool call should be retried; Claude Code should attempt the operation again. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.",
+    "explanation": "The correct approach is: The is Retryable flag indicates the tool call should be retried; Claude Code should attempt the operation again. This aligns with best practices for Claude Code Configuration & Workflows, ensuring robust execution, predictable tool control, and proper context boundaries.\n\nExam Trick & Distractor Analysis:\n• The Core Trap: Ignoring isRetryable (Option B) or skipping to the next tool (Option C).\n• Why A is Correct: When an MCP tool returns an error with `isRetryable: true`, it explicitly signals a transient condition (rate limit, network timeout) that should be retried.",
     "mockEligible": true,
     "topicBrief": "Topic: Practice Test 1 Question 60",
     "roleContext": "Role: Claude Certified Architect & Systems Engineer",

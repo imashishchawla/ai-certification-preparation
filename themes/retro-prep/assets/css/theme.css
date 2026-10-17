@@ -507,6 +507,7 @@ th {
   border-left: 6px solid var(--accent);
   border-radius: 2px;
   font-size: 0.95rem;
+  white-space: pre-line;
 }
 
 /* Exam-inspired practice test */
