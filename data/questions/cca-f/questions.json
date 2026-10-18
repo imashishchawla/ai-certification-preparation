@@ -8,27 +8,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "The application runner inspects the API response and observes `stop_reason: \"tool_use\"`. What does this status code indicate your client-side agentic loop runner must do before returning a final answer to the user?",
+    "prompt": "You are developing a production agentic service using the Claude API for an automated code-refactoring pipeline. In your custom client-side orchestration loop, an HTTP response arrives from the Anthropic Messages endpoint with HTTP 200, and the JSON payload contains stop_reason: \"tool_use\" alongside two tool_use content blocks. A junior engineer proposes terminating the current session and returning the generated response text to the developer.\nHow should the client-side runner handle this control signal to ensure proper agentic lifecycle execution?",
     "options": [
       {
         "id": "A",
-        "text": "Claude is requesting that a tool be executed and its result fed back"
+        "text": "Keep the session active, parse the tool_use blocks to execute the requested local tools, and submit their outputs in a subsequent user message with tool_result content blocks."
       },
       {
         "id": "B",
-        "text": "Claude has finished the task and no further action is needed"
+        "text": "Conclude the execution lifecycle immediately, since Claude has produced its final output and signaled that no further interaction with external tools is required."
       },
       {
         "id": "C",
-        "text": "The agentic loop has exceeded its configured maximum iteration count limit and was terminated"
+        "text": "Raise a loop iteration ceiling exception and trigger an emergency rollback, as tool_use signifies that the agent has exceeded its allowable turn threshold."
       },
       {
         "id": "D",
-        "text": "Claude encountered an unrecoverable error and cannot continue"
+        "text": "Terminate the execution with an unrecoverable runtime error, as tool_use indicates Claude failed to generate text and crashed during inference."
       }
     ],
     "correct": "A",
-    "explanation": "`stop_reason: \"tool_use\"` means Claude wants to invoke one or more tools. Your loop must execute those tools, append the results to the conversation history, and call Claude again. The loop only terminates when `stop_reason` is `\"end_turn\"` (or a budget/turn limit is hit).\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop) · [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **Keep the session active, parse the tool_use blocks to execute the requested local tools, and submit their outputs in a subsequent user message with tool_result content blocks.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Candidates often confuse `stop_reason: \"tool_use\"` with an exit condition or error state.\n  * In the Claude API, `stop_reason: \"tool_use\"` is an *intermediate control signal*, not a completion event. Terminating the loop here discards the tool request and leaves the task unfinished.\n\n* **Why Option A Succeeds:**\n  * **Core Agentic Loop Contract:** When Claude emits `stop_reason: \"tool_use\"`, client-side orchestration must:\n    1. Extract all `tool_use` blocks from the assistant's message.\n    2. Execute the corresponding tools locally or over MCP.\n    3. Construct a new `user` message containing `tool_result` blocks referencing the matching `tool_use_id`.\n    4. Call the Messages API again to let Claude evaluate the results.\n\n* **Distractor Breakdown:**\n  * **Option A (_Parse tool_use, execute tools, submit tool_results_):** **Correct.** The fundamental protocol for client-side tool loops.\n  * **Option B (_Conclude execution immediately_):** *Trap.* Drops pending tool calls and returns an incomplete assistant response.\n  * **Option C (_Raise iteration ceiling exception_):** *Trap.* Confuses `tool_use` with `max_tokens` or custom turn limit checks.\n  * **Option D (_Terminate with runtime error_):** *Trap.* `tool_use` is normal operational behavior, not an error.\n\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop) · [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Agentic Loop Execution & Stop Signals",
     "roleContext": "Role: AI Systems Engineer Handling Claude Agent SDK",
@@ -43,27 +43,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "The runner inspects the response and receives `stop_reason: \"end_turn\"`. What does this control signal indicate regarding the agentic loop lifecycle?",
+    "prompt": "You are deploying a customer service assistant using the Claude Agent SDK. The agent is equipped with several custom tools for searching order history, checking inventory, and processing returns. During an ongoing customer inquiry, the assistant emits several tool turns and finally returns a response message where stop_reason is \"end_turn\" with a text content block explaining the return status.\nWhat does this control signal indicate to your agentic orchestration runner?",
     "options": [
       {
         "id": "A",
-        "text": "A tool execution failed and must be retried by the loop handler"
+        "text": "A critical tool execution failed silently, requiring the loop runner to re-dispatch the previous tool request with exponential backoff."
       },
       {
         "id": "B",
-        "text": "Claude has completed its response and the loop should terminate"
+        "text": "Claude has naturally finished its task without requesting additional tools, signaling the client runner to terminate the loop and deliver the response."
       },
       {
         "id": "C",
-        "text": "The model ran out of available context window space mid-response"
+        "text": "The model exhausted its available output token capacity mid-response, requiring an immediate context window expansion or compaction pass."
       },
       {
         "id": "D",
-        "text": "The user must provide additional input before the loop continues"
+        "text": "The orchestration loop must pause and prompt the customer for intermediate confirmation before Claude can continue executing tools."
       }
     ],
     "correct": "B",
-    "explanation": "`end_turn` means Claude has produced a final text-only response with no pending tool calls. This is the correct loop termination signal. Do not check text content or other heuristics to decide when to stop — always use `stop_reason`.\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
+    "explanation": "The correct approach is: **Claude has naturally finished its task without requesting additional tools, signaling the client runner to terminate the loop and deliver the response.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Developers often look at text heuristics (e.g. checking if the text contains a goodbye or question mark) instead of checking `stop_reason`.\n  * `end_turn` is the only authoritative, deterministic signal that Claude has concluded its generation without requesting further tools.\n\n* **Why Option B Succeeds:**\n  * **Authoritative Loop Termination:** `stop_reason: \"end_turn\"` indicates that Claude completed its reasoning turn cleanly, has no pending tool calls, and is delivering its final answer to the user.\n\n* **Distractor Breakdown:**\n  * **Option A (_Tool execution failed silently_):** *Trap.* Tool errors are reported via `isError: true` inside `tool_result`, not via `end_turn`.\n  * **Option B (_Naturally finished task, terminate loop_):** **Correct.** The standard termination condition for the Claude agentic loop.\n  * **Option C (_Exhausted output token capacity_):** *Trap.* Token exhaustion is signaled by `stop_reason: \"max_tokens\"`.\n  * **Option D (_Pause for customer confirmation_):** *Trap.* Conflates autonomous loop termination with human-in-the-loop gating.\n\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Agentic Loop Termination Lifecycle",
     "roleContext": "Role: AI Systems Engineer Handling Claude Agent SDK",
@@ -78,27 +78,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "What is the primary architectural responsibility of the central coordinator agent in this hub-and-spoke multi-agent topology?",
+    "prompt": "You are architecting an enterprise intelligence research system using the Claude Agent SDK in a hub-and-spoke multi-agent topology. The system comprises a central coordinator agent and several specialized worker subagents (Web Researcher, Financial Analyst, and Compliance Auditor). During system design review, an engineer suggests having the subagents communicate directly with one another to speed up execution.\nWhat is the core architectural responsibility of the central coordinator in maintaining system integrity under this topology?",
     "options": [
       {
         "id": "A",
-        "text": "To execute all tool calls directly without delegating to others"
+        "text": "Execute all low-level API tools and database transactions directly to eliminate execution latency and avoid delegating tool calls."
       },
       {
         "id": "B",
-        "text": "To act as a proxy relay between subagents and external tool APIs"
+        "text": "Serve as a dumb transport proxy that routes raw TCP sockets and streaming event payloads between external tools and subagents."
       },
       {
         "id": "C",
-        "text": "To decompose tasks, delegate to subagents, and aggregate results"
+        "text": "Decompose high-level user objectives, route scoped tasks to specialized subagents, maintain global state, and synthesize aggregated results."
       },
       {
         "id": "D",
-        "text": "To store a shared memory space accessible by all active subagents"
+        "text": "Provide a shared, mutable in-memory data store that all active subagents can read and write to concurrently during execution."
       }
     ],
     "correct": "C",
-    "explanation": "In hub-and-spoke, the coordinator is the central hub. It decomposes the task, delegates to specialist subagents, routes information, and aggregates results. Subagents communicate only through the coordinator — never directly with each other.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Decompose high-level user objectives, route scoped tasks to specialized subagents, maintain global state, and synthesize aggregated results.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Peer-to-peer subagent communication sounds appealing for speed, but creates quadratic communication complexity ($O(N^2)$), context pollution, and uncoordinated state drift.\n  * The hub-and-spoke pattern strictly forbids direct subagent-to-subagent communication.\n\n* **Why Option C Succeeds:**\n  * **Centralized Orchestration:** The coordinator acts as the single source of truth. It breaks down the user's objective, invokes specialists with targeted prompts, receives scoped outputs, and synthesizes the unified final response.\n\n* **Distractor Breakdown:**\n  * **Option A (_Execute all tools directly without delegating_):** *Trap.* Defeats the entire purpose of a multi-agent topology and causes context bloat.\n  * **Option B (_Serve as a dumb transport proxy_):** *Trap.* The coordinator is an intelligent reasoning agent, not a network switch.\n  * **Option C (_Decompose, delegate, maintain state, synthesize_):** **Correct.** The defining responsibilities of a hub coordinator.\n  * **Option D (_Shared mutable in-memory store_):** *Trap.* Subagents have isolated contexts; mutable shared memory leads to race conditions.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Hub-and-Spoke Coordinator Patterns",
     "roleContext": "Role: Lead AI Architect Designing Multi-Agent Systems",
@@ -113,27 +113,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "Which Claude Agent SDK parameter should you configure in the runner to enforce a hard ceiling on the maximum number of tool-use turns allowed per execution?",
+    "prompt": "Your team is deploying an autonomous debugging agent using the Claude Agent SDK that reads source repositories and runs automated unit tests. During testing on an ambiguous bug report, the agent entered an unconstrained loop, making 45 consecutive tool calls and exhausting the team's API budget for the day. You must configure the SDK runner to establish a strict, programmatic ceiling on tool-use iterations to prevent runaway execution.\nWhich parameter in the Claude Agent SDK controls this hard iteration limit?",
     "options": [
       {
         "id": "A",
-        "text": "max_iterations"
+        "text": "max_iterations, which sets a global counter across all model invocations and external network calls."
       },
       {
         "id": "B",
-        "text": "turn_limit"
+        "text": "turn_limit, which specifies the maximum cumulative number of input and output messages in the conversation array."
       },
       {
         "id": "C",
-        "text": "stop_after"
+        "text": "stop_after, which instructs the client runner to interrupt inference after a specified duration in seconds."
       },
       {
         "id": "D",
-        "text": "max_turns"
+        "text": "max_turns, which enforces a deterministic hard ceiling on the number of tool-use turns allowed before terminating the loop."
       }
     ],
     "correct": "D",
-    "explanation": "`max_turns` (Python) / `maxTurns` (TypeScript) limits how many tool-use turns the loop can run. It counts tool-use turns only, not the final text response. `max_budget_usd` / `maxBudgetUsd` is the cost-based equivalent.\nRefs: [Agent SDK — turns and budget](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
+    "explanation": "The correct approach is: **max_turns, which enforces a deterministic hard ceiling on the number of tool-use turns allowed before terminating the loop.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Many third-party frameworks use `max_iterations` or `turn_limit`. On Anthropic exams, candidates are tested on the exact Claude Agent SDK parameters: `max_turns` in Python and `maxTurns` in TypeScript.\n\n* **Why Option D Succeeds:**\n  * **Deterministic Cost & Loop Protection:** `max_turns` defines the maximum allowable tool-use rounds before the runner forcefully terminates the agentic loop, preventing infinite recursion and budget exhaustion.\n\n* **Distractor Breakdown:**\n  * **Option A (_max_iterations_):** *Trap.* Non-standard parameter name in the Claude Agent SDK.\n  * **Option B (_turn_limit_):** *Trap.* Invented parameter name.\n  * **Option C (_stop_after_):** *Trap.* Invented time-based parameter.\n  * **Option D (_max_turns_):** **Correct.** The official parameter for limiting agent tool turns in the Claude Agent SDK.\n\nRefs: [Agent SDK — turns and budget](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Preventing Runaway Agentic Loops",
     "roleContext": "Role: Cloud Systems Engineer Handling Production Cost Controls",
@@ -148,27 +148,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "basic",
-    "prompt": "Does the spawned subagent automatically inherit and have access to the coordinator's entire conversation history?",
+    "prompt": "You are architecting an enterprise customer onboarding assistant using the Claude Agent SDK. A primary coordinator agent handles claimant onboarding, verifies user identity, and inspects uploaded loss receipts. The coordinator then delegates claim fraud assessment to a specialized fraud detection subagent using the Task tool. During user acceptance testing, the fraud subagent repeatedly hallucinates claimant details and asks the user for policy numbers that were already verified earlier.\nWhat explains this behavior, and what architectural rule governs subagent context inheritance?",
     "options": [
       {
         "id": "A",
-        "text": "No — subagents have isolated context and receive information only via their prompt"
+        "text": "Subagents operate with completely isolated context windows; they do not inherit coordinator conversation history and receive context only via their prompt."
       },
       {
         "id": "B",
-        "text": "Yes — the Agent SDK shares conversation context and tool results automatically between all agents"
+        "text": "Subagents automatically inherit the coordinator's message history, but the coordinator's history was wiped due to a session timeout."
       },
       {
         "id": "C",
-        "text": "Yes — subagents inherit context through the SDK's shared session state store"
+        "text": "The Claude Agent SDK shares conversational turns across agents automatically, but only if the subagent executes in the same process thread."
       },
       {
         "id": "D",
-        "text": "Only if the coordinator explicitly sets `share_context: true` in the Task call"
+        "text": "Subagents inherit coordinator history only when the coordinator explicitly sets share_context: true in the Task tool parameters."
       }
     ],
     "correct": "A",
-    "explanation": "Subagents are isolated. They have no access to the coordinator's conversation history unless the coordinator explicitly includes the relevant information in the subagent's prompt. This is one of the most commonly tested facts on the exam.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Subagents operate with completely isolated context windows; they do not inherit coordinator conversation history and receive context only via their prompt.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Candidates intuitively assume child agents inherit the parent agent's conversation history like thread inheritance in traditional programming.\n  * In the Claude Agent SDK, subagents start with an entirely blank message history.\n\n* **Why Option A Succeeds:**\n  * **Context Isolation by Design:** Subagents are isolated to prevent prompt bloat and cross-task confusion. If a subagent requires information gathered by the coordinator, the coordinator must explicitly summarize and inject that information into the `Task` tool prompt.\n\n* **Distractor Breakdown:**\n  * **Option A (_Subagents have isolated context, receive data only via prompt_):** **Correct.** The foundational rule of multi-agent SDK architecture.\n  * **Option B (_History wiped due to session timeout_):** *Trap.* Fabricated explanation for standard context isolation.\n  * **Option C (_Auto-shares in same process thread_):** *Trap.* Process threading has no bearing on API prompt context boundaries.\n  * **Option D (_share_context: true parameter_):** *Trap.* Invented parameter; no such automatic inheritance toggle exists.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Subagent Context Scoping & Isolation",
     "roleContext": "Role: AI Pipeline Architect Building Hierarchical Agents",
@@ -183,27 +183,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Why is parsing natural language text rather than inspecting `stop_reason` considered a dangerous anti-pattern in production agentic systems?",
+    "prompt": "A software team is building an agentic loop runner around the Claude Messages API. To determine whether the agent has finished its task, the developer writes a regex check searching for phrases like \"I have completed the task\" or \"Here is your final answer\" in Claude's text output, rather than inspecting the stop_reason field. In production, this causes the agent to occasionally stop prematurely while half of the tool calls remain unexecuted.\nWhy is relying on natural language text matching rather than stop_reason a dangerous architectural anti-pattern?",
     "options": [
       {
         "id": "A",
-        "text": "The content array may be empty or missing, causing a runtime index error"
+        "text": "Natural language matching requires downloading language dictionary files, adding significant memory overhead to the client runner."
       },
       {
         "id": "B",
-        "text": "Text content checks are unreliable — `stop_reason` is the authoritative signal"
+        "text": "Claude may output conversational closing phrases while simultaneously emitting tool calls, leading to premature termination and dropped actions."
       },
       {
         "id": "C",
-        "text": "The developer should check `response.content[0].type` instead of the `.text` field"
+        "text": "The Anthropic API deprecates text output whenever tools are enabled, returning only binary encoded control signals."
       },
       {
         "id": "D",
-        "text": "Nothing is wrong; this is a valid alternative approach to checking `stop_reason`"
+        "text": "Inspecting message text requires unmasking encrypted prompt tokens, which triggers security warnings in the Claude SDK."
       }
     ],
     "correct": "B",
-    "explanation": "`stop_reason` is the correct and only reliable termination signal. Parsing text content (e.g., looking for \"Done\" or \"Finished\") is an anti-pattern: Claude's phrasing varies and the text may contain the word even mid-task. Always use `stop_reason === \"end_turn\"` to terminate the loop.\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
+    "explanation": "The correct approach is: **Claude may output conversational closing phrases while simultaneously emitting tool calls, leading to premature termination and dropped actions.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Developers coming from simple chatbot development often rely on string matching to detect intent.\n  * In an agentic loop, Claude frequently produces thought text or polite phrases alongside tool calls. String parsing creates catastrophic false-termination bugs.\n\n* **Why Option B Succeeds:**\n  * **Protocol-Level Determinism:** `stop_reason` is the deterministic API signal. If `stop_reason` is `\"tool_use\"`, tools *must* be executed regardless of what text was emitted. Terminating based on text substrings drops required tool calls.\n\n* **Distractor Breakdown:**\n  * **Option A (_Dictionary download overhead_):** *Trap.* Regex string matching requires no external dictionary downloads.\n  * **Option B (_Conversational text emitted alongside tool calls_):** **Correct.** Classic agent loop failure mode.\n  * **Option C (_Deprecated text output with tools_):** *Trap.* False; Claude routinely returns both text blocks and tool_use blocks.\n  * **Option D (_Unmasking encrypted tokens_):** *Trap.* Completely fictitious security concept.\n\nRefs: [Agent SDK — how the loop works](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Anti-Patterns in Loop Termination",
     "roleContext": "Role: Senior AI Engineer Refactoring Legacy Agent Code",
@@ -218,27 +218,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "A coordinator agent decomposes a research task into 3 fixed subtopics and consistently misses entire subject areas. What is the root cause?",
+    "prompt": "You are building an automated competitive intelligence system. The current design uses a static coordinator that takes a company name and rigidly decomposes the investigation into three hardcoded subtopics: Financials, Product Offerings, and Executive Leadership. When analyzing fast-evolving AI startups, the agent consistently fails to capture critical cross-cutting insights, such as recent open-source licensing changes or regulatory investigations.\nWhat architectural pattern should you adopt to make task decomposition responsive to discovery?",
     "options": [
       {
         "id": "A",
-        "text": "The subagents are not returning their completed results back to the coordinator agent for aggregation"
+        "text": "Enforce a strict linear prompt chain that executes all three research modules sequentially without allowing any feedback loops."
       },
       {
         "id": "B",
-        "text": "The context window is too small to handle all aspects of the full topic"
+        "text": "Increase the token budget and instruct the model in its system prompt to be more thorough when exploring the three fixed topics."
       },
       {
         "id": "C",
-        "text": "Fixed decomposition is too narrow — the coordinator should adapt scope dynamically"
+        "text": "Implement dynamic, adaptive decomposition where the coordinator evaluates preliminary discoveries and generates tailored subtasks based on findings."
       },
       {
         "id": "D",
-        "text": "The web search tool is returning incomplete or low-quality search results"
+        "text": "Replace the coordinator with a peer-to-peer agent mesh where subagents negotiate topics among themselves without central oversight."
       }
     ],
     "correct": "C",
-    "explanation": "Fixed decomposition causes incomplete coverage when topics are broader or more complex than the preset subtopics. The coordinator should analyze the query and dynamically determine how many subtopics to generate, not always route through a fixed pipeline. This is a task decomposition design flaw.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Implement dynamic, adaptive decomposition where the coordinator evaluates preliminary discoveries and generates tailored subtasks based on findings.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Fixed prompt chains and rigid hardcoded subtasks work well for static workflows, but completely fail on exploratory, high-ambiguity research.\n  * Trying to fix missing topics by prompting the model to \"be more thorough\" (Option B) fails because the static taxonomy itself is blind to unexpected domains.\n\n* **Why Option C Succeeds:**\n  * **Adaptive Model-Driven Decomposition:** The coordinator performs an initial broad scan, inspects intermediate findings, and dynamically generates specialized follow-up tasks to explore discovered anomalies or cross-cutting developments.\n\n* **Distractor Breakdown:**\n  * **Option A (_Strict linear prompt chain_):** *Trap.* Increases rigidity and prevents responsive discovery.\n  * **Option B (_System prompt thoroughness prompt-stuffing_):** *Trap.* Prompting cannot overcome hardcoded subtopic restrictions.\n  * **Option C (_Dynamic adaptive decomposition_):** **Correct.** Enables the orchestrator to adapt tasks based on emergent findings.\n  * **Option D (_Peer-to-peer uncoordinated mesh_):** *Trap.* Creates chaos, redundant searches, and uncoordinated state.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true
   },
   {
@@ -250,27 +250,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "How should the coordinator formulate its tool invocation to spawn three worker subagents to run in parallel using the Task tool?",
+    "prompt": "You are optimizing an agentic document analysis pipeline that extracts data from balance sheets, income statements, and cash flow reports. Currently, the coordinator invokes a specialized subagent for each statement one by one, resulting in high latency (over 45 seconds total). You want the coordinator to execute all three subagents concurrently to reduce turnaround time to under 15 seconds.\nHow should the coordinator formulate its tool invocation to achieve parallel execution in the Claude Agent SDK?",
     "options": [
       {
         "id": "A",
-        "text": "Set `parallel: true` in the Task tool configuration object for concurrent execution"
+        "text": "Emit a single Task call containing an array of three task prompts, relying on the client runtime to split them across threads."
       },
       {
         "id": "B",
-        "text": "Call the Task tool separately, once per coordinator turn each time"
+        "text": "Chain three consecutive API calls with stream: true and combine the incoming server-sent events using an asynchronous event multiplexer."
       },
       {
         "id": "C",
-        "text": "Use the `fork_session` function instead of the standard Task tool"
+        "text": "Instruct the model in its system prompt to \"think in parallel\" so that subagent tasks execute asynchronously on Anthropic's servers."
       },
       {
         "id": "D",
-        "text": "Emit multiple Task tool calls within a single coordinator response"
+        "text": "Emit multiple tool_use blocks for the Task tool within a single assistant message turn, enabling the runner to dispatch them concurrently."
       }
     ],
     "correct": "D",
-    "explanation": "Parallel subagent execution is triggered by emitting multiple Task tool calls in a single coordinator response (single turn). If you make separate Task calls across separate turns, they execute sequentially. The SDK interprets multiple tool calls in one response as concurrent invocations.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Emit multiple tool_use blocks for the Task tool within a single assistant message turn, enabling the runner to dispatch them concurrently.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Candidates often assume parallel execution requires complex streaming multiplexers or custom threading hacks.\n  * In the Claude API and Agent SDK, parallel execution is natively initiated when Claude emits multiple `tool_use` blocks in a single assistant turn.\n\n* **Why Option D Succeeds:**\n  * **Native Multi-Tool Turn:** Claude natively supports generating multiple tool calls in a single turn. When the coordinator outputs three `tool_use` blocks for the `Task` tool, the SDK runner executes all three subagents concurrently via `Promise.all` or `asyncio.gather`.\n\n* **Distractor Breakdown:**\n  * **Option A (_Single Task call with prompt array_):** *Trap.* The `Task` tool schema takes a single prompt string, not an array.\n  * **Option B (_Stream multiplexing across 3 calls_):** *Trap.* Unnecessary complexity; the model naturally emits multiple tool calls in one turn.\n  * **Option C (_Prompting model to 'think in parallel'_):** *Trap.* Prompt cajoling cannot alter API execution mechanics.\n  * **Option D (_Multiple tool_use blocks in one turn_):** **Correct.** The standard pattern for parallel subagent invocation.\n\nRefs: [Tool use overview — parallel tool use](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) · [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Parallel Subagent Spawning via Task Tool",
     "roleContext": "Role: Performance Architect Optimizing Multi-Agent Latency",
@@ -285,27 +285,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "When passing context from a web search subagent to a synthesis subagent, what should the coordinator include to preserve attribution?",
+    "prompt": "You are building a multi-agent research assistant. A web search subagent queries external search engines and retrieves 15 dense web pages (totaling approximately 45,000 tokens of raw HTML and text). A synthesis subagent must now compile these findings into an executive briefing. If the coordinator passes the full raw search transcript directly into the synthesis subagent's prompt, the synthesis context will quickly saturate.\nWhat architectural strategy should the coordinator adopt to supply the required context while minimizing token bloat?",
     "options": [
       {
         "id": "A",
-        "text": "Structured data separating content from metadata like source URLs and page numbers"
+        "text": "Distill the search subagent's findings into a concise, structured brief containing key facts and citations before passing it to the synthesis subagent."
       },
       {
         "id": "B",
-        "text": "Only the final text summary without source URLs; including metadata adds unnecessary token overhead cost"
+        "text": "Pass the raw 45,000-token payload unmodified, as modern 200k context windows make summarization redundant and lossy."
       },
       {
         "id": "C",
-        "text": "A plain text blob of all findings concatenated together without structure"
+        "text": "Store the full HTML transcripts in the synthesis subagent's system prompt so that they do not count against conversational token limits."
       },
       {
         "id": "D",
-        "text": "A reference to the shared session ID where the subagent results are stored"
+        "text": "Instruct the synthesis subagent to re-run all web searches independently using its own web search tool to ensure freshness."
       }
     ],
     "correct": "A",
-    "explanation": "The coordinator should use structured data to separate content (what was found) from metadata (where it came from — URLs, titles, page numbers). This allows the synthesis subagent to produce properly cited output and enables the coordinator to trace any finding back to its source for verification.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Distill the search subagent's findings into a concise, structured brief containing key facts and citations before passing it to the synthesis subagent.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * \"Just throw it into the 200k context window\" is the most common anti-pattern on the CCAF exam.\n  * Saturating context windows degrades model attention (\"lost in the middle\"), increases latency linearly, and burns unnecessary token budget.\n\n* **Why Option A Succeeds:**\n  * **Context Distillation:** The coordinator or search subagent synthesizes raw content into a high-density, structured summary with citations. This passes 100% of the relevant signal using only a fraction of the token budget.\n\n* **Distractor Breakdown:**\n  * **Option A (_Distill into concise structured brief with citations_):** **Correct.** Maximizes signal-to-noise ratio and preserves context headroom.\n  * **Option B (_Pass raw 45k payload unmodified_):** *Trap.* Classic context bloat anti-pattern that leads to attention degradation.\n  * **Option C (_Store in system prompt to bypass limits_):** *Trap.* System prompt tokens count against context limits identically to user messages.\n  * **Option D (_Re-run searches independently_):** *Trap.* Wasteful, duplicate execution that doubles cost and latency.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": false,
     "qualityReview": {
       "code": "duplicate",
@@ -324,27 +324,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Which specific tool must be explicitly included in the coordinator's `allowedTools` list to permit subagent delegation?",
+    "prompt": "You are configuring the security boundaries and tool access permissions for a coordinator agent in a multi-agent workflow using the Claude Agent SDK. You define the coordinator's configuration object and specify its allowedTools whitelist. When you run the system, the coordinator produces text planning to delegate tasks to specialists, but it never actually spawns any subagents, returning only conversational text.\nWhich tool must be explicitly declared in the coordinator's allowedTools list to grant it subagent-spawning capability?",
     "options": [
       {
         "id": "A",
-        "text": "Spawn"
+        "text": "SubagentManager, which provides the administrative API for containerizing child agent runtimes."
       },
       {
         "id": "B",
-        "text": "Task"
+        "text": "Task, which is the built-in tool that enables an agent to instantiate and delegate tasks to specialized subagents."
       },
       {
         "id": "C",
-        "text": "Delegate"
+        "text": "Delegate, which acts as the inter-process communication bridge between parent and child agent threads."
       },
       {
         "id": "D",
-        "text": "SubAgent"
+        "text": "Spawn, which initiates an asynchronous background worker process in the agent SDK environment."
       }
     ],
     "correct": "B",
-    "explanation": "The `Task` tool is the Agent SDK mechanism for spawning subagents. If \"Task\" is not included in the coordinator's `allowedTools`, the coordinator cannot invoke subagents — the call will either fail or Claude will not attempt it.\nRefs: [Agent SDK quickstart](https://platform.claude.com/docs/en/agent-sdk/quickstart)",
+    "explanation": "The correct approach is: **Task, which is the built-in tool that enables an agent to instantiate and delegate tasks to specialized subagents.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Candidates often guess invented tool names like `SubagentManager`, `Delegate`, or `Spawn`.\n  * In the Claude Agent SDK, subagent delegation is mediated strictly through the built-in `Task` tool.\n\n* **Why Option B Succeeds:**\n  * **SDK Tool Naming:** The Claude Agent SDK exposes subagent orchestration as a first-class tool called `Task`. If `Task` is not included in `allowedTools`, Claude has no mechanism to invoke subagents and falls back to text generation.\n\n* **Distractor Breakdown:**\n  * **Option A (_SubagentManager_):** *Trap.* Invented tool name.\n  * **Option B (_Task_):** **Correct.** The official Claude Agent SDK tool for subagent delegation.\n  * **Option C (_Delegate_):** *Trap.* Invented tool name.\n  * **Option D (_Spawn_):** *Trap.* Invented tool name.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Coordinator Tool Permissions & Spawning",
     "roleContext": "Role: DevSecOps Engineer Configuring Agent Tool Sandboxes",
@@ -359,27 +359,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Which production task is a `PostToolUse` hook best architected to accomplish?",
+    "prompt": "You are implementing enterprise governance, auditing, and safety controls for a Claude agent that manages cloud infrastructure via Model Context Protocol (MCP) tools. You need to capture compliance logs of executed actions, sanitize sensitive credentials from tool outputs before they enter the model's conversation history, and validate post-execution invariants.\nWhich architectural mechanism is best suited for executing these post-execution operational tasks?",
     "options": [
       {
         "id": "A",
-        "text": "Block a tool from being called at all during the current session"
+        "text": "System prompt instructions asking Claude to redact secrets and write audit messages to the user after every tool call."
       },
       {
         "id": "B",
-        "text": "Override Claude's decision about which tool to invoke in the next step of the agentic loop"
+        "text": "A custom MCP proxy server that rejects tool requests before they reach the infrastructure provider."
       },
       {
         "id": "C",
-        "text": "Normalize heterogeneous data formats like timestamps before Claude processes them"
+        "text": "A PostToolUse hook that intercepts tool execution outputs, enforces redaction, and records deterministic audit telemetry."
       },
       {
         "id": "D",
-        "text": "Log all tool calls and their results to an external database for auditing"
+        "text": "A fine-tuned classifier model that scans the user's input messages before the agent begins reasoning."
       }
     ],
     "correct": "C",
-    "explanation": "PostToolUse hooks intercept tool results *after* execution but *before* Claude processes them. They are ideal for normalizing heterogeneous data — e.g., converting Unix timestamps, ISO 8601 strings, and numeric codes from different MCP tools into a consistent format. Blocking tool calls before execution requires a pre-call interception hook.\nRefs: [Agent SDK — hooks documentation](https://github.com/anthropics/claude-agent-sdk-python)",
+    "explanation": "The correct approach is: **A PostToolUse hook that intercepts tool execution outputs, enforces redaction, and records deterministic audit telemetry.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Asking the model via prompt to redact its own secrets or log compliance actions violates the \"Architecture Over Instructions\" principle.\n  * Non-deterministic prompts cannot guarantee security compliance.\n\n* **Why Option C Succeeds:**\n  * **Deterministic Lifecycle Interception:** A `PostToolUse` hook runs in deterministic application code immediately after a tool finishes execution. It can inspect outputs, mask API keys, record compliance metrics, and sanitize context before the payload is appended to the message history.\n\n* **Distractor Breakdown:**\n  * **Option A (_System prompt secret redaction_):** *Trap.* LLMs are probabilistic; relying on prompts for security redaction leaks credentials.\n  * **Option B (_Pre-execution MCP proxy_):** *Trap.* Operates before tool execution, so it cannot inspect or sanitize post-execution results.\n  * **Option C (_PostToolUse hook_):** **Correct.** Ideal for auditing, secret masking, and output validation.\n  * **Option D (_Input classifier model_):** *Trap.* Only inspects user input; completely blind to tool execution outputs.\n\nRefs: [Agent SDK — hooks](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: PostToolUse Hook Applications",
     "roleContext": "Role: AI Platform Engineer Implementing Guardrails",
@@ -394,27 +394,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "You use `--resume <session-name>` to continue a prior investigation. After resuming, you notice Claude is reasoning from stale file analysis done before you modified several files. What should you do?",
+    "prompt": "An intelligence analyst uses a CLI-based Claude agent to investigate cybersecurity threats. Yesterday, the analyst saved an ongoing investigation using --session threat-intel-alpha. Today, new indicators of compromise (IOCs) emerge, and the analyst resumes the session using --resume threat-intel-alpha while instructing the coordinator to pivot focus toward a specific ransomware variant.\nWhat must the coordinator do to ensure its worker subagents incorporate the revised investigation scope?",
     "options": [
       {
         "id": "A",
-        "text": "Restart the entire session from scratch with no prior context at all"
+        "text": "Nothing; resuming the parent session automatically cascades updated context and instructions to all child subagents retroactively."
       },
       {
         "id": "B",
-        "text": "Use `fork_session` to create an independent branch from the stale point"
+        "text": "Execute a session_refresh command in Bash to update the shared background session daemon with the new objectives."
       },
       {
         "id": "C",
-        "text": "Simply re-run the previous prompt — Claude will automatically detect and process file changes"
+        "text": "Restart the entire session from scratch, as resumed sessions permanently freeze subagent configurations and cannot accept new directives."
       },
       {
         "id": "D",
-        "text": "Tell the resumed session which files changed so Claude re-analyzes them specifically"
+        "text": "Explicitly communicate the updated threat scope and specific targets in new Task tool invocations to the subagents."
       }
     ],
     "correct": "D",
-    "explanation": "When resuming a session after code modifications, you must explicitly tell Claude which files changed. Claude will not automatically diff the file system against its prior analysis. Targeted re-analysis (\"file X and Y were modified — please re-analyze them\") is more efficient than full re-exploration and produces better results than relying on stale tool results.\nRefs: [Claude Code — memory and sessions](https://code.claude.com/docs/en/memory)",
+    "explanation": "The correct approach is: **Explicitly communicate the updated threat scope and specific targets in new Task tool invocations to the subagents.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Believing session resumption propagates updates to child subagents.\n  * Subagents are ephemeral and isolated. Resuming a coordinator session does not update child subagents unless the coordinator explicitly instructs them in new task dispatches.\n\n* **Why Option D Succeeds:**\n  * **Explicit Scope Propagation:** Because subagents have isolated context windows, the coordinator must take responsibility for passing any updated priorities, new parameters, or changed boundaries within the `Task` prompt payload.\n\n* **Distractor Breakdown:**\n  * **Option A (_Automatic cascading inheritance_):** *Trap.* Subagents do not inherit parent modifications retroactively.\n  * **Option B (_session_refresh command_):** *Trap.* Fictitious command; session state is managed via API message arrays.\n  * **Option C (_Restart session from scratch_):** *Trap.* Resuming is fully supported; it simply requires explicit task communication.\n  * **Option D (_Explicit communication in new Task invocations_):** **Correct.** Preserves context boundaries while updating scope.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true
   },
   {
@@ -426,27 +426,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "intermediate",
-    "prompt": "Under what operational circumstance is `fork_session` the most appropriate mechanism to employ?",
+    "prompt": "A software engineering team is using Claude to evaluate two competing architectural refactoring strategies for a legacy monolith: microservices decomposition vs. a modular monolith. After an extensive 15-turn codebase exploration that established baseline dependencies and database schemas, the team wants to explore both refactoring approaches in depth without polluting one exploration with the assumptions of the other.\nWhich session management pattern is most appropriate to structure this comparative evaluation?",
     "options": [
       {
         "id": "A",
-        "text": "Create independent exploration branches from a shared analysis baseline point"
+        "text": "Use fork_session to branch from the shared baseline into two independent sessions, exploring one architecture in each branch."
       },
       {
         "id": "B",
-        "text": "Continue a previously suspended session with updated and corrected context information"
+        "text": "Continue in the single active session, exploring both refactoring approaches sequentially in the same conversation history."
       },
       {
         "id": "C",
-        "text": "Run the same agent on multiple machines simultaneously for load balancing"
+        "text": "Start two completely fresh sessions from scratch and copy-paste the baseline findings manually into each session prompt."
       },
       {
         "id": "D",
-        "text": "Share session state between two different coordinator agents in a pipeline"
+        "text": "Create a circular multi-agent mesh where two subagents argue the merits of each approach within the parent's context window."
       }
     ],
     "correct": "A",
-    "explanation": "`fork_session` creates parallel branches from a shared starting point — ideal when you want to explore two divergent approaches (e.g., two refactoring strategies, two testing architectures) without them interfering with each other. It is not for resuming sessions or distributed execution.\nRefs: [Claude Code — sessions and forking](https://code.claude.com/docs/en/overview)",
+    "explanation": "The correct approach is: **Use fork_session to branch from the shared baseline into two independent sessions, exploring one architecture in each branch.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Continuing sequentially in one session causes catastrophic context pollution: details from option 1 bleed into option 2, and token capacity quickly saturates.\n  * Starting from scratch wastes 15 turns of expensive discovery.\n\n* **Why Option A Succeeds:**\n  * **Session Branching with fork_session:** `fork_session` creates an isolated clone of the conversation history up to the branching point. Each branch can then diverge and explore a unique implementation path with clean isolation and full baseline context.\n\n* **Distractor Breakdown:**\n  * **Option A (_fork_session to branch into two independent sessions_):** **Correct.** Ideal pattern for comparative A/B exploration.\n  * **Option B (_Explore sequentially in single session_):** *Trap.* Causes severe context pollution and context window exhaustion.\n  * **Option C (_Two fresh sessions from scratch_):** *Trap.* Wastes tokens and developer time re-exploring baseline dependencies.\n  * **Option D (_Circular multi-agent debate mesh_):** *Trap.* Over-engineered and does not provide isolated implementation sandboxes.\n\nRefs: [Agent SDK — session management](https://platform.claude.com/docs/en/agent-sdk/agent-loop)",
     "mockEligible": true,
     "topicBrief": "Topic Brief: Session Forking vs In-Place Resumption",
     "roleContext": "Role: AI Architect Designing Code Exploration Workflows",
@@ -493,27 +493,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "advanced",
-    "prompt": "A multi-agent research coordinator produces synthesis reports with poor coverage because it invokes all four subagents (web, document, synthesis, report) for every query regardless of complexity. What architectural improvement should be made?",
+    "prompt": "You have deployed a multi-agent market analysis platform using the Claude Agent SDK. The system currently executes a single-pass workflow: the coordinator delegates research topics to subagents, receives their initial summaries, and immediately compiles the final report. In production, users report that complex niche topics contain significant factual gaps and missing market statistics.\nHow should you restructure the coordinator's workflow to systematically eliminate research gaps without restarting from scratch?",
     "options": [
       {
         "id": "A",
-        "text": "Add a fifth \"orchestration\" subagent to manage the other four"
+        "text": "Double the max_tokens allocation on the coordinator's initial request to force it to produce a longer synthesis."
       },
       {
         "id": "B",
-        "text": "Switch to a fixed sequential pipeline with no dynamic routing"
+        "text": "Enforce a rigid rule requiring every subagent to perform exactly five search queries regardless of topic complexity."
       },
       {
         "id": "C",
-        "text": "Configure the coordinator to analyze query requirements and dynamically select only the relevant subagents"
+        "text": "Implement an evaluation and refinement loop where the coordinator identifies specific missing data points and re-invokes subagents with targeted gap queries."
       },
       {
         "id": "D",
-        "text": "Increase the context window size to accommodate all four subagents' outputs"
+        "text": "Replace the subagents with a fine-tuned Claude model that has internal knowledge of recent market statistics."
       }
     ],
     "correct": "C",
-    "explanation": "Always routing through the full pipeline is wasteful and can actually degrade quality (irrelevant subagents add noise). The coordinator should analyze each query and dynamically select only the subagents needed. A simple factual question might only need the web search subagent; a document-heavy analysis might skip web search entirely.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Implement an evaluation and refinement loop where the coordinator identifies specific missing data points and re-invokes subagents with targeted gap queries.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Single-pass architectures inherently suffer from coverage gaps because the initial prompt cannot anticipate what information is missing.\n  * Arbitrary query quotas (Option B) or inflating max_tokens (Option A) produce verbosity without fixing factual omissions.\n\n* **Why Option C Succeeds:**\n  * **Refinement & Gap-Filling Loops:** An evaluation step enables the coordinator to audit initial findings against completeness criteria, identify specific missing datapoints, and dispatch targeted follow-up queries without re-running the entire pipeline.\n\n* **Distractor Breakdown:**\n  * **Option A (_Double max_tokens allocation_):** *Trap.* Produces longer prose but does not retrieve missing facts.\n  * **Option B (_Rigid 5-query quota_):** *Trap.* Inflexible; wastes tokens on simple topics and under-serves complex ones.\n  * **Option C (_Evaluation and refinement loop with gap queries_):** **Correct.** Systematic, targeted gap resolution.\n  * **Option D (_Fine-tuned model replacement_):** *Trap.* Fine-tuning does not provide dynamic, real-time factual knowledge retrieval.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true
   },
   {
@@ -525,27 +525,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "advanced",
-    "prompt": "You are designing a coordinator prompt for a multi-agent research system. Which prompt style leads to better subagent outcomes?",
+    "prompt": "You are writing the system prompt for a coordinator agent responsible for orchestrating complex technical investigations across specialized subagents. A colleague drafts a highly procedural prompt that prescribes rigid, micro-managed scripts: \"Step 1: Call WebSearch for keyword A. Step 2: Call DocumentParser on file B. Step 3: Combine them.\" In testing, this agent fails whenever web results return unexpected formats or require dynamic follow-up queries.\nWhich prompting paradigm should you employ to enable robust, adaptive orchestration across diverse research tasks?",
     "options": [
       {
         "id": "A",
-        "text": "Step-by-step procedural instructions: \"First search for X, then analyze Y, then synthesize Z\""
+        "text": "Pseudo-code procedural scripting that pre-defines every conditional branch and API parameter the agent might encounter."
       },
       {
         "id": "B",
-        "text": "Prompts that list which tools each subagent should use in what order"
+        "text": "Zero-shot prompt delegation that gives only the user's raw query with no instructions or role definition."
       },
       {
         "id": "C",
-        "text": "Single-sentence prompts to minimize token usage"
+        "text": "Few-shot prompt engineering containing 50 hardcoded conversational dialogues demonstrating fixed tool call sequences."
       },
       {
         "id": "D",
-        "text": "Goal-oriented prompts specifying research goals and quality criteria rather than procedural steps"
+        "text": "Goal-oriented prompt design that clearly defines the desired objective, operational boundaries, success criteria, and available subagent specializations."
       }
     ],
     "correct": "D",
-    "explanation": "Goal-oriented coordinator prompts (\"Research the impact of X on Y, ensure findings are cited, cover both short-term and long-term effects\") outperform procedural step-by-step instructions. Specifying the *what* and *quality bar* rather than the *how* allows subagents to adapt their approach based on what they discover, producing more thorough and accurate results.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Goal-oriented prompt design that clearly defines the desired objective, operational boundaries, success criteria, and available subagent specializations.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Developers instinctively write procedural scripts (\"if X then do Y step 1 step 2\") treating the LLM like deterministic procedural code.\n  * Micro-managed procedural prompts make agents brittle, preventing them from recovering when intermediate tool outputs diverge from expectations.\n\n* **Why Option D Succeeds:**\n  * **Goal-Oriented Delegation:** Providing clear goals, domain constraints, quality criteria, and tool capabilities empowers Claude to reason dynamically, selecting tools and navigating unexpected obstacles autonomously.\n\n* **Distractor Breakdown:**\n  * **Option A (_Procedural scripting with pre-defined branches_):** *Trap.* Brittle; breaks immediately when real-world data deviates from the script.\n  * **Option B (_Zero-shot prompt with no instructions_):** *Trap.* Provides no guidance on quality standards or tool boundaries.\n  * **Option C (_50 hardcoded few-shot dialogues_):** *Trap.* Satures context with rigid examples that reduce generalizability.\n  * **Option D (_Goal-oriented design with boundaries and success criteria_):** **Correct.** Industry best practice for robust agentic orchestration.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": false,
     "qualityReview": {
       "code": "short-without-scenario",
@@ -563,27 +563,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "advanced",
-    "prompt": "When should you start a new session with an injected structured summary rather than resuming a prior session with `--resume`?",
+    "prompt": "A customer support agent built with the Claude Agent SDK has engaged in a lengthy, 18-turn troubleshooting session with an enterprise client regarding a complex database synchronization failure. The conversation history has accumulated over 140,000 tokens of raw stack traces, log dumps, and tool outputs. The customer now requests assistance with configuring a completely separate database backup replication schedule.\nWhy should the orchestrator start a fresh session with an injected summary rather than resuming the existing session?",
     "options": [
       {
         "id": "A",
-        "text": "When the prior session's tool results are stale due to significant system state changes"
+        "text": "Resuming would place the agent near its context ceiling, causing high token costs and attention degradation; a structured summary resets context headroom."
       },
       {
         "id": "B",
-        "text": "Always — new sessions are always more reliable than resumed ones"
+        "text": "Resumed sessions lose their tool execution permissions, forcing the agent to operate in text-only mode for the remainder of the conversation."
       },
       {
         "id": "C",
-        "text": "Only when the original session exceeded 100 turns"
+        "text": "The Claude API automatically rejects any resumed session request that contains more than 10 tool execution turns."
       },
       {
         "id": "D",
-        "text": "When the task domain changes from one programming language to another"
+        "text": "Starting a fresh session allows the client to change the underlying model temperature, which cannot be modified in an existing session."
       }
     ],
     "correct": "A",
-    "explanation": "Resume (`--resume`) is effective when prior context is mostly still valid. When significant state changes have occurred (large refactors, database schema changes, dependency updates), the prior tool results become stale and can mislead Claude into reasoning from outdated assumptions. A fresh session with an injected structured summary of current state is more reliable in these cases.\nRefs: [Claude Code — memory and sessions](https://code.claude.com/docs/en/memory)",
+    "explanation": "The correct approach is: **Resuming would place the agent near its context ceiling, causing high token costs and attention degradation; a structured summary resets context headroom.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Candidates often think \"more context is always better\" and resume huge sessions indiscriminately.\n  * At 140k+ tokens of raw logs and dumps, the session suffers from severe latency, high cost per turn, and attention dilution.\n\n* **Why Option A Succeeds:**\n  * **Context Compaction & Session Reset:** Summarizing the verified client environment into an executive brief (e.g. database versions, cluster topology) and starting a fresh session restores full context headroom (200k tokens) and guarantees fast, high-accuracy reasoning for the new task.\n\n* **Distractor Breakdown:**\n  * **Option A (_Avoids context ceiling, high token cost, and attention degradation_):** **Correct.** Core context management best practice.\n  * **Option B (_Loses tool execution permissions_):** *Trap.* Tools remain available in resumed sessions.\n  * **Option C (_API rejects sessions > 10 tool turns_):** *Trap.* Fictitious limit; Claude supports unlimited turns up to context token capacity.\n  * **Option D (_Temperature modification restriction_):** *Trap.* Model temperature can be adjusted on any individual API request.\n\nRefs: [Context management](https://platform.claude.com/docs/en/build-with-claude/context-window)",
     "mockEligible": true
   },
   {
@@ -627,27 +627,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "advanced",
-    "prompt": "A large code review task is producing inconsistent results because Claude is missing interactions between files analyzed separately. What decomposition strategy addresses this?",
+    "prompt": "You are designing an automated code review service for pull requests using Claude 3.5 Sonnet. Your initial implementation uses a single, comprehensive prompt that asks Claude to simultaneously evaluate code formatting, architectural style, unit test coverage, and subtle security vulnerabilities (e.g., SQL injections and race conditions). While formatting comments are consistently accurate, Claude frequently overlooks critical security flaws.\nWhat architectural pattern best addresses this attention dilution and improves vulnerability recall?",
     "options": [
       {
         "id": "A",
-        "text": "Use a larger model with a bigger context window to process all files simultaneously"
+        "text": "Switch to a smaller, faster model like Claude 3.5 Haiku to process the pull request with lower latency."
       },
       {
         "id": "B",
-        "text": "Have Claude re-read the entire codebase after each file analysis"
+        "text": "Increase the model temperature to 1.0 to encourage more creative exploration of potential security exploits."
       },
       {
         "id": "C",
-        "text": "Split into per-file local analysis passes followed by a separate cross-file integration pass"
+        "text": "Decompose the review into specialized, sequential passes (e.g., dedicated security audit pass, style pass) using prompt chaining or specialized subagents."
       },
       {
         "id": "D",
-        "text": "Increase max_turns to allow more iterations"
+        "text": "Append emphatic warnings in all-caps to the system prompt emphasizing that security is the top priority."
       }
     ],
     "correct": "C",
-    "explanation": "Attention dilution occurs when too many files are processed simultaneously. The correct pattern: (1) run focused per-file analysis passes where each file gets full attention, then (2) run a dedicated cross-file integration pass with summaries from step 1. This two-phase approach reliably surfaces cross-file issues without attention degradation.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Decompose the review into specialized, sequential passes (e.g., dedicated security audit pass, style pass) using prompt chaining or specialized subagents.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * When a single prompt handles competing concerns, the model naturally defaults to surface-level, frequent patterns (formatting, docstrings) while missing deep logical flaws.\n  * Shouting in all-caps (\"SECURITY IS PRIORITY\") in the prompt (Option D) does not solve attention dilution.\n\n* **Why Option C Succeeds:**\n  * **Specialized Multi-Pass Decomposition:** Isolating the security review into a dedicated evaluation pass gives Claude a focused prompt and undivided attention, dramatically increasing recall for complex vulnerabilities.\n\n* **Distractor Breakdown:**\n  * **Option A (_Switch to smaller model Haiku_):** *Trap.* Smaller models have weaker reasoning on subtle security exploits.\n  * **Option B (_Increase temperature to 1.0_):** *Trap.* High temperature increases hallucination and non-determinism.\n  * **Option C (_Decompose review into specialized sequential passes_):** **Correct.** Standard architecture for high-recall auditing.\n  * **Option D (_All-caps prompt warnings_):** *Trap.* Prompt cajoling fails to fix cognitive attention dilution.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true
   },
   {
@@ -659,27 +659,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "advanced",
-    "prompt": "What is the key difference between `prompt chaining` and `dynamic adaptive decomposition` for task execution?",
+    "prompt": "Your engineering team is debating how to architect a new automated software migration pipeline. One architect proposes a fixed prompt chain, while another advocates for dynamic adaptive decomposition using a coordinator agent with subagents. You are asked to present the core architectural trade-off to the leadership team.\nWhat is the defining operational distinction between prompt chaining and dynamic adaptive decomposition?",
     "options": [
       {
         "id": "A",
-        "text": "Prompt chaining uses multiple models; dynamic decomposition uses one"
+        "text": "Prompt chaining requires multiple concurrent processes, whereas dynamic decomposition executes strictly in a single thread."
       },
       {
         "id": "B",
-        "text": "Prompt chaining is cheaper; dynamic decomposition produces better results but at higher cost"
+        "text": "Prompt chaining works exclusively with Claude 3.5 Haiku, whereas dynamic decomposition requires Claude 3.5 Sonnet or Opus."
       },
       {
         "id": "C",
-        "text": "Dynamic decomposition requires a coordinator agent; prompt chaining can run in a single agent"
+        "text": "Dynamic decomposition is deterministic and runs without model reasoning, whereas prompt chaining requires dynamic runtime evaluation."
       },
       {
         "id": "D",
-        "text": "Prompt chaining is for sequential predictable steps; dynamic decomposition generates subtasks based on intermediate findings"
+        "text": "Prompt chaining follows a fixed, pre-determined sequence of dependent stages, whereas dynamic decomposition allows the coordinator to evaluate intermediate results and determine next steps adaptively."
       }
     ],
     "correct": "D",
-    "explanation": "Prompt chaining is best for workflows with known, fixed steps (e.g., file-by-file analysis → cross-file synthesis). Dynamic adaptive decomposition is for open-ended tasks where the full scope is unknown upfront — the plan adapts as findings emerge. A legacy codebase test coverage task uses dynamic decomposition because you don't know the structure or high-impact areas until you start exploring.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Prompt chaining follows a fixed, pre-determined sequence of dependent stages, whereas dynamic decomposition allows the coordinator to evaluate intermediate results and determine next steps adaptively.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Confusing static multi-step pipelines with agentic workflows.\n  * Prompt chaining is hardcoded: Stage A always feeds Stage B. Dynamic decomposition uses model reasoning to decide *whether* and *which* subagents to invoke next.\n\n* **Why Option D Succeeds:**\n  * **Deterministic Sequence vs. Adaptive Routing:** Prompt chaining is ideal when steps are invariant (e.g., translate -> summarize -> format). Dynamic decomposition is required when downstream tasks depend on what is discovered along the way.\n\n* **Distractor Breakdown:**\n  * **Option A (_Concurrency vs single thread_):** *Trap.* Concurrency is an implementation detail, not the architectural distinction.\n  * **Option B (_Model tier limitation_):** *Trap.* Both patterns work across all Claude model families.\n  * **Option C (_Inverted determinism claims_):** *Trap.* Backwards: prompt chains are deterministic, while decomposition is adaptive.\n  * **Option D (_Fixed dependent stages vs adaptive intermediate evaluation_):** **Correct.** The fundamental architectural definition.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": false,
     "qualityReview": {
       "code": "recall-only",
@@ -697,27 +697,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "advanced",
-    "prompt": "A subagent fails to retrieve data from a slow external API (timeout). What is the correct error-handling architecture?",
+    "prompt": "You are implementing a flight-booking agent that calls an external airline inventory API via a custom tool. During peak periods, the airline API occasionally experiences network congestion, resulting in HTTP 504 Gateway Timeout errors. Currently, the tool throws an unhandled exception that crashes the agent's execution loop.\nHow should this transient failure be architected between the tool implementation and the agentic loop?",
     "options": [
       {
         "id": "A",
-        "text": "Attempt local recovery (e.g., retry); if unresolvable, propagate to coordinator with partial results and a structured error description"
+        "text": "The tool implementation should catch transient network timeouts and retry with bounded exponential backoff before surfacing failure to the agent."
       },
       {
         "id": "B",
-        "text": "Immediately propagate the error to the coordinator without any local recovery attempt"
+        "text": "The tool should return an empty flight list so the agent assumes no flights are available and informs the customer accordingly."
       },
       {
         "id": "C",
-        "text": "Return an empty result set and let the coordinator decide what to do"
+        "text": "The tool should bubble the raw HTTP timeout exception directly to the model prompt on the first attempt so Claude can decide whether to retry."
       },
       {
         "id": "D",
-        "text": "Log the error silently and continue as if the tool call succeeded"
+        "text": "The agentic loop should catch the timeout, terminate the conversation, and instruct the user to re-submit their query later."
       }
     ],
     "correct": "A",
-    "explanation": "Subagents should attempt local recovery for transient errors (timeouts, temporary unavailability) before escalating. When escalating, they must return structured context: what data was retrieved before failure, what failed and why, and whether retry is appropriate. Silent error suppression prevents coordinator recovery; immediate escalation without retry wastes resources on recoverable failures.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk) · [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **The tool implementation should catch transient network timeouts and retry with bounded exponential backoff before surfacing failure to the agent.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Pushing transient transport errors (503s, 504s, socket resets) up to the LLM agent wastes conversational turns and burns tokens on mechanical retry loops.\n  * Faking empty results (Option B) misleads the model into telling users that no flights exist.\n\n* **Why Option A Succeeds:**\n  * **Transport vs Domain Separation:** Tools should encapsulate infrastructure resilience (retries, timeouts, connection pooling). If the API fails transiently, the tool retries automatically before bothering the agent.\n\n* **Distractor Breakdown:**\n  * **Option A (_Tool catches transient timeouts and retries with backoff_):** **Correct.** Resilient tool implementation standard.\n  * **Option B (_Return empty flight list_):** *Trap.* Severe bug: agent hallucinates that flights don't exist when it's a network glitch.\n  * **Option C (_Bubble raw exception to prompt immediately_):** *Trap.* Wastes LLM turns and tokens on routine network blips.\n  * **Option D (_Terminate conversation and tell user to retry_):** *Trap.* Poor user experience that aborts recovery prematurely.\n\nRefs: [Tool design best practices](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": false,
     "qualityReview": {
       "code": "short-without-scenario",
@@ -834,27 +834,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "After a multi-agent research pipeline produces a comprehensive but shallow first draft, the coordinator needs to run iterative refinement. What is the architecturally correct approach?",
+    "prompt": "You are architecting an autonomous legal research agent using the Claude Agent SDK. The coordinator decomposes case law research across subagents and runs an iterative refinement loop to identify missing precedents and verify legal citations. During testing, the agent gets trapped in minor semantic nitpicking, performing 20 iteration rounds on obscure footnotes and generating hundreds of dollars in API charges.\nWhat stopping condition should you implement to prevent runaway costs while ensuring thorough research?",
     "options": [
       {
         "id": "A",
-        "text": "The coordinator evaluates the synthesis for coverage gaps, re-delegates targeted queries to search/analysis subagents, and re-invokes synthesis until quality criteria are met"
+        "text": "Implement adaptive stopping that measures marginal information gain between iterations and halts refinement when novel substantive findings diminish."
       },
       {
         "id": "B",
-        "text": "Have the synthesis subagent expand all sections autonomously without coordinator guidance"
+        "text": "Allow the refinement loop to continue running indefinitely until the subagents report 100% confidence with zero remaining questions."
       },
       {
         "id": "C",
-        "text": "Have the coordinator re-run the entire pipeline from scratch"
+        "text": "Set a hard limit of exactly one iteration round regardless of whether critical case precedents were found or missed."
       },
       {
         "id": "D",
-        "text": "Ask the end user to identify which sections need more depth"
+        "text": "Terminate the loop immediately if any subagent returns a tool error, aborting the report generation."
       }
     ],
     "correct": "A",
-    "explanation": "Iterative refinement is a coordinator responsibility. The coordinator evaluates synthesis output against quality criteria (depth, coverage, citation density), identifies specific gaps (not vague dissatisfaction), formulates targeted follow-up queries, and re-delegates only what is needed. This loop continues until the coordinator's quality evaluation passes. Full pipeline re-runs are wasteful; user-driven gap identification is a design failure.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Implement adaptive stopping that measures marginal information gain between iterations and halts refinement when novel substantive findings diminish.** This aligns with best practices for _Agentic Architecture & Orchestration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Fixed round limits (e.g. exactly 1 or 3 rounds) are blunt instruments that either cut off hard queries or waste money on easy ones.\n  * Unbounded loops (Option B) inevitably cause runaway token costs.\n\n* **Why Option A Succeeds:**\n  * **Adaptive Diminishing Returns:** By evaluating whether the latest iteration discovered meaningful new insights, the orchestrator terminates refinement as soon as marginal gains flatten out, balancing thoroughness with cost control.\n\n* **Distractor Breakdown:**\n  * **Option A (_Adaptive stopping on diminishing marginal returns_):** **Correct.** Balances depth with cost and latency.\n  * **Option B (_Run indefinitely until 100% confidence_):** *Trap.* Severe anti-pattern risking infinite loops and massive bills.\n  * **Option C (_Hard limit of exactly one round_):** *Trap.* Rigid; under-serves complex investigations with real gaps.\n  * **Option D (_Abort report on any tool error_):** *Trap.* Overly fragile; transient errors should be handled, not crash the report.\n\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true,
     "title": "Scenario: Multi-Agent Research System"
   },
@@ -900,27 +900,27 @@
     "contentVersion": 1,
     "domain": "D1 Agentic Architecture & Orchestration",
     "difficulty": "exam",
-    "prompt": "Your agent has resolved a complex billing dispute but cannot resolve a technical account issue that requires backend engineering access. It must hand off to a human agent. What should the handoff summary include?",
+    "prompt": "An enterprise telecom support agent powered by the Claude Agent SDK interacts with a customer experiencing two distinct problems: an erroneous data roaming charge and a damaged fiber-optic modem requiring an onsite technician dispatch. The agent successfully validates the billing error and applies an account credit, but onsite dispatch requires human supervisor scheduling.\nHow should the agent handle this partial resolution and human handoff?",
     "options": [
       {
         "id": "A",
-        "text": "A link to the conversation transcript only — the human agent can read it"
+        "text": "Discard the billing resolution and escalate the entire conversation transcript to the human queue so the human can handle both issues from the beginning."
       },
       {
         "id": "B",
-        "text": "A single sentence summary of the issue"
+        "text": "Falsely confirm that the technician appointment has been scheduled to achieve first-contact resolution, and close the ticket."
       },
       {
         "id": "C",
-        "text": "Customer ID, root cause analysis, actions already taken, refund amounts applied, and recommended next action"
+        "text": "Confirm the successful billing adjustment to the customer, compile a structured handoff packet detailing the verified credit and modem issue, and invoke escalate_to_human."
       },
       {
         "id": "D",
-        "text": "The full raw conversation history in JSON format"
+        "text": "Instruct the customer to hang up, open a separate support portal, and re-enter all their account details into a web form."
       }
     ],
     "correct": "C",
-    "explanation": "Human agents receiving escalations typically do not have access to the full conversation transcript or AI session context. The structured handoff summary must be self-contained: customer ID (for lookup), root cause (what was determined), actions taken (what the AI already did, including any credits applied), and recommended next action (what the human should do first). This prevents duplicate actions and allows the human to work from a cold start.\nRefs: [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **Confirm the successful billing adjustment to the customer, compile a structured handoff packet detailing the verified credit and modem issue, and invoke escalate_to_human.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * All-or-nothing thinking: either abandoning all automated work when a block is hit, or falsely claiming complete resolution.\n  * High-performing agents maximize first-contact value by resolving what is authorized and cleanly packaging what remains for human escalation.\n\n* **Why Option C Succeeds:**\n  * **Structured Partial Resolution & Handoff:** Applying the authorized refund resolves 50% of the customer's problem immediately. Handing off a structured summary with customer ID, applied credit, and modem diagnostic ensures the human agent can schedule the technician in seconds.\n\n* **Distractor Breakdown:**\n  * **Option A (_Discard billing resolution and dump raw transcript_):** *Trap.* Forces human agents to redo work already completed by the AI.\n  * **Option B (_Falsely confirm scheduling to inflate metrics_):** *Trap.* Severe integrity violation; leaves customer stranded with a broken modem.\n  * **Option C (_Confirm billing, package structured handoff, escalate_):** **Correct.** The gold standard for customer support agent architecture.\n  * **Option D (_Punt customer to another portal_):** *Trap.* Terrible customer experience that negates the value of the support agent.\n\nRefs: [Agent design patterns](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true,
     "title": "Scenario: Customer Support Resolution Agent"
   },
@@ -933,27 +933,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "When Claude evaluates multiple available tools to fulfill an intent, which component of the tool definition serves as the primary mechanism for deciding which tool to invoke?",
+    "prompt": "You are designing an MCP server that provides 12 database tools to Claude for financial transaction auditing. During user testing, you observe that Claude frequently invokes the wrong tool (e.g., calling query_transaction_logs instead of lookup_settlement_record) when user prompts contain ambiguous financial terminology. You review the tool schema objects passed to the API.\nWhich component of the tool definition schema has the most decisive impact on Claude's semantic tool routing?",
     "options": [
       {
         "id": "A",
-        "text": "The tool name only — Claude does not read or parse the tool description text at all"
+        "text": "The alphabetical ordering of the tool names within the tools array parameter of the request."
       },
       {
         "id": "B",
-        "text": "A separate routing system prompt that maps user intents to tool names"
+        "text": "The complexity and depth of nested object validation rules defined in the JSON Schema properties."
       },
       {
         "id": "C",
-        "text": "The order in which tools appear in the tools array sent to the API"
+        "text": "The programming language and runtime framework used to implement the backend tool handler."
       },
       {
         "id": "D",
-        "text": "The tool description, which explains purpose, expected inputs, and boundaries"
+        "text": "A clear, descriptive top-level description explaining the specific purpose, input requirements, and boundary conditions of the tool."
       }
     ],
     "correct": "D",
-    "explanation": "Tool descriptions are the primary selection mechanism. Claude reads each tool's description to determine which tool is appropriate for the current task. Weak, minimal, or overlapping descriptions directly cause misrouting. This is why investing in clear, differentiated descriptions is critical for reliable tool use.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **A clear, descriptive top-level description explaining the specific purpose, input requirements, and boundary conditions of the tool.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Developers often spend hours fine-tuning JSON Schema parameter regexes while leaving the top-level tool `description` brief or cryptic.\n  * Claude evaluates tool selection primarily by comparing the user's intent against the semantic prose in the tool's `description`.\n\n* **Why Option D Succeeds:**\n  * **Semantic Routing Signal:** The `description` field is the primary signal Claude inspects during reasoning. A detailed description explaining *what* the tool does, *what data it takes*, and *when to use it instead of similar tools* resolves routing ambiguity instantly.\n\n* **Distractor Breakdown:**\n  * **Option A (_Alphabetical ordering of tool names_):** *Trap.* Array ordering has zero impact on semantic tool selection.\n  * **Option B (_Complexity of nested schema properties_):** *Trap.* Schema properties validate arguments after selection, but don't guide selection.\n  * **Option C (_Backend implementation language_):** *Trap.* Claude only sees the JSON schema; backend runtime is completely invisible.\n  * **Option D (_Clear descriptive top-level description with boundaries_):** **Correct.** The single most critical factor in tool routing accuracy.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": false,
     "qualityReview": {
       "code": "recall-only",
@@ -974,27 +974,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "basic",
-    "prompt": "An MCP tool encounters a permanent business rule violation (refund exceeds the allowed maximum). Which `isRetryable` value should the error response include?",
+    "prompt": "You are developing a Model Context Protocol (MCP) tool called process_customer_refund. The tool validates refund requests against corporate compliance policies. A customer support agent invokes the tool with a refund amount of $1,200 for a digital download, which strictly exceeds the company's non-negotiable policy limit of $250.\nWhen constructing the structured error response payload to return to Claude, what value should be assigned to the isRetryable metadata field?",
     "options": [
       {
         "id": "A",
-        "text": "false"
+        "text": "false, because the failure is a deterministic policy violation that will not succeed on re-invocation with the same parameters."
       },
       {
         "id": "B",
-        "text": "null"
+        "text": "true, to encourage the agent to repeatedly retry the tool call until an override flag is detected."
       },
       {
         "id": "C",
-        "text": "true"
+        "text": "null, which causes the MCP client SDK to fall back to default exponential backoff retry behavior."
       },
       {
         "id": "D",
-        "text": "The field should be omitted for business errors"
+        "text": "The field should be completely omitted because isRetryable is valid only for transport-level HTTP socket errors."
       }
     ],
     "correct": "A",
-    "explanation": "Business rule violations are not retryable — retrying with the same parameters will always produce the same error. Setting `isRetryable: false` signals this to the agent, preventing wasted retry attempts. Transient errors (timeouts, temporary service unavailability) should use `isRetryable: true`.\nRefs: [MCP documentation](https://modelcontextprotocol.io/docs)",
+    "explanation": "The correct approach is: **false, because the failure is a deterministic policy violation that will not succeed on re-invocation with the same parameters.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Failing to distinguish between transient failures (which should be retried) and permanent domain/policy rejections (which must *never* be retried).\n  * Setting `isRetryable: true` or omitting the flag causes Claude to waste turns retrying the exact same forbidden operation.\n\n* **Why Option A Succeeds:**\n  * **Signaling Deterministic Rejection:** Business policy violations are permanent. Setting `isRetryable: false` tells the agent that the parameters are fundamentally rejected, forcing Claude to explain the policy limit to the user or escalate.\n\n* **Distractor Breakdown:**\n  * **Option A (_false, deterministic policy violation_):** **Correct.** Prevents wasteful retry loops on permanent rejections.\n  * **Option B (_true, encourage repeated retries_):** *Trap.* Causes infinite loops or wasted budget on hopeless retries.\n  * **Option C (_null fallback_):** *Trap.* Unhandled nulls lead to ambiguous client retry behavior.\n  * **Option D (_Omit field, only for transport errors_):** *Trap.* False; structured MCP error metadata is standard for domain failures.\n\nRefs: [MCP documentation](https://modelcontextprotocol.io/docs)",
     "mockEligible": true
   },
   {
@@ -1006,27 +1006,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "When configuring the Claude Messages API request to regulate tool execution behavior, which three values are supported for the `tool_choice` parameter?",
+    "prompt": "You are architecting an automated document intake pipeline using the Anthropic Messages API. For the first stage of the pipeline, you must ensure that Claude always invokes a specific extraction tool, while for later conversational stages, you want Claude to decide autonomously whether tool execution is necessary. You consult the API specification to configure the tool_choice parameter.\nWhich values are officially supported for configuring tool_choice in the Claude Messages API?",
     "options": [
       {
         "id": "A",
-        "text": "\"always\", \"never\", \"auto\" with an optional tool name override parameter"
+        "text": "\"always\", \"never\", and \"auto\" with an optional regex pattern to filter tool names."
       },
       {
         "id": "B",
-        "text": "\"auto\", \"any\", and a forced object `{\"type\": \"tool\", \"name\": \"...\"}`"
+        "text": "\"auto\", \"any\", and an explicit object specifying a named tool: {\"type\": \"tool\", \"name\": \"tool_name\"}."
       },
       {
         "id": "C",
-        "text": "\"auto\", \"required\", \"none\" matching the standard API values"
+        "text": "\"auto\", \"required\", and \"none\", matching traditional REST API convention flags."
       },
       {
         "id": "D",
-        "text": "\"required\", \"optional\", \"forced\" as the three selection modes"
+        "text": "\"optional\", \"mandatory\", and \"disabled\", configured alongside a tool priority list."
       }
     ],
     "correct": "B",
-    "explanation": "`tool_choice` options: `\"auto\"` (Claude decides whether to use a tool), `\"any\"` (Claude must use at least one tool), and `{\"type\": \"tool\", \"name\": \"tool_name\"}` (Claude must call this specific named tool). There is no \"required\" or \"none\" option.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **\"auto\", \"any\", and an explicit object specifying a named tool: {\"type\": \"tool\", \"name\": \"tool_name\"}.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Candidates familiar with OpenAI's API often assume `\"required\"` or `\"none\"` exist in the Claude API.\n  * Claude's Messages API supports exactly three modes: `\"auto\"`, `\"any\"`, and `{\"type\": \"tool\", \"name\": \"...\"}`.\n\n* **Why Option B Succeeds:**\n  * **Official API Specification:**\n    - `\"auto\"`: Claude decides autonomously whether to call zero, one, or more tools.\n    - `\"any\"`: Claude is forced to call at least one tool, but chooses which one.\n    - `{\"type\": \"tool\", \"name\": \"...\"}`: Claude is forced to call that exact tool.\n\n* **Distractor Breakdown:**\n  * **Option A (_always, never, auto with regex_):** *Trap.* Invented API parameters.\n  * **Option B (_auto, any, and explicit tool object_):** **Correct.** The three officially supported tool_choice options in the Claude Messages API.\n  * **Option C (_auto, required, none_):** *Trap.* OpenAI API syntax, not Anthropic.\n  * **Option D (_optional, mandatory, disabled_):** *Trap.* Completely fictitious parameter names.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": false,
     "qualityReview": {
       "code": "recall-only",
@@ -1047,27 +1047,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "When communicating this operational outcome back to Claude via the MCP protocol specification, what does the `isError: true` flag in the tool response indicate?",
+    "prompt": "An MCP server tool query_postgres_table executes a SQL query requested by Claude. The database server rejects the query with an SQL syntax error (relation \"users_v2\" does not exist). The MCP tool handler catches this error, packages the error message into the CallToolResult content array, and sets isError: true.\nAccording to the Model Context Protocol (MCP) specification, what does the isError: true flag communicate to the agent runtime?",
     "options": [
       {
         "id": "A",
-        "text": "Claude made an invalid tool call with wrong parameter types or values"
+        "text": "Claude made a malformed RPC request that violates the JSON Schema and must be discarded by the transport protocol."
       },
       {
         "id": "B",
-        "text": "The tool call was rejected by the MCP server before execution even started due to invalid params"
+        "text": "The MCP server crashed and has severed its transport connection with the client orchestrator."
       },
       {
         "id": "C",
-        "text": "The tool encountered a runtime error and the agent should handle the failure"
+        "text": "The tool invocation completed successfully at the protocol level, but encountered an execution/runtime failure that the agent should evaluate and handle."
       },
       {
         "id": "D",
-        "text": "The tool result should be ignored and the agent should proceed without it"
+        "text": "The model should ignore the tool result completely and fabricate an answer without notifying the user."
       }
     ],
     "correct": "C",
-    "explanation": "`isError: true` on an MCP tool response means the tool was called successfully (no schema error) but encountered a runtime error during execution. The agent should read the error metadata and decide whether to retry, escalate, or continue with partial data.\nRefs: [MCP documentation](https://modelcontextprotocol.io/docs)",
+    "explanation": "The correct approach is: **The tool invocation completed successfully at the protocol level, but encountered an execution/runtime failure that the agent should evaluate and handle.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Confusing protocol-level transport crashes (JSON-RPC errors) with application-level runtime failures.\n  * In MCP, runtime errors must be returned inside `CallToolResult` with `isError: true`, rather than crashing the RPC socket.\n\n* **Why Option C Succeeds:**\n  * **Graceful Failure Propagation:** Setting `isError: true` allows the JSON-RPC message to arrive cleanly. Claude receives the database error message in its context, understands that table `users_v2` is missing, and can query `information_schema` to find the correct table name.\n\n* **Distractor Breakdown:**\n  * **Option A (_Malformed RPC request violating schema_):** *Trap.* Schema violations occur before execution; `isError: true` signals execution errors.\n  * **Option B (_MCP server crash and disconnection_):** *Trap.* Server did not crash; it handled the error gracefully.\n  * **Option C (_Protocol succeeded, but execution failed for agent handling_):** **Correct.** Official MCP definition for `isError: true`.\n  * **Option D (_Ignore result and fabricate answer_):** *Trap.* Anti-pattern that promotes hallucination.\n\nRefs: [MCP documentation](https://modelcontextprotocol.io/docs)",
     "mockEligible": false,
     "qualityReview": {
       "code": "recall-only",
@@ -1088,27 +1088,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "You have two tools: `analyze_content` (description: \"Analyzes content\") and `analyze_document` (description: \"Analyzes a document\"). What problem will this cause in production?",
+    "prompt": "You inherit a production multi-tool agent designed to process media assets and textual records. In the tool definitions, you find two active tools: analyze_content with description \"Analyzes content\" and analyze_document with description \"Analyzes a document\". In production logs, you notice that when users upload customer contracts, Claude routes requests erratically between the two tools, frequently choosing the wrong one.\nWhat is the root architectural cause of this erratic routing behavior?",
     "options": [
       {
         "id": "A",
-        "text": "Both tools will be called simultaneously for every request, causing duplicate data processing"
+        "text": "The Claude Messages API merges tools with overlapping names into a single composite tool at runtime."
       },
       {
         "id": "B",
-        "text": "The tools will merge into a single logical tool inside the agent runtime"
+        "text": "Claude will reject the request and return an HTTP 400 Bad Request error due to namespace collision."
       },
       {
         "id": "C",
-        "text": "Claude will refuse to use either tool due to the ambiguity in descriptions"
+        "text": "The MCP server will execute both tools simultaneously in parallel, resulting in duplicate billing."
       },
       {
         "id": "D",
-        "text": "Unreliable tool selection — Claude misroutes because descriptions are identical"
+        "text": "Near-identical, ambiguous descriptions provide insufficient semantic differentiation, causing Claude to misroute calls unpredictably."
       }
     ],
     "correct": "D",
-    "explanation": "Identical or near-identical descriptions make it impossible for Claude to reliably distinguish between tools. With no functional differentiation, Claude will select unpredictably. The fix is to make each tool's description explicitly explain: (1) what it does differently, (2) its specific input format, (3) when to use it instead of similar alternatives.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **Near-identical, ambiguous descriptions provide insufficient semantic differentiation, causing Claude to misroute calls unpredictably.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Developers often assume the LLM will inspect internal code or deduce functionality from tool names alone.\n  * When tool descriptions are vague and overlapping, Claude cannot build a distinct routing boundary.\n\n* **Why Option D Succeeds:**\n  * **Tool Description Differentiation:** Claude relies on descriptions to determine which tool fits user intent. To fix this, descriptions must explicitly state: (1) what the tool does differently, (2) its expected input format, and (3) when to choose it over alternatives.\n\n* **Distractor Breakdown:**\n  * **Option A (_Tools merge into composite tool_):** *Trap.* Fictitious behavior; tools remain separate in the schema.\n  * **Option B (_HTTP 400 namespace collision_):** *Trap.* The tool names are distinct, so the API schema is valid.\n  * **Option C (_MCP server executes both in parallel_):** *Trap.* The MCP server only executes the tool Claude selects.\n  * **Option D (_Ambiguous descriptions provide insufficient differentiation_):** **Correct.** Primary cause of tool selection entropy.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": true
   },
   {
@@ -1152,27 +1152,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "A synthesis subagent is given access to 18 tools: web search, document analysis, database query, file read/write, email, calendar, and 12 others. What is the most likely consequence?",
+    "prompt": "A developer is configuring a multi-agent system and decides to grant every subagent access to all 18 tools available in the enterprise catalog (including web search, document OCR, database queries, file write, email dispatch, and calendar booking) so that \"subagents never run out of options.\" In production, the synthesis subagent frequently hallucinates search queries and attempts to send emails instead of summarizing findings.\nWhat architectural principle was violated, and what is the primary operational consequence?",
     "options": [
       {
         "id": "A",
-        "text": "The subagent will use all 18 tools for every task, slowing performance down"
+        "text": "Tool execution throughput is throttled because MCP connections have a strict hard limit of 5 tools per agent."
       },
       {
         "id": "B",
-        "text": "Tool selection degrades — Claude makes worse decisions with too many options"
+        "text": "The principle of least privilege was violated; excessive tool options create selection noise, degrading routing accuracy and task focus."
       },
       {
         "id": "C",
-        "text": "The synthesis subagent will request a tool manifest from the coordinator agent"
+        "text": "Claude automatically disables reasoning blocks whenever the number of available tools exceeds 10."
       },
       {
         "id": "D",
-        "text": "The MCP server will reject the connection due to the hard tool count limit"
+        "text": "The agent SDK runner will crash with an out-of-memory error when serializing the tool catalog into prompt context."
       }
     ],
     "correct": "B",
-    "explanation": "Tool selection reliability degrades as the number of available tools increases, especially when many tools are outside the agent's core role. A synthesis agent with 18 tools will sometimes misuse web search or email tools. The principle is to scope each agent's tools to 4–5 role-relevant tools, with limited cross-role tools only for high-frequency needs.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) · [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
+    "explanation": "The correct approach is: **The principle of least privilege was violated; excessive tool options create selection noise, degrading routing accuracy and task focus.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Thinking \"more tools equals more capability.\"\n  * Flooding an agent's schema with 15+ irrelevant tools increases cognitive load, expands prompt token overhead, and drastically degrades tool selection accuracy.\n\n* **Why Option B Succeeds:**\n  * **Scoping Tools to Agent Roles:** Each agent should have only 3–5 role-specific tools required for its direct responsibility. A synthesis agent needs reading/aggregation tools—never email dispatch or calendar booking.\n\n* **Distractor Breakdown:**\n  * **Option A (_Hard limit of 5 tools per agent_):** *Trap.* Fictitious limitation; MCP supports arbitrary tool counts.\n  * **Option B (_Least privilege violated, creates selection noise and degradation_):** **Correct.** Core principle of multi-agent tool distribution.\n  * **Option C (_Disables reasoning blocks above 10 tools_):** *Trap.* Fictitious constraint; reasoning works regardless of tool counts.\n  * **Option D (_Out-of-memory crash on serialization_):** *Trap.* 18 tools take only a few thousand tokens, not crashing memory.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview) · [Building agents with the Claude Agent SDK](https://www.anthropic.com/engineering/building-agents-with-the-claude-agent-sdk)",
     "mockEligible": true
   },
   {
@@ -1184,27 +1184,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "You want to ensure Claude always calls the `extract_structured_data` tool for a specific step in a pipeline, regardless of what the conversation context suggests. Which `tool_choice` configuration achieves this?",
+    "prompt": "You are building an automated invoice ingestion service. In the first pipeline stage, Claude receives unstructured invoice PDFs and must output normalized financial entities. In testing with conversational edge cases (e.g. an invoice that contains a dispute letter), Claude occasionally emits a conversational apology text instead of invoking the extraction tool. You must guarantee that Claude invokes the extraction tool 100% of the time.\nWhich tool_choice configuration guarantees that Claude invokes extract_structured_data on this turn?",
     "options": [
       {
         "id": "A",
-        "text": "`tool_choice: \"any\"` which guarantees some tool call but not a specific one"
+        "text": "tool_choice: \"any\", which forces Claude to call some tool, though not necessarily the extraction tool."
       },
       {
         "id": "B",
-        "text": "`tool_choice: \"auto\"` which lets Claude decide based on conversation context"
+        "text": "tool_choice: \"auto\", while adding five few-shot examples in the system prompt emphasizing extraction."
       },
       {
         "id": "C",
-        "text": "`tool_choice: {\"type\": \"tool\", \"name\": \"extract_structured_data\"}`"
+        "text": "tool_choice: {\"type\": \"tool\", \"name\": \"extract_structured_data\"}, which deterministically restricts generation to that specific tool."
       },
       {
         "id": "D",
-        "text": "`tool_choice: \"required\"` with the tool name passed in a separate parameter"
+        "text": "tool_choice: \"required\", passing extract_structured_data in a separate enforced_tools parameter array."
       }
     ],
     "correct": "C",
-    "explanation": "Forced tool selection requires `{\"type\": \"tool\", \"name\": \"tool_name\"}`. This guarantees Claude calls that specific tool regardless of context. `\"auto\"` lets Claude decide freely. `\"any\"` requires *some* tool call but not a specific one. `\"required\"` is not a valid value.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **tool_choice: {\"type\": \"tool\", \"name\": \"extract_structured_data\"}, which deterministically restricts generation to that specific tool.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Trying to solve structured extraction through prompt instructions or few-shot examples (Option B). Prompts remain probabilistic.\n  * Using `tool_choice: \"any\"` (Option A) guarantees *a* tool, but allows Claude to call the wrong tool if multiple tools exist.\n\n* **Why Option C Succeeds:**\n  * **Deterministic Specific Tool Enforcement:** Specifying `{\"type\": \"tool\", \"name\": \"extract_structured_data\"}` forces the model's next turn to emit an invocation for that exact tool with zero possibility of conversational divergence.\n\n* **Distractor Breakdown:**\n  * **Option A (_tool_choice: 'any'_):** *Trap.* Guarantees a tool call, but not specifically `extract_structured_data`.\n  * **Option B (_tool_choice: 'auto' with few-shot prompt_):** *Trap.* Fails on edge cases; prompt guidance is probabilistic.\n  * **Option C (_Forced tool object with exact name_):** **Correct.** The only way to guarantee a specific tool is called 100% of the time.\n  * **Option D (_tool_choice: 'required'_):** *Trap.* Non-existent Claude API syntax.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": true
   },
   {
@@ -1216,27 +1216,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "intermediate",
-    "prompt": "Your system prompt contains the phrase \"analyze content from URLs.\" You have a tool named `analyze_content`. What unintended consequence might occur?",
+    "prompt": "You are reviewing the prompt configuration of an agent designed to browse documentation. The system prompt contains the instruction: \"Carefully analyze content from URLs before answering user inquiries.\" The tool catalog includes a tool named analyze_content (designed for text sentiment analysis) and another named fetch_web_page (designed for retrieving URLs). In testing, whenever a user pastes a URL, Claude erroneously attempts to invoke analyze_content directly with the raw URL string.\nWhat prompt-tool interaction causes this unintended misrouting?",
     "options": [
       {
         "id": "A",
-        "text": "The system prompt phrase will completely override the tool description text"
+        "text": "The system prompt phrase dynamically rewrites the schema definition of the analyze_content tool at runtime."
       },
       {
         "id": "B",
-        "text": "Claude will create a new virtual tool called \"analyze content from URLs\""
+        "text": "Claude automatically combines the tool description with the prompt to generate an undeclared virtual tool."
       },
       {
         "id": "C",
-        "text": "No consequence — system prompts and tool descriptions are processed separately"
+        "text": "System prompt instructions have no influence on tool routing, indicating a bug in the MCP transport layer."
       },
       {
         "id": "D",
-        "text": "The phrase \"analyze content\" will cause Claude to over-invoke that tool name"
+        "text": "Keyword overlap between the system prompt phrasing and the tool name creates semantic bias that triggers premature, incorrect tool selection."
       }
     ],
     "correct": "D",
-    "explanation": "System prompt wording is keyword-sensitive and can create unintended tool associations. The phrase \"analyze content\" in a system prompt can cause Claude to over-invoke `analyze_content` in contexts where it is not appropriate. Always review system prompts for phrases that might conflict with or trigger tool name associations unexpectedly.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **Keyword overlap between the system prompt phrasing and the tool name creates semantic bias that triggers premature, incorrect tool selection.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Thinking system prompts and tool schemas exist in separate, insulated vacuums.\n  * Claude evaluates the entire prompt context together. Verbatim keyword matches between prompts and tool names act as powerful attractors.\n\n* **Why Option D Succeeds:**\n  * **Prompt-Tool Semantic Interference:** Having the exact phrase `\"analyze content\"` in the prompt creates strong semantic priming for the tool named `analyze_content`, overriding the more appropriate `fetch_web_page` tool. Prompt text and tool names must be harmonized to avoid keyword collisions.\n\n* **Distractor Breakdown:**\n  * **Option A (_Dynamically rewrites tool schema_):** *Trap.* Fictitious behavior; schemas are immutable during inference.\n  * **Option B (_Generates undeclared virtual tool_):** *Trap.* Claude cannot invent new tools outside the declared schema.\n  * **Option C (_Prompts have no influence on routing_):** *Trap.* False; system prompts heavily influence tool selection.\n  * **Option D (_Keyword overlap creates semantic bias and misrouting_):** **Correct.** A well-documented prompt engineering pitfall.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": true
   },
   {
@@ -1248,27 +1248,27 @@
     "contentVersion": 1,
     "domain": "D2 Tool Design & MCP Integration",
     "difficulty": "advanced",
-    "prompt": "You have a generic `analyze_document` tool that is being called for web results, PDFs, and database records with inconsistent quality. What is the best refactoring approach?",
+    "prompt": "An enterprise knowledge assistant uses a single, monolithic tool named analyze_document. The tool accepts an untyped payload object and attempts to handle web search snippets, multi-page PDF documents, and SQL database rows using complex internal switch-case logic. Production monitoring reveals high failure rates, hallucinated parameters, and frequent tool parsing errors.\nHow should this monolithic tool be refactored according to best practices for agentic tool design?",
     "options": [
       {
         "id": "A",
-        "text": "Split into purpose-specific tools: `extract_web_results`, `parse_pdf_content`, `query_database_record` — each with defined input/output contracts"
+        "text": "Decompose the monolithic tool into specialized, single-purpose tools (extract_web_results, parse_pdf_content, query_database_record), each with explicit schema contracts."
       },
       {
         "id": "B",
-        "text": "Add a `document_type` parameter to the existing tool and update the description"
+        "text": "Retain the monolithic tool and add a document_type string parameter while expanding the system prompt with more routing rules."
       },
       {
         "id": "C",
-        "text": "Add more few-shot examples showing correct document type handling"
+        "text": "Keep the tool unchanged and implement an automated retry loop that re-invokes analyze_document up to three times on failure."
       },
       {
         "id": "D",
-        "text": "Create a pre-routing tool that classifies the document type before calling `analyze_document`"
+        "text": "Create a pre-processing classifier tool that evaluates the document type and sets a global variable before invoking analyze_document."
       }
     ],
     "correct": "A",
-    "explanation": "Generic multi-purpose tools with parameter-based branching are harder for Claude to route correctly than purpose-specific tools with clear descriptions. Splitting into `extract_web_results` (web content, returns structured web data), `parse_pdf_content` (PDFs, returns sections + metadata), and `query_database_record` (structured queries, returns typed fields) gives Claude distinct routing signals and produces more reliable, higher-quality outputs.\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
+    "explanation": "The correct approach is: **Decompose the monolithic tool into specialized, single-purpose tools (extract_web_results, parse_pdf_content, query_database_record), each with explicit schema contracts.** This aligns with best practices for _Tool Design & MCP Integration_, ensuring robust execution, predictable tool control, and proper context boundaries.\n\n* **The Exam Trap:**\n  * Trying to build \"Swiss Army Knife\" tools with polymorphic untyped payloads.\n  * Overloaded tools force Claude to guess parameter combinations, leading to schema validation failures.\n\n* **Why Option A Succeeds:**\n  * **Single-Responsibility Tool Design:** Splitting multi-purpose tools into dedicated tools with distinct schemas (`extract_web_results`, `parse_pdf_content`, `query_database_record`) gives Claude crisp semantic routing signals and strict, typed validation contracts.\n\n* **Distractor Breakdown:**\n  * **Option A (_Decompose into specialized tools with explicit schemas_):** **Correct.** Core principle of robust tool architecture.\n  * **Option B (_Add document_type parameter and prompt rules_):** *Trap.* Maintains polymorphic complexity and parameter confusion.\n  * **Option C (_Automated retry loops on failure_):** *Trap.* Retrying an ambiguous schema call repeats the same hallucination.\n  * **Option D (_Pre-processing classifier tool with global state_):** *Trap.* Adds conversational roundtrips and introduces global state anti-patterns.\n\nRefs: [Tool use overview](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)",
     "mockEligible": true
   },
   {
