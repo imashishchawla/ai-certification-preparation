@@ -11891,8 +11891,10 @@
       "updated_at": "2026-10-12T14:50:24.154Z"
     },
     "2026-W42": {
-      "status": "pending",
-      "created_at": "2026-10-19T08:36:30.670Z"
+      "status": "skipped",
+      "created_at": "2026-10-19T08:36:30.670Z",
+      "error": "Missing RESEND_API_KEY, REPORT_EMAIL_FROM, or REPORT_EMAIL_TO",
+      "updated_at": "2026-10-19T08:36:34.116Z"
     }
   }
 }
