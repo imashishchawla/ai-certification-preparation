@@ -17,20 +17,20 @@
 ---
 
 <!-- WEEKLY-METRICS:START -->
-### Weekly platform update · 2026-W42
+### Weekly platform update · 2026-W43 · 19 Oct–25 Oct
 
-| Metric | 2026-W41 | 2026-W42 | This week |
+| Metric | 2026-W42 · 12 Oct–18 Oct | 2026-W43 · 19 Oct–25 Oct | This week |
 | --- | --- | --- | --- |
-| Questions | 1,149 | 1,322 | +173 |
-| Markdown documents | 116 | 119 | +3 |
-| Rendered Pages | 130 | 133 | +3 |
+| Questions | 1,322 | 1,322 | 0 |
+| Markdown documents | 119 | 119 | 0 |
+| Rendered Pages | 133 | 133 | 0 |
 | PDF & Other documents | 8 | 8 | 0 |
 
-Site size: 24.68 MiB (+1.70 MiB); includes 9.42 MiB of downloadable files (8 PDF, 0 other).
+Site size: 24.68 MiB (0.00 MiB); includes 9.42 MiB of downloadable files (8 PDF, 0 other).
 
-**What changed:** Questions: +173 added, -0 removed, 29 revised; Markdown documents: +3 added, -0 removed, 0 revised; Rendered Pages: +3 added, -0 removed, 0 revised; PDF & Other documents: +0 added, -0 removed, 0 revised.  
+**What changed:** Questions: +0 added, -0 removed, 0 revised; Markdown documents: +0 added, -0 removed, 0 revised; Rendered Pages: +0 added, -0 removed, 0 revised; PDF & Other documents: +0 added, -0 removed, 0 revised.  
 **New sources:** None.  
-**Status:** verified · Measured 2026-10-19T08:36:30.590Z · Source 40e0960636b49ebb265dbf6d3ec55a4df0c9004e · Run https://github.com/imashishchawla/ai-certification-preparation/actions/runs/39223946076.
+**Status:** verified · Measured 2026-10-26T08:38:34.911Z · Source ac2a4417c58550fd03d73a99a5011a932699a80d · Run https://github.com/imashishchawla/ai-certification-preparation/actions/runs/40293662299.
 <!-- WEEKLY-METRICS:END -->
 
 ---
