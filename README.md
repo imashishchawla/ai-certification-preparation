@@ -17,9 +17,9 @@
 ---
 
 <!-- WEEKLY-METRICS:START -->
-### Weekly platform update · 2026-W44 · 26 Oct–1 Nov
+### Weekly platform update · 2026-W45 · 2 Nov–8 Nov
 
-| Metric | 2026-W43 · 19 Oct–25 Oct | 2026-W44 · 26 Oct–1 Nov | This week |
+| Metric | 2026-W44 · 26 Oct–1 Nov | 2026-W45 · 2 Nov–8 Nov | This week |
 | --- | --- | --- | --- |
 | Questions | 1,322 | 1,322 | 0 |
 | Markdown documents | 119 | 119 | 0 |
@@ -30,7 +30,7 @@ Site size: 24.68 MiB (0.00 MiB); includes 9.42 MiB of downloadable files (8 PDF,
 
 **What changed:** Questions: +0 added, -0 removed, 0 revised; Markdown documents: +0 added, -0 removed, 0 revised; Rendered Pages: +0 added, -0 removed, 0 revised; PDF & Other documents: +0 added, -0 removed, 0 revised.  
 **New sources:** None.  
-**Status:** verified · Measured 2026-11-02T10:41:36.938Z · Source 0dd5dfa57eebe877d9157f423d63b22a96547f5b · Run https://github.com/imashishchawla/ai-certification-preparation/actions/runs/41430787530.
+**Status:** verified · Measured 2026-11-09T11:03:56.178Z · Source e4782e09e4cb6cfc2b074cd05f1e94a5b857a25e · Run https://github.com/imashishchawla/ai-certification-preparation/actions/runs/42605925000.
 <!-- WEEKLY-METRICS:END -->
 
 ---
