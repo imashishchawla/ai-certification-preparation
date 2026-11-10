@@ -76,3 +76,13 @@ sync_enabled = true
 schedule_category = "category-b"
 sync_timeout_minutes = 45
 minimum_mock_questions = 60
+
+[exams.domain_weights]
+"D1 Infrastructure as Code (IaC) with Terraform" = 8
+"D2 Terraform fundamentals" = 12
+"D3 Core Terraform workflow" = 18
+"D4 Terraform configuration" = 20
+"D5 Terraform modules" = 12
+"D6 Terraform state management" = 16
+"D7 Maintain infrastructure with Terraform" = 6
+"D8 HCP Terraform" = 8
