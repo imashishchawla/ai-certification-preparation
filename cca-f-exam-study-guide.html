@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CCA-F Exam Study Guide - Complete Analysis of 4 Question Sets</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: #eaeaea; padding: 40px 20px; border-radius: 12px; margin-bottom: 30px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        header p { font-size: 1.1rem; opacity: 0.9; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
+        .stat-card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .stat-card h3 { font-size: 2rem; color: #1a1a2e; margin-bottom: 5px; }
+        .stat-card p { color: #666; font-size: 0.9rem; }
+        section { background: white; border-radius: 10px; padding: 30px; margin-bottom: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        h2 { color: #1a1a2e; border-bottom: 3px solid #1a1a2e; padding-bottom: 10px; margin-bottom: 20px; font-size: 1.8rem; }
+        h3 { color: #16213e; margin: 25px 0 15px; font-size: 1.4rem; }
+        h4 { color: #2d3a4f; margin: 15px 0 10px; font-size: 1.1rem; }
+        .domain-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin: 2px; }
+        .d1 { background: #e8f4fd; color: #1a73e8; }
+        .d2 { background: #fef3c7; color: #b45309; }
+        .d3 { background: #dcfce7; color: #166534; }
+        .d4 { background: #fce7f3; color: #be185d; }
+        .d5 { background: #f3e8ff; color: #7c3aed; }
+        .trap-box { background: #fef2f2; border-left: 4px solid #ef4444; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .trap-box strong { color: #dc2626; }
+        .tip-box { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .tip-box strong { color: #16a34a; }
+        .pattern-box { background: #fafafa; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin: 15px 0; }
+        .pattern-box h4 { margin-top: 0; color: #374151; }
+        .question-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin: 20px 0; }
+        .q-card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 15px; transition: transform 0.2s, box-shadow 0.2s; }
+        .q-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .q-card .q-id { font-family: monospace; font-size: 0.8rem; color: #6b7280; margin-bottom: 5px; }
+        .q-card .q-prompt { font-size: 0.9rem; color: #374151; }
+        .q-card .q-correct { color: #16a34a; font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        th { background: #f9fafb; font-weight: 600; color: #374151; }
+        tr:hover { background: #f9fafb; }
+        .code { font-family: 'SF Mono', Monaco, monospace; background: #f3f4f6; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        .checklist { list-style: none; }
+        .checklist li { padding: 8px 0 8px 28px; position: relative; }
+        .checklist li::before { content: "✓"; position: absolute; left: 0; color: #22c55e; font-weight: bold; }
+        .memorize { background: #fffbeb; border: 2px solid #fcd34d; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .memorize h3 { color: #92400e; margin-top: 0; }
+        .memorize ul { margin-left: 20px; }
+        .memorize li { margin: 8px 0; }
+        .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+        .comp-card { padding: 20px; border-radius: 8px; }
+        .comp-trap { background: #fef2f2; }
+        .comp-correct { background: #f0fdf4; }
+        .comp-card h4 { margin-top: 0; }
+        .comp-card ul { margin-left: 20px; }
+        .comp-card li { margin: 6px 0; }
+        .toc { background: #f9fafb; border-radius: 8px; padding: 20px; margin-bottom: 30px; }
+        .toc ul { list-style: none; }
+        .toc li { padding: 8px 0; border-bottom: 1px solid #e5e7eb; }
+        .toc a { color: #1a1a2e; text-decoration: none; font-weight: 500; }
+        .toc a:hover { color: #1a73e8; }
+        .toc .toc-sub { margin-left: 20px; font-size: 0.9rem; }
+        .toc .toc-sub a { font-weight: 400; color: #4b5563; }
+        footer { text-align: center; padding: 40px; color: #6b7280; font-size: 0.9rem; }
+        .key-concept { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 15px; margin: 15px 0; border-radius: 0 8px 8px 0; }
+        .key-concept strong { color: #1d4ed8; }
+        .repeated { background: #fdf4ff; border: 2px solid #d946ef; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .repeated h3 { color: #a21caf; margin-top: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CCA-F Exam Study Guide</h1>
+            <p>Complete Analysis of 4 Question Sets (170+ Questions) — Patterns, Traps, Strategies & Must-Memorize Concepts</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card"><h3>170+</h3><p>Total Questions Analyzed</p></div>
+            <div class="stat-card"><h3>4</h3><p>Question Sets</p></div>
+            <div class="stat-card"><h3>5</h3><p>Domains Covered</p></div>
+            <div class="stat-card"><h3>17</h3><p>Repeated Concepts</p></div>
+        </div>
+
+        <nav class="toc" aria-label="Table of Contents">
+            <h3 style="margin-top: 0;">📋 Table of Contents</h3>
+            <ul>
+                <li><a href="#sets-overview">1. Four Sets Overview & Source Breakdown</a></li>
+                <li><a href="#domain-breakdown">2. Domain Distribution & Question Patterns</a>
+                    <ul class="toc-sub">
+                        <li><a href="#d1">D1: Agentic Architecture & Orchestration</a></li>
+                        <li><a href="#d2">D2: Tool Design & MCP Integration</a></li>
+                        <li><a href="#d3">D3: Claude Code Configuration & Workflows</a></li>
+                        <li><a href="#d4">D4: Prompt Engineering & Structured Output</a></li>
+                        <li><a href="#d5">D5: Context Management & Reliability</a></li>
+                    </ul>
+                </li>
+                <li><a href="#common-traps">3. The 12 Most Common Exam Traps</a></li>
+                <li><a href="#easy-patterns">4. Easy Answer Patterns (High-Yield)</a></li>
+                <li><a href="#best-answer-strategy">5. How to Select the Best Answer</a></li>
+                <li><a href="#repeated-concepts">6. Repeated Concepts to Memorize by Heart</a></li>
+                <li><a href="#scenario-patterns">7. Scenario Archetypes & How to Recognize Them</a></li>
+                <li><a href="#question-catalog">8. Full Question Catalog by Set</a></li>
+            </ul>
+        </nav>
+
+        <section id="sets-overview">
+            <h2>1. Four Sets Overview & Source Breakdown</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Set ID</th>
+                        <th>File Name</th>
+                        <th>Source</th>
+                        <th>Questions</th>
+                        <th>Domains</th>
+                        <th>Focus Areas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Set 1</strong></td>
+                        <td>shared-set1.json</td>
+                        <td>udemy-cca-mock-dump-set1</td>
+                        <td>17</td>
+                        <td>D1, D5</td>
+                        <td>Multi-agent research systems, context management, tool design, subagent orchestration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Set 2</strong></td>
+                        <td>shared-set2.json</td>
+                        <td>udemy-cca-mock-dump-set2</td>
+                        <td>54</td>
+                        <td>D1, D2, D3, D4, D5</td>
+                        <td>CI/CD with Claude Code, customer support agents, structured extraction, batch processing</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Set 3 (SDK-59)</strong></td>
+                        <td>shared-59.json</td>
+                        <td>claude-code-agent-sdk-59</td>
+                        <td>59</td>
+                        <td>D1, D2, D3, D4, D5</td>
+                        <td>Claude Code SDK, MCP configuration, skills, session management, tool design patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Set 4 (175)</strong></td>
+                        <td>shared-175.json</td>
+                        <td>certyiq, situational-scenarios-88, licensed-team-practice</td>
+                        <td>40+</td>
+                        <td>D1, D2, D4, D5</td>
+                        <td>Certification-style questions, real-world scenarios, batch API, context window management</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="key-concept">
+                <strong>Key Insight:</strong> Sets 1 & 2 are from Udemy mock dumps (practice tests). Sets 3 & 4 are from official Claude Code Agent SDK assessments and licensed practice questions. The SDK-59 set is particularly valuable as it comes directly from Anthropic's own assessment materials.
+            </div>
+        </section>
+
+        <section id="domain-breakdown">
+            <h2>2. Domain Distribution & Question Patterns</h2>
+            
+            <h3 id="d1">D1: Agentic Architecture & Orchestration <span class="domain-badge d1">D1</span> (≈45 questions)</h3>
+            <p>Largest domain. Covers coordinator-subagent patterns, task decomposition, parallel execution, session management, and orchestration strategies.</p>
+            
+            <div class="pattern-box">
+                <h4>Core Patterns Tested:</h4>
+                <ul class="checklist">
+                    <li><strong>Coordinator-Subagent Pattern:</strong> Central coordinator delegates to specialized subagents (web search, doc analysis, synthesis, report generation)</li>
+                    <li><strong>Context Isolation:</strong> Subagents do NOT inherit parent context — must pass data explicitly</li>
+                    <li><strong>Parallel vs Sequential:</strong> Emit multiple Task calls in ONE response for parallelism</li>
+                    <li><strong>Task Decomposition:</strong> Dynamic (adaptive) vs Fixed (prompt chaining) based on predictability</li>
+                    <li><strong>Session Resumption:</strong> --resume for continuation, fork_session for parallel exploration</li>
+                    <li><strong>State Persistence:</strong> Structured exports > conversation logs > vector stores for fidelity</li>
+                </ul>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Coordinator-Subagent Data Flow</h3>
+                <p>Appears in: <strong>set1-q10, set2-q13, set3-q31, set4-q1, set4-q12, set4-q13, set4-q14</strong></p>
+                <p><strong>The Pattern:</strong> Coordinator runs web search → doc analysis → synthesis. How does synthesis get data?</p>
+                <p><strong>Correct Answer:</strong> Coordinator passes structured data/references explicitly (NOT auto-inheritance)</p>
+                <p><strong>Wrong Answers Always Include:</strong> "Subagents share context automatically", "Subagents query each other directly", "Event-driven message queues"</p>
+            </div>
+
+            <h3 id="d2">D2: Tool Design & MCP Integration <span class="domain-badge d2">D2</span> (≈40 questions)</h3>
+            <p>Tool schema design, error handling, MCP server configuration, tool scoping, and tool composition patterns.</p>
+            
+            <div class="pattern-box">
+                <h4>Core Patterns Tested:</h4>
+                <ul class="checklist">
+                    <li><strong>Atomic Operations:</strong> Combine check+act into single tool (find_and_book) to prevent TOCTOU races</li>
+                    <li><strong>Structured Errors:</strong> isError + errorCategory + isRetryable + details (NOT plain text)</li>
+                    <li><strong>Transient vs Non-transient:</strong> Tool retries 503/timeouts; surfaces 400/401/422 to agent</li>
+                    <li><strong>Tool Scoping:</strong> allowedTools restricts at runtime (hard enforcement)</li>
+                    <li><strong>MCP Scoping:</strong> ~/.claude.json (global) + .mcp.json (project-level)</li>
+                    <li><strong>Tool Descriptions:</strong> Must specify params, output, edge cases, when to use vs alternatives</li>
+                    <li><strong>Dynamic Tool Discovery:</strong> search_connectors adds matched tools to available set</li>
+                </ul>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Scheduling Race Condition (TOCTOU)</h3>
+                <p>Appears in: <strong>set1-q3, set4-q25</strong></p>
+                <p><strong>Scenario:</strong> get_available_slots → book_appointment, slot stolen between calls</p>
+                <p><strong>Correct Answer:</strong> Combine into atomic find_and_book_appointment</p>
+                <p><strong>Distractors:</strong> hold_slot tool, richer failure details, retry prompts</p>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Error Handling Partition</h3>
+                <p>Appears in: <strong>set1-q2, set1-q5, set2-q3, set2-q31, set2-q40, set4-q20, set4-q17</strong></p>
+                <p><strong>Correct Pattern:</strong> Tool handles transient (503, timeout) with exponential backoff; surfaces non-transient (400, 401, 422) with structured error + customer-friendly message</p>
+            </div>
+
+            <h3 id="d3">D3: Claude Code Configuration & Workflows <span class="domain-badge d3">D3</span> (≈25 questions)</h3>
+            <p>CLAUDE.md hierarchy, hooks, skills, plan mode vs direct execution, MCP resources, session flags.</p>
+            
+            <div class="pattern-box">
+                <h4>Core Patterns Tested:</h4>
+                <ul class="checklist">
+                    <li><strong>CLAUDE.md Hierarchy:</strong> User (~/.claude) → Project → Directory (.claude/rules/ with path patterns)</li>
+                    <li><strong>@import:</strong> Modularize CLAUDE.md with @import for feature-specific rules</li>
+                    <li><strong>Hooks:</strong> PostToolUse with Edit/Write matcher for deterministic formatting (Prettier)</li>
+                    <li><strong>Skills:</strong> .claude/skills/name/SKILL.md in project (version-controlled)</li>
+                    <li><strong>Plan Mode:</strong> Use for unfamiliar code/architecture exploration before implementation</li>
+                    <li><strong>Direct Execution:</strong> Small, well-understood, isolated changes</li>
+                    <li><strong>MCP Resources:</strong> Catalog index for large docs (not custom tools or context loading)</li>
+                    <li><strong>Session Flags:</strong> --resume (continue), fork_session (branch), --session-id (specific)</li>
+                </ul>
+            </div>
+
+            <h3 id="d4">D4: Prompt Engineering & Structured Output <span class="domain-badge d4">D4</span> (≈35 questions)</h3>
+            <p>Schema compliance, few-shot prompting, validation-retry loops, batch processing, confidence calibration.</p>
+            
+            <div class="pattern-box">
+                <h4>Core Patterns Tested:</h4>
+                <ul class="checklist">
+                    <li><strong>Schema Compliance:</strong> Tool use with JSON schema input parameters > prompt-only JSON</li>
+                    <li><strong>tool_choice:</strong> "auto" (default, optional), "any" (must call a tool), specific tool name (force one)</li>
+                    <li><strong>Few-shot Examples:</strong> Best for formatting normalization, granularity, compound phrases</li>
+                    <li><strong>Validation Retry:</strong> Send validation error back to model for correction (works for format/structure)</li>
+                    <li><strong>Retries DON'T Work:</strong> Missing information not in source document</li>
+                    <li><strong>Confidence Calibration:</strong> Compare accuracy at thresholds against labeled validation data</li>
+                    <li><strong>Batch API:</strong> 50% cost savings, 24hr window, NO multi-turn tool calling</li>
+                    <li><strong>Invoice Totals:</strong> calculated_total + stated_total + flag mismatch (don't auto-adjust)</li>
+                </ul>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Reliable JSON Schema Compliance</h3>
+                <p>Appears in: <strong>set2-q5, set2-q15, set4-q21, set4-q35</strong></p>
+                <p><strong>Correct Answer:</strong> Define a tool with the target schema as input parameters</p>
+                <p><strong>Wrong:</strong> Pre-fill brace, detailed prompt instructions, retry on parse failure</p>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Guaranteed Structured Output (tool_choice)</h3>
+                <p>Appears in: <strong>set2-q6, set4-q42</strong></p>
+                <p><strong>Scenario:</strong> Multiple extraction tools, unknown doc type, need guaranteed tool use</p>
+                <p><strong>Correct Answer:</strong> tool_choice: "any" with all tools defined</p>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Validation Retry with Error Feedback</h3>
+                <p>Appears in: <strong>set2-q14, set4-q16, set4-q31, set4-q32, set4-q40, set4-q43</strong></p>
+                <p><strong>Pattern:</strong> Retry + append validation error → model corrects output</p>
+                <p><strong>Least Effective For:</strong> Missing data not in source (external info)</p>
+            </div>
+
+            <h3 id="d5">D5: Context Management & Reliability <span class="domain-badge d5">D5</span> (≈25 questions)</h3>
+            <p>Context window management, session resumption, progressive summarization, human review calibration, error propagation.</p>
+            
+            <div class="pattern-box">
+                <h4>Core Patterns Tested:</h4>
+                <ul class="checklist">
+                    <li><strong>Progressive Summarization:</strong> Keep recent verbatim, summarize older with key conclusions extracted</li>
+                    <li><strong>Structured State:</strong> Persist order IDs, amounts, statuses separately from conversation</li>
+                    <li><strong>Session Resume Strategy:</strong> Fresh session + structured summary > full history with stale tool results</li>
+                    <li><strong>RAG Context Crowding:</strong> Sliding window for RAG results (last 2-3), preserve conversation history</li>
+                    <li><strong>Instruction Drift:</strong> Reinforce guidelines via user-role messages at breakpoints</li>
+                    <li><strong>Confidence Segmentation:</strong> Must verify per document-type/field, not just aggregate</li>
+                    <li><strong>Amendment Handling:</strong> Schema captures multiple values with source location + effective date</li>
+                </ul>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Resuming Stale Sessions</h3>
+                <p>Appears in: <strong>set1-q14, set2-q30, set3-q31, set3-q46, set3-q60, set4-q44, set4-q45</strong></p>
+                <p><strong>Scenario:</strong> Customer returns hours later, context has stale tool results</p>
+                <p><strong>Correct:</strong> New session + structured summary + fresh tool calls</p>
+                <p><strong>Wrong:</strong> Resume full history with prompt instructions to "prefer latest"</p>
+            </div>
+
+            <div class="repeated">
+                <h3>🔄 REPEATED QUESTION: Context Window Management (Progressive Summarization)</h3>
+                <p>Appears in: <strong>set2-q29, set3-q39, set4-q44, set4-q45, set4-q50, set4-q52, set4-q53</strong></p>
+                <p><strong>Correct Pattern:</strong> Extract critical structured data → compact reference; summarize general discussion; retain recent verbatim</p>
+            </div>
+        </section>
+
+        <section id="common-traps">
+            <h2>3. The 12 Most Common Exam Traps</h2>
+            
+            <div class="trap-box">
+                <strong>Trap 1: "Parallel Subagents = Faster"</strong> — Launching unconstrained subagents without known entry points causes token inflation and fragmented results. Correct: Targeted Grep → incremental trace.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 2: "Ask the User/Engineer"</strong> — Prompts explicitly state the user is NEW and doesn't know. Agent must guide THEM. Never punt to user for info they don't have.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 3: "Read Everything Matching Keywords"</strong> — Brute force = immediate context saturation. Correct: Grep entry points → follow imports incrementally.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 4: "Subagents Inherit Context Automatically"</strong> — FALSE. Subagents start with CLEAN context. Coordinator MUST pass data explicitly in Task prompt.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 5: "PostToolUse Hook Prevents Bad Tool Calls"</strong> — PostToolUse fires AFTER execution. Cannot prevent. Correct: Fix system prompt / allowedTools.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 6: "Hardcode Decision Trees / Static Mappings"</strong> — Brittle, fails on multi-faceted queries. Correct: Model-driven dynamic partitioning.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 7: "Auto-fetch All Pagination Pages"</strong> — Latency spikes + context flood. Correct: First page + total_count + cursor for lazy loading.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 8: "Fake Empty Results for Errors"</strong> — Returning empty list for 503 makes agent hallucinate "no results exist". Correct: Retry with exponential backoff INSIDE tool.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 9: "Prompt Instructions Fix Everything"</strong> — LLMs struggle with numeric thresholds, consistent boundary evaluation. Correct: Deterministic backend boolean flags (requires_review).
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 10: "Resume Full History for Returning Users"</strong> — Stale tool results contaminate context. Correct: Fresh session + structured summary + fresh tool calls.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 11: "Sliding Window / Truncation Preserves Key Facts"</strong> — Drops critical IDs, allergies, constraints. Correct: Structured state layer + progressive summarization.
+            </div>
+            
+            <div class="trap-box">
+                <strong>Trap 12: "Aggregate Confidence is Enough for Automation"</strong> — 97% aggregate can hide 60% on specific doc types. Must calibrate per segment before deploying.
+            </div>
+        </section>
+
+        <section id="easy-patterns">
+            <h2>4. Easy Answer Patterns (High-Yield — Learn These First)</h2>
+            
+            <h3>✅ Pattern A: "Atomic Tool Design" (Appears 6+ times)</h3>
+            <div class="comparison">
+                <div class="comp-trap">
+                    <h4>❌ Trap Answers</h4>
+                    <ul>
+                        <li>Separate check + book tools</li>
+                        <li>hold_slot intermediate tool</li>
+                        <li>Richer failure details only</li>
+                        <li>Prompt retry instructions</li>
+                    </ul>
+                </div>
+                <div class="comp-correct">
+                    <h4>✅ Correct Answer</h4>
+                    <ul>
+                        <li>Single find_and_book tool</li>
+                        <li>Atomically checks & books</li>
+                        <li>Returns confirmation OR alternatives</li>
+                        <li>Eliminates TOCTOU race</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>✅ Pattern B: "Structured Error Responses" (Appears 7+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>Always choose the option with:</strong></p>
+                <ul class="checklist">
+                    <li>isError: true</li>
+                    <li>errorCategory: "transient" | "non_retryable" | "permission_denied" | "not_found" | "validation_error"</li>
+                    <li>isRetryable: boolean</li>
+                    <li>details: human-readable message with next steps</li>
+                </ul>
+                <p><strong>Never choose:</strong> Plain text errors, generic "tool unavailable", retry everything inside tool.</p>
+            </div>
+
+            <h3>✅ Pattern C: "Tool Use for Schema Compliance" (Appears 4+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>When downstream systems reject malformed JSON:</strong></p>
+                <ul class="checklist">
+                    <li>Define tool with target schema as input parameters</li>
+                    <li>Model calls tool with extracted data</li>
+                    <li>Schema enforced at interface level</li>
+                </ul>
+                <p><strong>Beats:</strong> Pre-fill brace, prompt instructions, retry logic, regex parsing.</p>
+            </div>
+
+            <h3>✅ Pattern D: "tool_choice: 'any' for Guaranteed Tool Use" (Appears 2+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>Multiple tools, unknown which needed, must guarantee structured output:</strong></p>
+                <ul class="checklist">
+                    <li>tool_choice: "any" — forces model to call ONE of the provided tools</li>
+                    <li>No classification call needed</li>
+                    <li>No consolidation into mega-schema needed</li>
+                </ul>
+            </div>
+
+            <h3>✅ Pattern E: "Few-Shot Examples for Extraction Consistency" (Appears 5+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>Inconsistent granularity, compound phrases, implied skills, varied formats:</strong></p>
+                <ul class="checklist">
+                    <li>Add few-shot examples showing exact desired behavior</li>
+                    <li>Demonstrate: compound splitting, explicit-only, target granularity</li>
+                    <li>Beats: constraints, post-processing, schema enrichment</li>
+                </ul>
+            </div>
+
+            <h3>✅ Pattern F: "Progressive Summarization for Context" (Appears 7+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>Long conversations, need to preserve key facts:</strong></p>
+                <ul class="checklist">
+                    <li>Extract critical structured data (IDs, constraints, allergies) → compact reference</li>
+                    <li>Summarize general discussion</li>
+                    <li>Retain recent exchanges verbatim</li>
+                </ul>
+                <p><strong>Beats:</strong> Sliding window, full summary, vector search replacement, separate API summarization calls.</p>
+            </div>
+
+            <h3>✅ Pattern G: "Model-Driven Dynamic Orchestration" (Appears 3+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>Coordinator deciding which subagents to invoke:</strong></p>
+                <ul class="checklist">
+                    <li>Let coordinator use model reasoning to partition work dynamically</li>
+                    <li>Beats: hardcoded rules, static decision trees, execute-all-parallel</li>
+                </ul>
+            </div>
+
+            <h3>✅ Pattern H: "Validation Retry with Error Feedback" (Appears 6+ times)</h3>
+            <div class="pattern-box">
+                <p><strong>Validation fails with specific error (format/structure):</strong></p>
+                <ul class="checklist">
+                    <li>Follow-up request: document + extraction + validation error</li>
+                    <li>Model corrects specific issue</li>
+                    <li>Works for: format mismatches, structural errors</li>
+                    <li>DOESN'T work for: missing external data</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="best-answer-strategy">
+            <h2>5. How to Select the Best Answer — Decision Framework</h2>
+            
+            <h3>Step 1: Identify the Domain & Core Principle</h3>
+            <table>
+                <thead>
+                    <tr><th>Domain</th><th>Core Principle</th><th>Keywords in Question</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>D1 Orchestration</td><td>Coordinator controls; subagents isolated; explicit data passing</td><td>coordinator, subagent, Task tool, synthesis, delegation</td></tr>
+                    <tr><td>D2 Tool Design</td><td>Atomic ops, structured errors, scoped access, clear descriptions</td><td>tool, MCP, error, retry, schema, allowedTools</td></tr>
+                    <tr><td>D3 Config</td><td>Hierarchy, hooks for enforcement, skills versioned, plan mode for unknown</td><td>CLAUDE.md, hook, skill, plan mode, --resume, MCP server</td></tr>
+                    <tr><td>D4 Prompting</td><td>Tool use > prompt-only; few-shot > instructions; validation retry works for format</td><td>schema, JSON, extraction, tool_choice, batch, few-shot</td></tr>
+                    <tr><td>D5 Context</td><td>Structured state > summaries > sliding windows; fresh session for stale data</td><td>context window, session, resume, summary, confidence, RAG</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Step 2: Apply the "Eliminate Traps First" Method</h3>
+            <ol>
+                <li><strong>Cross out</strong> any option matching the 12 Common Traps above</li>
+                <li><strong>Cross out</strong> "ask the user", "add more prompt instructions", "retry everything"</li>
+                <li><strong>Cross out</strong> options that violate context isolation (subagents auto-sharing)</li>
+                <li><strong>Cross out</strong> options adding unnecessary complexity (new agents, message queues, classifiers)</li>
+            </ol>
+
+            <h3>Step 3: Match to High-Yield Pattern</h3>
+            <div class="pattern-box">
+                <p>If remaining options include a <strong>High-Yield Pattern (A-H above)</strong>, that's your answer. These patterns appear repeatedly because they're the "correct architecture" per Anthropic.</p>
+            </div>
+
+            <h3>Step 4: Verify with "Why This Works" Logic</h3>
+            <table>
+                <thead>
+                    <tr><th>Correct Answer Trait</th><th>Why It Wins</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Deterministic enforcement</td><td>Hooks, schemas, tool scoping enforce at system level, not prompt level</td></tr>
+                    <td>Reduces conversational turns</td><td>Atomic tools, tool_choice:any, parameter ergonomics save LLM turns/tokens</td></tr>
+                    <tr><td>Preserves information fidelity</td><td>Structured state, claim-source mappings, amendment provenance</td></tr>
+                    <tr><td>Scales & maintains control</td><td>Coordinator orchestration, allowedTools, progressive summarization</td></tr>
+                    <tr><td>Separates concerns cleanly</td><td>Transient vs non-transient errors; tool vs agent responsibility</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="repeated-concepts">
+            <h2>6. Repeated Concepts to Memorize by Heart</h2>
+            <p>These 17 concepts appear across 3+ question sets. Memorize the concept, the correct pattern, and the trap distractors.</p>
+            
+            <div class="memorize">
+                <h3>🧠 MEMORIZE THESE 17 CONCEPTS</h3>
+                <ol>
+                    <li><strong>Subagent Context Isolation:</strong> Subagents NEVER inherit parent context. Coordinator MUST pass data explicitly in Task prompt.</li>
+                    <li><strong>Atomic Tool Pattern:</strong> Combine check+act (find_and_book) to prevent TOCTOU races. Never use hold_slot or separate check/book.</li>
+                    <li><strong>Structured Error Schema:</strong> isError + errorCategory + isRetryable + details. Tool handles transient; agent gets non-transient.</li>
+                    <li><strong>Tool Scoping = Hard Enforcement:</strong> allowedTools restricts at runtime. Agent CANNOT call tools outside list.</li>
+                    <li><strong>MCP Config Hierarchy:</strong> ~/.claude.json (global/user) + .mcp.json (project). Remote=shared→project; local=personal→user.</li>
+                    <li><strong>Hooks for Deterministic Enforcement:</strong> PostToolUse with Edit/Write matcher runs formatter. Prompts are probabilistic; hooks are deterministic.</li>
+                    <li><strong>Plan Mode vs Direct Execution:</strong> Plan mode = unfamiliar code/architecture exploration. Direct = small, well-understood, isolated changes.</li>
+                    <li><strong>Tool Use for JSON Compliance:</strong> Define tool with target schema as input params. Beats prompt-only JSON every time.</li>
+                    <li><strong>tool_choice: "any" Guarantees Tool Call:</strong> Forces model to select one tool. Use when document type unknown but structured output required.</li>
+                    <li><strong>Few-Shot > Constraints > Post-Processing:</strong> For extraction consistency (granularity, compound phrases, implied content).</li>
+                    <li><strong>Validation Retry Works for Format, Not Missing Data:</strong> Send validation error back to model. Fails if info not in source.</li>
+                    <li><strong>Invoice Totals: calculated + stated + flag:</strong> Never auto-adjust financial data. Preserve both, flag discrepancy.</li>
+                    <li><strong>Progressive Summarization:</strong> Critical structured data (exact) + summarized general + recent verbatim. Beats sliding window.</li>
+                    <li><strong>Session Resume: Fresh + Summary + Fresh Tools:</strong> Stale tool results contaminate. Never resume full history with "prefer latest" prompt.</li>
+                    <li><strong>RAG Sliding Window:</strong> Limit RAG to last 2-3 queries; preserve conversation history.</li>
+                    <li><strong>Confidence Calibration Per Segment:</strong> Aggregate accuracy hides weak spots. Must verify per doc-type/field before automation.</li>
+                    <li><strong>Amendment Schema: Multiple Values + Source + Date:</strong> Capture all values with provenance. Don't preprocess/classify/prompt-ignore.</li>
+                </ol>
+            </div>
+
+            <h3>Quick-Reference Flashcards</h3>
+            <div class="question-grid" id="flashcards">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+        <section id="scenario-patterns">
+            <h2>7. Scenario Archetypes & How to Recognize Them</h2>
+            
+            <table>
+                <thead>
+                    <tr><th>Archetype</th><th>Scenario Keywords</th><th>Core Question</th><th>Correct Pattern</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Multi-Agent Research</strong></td>
+                        <td>coordinator, web search, document analysis, synthesis, report generation</td>
+                        <td>How do agents share data? How to handle gaps? How to parallelize?</td>
+                        <td>Coordinator passes structured data; iterative gap-filling; emit Task calls in single response</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Support Agent</strong></td>
+                        <td>get_customer, lookup_order, process_refund, escalate_to_human, 80% FCR</td>
+                        <td>When to escalate? How to handle errors? Context for returning users?</td>
+                        <td>Escalate on: user request, policy exception, no progress. Structured errors. Fresh session + summary.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CI/CD with Claude Code</strong></td>
+                        <td>GitHub Actions, -p flag, --output-format json, CLAUDE.md, code review</td>
+                        <td>Config access? Tool scoping? Review structure? False positives?</td>
+                        <td>CI reads CLAUDE.md. allowedTools per agent. Multi-pass review. Disable noisy categories.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Structured Extraction Pipeline</strong></td>
+                        <td>JSON schema, validation, Pydantic, retries, batch API, confidence</td>
+                        <td>Schema compliance? Retry strategy? Batch vs real-time? Confidence threshold?</td>
+                        <td>Tool use with schema. Validation error feedback. Batch for standard, real-time for urgent. Per-segment calibration.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Codebase Exploration</strong></td>
+                        <td>legacy code, Grep, Read, imports, subagents, context limits</td>
+                        <td>Exploration strategy? Context management? Resume after changes?</td>
+                        <td>Grep entry points → incremental trace. Subagents for scoped tasks. Resume + identify changed files.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude Code Workflow</strong></td>
+                        <td>CLAUDE.md, hooks, skills, plan mode, MCP, --resume, fork_session</td>
+                        <td>Config scoping? Enforcement? Skill sharing? Session management?</td>
+                        <td>Path-scoped rules. PostToolUse hooks. Project skills. --resume for continue, fork for branches.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="question-catalog">
+            <h2>8. Full Question Catalog by Set</h2>
+            
+            <h3>Set 1: shared-set1.json (17 questions)</h3>
+            <div class="question-grid">
+                <div class="q-card"><div class="q-id">cca-f-set1-001</div><div class="q-prompt">Multi-agent codebase exploration: Grep entry points vs parallel subagents vs read all</div><div class="q-correct">D: Grep + incremental trace</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-002</div><div class="q-prompt">Error handling partition: transient vs non-transient in publish_article tool</div><div class="q-correct">C: Tool retries transient; surfaces non-transient</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-003</div><div class="q-prompt">Scheduling TOCTOU: get_slots + book_appointment race condition</div><div class="q-correct">B: Atomic find_and_book</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-004</div><div class="q-prompt">Tool parameter ergonomics: neighborhood tool needs address from property_id</div><div class="q-correct">C: Accept property_id, resolve internally</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-005</div><div class="q-prompt">503 Service Unavailable: retry with exponential backoff inside tool</div><div class="q-correct">D: Bounded exponential backoff</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-006</div><div class="q-prompt">Confidence scores: requires_review boolean + review_reason + scores</div><div class="q-correct">A: Boolean flag + reason + scores</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-007</div><div class="q-prompt">Subagent inheritance: parent conversation history NOT inherited</div><div class="q-correct">A: Parent session context</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-008</div><div class="q-prompt">Subagent compliance: modify system prompt, not PostToolUse hook</div><div class="q-correct">A: Stricter rules in system prompt</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-009</div><div class="q-prompt">Subagent iteration: internal loop for query refinement</div><div class="q-correct">A: Iterate internally</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-010</div><div class="q-prompt">Data passing to synthesis: shared database query, not context passing</div><div class="q-correct">D: Shared database querying</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-011</div><div class="q-prompt">Research gaps: summarize + fresh session, not queue in same session</div><div class="q-correct">D: Summarize and start fresh</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-012</div><div class="q-prompt">Refinement loop: coordinator evaluates in agentic loop</div><div class="q-correct">B: Coordinator agentic loop</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-013</div><div class="q-prompt">Dynamic task partitioning: model-driven reasoning</div><div class="q-correct">B: Model-driven dynamic partitioning</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-014</div><div class="q-prompt">Resumed session: coordinator must explicitly communicate scope changes</div><div class="q-correct">D: Explicit communication in fresh calls</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-015</div><div class="q-prompt">Adaptive stopping: continue if new info, stop when returns diminish</div><div class="q-correct">D: Adaptive stopping</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-016</div><div class="q-prompt">Pagination: first page + total + cursor</div><div class="q-correct">C: Cursor-based pagination</div></div>
+                <div class="q-card"><div class="q-id">cca-f-set1-017</div><div class="q-prompt">Context limits: targeted search + incremental reading</div><div class="q-correct">D: Grep entry points + incremental</div></div>
+            </div>
+
+            <h3>Set 2: shared-set2.json (54 questions) — Key Highlights</h3>
+            <div class="pattern-box">
+                <p><strong>CI/CD Questions (1-4, 10, 21, 24, 52-54):</strong> CLAUDE.md in CI, allowedTools for reviewer agents, MCP isRetryable, single tool with operation param, -p flag = non-interactive, --json-schema flag, multi-pass review, disable noisy categories, include prior findings in context.</p>
+                <p><strong>Structured Extraction (5-9, 11-19, 44-51):</strong> Tool use for schema compliance, tool_choice:any for guaranteed tool use, normalization in prompt, retries don't fix missing data, calculated_total + stated_total + flag, calibrated confidence for review, 6hr batch cadence for 30hr SLA, validation error feedback retry, few-shot for varied formats, tool use for resume extraction.</p>
+                <p><strong>Customer Support Agent (20, 22, 26-41):</strong> Acknowledge + offer choice vs immediate escalate. Immediate escalate if user insists. Structured handoff summary. Model reasons from tool results. Escalation criteria: user request + policy exception + no progress. Structured issue state for context. Fresh session + summary for returning. Structured error metadata. allowedTools hard enforcement. Tool descriptions need params/output/edge cases. .mcp.json for project scoping. tool_choice:auto vs any. @import for CLAUDE.md modularity. MCP resources for catalogs. Structured errors with retriable flag. Hook for $500 refund limit. Tool description for fabricated order_id prevention. Structured errorCategory + isRetryable.</p>
+                <p><strong>Code Generation (23, 25, 38-49):</strong> Tool use for code gen. Hub-spoke: isolated context + parallel specialization. allowedTools in Task config. --resume for pause/resume. Few-shot for edge cases. Explicit criteria. Batch API: 50% savings, no multi-turn. Multi-pass review for precision. Independent review > self-review. Disable high-FP categories.</p>
+            </div>
+
+            <h3>Set 3: shared-59.json (59 questions) — SDK Assessment Focus</h3>
+            <div class="pattern-box">
+                <p><strong>Claude Code Config (2-15):</strong> MCP scope: remote→project (.mcp.json), local→user (~/.claude.json). Hooks for formatting enforcement. Test cases for iteration. @references for existing patterns. Plan mode for unfamiliar. MCP prompts = slash commands. Permissions + CLAUDE.md + hooks for enforcement triad. Direct execution for small changes. Incremental fixes for interacting layouts. Path-scoped rules with **/*.tf patterns. Project skills in .claude/skills/. Plan mode for cross-module migrations. Interview for requirements. Tests first for algorithms. Validation error feedback retry. Missing external data = retries won't help. Explicit evidence rule for null fields. Stratified sampling for audit. Calibrate thresholds on labeled data. Tool use for JSON. calculated_total + stated_total + flag. Low confidence/ambiguity for review. Few-shot for informal measurements. Optional fields for missing specs. Schema normalization rules. Force extract_metadata first then enrich. Skills few-shot for granularity. Amendment schema with provenance. Shared memory store for synthesis. Coordinator passes findings explicitly. Synthesis draft + structured source index. Pagination: first page + cursor. 503 retry with backoff. MCP error: protocol for malformed, tool result for 404/503. Dynamic tool discovery via search_connectors. Transient retry in tool, non-transient to agent.</p>
+                <p><strong>Orchestration (35-59):</strong> Orchestration-layer handoff guarantee. Escalation criteria: user request + policy + no progress. Structured handoff before escalate. Structured errors with retriable flag. Structured case state for multi-issue. Fresh session + summary for stale tools. Hook intercept for $500 limit. Tool description for fabricated ID prevention. Structured errorCategory. Stop_reason inspection. Timeout: explain + offer escalation/retry. Error-specific messages with is_error. Resume + identify changed files. fork_session for independent strategies. Trace imports/hierarchies for architecture. Map structure → prioritize → adapt. fork_session for comparing approaches. Export names → Grep each for aliased callers. MCP tools discovered from all configured servers. Subagents for context pressure. Expand tool descriptions. Plan mode for cross-cutting changes. Dynamic subtasks for unknown error paths. --resume named session. Resume subagent + inform of renames.</p>
+            </div>
+
+            <h3>Set 4: shared-175.json (40 questions) — Certification Style</h3>
+            <div class="pattern-box">
+                <p><strong>CertYIQ (1-40):</strong> Coordinator passes outputs explicitly. Timestamps in structured outputs for temporal reasoning. Analysis agent reports gaps → coordinator triggers targeted search. Structured exports + coordinator injection for session resumption. Coordinator evaluates synthesis gaps → re-delegates. Coordinator spawns parallel subagents for precedents. Emit Task calls in single response for parallelism. Explicit uncertainty sections in reports. Synthesis renders per content type (tables/prose/lists). Task tool required in allowedTools. Claim-source mappings preserved through pipeline. Coordinator mediates web→doc analysis. Synthesis draft + structured source index. Pagination cursor pattern. 503 auto-retry with backoff. MCP error classification. Dynamic connector discovery. Error handling partition. Batch API routing by urgency. tool_choice:any for guaranteed tool use. Validation error feedback. Progressive summarization. Hybrid context: structured refs + summarized + recent. Intake form friction vs explicit assumptions. Reinforce guidelines at breakpoints. RAG sliding window. System prompt for behavioral guidelines. Clarify action type for ambiguous "set up". Prefill assistant response for greeting elimination. Few-shot for skill extraction consistency. Force extract_metadata then enrich. Segment-level confidence calibration. Context crowding from tool definitions. calculated_total + stated_total + flag for invoices.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>9. Final Exam Day Checklist</h2>
+            <div class="checklist">
+                <li>Read every question TWICE — first for scenario, second for what's actually being asked</li>
+                <li>Identify the DOMAIN immediately (D1-D5) to trigger the right mental model</li>
+                <li>Eliminate trap answers first (12 traps memorized)</li>
+                <li>Match remaining to High-Yield Patterns (A-H)</li>
+                <li>Verify: Does this enforce deterministically? Reduce turns? Preserve fidelity? Scale cleanly?</li>
+                <li>Watch for "NOT" / "LEAST effective" / "MOST reliable" qualifiers</li>
+                <li>For scenario questions: map to archetype (Research, Support, CI/CD, Extraction, Exploration, Workflow)</li>
+                <li>Trust the repeated patterns — they're repeated because they're the certified architecture</li>
+            </div>
+
+            <div class="tip-box">
+                <strong>Pro Tip:</strong> The exam heavily favors answers that move enforcement from "prompt instructions" (probabilistic) to "system-level enforcement" (deterministic): hooks, schemas, tool scoping, structured errors, atomic tools, allowedTools. If you see "add instructions to prompt" vs "implement hook/schema/validation", the latter is almost always correct.
+            </div>
+        </section>
+
+        <footer>
+            <p>Generated from analysis of 4 CCA-F question sets (170+ questions) | Sets: udemy-cca-mock-dump-set1, udemy-cca-mock-dump-set2, claude-code-agent-sdk-59, certyiq/licensed-practice</p>
+            <p>Last updated: 2026 | For personal study use only</p>
+        </footer>
+    </div>
+
+    <script>
+        // Flashcard generator for repeated concepts
+        const flashcards = [
+            {q: "Subagent context inheritance?", a: "NONE. Clean context. Coordinator passes data explicitly in Task prompt."},
+            {q: "TOCTOU race condition fix?", a: "Atomic find_and_book tool combining check + reserve."},
+            {q: "Structured error schema?", a: "isError + errorCategory + isRetryable + details. Tool handles transient (503); agent gets non-transient (400/401/422)."},
+            {q: "allowedTools enforcement?", a: "HARD runtime enforcement. Agent CANNOT call tools outside the list."},
+            {q: "MCP config: shared remote vs personal local?", a: "Remote (shared) → .mcp.json (project). Local (personal) → ~/.claude.json (user)."},
+            {q: "Deterministic formatting enforcement?", a: "PostToolUse hook with Edit/Write matcher running Prettier. Not prompts."},
+            {q: "Plan mode vs Direct execution?", a: "Plan = unfamiliar architecture. Direct = small, well-understood, isolated changes."},
+            {q: "Guaranteed JSON schema compliance?", a: "Tool use with target schema as input parameters. Beats prompt-only JSON."},
+            {q: "tool_choice for guaranteed tool use?", a: '"any" forces model to call one of the provided tools. No classification call needed."'},
+            {q: "Extraction consistency fix?", a: "Few-shot examples showing compound splitting, explicit-only, target granularity."},
+            {q: "When do validation retries FAIL?", a: "Missing information not in source document (external data)."},
+            {q: "Invoice total mismatch handling?", a: "calculated_total + stated_total + flag discrepancy. Never auto-adjust financial data."},
+            {q: "Progressive summarization recipe?", a: "Critical structured data (exact) → compact ref + Summarized general + Recent verbatim."},
+            {q: "Returning user with stale context?", a: "Fresh session + structured summary + FRESH tool calls. Never resume full history."},
+            {q: "RAG context crowding fix?", a: "Sliding window for RAG (last 2-3 queries). Preserve conversation history."},
+            {q: "Confidence threshold validation?", a: "Must calibrate per document-type AND field. Aggregate hides weak segments."},
+            {q: "Amendment handling in schema?", a: "Capture multiple values with source location + effective date. Preserve provenance."}
+        ];
+
+        const container = document.getElementById('flashcards');
+        flashcards.forEach((card, i) => {
+            const div = document.createElement('div');
+            div.className = 'q-card';
+            div.innerHTML = `<div class="q-id">Flashcard ${i+1}</div><div class="q-prompt"><strong>Q:</strong> ${card.q}</div><div class="q-correct"><strong>A:</strong> ${card.a}</div>`;
+            container.appendChild(div);
+        });
+    </script>
+</body>
+</html>
