@@ -1,0 +1,69 @@
+{
+  "exam": "cka",
+  "examVersion": "v1.31+",
+  "lastUpdated": "2026-11-10",
+  "source": "https://github.com/cncf/curriculum/blob/main/cka/README.md",
+  "domains": [
+    {
+      "code": "D1",
+      "name": "Troubleshooting",
+      "weight": 30,
+      "objectives": [
+        { "code": "1a", "text": "Troubleshoot clusters and nodes" },
+        { "code": "1b", "text": "Troubleshoot cluster components (API server, etcd, controller manager, scheduler)" },
+        { "code": "1c", "text": "Monitor cluster and application resource usage" },
+        { "code": "1d", "text": "Manage and evaluate container output streams and logging" },
+        { "code": "1e", "text": "Troubleshoot services, DNS resolution, and networking plumbing" }
+      ]
+    },
+    {
+      "code": "D2",
+      "name": "Cluster Architecture, Installation & Configuration",
+      "weight": 25,
+      "objectives": [
+        { "code": "2a", "text": "Manage Role-Based Access Control (RBAC) and service accounts" },
+        { "code": "2b", "text": "Prepare underlying infrastructure for installing a Kubernetes cluster" },
+        { "code": "2c", "text": "Create and manage Kubernetes clusters using kubeadm (kubeadm init, kubeadm join)" },
+        { "code": "2d", "text": "Manage the lifecycle of Kubernetes clusters (including version upgrades)" },
+        { "code": "2e", "text": "Implement and configure a highly-available control plane" },
+        { "code": "2f", "text": "Implement etcd snapshot backup and restore procedures" },
+        { "code": "2g", "text": "Use Helm and Kustomize to deploy application and cluster components" },
+        { "code": "2h", "text": "Understand extension interfaces (CNI, CSI, CRI), CRDs, and operators" }
+      ]
+    },
+    {
+      "code": "D3",
+      "name": "Services & Networking",
+      "weight": 20,
+      "objectives": [
+        { "code": "3a", "text": "Understand connectivity between Pods and node-to-pod networking" },
+        { "code": "3b", "text": "Define and enforce NetworkPolicies to restrict ingress and egress traffic" },
+        { "code": "3c", "text": "Configure Service types (ClusterIP, NodePort, LoadBalancer, ExternalName) and Endpoints" },
+        { "code": "3d", "text": "Use Ingress controllers, Ingress resources, and the Gateway API" },
+        { "code": "3e", "text": "Configure and troubleshoot cluster CoreDNS resolution" }
+      ]
+    },
+    {
+      "code": "D4",
+      "name": "Workloads & Scheduling",
+      "weight": 15,
+      "objectives": [
+        { "code": "4a", "text": "Understand application deployments, rolling updates, and rollbacks" },
+        { "code": "4b", "text": "Use ConfigMaps and Secrets to configure applications" },
+        { "code": "4c", "text": "Configure workload autoscaling using Horizontal Pod Autoscaler (HPA)" },
+        { "code": "4d", "text": "Create and manage Deployments, StatefulSets, DaemonSets, Jobs, and CronJobs" },
+        { "code": "4e", "text": "Understand scheduling primitives: node selectors, node affinity, taints, tolerations, and pod affinity" }
+      ]
+    },
+    {
+      "code": "D5",
+      "name": "Storage",
+      "weight": 10,
+      "objectives": [
+        { "code": "5a", "text": "Understand StorageClasses and configure dynamic volume provisioning" },
+        { "code": "5b", "text": "Configure volume types, access modes (RWO, ROX, RWX), and reclaim policies" },
+        { "code": "5c", "text": "Manage Persistent Volumes (PVs) and Persistent Volume Claims (PVCs)" }
+      ]
+    }
+  ]
+}

@@ -770,6 +770,63 @@
         }
       ]
     },
+    "cka": {
+      "sources": [
+        {
+          "id": "cncf-official-curriculum",
+          "exam_ids": [
+            "cka"
+          ],
+          "name": "CNCF Official CKA Curriculum (GitHub)",
+          "url": "https://github.com/cncf/curriculum/blob/main/cka/README.md",
+          "allowed_redirect_hosts": [
+            "github.com",
+            "raw.githubusercontent.com"
+          ],
+          "trust_tier": "tier-1-official",
+          "active": true,
+          "publication_mode": "document-source",
+          "parser_adapter": "github-markdown",
+          "format": "markdown",
+          "refresh_frequency": "monthly",
+          "timeout_seconds": 30,
+          "destination": "content/exams/cka/study-materials/",
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ]
+        },
+        {
+          "id": "kubernetes-official-docs",
+          "exam_ids": [
+            "cka"
+          ],
+          "name": "Kubernetes Official Documentation (kubernetes.io/docs)",
+          "url": "https://kubernetes.io/docs/home/",
+          "allowed_redirect_hosts": [
+            "kubernetes.io"
+          ],
+          "trust_tier": "tier-1-official",
+          "active": true,
+          "publication_mode": "document-source",
+          "parser_adapter": "http-generic",
+          "format": "html",
+          "refresh_frequency": "weekly",
+          "timeout_seconds": 30,
+          "destination": "content/exams/cka/study-materials/",
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5"
+          ]
+        }
+      ]
+    },
     "ccao-f": {
       "sources": [
         {

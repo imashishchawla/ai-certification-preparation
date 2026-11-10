@@ -87,3 +87,29 @@ minimum_mock_questions = 60
 "D6 Terraform state management" = 16
 "D7 Maintain infrastructure with Terraform" = 6
 "D8 HCP Terraform" = 8
+
+[[exams]]
+id = "cka"
+code = "CKA"
+name = "Certified Kubernetes Administrator (CKA)"
+provider = "Cloud Native Computing Foundation (CNCF)"
+status = "onboarding"
+version = "v1.31+"
+questions = 0
+duration_minutes = 120
+pass_score = 66
+price_usd = 395
+official_source = "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/"
+path = "exams/cka/"
+objective_catalog = "data/objectives/cka.json"
+description = "Hands-on, performance-based Kubernetes administration certification covering cluster architecture, installation, workloads, networking, storage, and troubleshooting."
+sync_enabled = false
+schedule_category = "category-b"
+minimum_mock_questions = 20
+
+[exams.domain_weights]
+"D1 Troubleshooting" = 30
+"D2 Cluster Architecture, Installation & Configuration" = 25
+"D3 Services & Networking" = 20
+"D4 Workloads & Scheduling" = 15
+"D5 Storage" = 10

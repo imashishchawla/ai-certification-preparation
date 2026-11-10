@@ -32,10 +32,14 @@ const cca = checkPage('exams/cca-f/index.html');
 const terraform = checkPage('exams/terraform-associate/index.html');
 const terraformPractice = checkPage('exams/terraform-associate/sample-questions/index.html');
 const terraformMock = checkPage('exams/terraform-associate/mock-test/index.html');
+const cka = checkPage('exams/cka/index.html');
+const ckaPractice = checkPage('exams/cka/sample-questions/index.html');
+const ckaMock = checkPage('exams/cka/mock-test/index.html');
 
 const ccaPublished = JSON.parse(read('data/exams/cca-f/questions.json'));
 const terraformPublished = JSON.parse(read('data/exams/terraform-associate/questions.json'));
-const totalPublished = ccaPublished.length + terraformPublished.length;
+const ckaPublished = JSON.parse(read('data/exams/cka/questions.json'));
+const totalPublished = ccaPublished.length + terraformPublished.length + ckaPublished.length;
 
 if (!home.includes('Certification Prep — Practice Library')) errors.push('Homepage title missing');
 if (!home.includes(`${totalPublished}</strong> published practice questions`)) errors.push('Homepage published count does not match browser data');
@@ -43,10 +47,12 @@ if (terraformPublished.length < 60) errors.push('Active Terraform question bank 
 if (!terraformPractice.includes('id=questionsContainer') && !terraformPractice.includes('id="questionsContainer"')) errors.push('Active Terraform practice UI is missing');
 if (!terraformMock.includes('id=mockTestApp') && !terraformMock.includes('id="mockTestApp"')) errors.push('Active Terraform mock test app is missing');
 if (!terraform.includes('$70.50') || /700\s*\/\s*1000|Domains &amp; Weights/.test(terraform)) errors.push('Terraform overview contains an unverified exam claim');
+if (ckaPractice.includes('id=questionsContainer') || ckaMock.includes('id=mockTestApp')) errors.push('Onboarding CKA practice UI is enabled');
+if (!cka.includes('$395')) errors.push('CKA overview missing official fee');
 if (!cca.includes('Claude Certified Architect')) errors.push('Active CCAF overview missing');
 if (!catalog.includes('In development')) errors.push('Catalog development section missing');
 
-for (const relative of ['exams/ccar-p/index.html', 'exams/ccdv-f/index.html']) {
+for (const relative of ['exams/ccar-p/index.html', 'exams/ccdv-f/index.html', 'exams/cka/sample-questions/index.html']) {
   const html = checkPage(relative);
   if (!html.includes('noindex, follow')) errors.push(`${relative}: placeholder should be noindex`);
 }
