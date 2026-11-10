@@ -1,13 +1,7 @@
 ---
 title: "Sample Questions — Terraform Associate (004)"
-description: "Sample practice questions for HashiCorp Certified Terraform Associate (004)."
-exam_id: "terraform-associate"
-noindex: true
-sitemap:
-  disable: true
-layout: "sample-questions"
+description: "Interactive domain-categorized practice questions for HashiCorp Certified Terraform Associate (004)."
 type: "sample-questions"
-draft: false
+exam_id: "terraform-associate"
+layout: "list"
 ---
-
-Sample questions will appear here once the question bank passes release gates.

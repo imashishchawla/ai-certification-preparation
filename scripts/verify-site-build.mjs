@@ -35,15 +35,18 @@ const terraformMock = checkPage('exams/terraform-associate/mock-test/index.html'
 
 const ccaPublished = JSON.parse(read('data/exams/cca-f/questions.json'));
 const terraformPublished = JSON.parse(read('data/exams/terraform-associate/questions.json'));
+const totalPublished = ccaPublished.length + terraformPublished.length;
+
 if (!home.includes('Certification Prep — Practice Library')) errors.push('Homepage title missing');
-if (!home.includes(`${ccaPublished.length}</strong> published practice questions`)) errors.push('Homepage published count does not match browser data');
-if (terraformPublished.length !== 0) errors.push('Onboarding Terraform questions were published');
-if (terraformPractice.includes('id=questionsContainer') || terraformMock.includes('id=mockTestApp')) errors.push('Onboarding Terraform practice UI is enabled');
+if (!home.includes(`${totalPublished}</strong> published practice questions`)) errors.push('Homepage published count does not match browser data');
+if (terraformPublished.length < 60) errors.push('Active Terraform question bank under minimum 60-item gate');
+if (!terraformPractice.includes('id=questionsContainer') && !terraformPractice.includes('id="questionsContainer"')) errors.push('Active Terraform practice UI is missing');
+if (!terraformMock.includes('id=mockTestApp') && !terraformMock.includes('id="mockTestApp"')) errors.push('Active Terraform mock test app is missing');
 if (!terraform.includes('$70.50') || /700\s*\/\s*1000|Domains &amp; Weights/.test(terraform)) errors.push('Terraform overview contains an unverified exam claim');
 if (!cca.includes('Claude Certified Architect')) errors.push('Active CCAF overview missing');
 if (!catalog.includes('In development')) errors.push('Catalog development section missing');
 
-for (const relative of ['exams/ccar-p/index.html', 'exams/ccdv-f/index.html', 'exams/terraform-associate/sample-questions/index.html']) {
+for (const relative of ['exams/ccar-p/index.html', 'exams/ccdv-f/index.html']) {
   const html = checkPage(relative);
   if (!html.includes('noindex, follow')) errors.push(`${relative}: placeholder should be noindex`);
 }

@@ -503,6 +503,36 @@
     "terraform-associate": {
       "sources": [
         {
+          "id": "chojuninengu-practice-exam",
+          "exam_ids": [
+            "terraform-associate"
+          ],
+          "name": "Terraform Associate 004 Community Practice Exams (chojuninengu)",
+          "url": "https://github.com/chojuninengu/terraform-associate-practice-exam",
+          "allowed_redirect_hosts": [
+            "github.com",
+            "raw.githubusercontent.com"
+          ],
+          "trust_tier": "tier-2-curated",
+          "active": true,
+          "publication_mode": "question-source",
+          "parser_adapter": "github-markdown",
+          "format": "markdown",
+          "refresh_frequency": "monthly",
+          "timeout_seconds": 30,
+          "destination": "data/questions/terraform-associate/questions.json",
+          "domains": [
+            "D1",
+            "D2",
+            "D3",
+            "D4",
+            "D5",
+            "D6",
+            "D7",
+            "D8"
+          ]
+        },
+        {
           "id": "hashicorp-official-study-guide",
           "exam_ids": [
             "terraform-associate"

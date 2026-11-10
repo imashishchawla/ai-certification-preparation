@@ -1,13 +1,7 @@
 ---
-title: "Mock Test — Terraform Associate (004)"
-description: "A timed practice test for Terraform Associate (004), available after question-bank review."
-exam_id: "terraform-associate"
-noindex: true
-sitemap:
-  disable: true
-layout: "mock-test"
+title: "Timed Mock Test (57Q / 60M)"
+description: "Simulate the live Certiverse Terraform Associate (004) exam with a 57-question timed test."
 type: "mock-test"
-draft: false
+exam_id: "terraform-associate"
+layout: "list"
 ---
-
-The mock test simulator will be available once the question bank passes minimum release gates (60+ validated questions).
