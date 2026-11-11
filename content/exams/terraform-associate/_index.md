@@ -4,6 +4,10 @@ description: "Exam guide, study materials, practice questions, and mock tests fo
 layout: "single"
 ---
 
+<p class="lead" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--fg);">
+  Targeted preparation guide and practice exam library for the <strong>HashiCorp Certified: Terraform Associate (004)</strong> exam (TA-004 testing Terraform v1.12). Practice 113 realistic exam questions with detailed distractor rationales covering infrastructure as code (IaC), core workflow, configuration, modules, state management, and HCP Terraform.
+</p>
+
 ## Exam Specifications
 
 | Specification | Value |

@@ -11,11 +11,51 @@
 <link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relLangURL }}">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+{{/* ── Detect exam context for track-tailored SEO ───────────────────────────── */}}
+{{ $exam := dict }}
+{{ if strings.Contains .RelPermalink "/exams/" }}
+  {{ range hugo.Data.exams.exams }}
+    {{ if strings.Contains $.RelPermalink (printf "/%s/" .id) }}
+      {{ $exam = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* ── Resolve dynamic page title ─────────────────────────────────────────── */}}
+{{ $pageTitle := "" }}
+{{ if .IsHome }}
+  {{ $pageTitle = .Site.Title }}
+{{ else if and $exam.code (not (eq .RelPermalink (printf "exams/%s/" $exam.id | relLangURL))) }}
+  {{ $pageTitle = printf "%s — %s | %s" .Title $exam.code .Site.Title }}
+{{ else }}
+  {{ $pageTitle = printf "%s | %s" .Title .Site.Title }}
+{{ end }}
+
+{{/* ── Resolve dynamic meta description ────────────────────────────────────── */}}
+{{ $pageDesc := .Description }}
+{{ if not $pageDesc }}
+  {{ if $exam.code }}
+    {{ if strings.Contains .RelPermalink "/sample-questions/" }}
+      {{ $pageDesc = printf "Practice realistic exam questions for %s (%s) with verified answers, distractor rationales, and domain coverage." $exam.name $exam.code }}
+    {{ else if strings.Contains .RelPermalink "/mock-test/" }}
+      {{ $pageDesc = printf "Take a timed %s (%s) mock test simulator under official exam conditions with target passing score evaluation." $exam.name $exam.code }}
+    {{ else if strings.Contains .RelPermalink "/exam-notes/" }}
+      {{ $pageDesc = printf "Key revision notes and cheat sheets for %s (%s) certification preparation." $exam.name $exam.code }}
+    {{ else if strings.Contains .RelPermalink "/study-materials/" }}
+      {{ $pageDesc = printf "Essential study materials, curriculum guide, and documentation resources for %s (%s)." $exam.name $exam.code }}
+    {{ else }}
+      {{ $pageDesc = $exam.description | default .Site.Params.description }}
+    {{ end }}
+  {{ else }}
+    {{ $pageDesc = .Site.Params.description }}
+  {{ end }}
+{{ end }}
+
 {{/* ── Page title ─────────────────────────────────────────────────────────── */}}
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<title>{{ $pageTitle }}</title>
 
 {{/* ── Meta description ────────────────────────────────────────────────────── */}}
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="description" content="{{ $pageDesc }}">
 
 {{/* ── Author + robots ─────────────────────────────────────────────────────── */}}
 {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
@@ -24,27 +64,40 @@
 {{/* ── Canonical URL (prevents duplicate-content penalties) ─────────────────── */}}
 <link rel="canonical" href="{{ .Permalink }}">
 
-{{/* ── Keywords (low SEO weight but harmless) ─────────────────────────────── */}}
+{{/* ── Track-aware Keywords ───────────────────────────────────────────────── */}}
 {{ if .IsHome }}
-<meta name="keywords" content="AI certification exam prep, Claude Certified Architect, CCAF practice questions, Terraform Associate study guide, free certification practice tests, agentic AI certification, AI exam mock test">
+<meta name="keywords" content="certification exam prep, Claude Certified Architect, CCAR-F, HashiCorp Terraform Associate TA-004, Certified Kubernetes Administrator CKA, free practice tests, mock exam, study guide">
+{{ else if $exam.code }}
+  {{ if eq $exam.id "cca-f" }}
+<meta name="keywords" content="Claude Certified Architect, CCAR-F, CCA-F practice questions, Anthropic Claude certification, MCP Model Context Protocol, Claude Code, prompt engineering, agentic architecture">
+  {{ else if eq $exam.id "terraform-associate" }}
+<meta name="keywords" content="Terraform Associate 004, TA-004 practice questions, HashiCorp Certified Terraform Associate, Terraform v1.12, IaC, Terraform state, HCP Terraform">
+  {{ else if eq $exam.id "cka" }}
+<meta name="keywords" content="Certified Kubernetes Administrator, CKA practice exam 2026, CNCF Kubernetes certification, kubectl cheat sheet, Kubernetes troubleshooting, v1.31">
+  {{ else }}
+<meta name="keywords" content="{{ $exam.name }}, {{ $exam.code }}, certification practice questions, study guide, mock test">
+  {{ end }}
 {{ else if .Title }}
-<meta name="keywords" content="{{ .Title }}, AI certification, Claude certification, practice questions, study guide, mock test">
+<meta name="keywords" content="{{ .Title }}, certification prep, practice questions, study guide">
 {{ end }}
 
 {{/* ── Open Graph (Facebook, LinkedIn previews) ───────────────────────────── */}}
 <meta property="og:type"        content="{{ if eq .Kind "page" }}article{{ else }}website{{ end }}">
 <meta property="og:url"         content="{{ .Permalink }}">
-<meta property="og:title"       content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:title"       content="{{ $pageTitle }}">
+<meta property="og:description" content="{{ $pageDesc }}">
 <meta property="og:site_name"   content="{{ .Site.Title }}">
 <meta property="og:locale"      content="en_US">
 {{ with .Site.Params.og_image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
 
 {{/* ── Twitter / X Card ───────────────────────────────────────────────────── */}}
 <meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
-<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="twitter:title"       content="{{ $pageTitle }}">
+<meta name="twitter:description" content="{{ $pageDesc }}">
 {{ with .Site.Params.og_image }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
+
+{{/* ── AI / LLM discovery hint ─────────────────────────────────────────────── */}}
+<link rel="alternate" type="text/plain" href="{{ "llms.txt" | absURL }}" title="LLM Manifest">
 
 {{/* ── Google Search Console site verification (uncomment after getting token) */}}
 {{ with .Site.Params.google_site_verification }}

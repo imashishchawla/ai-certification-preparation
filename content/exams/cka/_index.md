@@ -4,6 +4,10 @@ description: "Exam guide, study materials, performance tasks, and hands-on pract
 layout: "single"
 ---
 
+<p class="lead" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--fg);">
+  Curriculum roadmap and preparation guide for the CNCF &amp; The Linux Foundation <strong>Certified Kubernetes Administrator (CKA)</strong> certification. Master 15–20 hands-on performance tasks in live terminal clusters across troubleshooting, cluster architecture, kubeadm upgrades, networking, and storage on Kubernetes v1.31+.
+</p>
+
 ## Exam Specifications
 
 | Specification | Value |

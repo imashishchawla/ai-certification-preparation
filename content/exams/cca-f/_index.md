@@ -4,6 +4,10 @@ description: "Exam guide, study materials, practice questions, and mock tests fo
 layout: "single"
 ---
 
+<p class="lead" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--fg);">
+  Comprehensive study guide and practice exam library for the Anthropic <strong>Claude Certified Architect — Foundations (CCAR-F)</strong> certification (formerly CCA-F). Master agentic architecture, tool design, Model Context Protocol (MCP), Claude Code workflows, and prompt engineering with 1,320+ realistic practice questions.
+</p>
+
 ## Exam Specifications
 
 | Specification | Value |

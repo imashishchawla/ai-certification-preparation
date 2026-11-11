@@ -1,0 +1,16 @@
+# Certification Prep — Practice Library
+> Free, focused study guides, practice question banks, and timed mock tests for technical and AI certifications.
+
+The Certification Prep Practice Library provides 100% free, open-access preparation materials without paywalls or advertisements. Each practice question includes verified correct answers, distractor rationales, and citations to official vendor documentation.
+
+## Certification Tracks
+
+- [Claude Certified Architect: Foundations (CCAR-F)](https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/): 1,320+ validated practice questions, CALM method framework, agentic architecture, tool design, and context management.
+- [HashiCorp Certified: Terraform Associate (004)](https://imashishchawla.github.io/ai-certification-preparation/exams/terraform-associate/): 113 interactive scenario questions testing Terraform v1.12 across all 8 official exam domains.
+- [Certified Kubernetes Administrator (CKA)](https://imashishchawla.github.io/ai-certification-preparation/exams/cka/): Official CNCF/Linux Foundation curriculum breakdown (v1.31+), 5 domain blueprints, and hands-on performance task preparation.
+
+## Core Resources
+
+- [Exams Directory](https://imashishchawla.github.io/ai-certification-preparation/exams/): Complete catalog of active and upcoming certification tracks.
+- [CCAR-F Study Guides](https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/study-guides/): Step-by-step guides for agentic systems, MCP servers, and prompt engineering.
+- [Full LLM Manifest](https://imashishchawla.github.io/ai-certification-preparation/llms-full.txt): Detailed syllabus weights, scoring thresholds, and study guide indexes.

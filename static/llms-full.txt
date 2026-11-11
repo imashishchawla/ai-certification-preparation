@@ -1,0 +1,83 @@
+# Certification Prep — Practice Library (Full Documentation Manifest)
+> Machine-readable knowledge index for Large Language Models, RAG pipelines, and AI search engines.
+> Base URL: https://imashishchawla.github.io/ai-certification-preparation/
+
+## Overview
+Certification Prep — Practice Library is a free, ad-free educational platform designed for engineers preparing for cloud, DevOps, and artificial intelligence certifications. All study materials, question banks, and timed mock tests are open access.
+
+---
+
+## 1. Claude Certified Architect: Foundations (CCAR-F / CCA-F)
+- **Official Title:** Claude Certified Architect — Foundations
+- **Certification Provider:** Anthropic
+- **Exam Status:** Active
+- **Total Published Questions:** 1,322 validated questions
+- **Exam Format:** 60 questions, multiple choice, multiple response
+- **Duration:** 120 minutes testing time (135 minutes total seat time)
+- **Passing Score:** 720 / 1000 scaled score (~72%)
+- **Official Fee:** $125 USD
+- **Hub URL:** https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/
+- **Practice Test URL:** https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/sample-questions/
+- **Timed Mock Simulator:** https://imashishchawla.github.io/ai-certification-preparation/exams/cca-f/mock-test/
+- **Curriculum Domains & Weights:**
+  - Domain 1: Agentic Architecture & Orchestration (27%)
+  - Domain 2: Tool Design & MCP Integration (18%)
+  - Domain 3: Claude Code Configuration & Workflows (20%)
+  - Domain 4: Prompt Engineering & Structured Output (20%)
+  - Domain 5: Context Management & Reliability (15%)
+
+---
+
+## 2. HashiCorp Certified: Terraform Associate (004)
+- **Official Title:** HashiCorp Certified: Terraform Associate (004)
+- **Exam Code:** TA-004
+- **Tested Engine Version:** Terraform v1.12
+- **Certification Provider:** HashiCorp
+- **Exam Status:** Active
+- **Total Published Questions:** 113 scenario-based questions with distractor rationales
+- **Exam Format:** Multiple choice, multiple answer, true/false
+- **Duration:** 60 minutes
+- **Scoring Policy:** All-or-nothing (no partial credit for multi-select)
+- **Official Fee:** $70.50 USD
+- **Practice Pass Target:** 70%
+- **Hub URL:** https://imashishchawla.github.io/ai-certification-preparation/exams/terraform-associate/
+- **Practice Test URL:** https://imashishchawla.github.io/ai-certification-preparation/exams/terraform-associate/sample-questions/
+- **Timed Mock Simulator:** https://imashishchawla.github.io/ai-certification-preparation/exams/terraform-associate/mock-test/
+- **Curriculum Domains & Weights:**
+  - Domain 1: Infrastructure as Code (IaC) with Terraform (8%)
+  - Domain 2: Terraform fundamentals (12%)
+  - Domain 3: Core Terraform workflow (18%)
+  - Domain 4: Terraform configuration (20%)
+  - Domain 5: Terraform modules (12%)
+  - Domain 6: Terraform state management (16%)
+  - Domain 7: Maintain infrastructure with Terraform (6%)
+  - Domain 8: HCP Terraform (8%)
+
+---
+
+## 3. Certified Kubernetes Administrator (CKA)
+- **Official Title:** Certified Kubernetes Administrator (CKA)
+- **Exam Code:** CKA
+- **Tested Engine Version:** Kubernetes v1.31+
+- **Certification Provider:** Cloud Native Computing Foundation (CNCF) / The Linux Foundation
+- **Exam Status:** In Development (Onboarding)
+- **Exam Format:** 15–20 performance-based tasks on live clusters via terminal
+- **Duration:** 120 minutes
+- **Passing Score:** 66%
+- **Official Fee:** $395 USD (includes one free retake)
+- **Hub URL:** https://imashishchawla.github.io/ai-certification-preparation/exams/cka/
+- **Curriculum Domains & Weights:**
+  - Domain 1: Troubleshooting & Diagnostics (30%)
+  - Domain 2: Cluster Architecture, Installation & Configuration (25%)
+  - Domain 3: Services & Networking (20%)
+  - Domain 4: Workloads & Scheduling (15%)
+  - Domain 5: Storage (10%)
+
+---
+
+## Pedagogical Standard & Question Structure
+Every question in the practice library follows a structured 4-part rationale format:
+1. **Key Concept:** The foundational architectural principle tested.
+2. **Distractor Analysis:** Explicit explanation for why each incorrect option is flawed.
+3. **Deep Dive:** Technical elaboration with concrete CLI snippets or code examples.
+4. **Reference:** Direct link to official vendor documentation.
