@@ -1,31 +1,56 @@
 {{/* ═══════════════════════════════════════════════════════════════════════════
      certifications-directory-grid.html
-     Interactive Certifications Directory with Multi-Facet Filtering
+     Interactive Certifications Directory with Full-Width Middle Search Bar,
+     Left Sidebar Facet Filters, and Direct End-Certification Links
    ═══════════════════════════════════════════════════════════════════════════ */}}
 
 {{ $certs := hugo.Data.certifications_directory.certifications }}
 {{ $total := len $certs }}
 
-<section class="directory-section cert-directory-section" id="certifications-directory" aria-labelledby="cert-directory-heading">
-  <div class="section-heading">
-    <div>
-      <p class="eyebrow">Explore, Filter &amp; Compare</p>
-      <h2 id="cert-directory-heading">Certifications Directory</h2>
+<section class="cert-directory-section" id="certifications-directory" aria-label="Certifications Directory">
+
+  {{/* ── Full-Width Middle Search Bar ───────────────────────────────────── */}}
+  <div class="cert-search-fullbar" role="search" aria-label="Search Certifications">
+    <div class="search-input-wrapper">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input type="search"
+             id="certSearchInput"
+             class="cert-search-input"
+             placeholder="Search by certification name, brand, technology, or topic (e.g. Kubernetes, AWS, C#, Security, Terraform)..."
+             aria-label="Search certifications">
+      <button type="button" id="clearSearchBtn" class="clear-search-btn" aria-label="Clear search text" style="display: none;">✕</button>
     </div>
-    <p>Filter verified credentials, exams, and free badge programs across leading technology brands.</p>
   </div>
 
-  {{/* ── Filter Toolbar ─────────────────────────────────────────────────── */}}
-  <div class="cert-filter-toolbar" role="region" aria-label="Certification Filters">
-    
-    {{/* Search Row */}}
-    <div class="filter-search-row">
-      <div class="search-input-wrapper">
-        <span class="search-icon" aria-hidden="true">🔍</span>
-        <input type="search" id="certSearchInput" class="cert-search-input" placeholder="Search by certification name, brand, or technology..." aria-label="Search certifications">
+  {{/* ── Mobile Filter Toggle Button ────────────────────────────────────── */}}
+  <div class="cert-mobile-filter-bar">
+    <button type="button" id="toggleMobileFiltersBtn" class="mobile-filter-toggle" aria-expanded="false" aria-controls="certSidebarFilters">
+      <span class="filter-icon" aria-hidden="true">⚙️</span>
+      <span>Filters &amp; Facets</span>
+      <span class="filter-count-badge" id="activeFiltersBadge" style="display: none;">0</span>
+    </button>
+    <div class="mobile-count-summary">
+      Showing <strong id="certMobileCount">{{ $total }}</strong> of {{ $total }}
+    </div>
+  </div>
+
+  {{/* ── 2-Column Layout: Left Sidebar + Right Main Grid ────────────────── */}}
+  <div class="cert-directory-layout">
+
+    {{/* ── Left Sidebar: Multi-Facet Filters ── */}}
+    <aside class="cert-sidebar-filters" id="certSidebarFilters" role="region" aria-label="Certification Filters">
+      
+      <div class="sidebar-header">
+        <div class="sidebar-title-row">
+          <h2 class="sidebar-title">Filters</h2>
+          <button type="button" id="resetCertFiltersBtn" class="reset-filter-btn" style="display: none;">Reset All ✕</button>
+        </div>
+        <p class="sidebar-count">Showing <strong id="certCurrentCount">{{ $total }}</strong> of {{ $total }} certifications</p>
       </div>
-      <div class="brand-dropdown-wrapper">
-        <label for="brandSelectDropdown" class="visually-hidden">Filter by Brand</label>
+
+      {{/* Brand Filter */}}
+      <div class="sidebar-filter-group">
+        <label for="brandSelectDropdown" class="sidebar-filter-heading">Brand</label>
         <select id="brandSelectDropdown" class="cert-brand-select" aria-label="Select Brand">
           <option value="all">All Brands ({{ $total }})</option>
           <option value="aws">Amazon Web Services</option>
@@ -41,56 +66,52 @@
           <option value="tigera">Tigera</option>
         </select>
       </div>
-    </div>
 
-    {{/* Facet Filter Rows */}}
-    <div class="filter-facets-container">
-      
       {{/* Price Facet */}}
-      <div class="filter-facet-row" data-facet="price">
-        <span class="facet-label">Price:</span>
-        <div class="facet-pills" role="radiogroup" aria-label="Filter by Price">
+      <div class="sidebar-filter-group filter-facet-row" data-facet="price">
+        <span class="sidebar-filter-heading">Price</span>
+        <div class="sidebar-pills" role="radiogroup" aria-label="Filter by Price">
           <button type="button" class="facet-pill is-active" data-val="all" role="radio" aria-checked="true">All</button>
           <button type="button" class="facet-pill" data-val="free" role="radio" aria-checked="false">Free ($0)</button>
           <button type="button" class="facet-pill" data-val="paid" role="radio" aria-checked="false">Paid</button>
         </div>
       </div>
 
-      {{/* Type Facet (Proctored vs Non-Proctored) */}}
-      <div class="filter-facet-row" data-facet="type">
-        <span class="facet-label">Type:</span>
-        <div class="facet-pills" role="radiogroup" aria-label="Filter by Type">
+      {{/* Type Facet */}}
+      <div class="sidebar-filter-group filter-facet-row" data-facet="type">
+        <span class="sidebar-filter-heading">Exam Type</span>
+        <div class="sidebar-pills" role="radiogroup" aria-label="Filter by Type">
           <button type="button" class="facet-pill is-active" data-val="all" role="radio" aria-checked="true">All</button>
           <button type="button" class="facet-pill" data-val="proctored" role="radio" aria-checked="false">PROCTORED</button>
           <button type="button" class="facet-pill" data-val="non-proctored" role="radio" aria-checked="false">NON-PROCTORED</button>
         </div>
       </div>
 
-      {{/* Audience / Eligibility Facet */}}
-      <div class="filter-facet-row" data-facet="audience">
-        <span class="facet-label">Audience:</span>
-        <div class="facet-pills" role="radiogroup" aria-label="Filter by Audience">
+      {{/* Audience Facet */}}
+      <div class="sidebar-filter-group filter-facet-row" data-facet="audience">
+        <span class="sidebar-filter-heading">Audience</span>
+        <div class="sidebar-pills" role="radiogroup" aria-label="Filter by Audience">
           <button type="button" class="facet-pill is-active" data-val="all" role="radio" aria-checked="true">All</button>
-          <button type="button" class="facet-pill" data-val="students" role="radio" aria-checked="false">Students / Free Vouchers</button>
+          <button type="button" class="facet-pill" data-val="students" role="radio" aria-checked="false">Students / Vouchers</button>
           <button type="button" class="facet-pill" data-val="professional" role="radio" aria-checked="false">Professional</button>
         </div>
       </div>
 
       {{/* Expiration Facet */}}
-      <div class="filter-facet-row" data-facet="expiration">
-        <span class="facet-label">Expiration:</span>
-        <div class="facet-pills" role="radiogroup" aria-label="Filter by Expiration">
+      <div class="sidebar-filter-group filter-facet-row" data-facet="expiration">
+        <span class="sidebar-filter-heading">Validity</span>
+        <div class="sidebar-pills" role="radiogroup" aria-label="Filter by Expiration">
           <button type="button" class="facet-pill is-active" data-val="all" role="radio" aria-checked="true">All</button>
-          <button type="button" class="facet-pill" data-val="lifetime" role="radio" aria-checked="false">Lifetime (No Expiry)</button>
+          <button type="button" class="facet-pill" data-val="lifetime" role="radio" aria-checked="false">Lifetime</button>
           <button type="button" class="facet-pill" data-val="2years" role="radio" aria-checked="false">Valid 2 Years</button>
           <button type="button" class="facet-pill" data-val="3years" role="radio" aria-checked="false">Valid 3 Years</button>
         </div>
       </div>
 
       {{/* Verified Badge Facet */}}
-      <div class="filter-facet-row" data-facet="badge">
-        <span class="facet-label">Badge:</span>
-        <div class="facet-pills" role="radiogroup" aria-label="Filter by Verified Badge">
+      <div class="sidebar-filter-group filter-facet-row" data-facet="badge">
+        <span class="sidebar-filter-heading">Digital Badge</span>
+        <div class="sidebar-pills" role="radiogroup" aria-label="Filter by Digital Badge">
           <button type="button" class="facet-pill is-active" data-val="all" role="radio" aria-checked="true">All</button>
           <button type="button" class="facet-pill" data-val="credly" role="radio" aria-checked="false">Credly</button>
           <button type="button" class="facet-pill" data-val="linkedin" role="radio" aria-checked="false">LinkedIn</button>
@@ -99,84 +120,99 @@
       </div>
 
       {{/* Format Facet */}}
-      <div class="filter-facet-row" data-facet="format">
-        <span class="facet-label">Format:</span>
-        <div class="facet-pills" role="radiogroup" aria-label="Filter by Format">
+      <div class="sidebar-filter-group filter-facet-row" data-facet="format">
+        <span class="sidebar-filter-heading">Format</span>
+        <div class="sidebar-pills" role="radiogroup" aria-label="Filter by Format">
           <button type="button" class="facet-pill is-active" data-val="all" role="radio" aria-checked="true">All</button>
           <button type="button" class="facet-pill" data-val="mcq" role="radio" aria-checked="false">MC Questions</button>
           <button type="button" class="facet-pill" data-val="hands-on" role="radio" aria-checked="false">Hands-on</button>
         </div>
       </div>
 
-    </div>
+    </aside>
 
-    {{/* Status Bar & Reset */}}
-    <div class="filter-status-bar">
-      <span class="filter-count-text">Showing <strong id="certCurrentCount">{{ $total }}</strong> of {{ $total }} certifications</span>
-      <button type="button" id="resetCertFiltersBtn" class="reset-filter-btn" style="display: none;">Reset All Filters ✕</button>
-    </div>
+    {{/* ── Right Main Column: Cards Grid & State ── */}}
+    <div class="cert-main-column">
 
-  </div>
-
-  {{/* ── Cards Grid ──────────────────────────────────────────────────────── */}}
-  <div class="card-grid card-grid-3" id="certCardsGrid">
-    {{ range $certs }}
-    <article class="cert-card cert-directory-card"
-             data-brand="{{ .brand }}"
-             data-price="{{ .price }}"
-             data-type="{{ .type }}"
-             data-audience="{{ .audience }}"
-             data-expiration="{{ .expiration }}"
-             data-badge="{{ .badge }}"
-             data-format="{{ .format }}"
-             data-search="{{ lower .name }} {{ lower .brand_name }} {{ lower .category_label }} {{ lower .description }}">
-      
-      <div class="cert-card-copy">
-        {{/* Brand Header */}}
-        <div class="cert-brand-header">
-          <img src="{{ .brand_logo | relURL }}" alt="{{ .brand_name }} icon" class="cert-brand-logo" width="28" height="28" loading="lazy">
-          <span class="cert-brand-title">{{ .brand_name }}</span>
-        </div>
-
-        {{/* Tags & Badges Row */}}
-        <div class="cert-pill-badges">
-          <span class="cert-pill cert-pill-price cert-price-{{ .price }}">{{ if eq .price "free" }}FREE{{ else }}{{ .price_label }}{{ end }}</span>
-          <span class="cert-pill cert-pill-type cert-type-{{ .type }}">{{ if eq .type "proctored" }}PROCTORED{{ else }}NON-PROCTORED{{ end }}</span>
-          <span class="cert-pill cert-pill-badge">{{ .badge_label }}</span>
-          <span class="cert-pill cert-pill-format">{{ .format_label }}</span>
-        </div>
-
-        {{/* Title & Category */}}
-        <div class="cert-meta-eyebrow">{{ .category_label }} · {{ .expiration_label }}</div>
-        <h3 class="cert-directory-title">{{ .name }}</h3>
-        <p class="cert-directory-desc">{{ .description }}</p>
+      {{/* Active Filter Chips / Dismiss Row */}}
+      <div id="activeFilterTagsBar" class="active-filter-tags-bar" style="display: none;">
+        <span class="active-tags-label">Active Filters:</span>
+        <div id="activeTagsContainer" class="active-tags-container"></div>
+        <button type="button" id="clearAllTagsBtn" class="clear-all-tags-btn">Clear All</button>
       </div>
 
-      {{/* Action Link */}}
-      <div class="cert-directory-action">
-        {{ if .has_practice }}
-          <a href="{{ .url | relLangURL }}" class="reveal-btn cert-action">Explore Practice Library →</a>
-        {{ else if .is_external }}
-          <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary cert-action cert-external-link">Official Portal <span aria-hidden="true">↗</span></a>
-        {{ else }}
-          <a href="{{ .url | relLangURL }}" class="cert-text-link">View Exam Information <span aria-hidden="true">→</span></a>
+      {{/* Cards Grid */}}
+      <div class="card-grid card-grid-2" id="certCardsGrid">
+        {{ range $certs }}
+        <article class="cert-card cert-directory-card"
+                 data-brand="{{ .brand }}"
+                 data-price="{{ .price }}"
+                 data-type="{{ .type }}"
+                 data-audience="{{ .audience }}"
+                 data-expiration="{{ .expiration }}"
+                 data-badge="{{ .badge }}"
+                 data-format="{{ .format }}"
+                 data-search="{{ lower .name }} {{ lower .brand_name }} {{ lower .category_label }} {{ lower .description }}">
+          
+          <div class="cert-card-copy">
+            {{/* Brand Header */}}
+            <div class="cert-brand-header">
+              <img src="{{ .brand_logo | relURL }}" alt="{{ .brand_name }} icon" class="cert-brand-logo" width="28" height="28" loading="lazy">
+              <span class="cert-brand-title">{{ .brand_name }}</span>
+            </div>
+
+            {{/* Tags & Badges Row */}}
+            <div class="cert-pill-badges">
+              <span class="cert-pill cert-pill-price cert-price-{{ .price }}">{{ if eq .price "free" }}FREE{{ else }}{{ .price_label }}{{ end }}</span>
+              <span class="cert-pill cert-pill-type cert-type-{{ .type }}">{{ if eq .type "proctored" }}PROCTORED{{ else }}NON-PROCTORED{{ end }}</span>
+              <span class="cert-pill cert-pill-badge">{{ .badge_label }}</span>
+              <span class="cert-pill cert-pill-format">{{ .format_label }}</span>
+            </div>
+
+            {{/* Title & Category - Direct link to end certification itself */}}
+            <div class="cert-meta-eyebrow">{{ .category_label }} · {{ .expiration_label }}</div>
+            <h3 class="cert-directory-title">
+              <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="cert-title-link">
+                {{ .name }} <span class="ext-icon" aria-hidden="true">↗</span>
+              </a>
+            </h3>
+            <p class="cert-directory-desc">{{ .description }}</p>
+          </div>
+
+          {{/* Action Links */}}
+          <div class="cert-directory-action">
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" class="reveal-btn cert-action">
+              Official Certification <span aria-hidden="true">↗</span>
+            </a>
+            {{ if .has_practice }}
+              <a href="{{ .practice_url | relLangURL }}" class="cert-practice-sublink">
+                📚 Practice Questions &amp; Mock Test →
+              </a>
+            {{ else if .voucher_url }}
+              <a href="{{ .voucher_url }}" target="_blank" rel="noopener noreferrer" class="cert-practice-sublink">
+                🎟️ Free 1MCC Voucher Application ↗
+              </a>
+            {{ end }}
+          </div>
+
+        </article>
         {{ end }}
       </div>
 
-    </article>
-    {{ end }}
-  </div>
+      {{/* Empty Results State */}}
+      <div id="certEmptyState" class="cert-empty-state" style="display: none;">
+        <p class="empty-title">No certifications match your selected filters.</p>
+        <p class="muted">Try relaxing some criteria or resetting the search.</p>
+        <button type="button" id="emptyResetBtn" class="reveal-btn" style="margin-top: 1rem;">Reset All Filters</button>
+      </div>
 
-  {{/* Empty Results State */}}
-  <div id="certEmptyState" class="cert-empty-state" style="display: none;">
-    <p class="empty-title">No certifications match your selected filters.</p>
-    <p class="muted">Try relaxing some criteria or click below to reset.</p>
-    <button type="button" id="emptyResetBtn" class="reveal-btn" style="margin-top: 1rem;">Reset All Filters</button>
+    </div>
+
   </div>
 
 </section>
 
-{{/* ── Real-time Zero-Dependency Filter Script ────────────────────────────── */}}
+{{/* ── Filter & Search Controller Script ──────────────────────────────────── */}}
 <script>
 (function() {
   var activeFilters = {
@@ -191,14 +227,21 @@
   };
 
   var searchInput = document.getElementById('certSearchInput');
+  var clearSearchBtn = document.getElementById('clearSearchBtn');
   var brandSelect = document.getElementById('brandSelectDropdown');
   var facetRows = document.querySelectorAll('.filter-facet-row');
   var cards = document.querySelectorAll('.cert-directory-card');
   var countEl = document.getElementById('certCurrentCount');
+  var mobileCountEl = document.getElementById('certMobileCount');
+  var badgeCountEl = document.getElementById('activeFiltersBadge');
   var resetBtn = document.getElementById('resetCertFiltersBtn');
   var emptyState = document.getElementById('certEmptyState');
   var emptyResetBtn = document.getElementById('emptyResetBtn');
-  var totalCards = cards.length;
+  var tagsBar = document.getElementById('activeFilterTagsBar');
+  var tagsContainer = document.getElementById('activeTagsContainer');
+  var clearAllTagsBtn = document.getElementById('clearAllTagsBtn');
+  var mobileToggleBtn = document.getElementById('toggleMobileFiltersBtn');
+  var sidebar = document.getElementById('certSidebarFilters');
 
   function isFiltered() {
     return activeFilters.search !== '' ||
@@ -209,6 +252,102 @@
            activeFilters.expiration !== 'all' ||
            activeFilters.badge !== 'all' ||
            activeFilters.format !== 'all';
+  }
+
+  function getActiveFilterCount() {
+    var count = 0;
+    if (activeFilters.search) count++;
+    if (activeFilters.brand !== 'all') count++;
+    if (activeFilters.price !== 'all') count++;
+    if (activeFilters.type !== 'all') count++;
+    if (activeFilters.audience !== 'all') count++;
+    if (activeFilters.expiration !== 'all') count++;
+    if (activeFilters.badge !== 'all') count++;
+    if (activeFilters.format !== 'all') count++;
+    return count;
+  }
+
+  function renderActiveTags() {
+    if (!tagsBar || !tagsContainer) return;
+    tagsContainer.innerHTML = '';
+
+    var activeCount = getActiveFilterCount();
+    if (activeCount === 0) {
+      tagsBar.style.display = 'none';
+      if (badgeCountEl) {
+        badgeCountEl.style.display = 'none';
+        badgeCountEl.textContent = '0';
+      }
+      return;
+    }
+
+    tagsBar.style.display = 'flex';
+    if (badgeCountEl) {
+      badgeCountEl.style.display = 'inline-block';
+      badgeCountEl.textContent = activeCount;
+    }
+
+    function addTag(label, removeFn) {
+      var tag = document.createElement('span');
+      tag.className = 'active-filter-chip';
+      tag.innerHTML = label + ' <button type="button" class="remove-chip-btn" aria-label="Remove ' + label + ' filter">✕</button>';
+      tag.querySelector('.remove-chip-btn').addEventListener('click', removeFn);
+      tagsContainer.appendChild(tag);
+    }
+
+    if (activeFilters.search) {
+      addTag('Search: "' + activeFilters.search + '"', function() {
+        activeFilters.search = '';
+        if (searchInput) searchInput.value = '';
+        if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+        applyFilters();
+      });
+    }
+
+    if (activeFilters.brand !== 'all') {
+      var brandText = brandSelect ? brandSelect.options[brandSelect.selectedIndex].text : activeFilters.brand;
+      addTag('Brand: ' + brandText, function() {
+        activeFilters.brand = 'all';
+        if (brandSelect) brandSelect.value = 'all';
+        applyFilters();
+      });
+    }
+
+    var facetLabels = {
+      price: { free: 'Price: Free ($0)', paid: 'Price: Paid' },
+      type: { proctored: 'Type: PROCTORED', 'non-proctored': 'Type: NON-PROCTORED' },
+      audience: { students: 'Audience: Students', professional: 'Audience: Professional' },
+      expiration: { lifetime: 'Validity: Lifetime', '2years': 'Validity: 2 Years', '3years': 'Validity: 3 Years' },
+      badge: { credly: 'Badge: Credly', linkedin: 'Badge: LinkedIn', others: 'Badge: Others' },
+      format: { mcq: 'Format: MC Questions', 'hands-on': 'Format: Hands-on' }
+    };
+
+    Object.keys(facetLabels).forEach(function(facetKey) {
+      var val = activeFilters[facetKey];
+      if (val !== 'all' && facetLabels[facetKey][val]) {
+        addTag(facetLabels[facetKey][val], function() {
+          resetFacet(facetKey);
+          applyFilters();
+        });
+      }
+    });
+  }
+
+  function resetFacet(facetKey) {
+    activeFilters[facetKey] = 'all';
+    var row = document.querySelector('.filter-facet-row[data-facet="' + facetKey + '"]');
+    if (row) {
+      var pills = row.querySelectorAll('.facet-pill');
+      pills.forEach(function(p) {
+        if (p.getAttribute('data-val') === 'all') {
+          p.classList.add('is-active');
+          p.setAttribute('aria-checked', 'true');
+        } else {
+          p.classList.remove('is-active');
+          p.setAttribute('aria-checked', 'false');
+        }
+      });
+    }
   }
 
   function applyFilters() {
@@ -224,7 +363,7 @@
       var matchesExpiration = (activeFilters.expiration === 'all') || (card.getAttribute('data-expiration') === activeFilters.expiration);
       var matchesBadge = (activeFilters.badge === 'all') || (card.getAttribute('data-badge') === activeFilters.badge);
       var matchesFormat = (activeFilters.format === 'all') || (card.getAttribute('data-format') === activeFilters.format);
-      
+
       var matchesSearch = true;
       if (query !== '') {
         var searchIndex = card.getAttribute('data-search') || '';
@@ -242,8 +381,11 @@
     }
 
     if (countEl) countEl.textContent = visibleCount;
+    if (mobileCountEl) mobileCountEl.textContent = visibleCount;
     if (resetBtn) resetBtn.style.display = isFiltered() ? 'inline-block' : 'none';
     if (emptyState) emptyState.style.display = (visibleCount === 0) ? 'block' : 'none';
+
+    renderActiveTags();
   }
 
   function resetAll() {
@@ -257,6 +399,7 @@
     activeFilters.format = 'all';
 
     if (searchInput) searchInput.value = '';
+    if (clearSearchBtn) clearSearchBtn.style.display = 'none';
     if (brandSelect) brandSelect.value = 'all';
 
     facetRows.forEach(function(row) {
@@ -279,6 +422,20 @@
   if (searchInput) {
     searchInput.addEventListener('input', function(e) {
       activeFilters.search = e.target.value;
+      if (clearSearchBtn) clearSearchBtn.style.display = e.target.value ? 'inline-block' : 'none';
+      applyFilters();
+    });
+  }
+
+  // Bind Clear Search Button
+  if (clearSearchBtn) {
+    clearSearchBtn.addEventListener('click', function() {
+      activeFilters.search = '';
+      if (searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+      }
+      clearSearchBtn.style.display = 'none';
       applyFilters();
     });
   }
@@ -311,8 +468,17 @@
     });
   });
 
+  // Bind Mobile Toggle
+  if (mobileToggleBtn && sidebar) {
+    mobileToggleBtn.addEventListener('click', function() {
+      var isOpen = sidebar.classList.toggle('is-open');
+      mobileToggleBtn.setAttribute('aria-expanded', isOpen);
+    });
+  }
+
   // Bind Reset Buttons
   if (resetBtn) resetBtn.addEventListener('click', resetAll);
   if (emptyResetBtn) emptyResetBtn.addEventListener('click', resetAll);
+  if (clearAllTagsBtn) clearAllTagsBtn.addEventListener('click', resetAll);
 })();
 </script>

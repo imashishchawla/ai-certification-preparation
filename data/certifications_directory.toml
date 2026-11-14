@@ -1,5 +1,6 @@
 # ── CERTIFICATIONS DIRECTORY DATASET ──────────────────────────────────────────
 # Controlled catalog of verified industry certifications and badges.
+# Every entry's `url` points directly to the official end certification page.
 
 # ── GITHUB ────────────────────────────────────────────────────────────────────
 [[certifications]]
@@ -22,7 +23,7 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "MC Questions (60 items)"
-url = "https://learn.github.com/certifications"
+url = "https://learn.github.com/certifications/github-foundations"
 is_external = true
 has_practice = false
 description = "Official GitHub foundational credential validating Git collaboration, repository management, GitHub Actions, and security features."
@@ -48,8 +49,9 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "hands-on"
 format_label = "Hands-on (15–20 Tasks)"
-url = "exams/cka/"
-is_external = false
+url = "https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/"
+practice_url = "exams/cka/"
+is_external = true
 has_practice = false
 description = "Premier Kubernetes administration credential testing live-cluster troubleshooting, installation, networking, and storage."
 
@@ -73,7 +75,7 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "MC Questions & Quizzes"
-url = "https://training.linuxfoundation.org/resources/free-courses/"
+url = "https://training.linuxfoundation.org/express-learning/developing-secure-software-lfd121/"
 is_external = true
 has_practice = false
 description = "OpenSSF credential covering threat modeling, secure coding in C/Python/Java, cryptography, and supply chain verification."
@@ -125,8 +127,9 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "MC Questions (57 items)"
-url = "exams/terraform-associate/"
-is_external = false
+url = "https://developer.hashicorp.com/certifications/infrastructure-automation"
+practice_url = "exams/terraform-associate/"
+is_external = true
 has_practice = true
 description = "Infrastructure as Code certification testing Terraform v1.12 workflow, configuration, state management, and HCP Terraform."
 
@@ -151,7 +154,8 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "MC Questions (100 items)"
-url = "https://www.isc2.org/landing/1mcc"
+url = "https://www.isc2.org/certifications/cc"
+voucher_url = "https://www.isc2.org/landing/1mcc"
 is_external = true
 has_practice = false
 description = "Global foundational cybersecurity certification funded by the 1MCC program. Includes free official training and free Pearson VUE proctored exam voucher."
@@ -177,7 +181,7 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "MC Questions (40 items)"
-url = "https://explore.skillbuilder.aws"
+url = "https://www.credly.com/org/amazon-web-services/badge/aws-knowledge-cloud-essentials-training-badge"
 is_external = true
 has_practice = false
 description = "Official AWS Skill Builder assessment validating foundational cloud concepts, compute, storage, security, and billing."
@@ -202,7 +206,7 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "Reading & Quiz"
-url = "https://www.awseducate.com"
+url = "https://www.credly.com/org/amazon-web-services/badge/aws-educate-introduction-to-generative-ai-training-"
 is_external = true
 has_practice = false
 description = "Student-friendly AWS Educate track covering foundation models, prompt engineering, generative applications, and Bedrock."
@@ -280,7 +284,7 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "mcq"
 format_label = "MC Questions"
-url = "https://skillsforall.com"
+url = "https://skillsforall.com/course/introduction-to-cybersecurity"
 is_external = true
 has_practice = false
 description = "Cisco Networking Academy foundational credential covering global cyber threats, defensive measures, and data privacy."
@@ -306,8 +310,9 @@ badge = "others"
 badge_label = "Vendor Credential"
 format = "mcq"
 format_label = "MC Questions (60 items)"
-url = "exams/cca-f/"
-is_external = false
+url = "https://anthropic-partners.skilljar.com/claude-certified-architect-foundations-certification"
+practice_url = "exams/cca-f/"
+is_external = true
 has_practice = true
 description = "Foundations certification covering agentic architecture, tool design, Model Context Protocol (MCP), and Claude Code workflows."
 
@@ -332,7 +337,7 @@ badge = "credly"
 badge_label = "Credly Badge"
 format = "hands-on"
 format_label = "Hands-on Lab"
-url = "https://academy.tigera.io"
+url = "https://www.tigera.io/lp/courses-and-certifications/"
 is_external = true
 has_practice = false
 description = "Industry standard credential validating Kubernetes networking, CNI architecture, NetworkPolicy enforcement, and cluster observability."
