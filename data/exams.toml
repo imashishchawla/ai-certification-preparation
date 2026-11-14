@@ -89,6 +89,26 @@ minimum_mock_questions = 60
 "D8 HCP Terraform" = 8
 
 [[exams]]
+id = "terraform-infrastructure-engineer-professional"
+name = "Terraform Infrastructure Engineer Professional (002)"
+provider = "HashiCorp"
+status = "onboarding"
+version = "002"
+terraform_version_tested = "1.15"
+questions = 0
+duration_minutes = 90
+price_usd = 200
+credential_validity_years = 2
+assessment_type = "Multiple choice and multiple answer"
+delivery_format = "Online proctored"
+official_source = "https://developer.hashicorp.com/certifications/terraform-infrastructure-engineer-professional"
+source_checked = "2026-11-14"
+path = "exams/terraform-infrastructure-engineer-professional/"
+objective_catalog = "data/objectives/terraform-infrastructure-engineer-professional.json"
+description = "Professional Terraform certification covering scalable configuration, state and backends, infrastructure operations, CI/CD, security and governance, advanced modules, and HCP Terraform."
+sync_enabled = false
+
+[[exams]]
 id = "cka"
 code = "CKA"
 name = "Certified Kubernetes Administrator (CKA)"

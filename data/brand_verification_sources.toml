@@ -1,0 +1,89 @@
+# ── Weekly Brand Verification Sources ─────────────────────────────────────────
+# Master registry for automated weekly link and voucher status verification.
+
+[[brands]]
+id = "github"
+name = "GitHub"
+official_url = "https://learn.github.com/certifications"
+credly_issuer_url = "https://www.credly.com/organizations/github/badges"
+student_program_url = "https://education.github.com/pack"
+student_offer_details = "Free exam vouchers for verified students via GitHub Student Developer Pack"
+frequency = "weekly"
+
+[[brands]]
+id = "red-hat"
+name = "Red Hat"
+official_url = "https://www.redhat.com/en/services/certification"
+credly_issuer_url = "https://www.credly.com/organizations/red-hat/badges"
+free_training_url = "https://www.redhat.com/en/services/training/free-technical-overview"
+frequency = "weekly"
+
+[[brands]]
+id = "linux-foundation"
+name = "The Linux Foundation / CNCF"
+official_url = "https://training.linuxfoundation.org/certification/"
+credly_issuer_url = "https://www.credly.com/organizations/the-linux-foundation/badges"
+free_program_url = "https://training.linuxfoundation.org/resources/free-courses/"
+frequency = "weekly"
+
+[[brands]]
+id = "hashicorp"
+name = "HashiCorp"
+official_url = "https://developer.hashicorp.com/certifications/infrastructure-automation"
+credly_issuer_url = "https://www.credly.com/organizations/hashicorp/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "aws"
+name = "Amazon Web Services"
+official_url = "https://aws.amazon.com/certification/"
+credly_issuer_url = "https://www.credly.com/organizations/amazon-web-services/badges"
+student_program_url = "https://www.awseducate.com"
+free_assessment_url = "https://explore.skillbuilder.aws"
+frequency = "weekly"
+
+[[brands]]
+id = "microsoft"
+name = "Microsoft"
+official_url = "https://learn.microsoft.com/credentials/"
+registry_type = "linkedin_microsoft_learn"
+student_program_url = "https://learn.microsoft.com/credentials/student-hub/"
+ai_skills_navigator_url = "https://aiskillsnavigator.microsoft.com/en-us"
+frequency = "weekly"
+
+[[brands]]
+id = "cisco"
+name = "Cisco"
+official_url = "https://skillsforall.com"
+credly_issuer_url = "https://www.credly.com/organizations/cisco/badges"
+netacad_url = "https://www.netacad.com"
+frequency = "weekly"
+
+[[brands]]
+id = "isc2"
+name = "ISC2"
+official_url = "https://www.isc2.org/landing/1mcc"
+credly_issuer_url = "https://www.credly.com/organizations/isc2/badges"
+free_voucher_program = "One Million Certified in Cybersecurity (1MCC)"
+frequency = "weekly"
+
+[[brands]]
+id = "anthropic"
+name = "Anthropic"
+official_url = "https://anthropic-partners.skilljar.com/"
+registry_type = "skilljar_digital_credential"
+frequency = "weekly"
+
+[[brands]]
+id = "tigera"
+name = "Tigera"
+official_url = "https://academy.tigera.io"
+credly_issuer_url = "https://www.credly.com/organizations/tigera/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "freecodecamp"
+name = "freeCodeCamp"
+official_url = "https://www.freecodecamp.org/"
+co_issuer = "Microsoft"
+frequency = "weekly"

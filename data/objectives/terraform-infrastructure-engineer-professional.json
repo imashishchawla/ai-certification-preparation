@@ -1,0 +1,93 @@
+{
+  "exam": "terraform-infrastructure-engineer-professional",
+  "examVersion": "002",
+  "productVersionTested": "Terraform 1.15",
+  "lastUpdated": "2026-11-14",
+  "source": "https://developer.hashicorp.com/certifications/terraform-infrastructure-engineer-professional",
+  "contentList": "https://docs.hashicorp.com/terraform/tutorials/certification-infra-professional/cert-pro-review",
+  "weightsPublished": false,
+  "domains": [
+    {
+      "code": "D1",
+      "name": "Scalable Terraform Configuration Design",
+      "objectives": [
+        { "code": "1a", "text": "Translate business requirements into infrastructure code" },
+        { "code": "1b", "text": "Predictable and secure Terraform configuration" },
+        { "code": "1c", "text": "Trace input variables, local values, and outputs to identify the source of a configuration issue" },
+        { "code": "1d", "text": "Trace dynamic resources created with for_each" },
+        { "code": "1e", "text": "Predict the value of an expression that uses a Terraform function" },
+        { "code": "1f", "text": "Implement advanced configurations" },
+        { "code": "1g", "text": "Configure Terraform providers" },
+        { "code": "1h", "text": "Use the Terraform MCP server to enhance development with AI coding agents" }
+      ]
+    },
+    {
+      "code": "D2",
+      "name": "Terraform State and Backend Operations",
+      "objectives": [
+        { "code": "2a", "text": "Create and manage Remote Backend and Remote State Configuration" },
+        { "code": "2b", "text": "Manage state and remediate drift" },
+        { "code": "2c", "text": "Identify dependency chains before upgrades" },
+        { "code": "2d", "text": "Upgrade Terraform versions across environments" },
+        { "code": "2e", "text": "Inspect Terraform state" }
+      ]
+    },
+    {
+      "code": "D3",
+      "name": "Infrastructure Lifecycle and Operations",
+      "objectives": [
+        { "code": "3a", "text": "Manage and scale infrastructure projects" },
+        { "code": "3b", "text": "Plan changes to infrastructure" },
+        { "code": "3c", "text": "Apply changes to infrastructure" },
+        { "code": "3d", "text": "Import existing infrastructure to an infrastructure project" },
+        { "code": "3e", "text": "Manage infrastructure lifecycle" },
+        { "code": "3f", "text": "Manage multiple infrastructure environments" },
+        { "code": "3g", "text": "Troubleshoot deployment issues" },
+        { "code": "3h", "text": "Input and output data from infrastructure projects" },
+        { "code": "3i", "text": "Manage provider and module versions" }
+      ]
+    },
+    {
+      "code": "D4",
+      "name": "CI/CD and Automation Workflows",
+      "objectives": [
+        { "code": "4a", "text": "Manage CI/CD pipeline functionality" },
+        { "code": "4b", "text": "Understand deployment strategies" },
+        { "code": "4c", "text": "Manage multiple sets of dynamic provider credentials across teams, projects, and workspaces" },
+        { "code": "4d", "text": "Overwrite Terraform variables using auto.tfvars / .tfvars" }
+      ]
+    },
+    {
+      "code": "D5",
+      "name": "Terraform Security and Governance",
+      "objectives": [
+        { "code": "5a", "text": "Identify best practices for secrets" },
+        { "code": "5b", "text": "Use secret rotation and integration with secrets management tools" },
+        { "code": "5c", "text": "Secure CI/CD pipeline identities and access" },
+        { "code": "5d", "text": "Establish core compliance/policy rules along with Team/Project specific policies" },
+        { "code": "5e", "text": "Identify and mitigate risky infrastructure changes" }
+      ]
+    },
+    {
+      "code": "D6",
+      "name": "Advanced Module Usage and Registry Practices",
+      "objectives": [
+        { "code": "6a", "text": "Understand when to refactor a Terraform configuration into a module" },
+        { "code": "6b", "text": "Understand the contract of a Terraform module" },
+        { "code": "6c", "text": "Use the Terraform registry to build or update a configuration" },
+        { "code": "6d", "text": "Validate modules with Terraform unit tests" }
+      ]
+    },
+    {
+      "code": "D7",
+      "name": "HCP Terraform / Enterprise Operations",
+      "objectives": [
+        { "code": "7a", "text": "Understand how to operate HCP Terraform" },
+        { "code": "7b", "text": "Track resource usage and cost" },
+        { "code": "7c", "text": "Implement multi-environment configuration" },
+        { "code": "7d", "text": "Upgrade Terraform versions across workspaces" },
+        { "code": "7e", "text": "Define Policy as Code in a CI/CD pipeline" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+  <rect width="32" height="32" rx="6" fill="#006654"/>
+  <!-- ISC2 Shield -->
+  <path fill="#ffffff" d="M16 7l7 3.5v6.2c0 4.8-3 9.3-7 10.3-4-1-7-5.5-7-10.3v-6.2L16 7zm0 2.2L11 11.7v4.7c0 3.8 2.2 7.5 5 8.4 2.8-.9 5-4.6 5-8.4v-4.7L16 9.2z"/>
+  <text x="16" y="18" fill="#ffffff" font-family="monospace" font-size="6.5" font-weight="bold" text-anchor="middle">CC</text>
+</svg>
