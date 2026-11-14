@@ -1,0 +1,11 @@
+{{ define "main" }}
+{{ partial "breadcrumbs.html" . }}
+
+<div class="directory-hero" style="margin-bottom: 2rem;">
+  <p class="eyebrow">Explore, Filter &amp; Compare</p>
+  <h1>Certifications Directory</h1>
+  <p class="directory-intro">{{ .Description | default "Filter verified credentials, exams, and free badge programs across leading technology brands." }}</p>
+</div>
+
+{{ partial "certifications-directory-grid.html" . }}
+{{ end }}

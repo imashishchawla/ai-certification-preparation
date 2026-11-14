@@ -18,6 +18,9 @@
         </div>
       </details>
 
+      {{/* ── Direct Certifications Directory link ── */}}
+      <a href="{{ "certifications/" | relLangURL }}" class="nav-link-btn">Certifications</a>
+
       {{/* ── Per-exam sub-nav dropdowns: one per active exam ── */}}
       {{ range hugo.Data.exams.exams }}
         {{ if eq .status "active" }}

@@ -37,10 +37,20 @@
         <a href="{{ .path | relLangURL }}" class="reveal-btn cert-action">Explore {{ .code }} track <span aria-hidden="true">→</span></a>
       </article>
     {{ end }}
+    <article class="cert-card cert-card-active cert-card-directory-highlight">
+      <div class="cert-card-copy">
+        <div class="cert-card-top">
+          <span class="provider-name">Multi-Brand Catalog</span>
+          <span class="status-label status-active">Active</span>
+        </div>
+        <h3><a href="{{ "certifications/" | relLangURL }}">Certifications Directory</a></h3>
+        <p>Explore, compare, and filter 13+ verified industry credentials and free digital badge programs across GitHub, Red Hat, Linux, Terraform, Microsoft, AWS, Cisco, and ISC2.</p>
+        <p class="cert-meta">13+ Industry Credentials · Free &amp; Paid · Proctored &amp; Self-Paced</p>
+      </div>
+      <a href="{{ "certifications/" | relLangURL }}" class="reveal-btn cert-action">Explore Directory <span aria-hidden="true">→</span></a>
+    </article>
   </div>
 </section>
-
-{{ partial "certifications-directory-grid.html" . }}
 
 <section class="directory-section" aria-labelledby="development-certifications">
   <div class="section-heading">

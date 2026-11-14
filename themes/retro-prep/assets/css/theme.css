@@ -141,7 +141,8 @@ details.dropdown {
   position: relative;
   display: inline-block;
 }
-details.dropdown summary {
+details.dropdown summary,
+.nav-link-btn {
   cursor: pointer;
   list-style: none;
   padding: 0.25rem 0.6rem;
@@ -150,6 +151,17 @@ details.dropdown summary {
   border: 2px solid var(--border);
   border-radius: 2px;
   background: var(--card);
+  color: var(--fg);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: normal;
+  transition: border-color 0.15s, color 0.15s;
+}
+.nav-link-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
 }
 details.dropdown summary::-webkit-details-marker {
   display: none;
