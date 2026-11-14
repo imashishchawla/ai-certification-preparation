@@ -137,8 +137,8 @@ brand_name = "ISC2"
 brand_logo = "images/brands/isc2.svg"
 category = "security"
 category_label = "Cybersecurity"
-price = "free"
-price_label = "100% Free ($0 via 1MCC)"
+price = "paid"
+price_label = "PAID ($199) • 1MCC Ended"
 type = "proctored"
 type_label = "PROCTORED (Pearson VUE)"
 audience = "students"
@@ -153,7 +153,7 @@ url = "https://www.isc2.org/certifications/cc"
 voucher_url = "https://www.isc2.org/landing/1mcc"
 is_external = true
 has_practice = false
-description = "Global foundational cybersecurity certification funded by the 1MCC program. Includes free official training and free Pearson VUE proctored exam voucher."
+description = "Global foundational cybersecurity certification. Note: The 1MCC free voucher program concluded new enrollments on May 20, 2026; existing vouchers remain redeemable through Dec 31, 2026."
 
 [[certifications]]
 id = "aws-cloud-essentials"
