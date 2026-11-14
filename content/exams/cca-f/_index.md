@@ -24,36 +24,39 @@ layout: "single"
 
 ## Official Exam Domains & Weights
 
-<div class="domains-row" style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0;">
-  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
-    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">27%</div>
-    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D1 Architecture</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈16 Questions</div>
+<div class="domains-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0; margin-bottom: 1.5rem;">
+  <div style="padding: 1.5rem; border: 2px solid var(--border); background: var(--bg); text-align: center; border-radius: 0.375rem;">
+    <div style="font-size: 2.5rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent); line-height: 1;">27%</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--fg);">D1 Architecture</div>
+    <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;">≈16 Questions</div>
   </div>
-  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
-    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">18%</div>
-    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D2 Tool Design</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈11 Questions</div>
+  <div style="padding: 1.5rem; border: 2px solid var(--border); background: var(--bg); text-align: center; border-radius: 0.375rem;">
+    <div style="font-size: 2.5rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent); line-height: 1;">18%</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--fg);">D2 Tool Design</div>
+    <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;">≈11 Questions</div>
   </div>
-  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
-    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">20%</div>
-    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D3 Claude Code</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈12 Questions</div>
+  <div style="padding: 1.5rem; border: 2px solid var(--border); background: var(--bg); text-align: center; border-radius: 0.375rem;">
+    <div style="font-size: 2.5rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent); line-height: 1;">20%</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--fg);">D3 Claude Code</div>
+    <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;">≈12 Questions</div>
   </div>
-  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
-    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">20%</div>
-    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D4 Prompts & JSON</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈12 Questions</div>
+  <div style="padding: 1.5rem; border: 2px solid var(--border); background: var(--bg); text-align: center; border-radius: 0.375rem;">
+    <div style="font-size: 2.5rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent); line-height: 1;">20%</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--fg);">D4 Prompts & JSON</div>
+    <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;">≈12 Questions</div>
   </div>
-  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--border); background: var(--bg); text-align: center;">
-    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent);">15%</div>
-    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">D5 Context & Rel</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">≈9 Questions</div>
+</div>
+
+<div class="domains-grid-bottom" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0;">
+  <div style="padding: 1.5rem; border: 2px solid var(--border); background: var(--bg); text-align: center; border-radius: 0.375rem;">
+    <div style="font-size: 2.5rem; font-weight: bold; font-family: var(--font-heading); color: var(--accent); line-height: 1;">15%</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--fg);">D5 Context & Relevance</div>
+    <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;">≈9 Questions</div>
   </div>
-  <div style="flex: 1; min-width: 140px; padding: 1rem; border: 2px solid var(--accent); background: rgba(0,0,0,0.03); text-align: center;">
-    <div style="font-size: 2.2rem; font-weight: bold; font-family: var(--font-heading); color: var(--fg);">100%</div>
-    <div style="font-size: 0.85rem; font-weight: bold; margin-top: 0.25rem;">Total Exam</div>
-    <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem;">60 Questions</div>
+  <div style="padding: 1.5rem; border: 2px solid var(--accent); background: var(--bg); text-align: center; border-radius: 0.375rem;">
+    <div style="font-size: 2.5rem; font-weight: bold; font-family: var(--font-heading); color: var(--fg); line-height: 1;">100%</div>
+    <div style="font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; color: var(--fg);">Total Exam</div>
+    <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem;">60 Questions</div>
   </div>
 </div>
 
