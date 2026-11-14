@@ -4,11 +4,11 @@
   {{ partial "head.html" . }}
   {{ partial "structured-data.html" . }}
 </head>
-<body>
+<body{{ if eq .Section "certifications" }} class="page-certifications"{{ end }}>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   {{ partial "nav.html" . }}
 
-  <main id="main-content" class="container" tabindex="-1">
+  <main id="main-content" class="container{{ if eq .Section "certifications" }} container-wide{{ end }}" tabindex="-1">
     {{ block "main" . }}{{ end }}
   </main>
 

@@ -1107,6 +1107,17 @@ a.reveal-btn:hover {
 /* ═══════════════════════════════════════════════════════════════════════════
    Certifications Directory Page (Full-Width Search + Left Sidebar Layout)
    ═══════════════════════════════════════════════════════════════════════════ */
+/* Wide Page Layout for Certifications Directory (+10% overall width: 1240px -> 1364px) */
+.page-certifications .container,
+.page-certifications .top-bar-inner,
+.container-wide {
+  max-width: 1364px;
+}
+
+.page-certifications .directory-intro {
+  max-width: 82ch;
+}
+
 .cert-directory-section {
   margin: 1.5rem 0 3.5rem;
 }
@@ -1173,10 +1184,10 @@ a.reveal-btn:hover {
   align-items: flex-start;
 }
 
-/* Left Sidebar Filters */
+/* Left Sidebar Filters (+10% width: 280px -> 308px, min-width 260px -> 286px) */
 .cert-sidebar-filters {
-  width: 280px;
-  min-width: 260px;
+  width: 308px;
+  min-width: 286px;
   flex-shrink: 0;
   background: var(--card);
   border: 2px solid var(--border);
