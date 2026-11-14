@@ -39,3 +39,6 @@ node_modules/
 # Plan & Private URLs — never commit
 plan/
 connectorurl.md
+
+# Knowledge & Autonomous Agent Memory
+.knowledge/

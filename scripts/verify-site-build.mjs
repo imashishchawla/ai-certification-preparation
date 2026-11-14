@@ -52,7 +52,7 @@ if (!cka.includes('$395')) errors.push('CKA overview missing official fee');
 if (!cca.includes('Claude Certified Architect')) errors.push('Active CCAF overview missing');
 if (!catalog.includes('In development')) errors.push('Catalog development section missing');
 
-for (const relative of ['exams/ccar-p/index.html', 'exams/ccdv-f/index.html', 'exams/cka/sample-questions/index.html']) {
+for (const relative of ['exams/cka/sample-questions/index.html']) {
   const html = checkPage(relative);
   if (!html.includes('noindex, follow')) errors.push(`${relative}: placeholder should be noindex`);
 }

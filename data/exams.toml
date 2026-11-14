@@ -24,36 +24,6 @@ description = "Foundations-level certification covering agentic architecture, to
 "D5 Context Management & Reliability" = 15
 
 [[exams]]
-id = "ccao-f"
-code = "CCAO-F"
-name = "Claude Certified Associate — Foundations"
-provider = "Anthropic"
-status = "planned"
-questions = 0
-path = "exams/ccao-f/"
-description = "A future study area for foundational Claude task execution, evaluation, solution design, and responsible use."
-
-[[exams]]
-id = "ccar-p"
-code = "CCAR-P"
-name = "Advanced Claude architecture preparation"
-provider = "Anthropic"
-status = "planned"
-questions = 0
-path = "exams/ccar-p/"
-description = "A future study area for advanced Claude architecture and governance topics."
-
-[[exams]]
-id = "ccdv-f"
-code = "CCDV-F"
-name = "Claude developer preparation"
-provider = "Anthropic"
-status = "planned"
-questions = 0
-path = "exams/ccdv-f/"
-description = "A future study area for Claude API, SDK, and tool integration."
-
-[[exams]]
 id = "terraform-associate"
 code = "TA-004"
 name = "HashiCorp Certified: Terraform Associate (004)"

@@ -24,7 +24,7 @@
     </div>
     <p>Study and practice with resources ready to use today.</p>
   </div>
-  <div class="card-grid card-grid-3 {{ if eq (len $active) 1 }}single-active{{ end }}">
+  <div class="card-grid card-grid-2">
     {{ range $active }}
       {{ $count := partial "published-question-count.html" . }}
       <article class="cert-card cert-card-active">
@@ -37,6 +37,18 @@
         <a href="{{ .path | relLangURL }}" class="reveal-btn cert-action">Explore {{ .code }} track <span aria-hidden="true">→</span></a>
       </article>
     {{ end }}
+  </div>
+</section>
+
+<section class="directory-section" aria-labelledby="certifications-library">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Verified Catalog</p>
+      <h2 id="certifications-library">Certifications Library</h2>
+    </div>
+    <p>Explore, compare, and filter 13+ verified industry credentials and free digital badge programs.</p>
+  </div>
+  <div class="card-grid single-active">
     <article class="cert-card cert-card-active cert-card-directory-highlight">
       <div class="cert-card-copy">
         <div class="cert-card-top">
@@ -45,7 +57,7 @@
         </div>
         <h3><a href="{{ "certifications/" | relLangURL }}">Certifications Directory</a></h3>
         <p>Explore, compare, and filter 13+ verified industry credentials and free digital badge programs across GitHub, Red Hat, Linux, Terraform, Microsoft, AWS, Cisco, and ISC2.</p>
-        <p class="cert-meta">13+ Industry Credentials · Free &amp; Paid · Proctored &amp; Self-Paced</p>
+        <p class="cert-meta">13+ Industry Credentials · Free &amp; Paid · Proctored &amp; Self-Paced · Student Grants</p>
       </div>
       <a href="{{ "certifications/" | relLangURL }}" class="reveal-btn cert-action">Explore Directory <span aria-hidden="true">→</span></a>
     </article>
@@ -60,7 +72,7 @@
     </div>
     <p>Tracks being prepared or considered for future coverage.</p>
   </div>
-  <div class="card-grid card-grid-3">
+  <div class="card-grid card-grid-2">
     {{ range sort $inDevelopment "status" }}
       <article class="cert-card cert-card-development">
         <div class="cert-card-top"><span class="provider-name">{{ .provider }}</span><span class="status-label {{ if eq .status "onboarding" }}status-onboarding{{ else }}status-planned{{ end }}">{{ if eq .status "onboarding" }}In preparation{{ else }}Planned{{ end }}</span></div>
