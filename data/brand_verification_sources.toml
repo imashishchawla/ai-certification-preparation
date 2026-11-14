@@ -182,3 +182,51 @@ id = "postman"
 name = "Postman"
 official_url = "https://badgr.com/public/issuers/postman"
 frequency = "weekly"
+
+[[brands]]
+id = "google-cloud"
+name = "Google Cloud"
+official_url = "https://www.cloudskillsboost.google/"
+credly_issuer_url = "https://www.credly.com/organizations/google-cloud/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "mongodb"
+name = "MongoDB"
+official_url = "https://learn.mongodb.com/"
+credly_issuer_url = "https://www.credly.com/organizations/mongodb/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "apollographql"
+name = "Apollo GraphQL"
+official_url = "https://odyssey.apollographql.com/"
+frequency = "weekly"
+
+[[brands]]
+id = "qualys"
+name = "Qualys"
+official_url = "https://www.qualys.com/training/"
+registry_type = "hyperstack"
+frequency = "weekly"
+
+[[brands]]
+id = "clickhouse"
+name = "ClickHouse"
+official_url = "https://clickhouse.com/learn"
+registry_type = "academy"
+frequency = "weekly"
+
+[[brands]]
+id = "nasa"
+name = "NASA Open Science"
+official_url = "https://science.nasa.gov/open-science/training/"
+credly_issuer_url = "https://www.credly.com/organizations/nasa-open-science/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "intel"
+name = "Intel"
+official_url = "https://partneruniversity.intel.com"
+credly_issuer_url = "https://www.credly.com/organizations/intel/badges"
+frequency = "weekly"
