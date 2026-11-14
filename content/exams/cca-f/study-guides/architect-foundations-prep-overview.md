@@ -126,13 +126,13 @@ Points worth noting before you schedule:
 
 - Agentic Architecture & Orchestration is the heaviest domain at 27%. Combined with Tool Design & MCP Integration, nearly half the exam is agent and tool design.
 - If you attempted this exam before June 30, 2026 and did not pass, the earlier failed attempt was cleared in the Pearson migration and you can register without a waiting period.
-- Anthropic describes this certification as proving an architect can build with Claude, while [Architect – Professional](/ai-certification-preparation/exams/ccar-p/) proves they can design and govern solutions at enterprise scale. There is no prerequisite in either direction and Foundations does not upgrade automatically.
+- Anthropic describes this certification as proving an architect can build with Claude, while Architect – Professional proves they can design and govern solutions at enterprise scale. There is no prerequisite in either direction and Foundations does not upgrade automatically.
 
 ## Related certifications
 
-- [Developer – Foundations](/ai-certification-preparation/exams/ccdv-f/), which tests overlapping technologies from an implementation perspective
-- [Claude Certified Architect – Professional](/ai-certification-preparation/exams/ccar-p/), the next step for enterprise-scale design and governance
-- [Associate – Foundations](/ai-certification-preparation/), for non-developers who apply Claude to business workflows
+- **Developer – Foundations**, which tests overlapping technologies from an implementation perspective
+- **Claude Certified Architect – Professional**, the next step for enterprise-scale design and governance
+- **Associate – Foundations**, for non-developers who apply Claude to business workflows
 
 ---
 
