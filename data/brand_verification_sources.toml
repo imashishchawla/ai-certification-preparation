@@ -87,3 +87,98 @@ name = "freeCodeCamp"
 official_url = "https://www.freecodecamp.org/"
 co_issuer = "Microsoft"
 frequency = "weekly"
+
+[[brands]]
+id = "neo4j"
+name = "Neo4j GraphAcademy"
+official_url = "https://graphacademy.neo4j.com/certifications/"
+credly_issuer_url = "https://www.credly.com/organizations/neo4j/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "snowflake"
+name = "Snowflake"
+official_url = "https://learn.snowflake.com/"
+credly_issuer_url = "https://www.credly.com/organizations/snowflake/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "rangeforce"
+name = "RangeForce"
+official_url = "https://www.rangeforce.com/"
+credly_issuer_url = "https://www.credly.com/organizations/rangeforce/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "chainguard"
+name = "Chainguard"
+official_url = "https://edu.chainguard.dev/"
+credly_issuer_url = "https://www.credly.com/organizations/chainguard/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "attackiq"
+name = "AttackIQ Academy"
+official_url = "https://academy.attackiq.com/"
+credly_issuer_url = "https://www.credly.com/organizations/attackiq/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "apisec"
+name = "APIsec University"
+official_url = "https://www.apisecuniversity.com/"
+credly_issuer_url = "https://www.credly.com/organizations/apisec-university/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "datadog"
+name = "Datadog"
+official_url = "https://learn.datadoghq.com/"
+frequency = "weekly"
+
+[[brands]]
+id = "fortinet"
+name = "Fortinet"
+official_url = "https://training.fortinet.com/"
+credly_issuer_url = "https://www.credly.com/organizations/fortinet/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "ibm"
+name = "IBM"
+official_url = "https://www.ibm.com/training/badges"
+credly_issuer_url = "https://www.credly.com/organizations/ibm/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "isovalent"
+name = "Isovalent (Cisco)"
+official_url = "https://isovalent.com/labs/"
+credly_issuer_url = "https://www.credly.com/organizations/isovalent/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "kong"
+name = "Kong"
+official_url = "https://education.konghq.com/"
+credly_issuer_url = "https://www.credly.com/organizations/kong/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "oracle"
+name = "Oracle"
+official_url = "https://mylearn.oracle.com/"
+frequency = "weekly"
+
+[[brands]]
+id = "pmi"
+name = "Project Management Institute (PMI)"
+official_url = "https://www.pmi.org/certifications"
+credly_issuer_url = "https://www.credly.com/organizations/project-management-institute/badges"
+frequency = "weekly"
+
+[[brands]]
+id = "postman"
+name = "Postman"
+official_url = "https://badgr.com/public/issuers/postman"
+frequency = "weekly"

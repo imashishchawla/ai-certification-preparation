@@ -53,17 +53,15 @@
         <label for="brandSelectDropdown" class="sidebar-filter-heading">Brand</label>
         <select id="brandSelectDropdown" class="cert-brand-select" aria-label="Select Brand">
           <option value="all">All Brands ({{ $total }})</option>
-          <option value="aws">Amazon Web Services</option>
-          <option value="anthropic">Anthropic</option>
-          <option value="cisco">Cisco</option>
-          <option value="freecodecamp">freeCodeCamp</option>
-          <option value="github">GitHub</option>
-          <option value="hashicorp">HashiCorp</option>
-          <option value="isc2">ISC2</option>
-          <option value="linux-foundation">Linux Foundation / CNCF</option>
-          <option value="microsoft">Microsoft</option>
-          <option value="red-hat">Red Hat</option>
-          <option value="tigera">Tigera</option>
+          {{- $brandDict := dict -}}
+          {{- range $certs -}}
+            {{- if not (index $brandDict .brand) -}}
+              {{- $brandDict = merge $brandDict (dict .brand .brand_name) -}}
+            {{- end -}}
+          {{- end -}}
+          {{- range $slug, $name := $brandDict -}}
+            <option value="{{ $slug }}">{{ $name }}</option>
+          {{- end -}}
         </select>
       </div>
 
